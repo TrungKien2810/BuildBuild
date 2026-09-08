@@ -1,0 +1,80 @@
+# ── Governance (OptimizedToken) — bỏ qua TOÀN BỘ ─────────────────────────────
+# Runtime + DB
+.govern/
+
+# Config do governance sinh
+config/governance.json
+config/pricing.json
+
+# Toàn bộ doc-state của governance (HANDOFF/IDEAS/STATUS/ISSUE/ADR/conventions…)
+docs/project-state/
+ISSUE.md
+
+# Hướng dẫn agent (do governance ghi/duy trì)
+CLAUDE.md
+AGENTS.md
+
+# Thư mục cấu hình agent
+.claude/
+.codex/
+.agents/
+.opencode/
+
+# ── Unity ───────────────────────────────────────────────────────────────────
+# Cache/generated — Unity tự sinh lại, KHÔNG commit (đây là phần làm repo nặng)
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Mm]emoryCaptures/
+/[Rr]ecordings/
+/.vsconfig
+
+# Asset meta của thư mục bị ignore
+/[Aa]ssets/AssetStoreTools*
+/[Aa]ssets/Plugins/Editor/JetBrains*
+
+# Visual Studio / Rider / VS Code
+.vs/
+.idea/
+.vscode/
+/*.csproj
+/*.unityproj
+/*.sln
+/*.suo
+/*.user
+/*.userprefs
+/*.pidb
+/*.booproj
+/*.svd
+/*.pdb
+/*.mdb
+/*.opendb
+/*.VC.db
+
+# Builds & artifacts
+*.apk
+*.aab
+*.unitypackage
+*.app
+ExportedObj/
+.consulo/
+*.stackdump
+crashlytics-build.properties
+/[Aa]ssets/[Ss]treamingAssets/aa.meta
+/[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets / rác tạm
+.env
+.env.*
+add.log
+
+# Art scratch — raw sheet tu PixelLab/SpriteCook truoc khi dong atlas vao Assets/
+tempart/
