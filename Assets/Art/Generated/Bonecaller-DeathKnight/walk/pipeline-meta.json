@@ -1,0 +1,63 @@
+{
+  "target": "player",
+  "mode": "walk",
+  "align": "feet",
+  "cell_size": 128,
+  "frames": [
+    {
+      "label": "walk-1",
+      "aligned_bbox": [
+        16,
+        36,
+        113,
+        117
+      ]
+    },
+    {
+      "label": "walk-2",
+      "aligned_bbox": [
+        16,
+        35,
+        110,
+        117
+      ]
+    },
+    {
+      "label": "walk-3",
+      "aligned_bbox": [
+        16,
+        34,
+        109,
+        117
+      ]
+    },
+    {
+      "label": "walk-4",
+      "aligned_bbox": [
+        16,
+        36,
+        110,
+        117
+      ]
+    },
+    {
+      "label": "walk-5",
+      "aligned_bbox": [
+        16,
+        35,
+        112,
+        117
+      ]
+    },
+    {
+      "label": "walk-6",
+      "aligned_bbox": [
+        16,
+        35,
+        113,
+        117
+      ]
+    }
+  ],
+  "delivery_note": "aligned_bbox viet lai tu alpha PNG luc giao 2026-09-15 (frame da dich sau processor)"
+}

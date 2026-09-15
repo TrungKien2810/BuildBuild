@@ -1,0 +1,95 @@
+{
+  "canvas_size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "ground_y": 820,
+  "castle_area": {
+    "x_min": 0,
+    "x_max": 384
+  },
+  "hero_deploy_area": {
+    "x_min": 384,
+    "x_max": 1300
+  },
+  "monster_path_area": {
+    "x_min": 1300,
+    "x_max": 1920
+  },
+  "layers": [
+    {
+      "name": "bg-sky",
+      "file": "bg-sky.png",
+      "width": 1920,
+      "height": 1080,
+      "y_offset": 0,
+      "parallax_hint": 0.0,
+      "has_alpha": false
+    },
+    {
+      "name": "bg-far",
+      "file": "bg-far.png",
+      "width": 1920,
+      "height": 620,
+      "y_offset": 200,
+      "parallax_hint": 0.2,
+      "has_alpha": true
+    },
+    {
+      "name": "bg-mid",
+      "file": "bg-mid.png",
+      "width": 1920,
+      "height": 420,
+      "y_offset": 400,
+      "parallax_hint": 0.5,
+      "has_alpha": true
+    },
+    {
+      "name": "bg-ground",
+      "file": "bg-ground.png",
+      "width": 1920,
+      "height": 300,
+      "y_offset": 780,
+      "parallax_hint": 1.0,
+      "has_alpha": true,
+      "tileable_x": true
+    }
+  ],
+  "props": [
+    {
+      "name": "prop-rock",
+      "file": "props/prop-rock.png",
+      "width": 64,
+      "height": 64,
+      "anchor": "bottom"
+    },
+    {
+      "name": "prop-dry-tree",
+      "file": "props/prop-dry-tree.png",
+      "width": 96,
+      "height": 128,
+      "anchor": "bottom"
+    },
+    {
+      "name": "prop-bone",
+      "file": "props/prop-bone.png",
+      "width": 64,
+      "height": 64,
+      "anchor": "bottom"
+    },
+    {
+      "name": "prop-stake",
+      "file": "props/prop-stake.png",
+      "width": 64,
+      "height": 96,
+      "anchor": "bottom"
+    },
+    {
+      "name": "prop-barrel",
+      "file": "props/prop-barrel.png",
+      "width": 64,
+      "height": 64,
+      "anchor": "bottom"
+    }
+  ]
+}
