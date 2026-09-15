@@ -1,0 +1,296 @@
+{
+  "target": "player",
+  "mode": "hurt",
+  "prompt": "",
+  "role": "",
+  "input": "tempart\\Bonecaller\\skeleton\\hurt\\raw-sheet.png",
+  "threshold": 100,
+  "edge_threshold": 150,
+  "duration": 200,
+  "rows": 2,
+  "cols": 2,
+  "cell_size": 128,
+  "fit_scale": 0.328,
+  "trim_border": 4,
+  "edge_clean_depth": 3,
+  "align": "feet",
+  "shared_scale": true,
+  "scale_strategy": "fit",
+  "component_mode": "all",
+  "component_padding": 0,
+  "min_component_area": 1,
+  "edge_touch_margin": 0,
+  "frame_labels": [
+    "hurt-1",
+    "hurt-2",
+    "hurt-3",
+    "hurt-4"
+  ],
+  "frames": [
+    {
+      "grid": [
+        0,
+        0
+      ],
+      "source_box": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "component_mode": "all",
+      "component_count": 2,
+      "selected_component_area": null,
+      "selected_component_bbox": null,
+      "crop_bbox": [
+        152,
+        129,
+        619,
+        580
+      ],
+      "source_frame_size": [
+        619,
+        619
+      ],
+      "is_empty": false,
+      "subject_area": 76434,
+      "body_core_area": 51801,
+      "body_area_fraction": 0.13519382191820148,
+      "anchor_source": [
+        422.0,
+        566.0
+      ],
+      "source_edge_touch": true,
+      "output_edge_touch": false,
+      "edge_touch": true,
+      "output_size": [
+        41,
+        40
+      ],
+      "paste_position": [
+        43,
+        45
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        44,
+        46,
+        90,
+        84
+      ],
+      "source_to_output_scale": 0.0899014989293362,
+      "bbox_scale_applied": true,
+      "scale_strategy": "fit",
+      "scale_changed": true,
+      "label": "hurt-1"
+    },
+    {
+      "grid": [
+        0,
+        1
+      ],
+      "source_box": [
+        627,
+        0,
+        1254,
+        627
+      ],
+      "component_mode": "all",
+      "component_count": 2,
+      "selected_component_area": null,
+      "selected_component_bbox": null,
+      "crop_bbox": [
+        76,
+        147,
+        462,
+        580
+      ],
+      "source_frame_size": [
+        619,
+        619
+      ],
+      "is_empty": false,
+      "subject_area": 69067,
+      "body_core_area": 63377,
+      "body_area_fraction": 0.16540566498156128,
+      "anchor_source": [
+        312.0,
+        566.0
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        34,
+        38
+      ],
+      "paste_position": [
+        47,
+        47
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        49,
+        46,
+        83,
+        84
+      ],
+      "source_to_output_scale": 0.0899014989293362,
+      "bbox_scale_applied": true,
+      "scale_strategy": "fit",
+      "scale_changed": true,
+      "label": "hurt-2"
+    },
+    {
+      "grid": [
+        1,
+        0
+      ],
+      "source_box": [
+        0,
+        627,
+        627,
+        1254
+      ],
+      "component_mode": "all",
+      "component_count": 1,
+      "selected_component_area": null,
+      "selected_component_bbox": null,
+      "crop_bbox": [
+        200,
+        51,
+        528,
+        492
+      ],
+      "source_frame_size": [
+        619,
+        619
+      ],
+      "is_empty": false,
+      "subject_area": 74644,
+      "body_core_area": 56464,
+      "body_area_fraction": 0.14736364087159184,
+      "anchor_source": [
+        416.0,
+        476.0
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        29,
+        39
+      ],
+      "paste_position": [
+        49,
+        46
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        49,
+        45,
+        78,
+        84
+      ],
+      "source_to_output_scale": 0.0899014989293362,
+      "bbox_scale_applied": true,
+      "scale_strategy": "fit",
+      "scale_changed": true,
+      "label": "hurt-3"
+    },
+    {
+      "grid": [
+        1,
+        1
+      ],
+      "source_box": [
+        627,
+        627,
+        1254,
+        1254
+      ],
+      "component_mode": "all",
+      "component_count": 1,
+      "selected_component_area": null,
+      "selected_component_bbox": null,
+      "crop_bbox": [
+        92,
+        69,
+        423,
+        492
+      ],
+      "source_frame_size": [
+        619,
+        619
+      ],
+      "is_empty": false,
+      "subject_area": 74620,
+      "body_core_area": 70389,
+      "body_area_fraction": 0.1837060661184202,
+      "anchor_source": [
+        332.0,
+        478.0
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        29,
+        38
+      ],
+      "paste_position": [
+        49,
+        47
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        49,
+        46,
+        78,
+        84
+      ],
+      "source_to_output_scale": 0.0899014989293362,
+      "bbox_scale_applied": true,
+      "scale_strategy": "fit",
+      "scale_changed": true,
+      "label": "hurt-4"
+    }
+  ],
+  "edge_touch_frames": [
+    [
+      0,
+      0
+    ]
+  ],
+  "source_edge_touch_frames": [
+    [
+      0,
+      0
+    ]
+  ],
+  "output_edge_touch_frames": [],
+  "empty_frames": [],
+  "paste_clamped_frames": [],
+  "qc_summary": {
+    "frame_count": 4,
+    "valid_frame_count": 4,
+    "empty_count": 0,
+    "edge_touch_count": 1,
+    "paste_clamped_count": 0,
+    "body_scale_mean": 0.39671931402222177,
+    "output_subject_height_mean": 38.75,
+    "body_scale_cv": 0.05808960311790425,
+    "anchor_x_std": 0.07925466620850007,
+    "anchor_y_std": 0.07189922071558533,
+    "anchor_y_mean": 0.8424878836833601
+  },
+  "qc_config": {
+    "strict_qc": false,
+    "reject_edge_touch": false,
+    "allow_source_edge_touch": false,
+    "max_body_scale_cv": null,
+    "max_anchor_y_std": null,
+    "max_profile_scale_drift": null
+  },
+  "delivery_note": "aligned_bbox viet lai tu alpha PNG luc giao 2026-09-15 (frame da dich sau processor)"
+}

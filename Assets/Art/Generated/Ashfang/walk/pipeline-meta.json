@@ -1,0 +1,74 @@
+{
+  "target": "creature",
+  "mode": "walk",
+  "frame_count": 6,
+  "cell_size": 128,
+  "align": "feet",
+  "scale_profile": "Assets/Art/Generated/Ashfang/character-scale-profile.json",
+  "source_halves": {
+    "A (frame 1-3)": "tempart/Ashfang/walk/",
+    "B (frame 4-6)": "tempart/Ashfang/walk-halfB/"
+  },
+  "note": "Hai nua sinh rieng (nua B bo sung de doi vai chan), cung --scale-profile cua idle. So do duoi day do lai tren 6 file output da giao.",
+  "frames": [
+    {
+      "label": "walk-1",
+      "source": "tempart/Ashfang/walk/walk-1.png",
+      "bbox_w": 49,
+      "bbox_h": 25,
+      "aligned_bottom": 89,
+      "area_px": 680
+    },
+    {
+      "label": "walk-2",
+      "source": "tempart/Ashfang/walk/walk-2.png",
+      "bbox_w": 40,
+      "bbox_h": 25,
+      "aligned_bottom": 89,
+      "area_px": 575
+    },
+    {
+      "label": "walk-3",
+      "source": "tempart/Ashfang/walk/walk-3.png",
+      "bbox_w": 50,
+      "bbox_h": 26,
+      "aligned_bottom": 89,
+      "area_px": 723
+    },
+    {
+      "label": "walk-4",
+      "source": "tempart/Ashfang/walk-halfB/walk-1.png",
+      "bbox_w": 48,
+      "bbox_h": 24,
+      "aligned_bottom": 89,
+      "area_px": 650
+    },
+    {
+      "label": "walk-5",
+      "source": "tempart/Ashfang/walk-halfB/walk-2.png",
+      "bbox_w": 40,
+      "bbox_h": 23,
+      "aligned_bottom": 89,
+      "area_px": 520
+    },
+    {
+      "label": "walk-6",
+      "source": "tempart/Ashfang/walk-halfB/walk-3.png",
+      "bbox_w": 50,
+      "bbox_h": 23,
+      "aligned_bottom": 89,
+      "area_px": 642
+    }
+  ],
+  "qc_output": {
+    "aligned_bottom_all": [
+      89
+    ],
+    "area_min_max": [
+      520,
+      723
+    ],
+    "idle_1_area_px": 790,
+    "magenta_residue": 0
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "panel-9slice.png": {
+    "left": 12,
+    "right": 12,
+    "top": 12,
+    "bottom": 12
+  },
+  "button-normal.png": {
+    "left": 12,
+    "right": 12,
+    "top": 12,
+    "bottom": 12
+  },
+  "button-hover.png": {
+    "left": 12,
+    "right": 12,
+    "top": 12,
+    "bottom": 12
+  },
+  "button-pressed.png": {
+    "left": 12,
+    "right": 12,
+    "top": 12,
+    "bottom": 12
+  },
+  "button-disabled.png": {
+    "left": 12,
+    "right": 12,
+    "top": 12,
+    "bottom": 12
+  },
+  "bar-frame.png": {
+    "left": 6,
+    "right": 6,
+    "top": 6,
+    "bottom": 6
+  },
+  "bar-fill-hp.png": {
+    "left": 0,
+    "right": 0,
+    "top": 0,
+    "bottom": 0
+  },
+  "bar-fill-mana.png": {
+    "left": 0,
+    "right": 0,
+    "top": 0,
+    "bottom": 0
+  }
+}

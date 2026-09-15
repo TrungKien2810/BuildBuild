@@ -1,0 +1,27 @@
+{
+  "cell": 384,
+  "baseline_y": 348,
+  "mounts": [
+    {
+      "floor": 1,
+      "x": 197,
+      "y": 280,
+      "platform_w": 115,
+      "clearance_h": 75
+    },
+    {
+      "floor": 2,
+      "x": 145,
+      "y": 205,
+      "platform_w": 120,
+      "clearance_h": 70
+    },
+    {
+      "floor": 3,
+      "x": 190,
+      "y": 135,
+      "platform_w": 120,
+      "clearance_h": 122
+    }
+  ]
+}

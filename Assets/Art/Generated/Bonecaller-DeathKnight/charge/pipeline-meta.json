@@ -1,0 +1,108 @@
+{
+  "target": "player",
+  "mode": "charge",
+  "align": "feet",
+  "cell_size": 160,
+  "frames": [
+    {
+      "label": "charge-1",
+      "aligned_bbox": [
+        27,
+        68,
+        134,
+        149
+      ]
+    },
+    {
+      "label": "charge-2",
+      "aligned_bbox": [
+        21,
+        72,
+        136,
+        149
+      ]
+    },
+    {
+      "label": "charge-3",
+      "aligned_bbox": [
+        28,
+        76,
+        143,
+        149
+      ]
+    },
+    {
+      "label": "charge-4",
+      "aligned_bbox": [
+        15,
+        74,
+        153,
+        149
+      ]
+    },
+    {
+      "label": "charge-5",
+      "aligned_bbox": [
+        15,
+        79,
+        152,
+        149
+      ]
+    },
+    {
+      "label": "charge-6",
+      "aligned_bbox": [
+        20,
+        81,
+        151,
+        149
+      ]
+    },
+    {
+      "label": "charge-7",
+      "aligned_bbox": [
+        16,
+        80,
+        151,
+        149
+      ]
+    },
+    {
+      "label": "charge-8",
+      "aligned_bbox": [
+        14,
+        69,
+        151,
+        149
+      ]
+    },
+    {
+      "label": "charge-9",
+      "aligned_bbox": [
+        13,
+        69,
+        132,
+        149
+      ]
+    },
+    {
+      "label": "charge-10",
+      "aligned_bbox": [
+        13,
+        67,
+        145,
+        149
+      ]
+    },
+    {
+      "label": "charge-11",
+      "aligned_bbox": [
+        13,
+        68,
+        139,
+        149
+      ]
+    }
+  ],
+  "delivery_note": "aligned_bbox viet lai tu alpha PNG luc giao 2026-09-15 (frame da dich sau processor)"
+}

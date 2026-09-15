@@ -1,0 +1,309 @@
+{
+  "target": "creature",
+  "mode": "hurt",
+  "prompt": "",
+  "role": "",
+  "input": "tempart\\Ashfang\\hurt\\raw-sheet.png",
+  "threshold": 100,
+  "edge_threshold": 150,
+  "duration": 200,
+  "rows": 2,
+  "cols": 2,
+  "cell_size": 128,
+  "fit_scale": 0.395,
+  "trim_border": 4,
+  "edge_clean_depth": 3,
+  "align": "feet",
+  "shared_scale": true,
+  "scale_strategy": "fit",
+  "component_mode": "largest",
+  "component_padding": 0,
+  "min_component_area": 1,
+  "edge_touch_margin": 0,
+  "frame_labels": [
+    "hurt-1",
+    "hurt-2",
+    "hurt-3",
+    "hurt-4"
+  ],
+  "frames": [
+    {
+      "grid": [
+        0,
+        0
+      ],
+      "source_box": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "component_mode": "largest",
+      "component_count": 1,
+      "selected_component_area": 24625,
+      "selected_component_bbox": [
+        214,
+        228,
+        478,
+        409
+      ],
+      "crop_bbox": [
+        214,
+        228,
+        478,
+        409
+      ],
+      "source_frame_size": [
+        619,
+        619
+      ],
+      "is_empty": false,
+      "subject_area": 24625,
+      "body_core_area": 24379,
+      "body_area_fraction": 0.06362599533877404,
+      "anchor_source": [
+        329.0,
+        403.0
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        48,
+        33
+      ],
+      "paste_position": [
+        40,
+        57
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        40,
+        57,
+        88,
+        90
+      ],
+      "source_to_output_scale": 0.18385454545454546,
+      "bbox_scale_applied": true,
+      "scale_strategy": "fit",
+      "scale_changed": true
+    },
+    {
+      "grid": [
+        0,
+        1
+      ],
+      "source_box": [
+        627,
+        0,
+        1254,
+        627
+      ],
+      "component_mode": "largest",
+      "component_count": 1,
+      "selected_component_area": 22923,
+      "selected_component_bbox": [
+        175,
+        267,
+        426,
+        409
+      ],
+      "crop_bbox": [
+        175,
+        267,
+        426,
+        409
+      ],
+      "source_frame_size": [
+        619,
+        619
+      ],
+      "is_empty": false,
+      "subject_area": 22923,
+      "body_core_area": 22923,
+      "body_area_fraction": 0.05982602613522775,
+      "anchor_source": [
+        302.0,
+        403.0
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        46,
+        26
+      ],
+      "paste_position": [
+        41,
+        64
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        41,
+        64,
+        87,
+        90
+      ],
+      "source_to_output_scale": 0.18385454545454546,
+      "bbox_scale_applied": true,
+      "scale_strategy": "fit",
+      "scale_changed": true
+    },
+    {
+      "grid": [
+        1,
+        0
+      ],
+      "source_box": [
+        0,
+        627,
+        627,
+        1254
+      ],
+      "component_mode": "largest",
+      "component_count": 1,
+      "selected_component_area": 25614,
+      "selected_component_bbox": [
+        188,
+        211,
+        457,
+        374
+      ],
+      "crop_bbox": [
+        188,
+        211,
+        457,
+        374
+      ],
+      "source_frame_size": [
+        619,
+        619
+      ],
+      "is_empty": false,
+      "subject_area": 25614,
+      "body_core_area": 25614,
+      "body_area_fraction": 0.06684918350249634,
+      "anchor_source": [
+        326.0,
+        368.0
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        49,
+        29
+      ],
+      "paste_position": [
+        39,
+        61
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        39,
+        61,
+        88,
+        90
+      ],
+      "source_to_output_scale": 0.18385454545454546,
+      "bbox_scale_applied": true,
+      "scale_strategy": "fit",
+      "scale_changed": true
+    },
+    {
+      "grid": [
+        1,
+        1
+      ],
+      "source_box": [
+        627,
+        627,
+        1254,
+        1254
+      ],
+      "component_mode": "largest",
+      "component_count": 1,
+      "selected_component_area": 24957,
+      "selected_component_bbox": [
+        172,
+        211,
+        447,
+        374
+      ],
+      "crop_bbox": [
+        172,
+        211,
+        447,
+        374
+      ],
+      "source_frame_size": [
+        619,
+        619
+      ],
+      "is_empty": false,
+      "subject_area": 24957,
+      "body_core_area": 24957,
+      "body_area_fraction": 0.06513449959677525,
+      "anchor_source": [
+        310.0,
+        368.0
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        50,
+        29
+      ],
+      "paste_position": [
+        39,
+        61
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        39,
+        61,
+        89,
+        90
+      ],
+      "source_to_output_scale": 0.18385454545454546,
+      "bbox_scale_applied": true,
+      "scale_strategy": "fit",
+      "scale_changed": true
+    }
+  ],
+  "edge_touch_frames": [],
+  "source_edge_touch_frames": [],
+  "output_edge_touch_frames": [],
+  "empty_frames": [],
+  "paste_clamped_frames": [],
+  "qc_summary": {
+    "frame_count": 4,
+    "valid_frame_count": 4,
+    "empty_count": 0,
+    "edge_touch_count": 0,
+    "paste_clamped_count": 0,
+    "body_scale_mean": 0.2526505592998683,
+    "output_subject_height_mean": 29.25,
+    "body_scale_cv": 0.020421712296271488,
+    "anchor_x_std": 0.018039346877324152,
+    "anchor_y_std": 0.028271405492730217,
+    "anchor_y_mean": 0.622778675282714,
+    "profile_body_scale_drift": 0.03395184151607267
+  },
+  "scale_profile": {
+    "path": "Assets\\Art\\Generated\\Ashfang\\character-scale-profile.json",
+    "version": 1,
+    "name": "ashfang",
+    "reference_mode": "idle",
+    "processing_contract_applied": true
+  },
+  "qc_config": {
+    "strict_qc": true,
+    "reject_edge_touch": false,
+    "allow_source_edge_touch": false,
+    "max_body_scale_cv": 0.08,
+    "max_anchor_y_std": 0.05,
+    "max_profile_scale_drift": 0.1
+  }
+}
