@@ -20,6 +20,12 @@ AGENTS.md
 .agents/
 .opencode/
 
+# Agent bridge (Claude giao viec cho Codex/agy) — tooling local, khong commit
+config/agent-bridge/
+
+# Asset Gen — art ĐÃ DUYỆT trong Assets/Art/Generated được commit; raw pipeline nằm ở tempart/raw (ignore bên dưới)
+
+
 # ── Unity ───────────────────────────────────────────────────────────────────
 # Cache/generated — Unity tự sinh lại, KHÔNG commit (đây là phần làm repo nặng)
 /[Ll]ibrary/
@@ -78,3 +84,16 @@ add.log
 
 # Art scratch — raw sheet tu PixelLab/SpriteCook truoc khi dong atlas vao Assets/
 tempart/
+
+# ── Chỉ ở local ─────────────────────────────────────────────────────────────
+# Ảnh chụp màn hình kiểm tra, file crash-recovery của Unity, STATUS tự sinh
+/Captures/
+/[Aa]ssets/_Recovery/
+/[Aa]ssets/_Recovery.meta
+/STATUS.md
+# Ảnh tham chiếu đầu vào khi sinh art — importer/game không đọc
+/[Aa]ssets/[Aa]rt/[Gg]enerated/**/references/
+/[Aa]ssets/[Aa]rt/[Gg]enerated/**/references.meta
+# Thử nghiệm so sánh SpriteCook vs PixelLab
+/spritecook-eval/
+__pycache__/
