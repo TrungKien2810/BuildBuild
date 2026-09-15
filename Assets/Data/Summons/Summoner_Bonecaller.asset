@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8faa04ea2b9cf35438ba43e7055e4333, type: 3}
+  m_Name: Summoner_Bonecaller
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.SummonerDefinition
+  unitPrefab: {fileID: 6379297408595509390, guid: 5222ae2c40cd08941985b2adc396e8e1, type: 3}
+  skeleton: {fileID: 11400000, guid: 71893146102fbb942b4670fa5055780a, type: 2}
+  bigSkeleton: {fileID: 11400000, guid: 0a4bb61d1f05f764d991f1da7e3fd97e, type: 2}
+  capPerSource: 6
+  bigEvery: 4
+  raiseRadius: 4
+  raiseChance: 0.35
+  passiveLifetime: 10
+  ringCooldown: 12
+  ringRadius: 1.6
+  ringDamage: 10
+  markDuration: 10
+  ringFxDuration: 1.5
+  ringFrames:
+  - {fileID: 21300000, guid: 6cb72a54e43c3314898f38a1f03b5626, type: 3}
+  - {fileID: 21300000, guid: 25ceb08f350db8448859c56669e1d7b0, type: 3}
+  - {fileID: 21300000, guid: dfdf7a972d2bbfd4a85333ff69af73a1, type: 3}
+  - {fileID: 21300000, guid: b70594b9891af2d4097b062f62a3b7d1, type: 3}
+  markFrames:
+  - {fileID: 21300000, guid: 5c3cd1718dc81a94586ce613012a5dbf, type: 3}
+  - {fileID: 21300000, guid: 5a370e087f788624fa0d810f1bddfa78, type: 3}
+  - {fileID: 21300000, guid: 9ba3b2073242e97458c9260a9f932be4, type: 3}
+  - {fileID: 21300000, guid: 79e643f642188b74689814ce2a787224, type: 3}
+  deathKnight: {fileID: 11400000, guid: bcfcd42c126498d49a79caa3839143a6, type: 2}
+  auraRadius: 4
+  auraDamageBonus: 0.5
+  auraAttackRateBonus: 0.3

@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
+  m_Name: Hero_Bonecaller
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
+  displayName: Bonecaller
+  maxHealth: 300
+  damage: 15
+  attackRate: 0.7
+  range: 4
+  moveSpeed: 1
+  leashRange: 3
+  projectileSpeed: 8
+  splashRadius: 0.3
+  projectileFrames:
+  - {fileID: 21300000, guid: 33387bb2b0287ae4a948ea912841fb11, type: 3}
+  - {fileID: 21300000, guid: 7effde0e55b88d945a066d2c147eaff8, type: 3}
+  - {fileID: 21300000, guid: 5a0f4bac316b99f42977a5595749efd6, type: 3}
+  - {fileID: 21300000, guid: a3209e65a9902ee4fb3bf087049267be, type: 3}
+  projectileScale: 1
+  impactFrames:
+  - {fileID: 21300000, guid: 01e81497da1956b48a69c297632b938b, type: 3}
+  - {fileID: 21300000, guid: eb21eee90d71a1c4c9f69625c01563b0, type: 3}
+  - {fileID: 21300000, guid: 89c4eeb9b5f56594c80706c967b5f3f9, type: 3}
+  - {fileID: 21300000, guid: 1b07e1ba0d91dd34994ed72671985bf5, type: 3}
+  skillKind: 5
+  skillTier: 0
+  skillCooldown: 0
+  manaMax: 5
+  manaPerSecond: 0.35
+  manaPerHit: 0.25
+  skillRadius: 1.6
+  skillDuration: 3
+  skillPower: 1
+  skillFrames: []
+  skillIntroFrames: []
+  summoner: {fileID: 11400000, guid: d3d2f52489ef3664e95b09c8278e5b3d, type: 2}
+  animations: {fileID: 11400000, guid: ed18e66d09b85894fa270c5cf011fd0b, type: 2}
+  avatar: {fileID: 0}

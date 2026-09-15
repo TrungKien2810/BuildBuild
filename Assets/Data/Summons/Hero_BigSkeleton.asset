@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
+  m_Name: Hero_BigSkeleton
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
+  displayName: "X\u01B0\u01A1ng l\u1EDBn"
+  maxHealth: 700
+  damage: 40
+  attackRate: 0.7
+  range: 0.9
+  moveSpeed: 0.7
+  leashRange: 3
+  projectileSpeed: 20
+  splashRadius: 0.3
+  projectileFrames: []
+  projectileScale: 1
+  impactFrames: []
+  skillKind: 0
+  skillTier: 0
+  skillCooldown: 0
+  manaMax: 0
+  manaPerSecond: 0.35
+  manaPerHit: 0.25
+  skillRadius: 1.6
+  skillDuration: 3
+  skillPower: 1
+  skillFrames: []
+  skillIntroFrames: []
+  summoner: {fileID: 0}
+  animations: {fileID: 11400000, guid: b2f39e6b8f36fff4685b81e3acf2146d, type: 2}
+  avatar: {fileID: 0}
