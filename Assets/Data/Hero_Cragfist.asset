@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
+  m_Name: Hero_Cragfist
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
+  displayName: Cragfist
+  maxHealth: 1400
+  damage: 10
+  attackRate: 0.5
+  range: 0.8
+  moveSpeed: 0.9
+  leashRange: 3
+  projectileSpeed: 20
+  splashRadius: 0.3
+  projectileFrames: []
+  projectileScale: 1
+  impactFrames: []
+  skillKind: 2
+  skillTier: 0
+  skillCooldown: 0
+  manaMax: 6
+  manaPerSecond: 0.35
+  manaPerHit: 0.25
+  skillRadius: 0
+  skillDuration: 5
+  skillPower: 0.2
+  skillFrames:
+  - {fileID: 21300000, guid: 9bab203d8d74fe64a9e8484f1f0fb401, type: 3}
+  - {fileID: 21300000, guid: 97cb765f1f4096a43975ae964d23616a, type: 3}
+  - {fileID: 21300000, guid: 9ac29596348c8a24b8306c591d78f3eb, type: 3}
+  - {fileID: 21300000, guid: e15e733107e96924f97e90b24662a9b6, type: 3}
+  skillIntroFrames:
+  - {fileID: 21300000, guid: 7e2b58bb05255aa42b25ff175aafd17e, type: 3}
+  - {fileID: 21300000, guid: e389c14b67995674db3877ed4ea33f00, type: 3}
+  - {fileID: 21300000, guid: 9f1962a1adee98b46b7618794b3dd577, type: 3}
+  - {fileID: 21300000, guid: 4101fe67366df7d499eac4bcf977fd6d, type: 3}
+  summoner: {fileID: 0}
+  animations: {fileID: 11400000, guid: 29def75c320feff41b26b600cbcd277f, type: 2}
+  avatar: {fileID: 21300000, guid: 76182530b5ac89a4e932ec5b5ed71bda, type: 3}

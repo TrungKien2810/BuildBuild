@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
+  m_Name: Hero_Frostweaver
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
+  displayName: Frostweaver
+  maxHealth: 260
+  damage: 35
+  attackRate: 0.6
+  range: 5
+  moveSpeed: 1.2
+  leashRange: 3
+  projectileSpeed: 8
+  splashRadius: 0.45
+  projectileFrames:
+  - {fileID: 21300000, guid: e43f97b493470c9489b81c0c6071c4e7, type: 3}
+  - {fileID: 21300000, guid: e9739e548e96c6542a6672bd47bce47e, type: 3}
+  - {fileID: 21300000, guid: 0c6d98c9a32e8f74087922972a972661, type: 3}
+  - {fileID: 21300000, guid: 9210114d59f4e04419abf758b0f9956b, type: 3}
+  projectileScale: 0.5
+  impactScale: 0.6
+  impactFrames:
+  - {fileID: 21300000, guid: 83f20c9c2b4e76a4fbac8d2271e99238, type: 3}
+  - {fileID: 21300000, guid: 3b763b3e3d23deb43b955290b4d739fd, type: 3}
+  - {fileID: 21300000, guid: 2c091757a03445e46983a28d51e77cd3, type: 3}
+  - {fileID: 21300000, guid: 77063b7719c75fc408adfc943c4be49f, type: 3}
+  skillKind: 1
+  skillTier: 0
+  skillCooldown: 0
+  manaMax: 6
+  manaPerSecond: 0.35
+  manaPerHit: 0.25
+  skillRadius: 1.6
+  skillDuration: 3
+  skillPower: 1
+  skillFrames: []
+  skillIntroFrames: []
+  summoner: {fileID: 0}
+  animations: {fileID: 11400000, guid: db1208e2e599f1a4cb023a8ab90b0028, type: 2}
+  avatar: {fileID: 21300000, guid: 32fbf95ad7b1d7340ae5627b8119d6cf, type: 3}

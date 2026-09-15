@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43f79185e45b14b4989261a367b45756, type: 3}
+  m_Name: WaveTuning
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.WaveTuning
+  healthPerWave: 0.12
+  damagePerWave: 0.08
+  baseEnemyCount: 5
+  waveGoldBase: 50
+  waveGoldPerWave: 10
+  bossGoldReward: 200
+  totalWaves: 30
+  spawnInterval: 1.2
+  timeBetweenWaves: 4
+  bands:
+  - fromWave: 1
+    toWave: 3
+    enemies:
+    - {fileID: 11400000, guid: ce5cee30680d48f409bb70b0a72805af, type: 2}
+    hasBoss: 0
+    bossStatMultiplier: 1
+  - fromWave: 4
+    toWave: 30
+    enemies:
+    - {fileID: 11400000, guid: ce5cee30680d48f409bb70b0a72805af, type: 2}
+    - {fileID: 11400000, guid: 841baa938d951e348bf41f08a568610c, type: 2}
+    hasBoss: 0
+    bossStatMultiplier: 1
