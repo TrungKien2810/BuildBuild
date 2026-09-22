@@ -32,6 +32,13 @@ namespace BuildBuild.UI
         [SerializeField] HeroDefinition[] roster;
         [Tooltip("Cung thu tu voi roster.")]
         [SerializeField] Button[] rosterButtons;
+        [Tooltip(
+            "Cung thu tu voi roster; o cua hero khong co ky nang de trong. O skill doi sang " +
+            "`slotSelectedSprite` khi hero do DANG dung tren san — day la dau hieu duy nhat trong bang " +
+            "cho biet vi sao dong do bam khong duoc.")]
+        [SerializeField] Image[] rosterSkillSlots;
+        [SerializeField] Sprite slotSkillSprite;
+        [SerializeField] Sprite slotSelectedSprite;
         [SerializeField] Button cancelButton;
 
         HeroSlot _pending;
@@ -73,8 +80,22 @@ namespace BuildBuild.UI
 
             _pending = slot;
             for (int i = 0; i < rosterButtons.Length; i++)
-                rosterButtons[i].interactable = !OnBoard(roster[i]);
+            {
+                bool onBoard = OnBoard(roster[i]);
+                rosterButtons[i].interactable = !onBoard;
+                MarkSkillSlot(i, onBoard);
+            }
             pickerPanel.SetActive(true);
+        }
+
+        /// <summary>O skill cua dong `index`: vien vang khi hero da dung tren san, vien da khi con chon duoc.</summary>
+        void MarkSkillSlot(int index, bool onBoard)
+        {
+            if (rosterSkillSlots == null || index >= rosterSkillSlots.Length) return;
+            var slot = rosterSkillSlots[index];
+            if (slot == null) return;                       // hero khong co ky nang -> o khoa, khong doi
+            var sprite = onBoard ? slotSelectedSprite : slotSkillSprite;
+            if (sprite != null) slot.sprite = sprite;
         }
 
         void Choose(int index)
@@ -102,7 +123,12 @@ namespace BuildBuild.UI
             ShowFrames(true);
         }
 
-        void OnDefeated(int wave) => ShowFrames(true);
+        // Thua wave cung la moc "het wave": ve o, day mau, mana ve goc y nhu luc thang.
+        void OnDefeated(int wave)
+        {
+            SpawnAll();
+            ShowFrames(true);
+        }
 
         // Khung o trong chi hien luc chuan bi — giua tran khong dat hero duoc, khung chi lam roi san.
         void ShowFrames(bool show)

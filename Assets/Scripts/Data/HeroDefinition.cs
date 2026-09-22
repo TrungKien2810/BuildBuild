@@ -97,6 +97,8 @@ namespace BuildBuild.Data
         public Sprite[] skillFrames;
         [Tooltip("Petrify: vo da moc len, chay MOT lan truoc khi lap skillFrames.")]
         public Sprite[] skillIntroFrames;
+        [Tooltip("Charge (Ky si tu than): sao choang LAP tren dau quai trong luc bi choang. Trong = khong co FX.")]
+        public Sprite[] stunFrames;
 
         /// <summary>
         /// Chi hero nao duoc bat ro rang trong asset moi co ky nang — loai va CA HAI tang deu mac dinh

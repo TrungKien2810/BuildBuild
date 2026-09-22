@@ -15,7 +15,7 @@
   "edge_clean_depth": 3,
   "align": "bottom",
   "shared_scale": true,
-  "scale_strategy": "fit",
+  "scale_strategy": "preserve",
   "component_mode": "largest",
   "component_padding": 0,
   "min_component_area": 1,
@@ -71,24 +71,24 @@
       "output_edge_touch": false,
       "edge_touch": false,
       "output_size": [
-        57,
-        76
+        31,
+        41
       ],
       "paste_position": [
-        35,
-        38
+        48,
+        73
       ],
       "paste_clamped": false,
       "aligned_bbox": [
-        35,
-        38,
-        92,
+        48,
+        73,
+        79,
         114
       ],
-      "source_to_output_scale": 0.3295049504950495,
-      "bbox_scale_applied": true,
-      "scale_strategy": "fit",
-      "scale_changed": true
+      "source_to_output_scale": 0.177,
+      "bbox_scale_applied": false,
+      "scale_strategy": "preserve",
+      "scale_changed": false
     },
     {
       "grid": [
@@ -132,24 +132,24 @@
       "output_edge_touch": false,
       "edge_touch": false,
       "output_size": [
-        69,
-        63
+        37,
+        34
       ],
       "paste_position": [
-        29,
-        51
+        45,
+        80
       ],
       "paste_clamped": false,
       "aligned_bbox": [
-        29,
-        51,
-        98,
+        45,
+        80,
+        82,
         114
       ],
-      "source_to_output_scale": 0.3295049504950495,
-      "bbox_scale_applied": true,
-      "scale_strategy": "fit",
-      "scale_changed": true
+      "source_to_output_scale": 0.177,
+      "bbox_scale_applied": false,
+      "scale_strategy": "preserve",
+      "scale_changed": false
     },
     {
       "grid": [
@@ -193,24 +193,24 @@
       "output_edge_touch": false,
       "edge_touch": false,
       "output_size": [
-        70,
-        69
+        38,
+        37
       ],
       "paste_position": [
-        29,
-        45
+        45,
+        77
       ],
       "paste_clamped": false,
       "aligned_bbox": [
-        29,
         45,
-        99,
+        77,
+        83,
         114
       ],
-      "source_to_output_scale": 0.3295049504950495,
-      "bbox_scale_applied": true,
-      "scale_strategy": "fit",
-      "scale_changed": true
+      "source_to_output_scale": 0.177,
+      "bbox_scale_applied": false,
+      "scale_strategy": "preserve",
+      "scale_changed": false
     },
     {
       "grid": [
@@ -254,24 +254,24 @@
       "output_edge_touch": false,
       "edge_touch": false,
       "output_size": [
-        88,
-        57
+        48,
+        31
       ],
       "paste_position": [
-        20,
-        57
+        40,
+        83
       ],
       "paste_clamped": false,
       "aligned_bbox": [
-        20,
-        57,
-        108,
+        40,
+        83,
+        88,
         114
       ],
-      "source_to_output_scale": 0.3295049504950495,
-      "bbox_scale_applied": true,
-      "scale_strategy": "fit",
-      "scale_changed": true
+      "source_to_output_scale": 0.177,
+      "bbox_scale_applied": false,
+      "scale_strategy": "preserve",
+      "scale_changed": false
     },
     {
       "grid": [
@@ -315,24 +315,24 @@
       "output_edge_touch": false,
       "edge_touch": false,
       "output_size": [
-        99,
-        40
+        54,
+        22
       ],
       "paste_position": [
-        14,
-        74
+        37,
+        92
       ],
       "paste_clamped": false,
       "aligned_bbox": [
-        14,
-        74,
-        113,
+        37,
+        92,
+        91,
         114
       ],
-      "source_to_output_scale": 0.3295049504950495,
-      "bbox_scale_applied": true,
-      "scale_strategy": "fit",
-      "scale_changed": true
+      "source_to_output_scale": 0.177,
+      "bbox_scale_applied": false,
+      "scale_strategy": "preserve",
+      "scale_changed": false
     },
     {
       "grid": [
@@ -376,24 +376,24 @@
       "output_edge_touch": false,
       "edge_touch": false,
       "output_size": [
-        99,
-        40
+        53,
+        22
       ],
       "paste_position": [
-        14,
-        74
+        37,
+        92
       ],
       "paste_clamped": false,
       "aligned_bbox": [
-        14,
-        74,
-        113,
+        37,
+        92,
+        90,
         114
       ],
-      "source_to_output_scale": 0.3295049504950495,
-      "bbox_scale_applied": true,
-      "scale_strategy": "fit",
-      "scale_changed": true
+      "source_to_output_scale": 0.177,
+      "bbox_scale_applied": false,
+      "scale_strategy": "preserve",
+      "scale_changed": false
     }
   ],
   "edge_touch_frames": [],

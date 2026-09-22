@@ -24,6 +24,8 @@ MonoBehaviour:
   projectileFrames: []
   projectileScale: 1
   impactFrames: []
+  impactScale: 1
+  knockbackOnHit: 0
   skillKind: 0
   skillTier: 0
   skillCooldown: 0
@@ -35,6 +37,7 @@ MonoBehaviour:
   skillPower: 1
   skillFrames: []
   skillIntroFrames: []
+  stunFrames: []
   summoner: {fileID: 0}
   animations: {fileID: 11400000, guid: b2f39e6b8f36fff4685b81e3acf2146d, type: 2}
   avatar: {fileID: 0}

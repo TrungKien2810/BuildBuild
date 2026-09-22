@@ -42,7 +42,7 @@ namespace BuildBuild.Core
         // khong duoc dam bao — doc Fraction truoc do la 0 va lau dai hien sprite sap ngay tu dau.
         void Start() => RefreshSprite();
 
-        /// <summary>Hoi day mau truoc tran moi — thua thi choi lai tu wave 1 voi lau dai nguyen ven.</summary>
+        /// <summary>Hoi day mau — WaveManager goi ngay khi mot wave ket thuc (thang lan thua).</summary>
         public void Repair()
         {
             _health.ResetTo(_health.Max);

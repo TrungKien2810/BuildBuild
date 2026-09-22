@@ -26,6 +26,9 @@ namespace BuildBuild.Combat
         /// <summary>Mau phu luc dang bi dong bang — de nguoi choi doc ra con nao dang dinh.</summary>
         static readonly Color FrozenTint = new Color(0.62f, 0.82f, 1f);
 
+        /// <summary>Mau phu luc dang bi choang (vd. phi cua Ky si tu than) — vang, phan biet voi dong bang.</summary>
+        static readonly Color StunnedTint = new Color(1f, 0.85f, 0.35f);
+
         [SerializeField] SpriteAnimator animator;
 
         EnemyDefinition _definition;
@@ -45,6 +48,8 @@ namespace BuildBuild.Combat
         GameObject _markFx;
         Health _pendingHit;
         SpriteRenderer _markRenderer;
+        GameObject _stunFx;
+        SpriteRenderer _stunRenderer;
         float _bodyRadius;
         float _bodyHeight;
         Hero _engaged;
@@ -57,6 +62,13 @@ namespace BuildBuild.Combat
 
         /// <summary>Tren dau quai (toa do LOCAL, da nhan scale than) — cho dat FX an ky.</summary>
         static readonly Vector3 MarkOffset = new Vector3(0f, 0.65f, 0f);
+
+        /// <summary>
+        /// Scale LOCAL cua FX choang. Art ve tren canvas 128px @100 PPU = 1,28 unit, ma FX gan vao than quai
+        /// (transform da nhan `Battlefield.UnitScale` = 2) nen de 1 thi sao choang rong ~2,1 unit — to hon ca
+        /// con quai. 0,3 cho no rong ~0,64 unit, vua bang be ngang dau.
+        /// </summary>
+        const float StunFxScale = 0.3f;
 
         /// <summary>
         /// Goc tren MAT DAT cua tung cho vay, tinh tu phia quai den: chinh dien, cheo tren, cheo duoi. 70 do chu
@@ -147,11 +159,17 @@ namespace BuildBuild.Combat
             _frozenUntil = Mathf.Max(_frozenUntil, Time.time + seconds);
         }
 
-        /// <summary>Choang: khoa y nhu dong bang (khong di, khong danh, dung animation) nhung KHONG doi mau bang.</summary>
-        public void ApplyStun(float seconds)
+        /// <summary>Choang: khoa y nhu dong bang (khong di, khong danh, dung animation), phu mau vang + sao choang tren dau.</summary>
+        public void ApplyStun(float seconds, Sprite[] frames)
         {
             if (_dying || seconds <= 0f) return;
+            bool alreadyStunned = IsStunned;
             _stunnedUntil = Mathf.Max(_stunnedUntil, Time.time + seconds);
+            if (alreadyStunned || frames == null || frames.Length == 0) return;
+            if (_stunFx != null) Destroy(_stunFx);
+            _stunFx = OneShotFx.SpawnLoop(transform, MarkOffset, frames, seconds, SortOrder.ForUnit(this) + 1,
+                scale: StunFxScale);
+            _stunRenderer = _stunFx != null ? _stunFx.GetComponent<SpriteRenderer>() : null;
         }
 
         /// <summary>
@@ -198,13 +216,18 @@ namespace BuildBuild.Combat
             // Bi day lui: frame nay chi lui, khong di khong danh (cooldown van chay tiep o tren).
             if (_knockback.Step(transform)) return;
 
+            // Dang vung don (clip "attack" chua het) thi dung khoa nguyen cho — ke ca luc doi hinh day
+            // tach nhau: tach giua chung la nuot mat don, va la nguon lam quai "vua di vua danh" truoc day.
+            bool swinging = animator != null && animator.CurrentClip == "attack" && !animator.IsFinished;
+
             // Ca doi hinh khong don khit vao mot diem truoc hero hay truoc tuong.
-            transform.position += Battlefield.Separation(this, Alive) * Mathf.Min(1f, SeparationRate * Time.deltaTime);
+            if (!swinging)
+                transform.position += Battlefield.Separation(this, Alive) * Mathf.Min(1f, SeparationRate * Time.deltaTime);
 
             var hero = EngageHero();
             if (hero != null)
             {
-                Fight(hero);
+                Fight(hero, swinging);
                 return;
             }
 
@@ -213,6 +236,7 @@ namespace BuildBuild.Combat
                 March();
                 return;
             }
+            if (swinging) return;
 
             // Tuong truoc lau dai la mot duong thang dung: quai o y nao cung chi can MEP THAN du gan theo x.
             float distance = Mathf.Abs(_targetTransform.position.x - transform.position.x);
@@ -231,6 +255,7 @@ namespace BuildBuild.Combat
             if (_renderer == null) return;
             _renderer.sortingOrder = SortOrder.ForUnit(this);
             if (_markRenderer != null) _markRenderer.sortingOrder = _renderer.sortingOrder + 1;
+            if (_stunRenderer != null) _stunRenderer.sortingOrder = _renderer.sortingOrder + 1;
         }
 
         /// <summary>
@@ -269,10 +294,9 @@ namespace BuildBuild.Combat
         /// Vao tam (chan quai toi MEP than hero, do tren mat dat) va het cooldown thi danh ngay; giua hai don thi
         /// di ve cho vay cua minh. Dang vung don thi dung yen: di giua chung la cat clip va nuot mat don.
         /// </summary>
-        void Fight(Hero hero)
+        void Fight(Hero hero, bool swinging)
         {
             var heroPosition = hero.transform.position;
-            bool swinging = animator != null && animator.CurrentClip == "attack" && !animator.IsFinished;
             if (swinging) return;
 
             bool inReach = Battlefield.GroundDistance(heroPosition, transform.position) - hero.BodyRadius <= _definition.attackRange;
@@ -307,14 +331,14 @@ namespace BuildBuild.Combat
         }
 
         /// <summary>
-        /// Tra ve true neu dang bi dong bang. Dung luon animation va doi mau: neu chi chan dung ma
-        /// chan van buoc thi doc ra nhu game dung hinh, khong phai bi dong bang.
+        /// Tra ve true neu dang bi dong bang hoac choang. Dung luon animation va doi mau: neu chi chan
+        /// dung ma chan van buoc thi doc ra nhu game dung hinh, khong phai bi khoa.
         /// Chi cham renderer khi trang thai DOI, khong phai moi frame.
         /// </summary>
         bool UpdateFrozen()
         {
             bool locked = IsFrozen || IsStunned;
-            var tint = IsFrozen ? FrozenTint : Color.white;
+            var tint = IsFrozen ? FrozenTint : IsStunned ? StunnedTint : Color.white;
             if (locked != _frozenVisual || (_renderer != null && _renderer.color != tint))
             {
                 _frozenVisual = locked;
@@ -331,6 +355,9 @@ namespace BuildBuild.Combat
             _frozenVisual = false;
             if (animator != null) animator.Paused = false;
             if (_renderer != null) _renderer.color = Color.white;
+            if (_stunFx != null) Destroy(_stunFx);
+            _stunFx = null;
+            _stunRenderer = null;
         }
 
         void March()

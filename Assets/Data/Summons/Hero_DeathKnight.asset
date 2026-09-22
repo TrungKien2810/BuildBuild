@@ -21,10 +21,11 @@ MonoBehaviour:
   leashRange: 3
   projectileSpeed: 20
   splashRadius: 1.2
-  knockbackOnHit: 1
   projectileFrames: []
   projectileScale: 1
   impactFrames: []
+  impactScale: 1
+  knockbackOnHit: 1
   skillKind: 6
   skillTier: 0
   skillCooldown: 0
@@ -36,6 +37,11 @@ MonoBehaviour:
   skillPower: 150
   skillFrames: []
   skillIntroFrames: []
+  stunFrames:
+  - {fileID: 21300000, guid: 1a1fae456d75bfb42a8ffae427a8e2f3, type: 3}
+  - {fileID: 21300000, guid: 5f10dad14feb11e48ab8189f300fd865, type: 3}
+  - {fileID: 21300000, guid: 7213f6b7419d25048959c0318ee69916, type: 3}
+  - {fileID: 21300000, guid: b54ff30fbe8e230408ef3ea33a794952, type: 3}
   summoner: {fileID: 0}
   animations: {fileID: 11400000, guid: 707b410f960a90c47a33b0490fe9ac6c, type: 2}
   avatar: {fileID: 0}

@@ -127,6 +127,7 @@ namespace BuildBuild.Combat
 
             float side = (_hero.GetComponent<SpriteRenderer>().flipX ? 0.6f : -0.6f) * Battlefield.UnitScale;
             _knight = Spawn(_definition.deathKnight, _hero.transform.position + new Vector3(side, 0f, 0f), 0f);
+            if (_knight != null) SummonBurst.Spawn(_knight.transform.position, _knight.BodyRadius, _definition.summonBurstFrames);
         }
 
         /// <summary>Linh xuong (khong phai chinh ky si) dung trong hao quang thi nhan buff.</summary>

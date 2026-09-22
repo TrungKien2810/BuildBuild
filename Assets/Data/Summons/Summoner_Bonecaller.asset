@@ -36,6 +36,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9ba3b2073242e97458c9260a9f932be4, type: 3}
   - {fileID: 21300000, guid: 79e643f642188b74689814ce2a787224, type: 3}
   deathKnight: {fileID: 11400000, guid: bcfcd42c126498d49a79caa3839143a6, type: 2}
+  summonBurstFrames:
+  - {fileID: 21300000, guid: 8f05a8517d505494d91eb1fb64823f92, type: 3}
+  - {fileID: 21300000, guid: 207a971444178a44fb06abbd7360190b, type: 3}
+  - {fileID: 21300000, guid: 6ef4d1e40613137429b1af5edb8da9f1, type: 3}
+  - {fileID: 21300000, guid: fd39692d69c18eb4191f53cf54d024d0, type: 3}
   auraRadius: 4
   auraDamageBonus: 0.5
   auraAttackRateBonus: 0.3

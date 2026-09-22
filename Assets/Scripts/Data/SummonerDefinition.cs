@@ -42,6 +42,8 @@ namespace BuildBuild.Data
 
         [Header("Chieu xin — ky si tu than")]
         public HeroDefinition deathKnight;
+        [Tooltip("Quang phap bung len duoi chan luc ky si VUA duoc trieu hoi (lan dau hoac hoi sinh). Trong = ve placeholder bang code.")]
+        public Sprite[] summonBurstFrames;
         [Tooltip("Linh xuong trong ban kinh nay quanh ky si duoc buff.")]
         public float auraRadius = 4f;
         public float auraDamageBonus = 0.5f;
