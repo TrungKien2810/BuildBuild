@@ -27,12 +27,13 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0c6d98c9a32e8f74087922972a972661, type: 3}
   - {fileID: 21300000, guid: 9210114d59f4e04419abf758b0f9956b, type: 3}
   projectileScale: 0.5
-  impactScale: 0.6
   impactFrames:
   - {fileID: 21300000, guid: 83f20c9c2b4e76a4fbac8d2271e99238, type: 3}
   - {fileID: 21300000, guid: 3b763b3e3d23deb43b955290b4d739fd, type: 3}
   - {fileID: 21300000, guid: 2c091757a03445e46983a28d51e77cd3, type: 3}
   - {fileID: 21300000, guid: 77063b7719c75fc408adfc943c4be49f, type: 3}
+  impactScale: 0.6
+  knockbackOnHit: 0
   skillKind: 1
   skillTier: 0
   skillCooldown: 0
@@ -42,8 +43,13 @@ MonoBehaviour:
   skillRadius: 1.6
   skillDuration: 3
   skillPower: 1
-  skillFrames: []
+  skillFrames:
+  - {fileID: 21300000, guid: f048826d64684c744866402d386eab31, type: 3}
+  - {fileID: 21300000, guid: 71a458061a3ef9b43ab13fbac41f73a7, type: 3}
+  - {fileID: 21300000, guid: 004dedca936f5f54c972f12d59a53a2c, type: 3}
+  - {fileID: 21300000, guid: 59a0bbed44cf7f14d90735bbfaec7331, type: 3}
   skillIntroFrames: []
+  stunFrames: []
   summoner: {fileID: 0}
   animations: {fileID: 11400000, guid: db1208e2e599f1a4cb023a8ab90b0028, type: 2}
   avatar: {fileID: 21300000, guid: 32fbf95ad7b1d7340ae5627b8119d6cf, type: 3}

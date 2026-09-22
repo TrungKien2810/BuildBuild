@@ -96,7 +96,7 @@ namespace BuildBuild.Editor
         // Importer (pivot chan, border 9-slice) chi co hieu luc khi file duoc import LAI.
         static void ReimportArt()
         {
-            foreach (var folder in new[] { ArtRoot + "Goblin", ArtRoot + "Ashfang", ArtRoot + "Frostweaver-v2", UiDir + "9slice" })
+            foreach (var folder in new[] { ArtRoot + "Goblin", ArtRoot + "Ashfang", ArtRoot + "Frostweaver-v2", UiDir + "9slice", UiDir + "chrome", UiDir + "panels" })
                 foreach (var guid in AssetDatabase.FindAssets("t:Texture2D", new[] { folder }))
                     AssetDatabase.ImportAsset(AssetDatabase.GUIDToAssetPath(guid), ImportAssetOptions.ForceUpdate);
         }
@@ -243,7 +243,7 @@ namespace BuildBuild.Editor
 
             // Bonecaller: don thuong + chieu xin goi ky si qua thanh mana; noi tai + chieu thuong + linh
             // nam o Summoner_Bonecaller (so Claude de xuat trong GDD muc 3, chua can bang).
-            var bonecaller = HeroDef("Bonecaller", null,
+            var bonecaller = HeroDef("Bonecaller", "avatar-bonecaller",
                 AnimSet("Bonecaller", "Bonecaller/", attack: ("attack", "attack"), hit: 4),
                 d =>
                 {
@@ -287,6 +287,12 @@ namespace BuildBuild.Editor
                 },
                 SkillKind.Charge, d => { d.manaMax = 5f; d.skillRadius = 6f; d.skillPower = 150f; d.skillDuration = 2f; },
                 summons);
+            // Sao choang la FX bo sung sau khi asset da co — bu mot lan (cung kieu vo da Cragfist).
+            if (deathKnight.stunFrames == null || deathKnight.stunFrames.Length == 0)
+            {
+                deathKnight.stunFrames = Frames(ArtRoot + "Enemy/stunned-status", "stun");
+                EditorUtility.SetDirty(deathKnight);
+            }
 
             var go = new GameObject("Hero");
             go.AddComponent<SpriteRenderer>();   // order dat moi frame theo chan (SortOrder.ForUnit)
@@ -308,6 +314,9 @@ namespace BuildBuild.Editor
             summoner.skeleton = skeleton;
             summoner.bigSkeleton = bigSkeleton;
             summoner.deathKnight = deathKnight;
+            // Quang phap trieu hoi la FX bo sung sau khi asset da co — bu mot lan.
+            if (summoner.summonBurstFrames == null || summoner.summonBurstFrames.Length == 0)
+                summoner.summonBurstFrames = Frames(ArtRoot + "DeathKnight/summon-burst", "summon-burst");
             EditorUtility.SetDirty(summoner);
             if (bonecaller.summoner == null) bonecaller.summoner = summoner;
             EditorUtility.SetDirty(bonecaller);
@@ -442,19 +451,19 @@ namespace BuildBuild.Editor
             SetRef(hud, "castle", castle);
             SetRef(hud, "economy", economy);
 
-            // Mau lau dai — khung 320x40 co o icon ben trai; ruot fill nam trong phan con lai.
-            var hpFrame = Img("CastleHp", canvas, UiSprite("hud/hud-hp-frame"), TopLeft, new Vector2(24, -24), Native(320, 40));
-            var hpFill = Img("Fill", hpFrame.transform, UiSprite("9slice/bar-fill-hp"), Center, Vector2.zero, Vector2.zero);
-            Stretch(hpFill.rectTransform, 44 * UiScale, 6 * UiScale, 8 * UiScale, 8 * UiScale);
+            // Mau lau dai — khung chrome/bar-frame (3-slice, long cach tren/duoi 4 px) + icon tim ben trai.
+            var hpFrame = Img("CastleHp", canvas, UiSprite("chrome/bar-frame"), TopLeft, new Vector2(80, -36), Native(200, 23), sliced: true);
+            var hpFill = Img("Fill", hpFrame.transform, UiSprite("chrome/bar-fill-hp"), Center, Vector2.zero, Vector2.zero);
+            Stretch(hpFill.rectTransform, 6 * UiScale, 5 * UiScale, 4 * UiScale, 4 * UiScale);
             hpFill.type = Image.Type.Filled;
             hpFill.fillMethod = Image.FillMethod.Horizontal;
-            Img("Icon", hpFrame.transform, UiSprite("icons/icon-hp"), MidLeft, new Vector2(8, 0), new Vector2(48, 48));
-            var hpText = Label("Value", hpFrame.transform, "", 26, Center, new Vector2(40, 0), Native(280, 40));
+            Img("Icon", hpFrame.transform, UiSprite("icons/icon-hp"), MidLeft, new Vector2(-56, 0), new Vector2(48, 48));
+            var hpText = Label("Value", hpFrame.transform, "", 26, Center, Vector2.zero, Native(200, 23));
             SetRef(hud, "castleHpFill", hpFill);
             SetRef(hud, "castleHpText", hpText);
 
-            var badge = Img("Wave", canvas, UiSprite("hud/hud-wave-badge"), Top, new Vector2(0, -16), Native(96, 96));
-            SetRef(hud, "waveText", Label("Value", badge.transform, "0", 56, Center, Vector2.zero, Native(96, 96)));
+            var badge = Img("Wave", canvas, UiSprite("chrome/banner-stage"), Top, new Vector2(0, -16), Native(160, 26), sliced: true);
+            SetRef(hud, "waveText", Label("Value", badge.transform, "0", 36, Center, Vector2.zero, Native(160, 26)));
 
             SetRef(hud, "goldText", GoldPill(canvas));
             SetRef(hud, "gachaButton", MakeButton("GachaButton", canvas, "Triệu hồi", TopRight, new Vector2(-24, -136), new Vector2(240, 72), out _));
@@ -463,29 +472,109 @@ namespace BuildBuild.Editor
             SetRef(hud, "messageText", Label("Message", canvas, "", 48, Center, new Vector2(0, 120), new Vector2(1400, 120)));
 
             // Bang chon hero: mo khi cham o trong. Panel bat raycast de cham khong xuyen xuong o ben duoi.
-            // Roster = moi HeroDefinition trong Assets/Data, moi hero mot nut xep doc.
-            const float rowStep = 110f;
-            float pickerHeight = 100f + roster.Length * rowStep + 110f;
-            var picker = Img("HeroPicker", canvas, UiSprite("9slice/panel-9slice"), Center, new Vector2(0, 60), new Vector2(560, pickerHeight), sliced: true);
+            // Roster = moi HeroDefinition trong Assets/Data, moi hero mot dong xep doc.
+            //
+            // Skin dot UI thu 3 (`UI/panels/`): nen `panel-hero`, tieu de tren `title-ribbon`, moi dong co
+            // khung chan dung + mot dai chi so + mot o skill. Chi so DOC TU HeroDefinition chu khong go tay --
+            // sua asset la bang doi theo, khong co cho cho so cu nam lai.
+            const float rowStep = 132f;
+            float pickerHeight = 108f + roster.Length * rowStep + 110f;
+            var picker = Img("HeroPicker", canvas, UiSprite("panels/panel-hero"), Center, new Vector2(0, 60), new Vector2(680, pickerHeight), sliced: true);
             picker.raycastTarget = true;
-            Label("Title", picker.transform, "Chọn hero", 36, Center, new Vector2(0, -20), new Vector2(520, 60), Top);
+            var titleBar = Img("Title", picker.transform, UiSprite("panels/title-ribbon"), Top, new Vector2(0, 26), new Vector2(360, 64), sliced: true);
+            Label("Value", titleBar.transform, "Chọn hero", 34, Center, Vector2.zero, new Vector2(340, 64));
+
             var heroButtons = new Object[roster.Length];
+            var skillSlots = new Object[roster.Length];
             for (int i = 0; i < roster.Length; i++)
             {
                 var heroDef = roster[i];
-                float y = pickerHeight / 2f - 100f - rowStep / 2f - i * rowStep;
-                var heroButton = MakeButton("Hero_" + heroDef.name, picker.transform, heroDef.displayName, Center, new Vector2(0, y), new Vector2(360, 96), out _);
+                float y = pickerHeight / 2f - 108f - rowStep / 2f - i * rowStep;
+                var row = MakeButton("Hero_" + heroDef.name, picker.transform, "", Center, new Vector2(0, y),
+                    new Vector2(608, 118), out _, UiSprite("panels/stat-strip"));
+
                 // Avatar lay TU heroDef, khong ghim cung ten file: them hero thu hai vao roster ma icon
                 // van la cua hero thu nhat thi khong co loi nao bao, chi co nguoi choi bam nham.
+                var portrait = Img("Portrait", row.transform, UiSprite("panels/portrait-frame-big"), MidLeft, new Vector2(10, 0), new Vector2(98, 98), sliced: true);
                 if (heroDef.avatar != null)
-                    Img("Icon", heroButton.transform, heroDef.avatar, MidLeft, new Vector2(12, 0), new Vector2(72, 72));
-                heroButtons[i] = heroButton;
+                    Img("Avatar", portrait.transform, heroDef.avatar, Center, Vector2.zero, new Vector2(72, 72));
+
+                var nameText = Label("Name", row.transform, heroDef.displayName, 32, MidLeft, new Vector2(122, 26), new Vector2(300, 40), MidLeft);
+                nameText.alignment = TextAnchor.MiddleLeft;
+                var statText = Label("Stats", row.transform,
+                    $"ST {heroDef.damage:0}   Tầm {heroDef.range:0.#}   Máu {heroDef.maxHealth:0}",
+                    24, MidLeft, new Vector2(122, -18), new Vector2(340, 34), MidLeft);
+                statText.alignment = TextAnchor.MiddleLeft;
+
+                // O skill: `slot-skill` = co ky nang, `slot-skill-locked` = HeroDefinition de skillKind None.
+                // Sprite "dang dung" (`slot-skill-selected`) do HeroBoard doi khi hero da dung tren san.
+                bool hasSkill = heroDef.skillKind != SkillKind.None;
+                var slot = Img("SkillSlot", row.transform, UiSprite(hasSkill ? "panels/slot-skill" : "panels/slot-skill-locked"),
+                    MidLeft, new Vector2(500, 0), new Vector2(88, 88), sliced: true);
+                if (hasSkill && heroDef.avatar != null)
+                    Img("Icon", slot.transform, heroDef.avatar, Center, Vector2.zero, new Vector2(52, 52));
+
+                heroButtons[i] = row;
+                skillSlots[i] = hasSkill ? slot : null;
             }
             var cancel = MakeButton("Cancel", picker.transform, "Huỷ", Bottom, new Vector2(0, 24), new Vector2(200, 72), out _);
             SetRef(board, "pickerPanel", picker.gameObject);
             SetRefs(board, "roster", roster);
             SetRefs(board, "rosterButtons", heroButtons);
+            SetRefs(board, "rosterSkillSlots", skillSlots);
+            SetRef(board, "slotSkillSprite", UiSprite("panels/slot-skill"));
+            SetRef(board, "slotSelectedSprite", UiSprite("panels/slot-skill-selected"));
             SetRef(board, "cancelButton", cancel);
+
+            SetRef(hud, "resultPopup", BuildResultPopup(canvas));
+        }
+
+        /// <summary>
+        /// Bang ket qua sau moi wave (thang/thua + vang). Dung bo sprite `UI/panels/` dot 3.
+        ///
+        /// Lop `Dim` phu kin man va BAT raycast: no vua lam noi bang, vua chan cham xuyen xuong o hero
+        /// ben duoi luc bang dang mo. Ruy bang thang/thua dung chung mot Image, dat o Top cua panel voi
+        /// nua chieu cao tran ra ngoai -- hai file da cat trung khit bbox nen doi sprite khong xe khung.
+        /// </summary>
+        static ResultPopup BuildResultPopup(RectTransform canvas)
+        {
+            var rootRect = Rect("ResultPopup", canvas, Center, Vector2.zero, new Vector2(RefWidth, RefHeight));
+            var popup = rootRect.gameObject.AddComponent<ResultPopup>();
+
+            var dim = Img("Dim", rootRect, UiSprite("chrome/dim-tile"), Center, Vector2.zero, Vector2.zero);
+            Stretch(dim.rectTransform, 0, 0, 0, 0);
+            dim.color = new Color(1f, 1f, 1f, 0.72f);
+            dim.raycastTarget = true;
+            dim.transform.SetAsFirstSibling();
+
+            var body = Rect("Body", rootRect, Center, Vector2.zero, new Vector2(760, 420));
+            var rays = Img("Rays", body, UiSprite("panels/rays-burst"), Center, Vector2.zero, new Vector2(760, 760));
+            var panel = Img("Panel", body, UiSprite("panels/panel-result"), Center, Vector2.zero, new Vector2(760, 420), sliced: true);
+            var sparkle = Img("Sparkle", body, UiSprite("panels/sparkle"), Center, new Vector2(-268, 96), new Vector2(166, 140));
+
+            var ribbon = Img("Ribbon", panel.transform, UiSprite("panels/ribbon-victory"), Top, new Vector2(0, 40), new Vector2(600, 80), sliced: true);
+            var title = Label("Value", ribbon.transform, "", 40, Center, new Vector2(0, 2), new Vector2(560, 80));
+
+            var rewardRow = Img("Reward", panel.transform, UiSprite("panels/reward-row"), Center, new Vector2(0, 16), new Vector2(440, 76), sliced: true);
+            Img("Icon", rewardRow.transform, UiSprite("icons/icon-gold"), MidLeft, new Vector2(46, 0), new Vector2(56, 56));
+            var gold = Label("Value", rewardRow.transform, "0", 36, Center, new Vector2(26, 0), new Vector2(320, 76));
+
+            var hint = Label("Hint", panel.transform, "", 26, Center, new Vector2(0, -56), new Vector2(660, 40));
+            var close = MakeButton("Close", panel.transform, "Tiếp tục", Bottom, new Vector2(0, 26), new Vector2(260, 76), out _);
+
+            SetRef(popup, "root", body.gameObject);
+            SetRef(popup, "dim", dim.gameObject);
+            SetRef(popup, "rays", rays.gameObject);
+            SetRef(popup, "sparkle", sparkle.gameObject);
+            SetRef(popup, "ribbon", ribbon);
+            SetRef(popup, "victoryRibbon", UiSprite("panels/ribbon-victory"));
+            SetRef(popup, "defeatRibbon", UiSprite("panels/ribbon-defeat"));
+            SetRef(popup, "titleText", title);
+            SetRef(popup, "rewardRow", rewardRow.gameObject);
+            SetRef(popup, "goldText", gold);
+            SetRef(popup, "hintText", hint);
+            SetRef(popup, "closeButton", close);
+            return popup;
         }
 
         // 9 o dat hero (3x3) tren SAN, ngay truoc tuong lau dai — GDD muc 2. O la DIEM XUAT HIEN dau
@@ -546,7 +635,7 @@ namespace BuildBuild.Editor
             SetRef(screen, "backButton", MakeButton("BackButton", canvas, "Quay lại", TopLeft, new Vector2(24, -24), new Vector2(200, 72), out _));
             SetRef(screen, "goldText", GoldPill(canvas));
 
-            var info = Img("Info", canvas, UiSprite("9slice/panel-9slice"), Top, new Vector2(0, -120), new Vector2(1100, 120), sliced: true);
+            var info = Img("Info", canvas, UiSprite("chrome/panel-wood"), Top, new Vector2(0, -120), new Vector2(1100, 120), sliced: true);
             SetRef(screen, "ratesText", Label("Rates", info.transform, "", 30, Center, new Vector2(0, -14), new Vector2(1060, 44), Top));
             SetRef(screen, "pityText", Label("Pity", info.transform, "", 26, Center, new Vector2(0, 14), new Vector2(1060, 44), Bottom));
 
@@ -605,24 +694,22 @@ namespace BuildBuild.Editor
 
         static Text GoldPill(Transform canvas)
         {
-            var pill = Img("Gold", canvas, UiSprite("hud/hud-gold-pill"), TopRight, new Vector2(-24, -24), Native(160, 48));
-            Img("Icon", pill.transform, UiSprite("icons/icon-gold"), MidLeft, new Vector2(16, 0), new Vector2(48, 48));
-            return Label("Value", pill.transform, "0", 32, Center, new Vector2(32, 0), Native(120, 48));
+            var pill = Img("Gold", canvas, UiSprite("chrome/currency-pill"), TopRight, new Vector2(-24, -28), Native(100, 20), sliced: true);
+            Img("Icon", pill.transform, UiSprite("icons/icon-gold"), MidLeft, new Vector2(-12, 0), new Vector2(48, 48));
+            return Label("Value", pill.transform, "0", 30, Center, new Vector2(16, 0), Native(80, 20));
         }
 
-        static Button MakeButton(string name, Transform parent, string label, Vector2 anchor, Vector2 pos, Vector2 size, out Text text)
+        static Button MakeButton(string name, Transform parent, string label, Vector2 anchor, Vector2 pos, Vector2 size, out Text text,
+            Sprite background = null)
         {
-            var img = Img(name, parent, UiSprite("9slice/button-normal"), anchor, pos, size, sliced: true);
+            // Chrome chi co MOT sprite nut xanh -> trang thai bang tint mau, khong swap sprite.
+            var img = Img(name, parent, background != null ? background : UiSprite("chrome/btn-green"), anchor, pos, size, sliced: true);
             img.raycastTarget = true;
             var button = img.gameObject.AddComponent<Button>();
-            button.transition = Selectable.Transition.SpriteSwap;
-            button.spriteState = new SpriteState
-            {
-                highlightedSprite = UiSprite("9slice/button-hover"),
-                pressedSprite = UiSprite("9slice/button-pressed"),
-                selectedSprite = UiSprite("9slice/button-normal"),
-                disabledSprite = UiSprite("9slice/button-disabled"),
-            };
+            button.transition = Selectable.Transition.ColorTint;
+            var colors = ColorBlock.defaultColorBlock;
+            colors.disabledColor = new Color(0.55f, 0.55f, 0.55f, 1f);
+            button.colors = colors;
             text = Label("Label", img.transform, label, 30, Center, Vector2.zero, size);
             return button;
         }

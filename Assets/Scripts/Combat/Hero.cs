@@ -467,7 +467,7 @@ namespace BuildBuild.Combat
                 float across = offset.x * _chargeDirection.y - offset.y * _chargeDirection.x;
                 if (Mathf.Abs(along) > _bodyRadius + enemy.BodyRadius || Mathf.Abs(across) > ChargeHalfWidth) continue;
                 _chargeHits.Add(enemy);
-                enemy.ApplyStun(enemy.IsBoss ? _definition.skillDuration * 0.5f : _definition.skillDuration);
+                enemy.ApplyStun(enemy.IsBoss ? _definition.skillDuration * 0.5f : _definition.skillDuration, _definition.stunFrames);
                 enemy.Health.TakeDamage(_definition.skillPower, _health);
             }
 

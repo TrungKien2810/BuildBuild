@@ -26,18 +26,33 @@ namespace BuildBuild.UI
         [SerializeField] Button startButton;
         [SerializeField] Text startLabel;
         [SerializeField] Button gachaButton;
+        [Tooltip("Bang ket qua sau moi wave (thang/thua + vang). Khong gan thi HUD chi hien dong chu nhu cu.")]
+        [SerializeField] ResultPopup resultPopup;
 
         void Start()
         {
-            waves.WaveStarted += _ => { ShowMessage(""); Refresh(); };
-            waves.WaveCleared += (wave, gold) =>
+            waves.WaveStarted += _ =>
             {
-                ShowMessage(waves.AllCleared
-                    ? "Chiến thắng — đã qua hết các wave!"
-                    : $"Thắng wave {wave}: +{gold:N0} vàng — nâng cấp rồi đánh tiếp");
+                ShowMessage("");
+                if (resultPopup != null) resultPopup.Hide();
                 Refresh();
             };
-            waves.Defeated += wave => { ShowMessage($"Thua wave {wave} — phát triển thêm rồi đánh lại"); Refresh(); };
+            waves.WaveCleared += (wave, gold) =>
+            {
+                string hint = waves.AllCleared
+                    ? "Đã qua hết các wave!"
+                    : $"Xong wave {wave} — nâng cấp rồi đánh tiếp";
+                ShowMessage(hint);
+                if (resultPopup != null) resultPopup.Show(true, gold, hint);
+                Refresh();
+            };
+            waves.Defeated += wave =>
+            {
+                string hint = $"Thua wave {wave} — phát triển thêm rồi đánh lại";
+                ShowMessage(hint);
+                if (resultPopup != null) resultPopup.Show(false, 0, hint);
+                Refresh();
+            };
             castle.Health.Damaged += _ => RefreshCastle();
             economy.Changed += _ => RefreshGold();
 
@@ -50,7 +65,7 @@ namespace BuildBuild.UI
 
         public void Refresh()
         {
-            waveText.text = $"{waves.NextWave}";
+            waveText.text = $"Wave {waves.NextWave}";
             startLabel.text = $"Đánh wave {waves.NextWave}";
             startButton.gameObject.SetActive(!waves.IsFighting && !waves.AllCleared);
             gachaButton.interactable = !waves.IsFighting;

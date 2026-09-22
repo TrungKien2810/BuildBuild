@@ -1,5 +1,6 @@
 using BuildBuild.Combat;
 using BuildBuild.Core;
+using BuildBuild.Meta;
 using UnityEngine;
 
 namespace BuildBuild.UI
@@ -19,6 +20,7 @@ namespace BuildBuild.UI
 
         bool _open;
         string _waveInput = "1";
+        Vector2 _ownedScroll;
 
         void OnDisable() => Time.timeScale = 1f;   // roi scene luc dang tua nhanh: khong treo sang scene khac
 
@@ -39,7 +41,8 @@ namespace BuildBuild.UI
             if (GUI.Button(new Rect(left, bottom - 48f, 120f, 48f), _open ? "ADMIN ▼" : "ADMIN ▲")) _open = !_open;
             if (!_open) return;
 
-            GUILayout.BeginArea(new Rect(left, bottom - 48f - 12f - 520f, 360f, 520f), GUI.skin.box);
+            const float panelHeight = 720f;
+            GUILayout.BeginArea(new Rect(left, bottom - 48f - 12f - panelHeight, 360f, panelHeight), GUI.skin.box);
             GUILayout.Label($"Wave tiep: {waves.NextWave}   {(waves.IsFighting ? "(dang danh)" : "")}");
 
             GUILayout.BeginHorizontal();
@@ -77,6 +80,23 @@ namespace BuildBuild.UI
             foreach (float speed in Speeds)
                 if (GUILayout.Button($"x{speed:0.#}")) Time.timeScale = speed;
             GUILayout.EndHorizontal();
+
+            GUILayout.Label("Da so huu (xoa khoi kho — khong hoan vang/thach):");
+            var owned = SaveSystem.Data.owned;
+            _ownedScroll = GUILayout.BeginScrollView(_ownedScroll, GUILayout.Height(160f));
+            for (int i = owned.Count - 1; i >= 0; i--)
+            {
+                var unit = owned[i];
+                GUILayout.BeginHorizontal();
+                GUILayout.Label($"{unit.id}  Lv{unit.level} {unit.stars}★ {unit.shards}mv", GUILayout.Width(240f));
+                if (GUILayout.Button("Xoa", GUILayout.Width(60f)))
+                {
+                    owned.RemoveAt(i);
+                    SaveSystem.Save();
+                }
+                GUILayout.EndHorizontal();
+            }
+            GUILayout.EndScrollView();
 
             GUILayout.EndArea();
         }

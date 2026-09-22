@@ -32,6 +32,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d7f1824a8f17def4a8e25138daeed750, type: 3}
   - {fileID: 21300000, guid: 18fb02ba2bcb6e74cbf6e22196a01534, type: 3}
   - {fileID: 21300000, guid: a42d3da1e6cd0054c8cbd79bb01f7bfa, type: 3}
+  impactScale: 1
+  knockbackOnHit: 0
   skillKind: 4
   skillTier: 0
   skillCooldown: 0
@@ -43,6 +45,7 @@ MonoBehaviour:
   skillPower: 3
   skillFrames: []
   skillIntroFrames: []
+  stunFrames: []
   summoner: {fileID: 0}
   animations: {fileID: 11400000, guid: aaba1a3b05739ea4581857647bb28840, type: 2}
   avatar: {fileID: 21300000, guid: 855dacc74ee61234da969f8eb3b8e02b, type: 3}

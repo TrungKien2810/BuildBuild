@@ -12,7 +12,7 @@ namespace BuildBuild.Core
     /// Danh TUNG wave mot (GAME_DESIGN.md muc 1): nguoi choi bam bat dau -> spawn het quai cua wave ->
     /// diet het thi THANG, cong vang roi DUNG lai de nguoi choi di nang cap cho wave sau.
     /// Thua (lau dai sup) cung dung tai wave do — lan bam sau danh lai dung wave vua thua, khong ve wave 1.
-    /// Lau dai hoi day mau truoc moi wave.
+    /// Lau dai hoi day mau NGAY khi wave ket thuc (thang lan thua), khong doi den luc bam danh wave sau.
     ///
     /// Lop nay khong tu cham vao vi tien; no chi cong vang qua `Economy`.
     /// </summary>
@@ -76,7 +76,6 @@ namespace BuildBuild.Core
             }
 
             ClearAlive();
-            if (castle != null) castle.Repair();
             IsFighting = true;
             _loop = StartCoroutine(RunWave(NextWave));
         }
@@ -95,6 +94,7 @@ namespace BuildBuild.Core
             if (economy != null) economy.Add(gold);
             IsFighting = false;
             NextWave = wave + 1;
+            if (castle != null) castle.Repair();   // day mau ngay khi het tran, khong doi den luc bam danh tiep
             WaveCleared?.Invoke(wave, gold);
         }
 
@@ -143,6 +143,7 @@ namespace BuildBuild.Core
             IsFighting = false;
             if (_loop != null) StopCoroutine(_loop);
             ClearAlive();
+            if (castle != null) castle.Repair();   // day mau ngay khi het tran, khong doi den luc bam danh tiep
             Defeated?.Invoke(NextWave);
         }
 

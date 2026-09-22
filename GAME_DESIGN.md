@@ -127,8 +127,11 @@ gậy, nên đạn đọc ra là "đầu lâu trên gậy bắn ra". Đạn đơ
 | Thường | Goblin | 100 | 15 | 1.5 | 5 |
 | Nhanh | Ashfang (chó sói) | 60 | 10 | 3.0 | 4 |
 | Tank | Orc | 400 | 40 | 0.8 | 12 |
+| **Bắn xa** | **Goblin Ná** | — | — | — | — |
 | **Tinh anh** | **Gatebreaker** | **1200** | **60** | **0.7** | **40** |
-| Boss | *(chưa đặt tên)* | 5000 | 120 | 0.6 | 200 |
+| Boss | *Vua minotaur (chưa đặt tên)* | 5000 | 120 | 0.6 | 200 |
+
+**Bắn xa `Goblin Ná` (thêm 2026-09-21, người dùng chốt):** goblin cầm ná cao su chữ Y, bắn viên đá. **Ưu tiên bắn hero và lính phe ta** trong tầm; **hết mục tiêu mới bắn tường thành**. Chỉ số, tầm và wave xuất hiện chưa chốt. Art: identity đang sinh (`tempart/GoblinSlinger/`).
 
 **Tinh anh `Gatebreaker` (thêm 2026-09-12):** hạng quái giữa Orc và boss — cùng dòng giống với boss,
 đọc ra như "lính của nó". Vác một cánh cổng thành gỗ đã vỡ: **giảm 15% sát thương** (nửa của boss).
@@ -211,8 +214,8 @@ Trang bị bị đẩy khỏi MVP vì kéo theo stat cộng dồn + UI riêng + 
 
 ## 9. Điểm còn TRỐNG — cần chốt trước khi sinh art tương ứng
 
-- **Boss chưa có tên và chưa có thiết kế ngoại hình.** Nó xuất hiện ở 3 wave quan trọng nhất
-  (10/20/30) nên là asset đắt giá nhất; chưa chốt thì chưa sinh được.
+- **Boss: ngoại hình ĐÃ CHỐT 2026-09-22, tên CHƯA.** Vua minotaur cùng giống Gatebreaker, **cao gấp đôi
+  Gatebreaker**, giáp sắt đen, búa đá khổng lồ, một sừng gãy, vải chiến đỏ sẫm.
 - ~~Elf làm "quái nhanh"~~ **ĐÃ CHỐT 2026-09-11: thay Elf bằng CHÓ SÓI 4 chân, tên `Ashfang`.**
   Lý do: elf mặc định không đọc ra là kẻ địch. Sói 4 chân là unit duy nhất trong roster không phải
   humanoid đứng thẳng nên silhouette tách ra tức thì — đúng thứ "quái nhanh" cần. Palette xám tro

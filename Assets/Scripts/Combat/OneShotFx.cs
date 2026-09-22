@@ -13,6 +13,7 @@ namespace BuildBuild.Combat
         const float FramesPerSecond = 9f;   // cung nhip 110ms/frame voi SpriteAnimationSet va Projectile
 
         SpriteRenderer _renderer;
+        float _frameDuration = 1f / FramesPerSecond;
         Sprite[] _frames;
         float _timer;
         int _frame;
@@ -20,10 +21,13 @@ namespace BuildBuild.Combat
         Sprite[] _loopFrames;   // co intro: phan lap sau khi intro chay xong mot lan
 
         /// <param name="scale">Art ve theo co than unit (vet chem) thi truyen `Battlefield.UnitScale`; art ve dung ban kinh gameplay thi 1.</param>
-        public static void Spawn(Vector3 position, Sprite[] frames, bool flipX, int sortingOrder, float scale = 1f)
+        /// <param name="fps">Nhip phat. FX it frame ma can nhin ro (quang trieu hoi 4 frame) thi ha xuong.</param>
+        public static void Spawn(Vector3 position, Sprite[] frames, bool flipX, int sortingOrder, float scale = 1f,
+            float fps = FramesPerSecond)
         {
             var fx = Create(frames, sortingOrder);
             if (fx == null) return;
+            fx._frameDuration = 1f / fps;
             fx.transform.position = position;
             fx.transform.localScale = Vector3.one * scale;
             fx._renderer.flipX = flipX;
@@ -33,8 +37,10 @@ namespace BuildBuild.Combat
         /// Lap vong <paramref name="seconds"/> giay, gan vao <paramref name="parent"/> (cha bi xoa thi FX mat theo).
         /// <paramref name="intro"/> (tuy chon) chay MOT lan truoc phan lap — vd. vo da moc len roi dung yen.
         /// </summary>
+        /// <param name="scale">Scale LOCAL — cha (unit) da nhan `Battlefield.UnitScale` roi, nen art ve dung co
+        /// man hinh phai chia lai o day chu khong de 1.</param>
         public static GameObject SpawnLoop(Transform parent, Vector3 localOffset, Sprite[] frames, float seconds, int sortingOrder,
-            Sprite[] intro = null)
+            Sprite[] intro = null, float scale = 1f)
         {
             bool hasIntro = intro != null && intro.Length > 0;
             var fx = Create(hasIntro ? intro : frames, sortingOrder);
@@ -42,6 +48,7 @@ namespace BuildBuild.Combat
             if (hasIntro && frames != null && frames.Length > 0) fx._loopFrames = frames;
             fx.transform.SetParent(parent, false);
             fx.transform.localPosition = localOffset;
+            fx.transform.localScale = Vector3.one * scale;
             fx._loopUntil = Time.time + seconds;
             return fx.gameObject;
         }
@@ -70,10 +77,9 @@ namespace BuildBuild.Combat
             }
 
             _timer += Time.deltaTime;
-            float frameDuration = 1f / FramesPerSecond;
-            while (_timer >= frameDuration)
+            while (_timer >= _frameDuration)
             {
-                _timer -= frameDuration;
+                _timer -= _frameDuration;
                 _frame++;
                 if (_frame >= _frames.Length)
                 {
