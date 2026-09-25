@@ -71,21 +71,21 @@
       "output_edge_touch": false,
       "edge_touch": false,
       "output_size": [
-        33,
-        29
+        41,
+        36
       ],
       "paste_position": [
-        47,
-        56
+        43,
+        49
       ],
       "paste_clamped": false,
       "aligned_bbox": [
-        47,
-        56,
-        80,
+        43,
+        49,
+        84,
         85
       ],
-      "source_to_output_scale": 0.13003174603174603,
+      "source_to_output_scale": 0.15863873015873015,
       "bbox_scale_applied": true,
       "scale_strategy": "fit",
       "scale_changed": true
@@ -132,21 +132,21 @@
       "output_edge_touch": false,
       "edge_touch": false,
       "output_size": [
-        27,
-        36
+        34,
+        45
       ],
       "paste_position": [
-        50,
-        49
+        46,
+        40
       ],
       "paste_clamped": false,
       "aligned_bbox": [
-        50,
-        49,
-        77,
+        46,
+        40,
+        80,
         85
       ],
-      "source_to_output_scale": 0.13003174603174603,
+      "source_to_output_scale": 0.15863873015873015,
       "bbox_scale_applied": true,
       "scale_strategy": "fit",
       "scale_changed": true
@@ -193,21 +193,21 @@
       "output_edge_touch": false,
       "edge_touch": false,
       "output_size": [
-        40,
-        27
+        50,
+        34
       ],
       "paste_position": [
-        44,
-        58
+        39,
+        51
       ],
       "paste_clamped": false,
       "aligned_bbox": [
-        44,
-        58,
-        84,
+        39,
+        51,
+        89,
         85
       ],
-      "source_to_output_scale": 0.13003174603174603,
+      "source_to_output_scale": 0.15863873015873015,
       "bbox_scale_applied": true,
       "scale_strategy": "fit",
       "scale_changed": true
@@ -254,21 +254,21 @@
       "output_edge_touch": false,
       "edge_touch": false,
       "output_size": [
-        40,
-        28
+        49,
+        34
       ],
       "paste_position": [
-        44,
-        57
+        40,
+        51
       ],
       "paste_clamped": false,
       "aligned_bbox": [
-        44,
-        57,
-        84,
+        40,
+        51,
+        89,
         85
       ],
-      "source_to_output_scale": 0.13003174603174603,
+      "source_to_output_scale": 0.15863873015873015,
       "bbox_scale_applied": true,
       "scale_strategy": "fit",
       "scale_changed": true
@@ -315,21 +315,21 @@
       "output_edge_touch": false,
       "edge_touch": false,
       "output_size": [
-        29,
-        31
+        36,
+        39
       ],
       "paste_position": [
-        49,
-        54
+        46,
+        46
       ],
       "paste_clamped": false,
       "aligned_bbox": [
-        49,
-        54,
-        78,
+        46,
+        46,
+        82,
         85
       ],
-      "source_to_output_scale": 0.13003174603174603,
+      "source_to_output_scale": 0.15863873015873015,
       "bbox_scale_applied": true,
       "scale_strategy": "fit",
       "scale_changed": true
@@ -376,21 +376,21 @@
       "output_edge_touch": false,
       "edge_touch": false,
       "output_size": [
-        27,
-        30
+        34,
+        37
       ],
       "paste_position": [
-        50,
-        55
+        46,
+        48
       ],
       "paste_clamped": false,
       "aligned_bbox": [
-        50,
-        55,
-        77,
+        46,
+        48,
+        80,
         85
       ],
-      "source_to_output_scale": 0.13003174603174603,
+      "source_to_output_scale": 0.15863873015873015,
       "bbox_scale_applied": true,
       "scale_strategy": "fit",
       "scale_changed": true
