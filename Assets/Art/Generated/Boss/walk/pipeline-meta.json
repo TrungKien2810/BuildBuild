@@ -1,0 +1,58 @@
+{
+  "align": "feet",
+  "cell_size": 256,
+  "cell_width": 256,
+  "cell_height": 256,
+  "frames": [
+    {
+      "aligned_bbox": [
+        52,
+        46,
+        209,
+        222
+      ]
+    },
+    {
+      "aligned_bbox": [
+        50,
+        45,
+        209,
+        222
+      ]
+    },
+    {
+      "aligned_bbox": [
+        50,
+        38,
+        212,
+        222
+      ]
+    },
+    {
+      "aligned_bbox": [
+        48,
+        43,
+        206,
+        222
+      ]
+    },
+    {
+      "aligned_bbox": [
+        48,
+        42,
+        208,
+        222
+      ]
+    },
+    {
+      "aligned_bbox": [
+        47,
+        36,
+        208,
+        222
+      ]
+    }
+  ],
+  "source": "tempart/Boss/walk-A/final-narrow-8 (codex g1 walk A \"dam chan\", dat lai frame fix_placement.py, match_clips theo idle, khep chan narrow_stance.py D=8)",
+  "note": "aligned_bbox viet lai tu alpha PNG luc giao (2026-09-24); [3] exclusive = day + 1"
+}

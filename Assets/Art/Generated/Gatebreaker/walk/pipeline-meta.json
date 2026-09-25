@@ -1,0 +1,58 @@
+{
+  "align": "feet",
+  "cell_size": 128,
+  "cell_width": 128,
+  "cell_height": 128,
+  "frames": [
+    {
+      "aligned_bbox": [
+        32,
+        21,
+        98,
+        111
+      ]
+    },
+    {
+      "aligned_bbox": [
+        32,
+        21,
+        98,
+        111
+      ]
+    },
+    {
+      "aligned_bbox": [
+        34,
+        16,
+        100,
+        111
+      ]
+    },
+    {
+      "aligned_bbox": [
+        31,
+        21,
+        97,
+        111
+      ]
+    },
+    {
+      "aligned_bbox": [
+        29,
+        21,
+        95,
+        111
+      ]
+    },
+    {
+      "aligned_bbox": [
+        30,
+        19,
+        96,
+        111
+      ]
+    }
+  ],
+  "source": "tempart/Gatebreaker/walk-minotaur-A/final-v2 (raw codex g2, dat lai frame bang fix_placement.py)",
+  "note": "aligned_bbox viet lai tu alpha PNG luc giao (2026-09-24); [3] exclusive = day + 1"
+}
