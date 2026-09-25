@@ -1,0 +1,58 @@
+{
+ "align": "feet",
+ "cell_size": 320,
+ "cell_width": 320,
+ "cell_height": 256,
+ "frames": [
+  {
+   "aligned_bbox": [
+    88,
+    31,
+    248,
+    222
+   ]
+  },
+  {
+   "aligned_bbox": [
+    71,
+    61,
+    261,
+    222
+   ]
+  },
+  {
+   "aligned_bbox": [
+    85,
+    104,
+    289,
+    222
+   ]
+  },
+  {
+   "aligned_bbox": [
+    89,
+    142,
+    288,
+    222
+   ]
+  },
+  {
+   "aligned_bbox": [
+    88,
+    149,
+    288,
+    222
+   ]
+  },
+  {
+   "aligned_bbox": [
+    90,
+    149,
+    288,
+    222
+   ]
+  }
+ ],
+ "source": "tempart/Boss/death/final/graded",
+ "note": "aligned_bbox viet lai tu alpha PNG luc giao (2026-09-23); [3] exclusive = day + 1"
+}

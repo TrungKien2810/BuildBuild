@@ -1,0 +1,42 @@
+{
+ "align": "feet",
+ "cell_size": 256,
+ "cell_width": 256,
+ "cell_height": 256,
+ "frames": [
+  {
+   "aligned_bbox": [
+    55,
+    39,
+    222,
+    222
+   ]
+  },
+  {
+   "aligned_bbox": [
+    56,
+    36,
+    220,
+    222
+   ]
+  },
+  {
+   "aligned_bbox": [
+    50,
+    43,
+    208,
+    222
+   ]
+  },
+  {
+   "aligned_bbox": [
+    50,
+    43,
+    206,
+    222
+   ]
+  }
+ ],
+ "source": "tempart/Boss/hurt/final/graded",
+ "note": "aligned_bbox viet lai tu alpha PNG luc giao (2026-09-23); [3] exclusive = day + 1"
+}

@@ -1,0 +1,58 @@
+{
+ "align": "center",
+ "cell_size": 256,
+ "cell_width": 256,
+ "cell_height": 256,
+ "frames": [
+  {
+   "aligned_bbox": [
+    157,
+    109,
+    188,
+    163
+   ]
+  },
+  {
+   "aligned_bbox": [
+    115,
+    95,
+    177,
+    172
+   ]
+  },
+  {
+   "aligned_bbox": [
+    80,
+    71,
+    175,
+    186
+   ]
+  },
+  {
+   "aligned_bbox": [
+    63,
+    59,
+    179,
+    181
+   ]
+  },
+  {
+   "aligned_bbox": [
+    84,
+    75,
+    147,
+    173
+   ]
+  },
+  {
+   "aligned_bbox": [
+    85,
+    82,
+    123,
+    171
+   ]
+  }
+ ],
+ "source": "tempart/Boss/roar-fx/final",
+ "note": "aligned_bbox viet lai tu alpha PNG luc giao (2026-09-23); [3] exclusive = day + 1"
+}
