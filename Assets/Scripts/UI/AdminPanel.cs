@@ -15,6 +15,7 @@ namespace BuildBuild.UI
         [SerializeField] Castle castle;
         [SerializeField] Economy economy;
         [SerializeField] BattleHud hud;
+        [SerializeField] CannonBoard cannons;
 
         static readonly float[] Speeds = { 0.5f, 1f, 2f, 4f };
 
@@ -67,6 +68,8 @@ namespace BuildBuild.UI
 
             if (GUILayout.Button("Day mana moi hero / linh"))
                 foreach (var hero in Hero.Alive.ToArray()) hero.DevFillMana();
+
+            if (cannons != null && GUILayout.Button("So huu ca 3 phao (test be phao)")) cannons.DevOwnAll();
 
             if (GUILayout.Button("Hoi day mau lau dai"))
             {

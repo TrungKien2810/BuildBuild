@@ -15,8 +15,12 @@ namespace BuildBuild.Data
         public EnemyDefinition[] enemies;
         [Tooltip("Wave nay co boss khong (wave 10 / 20 / 30).")]
         public bool hasBoss;
-        [Tooltip("He so nhan chi so boss: wave 10 = 1, wave 20 = 2, wave 30 = 3.5.")]
+        [Tooltip("He so nhan chi so boss: wave 10 = 1, wave 20 = 2, wave 30 = 3.5. Thay cho cong thuc len thang theo wave.")]
         public float bossStatMultiplier = 1f;
+        [Tooltip("-1 = so quai thuong theo cong thuc (5 + wave/2). >= 0 = dung so nay (wave boss: 6 ho tong, 4, 0).")]
+        public int fixedCount = -1;
+        [Tooltip("So tinh anh (`WaveTuning.elite`) spawn THEM trong wave. GDD: tu wave 12 la 1, wave 21+ la 2, khong co o wave boss.")]
+        public int eliteCount;
 
         public bool Contains(int wave) => wave >= fromWave && wave <= toWave;
     }
@@ -52,9 +56,19 @@ namespace BuildBuild.Data
         [Header("Bang wave")]
         public WaveBand[] bands;
 
+        [Header("Quai dac biet")]
+        [Tooltip("Boss cua wave co `hasBoss`.")]
+        public EnemyDefinition boss;
+        [Tooltip("Tinh anh cua `WaveBand.eliteCount` (Gatebreaker).")]
+        public EnemyDefinition elite;
+
         public float HealthMultiplier(int wave) => 1f + healthPerWave * wave;
         public float DamageMultiplier(int wave) => 1f + damagePerWave * wave;
         public int EnemyCount(int wave) => baseEnemyCount + wave / 2;
+
+        /// <summary>So quai THUONG cua wave (khong tinh boss va tinh anh).</summary>
+        public int RegularCount(int wave, WaveBand band) =>
+            band != null && band.fixedCount >= 0 ? band.fixedCount : EnemyCount(wave);
         public int WaveGold(int wave) => waveGoldBase + waveGoldPerWave * wave;
 
         public WaveBand BandFor(int wave)

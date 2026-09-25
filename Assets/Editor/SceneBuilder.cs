@@ -77,7 +77,10 @@ namespace BuildBuild.Editor
             EnsureFolder(PrefabDir);
 
             var tuning = BuildWaveData(out var enemyPrefab);
+            BuildNewEnemies(tuning);
             BuildHeroData();
+            BuildVespera();
+            BuildCannons();
             var gacha = BuildGachaData();
             AssetDatabase.SaveAssets();
 
@@ -366,6 +369,200 @@ namespace BuildBuild.Editor
             return unit;
         }
 
+        // ---------------------------------------------------------------- du lieu nhanh Tru (phao, quai moi, Vespera)
+
+        const string CannonDir = DataDir + "/Cannons";
+
+        /// <summary>
+        /// Goblin Na (ban xa), Gatebreaker (tinh anh), Boss + bang wave GDD muc 5. So cua Goblin Na va ban kinh Chan Dia
+        /// GDD chua chot — so tam (plan 2 thanh vien, muc B2). Bang wave chi ghi lai khi tuning chua co boss: da co
+        /// boss nghia la da chay ban nay roi, so chinh tay trong Inspector duoc giu.
+        /// </summary>
+        static void BuildNewEnemies(WaveTuning tuning)
+        {
+            var slinger = LoadOrCreate<EnemyDefinition>(DataDir + "/Enemy_GoblinSlinger.asset", out bool newSlinger);
+            if (newSlinger)
+            {
+                slinger.displayName = "Goblin Ná";
+                slinger.kind = EnemyKind.BanXa;
+                slinger.baseHealth = 80f;
+                slinger.baseDamage = 12f;
+                slinger.moveSpeed = 1.3f;
+                slinger.attackRange = 4f;
+                slinger.heroAggroRange = 4.5f;   // >= tam ban: hero / linh trong tam duoc chon truoc tuong
+                slinger.attackRate = 0.8f;
+                slinger.goldReward = 6;
+                slinger.projectileFrames = Frames(ArtRoot + "GoblinSlinger/stone", "projectile");
+                slinger.impactFrames = Frames(ArtRoot + "GoblinSlinger/stone-impact", "impact");
+                slinger.projectileSpeed = 7f;
+                slinger.projectileScale = 0.5f;
+                slinger.animations = AnimSet("GoblinSlinger", "GoblinSlinger/", attack: ("attack", "attack"), hit: 4);
+                EditorUtility.SetDirty(slinger);
+            }
+
+            // Gatebreaker moi co identity + walk, THIEU attack/hurt/death: tam dung walk (plan muc B2). Death bat buoc co
+            // clip — Enemy doi het clip death moi bao chet; hurt de trong thi Enemy bo qua.
+            var gateAnim = LoadOrCreate<SpriteAnimationSet>(DataDir + "/Anim_Gatebreaker.asset", out bool newGateAnim);
+            if (newGateAnim)
+            {
+                var walk = Frames(ArtRoot + "Gatebreaker/walk", "walk");
+                gateAnim.idle.frames = walk;
+                gateAnim.walk.frames = walk;
+                gateAnim.attack.frames = walk;
+                gateAnim.attack.hitFrame = 4;
+                gateAnim.death.frames = walk;
+                EditorUtility.SetDirty(gateAnim);
+            }
+            var gatebreaker = LoadOrCreate<EnemyDefinition>(DataDir + "/Enemy_Gatebreaker.asset", out bool newGate);
+            if (newGate)
+            {
+                gatebreaker.displayName = "Gatebreaker";
+                gatebreaker.kind = EnemyKind.TinhAnh;
+                gatebreaker.baseHealth = 1200f;
+                gatebreaker.baseDamage = 60f;
+                gatebreaker.moveSpeed = 0.7f;
+                gatebreaker.goldReward = 40;
+                gatebreaker.attackRange = 0.5f;
+                gatebreaker.attackRate = 0.6f;
+                gatebreaker.damageReduction = 0.15f;
+                gatebreaker.animations = gateAnim;
+                EditorUtility.SetDirty(gatebreaker);
+            }
+
+            var bossAnim = AnimSet("Boss", "Boss/", attack: ("attack", "attack"), hit: 3);
+            var bossKit = LoadOrCreate<BossDefinition>(DataDir + "/Boss_Minotaur.asset", out bool newKit);
+            if (newKit)
+            {
+                bossKit.slamFrames = Frames(ArtRoot + "Boss/slam-fx", "slam-fx");
+                bossKit.roarFrames = Frames(ArtRoot + "Boss/roar-wave", "roar-wave");
+                bossKit.roarBuffFrames = Frames(ArtRoot + "Boss/roar-buff", "roar-buff");
+                EditorUtility.SetDirty(bossKit);
+            }
+            var boss = LoadOrCreate<EnemyDefinition>(DataDir + "/Enemy_Boss.asset", out bool newBoss);
+            if (newBoss)
+            {
+                boss.displayName = "Vua Minotaur";
+                boss.kind = EnemyKind.Boss;
+                boss.baseHealth = 5000f;
+                boss.baseDamage = 120f;
+                boss.moveSpeed = 0.6f;
+                boss.goldReward = 200;
+                boss.attackRange = 0.8f;
+                boss.attackRate = 0.5f;
+                boss.heroAggroRange = 2.5f;
+                boss.damageReduction = 0.3f;
+                boss.boss = bossKit;
+                boss.animations = bossAnim;
+                EditorUtility.SetDirty(boss);
+            }
+
+            if (tuning.boss != null) return;
+            var goblin = AssetDatabase.LoadAssetAtPath<EnemyDefinition>(DataDir + "/Enemy_Goblin.asset");
+            var ashfang = AssetDatabase.LoadAssetAtPath<EnemyDefinition>(DataDir + "/Enemy_Ashfang.asset");
+            var mixed = new[] { goblin, ashfang, slinger };
+            tuning.boss = boss;
+            tuning.elite = gatebreaker;
+            // Orc chua co art: wave 7-9 dung Goblin Na o cho Orc, wave 20 dung Goblin thay "4 Orc".
+            tuning.bands = new[]
+            {
+                new WaveBand { fromWave = 1, toWave = 3, enemies = new[] { goblin } },
+                new WaveBand { fromWave = 4, toWave = 6, enemies = new[] { goblin, ashfang } },
+                new WaveBand { fromWave = 7, toWave = 9, enemies = mixed },
+                new WaveBand { fromWave = 10, toWave = 10, enemies = new[] { goblin }, hasBoss = true, bossStatMultiplier = 1f, fixedCount = 6 },
+                new WaveBand { fromWave = 11, toWave = 11, enemies = mixed },
+                new WaveBand { fromWave = 12, toWave = 19, enemies = mixed, eliteCount = 1 },
+                new WaveBand { fromWave = 20, toWave = 20, enemies = new[] { goblin }, hasBoss = true, bossStatMultiplier = 2f, fixedCount = 4 },
+                new WaveBand { fromWave = 21, toWave = 29, enemies = mixed, eliteCount = 2 },
+                new WaveBand { fromWave = 30, toWave = 30, enemies = new EnemyDefinition[0], hasBoss = true, bossStatMultiplier = 3.5f, fixedCount = 0 },
+            };
+            EditorUtility.SetDirty(tuning);
+        }
+
+        /// <summary>Hero R Vespera (don thuong hoi mau, kit chua chot — so tam) + FX buff tren dau Hawkfletch.</summary>
+        static void BuildVespera()
+        {
+            var vespera = HeroDef("Vespera", null,
+                AnimSet("Vespera", "Vespera/", attack: ("attack", "attack"), hit: 4),
+                d =>
+                {
+                    d.maxHealth = 350f; d.damage = 20f; d.attackRate = 0.8f; d.range = 4f; d.moveSpeed = 1.1f;
+                    d.healsAllies = true;
+                    d.healFrames = Frames(ArtRoot + "Vespera/heal-fx", "impact");
+                },
+                SkillKind.None, null);
+            // Chua co avatar 128x128 trong UI/avatars: tam dung frame identity.
+            if (vespera.avatar == null)
+            {
+                vespera.avatar = LoadSprite(ArtRoot + "Vespera/identity/identity-1.png");
+                EditorUtility.SetDirty(vespera);
+            }
+
+            var hawkfletch = AssetDatabase.LoadAssetAtPath<HeroDefinition>(DataDir + "/Hero_Hawkfletch.asset");
+            if (hawkfletch != null && (hawkfletch.buffFrames == null || hawkfletch.buffFrames.Length == 0))
+            {
+                hawkfletch.buffFrames = Frames(ArtRoot + "Hawkfletch/rapid-fire-buff", "impact");
+                EditorUtility.SetDirty(hawkfletch);
+            }
+        }
+
+        /// <summary>
+        /// 3 phao GDD muc 4. Chi Lien Thanh co art (`CannonRapid/`); No va Bang tam dung chung bo sprite do, to cam / xanh
+        /// qua `tint` (plan muc B1). Co art rieng thi doi `animations` / frame dan trong asset.
+        /// </summary>
+        static CannonDefinition[] BuildCannons()
+        {
+            EnsureFolder(CannonDir);
+            string dir = ArtRoot + "CannonRapid/";
+            // Phao chi co idle + attack — khong goi AnimSet (se tim walk/hurt/death khong ton tai).
+            var anim = LoadOrCreate<SpriteAnimationSet>(DataDir + "/Anim_CannonRapid.asset", out bool newAnim);
+            if (newAnim)
+            {
+                anim.idle.frames = Frames(dir + "idle", "idle");
+                anim.attack.frames = Frames(dir + "attack", "attack");
+                anim.attack.hitFrame = 2;   // frame loe nong
+                EditorUtility.SetDirty(anim);
+            }
+
+            return new[]
+            {
+                CannonDef("Rapid", "cannon_rapid", "Pháo Liên Thanh", "icon-cannon-rapid", anim, c =>
+                {
+                    c.damage = 12f; c.fireRate = 2f; c.range = 8f;
+                    c.projectileScale = 0.5f; c.impactScale = 0.6f;
+                }),
+                CannonDef("Blast", "cannon_blast", "Pháo Nổ", "icon-cannon-blast", anim, c =>
+                {
+                    c.damage = 30f; c.fireRate = 0.5f; c.range = 7f; c.aoeRadius = 2f;
+                    c.projectileSpeed = 10f; c.projectileScale = 0.8f; c.impactScale = 2.5f;
+                    c.tint = new Color(1f, 0.62f, 0.3f);
+                }),
+                CannonDef("Frost", "cannon_frost", "Pháo Băng", "icon-cannon-frost", anim, c =>
+                {
+                    c.damage = 8f; c.fireRate = 1f; c.range = 7f; c.slowPercent = 0.4f; c.slowDuration = 3f;
+                    c.projectileScale = 0.6f; c.impactScale = 0.8f;
+                    c.tint = new Color(0.55f, 0.8f, 1f);
+                }),
+            };
+        }
+
+        static CannonDefinition CannonDef(string id, string unitId, string displayName, string icon, SpriteAnimationSet anim,
+            Action<CannonDefinition> stats)
+        {
+            var def = LoadOrCreate<CannonDefinition>($"{CannonDir}/Cannon_{id}.asset", out bool created);
+            if (created)
+            {
+                def.unitId = unitId;
+                def.displayName = displayName;
+                def.animations = anim;
+                def.projectileFrames = Frames(ArtRoot + "CannonRapid/bullet", "projectile");
+                def.impactFrames = Frames(ArtRoot + "CannonRapid/bullet-impact", "impact");
+                stats(def);
+            }
+            if (def.icon == null) def.icon = LoadSprite($"{UiDir}icons/{icon}.png");
+            EditorUtility.SetDirty(def);
+            return def;
+        }
+
         // ---------------------------------------------------------------- scene Battle
 
         static void BuildBattleScene(WaveTuning tuning, Enemy enemyPrefab)
@@ -439,6 +636,8 @@ namespace BuildBuild.Editor
             SetRef(admin, "castle", castle);
             SetRef(admin, "economy", economy);
             SetRef(admin, "hud", Object.FindObjectOfType<BattleHud>());
+
+            BuildCannonBoard(game, castleGo.transform, body);
 
             EditorSceneManager.SaveScene(scene, ScenePath(SceneNames.Battle));
         }
@@ -606,6 +805,123 @@ namespace BuildBuild.Editor
                     slots[i++] = slot;
                 }
             return slots;
+        }
+
+        // 3 be phao tren fortress.png (735x900, toa do px tinh tu goc tren-trai): tam dia da tron do bang mat tren anh.
+        // Chan phao (pivot feet) dat thap hon tam dia mot chut cho de phao ngoi len mat dia.
+        static readonly Vector2[] MountPadsInSprite = { new Vector2(440f, 152f), new Vector2(440f, 387f), new Vector2(440f, 619f) };
+        // Vung cham phu ca dia lan than phao (world, tinh tu chan).
+        static readonly Vector2 MountHitSize = new Vector2(0.9f, 1.1f);
+        const float MountFrameHeightPx = 60f;
+
+        /// <summary>
+        /// Toan bo phan phao cua scene Battle (nhanh Tru): `CannonBoard` tren `Game`, 3 be tren `Castle`, bang chon phao
+        /// trong HUD, nut admin. Goi MOT dong o cuoi `BuildBattleScene`, sau khi HUD + admin da dung.
+        /// </summary>
+        static void BuildCannonBoard(GameObject game, Transform castle, SpriteRenderer body)
+        {
+            var board = game.AddComponent<CannonBoard>();
+            SetRef(board, "waves", game.GetComponent<WaveManager>());
+            SetRef(board, "economy", game.GetComponent<Economy>());
+            SetRefs(board, "mounts", BuildCannonMounts(castle, body, board));
+            BuildCannonPicker((RectTransform)Object.FindObjectOfType<BattleHud>().transform, board);
+            SetRef(game.GetComponent<AdminPanel>(), "cannons", board);
+        }
+
+        static CannonMount[] BuildCannonMounts(Transform castle, SpriteRenderer body, CannonBoard board)
+        {
+            var sprite = UiSprite("hud/hud-dropzone-edge");
+            var size = body.sprite.rect.size;
+            var mounts = new CannonMount[MountPadsInSprite.Length];
+            for (int i = 0; i < mounts.Length; i++)
+            {
+                var pad = MountPadsInSprite[i];
+                var go = new GameObject($"CannonMount{i + 1}");
+                go.transform.SetParent(castle, false);
+                // Body pivot giua sprite (fortress.png khong co pipeline-meta).
+                go.transform.position = body.transform.position +
+                    new Vector3((pad.x - size.x / 2f) * FortressScale / Ppu, (size.y / 2f - pad.y) * FortressScale / Ppu, 0f);
+
+                var hit = go.AddComponent<BoxCollider2D>();
+                hit.size = MountHitSize;
+                hit.offset = new Vector2(0f, MountHitSize.y * 0.35f);
+
+                var frame = NewSprite("Frame", go.transform, sprite, SortOrder.Castle + 1);
+                if (sprite != null) frame.transform.localScale = Vector3.one * (MountFrameHeightPx / Ppu / sprite.bounds.size.y);
+
+                var mount = go.AddComponent<CannonMount>();
+                SetRef(mount, "board", board);
+                SetRef(mount, "frame", frame);
+                mounts[i] = mount;
+            }
+            return mounts;
+        }
+
+        /// <summary>
+        /// Bang chon phao: cung skin voi bang chon hero (`panels/`). Moi dong: emblem + ten + dong chi so (CannonBoard dien
+        /// luc mo) + nut nang cap. Duoi cung: go phao / huy. Dat TRUOC ResultPopup de bang ket qua luon de len tren.
+        /// </summary>
+        static void BuildCannonPicker(RectTransform canvas, CannonBoard board)
+        {
+            var roster = AssetDatabase.FindAssets("t:CannonDefinition", new[] { CannonDir })
+                .Select(AssetDatabase.GUIDToAssetPath)
+                .OrderBy(path => path)
+                .Select(AssetDatabase.LoadAssetAtPath<CannonDefinition>)
+                .ToArray();
+
+            const float rowStep = 132f;
+            float height = 108f + roster.Length * rowStep + 110f;
+            var picker = Img("CannonPicker", canvas, UiSprite("panels/panel-hero"), Center, new Vector2(0, 60), new Vector2(680, height), sliced: true);
+            picker.raycastTarget = true;
+            var titleBar = Img("Title", picker.transform, UiSprite("panels/title-ribbon"), Top, new Vector2(0, 26), new Vector2(360, 64), sliced: true);
+            Label("Value", titleBar.transform, "Chọn pháo", 34, Center, Vector2.zero, new Vector2(340, 64));
+
+            var buttons = new Object[roster.Length];
+            var infos = new Object[roster.Length];
+            var upgrades = new Object[roster.Length];
+            var upgradeLabels = new Object[roster.Length];
+            for (int i = 0; i < roster.Length; i++)
+            {
+                var cannon = roster[i];
+                float y = height / 2f - 108f - rowStep / 2f - i * rowStep;
+                var row = MakeButton("Cannon_" + cannon.name, picker.transform, "", Center, new Vector2(0, y),
+                    new Vector2(608, 118), out _, UiSprite("panels/stat-strip"));
+
+                var portrait = Img("Portrait", row.transform, UiSprite("panels/portrait-frame-big"), MidLeft, new Vector2(10, 0), new Vector2(98, 98), sliced: true);
+                if (cannon.icon != null)
+                {
+                    var icon = Img("Icon", portrait.transform, cannon.icon, Center, Vector2.zero, new Vector2(72, 72));
+                    icon.color = cannon.tint;
+                }
+
+                var nameText = Label("Name", row.transform, cannon.displayName, 32, MidLeft, new Vector2(122, 26), new Vector2(300, 40), MidLeft);
+                nameText.alignment = TextAnchor.MiddleLeft;
+                var info = Label("Info", row.transform, "", 20, MidLeft, new Vector2(122, -18), new Vector2(330, 34), MidLeft);
+                info.alignment = TextAnchor.MiddleLeft;
+                info.horizontalOverflow = HorizontalWrapMode.Wrap;
+
+                var upgrade = MakeButton("Upgrade", row.transform, "", MidLeft, new Vector2(460, 0), new Vector2(136, 64), out var upgradeLabel);
+                upgradeLabel.fontSize = 24;
+
+                buttons[i] = row;
+                infos[i] = info;
+                upgrades[i] = upgrade;
+                upgradeLabels[i] = upgradeLabel;
+            }
+            var remove = MakeButton("Remove", picker.transform, "Gỡ pháo", Bottom, new Vector2(-120, 24), new Vector2(200, 72), out _);
+            var cancel = MakeButton("Cancel", picker.transform, "Huỷ", Bottom, new Vector2(120, 24), new Vector2(200, 72), out _);
+
+            SetRef(board, "pickerPanel", picker.gameObject);
+            SetRefs(board, "roster", roster);
+            SetRefs(board, "rosterButtons", buttons);
+            SetRefs(board, "rosterInfo", infos);
+            SetRefs(board, "upgradeButtons", upgrades);
+            SetRefs(board, "upgradeLabels", upgradeLabels);
+            SetRef(board, "removeButton", remove);
+            SetRef(board, "cancelButton", cancel);
+
+            var popup = canvas.Find("ResultPopup");
+            if (popup != null) popup.SetAsLastSibling();
         }
 
         // ---------------------------------------------------------------- scene Gacha
