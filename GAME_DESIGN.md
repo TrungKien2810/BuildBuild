@@ -112,6 +112,18 @@ lính xương 150 máu / 12 dmg / 1,0 đòn/s / tốc 1,0 · xương lớn 700 m
 đích thì **vỡ thành mảnh xương + khói bạc hà** (impact 4 frame). Màu bạc hà lấy từ hốc mắt đầu lâu trên
 gậy, nên đạn đọc ra là "đầu lâu trên gậy bắn ra". Đạn đơn mục tiêu, không xuyên, không gây hiệu ứng phụ.
 
+**Cai ngục móc xích (Chainwarden, SR) — bộ kỹ năng (chốt với người dùng 2026-09-24).** Vai: chốt chặn
+khống chế + khuếch đại sát thương — kéo quái về, giữ chặt tại chỗ để đồng đội và pháo dồn đòn. Ba ô móc vào
+nhau qua trạng thái **Xích** (quái bị Xích nhận thêm sát thương từ mọi nguồn).
+
+| | Nội tại *Cai Ngục* *(luôn chạy)* | Chiêu thường *Quật Xích* *(cooldown ẩn)* | Chiêu xịn *Ném Móc* *(thanh mana 5)* |
+|---|---|---|---|
+| Hiệu ứng | Giữ tối đa **4 quái** (unit khác 3). Quái đang bị ông chặn bị **Xích**: **+20% sát thương nhận từ mọi nguồn** | Quay xích quanh mình: sát thương thấp + **trói** (đứng im, vẫn đánh được) mọi quái trong bán kính | Ném móc kéo quái tầm xa (ưu tiên Goblin Ná) về sát mình + choáng ngắn + **Xích 4s** |
+| Tinh anh/boss | Như quái thường | Trói **một nửa** thời gian | — |
+
+*Số khởi điểm Claude đề xuất, CHƯA cân bằng:* 1000 máu / 18 dmg / 0,7 đòn/s / tầm 0,6 / mana 5 · Quật Xích
+bán kính ~1,0, trói 1,5s, cooldown ~10s. Bỏ ý cũ "chiêu nhỏ móc lại quái lọt hàng" vì trùng chủ đề chiêu lớn.
+
 ## 4. Pháo (3 loại MVP)
 
 | Pháo | Sát thương | Tốc bắn | Tầm | Đặc điểm |
