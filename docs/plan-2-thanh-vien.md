@@ -10,20 +10,11 @@ Hai người, gọi tắt:
 
 ---
 
-## 0. Việc chung đầu tiên — sinh `.meta` cho asset mới (CHỈ 1 người làm, người kia chờ)
+## 0. Asset + `.meta` — ĐÃ XONG (2026-09-25)
 
-Asset mới **đã được commit** (2026-09-25, các commit `art: ...`) nhưng **chưa có `.meta`** vì lúc commit Unity không mở.
-Các thư mục thiếu `.meta`: `AcidLizard/`, `Boss/`, `CannonRapid/`, `Chainwarden/`, `Gatebreaker/walk/`,
-`GoblinSlinger/` (toàn bộ), `Hawkfletch/rapid-fire-buff/`, `StoneTortoise/`, `UI/style-b/`, `Vespera/`, `WarWolf/`.
-
-Nếu **cả hai** cùng mở Unity trước khi có `.meta` trên git, mỗi máy sinh một GUID khác cho cùng một ảnh → prefab/asset
-người này nối sẽ mất tham chiếu trên máy người kia. Vì vậy:
-
-1. **A** pull `main`, mở Unity, chờ import xong.
-2. Menu **BuildBuild → Art → Reimport Generated Art**, rồi **BuildBuild → Art → Verify Generated Art Import** (không được báo lỗi).
-3. `git status` — chỉ thấy file `.meta` mới trong `Assets/Art/Generated/` (không có PNG nào bị sửa).
-4. Commit `art: thêm .meta cho asset mới` + push.
-5. **B chỉ mở Unity SAU KHI đã pull commit này.** Lỡ mở trước thì xoá các `.meta` Unity vừa sinh trong những thư mục trên rồi pull lại.
+Mọi asset mới và `.meta` của chúng (Unity import qua `GeneratedArtImporter`) đã có trên `main` (commit `5992584`).
+Hai người chỉ cần **pull `main` TRƯỚC khi mở Unity**. Nếu `git status` sau khi mở Unity thấy `.meta` trong
+`Assets/Art/Generated/` bị sửa, đừng commit mà hỏi lại nhau trước: sửa như vậy là GUID/pivot bị đổi.
 
 > Chưa có art `CannonBlast` / `CannonFrost` trong `Assets/Art/Generated/` → B dùng tạm sprite `CannonRapid` tô màu (xem mục B).
 
@@ -149,7 +140,7 @@ Cập nhật `WaveTuning` theo bảng thành phần wave GDD mục 5.
 
 | Ngày | A | B |
 |---|---|---|
-| 1 | Mục 0 (sinh + commit `.meta`) · thêm `UnitCategory.Soldier`, push | Pull commit `.meta` rồi mới mở Unity · đọc `Enemy`/`Projectile`/`Castle` |
+| 1 | Pull `main` · thêm `UnitCategory.Soldier`, push | Pull `main` · đọc `Enemy`/`Projectile`/`Castle` |
 | 2–4 | A1 luật chặn | B1 `CannonDefinition` + `Cannon` + 3 bệ, Liên Thanh bắn được |
 | 5 | **Merge + chạy thử chung** (chặn + pháo cùng lúc) | ← |
 | 6–8 | A2 data lính + A3 bãi chờ / tài nguyên / kéo thả | B1 Nổ (AOE) + Băng (slow), UI chọn pháo · B2 GoblinSlinger, Gatebreaker |
