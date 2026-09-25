@@ -1,0 +1,230 @@
+{
+  "btn-green-normal.png": {
+    "left": 4,
+    "right": 4,
+    "top": 4,
+    "bottom": 5
+  },
+  "btn-green-hover.png": {
+    "left": 4,
+    "right": 4,
+    "top": 4,
+    "bottom": 5
+  },
+  "btn-green-pressed.png": {
+    "left": 4,
+    "right": 4,
+    "top": 4,
+    "bottom": 5
+  },
+  "btn-green-disabled.png": {
+    "left": 4,
+    "right": 4,
+    "top": 4,
+    "bottom": 5
+  },
+  "btn-red-normal.png": {
+    "left": 4,
+    "right": 4,
+    "top": 4,
+    "bottom": 5
+  },
+  "btn-red-hover.png": {
+    "left": 4,
+    "right": 4,
+    "top": 4,
+    "bottom": 5
+  },
+  "btn-red-pressed.png": {
+    "left": 4,
+    "right": 4,
+    "top": 4,
+    "bottom": 5
+  },
+  "btn-red-disabled.png": {
+    "left": 4,
+    "right": 4,
+    "top": 4,
+    "bottom": 5
+  },
+  "btn-blue-normal.png": {
+    "left": 4,
+    "right": 4,
+    "top": 4,
+    "bottom": 5
+  },
+  "btn-blue-hover.png": {
+    "left": 4,
+    "right": 4,
+    "top": 4,
+    "bottom": 5
+  },
+  "btn-blue-pressed.png": {
+    "left": 4,
+    "right": 4,
+    "top": 4,
+    "bottom": 5
+  },
+  "btn-blue-disabled.png": {
+    "left": 4,
+    "right": 4,
+    "top": 4,
+    "bottom": 5
+  },
+  "panel-slate.png": {
+    "left": 6,
+    "right": 6,
+    "top": 6,
+    "bottom": 6
+  },
+  "panel-parchment.png": {
+    "left": 6,
+    "right": 6,
+    "top": 6,
+    "bottom": 6
+  },
+  "toast.png": {
+    "left": 4,
+    "right": 4,
+    "top": 3,
+    "bottom": 3
+  },
+  "bar-frame.png": {
+    "left": 3,
+    "right": 3,
+    "top": 3,
+    "bottom": 3
+  },
+  "bar-fill-hp.png": {
+    "left": 1,
+    "right": 1,
+    "top": 0,
+    "bottom": 0
+  },
+  "bar-fill-mana.png": {
+    "left": 1,
+    "right": 1,
+    "top": 0,
+    "bottom": 0
+  },
+  "bar-fill-xp.png": {
+    "left": 1,
+    "right": 1,
+    "top": 0,
+    "bottom": 0
+  },
+  "bar-fill-gold.png": {
+    "left": 1,
+    "right": 1,
+    "top": 0,
+    "bottom": 0
+  },
+  "bar-fill-shard.png": {
+    "left": 1,
+    "right": 1,
+    "top": 0,
+    "bottom": 0
+  },
+  "bar-fill-pity.png": {
+    "left": 1,
+    "right": 1,
+    "top": 0,
+    "bottom": 0
+  },
+  "bar-fill-boss.png": {
+    "left": 1,
+    "right": 1,
+    "top": 0,
+    "bottom": 0
+  },
+  "bar-frame-boss.png": {
+    "left": 18,
+    "right": 4,
+    "top": 5,
+    "bottom": 5
+  },
+  "banner-stage.png": {
+    "left": 9,
+    "right": 9,
+    "top": 0,
+    "bottom": 0
+  },
+  "title-plate.png": {
+    "left": 11,
+    "right": 11,
+    "top": 0,
+    "bottom": 0
+  },
+  "ribbon-victory.png": {
+    "left": 12,
+    "right": 12,
+    "top": 0,
+    "bottom": 0
+  },
+  "ribbon-defeat.png": {
+    "left": 12,
+    "right": 12,
+    "top": 0,
+    "bottom": 0
+  },
+  "card-frame-n.png": {
+    "left": 5,
+    "right": 5,
+    "top": 5,
+    "bottom": 17
+  },
+  "card-frame-r.png": {
+    "left": 5,
+    "right": 5,
+    "top": 5,
+    "bottom": 17
+  },
+  "card-frame-sr.png": {
+    "left": 5,
+    "right": 5,
+    "top": 5,
+    "bottom": 17
+  },
+  "card-frame-ssr.png": {
+    "left": 5,
+    "right": 5,
+    "top": 5,
+    "bottom": 17
+  },
+  "card-frame-locked.png": {
+    "left": 5,
+    "right": 5,
+    "top": 5,
+    "bottom": 17
+  },
+  "tab-normal.png": {
+    "left": 3,
+    "right": 3,
+    "top": 3,
+    "bottom": 1
+  },
+  "tab-active.png": {
+    "left": 3,
+    "right": 3,
+    "top": 3,
+    "bottom": 1
+  },
+  "tab-bar.png": {
+    "left": 2,
+    "right": 2,
+    "top": 3,
+    "bottom": 2
+  },
+  "currency-pill.png": {
+    "left": 6,
+    "right": 6,
+    "top": 0,
+    "bottom": 0
+  },
+  "bar-mini-frame.png": {
+    "left": 1,
+    "right": 1,
+    "top": 1,
+    "bottom": 1
+  }
+}
