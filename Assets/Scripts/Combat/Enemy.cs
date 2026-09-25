@@ -172,6 +172,54 @@ namespace BuildBuild.Combat
             _stunRenderer = _stunFx != null ? _stunFx.GetComponent<SpriteRenderer>() : null;
         }
 
+        // ---------------------------------------------------------------- he so toc (nhanh Tru, plan muc B1.4)
+
+        float _slowUntil;
+        float _slowPercent;
+        float _hasteUntil;
+        float _hastePercent;
+
+        /// <summary>Dang bi lam cham (va khong mien).</summary>
+        public bool IsSlowed => Time.time < _slowUntil && !SlowImmune;
+
+        /// <summary>Mien moi lam cham (boss Noi Gian). Bat len thi slow dang chay cung mat tac dung.</summary>
+        public bool SlowImmune { get; set; }
+
+        /// <summary>He so toc DANH (boss Noi Gian 1,5). Doc moi lan vung don.</summary>
+        public float AttackRateMultiplier { get; set; } = 1f;
+
+        /// <summary>Toc chay hien tai: goc x (1 - cham) x (1 + tang toc). Moi buoc di doc so nay.</summary>
+        float MoveSpeed
+        {
+            get
+            {
+                float speed = _definition.moveSpeed;
+                if (IsSlowed) speed *= 1f - _slowPercent;
+                if (Time.time < _hasteUntil) speed *= 1f + _hastePercent;
+                return speed;
+            }
+        }
+
+        /// <summary>
+        /// Lam cham <paramref name="percent"/> (0..1) trong <paramref name="seconds"/> giay (phao Bang). Hai nguon chong
+        /// nhau thi lay muc MANH hon va thoi han DAI hon — khong cong don.
+        /// </summary>
+        public void ApplySlow(float percent, float seconds)
+        {
+            if (_dying || SlowImmune || percent <= 0f || seconds <= 0f) return;
+            bool active = Time.time < _slowUntil;
+            _slowPercent = active ? Mathf.Max(_slowPercent, Mathf.Clamp01(percent)) : Mathf.Clamp01(percent);
+            _slowUntil = Mathf.Max(_slowUntil, Time.time + seconds);
+        }
+
+        /// <summary>Tang toc chay <paramref name="percent"/> trong <paramref name="seconds"/> giay (boss Tieng Thet). Khong cong don.</summary>
+        public void ApplyHaste(float percent, float seconds)
+        {
+            if (_dying || percent <= 0f || seconds <= 0f) return;
+            _hastePercent = Mathf.Max(Time.time < _hasteUntil ? _hastePercent : 0f, percent);
+            _hasteUntil = Mathf.Max(_hasteUntil, Time.time + seconds);
+        }
+
         /// <summary>
         /// Day lui do don danh co `knockbackOnHit` (ky si tu than). Khac `OnDamaged`: day ca khi quai dang vung attack —
         /// quai vay danh ky si thi luc nao cung dang vung, bo qua thi khong bao gio thay lui.
@@ -364,7 +412,7 @@ namespace BuildBuild.Combat
         {
             // Quy uoc du an: sprite ve QUAY TRAI, va quai di sang trai — nen khong lat flipX.
             if (_renderer != null) _renderer.flipX = false;
-            transform.position += Vector3.left * (_definition.moveSpeed * Time.deltaTime);
+            transform.position += Vector3.left * (MoveSpeed * Time.deltaTime);
             if (animator != null && animator.CurrentClip != "hurt") animator.Play("walk");
         }
 
@@ -373,7 +421,7 @@ namespace BuildBuild.Combat
         {
             if (Mathf.Abs(direction.x) > 0.01f) Face(transform.position.x + direction.x);
             // Khong buoc qua dich: cho vay o gan hon mot buoc thi dung dung vao cho.
-            float step = Mathf.Min(_definition.moveSpeed * Time.deltaTime, direction.magnitude);
+            float step = Mathf.Min(MoveSpeed * Time.deltaTime, direction.magnitude);
             transform.position += direction.normalized * step;
             if (animator != null && animator.CurrentClip != "hurt") animator.Play("walk");
         }
@@ -383,7 +431,7 @@ namespace BuildBuild.Combat
             if (_attackCooldown > 0f) return;
             if (_definition.attackRate <= 0f) return;
 
-            _attackCooldown = 1f / _definition.attackRate;
+            _attackCooldown = 1f / (_definition.attackRate * AttackRateMultiplier);
             // Sat thuong ra o frame cham don cua clip (`hitFrame`), khong phai luc vua gio vu khi. Clip khong
             // khai hitFrame (hoac khong co animator) thi danh ngay nhu cu.
             _pendingHit = target;

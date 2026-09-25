@@ -101,21 +101,69 @@ namespace BuildBuild.Core
         IEnumerator SpawnWave(int wave)
         {
             var band = tuning.BandFor(wave);
-            if (band == null || band.enemies == null || band.enemies.Length == 0)
+            var queue = BuildSpawnQueue(wave, band);
+            if (queue.Count == 0)
             {
                 Debug.LogWarning($"[WaveManager] Wave {wave} khong co loai quai nao trong bang.");
                 yield break;
             }
 
-            int count = tuning.EnemyCount(wave);
+            foreach (var entry in queue)
+            {
+                if (!IsFighting) yield break;
+                Spawn(entry.definition, entry.health, entry.damage);
+                yield return new WaitForSeconds(tuning.spawnInterval);
+            }
+        }
+
+        struct SpawnEntry
+        {
+            public EnemyDefinition definition;
+            public float health;
+            public float damage;
+        }
+
+        /// <summary>
+        /// Thu tu spawn cua mot wave (GAME_DESIGN.md muc 5): quai thuong boc ngau nhien tu bang, tinh anh (`eliteCount`)
+        /// rai deu giua doan, boss ra SAU hai con ho tong dau tien (khong co ho tong thi ra ngay). Boss dung
+        /// `bossStatMultiplier` thay cho cong thuc len thang theo wave.
+        /// </summary>
+        List<SpawnEntry> BuildSpawnQueue(int wave, WaveBand band)
+        {
+            var queue = new List<SpawnEntry>();
+            if (band == null) return queue;
+
             float hp = tuning.HealthMultiplier(wave);
             float dmg = tuning.DamageMultiplier(wave);
 
-            for (int i = 0; i < count && IsFighting; i++)
+            if (band.enemies != null && band.enemies.Length > 0)
             {
-                Spawn(band.enemies[UnityEngine.Random.Range(0, band.enemies.Length)], hp, dmg);
-                yield return new WaitForSeconds(tuning.spawnInterval);
+                int count = tuning.RegularCount(wave, band);
+                for (int i = 0; i < count; i++)
+                    queue.Add(new SpawnEntry
+                    {
+                        definition = band.enemies[UnityEngine.Random.Range(0, band.enemies.Length)],
+                        health = hp,
+                        damage = dmg,
+                    });
             }
+
+            if (tuning.elite != null && band.eliteCount > 0)
+                for (int i = 0; i < band.eliteCount; i++)
+                {
+                    int at = (queue.Count + 1) * (i + 1) / (band.eliteCount + 1);
+                    queue.Insert(Mathf.Clamp(at, 0, queue.Count), new SpawnEntry { definition = tuning.elite, health = hp, damage = dmg });
+                }
+
+            if (band.hasBoss && tuning.boss != null)
+                queue.Insert(Mathf.Min(2, queue.Count), new SpawnEntry
+                {
+                    definition = tuning.boss,
+                    health = band.bossStatMultiplier,
+                    damage = band.bossStatMultiplier,
+                });
+
+            return queue;
         }
 
         void Spawn(EnemyDefinition definition, float healthMultiplier, float damageMultiplier)
@@ -125,6 +173,7 @@ namespace BuildBuild.Core
             var enemy = Instantiate(enemyPrefab, position, Quaternion.identity, transform);
             enemy.Initialise(definition, healthMultiplier, damageMultiplier);
             if (castle != null) enemy.SetTarget(castle.Health);
+            EnemyExtras.Attach(enemy, damageMultiplier);    // giap, vien da ban xa, co che boss
 
             enemy.Died += OnEnemyDied;
             _alive.Add(enemy);

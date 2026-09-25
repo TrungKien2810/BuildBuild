@@ -26,7 +26,22 @@ namespace BuildBuild.Core
         /// <summary>Tham so: sat thuong bi chan, Health cua ke danh (null neu nguon khong ro).</summary>
         public event Action<float, Health> Blocked;
 
+        /// <summary>0..1 — phan sat thuong bi giap an mat truoc khi tru mau (tinh anh 0,15, boss 0,3).</summary>
+        public float Armor { get; set; }
+
+        /// <summary>Ban ra khi duoc hoi mau (luong thuc te da cong).</summary>
+        public event Action<float> Healed;
+
         void Awake() => ResetTo(maxHealth);
+
+        /// <summary>Hoi mau, khong vuot `Max`; da chet thi khong hoi.</summary>
+        public void Heal(float amount)
+        {
+            if (IsDead || amount <= 0f || Current >= maxHealth) return;
+            float before = Current;
+            Current = Mathf.Min(maxHealth, Current + amount);
+            Healed?.Invoke(Current - before);
+        }
 
         public void ResetTo(float value)
         {
@@ -44,6 +59,7 @@ namespace BuildBuild.Core
                 return;
             }
 
+            amount *= 1f - Mathf.Clamp01(Armor);
             Current = Mathf.Max(0f, Current - amount);
             Damaged?.Invoke(amount);
 
