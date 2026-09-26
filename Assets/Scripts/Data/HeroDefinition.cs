@@ -110,6 +110,16 @@ namespace BuildBuild.Data
         [Tooltip("Chi hero trieu hoi (Bonecaller): noi tai + chieu thuong + linh. Trong = khong trieu hoi.")]
         public SummonerDefinition summoner;
 
+        [Header("Ho tro")]
+        [Tooltip(
+            "Don thuong la HOI MAU: `damage` mau cho dong minh thap mau nhat (theo ti le) trong `range`, khong ban quai " +
+            "(Vespera). Hero di toi dong minh bi thuong trong day xich, khong co ai bi thuong thi ve o.")]
+        public bool healsAllies;
+        [Tooltip("FX hoi mau chay mot lan tren nguoi duoc hoi.")]
+        public Sprite[] healFrames;
+        [Tooltip("RapidFire: FX lap tren dau trong luc buff. Trong = to mau cam nhu cu.")]
+        public Sprite[] buffFrames;
+
         [Header("Animation")]
         public SpriteAnimationSet animations;
 
