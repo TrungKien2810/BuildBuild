@@ -94,6 +94,31 @@ Chainwarden sống chung với luật chặn nên để A làm:
 
 ## 3. Thành viên B — Trụ (pháo) + asset quái/hero còn lại
 
+> **Tiến độ nhánh `feat/tru` (2026-09-25): đã code B1 + B2 + B3.** Asset / scene KHÔNG commit — theo mục 1, merge xong
+> mới chạy `BuildBuild/Scenes/Build Battle + Gacha` để sinh `Assets/Data/Cannons/`, `Enemy_GoblinSlinger/Gatebreaker/Boss`,
+> `Boss_Minotaur`, `Hero_Vespera` và dựng lại scene. Admin panel (F1) có nút "So huu ca 3 phao" để thử bệ pháo.
+>
+> Điểm chạm file chung — **A đọc trước khi merge**:
+> - `Enemy.cs` (của A): B **chỉ thêm** hệ số tốc qua hàm public (mục B1.4): `ApplySlow()`, `ApplyHaste()`, `IsSlowed`,
+>   `SlowImmune`, `AttackRateMultiplier`; hai dòng di chuyển đọc `MoveSpeed` thay `_definition.moveSpeed`, dòng cooldown đòn
+>   nhân `AttackRateMultiplier`. Không đụng luật đuổi / vây / chặn.
+> - Phần còn lại của B ở component riêng `EnemyExtras` (giáp qua `Health.Armor`, viên đá Goblin Ná, gắn `Boss`, tô màu
+>   khi bị chậm), `WaveManager.Spawn` gắn sau `Initialise`. Goblin Ná đánh bằng luật của A: `attackRange` 4,
+>   `heroAggroRange` 4,5 → đứng xa đánh, hero/lính trong tầm được chọn trước tường; sát thương ra ở frame ném, viên đá
+>   chỉ để nhìn. `EnemyDefinition.IsRanged` có sẵn nếu A muốn `Blocker` không giữ quái bắn xa.
+> - Boss **không** chạy clip thân `slam` / `roar` (Enemy.Update tự chọn clip mỗi frame nên clip riêng bị cắt): Chấn Địa /
+>   Tiếng Thét chỉ hiện bằng FX. Muốn có clip thân thì cần A thêm một móc "đang cast" trong Enemy.Update.
+> - Gatebreaker thiếu death: clip death tạm = walk (Enemy chờ hết clip death mới báo chết).
+> - `Hero` thành `partial`; phần của B ở `Hero.Support.cs` (`ApplyStun`, hero hồi máu, FX buff). Móc trong `Hero.cs`:
+>   `UpdateStunned()`, nhánh `healsAllies`, `ClearSupport()` trong `OnDied`.
+> - `Health`: thêm `Armor` (giảm sát thương, nhân trước khi trừ máu) + `Heal()`. Hệ số Xích +20% của A đặt cạnh dòng `Armor`.
+> - `SaveData.cannons`; `WaveBand.fixedCount/eliteCount`, `WaveTuning.boss/elite`; `EnemyKind` thêm `TinhAnh`, `BanXa` ở cuối enum.
+> - `SceneBuilder`: chỉ thêm hàm `BuildNewEnemies()`, `BuildVespera()`, `BuildCannons()`, `BuildCannonBoard()` (+ hai hàm
+>   con) và mỗi hàm một dòng gọi (3 dòng trong `BuildAll`, 1 dòng cuối `BuildBattleScene`).
+>
+> Số tạm B tự chọn (chưa có trong GDD): bán kính Chấn Địa 2,0 · Goblin Ná 0,8 đòn/s · Gatebreaker 0,6 đòn/s · boss 0,5 đòn/s ·
+> Goblin Ná xuất hiện từ wave 7 (thế chỗ Orc chưa có art), wave 20 dùng 4 Goblin thay 4 Orc · pháo Nổ bán kính 2,0 (hiểu "2 ô" = 2 đơn vị).
+
 ### B1. Hệ pháo trên pháo đài
 
 Luật (GDD mục 2 + 4):

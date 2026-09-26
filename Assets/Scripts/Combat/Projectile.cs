@@ -28,9 +28,25 @@ namespace BuildBuild.Combat
         Sprite[] _frames;
         Sprite[] _impactFrames;
         Hero _owner;
+        bool _singleTarget;     // phao Lien Thanh / Bang: chi con bi nham an don
+        float _slowPercent;
+        float _slowDuration;
         bool _impacting;
         float _timer;
         int _frame;
+
+        /// <summary>
+        /// Dan phao (`Cannon`): khong co hero chu. `aoeRadius` 0 = DON muc tieu (chi con bi nham, ke ca khi quai khac
+        /// dung chong len no); &gt; 0 = no nhu dan hero. Moi con trung bi lam cham neu phao co `slowPercent`.
+        /// </summary>
+        public void LaunchCannon(Enemy target, float damage, BuildBuild.Data.CannonDefinition cannon)
+        {
+            Launch(target, damage, cannon.aoeRadius, cannon.projectileSpeed, cannon.projectileFrames, cannon.impactFrames, null);
+            _singleTarget = cannon.aoeRadius <= 0f;
+            _impactScale = cannon.impactScale;
+            _slowPercent = cannon.slowPercent;
+            _slowDuration = cannon.slowDuration;
+        }
 
         public void Launch(Enemy target, float damage, float splashRadius, float speed, Sprite[] frames,
             Sprite[] impactFrames, Hero owner)
@@ -93,9 +109,11 @@ namespace BuildBuild.Combat
             foreach (var enemy in Enemy.Alive.ToArray())
             {
                 if (enemy == null || enemy.IsDying) continue;
-                if (Battlefield.GroundDistance(enemy.transform.position, _groundPoint) > _splashRadius + enemy.BodyRadius) continue;
+                if (_singleTarget ? enemy != _target
+                    : Battlefield.GroundDistance(enemy.transform.position, _groundPoint) > _splashRadius + enemy.BodyRadius) continue;
                 enemy.Health.TakeDamage(_damage);
                 if (_pushDirection != 0f) enemy.PushBack(_pushDirection);
+                if (_slowPercent > 0f) enemy.ApplySlow(_slowPercent, _slowDuration);
                 hits++;
             }
 

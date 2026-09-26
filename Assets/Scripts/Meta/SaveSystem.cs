@@ -27,6 +27,8 @@ namespace BuildBuild.Meta
         public int nextWave = 1;
         /// <summary>Doi hinh 9 o, theo thu tu o; moi phan tu la ten asset HeroDefinition, "" = o trong.</summary>
         public List<string> lineup = new List<string>();
+        /// <summary>Phao tren 3 be phao dai, tu tren xuong; moi phan tu la ten asset CannonDefinition, "" = be trong.</summary>
+        public List<string> cannons = new List<string>();
 
         public OwnedUnit Find(string id) => owned.Find(o => o.id == id);
     }

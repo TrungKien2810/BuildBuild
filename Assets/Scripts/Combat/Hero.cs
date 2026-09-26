@@ -40,7 +40,7 @@ namespace BuildBuild.Combat
     /// chieu thuong) nam o `Necromancer`, xem AD-17.
     /// </summary>
     [RequireComponent(typeof(Health))]
-    public class Hero : MonoBehaviour
+    public partial class Hero : MonoBehaviour
     {
         /// <summary>Moi hero dang song tren san — quai quet danh sach nay de tim muc tieu gan.</summary>
         public static readonly List<Hero> Alive = new List<Hero>();
@@ -209,6 +209,8 @@ namespace BuildBuild.Combat
                 _necromancer.Initialise(this, definition.summoner);
             }
 
+            InitialiseSupport();    // choang, hoi mau, FX buff — Hero.Support.cs
+
             StatBar.AttachHealth(this);
             // Chieu nho co cooldown AN — dung nghia den la khong ve gi len man hinh.
             if (UsesMana) StatBar.AttachMana(this);
@@ -250,9 +252,12 @@ namespace BuildBuild.Combat
                 EndPetrify();
             }
 
+            // Choang (boss Chan Dia): dung han, animation dung hinh — Hero.Support.cs.
+            if (UpdateStunned()) return;
+
             bool rapid = RapidFire;
             AuraMultipliers(out float auraDamage, out _);
-            _renderer.color = rapid ? RapidFireTint : auraDamage > 1f ? BoneAuraTint : Color.white;
+            _renderer.color = rapid && !HasBuffFx ? RapidFireTint : auraDamage > 1f ? BoneAuraTint : Color.white;
             if (animator != null) animator.Speed = rapid ? _definition.skillPower : 1f;
 
             if (_charging)
@@ -268,6 +273,13 @@ namespace BuildBuild.Combat
             transform.position += Battlefield.Separation(this, Alive) * Mathf.Min(1f, SeparationRate * Time.deltaTime);
 
             if (_casting) return;
+
+            // Hero hoi mau (Vespera) nham dong minh, khong nham quai.
+            if (_definition.healsAllies)
+            {
+                UpdateHealer();
+                return;
+            }
 
             // Phi xong KHONG ep di bo ve cho trieu hoi: ky si can chien quay lung di ve thi bi quai danh ma khong danh
             // lai (nguoi dung bat 2026-09-15). Het quai thi nhanh `target == null` ben duoi tu dua ve.
@@ -516,9 +528,18 @@ namespace BuildBuild.Combat
                 {
                     case SkillKind.FrostZone: CastFrostZone(); break;
                     case SkillKind.ConeSweep: CastConeSweep(); break;
-                    case SkillKind.RapidFire: _rapidFireUntil = Time.time + _definition.skillDuration; break;
+                    case SkillKind.RapidFire:
+                        _rapidFireUntil = Time.time + _definition.skillDuration;
+                        SpawnBuffFx(_definition.skillDuration);
+                        break;
                     case SkillKind.SummonKnight: if (_necromancer != null) _necromancer.SummonKnight(); break;
                 }
+                return;
+            }
+
+            if (_definition.healsAllies)
+            {
+                HealAlly();
                 return;
             }
 
@@ -619,7 +640,7 @@ namespace BuildBuild.Combat
         // giua chung la nuot mat phat dan va tru cooldown vo ich.
         void OnDamaged(float _)
         {
-            if (_dying || _casting || _petrified || _charging || animator == null) return;
+            if (_dying || _casting || _petrified || _charging || IsStunned || animator == null) return;
             animator.Play("hurt", restart: true);
             // Lui NGUOC huong dang nhin (flipX = nhin phai -> lui sang trai).
             _knockback.Trigger(_renderer.flipX ? -1f : 1f);
@@ -632,6 +653,7 @@ namespace BuildBuild.Combat
             _casting = false;
             _petrified = false;
             _charging = false;
+            ClearSupport();     // animator dang dung hinh vi choang thi death khong bao gio chay het
             _renderer.color = Color.white;
             if (animator != null && animator.CurrentClip != null)
             {
