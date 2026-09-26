@@ -17,6 +17,7 @@ MonoBehaviour:
   rateSR: 9
   rateSSR: 1
   heroShare: 0.6
+  soldierShare: 0.2
   singleCost: 500
   tenCost: 4500
   softPity: 30
@@ -31,3 +32,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: efe387c2709b2e543874767e90d1c877, type: 2}
   - {fileID: 11400000, guid: 73035525f13f5bf49a26d751fbf12d8f, type: 2}
   - {fileID: 11400000, guid: 6d65fa24823a9154f85516898f04a99c, type: 2}
+  - {fileID: 11400000, guid: a58547497af13d24f8a4a6c3f08abdaa, type: 2}
+  - {fileID: 11400000, guid: aa6a790dcb9b330419bcb389f1be7135, type: 2}
+  - {fileID: 11400000, guid: 540f32ebb32cd06458d7d7e734007b5a, type: 2}

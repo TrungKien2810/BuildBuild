@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f16e41ddfdcc413ca00d397c0e328db7, type: 3}
+  m_Name: SummonConfig
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.SummonConfig
+  resourcePerSecond: 1
+  resourcePerKill: 2
+  resourceCap: 100
+  keepBetweenWaves: 0
+  squadSpacing: 0.4
+  spawnFxFrames: []
