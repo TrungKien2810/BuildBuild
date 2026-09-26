@@ -63,6 +63,7 @@ namespace BuildBuild.UI
 
             GUI.enabled = waves.IsFighting;
             if (GUILayout.Button("Giet het quai")) waves.DevKillAll();
+            if (SoldierCamp.Current != null && GUILayout.Button("Linh: day tai nguyen + hoi chieu")) SoldierCamp.Current.DevFill();
             GUI.enabled = true;
 
             if (GUILayout.Button("Day mana moi hero / linh"))
