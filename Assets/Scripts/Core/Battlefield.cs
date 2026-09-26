@@ -85,6 +85,17 @@ namespace BuildBuild.Core
             return position;
         }
 
+        /// <summary>
+        /// Diem nam TREN SAN phe ta dung duoc: truoc vach thanh, trong mep phai man, trong dai y. Keo tha linh ra
+        /// ngoai (bai cho sau thanh, rung cay) thi khong tha. Chua co Battlefield thi coi nhu dung duoc.
+        /// </summary>
+        public static bool OnField(Vector3 position)
+        {
+            if (_current == null) return true;
+            return position.x > _current.leftBound && position.x < _current.rightBound
+                && position.y >= _current.laneBottom && position.y <= _current.laneTop;
+        }
+
         public static float GroundDistance(Vector3 a, Vector3 b)
         {
             float dx = a.x - b.x;

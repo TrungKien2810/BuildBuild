@@ -497,6 +497,7 @@ namespace BuildBuild.Editor
 
             CreateEventSystem();
             BuildBattleHud(CreateCanvas("HUD"), waves, castle, economy, board, roster);
+            BuildSoldierCamp(game, waves, heroPrefab);
 
             var admin = game.AddComponent<AdminPanel>();
             SetRef(admin, "waves", waves);
@@ -639,6 +640,107 @@ namespace BuildBuild.Editor
             SetRef(popup, "hintText", hint);
             SetRef(popup, "closeButton", close);
             return popup;
+        }
+
+        // ---------------------------------------------------------------- bai linh (nhanh Linh, plan muc A3)
+
+        // Bai dat SAU thanh: mep alpha trai cua phao dai o px 260 -> linh cho dung o x 150, ba hang cung hang o hero.
+        static readonly string[] CampOrder = { "WarWolf", "StoneTortoise", "AcidLizard" };
+        const float CampXPx = 150f;
+        static readonly float[] CampRowsPx = { 360f, 525f, 690f };
+
+        /// <summary>
+        /// `SoldierCamp` tren Game + moi loai linh mot `SoldierPost` o bai sau thanh + thanh tai nguyen tren HUD (ngay
+        /// duoi thanh mau lau dai, cung khung 3-slice). SummonConfig chi TAO khi chua co — so chinh tay khong bi ghi de.
+        /// </summary>
+        static void BuildSoldierCamp(GameObject game, WaveManager waves, Hero heroPrefab)
+        {
+            var config = LoadOrCreate<SummonConfig>(DataDir + "/SummonConfig.asset", out _);
+            var roster = CampOrder
+                .Select(id => AssetDatabase.LoadAssetAtPath<SoldierDefinition>($"{SoldierDir}/Soldier_{id}.asset"))
+                .Where(def => def != null)
+                .Take(CampRowsPx.Length)
+                .ToArray();
+
+            var camp = game.AddComponent<SoldierCamp>();
+            SetRef(camp, "waves", waves);
+            SetRef(camp, "config", config);
+            SetRef(camp, "unitPrefab", heroPrefab);
+            SetRefs(camp, "roster", roster);
+
+            var root = new GameObject("SoldierPosts").transform;
+            for (int i = 0; i < roster.Length; i++)
+                BuildSoldierPost(root, camp, i, roster[i], PxToWorld(CampXPx, CampRowsPx[i]));
+
+            var canvas = Object.FindObjectOfType<BattleHud>().transform;
+            var frame = Img("SummonResource", canvas, UiSprite("chrome/bar-frame"), TopLeft, new Vector2(80, -100), Native(200, 23), sliced: true);
+            var fill = Img("Fill", frame.transform, UiSprite("chrome/bar-fill-xp"), Center, Vector2.zero, Vector2.zero);
+            Stretch(fill.rectTransform, 6 * UiScale, 5 * UiScale, 4 * UiScale, 4 * UiScale);
+            fill.type = Image.Type.Filled;
+            fill.fillMethod = Image.FillMethod.Horizontal;
+            Img("Icon", frame.transform, UiSprite("style-b/icons/icon-skill-summon-squad"), MidLeft, new Vector2(-56, 0), new Vector2(48, 48));
+            var value = Label("Value", frame.transform, "", 26, Center, Vector2.zero, Native(200, 23));
+            var hud = frame.gameObject.AddComponent<SummonHud>();
+            SetRef(hud, "camp", camp);
+            SetRef(hud, "fill", fill);
+            SetRef(hud, "valueText", value);
+        }
+
+        /// <summary>
+        /// Mot con linh dung idle o bai (nhin sang phai), collider de keo, va canvas world-space tren dau: vong hoi chieu
+        /// (`ring-fill` Filled Radial) tren nen `ring-bg` + gia tai nguyen. Canvas 1 px = 0,01 unit nhu art.
+        /// </summary>
+        static void BuildSoldierPost(Transform root, SoldierCamp camp, int index, SoldierDefinition soldier, Vector3 position)
+        {
+            var go = new GameObject("Post_" + soldier.name);
+            go.transform.SetParent(root, false);
+            go.transform.position = position;
+
+            Battlefield.MeasureBody(soldier.animations, out float radius, out float height);
+            var collider = go.AddComponent<BoxCollider2D>();
+            collider.size = new Vector2(Mathf.Max(0.8f, radius * 2f + 0.2f), height + 0.5f);
+            collider.offset = new Vector2(0f, (height + 0.5f) * 0.5f);
+
+            var idle = soldier.animations != null && soldier.animations.idle.IsValid ? soldier.animations.idle.frames[0] : null;
+            var body = NewSprite("Body", go.transform, idle, 0);
+            body.transform.localScale = Vector3.one * Battlefield.UnitScale;
+            body.flipX = true;      // art quay trai; o bai linh nhin ve phia san
+            body.sortingOrder = SortOrder.ForUnit(body);
+            SetRef(body.gameObject.AddComponent<SpriteAnimator>(), "set", soldier.animations);
+
+            var ringCanvas = new GameObject("Cooldown", typeof(RectTransform));
+            ringCanvas.transform.SetParent(go.transform, false);
+            var canvas = ringCanvas.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.WorldSpace;
+            canvas.sortingOrder = SortOrder.Overlay;
+            var canvasRect = (RectTransform)ringCanvas.transform;
+            canvasRect.sizeDelta = new Vector2(80f, 80f);
+            canvasRect.localScale = Vector3.one / Ppu;
+            canvasRect.localPosition = new Vector3(0f, height + 0.35f, 0f);
+
+            Img("RingBg", canvasRect, UiSprite("style-b/chrome/ring-bg"), Center, new Vector2(0, 8), new Vector2(40, 40));
+            var ring = Img("RingFill", canvasRect, UiSprite("style-b/chrome/ring-fill"), Center, new Vector2(0, 8), new Vector2(40, 40));
+            ring.type = Image.Type.Filled;
+            ring.fillMethod = Image.FillMethod.Radial360;
+            ring.fillOrigin = (int)Image.Origin360.Top;
+            ring.fillClockwise = true;
+            var cost = Label("Cost", canvasRect, soldier.summonCost.ToString(), 20, Center, new Vector2(0, -24), new Vector2(80, 24));
+
+            var post = go.AddComponent<SoldierPost>();
+            SetRef(post, "camp", camp);
+            SetInt(post, "index", index);
+            SetRef(post, "body", body);
+            SetRef(post, "cooldownFill", ring);
+            SetRef(post, "costText", cost);
+        }
+
+        static void SetInt(Object target, string field, int value)
+        {
+            var so = new SerializedObject(target);
+            var prop = so.FindProperty(field);
+            if (prop == null) { Debug.LogError($"[SceneBuilder] {target.GetType().Name} khong co field '{field}'"); return; }
+            prop.intValue = value;
+            so.ApplyModifiedPropertiesWithoutUndo();
         }
 
         // 9 o dat hero (3x3) tren SAN, ngay truoc tuong lau dai — GDD muc 2. O la DIEM XUAT HIEN dau
