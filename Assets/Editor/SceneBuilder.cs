@@ -394,7 +394,36 @@ namespace BuildBuild.Editor
                     d.squadSize = 3; d.summonCost = 35; d.summonCooldown = 15f;
                 });
 
+            // Linh co trong gacha (IDEAS #1). Do hiem tam N ca ba — CHUA CHOT. Chi NOI THEM vao pool da co.
+            var units = new[]
+            {
+                SoldierUnit("soldier_warwolf", wolf),
+                SoldierUnit("soldier_stonetortoise", tortoise),
+                SoldierUnit("soldier_acidlizard", lizard),
+            };
+            var gacha = AssetDatabase.LoadAssetAtPath<GachaConfig>(DataDir + "/GachaConfig.asset");
+            if (gacha != null)
+            {
+                var pool = (gacha.pool ?? Array.Empty<UnitDefinition>()).ToList();
+                foreach (var unit in units)
+                    if (!pool.Contains(unit)) pool.Add(unit);
+                gacha.pool = pool.ToArray();
+                EditorUtility.SetDirty(gacha);
+            }
+
             return new[] { wolf, tortoise, lizard };
+        }
+
+        /// <summary>UnitDefinition gacha cua mot loai linh; icon = anh identity (chua co icon rieng trong UI/).</summary>
+        static UnitDefinition SoldierUnit(string id, SoldierDefinition soldier)
+        {
+            var unit = Unit(id, soldier.displayName, UnitCategory.Soldier, Rarity.N, "");
+            if (unit.icon == null && soldier.avatar != null)
+            {
+                unit.icon = soldier.avatar;
+                EditorUtility.SetDirty(unit);
+            }
+            return unit;
         }
 
         /// <summary>
