@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
+  m_Name: Hero_Vespera
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
+  displayName: Vespera
+  maxHealth: 350
+  damage: 20
+  attackRate: 0.8
+  range: 4
+  moveSpeed: 1.1
+  leashRange: 3
+  projectileSpeed: 8
+  splashRadius: 0.8
+  projectileFrames: []
+  projectileScale: 1
+  impactFrames: []
+  impactScale: 1
+  knockbackOnHit: 0
+  skillKind: 0
+  skillTier: 0
+  skillCooldown: 0
+  manaMax: 0
+  manaPerSecond: 0.35
+  manaPerHit: 0.25
+  skillRadius: 1.6
+  skillDuration: 3
+  skillPower: 1
+  skillFrames: []
+  skillIntroFrames: []
+  stunFrames: []
+  summoner: {fileID: 0}
+  healsAllies: 1
+  healFrames:
+  - {fileID: 21300000, guid: 01440e0d3fb5273468edf56b317f5f26, type: 3}
+  - {fileID: 21300000, guid: 090507418cb2aeb4eb88d70c18a33e28, type: 3}
+  - {fileID: 21300000, guid: 41b269f7d7c011c40ab0eb398d1c8eb4, type: 3}
+  - {fileID: 21300000, guid: 42ffb930453c8b24ca2dafcd2702fc1e, type: 3}
+  buffFrames: []
+  animations: {fileID: 11400000, guid: 86d3e5a031c49414bb7af68d1d33e22d, type: 2}
+  avatar: {fileID: 21300000, guid: 29cc412a2897537439bb7ed668cf02db, type: 3}
