@@ -80,6 +80,7 @@ namespace BuildBuild.Editor
             BuildHeroData();
             var gacha = BuildGachaData();
             BuildSoldiers();
+            BuildChainwarden();
             AssetDatabase.SaveAssets();
 
             BuildBattleScene(tuning, enemyPrefab);
@@ -394,6 +395,34 @@ namespace BuildBuild.Editor
                 });
 
             return new[] { wolf, tortoise, lizard };
+        }
+
+        /// <summary>
+        /// Hero SR Chainwarden (plan muc A4, kit chot 2026-09-24). So = GDD muc 3 (Claude de xuat, CHUA can bang); toc chay
+        /// GDD khong ghi -> 1,0 (giua Cragfist 0,9 va Ironblade 1,1). Nem Moc chua co art than -> dung clip attack.
+        /// Hero nam o Data/ goc nen tu vao bang chon hero.
+        /// </summary>
+        static HeroDefinition BuildChainwarden()
+        {
+            var warden = LoadOrCreate<WardenDefinition>(DataDir + "/Warden_Chainwarden.asset", out _);
+            if (warden.stunFrames == null || warden.stunFrames.Length == 0)
+                warden.stunFrames = Frames(ArtRoot + "Enemy/stunned-status", "stun");
+            EditorUtility.SetDirty(warden);
+
+            var hero = HeroDef("Chainwarden", null,
+                AnimSet("Chainwarden", "Chainwarden/", attack: ("attack", "attack"), hit: 4),
+                d =>
+                {
+                    d.maxHealth = 1000f; d.damage = 18f; d.attackRate = 0.7f; d.range = 0.6f; d.moveSpeed = 1f;
+                    d.projectileSpeed = 20f; d.splashRadius = 0.3f;
+                    d.maxHeld = 4; d.heldDamageBonus = 0.2f;
+                },
+                SkillKind.HookThrow, d => { d.manaMax = 5f; });
+            if (hero.warden == null) hero.warden = warden;
+            // Chua co avatar trong UI/avatars/: tam dung anh identity.
+            if (hero.avatar == null) hero.avatar = LoadSprite(ArtRoot + "Chainwarden/identity/identity-1.png");
+            EditorUtility.SetDirty(hero);
+            return hero;
         }
 
         static SoldierDefinition SoldierDef(string id, string displayName, SpriteAnimationSet anim, Action<SoldierDefinition> stats)

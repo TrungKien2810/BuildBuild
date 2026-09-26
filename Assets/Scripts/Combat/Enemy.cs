@@ -33,6 +33,9 @@ namespace BuildBuild.Combat
         /// <summary>Mau phu luc dang bi choang (vd. phi cua Ky si tu than) — vang, phan biet voi dong bang.</summary>
         static readonly Color StunnedTint = new Color(1f, 0.85f, 0.35f);
 
+        /// <summary>Mau phu luc mang Xich (Chainwarden) — tim nhat: nguoi choi doc ra con nao dang an them sat thuong.</summary>
+        static readonly Color ChainedTint = new Color(0.85f, 0.68f, 1f);
+
         [SerializeField] SpriteAnimator animator;
 
         EnemyDefinition _definition;
@@ -60,6 +63,11 @@ namespace BuildBuild.Combat
         Blocker _blocker;   // unit dang GIU quai nay (quai ban xa danh ma khong bi giu: _engaged co, _blocker null)
         int _slot = -1;
         float _slotSide;
+        float _rootedUntil;
+        float _chainedUntil;
+        float _chainBonus;
+        float _pullUntil;
+        Vector3 _pullTo;
         readonly Knockback _knockback = new Knockback();
 
         /// <summary>Toc tach hai quai dang dung chong len nhau (xem `Battlefield.Separation`).</summary>
@@ -96,6 +104,26 @@ namespace BuildBuild.Combat
         public bool IsFrozen => Time.time < _frozenUntil;
         bool IsStunned => Time.time < _stunnedUntil;
         public bool IsBoss => _definition != null && _definition.kind == EnemyKind.Boss;
+
+        /// <summary>Bi troi (Quat Xich): dung im, van danh.</summary>
+        public bool IsRooted => Time.time < _rootedUntil;
+
+        /// <summary>
+        /// Phan sat thuong nhan them do Xich (Chainwarden, GDD muc 3): dang bi mot unit co `heldDamageBonus` giu,
+        /// hoac con han Xich tu Nem Moc — lay muc cao hon, khong cong don. 0 = khong bi Xich.
+        /// </summary>
+        public float ChainBonus
+        {
+            get
+            {
+                var holder = Holder;
+                float held = holder != null ? holder.HeldDamageBonus : 0f;
+                float hooked = Time.time < _chainedUntil ? _chainBonus : 0f;
+                return Mathf.Max(held, hooked);
+            }
+        }
+
+        public bool IsChained => ChainBonus > 0f;
 
         /// <summary>Nua be ngang than tren mat dat (world) — tam can chien va vung no do toi MEP than, khong toi chan.</summary>
         public float BodyRadius => _bodyRadius;
@@ -135,6 +163,10 @@ namespace BuildBuild.Combat
             _markedBy = null;
             _markedUntil = 0f;
             Disengage();
+            _rootedUntil = 0f;
+            _chainedUntil = 0f;
+            _pullUntil = 0f;
+            _health.Vulnerability = 0f;
             _knockback.Reset();
             Thaw();
 
@@ -189,6 +221,50 @@ namespace BuildBuild.Combat
             _knockback.Trigger(direction);
         }
 
+        /// <summary>Troi <paramref name="seconds"/> giay (Quat Xich): khong di, khong bi day, van danh. Chong nhau lay han dai hon.</summary>
+        public void ApplyRoot(float seconds)
+        {
+            if (_dying || seconds <= 0f) return;
+            _rootedUntil = Mathf.Max(_rootedUntil, Time.time + seconds);
+        }
+
+        /// <summary>Xich co thoi han (Nem Moc): nhan them <paramref name="bonus"/> sat thuong ke ca khi khong bi giu.</summary>
+        public void ApplyChain(float bonus, float seconds)
+        {
+            if (_dying || bonus <= 0f || seconds <= 0f) return;
+            bool active = Time.time < _chainedUntil;
+            _chainBonus = active ? Mathf.Max(_chainBonus, bonus) : bonus;
+            _chainedUntil = Mathf.Max(_chainedUntil, Time.time + seconds);
+        }
+
+        /// <summary>
+        /// Bi KEO ve <paramref name="destination"/> trong <paramref name="seconds"/> giay (Nem Moc). Bo cho vay dang giu:
+        /// toi noi, quai tu nhan cho moi o unit gan nhat nhu binh thuong.
+        /// </summary>
+        public void PullTo(Vector3 destination, float seconds)
+        {
+            if (_dying) return;
+            Disengage();
+            _knockback.Reset();
+            _pullTo = new Vector3(destination.x, destination.y, transform.position.z);
+            _pullUntil = Time.time + Mathf.Max(0.01f, seconds);
+        }
+
+        /// <summary>Dang bi keo thi truot mot nhip ve dich va tra ve true — frame nay khong di, khong danh.</summary>
+        bool UpdatePull()
+        {
+            if (_pullUntil <= 0f) return false;
+            float left = _pullUntil - Time.time;
+            if (left <= Time.deltaTime)
+            {
+                transform.position = _pullTo;
+                _pullUntil = 0f;
+                return false;
+            }
+            transform.position += (_pullTo - transform.position) * (Time.deltaTime / left);
+            return true;
+        }
+
         /// <summary>An ky cua <paramref name="marker"/> trong <paramref name="seconds"/> giay; an lai thi dem lai tu dau.</summary>
         public void ApplyMark(UnityEngine.Object marker, float seconds, Sprite[] frames)
         {
@@ -214,21 +290,32 @@ namespace BuildBuild.Combat
         {
             if (_dying || _definition == null) return;
 
+            // Xich doi theo unit dang giu (con song, con giu) — dat lai moi frame, ke ca luc dang bi khoa.
+            _health.Vulnerability = ChainBonus;
+
+            // Bi moc keo: truot ve phia Chainwarden, khong di khong danh (van ve mau/choang dung).
+            if (UpdatePull())
+            {
+                UpdateFrozen();
+                return;
+            }
+
             // Dat TRUOC khi tru cooldown: quai dong bang giu nguyen nhip danh dang do, tan bang la
             // danh tiep tu dung cho cu — khong bi "an" mat mot don vi co.
             if (UpdateFrozen()) return;
 
             _attackCooldown -= Time.deltaTime;
 
-            // Bi day lui: frame nay chi lui, khong di khong danh (cooldown van chay tiep o tren).
-            if (_knockback.Step(transform)) return;
+            // Bi day lui: frame nay chi lui, khong di khong danh (cooldown van chay tiep o tren). Bi troi thi dung chan.
+            bool rooted = IsRooted;
+            if (!rooted && _knockback.Step(transform)) return;
 
             // Dang vung don (clip "attack" chua het) thi dung khoa nguyen cho — ke ca luc doi hinh day
             // tach nhau: tach giua chung la nuot mat don, va la nguon lam quai "vua di vua danh" truoc day.
             bool swinging = animator != null && animator.CurrentClip == "attack" && !animator.IsFinished;
 
             // Ca doi hinh khong don khit vao mot diem truoc hero hay truoc tuong.
-            if (!swinging)
+            if (!swinging && !rooted)
                 transform.position += Battlefield.Separation(this, Alive) * Mathf.Min(1f, SeparationRate * Time.deltaTime);
 
             var hero = EngageHero();
@@ -240,14 +327,14 @@ namespace BuildBuild.Combat
 
             if (_target == null || _target.IsDead)
             {
-                March();
+                Walk();
                 return;
             }
             if (swinging) return;
 
             // Tuong truoc lau dai la mot duong thang dung: quai o y nao cung chi can MEP THAN du gan theo x.
             float distance = Mathf.Abs(_targetTransform.position.x - transform.position.x);
-            if (distance > _definition.attackRange + _bodyRadius) March();
+            if (distance > _definition.attackRange + _bodyRadius) Walk();
             else
             {
                 if (_renderer != null) _renderer.flipX = false;
@@ -352,7 +439,8 @@ namespace BuildBuild.Combat
                 ? _blocker.SlotPosition(_slot, _slotSide, _definition.attackRange)
                 : inReach ? transform.position : heroPosition;
 
-            if (Battlefield.GroundDistance(slot, transform.position) > SlotTolerance)
+            // Bi troi thi dung tai cho nhin unit, van danh neu dang trong tam (nhanh tren).
+            if (!IsRooted && Battlefield.GroundDistance(slot, transform.position) > SlotTolerance)
             {
                 var to = slot - transform.position;
                 to.z = 0f;
@@ -378,7 +466,7 @@ namespace BuildBuild.Combat
         bool UpdateFrozen()
         {
             bool locked = IsFrozen || IsStunned;
-            var tint = IsFrozen ? FrozenTint : IsStunned ? StunnedTint : Color.white;
+            var tint = IsFrozen ? FrozenTint : IsStunned ? StunnedTint : IsChained ? ChainedTint : Color.white;
             if (locked != _frozenVisual || (_renderer != null && _renderer.color != tint))
             {
                 _frozenVisual = locked;
@@ -398,6 +486,17 @@ namespace BuildBuild.Combat
             if (_stunFx != null) Destroy(_stunFx);
             _stunFx = null;
             _stunRenderer = null;
+        }
+
+        /// <summary>Di ve lau dai — tru khi dang bi troi: dung idle tai cho.</summary>
+        void Walk()
+        {
+            if (!IsRooted)
+            {
+                March();
+                return;
+            }
+            if (animator != null && animator.CurrentClip == "walk") animator.Play("idle");
         }
 
         void March()

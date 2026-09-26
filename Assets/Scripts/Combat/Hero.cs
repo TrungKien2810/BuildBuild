@@ -31,6 +31,7 @@ namespace BuildBuild.Combat
     ///   - SummonKnight(Bonecaller)  : goi ky si tu than (hoac hoi day mau neu no con song), xem `Necromancer`;
     ///   - Charge      (Ky si tu than): phi `skillRadius` unit VE PHIA CUM QUAI DONG NHAT (ke ca huong cheo), `skillPower`
     ///     sat thuong + choang `skillDuration` giay moi quai tren duong, roi danh tiep tai cho (khong ep ve cho trieu hoi).
+    ///   - HookThrow   (Chainwarden) : Nem Moc — keo quai tam xa ve sat minh, xem `Warden`.
     /// Ky nang chia HAI TANG (`SkillTier`):
     ///   - Chieu LON: THANH MANA tich theo thoi gian VA theo so quai an don thuong, day thi tu cast
     ///     roi ve 0. Danh dong quai thi day nhanh hon — co chu dich: don khong che phai den dung luc
@@ -77,6 +78,7 @@ namespace BuildBuild.Combat
         SpriteRenderer _renderer;
         Necromancer _necromancer;
         Necromancer _summoner;
+        Warden _warden;
         Vector3 _anchor;
         float _cooldown;
         float _skillCooldown;
@@ -161,7 +163,7 @@ namespace BuildBuild.Combat
             _knockback.Reset();
             if (_blocker == null) _blocker = GetComponent<Blocker>();
             if (_blocker == null) _blocker = gameObject.AddComponent<Blocker>();
-            _blocker.Initialise(definition.maxHeld);
+            _blocker.Initialise(definition.maxHeld, definition.heldDamageBonus);
 
             transform.localScale = Vector3.one * Battlefield.UnitScale;
             Battlefield.MeasureBody(definition.animations, out _bodyRadius, out _bodyHeight);
@@ -177,6 +179,14 @@ namespace BuildBuild.Combat
                 animator.ClipFinished += OnClipFinished;
                 animator.HitFrame -= OnHitFrame;
                 animator.HitFrame += OnHitFrame;
+            }
+
+            // Chainwarden: Quat Xich (cooldown an) + so cua Nem Moc — xem `Warden`.
+            if (definition.warden != null)
+            {
+                _warden = GetComponent<Warden>();
+                if (_warden == null) _warden = gameObject.AddComponent<Warden>();
+                _warden.Initialise(this, definition.warden);
             }
 
             if (definition.summoner != null)
@@ -491,6 +501,7 @@ namespace BuildBuild.Combat
                 _castingSkill = false;
                 switch (_definition.skillKind)
                 {
+                    case SkillKind.HookThrow: if (_warden != null) _warden.ThrowHook(); break;
                     case SkillKind.FrostZone: CastFrostZone(); break;
                     case SkillKind.ConeSweep: CastConeSweep(); break;
                     case SkillKind.RapidFire: _rapidFireUntil = Time.time + _definition.skillDuration; break;

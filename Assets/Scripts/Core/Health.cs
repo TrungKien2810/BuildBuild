@@ -23,6 +23,12 @@ namespace BuildBuild.Core
         /// <summary>Mien sat thuong (vd. Cragfist Hoa Da). Don van toi — bao qua `Blocked` — nhung khong tru mau.</summary>
         public bool Invulnerable { get; set; }
 
+        /// <summary>
+        /// Phan sat thuong NHAN THEM tu moi nguon (0,2 = +20%). Trang thai Xich cua Chainwarden (GDD muc 3) — `Enemy`
+        /// dat lai moi frame. Nhan ngay dau `TakeDamage` nen don cua hero, linh, phao deu huong.
+        /// </summary>
+        public float Vulnerability { get; set; }
+
         /// <summary>Tham so: sat thuong bi chan, Health cua ke danh (null neu nguon khong ro).</summary>
         public event Action<float, Health> Blocked;
 
@@ -38,6 +44,8 @@ namespace BuildBuild.Core
         public void TakeDamage(float amount, Health source = null)
         {
             if (IsDead || amount <= 0f) return;
+            amount *= 1f + Mathf.Max(0f, Vulnerability);
+
             if (Invulnerable)
             {
                 Blocked?.Invoke(amount, source);
