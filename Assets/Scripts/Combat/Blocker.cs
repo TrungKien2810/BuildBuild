@@ -41,6 +41,9 @@ namespace BuildBuild.Combat
         public int MaxHeld => _held.Length;
         public bool IsDown => _hero == null || _hero.IsDying;
 
+        /// <summary>Quai dang bi unit nay giu mang Xich: nhan them bay nhieu phan sat thuong (Chainwarden 0,2). 0 = khong.</summary>
+        public float HeldDamageBonus { get; private set; }
+
         void Awake()
         {
             _hero = GetComponent<Hero>();
@@ -67,8 +70,9 @@ namespace BuildBuild.Combat
         }
 
         /// <summary>Goi tu `Hero.Initialise` (moi lan spawn lai). Doi so cho thi tha het quai dang giu.</summary>
-        public void Initialise(int maxHeld)
+        public void Initialise(int maxHeld, float heldDamageBonus = 0f)
         {
+            HeldDamageBonus = Mathf.Max(0f, heldDamageBonus);
             maxHeld = Mathf.Max(1, maxHeld);
             if (_held.Length != maxHeld) _held = new Enemy[maxHeld];
             else ReleaseAll();
