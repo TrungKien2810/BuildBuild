@@ -31,6 +31,7 @@ namespace BuildBuild.Combat
     ///   - SummonKnight(Bonecaller)  : goi ky si tu than (hoac hoi day mau neu no con song), xem `Necromancer`;
     ///   - Charge      (Ky si tu than): phi `skillRadius` unit VE PHIA CUM QUAI DONG NHAT (ke ca huong cheo), `skillPower`
     ///     sat thuong + choang `skillDuration` giay moi quai tren duong, roi danh tiep tai cho (khong ep ve cho trieu hoi).
+    ///   - HookThrow   (Chainwarden) : Nem Moc — keo quai tam xa ve sat minh, xem `Warden`.
     /// Ky nang chia HAI TANG (`SkillTier`):
     ///   - Chieu LON: THANH MANA tich theo thoi gian VA theo so quai an don thuong, day thi tu cast
     ///     roi ve 0. Danh dong quai thi day nhanh hon — co chu dich: don khong che phai den dung luc
@@ -47,9 +48,6 @@ namespace BuildBuild.Combat
 
         // Diem dan xuat hien: dau gay, tinh tu chan (pivot), o co art 1x — dung thi nhan `Battlefield.UnitScale`.
         static readonly Vector3 MuzzleOffset = new Vector3(0.15f, 0.3f, 0f) * Battlefield.UnitScale;
-
-        /// <summary>So quai toi da vay danh mot hero cung luc (xem `Enemy.EngageHero`).</summary>
-        public const int EngageSlots = 3;
 
         /// <summary>Tam danh tu muc nay tro xuong la can chien: duoi quai khong day xich.</summary>
         const float MeleeRange = 1.5f;
@@ -80,6 +78,7 @@ namespace BuildBuild.Combat
         SpriteRenderer _renderer;
         Necromancer _necromancer;
         Necromancer _summoner;
+        Warden _warden;
         Vector3 _anchor;
         float _cooldown;
         float _skillCooldown;
@@ -96,8 +95,8 @@ namespace BuildBuild.Combat
         float _chargeLeft;
         Vector3 _chargeDirection;
         readonly HashSet<Enemy> _chargeHits = new HashSet<Enemy>();
-        readonly Enemy[] _engagers = new Enemy[EngageSlots];
         readonly Knockback _knockback = new Knockback();
+        Blocker _blocker;
         SpriteRenderer _petrifyRenderer;
         float _bodyRadius;
         float _bodyHeight;
@@ -111,31 +110,9 @@ namespace BuildBuild.Combat
         /// <summary>Dinh dau tinh tu chan (world) — cho dat thanh mau.</summary>
         public float BodyHeight => _bodyHeight;
 
-        /// <summary>Con cho vay cho <paramref name="enemy"/> (hoac no dang giu san mot cho).</summary>
-        public bool HasFreeSlot(Enemy enemy)
-        {
-            for (int i = 0; i < EngageSlots; i++)
-                if (_engagers[i] == enemy || SlotFree(i)) return true;
-            return false;
-        }
+        /// <summary>Luat chan quai cua unit nay (giu toi da `HeroDefinition.maxHeld` quai) — xem `Blocker`.</summary>
+        public Blocker Blocker => _blocker;
 
-        /// <summary>Giu mot cho vay cho <paramref name="enemy"/>; tra ve chi so cho, -1 neu het cho.</summary>
-        public int ClaimSlot(Enemy enemy)
-        {
-            for (int i = 0; i < EngageSlots; i++)
-                if (_engagers[i] == enemy) return i;
-            for (int i = 0; i < EngageSlots; i++)
-            {
-                if (!SlotFree(i)) continue;
-                _engagers[i] = enemy;
-                return i;
-            }
-            return -1;
-        }
-
-        // Cho tu nha khi quai chet/bi xoa hoac da bo sang muc tieu khac — khong can quai bao lai.
-        bool SlotFree(int i) =>
-            _engagers[i] == null || _engagers[i].IsDying || _engagers[i].EngagedHero != this;
         public bool IsDying => _dying;
 
         /// <summary>0..1 cho thanh mana ve tren dau (`StatBar`).</summary>
@@ -184,7 +161,9 @@ namespace BuildBuild.Combat
             _health.ResetTo(definition.maxHealth);
             _renderer.color = Color.white;
             _knockback.Reset();
-            System.Array.Clear(_engagers, 0, EngageSlots);
+            if (_blocker == null) _blocker = GetComponent<Blocker>();
+            if (_blocker == null) _blocker = gameObject.AddComponent<Blocker>();
+            _blocker.Initialise(definition.maxHeld, definition.heldDamageBonus);
 
             transform.localScale = Vector3.one * Battlefield.UnitScale;
             Battlefield.MeasureBody(definition.animations, out _bodyRadius, out _bodyHeight);
@@ -200,6 +179,14 @@ namespace BuildBuild.Combat
                 animator.ClipFinished += OnClipFinished;
                 animator.HitFrame -= OnHitFrame;
                 animator.HitFrame += OnHitFrame;
+            }
+
+            // Chainwarden: Quat Xich (cooldown an) + so cua Nem Moc — xem `Warden`.
+            if (definition.warden != null)
+            {
+                _warden = GetComponent<Warden>();
+                if (_warden == null) _warden = gameObject.AddComponent<Warden>();
+                _warden.Initialise(this, definition.warden);
             }
 
             if (definition.summoner != null)
@@ -526,6 +513,7 @@ namespace BuildBuild.Combat
                 _castingSkill = false;
                 switch (_definition.skillKind)
                 {
+                    case SkillKind.HookThrow: if (_warden != null) _warden.ThrowHook(); break;
                     case SkillKind.FrostZone: CastFrostZone(); break;
                     case SkillKind.ConeSweep: CastConeSweep(); break;
                     case SkillKind.RapidFire:
