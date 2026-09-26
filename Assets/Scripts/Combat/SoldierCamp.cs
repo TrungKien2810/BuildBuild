@@ -106,7 +106,9 @@ namespace BuildBuild.Combat
             var soldier = roster[index];
             Resource -= soldier.summonCost;
             _cooldownLeft[index] = soldier.summonCooldown;
-            Summoned?.Invoke(soldier, SpawnSquad(soldier, point));
+            // Sinh truoc roi moi ban event: `Summoned?.Invoke(.., SpawnSquad(..))` bo qua ca SpawnSquad khi chua ai nghe.
+            var squad = SpawnSquad(soldier, point);
+            Summoned?.Invoke(soldier, squad);
             return true;
         }
 
