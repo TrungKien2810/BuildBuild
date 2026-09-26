@@ -79,6 +79,7 @@ namespace BuildBuild.Editor
             var tuning = BuildWaveData(out var enemyPrefab);
             BuildHeroData();
             var gacha = BuildGachaData();
+            BuildSoldiers();
             AssetDatabase.SaveAssets();
 
             BuildBattleScene(tuning, enemyPrefab);
@@ -347,6 +348,69 @@ namespace BuildBuild.Editor
             return config;
         }
 
+        // ---------------------------------------------------------------- du lieu nhanh Linh (linh trieu hoi, Chainwarden)
+
+        // Linh nam o Soldiers/ — `BuildBattleScene` loai thu muc nay khoi bang chon hero (SoldierDefinition la HeroDefinition).
+        const string SoldierDir = DataDir + "/Soldiers";
+
+        /// <summary>
+        /// 3 linh trieu hoi da co art (plan muc A2). So = bang plan (Claude de xuat, CHUA can bang); gia + hoi chieu
+        /// plan chua ghi -> so tam o day. Can chien "ban" bang dan vo hinh toc 20, splash 0,3 nhu linh xuong.
+        /// Tam can chien do toi MEP than quai (xem ghi chu dau file). hitFrame = frame vuon xa nhat (do alpha).
+        /// </summary>
+        static SoldierDefinition[] BuildSoldiers()
+        {
+            EnsureFolder(SoldierDir);
+
+            var wolf = SoldierDef("WarWolf", "Sói chiến",
+                AnimSet("WarWolf", "WarWolf/", attack: ("attack", "attack"), hit: 3),
+                d =>
+                {
+                    d.maxHealth = 200f; d.damage = 14f; d.attackRate = 1.2f; d.range = 0.5f; d.moveSpeed = 2f;
+                    d.projectileSpeed = 20f; d.splashRadius = 0.3f;
+                    d.squadSize = 3; d.summonCost = 30; d.summonCooldown = 12f;
+                });
+
+            var tortoise = SoldierDef("StoneTortoise", "Rùa đá khiên",
+                AnimSet("StoneTortoise", "StoneTortoise/", attack: ("attack", "attack"), hit: 2),
+                d =>
+                {
+                    d.maxHealth = 700f; d.damage = 8f; d.attackRate = 0.5f; d.range = 0.6f; d.moveSpeed = 0.6f;
+                    d.projectileSpeed = 20f; d.splashRadius = 0.3f;
+                    d.squadSize = 2; d.summonCost = 40; d.summonCooldown = 18f;
+                });
+
+            var lizard = SoldierDef("AcidLizard", "Kỳ nhông axit",
+                AnimSet("AcidLizard", "AcidLizard/", attack: ("attack", "attack"), hit: 2),
+                d =>
+                {
+                    d.maxHealth = 150f; d.damage = 18f; d.attackRate = 0.8f; d.range = 4f; d.moveSpeed = 1.2f;
+                    d.leashRange = 3f;
+                    // Giot axit ve co mui ten Hawkfletch (21 px) -> 1; vet no rong 48 px -> 0,6 nhu frost-impact.
+                    d.projectileSpeed = 8f; d.splashRadius = 0.3f; d.impactScale = 0.6f;
+                    d.projectileFrames = Frames(ArtRoot + "AcidLizard/acid", "projectile");
+                    d.impactFrames = Frames(ArtRoot + "AcidLizard/acid-impact", "impact");
+                    d.squadSize = 3; d.summonCost = 35; d.summonCooldown = 15f;
+                });
+
+            return new[] { wolf, tortoise, lizard };
+        }
+
+        static SoldierDefinition SoldierDef(string id, string displayName, SpriteAnimationSet anim, Action<SoldierDefinition> stats)
+        {
+            var def = LoadOrCreate<SoldierDefinition>($"{SoldierDir}/Soldier_{id}.asset", out bool created);
+            if (created)
+            {
+                def.displayName = displayName;
+                def.animations = anim;
+                stats(def);
+            }
+            // Chua co avatar rieng cho linh: tam dung anh identity (icon gacha + bai cho).
+            if (def.avatar == null) def.avatar = LoadSprite($"{ArtRoot}{id}/identity/identity-1.png");
+            EditorUtility.SetDirty(def);
+            return def;
+        }
+
         /// <param name="icon">Duong dan duoi `Assets/Art/Generated/UI/`, khong co duoi `.png` —
         /// vd. "avatars/avatar-ironblade" hoac "icons/icon-cannon-frost".</param>
         static UnitDefinition Unit(string id, string displayName, UnitCategory category, Rarity rarity, string icon)
@@ -378,7 +442,7 @@ namespace BuildBuild.Editor
             var heroPrefab = AssetDatabase.LoadAssetAtPath<Hero>(PrefabDir + "/Hero.prefab");
             var roster = AssetDatabase.FindAssets("t:HeroDefinition", new[] { DataDir })
                 .Select(AssetDatabase.GUIDToAssetPath)
-                .Where(path => !path.StartsWith(DataDir + "/Summons/"))
+                .Where(path => !path.StartsWith(DataDir + "/Summons/") && !path.StartsWith(SoldierDir + "/"))
                 .OrderBy(path => path)
                 .Select(AssetDatabase.LoadAssetAtPath<HeroDefinition>)
                 .ToArray();
