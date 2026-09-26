@@ -39,5 +39,8 @@ MonoBehaviour:
   skillIntroFrames: []
   stunFrames: []
   summoner: {fileID: 0}
+  healsAllies: 0
+  healFrames: []
+  buffFrames: []
   animations: {fileID: 11400000, guid: 5fde44f4558b9d544a57cb334e70a964, type: 2}
   avatar: {fileID: 0}

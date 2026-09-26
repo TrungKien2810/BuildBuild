@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4747510520256debab9ec5e299c95862, type: 3}
+  m_Name: Boss_Minotaur
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.BossDefinition
+  slamInterval: 15
+  slamDamage: 80
+  slamRadius: 2
+  slamStun: 2
+  slamFrames:
+  - {fileID: 21300000, guid: 507910b986601d2499fe74483174f3f8, type: 3}
+  - {fileID: 21300000, guid: 40040058f1b7e41449bc4d9e515aa01c, type: 3}
+  - {fileID: 21300000, guid: 1a07fb7f0139ab24cbc0017aad5aed16, type: 3}
+  - {fileID: 21300000, guid: 464194d4d4881c84a9673922667d3ca2, type: 3}
+  - {fileID: 21300000, guid: 62b01c4728dd9d4409b85dff20cbaeae, type: 3}
+  - {fileID: 21300000, guid: e63c4cad2d958ae4c87eccea2de27d1e, type: 3}
+  roarInterval: 20
+  roarHaste: 0.3
+  roarDuration: 5
+  roarFrames:
+  - {fileID: 21300000, guid: bd917e843c4560d438c78d47df500c05, type: 3}
+  - {fileID: 21300000, guid: a411081632a943941b49ca32274c5b17, type: 3}
+  - {fileID: 21300000, guid: 5538abb169c823a46a8541945ba66aba, type: 3}
+  - {fileID: 21300000, guid: 723312247df883447acca2f0c1ed29fa, type: 3}
+  - {fileID: 21300000, guid: c4bace26c1f06dc4eba852a6a2f6fc4e, type: 3}
+  - {fileID: 21300000, guid: 8205cb02f049e8e41acedaa0508bd30d, type: 3}
+  roarBuffFrames:
+  - {fileID: 21300000, guid: b0cc1ae8f65488847bb69c2b60279a95, type: 3}
+  - {fileID: 21300000, guid: e706b21d5b8bbe84983abcae3057c359, type: 3}
+  - {fileID: 21300000, guid: 528401b13fd566540aeb612927ba288b, type: 3}
+  - {fileID: 21300000, guid: 413e3edf9f2b758458a398def85c83c0, type: 3}
+  enrageBelow: 0.3
+  enrageAttackRateBonus: 0.5

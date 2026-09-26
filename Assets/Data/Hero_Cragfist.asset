@@ -47,5 +47,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4101fe67366df7d499eac4bcf977fd6d, type: 3}
   stunFrames: []
   summoner: {fileID: 0}
+  healsAllies: 0
+  healFrames: []
+  buffFrames: []
   animations: {fileID: 11400000, guid: 29def75c320feff41b26b600cbcd277f, type: 2}
   avatar: {fileID: 21300000, guid: 76182530b5ac89a4e932ec5b5ed71bda, type: 3}

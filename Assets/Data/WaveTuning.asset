@@ -28,10 +28,79 @@ MonoBehaviour:
     - {fileID: 11400000, guid: ce5cee30680d48f409bb70b0a72805af, type: 2}
     hasBoss: 0
     bossStatMultiplier: 1
+    fixedCount: -1
+    eliteCount: 0
   - fromWave: 4
-    toWave: 30
+    toWave: 6
     enemies:
     - {fileID: 11400000, guid: ce5cee30680d48f409bb70b0a72805af, type: 2}
     - {fileID: 11400000, guid: 841baa938d951e348bf41f08a568610c, type: 2}
     hasBoss: 0
     bossStatMultiplier: 1
+    fixedCount: -1
+    eliteCount: 0
+  - fromWave: 7
+    toWave: 9
+    enemies:
+    - {fileID: 11400000, guid: ce5cee30680d48f409bb70b0a72805af, type: 2}
+    - {fileID: 11400000, guid: 841baa938d951e348bf41f08a568610c, type: 2}
+    - {fileID: 11400000, guid: b282b025a6acb76488bc492db863ca62, type: 2}
+    hasBoss: 0
+    bossStatMultiplier: 1
+    fixedCount: -1
+    eliteCount: 0
+  - fromWave: 10
+    toWave: 10
+    enemies:
+    - {fileID: 11400000, guid: ce5cee30680d48f409bb70b0a72805af, type: 2}
+    hasBoss: 1
+    bossStatMultiplier: 1
+    fixedCount: 6
+    eliteCount: 0
+  - fromWave: 11
+    toWave: 11
+    enemies:
+    - {fileID: 11400000, guid: ce5cee30680d48f409bb70b0a72805af, type: 2}
+    - {fileID: 11400000, guid: 841baa938d951e348bf41f08a568610c, type: 2}
+    - {fileID: 11400000, guid: b282b025a6acb76488bc492db863ca62, type: 2}
+    hasBoss: 0
+    bossStatMultiplier: 1
+    fixedCount: -1
+    eliteCount: 0
+  - fromWave: 12
+    toWave: 19
+    enemies:
+    - {fileID: 11400000, guid: ce5cee30680d48f409bb70b0a72805af, type: 2}
+    - {fileID: 11400000, guid: 841baa938d951e348bf41f08a568610c, type: 2}
+    - {fileID: 11400000, guid: b282b025a6acb76488bc492db863ca62, type: 2}
+    hasBoss: 0
+    bossStatMultiplier: 1
+    fixedCount: -1
+    eliteCount: 1
+  - fromWave: 20
+    toWave: 20
+    enemies:
+    - {fileID: 11400000, guid: ce5cee30680d48f409bb70b0a72805af, type: 2}
+    hasBoss: 1
+    bossStatMultiplier: 2
+    fixedCount: 4
+    eliteCount: 0
+  - fromWave: 21
+    toWave: 29
+    enemies:
+    - {fileID: 11400000, guid: ce5cee30680d48f409bb70b0a72805af, type: 2}
+    - {fileID: 11400000, guid: 841baa938d951e348bf41f08a568610c, type: 2}
+    - {fileID: 11400000, guid: b282b025a6acb76488bc492db863ca62, type: 2}
+    hasBoss: 0
+    bossStatMultiplier: 1
+    fixedCount: -1
+    eliteCount: 2
+  - fromWave: 30
+    toWave: 30
+    enemies: []
+    hasBoss: 1
+    bossStatMultiplier: 3.5
+    fixedCount: 0
+    eliteCount: 0
+  boss: {fileID: 11400000, guid: 36a86bc566c8d184ca3ab63733c7812b, type: 2}
+  elite: {fileID: 11400000, guid: 0ec892b7db0b8e24f93ff69260c150c6, type: 2}
