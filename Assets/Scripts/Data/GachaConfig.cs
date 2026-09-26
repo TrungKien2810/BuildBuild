@@ -12,8 +12,12 @@ namespace BuildBuild.Data
         public float rateSR = 9f;
         public float rateSSR = 1f;
 
-        [Tooltip("Sau khi ra do hiem: xac suat ra hero (con lai la phao).")]
+        [Tooltip("Sau khi ra do hiem: xac suat ra hero (con lai la linh + phao).")]
         [Range(0f, 1f)] public float heroShare = 0.6f;
+        [Tooltip(
+            "Sau khi ra do hiem: xac suat ra LINH TRIEU HOI; phan con lai sau hero + linh la phao. GDD muc 6 moi ghi " +
+            "60% hero / 40% phao — phan cua linh CHUA CHOT, tam chia doi 40% cua phao.")]
+        [Range(0f, 1f)] public float soldierShare = 0.2f;
 
         [Header("Gia")]
         public int singleCost = 500;

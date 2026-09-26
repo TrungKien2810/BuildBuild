@@ -30,6 +30,8 @@ namespace BuildBuild.Data
         SummonKnight,
         /// <summary>Ky si tu than: phi dai `skillRadius`, `skillPower` sat thuong, choang `skillDuration`.</summary>
         Charge,
+        /// <summary>Chainwarden Nem Moc: keo quai tam xa ve sat minh + choang + Xich. So nam o `warden`.</summary>
+        HookThrow,
     }
 
     /// <summary>
@@ -57,6 +59,16 @@ namespace BuildBuild.Data
             "CHI tuong TAM XA (range > 1,5): hero di xa o toi da bao nhieu unit de dua quai vao tam. Quai " +
             "khong vao tam duoc trong khoang do thi hero ve o. Can chien bo qua o nay — duoi quai khap san.")]
         public float leashRange = 3f;
+
+        [Header("Chan quai (GAME_DESIGN.md muc 2)")]
+        [Tooltip("So quai unit nay GIU cung luc; quai thu N+1 tro di di tiep ve lau dai. Moi unit 3, Chainwarden 4.")]
+        [Min(1)] public int maxHeld = 3;
+        [Tooltip(
+            "Quai DANG bi unit nay giu mang trang thai Xich: nhan them bay nhieu phan sat thuong tu MOI nguon " +
+            "(0,2 = +20%). 0 = khong Xich. Chainwarden noi tai Cai Nguc.")]
+        [Min(0f)] public float heldDamageBonus;
+        [Tooltip("Chi Chainwarden: chieu thuong Quat Xich + so cua chieu lon Nem Moc. Trong = khong co.")]
+        public WardenDefinition warden;
 
         [Header("Dan")]
         public float projectileSpeed = 8f;

@@ -42,6 +42,77 @@ Hai người chỉ cần **pull `main` TRƯỚC khi mở Unity**. Nếu `git sta
 
 ## 2. Thành viên A — Lính triệu hồi + luật chặn
 
+> **Tiến độ nhánh `feat/linh` (2026-09-26): đã code A1 + A2 + A3 + A4 + lính vào gacha.** Chưa mở Unity trên máy
+> làm (chỉ type-check C# bằng reference assembly Unity 2022.3, cả nhánh riêng lẫn bản merge thử với `feat/tru`:
+> merge tự động không xung đột, compile sạch). Asset / scene KHÔNG commit — theo mục 1, mở Unity chạy
+> `BuildBuild/Scenes/Build Battle + Gacha` để sinh `Assets/Data/Soldiers/`, `Anim_WarWolf/StoneTortoise/AcidLizard/Chainwarden`,
+> `Hero_Chainwarden`, `Warden_Chainwarden`, `SummonConfig`, `Units/Unit_soldier_*` rồi commit kèm `.meta`.
+> Script mới đã có `.meta` (GUID tự tạo) trong cùng commit.
+>
+> **Thử nhanh:** Admin panel (F1) có nút "Linh: day tai nguyen + hoi chieu" (chỉ bấm được lúc đang đánh).
+> A1: để mỗi Ironblade trên sân, đánh wave 1 (đúng 5 Goblin) — chọn Ironblade trong Hierarchy, Scene view vẽ Gizmos
+> chỗ vây (xanh = trống, đỏ = có quái).
+>
+> Điểm chạm file chung — **B đọc trước khi merge**:
+> - `Enemy.cs`: vây đánh chuyển sang `Blocker` (`Blocker.cs` mới). **Giữ nguyên `Enemy.EngagedHero`** (trả `Hero`) cho
+>   `EnemyExtras`. Quái bắn xa (`attackRange` > 1,5, vd Goblin Ná 4) **không bị giữ, không chiếm chỗ**: vẫn đặt
+>   `EngagedHero` = unit gần nhất trong `heroAggroRange` và đứng xa bắn. Thêm `Holder`, `CanBeHeld`, `HoldBy()`,
+>   `ApplyRoot()`, `ApplyChain()`, `PullTo()`, `IsRooted`, `ChainBonus`; hai lời gọi `March()` trong `Update` đổi thành
+>   `Walk()` (trói thì đứng). Không đụng `March`/`Advance`/`Attack` (chỗ B đọc `MoveSpeed` / `AttackRateMultiplier`).
+> - `Hero.cs`: bỏ `EngageSlots` / `HasFreeSlot` / `ClaimSlot` (chuyển vào `Blocker`); `Initialise` gắn `Blocker` và
+>   `Warden`; switch `FinishCast` thêm `case HookThrow` ở đầu.
+> - `Health.cs`: thêm `Vulnerability` (Xích), nhân ở **đầu** `TakeDamage` — không đặt cạnh dòng `Armor` của B để git
+>   không báo xung đột; nhân giao hoán nên kết quả như nhau.
+> - `HeroDefinition`: header mới "Chan quai" sau `leashRange` (`maxHeld`, `heldDamageBonus`, `warden`); `SkillKind.HookThrow` cuối enum.
+> - `UnitCategory.Soldier` cuối enum. `GachaConfig.soldierShare` + `GachaSystem` quay 3 loại.
+> - `SceneBuilder`: thêm `BuildSoldiers()`, `BuildChainwarden()`, `BuildSoldierCamp()` (+ hàm con), 3 dòng gọi; bảng chọn
+>   hero loại thư mục `Data/Soldiers/` (SoldierDefinition kế thừa HeroDefinition).
+> - `Battlefield.OnField()`; `AdminPanel` thêm 1 nút (sau "Giet het quai").
+>
+> Số tạm A tự chọn (chưa có trong plan/GDD): giá + hồi chiêu lính — Sói 30 / 12s, Rùa 40 / 18s, Kỳ nhông 35 / 15s ·
+> đầu wave vòng hồi chiêu đầy sẵn · gacha hero 60% / lính 20% / pháo 20% · độ hiếm 3 lính tạm N · Chainwarden tốc chạy 1,0 ·
+> Quật Xích 10 dmg · Ném Móc tầm 6, kéo 0,3s, choáng 0,8s, không có quái bắn xa thì kéo con xa nhất chưa bị mình giữ ·
+> quái bị Xích tô tím nhạt · lính và Chainwarden tạm dùng ảnh `identity` làm avatar/icon.
+
+#### A — việc CÒN LẠI (cập nhật 2026-09-26)
+
+Code A1–A4 + gacha đã có trên `feat/linh`, nhưng **chưa mục nào được chạy trong Unity** — chưa mục nào coi là "Xong khi".
+
+**Cần Unity (làm trước):**
+
+- [ ] Pull `feat/linh`, mở Unity 6000.4, xem Console không có lỗi compile (mới type-check bằng Unity 2022.3, có thể lệch API).
+- [ ] Chạy `BuildBuild/Scenes/Build Battle + Gacha` → commit asset sinh ra **kèm `.meta`** trong cùng commit:
+      `Assets/Data/Soldiers/`, `Anim_WarWolf/StoneTortoise/AcidLizard/Chainwarden`, `Hero_Chainwarden`, `Warden_Chainwarden`,
+      `SummonConfig`, `Units/Unit_soldier_*`, `GachaConfig` (đã nối lính vào pool), scene `Battle.unity` / `Gacha.unity`.
+- [ ] Nghiệm thu **A1**: 5 Goblin vào 1 Ironblade → đúng 3 con đứng đánh, 2 con đi tiếp; giết 1 con bị giữ → 1 con đang đi vào thế chỗ;
+      Ironblade chết → quái được thả, đi tiếp.
+- [ ] Nghiệm thu **A2**: 3 lính đúng hướng nhìn, đúng scale, animation attack ra đòn đúng frame (`hitFrame` Sói 3, Rùa 2, Kỳ nhông 2 —
+      đo bằng alpha, cần nhìn lại); đạn axit Kỳ nhông bay đúng cỡ (`projectileScale` tạm 1).
+- [ ] Nghiệm thu **A3**: bãi chờ nằm đúng sau thành (toạ độ `CampXPx` / `CampRowsPx` trong `SceneBuilder` là ước lượng, chưa nhìn trên nền thật);
+      kéo thả ra sân sinh đúng tốp; kéo ra ngoài sân / thiếu tài nguyên thì không ra gì; thanh tài nguyên chạy; hết wave dọn sạch lính.
+- [ ] Nghiệm thu **A4**: Chainwarden giữ được 4; quái bị Xích tô tím và ăn thêm 20% (kể cả đạn pháo sau khi merge B);
+      Quật Xích trói (đứng im vẫn đánh); Ném Móc kéo Goblin Ná về, choáng, Xích 4s.
+- [ ] Gacha: quay ra được lính, thẻ hiện icon lính.
+
+**Việc chung với B (lịch mục 4):**
+
+- [ ] Merge `feat/tru` + `feat/linh` vào `main` (đã merge thử: không xung đột, compile sạch). Merge xong **chạy lại builder** —
+      scene `Battle.unity` B đã commit là bản chưa có bãi lính / thanh tài nguyên / Chainwarden.
+- [ ] Chạy thử chung chặn + pháo, wave 1–12, rồi wave 1–30; chỉnh số trong ScriptableObject.
+- [ ] Cập nhật `HANDOFF.md`.
+
+**Còn dở trong code A:**
+
+- [ ] "Tinh anh bị trói / choáng một nửa": `main` chưa có tinh anh. Sau merge B (`EnemyKind.TinhAnh`) sửa `Warden.Sweep` và
+      `Warden.ThrowHook` từ `enemy.IsBoss` thành boss **hoặc** tinh anh.
+- [ ] Quái vừa bị Xích vừa bị làm chậm: `EnemyExtras` của B tô màu chậm trong `LateUpdate` đè mất màu tím Xích (chỉ là hình, sát
+      thương vẫn đúng). Chốt thứ tự ưu tiên màu với B.
+- [ ] FX Quật Xích (chưa có art) và Ném Móc (`hook-throw-body`, `hook-fx` chờ duyệt): duyệt xong gán vào `Warden_Chainwarden`
+      (`sweepFrames`, `hookFrames`) và clip `skill` của `Anim_Chainwarden`.
+- [ ] Avatar / icon riêng cho 3 lính + Chainwarden (đang tạm dùng ảnh `identity`).
+- [ ] Bãi chờ chưa lọc theo lính **đã sở hữu** (hiện mang cả 3 loại vào trận); bảng chọn hero cũng chưa lọc theo sở hữu.
+- [ ] Chốt các số tạm ở mục 6 (câu 1, 2, 7, 8) rồi sửa trong ScriptableObject.
+
 ### A1. Luật chặn quái (làm TRƯỚC — lính vô dụng nếu không chặn)
 
 Luật đã chốt (GDD mục 2, IDEAS #1):
@@ -189,3 +260,5 @@ Cập nhật `WaveTuning` theo bảng thành phần wave GDD mục 5.
 4. Chỉ số + wave xuất hiện của Goblin Ná.
 5. Kit Vespera.
 6. Ai sinh art Pháo Nổ / Pháo Băng và Gatebreaker attack/hurt/death.
+7. Lính trong gacha: tỉ lệ ra lính (đang tạm 20%, lấy từ phần của pháo), độ hiếm từng lính; giá + hồi chiêu triệu hồi.
+8. Quái bắn xa có bị giữ không (đang: không bị giữ, không chiếm chỗ của unit).

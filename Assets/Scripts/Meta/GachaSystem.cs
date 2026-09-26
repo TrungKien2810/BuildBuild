@@ -18,7 +18,7 @@ namespace BuildBuild.Meta
     /// mot noi quyet dinh "du tien hay khong".
     ///
     /// Do hiem gan co dinh vao unit. Quay ra mot bac chua co unit nao (roster hien tai chi co N + mot
-    /// SR) thi ha dan xuong bac thap hon con unit — thu cung loai truoc, roi loai kia.
+    /// SR) thi ha dan xuong bac thap hon con unit — thu cung loai truoc, roi cac loai kia.
     ///
     /// Pity dem theo bac QUAY RA, khong theo unit nhan duoc: dem theo unit thi khi roster chua co SSR,
     /// bo dem SSR khong bao gio ve 0 va moi luot sau luot 80 deu bi ep SSR.
@@ -39,8 +39,7 @@ namespace BuildBuild.Meta
             var results = new List<GachaResult>(count);
             for (int i = 0; i < count; i++)
             {
-                var category = Random.value < _config.heroShare ? UnitCategory.Hero : UnitCategory.Cannon;
-                var unit = PickUnit(RollRarityWithPity(), category);
+                var unit = PickUnit(RollRarityWithPity(), RollCategory());
                 if (unit == null)
                 {
                     Debug.LogError("[Gacha] GachaConfig.pool chua co unit nao.");
@@ -63,12 +62,25 @@ namespace BuildBuild.Meta
             return rarity;
         }
 
+        /// <summary>Hero `heroShare`, linh `soldierShare`, con lai la phao.</summary>
+        UnitCategory RollCategory()
+        {
+            float x = Random.value;
+            if (x < _config.heroShare) return UnitCategory.Hero;
+            if (x < _config.heroShare + _config.soldierShare) return UnitCategory.Soldier;
+            return UnitCategory.Cannon;
+        }
+
+        static readonly UnitCategory[] Categories = { UnitCategory.Hero, UnitCategory.Cannon, UnitCategory.Soldier };
+
+        /// <summary>Moi bac: loai da quay truoc, roi cac loai con lai; bac trong het thi ha xuong bac duoi.</summary>
         UnitDefinition PickUnit(Rarity rarity, UnitCategory category)
         {
-            var other = category == UnitCategory.Hero ? UnitCategory.Cannon : UnitCategory.Hero;
             for (int tier = (int)rarity; tier >= 0; tier--)
             {
-                var unit = RandomUnit((Rarity)tier, category) ?? RandomUnit((Rarity)tier, other);
+                var unit = RandomUnit((Rarity)tier, category);
+                foreach (var other in Categories)
+                    if (unit == null && other != category) unit = RandomUnit((Rarity)tier, other);
                 if (unit != null) return unit;
             }
             return null;
