@@ -19,6 +19,9 @@ MonoBehaviour:
   range: 1
   moveSpeed: 1.2
   leashRange: 3
+  maxHeld: 3
+  heldDamageBonus: 0
+  warden: {fileID: 0}
   projectileSpeed: 20
   splashRadius: 1.2
   projectileFrames: []
