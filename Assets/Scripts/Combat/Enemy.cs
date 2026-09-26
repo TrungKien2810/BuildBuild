@@ -13,9 +13,13 @@ namespace BuildBuild.Combat
     /// thuong — dat hero chan duong la mot lua chon that, va mot hero yeu dat sai cho se chet. Khong con
     /// hero nao gan thi quai quay ve muc tieu mac dinh (`SetTarget`, hien la lau dai).
     ///
-    /// VAY DANH co cho: moi hero chi co `Hero.EngageSlots` (3) cho dung phia quai den — chinh dien, cheo
-    /// tren, cheo duoi. Quai giu cho de di toi dung vi tri do danh (khong don khit vao mot diem); hero da
-    /// het cho thi quai bo qua hero do va di tiep. Giu hero da vay cho toi khi hero chet hoac chay qua xa.
+    /// LUAT CHAN (xem `Blocker`): moi unit phe ta giu toi da `Blocker.MaxHeld` quai (3, Chainwarden 4). Quai
+    /// nhan mot CHO canh unit roi di toi dung cho do danh (khong don khit vao mot diem); unit da het cho thi
+    /// quai bo qua unit do va di tiep. Giu cho toi khi unit chet hoac chay qua xa. Quai bi giu chet thi
+    /// `Blocker` goi con gan nhat vao the cho (`HoldBy`).
+    ///
+    /// Quai BAN XA (tam > `RangedReach`) khong bi giu va khong chiem cho: no chon unit gan nhat trong tam nhin
+    /// va dung xa ban — de no chiem mot trong 3 cho thi con can chien phia sau lot qua het.
     /// </summary>
     [RequireComponent(typeof(Health))]
     public class Enemy : MonoBehaviour
@@ -53,7 +57,8 @@ namespace BuildBuild.Combat
         float _bodyRadius;
         float _bodyHeight;
         Hero _engaged;
-        int _slot;
+        Blocker _blocker;   // unit dang GIU quai nay (quai ban xa danh ma khong bi giu: _engaged co, _blocker null)
+        int _slot = -1;
         float _slotSide;
         readonly Knockback _knockback = new Knockback();
 
@@ -70,12 +75,8 @@ namespace BuildBuild.Combat
         /// </summary>
         const float StunFxScale = 0.3f;
 
-        /// <summary>
-        /// Goc tren MAT DAT cua tung cho vay, tinh tu phia quai den: chinh dien, cheo tren, cheo duoi. 70 do chu
-        /// khong 45: hai cho canh nhau phai cach nhau hon `Battlefield.PersonalSpace`, khong thi luc tach day quai
-        /// ra khoi cho lien tuc.
-        /// </summary>
-        static readonly float[] SlotAngles = { 0f, 70f, -70f };
+        /// <summary>Tam danh tu muc nay tro len la quai ban xa: khong bi giu, khong chiem cho (cung nguong can chien cua hero).</summary>
+        const float RangedReach = 1.5f;
 
         /// <summary>Cach cho vay trong khoang nay (tren mat dat) thi coi nhu da dung vao cho.</summary>
         const float SlotTolerance = 0.1f;
@@ -102,8 +103,14 @@ namespace BuildBuild.Combat
         /// <summary>Giua than (world) — cho dan nham vao.</summary>
         public Vector3 BodyCenter => transform.position + new Vector3(0f, _bodyHeight * 0.5f, 0f);
 
-        /// <summary>Hero ma quai nay dang giu cho vay; null = khong vay ai.</summary>
+        /// <summary>Unit phe ta quai nay dang danh (bi giu, hoac quai ban xa dang nham); null = di ve lau dai.</summary>
         public Hero EngagedHero => _engaged;
+
+        /// <summary>Unit dang GIU quai nay (con song, con giu no); null = khong bi ai giu.</summary>
+        public Blocker Holder => _blocker != null && !_blocker.IsDown && _blocker.Holds(this) ? _blocker : null;
+
+        /// <summary>Quai can chien moi bi giu; quai ban xa dung xa danh, khong chiem cho cua unit.</summary>
+        public bool CanBeHeld => _definition != null && _definition.attackRange <= RangedReach;
 
         void Awake()
         {
@@ -127,7 +134,7 @@ namespace BuildBuild.Combat
             _dying = false;
             _markedBy = null;
             _markedUntil = 0f;
-            _engaged = null;
+            Disengage();
             _knockback.Reset();
             Thaw();
 
@@ -259,40 +266,74 @@ namespace BuildBuild.Combat
         }
 
         /// <summary>
-        /// Hero dang vay (con song, chua chay qua xa) thi giu; khong thi nha cho va tim hero con song gan nhat
-        /// trong `heroAggroRange` CON CHO TRONG. Khong co thi null — quai di tiep toi lau dai.
+        /// Unit dang danh (con song, con giu quai nay, chua chay qua xa) thi giu; khong thi nha cho va tim unit
+        /// gan nhat trong `heroAggroRange` CON CHO TRONG (quai ban xa: unit gan nhat, khong can cho). Khong co thi
+        /// null — quai di tiep toi lau dai.
         /// </summary>
         Hero EngageHero()
         {
-            if (_engaged != null && !_engaged.IsDying)
+            bool stillOn = _engaged != null && !_engaged.IsDying && (!CanBeHeld || Holder != null);
+            if (stillOn)
             {
                 float sticky = _definition.heroAggroRange * StickyAggro;
                 if ((_engaged.transform.position - transform.position).sqrMagnitude <= sticky * sticky) return _engaged;
             }
-            _engaged = null;
+            Disengage();
 
-            Hero best = null;
+            Blocker best = null;
             float bestSqr = _definition.heroAggroRange * _definition.heroAggroRange;
-            foreach (var hero in Hero.Alive)
+            foreach (var blocker in Blocker.Active)
             {
-                if (hero == null || hero.IsDying || !hero.HasFreeSlot(this)) continue;
-                float sqr = (hero.transform.position - transform.position).sqrMagnitude;
+                if (blocker == null || blocker.IsDown) continue;
+                if (CanBeHeld && !blocker.HasFreeSlot(this)) continue;
+                float sqr = (blocker.transform.position - transform.position).sqrMagnitude;
                 if (sqr > bestSqr) continue;
                 bestSqr = sqr;
-                best = hero;
+                best = blocker;
             }
             if (best == null) return null;
 
-            _slot = best.ClaimSlot(this);
-            _engaged = best;
-            // Phia cua cho vay chot luc nhan cho: tinh lai moi frame thi quai dung ngay tren hero se lat qua lai.
-            _slotSide = best.transform.position.x <= transform.position.x ? 1f : -1f;
-            return best;
+            if (!CanBeHeld)
+            {
+                _engaged = best.Unit;
+                return _engaged;
+            }
+            return HoldBy(best) ? _engaged : null;
         }
 
         /// <summary>
-        /// Vao tam (chan quai toi MEP than hero, do tren mat dat) va het cooldown thi danh ngay; giua hai don thi
-        /// di ve cho vay cua minh. Dang vung don thi dung yen: di giua chung la cat clip va nuot mat don.
+        /// Vao cho cua <paramref name="blocker"/> (bo unit dang danh neu co). `Blocker` goi thang ham nay khi mot quai
+        /// no dang giu chet — con gan nhat vao the cho. Tra ve false neu unit het cho / quai ban xa.
+        /// </summary>
+        public bool HoldBy(Blocker blocker)
+        {
+            if (_dying || _definition == null || !CanBeHeld || blocker == null || blocker.IsDown) return false;
+            if (_blocker != blocker) Disengage();
+
+            // Phia cua cho vay chot luc nhan cho: tinh lai moi frame thi quai dung ngay tren unit se lat qua lai.
+            float side = blocker.transform.position.x <= transform.position.x ? 1f : -1f;
+            int slot = blocker.ClaimSlot(this, side, _definition.attackRange);
+            if (slot < 0) return false;
+
+            _blocker = blocker;
+            _engaged = blocker.Unit;
+            _slot = slot;
+            _slotSide = side;
+            return true;
+        }
+
+        void Disengage()
+        {
+            if (_blocker != null) _blocker.Release(this);
+            _blocker = null;
+            _engaged = null;
+            _slot = -1;
+        }
+
+        /// <summary>
+        /// Vao tam (chan quai toi MEP than unit, do tren mat dat) va het cooldown thi danh ngay; giua hai don thi
+        /// di ve cho vay cua minh (quai ban xa: buoc thang toi khi vao tam). Dang vung don thi dung yen: di giua
+        /// chung la cat clip va nuot mat don.
         /// </summary>
         void Fight(Hero hero, bool swinging)
         {
@@ -307,10 +348,9 @@ namespace BuildBuild.Combat
                 return;
             }
 
-            float angle = SlotAngles[_slot] * Mathf.Deg2Rad;
-            float ring = hero.BodyRadius + _definition.attackRange * 0.8f;
-            var slot = heroPosition + new Vector3(_slotSide * Mathf.Cos(angle) * ring,
-                Mathf.Sin(angle) * ring * Battlefield.DepthSquash, 0f);
+            var slot = _blocker != null && _slot >= 0
+                ? _blocker.SlotPosition(_slot, _slotSide, _definition.attackRange)
+                : inReach ? transform.position : heroPosition;
 
             if (Battlefield.GroundDistance(slot, transform.position) > SlotTolerance)
             {

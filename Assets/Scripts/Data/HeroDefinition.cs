@@ -58,6 +58,10 @@ namespace BuildBuild.Data
             "khong vao tam duoc trong khoang do thi hero ve o. Can chien bo qua o nay — duoi quai khap san.")]
         public float leashRange = 3f;
 
+        [Header("Chan quai (GAME_DESIGN.md muc 2)")]
+        [Tooltip("So quai unit nay GIU cung luc; quai thu N+1 tro di di tiep ve lau dai. Moi unit 3, Chainwarden 4.")]
+        [Min(1)] public int maxHeld = 3;
+
         [Header("Dan")]
         public float projectileSpeed = 8f;
         [Tooltip("Ban kinh no quanh diem trung (don vi the gioi) — vai tro sat thuong dien rong.")]
