@@ -48,9 +48,6 @@ namespace BuildBuild.Combat
         // Diem dan xuat hien: dau gay, tinh tu chan (pivot), o co art 1x — dung thi nhan `Battlefield.UnitScale`.
         static readonly Vector3 MuzzleOffset = new Vector3(0.15f, 0.3f, 0f) * Battlefield.UnitScale;
 
-        /// <summary>So quai toi da vay danh mot hero cung luc (xem `Enemy.EngageHero`).</summary>
-        public const int EngageSlots = 3;
-
         /// <summary>Tam danh tu muc nay tro xuong la can chien: duoi quai khong day xich.</summary>
         const float MeleeRange = 1.5f;
 
@@ -96,8 +93,8 @@ namespace BuildBuild.Combat
         float _chargeLeft;
         Vector3 _chargeDirection;
         readonly HashSet<Enemy> _chargeHits = new HashSet<Enemy>();
-        readonly Enemy[] _engagers = new Enemy[EngageSlots];
         readonly Knockback _knockback = new Knockback();
+        Blocker _blocker;
         SpriteRenderer _petrifyRenderer;
         float _bodyRadius;
         float _bodyHeight;
@@ -111,31 +108,9 @@ namespace BuildBuild.Combat
         /// <summary>Dinh dau tinh tu chan (world) — cho dat thanh mau.</summary>
         public float BodyHeight => _bodyHeight;
 
-        /// <summary>Con cho vay cho <paramref name="enemy"/> (hoac no dang giu san mot cho).</summary>
-        public bool HasFreeSlot(Enemy enemy)
-        {
-            for (int i = 0; i < EngageSlots; i++)
-                if (_engagers[i] == enemy || SlotFree(i)) return true;
-            return false;
-        }
+        /// <summary>Luat chan quai cua unit nay (giu toi da `HeroDefinition.maxHeld` quai) — xem `Blocker`.</summary>
+        public Blocker Blocker => _blocker;
 
-        /// <summary>Giu mot cho vay cho <paramref name="enemy"/>; tra ve chi so cho, -1 neu het cho.</summary>
-        public int ClaimSlot(Enemy enemy)
-        {
-            for (int i = 0; i < EngageSlots; i++)
-                if (_engagers[i] == enemy) return i;
-            for (int i = 0; i < EngageSlots; i++)
-            {
-                if (!SlotFree(i)) continue;
-                _engagers[i] = enemy;
-                return i;
-            }
-            return -1;
-        }
-
-        // Cho tu nha khi quai chet/bi xoa hoac da bo sang muc tieu khac — khong can quai bao lai.
-        bool SlotFree(int i) =>
-            _engagers[i] == null || _engagers[i].IsDying || _engagers[i].EngagedHero != this;
         public bool IsDying => _dying;
 
         /// <summary>0..1 cho thanh mana ve tren dau (`StatBar`).</summary>
@@ -184,7 +159,9 @@ namespace BuildBuild.Combat
             _health.ResetTo(definition.maxHealth);
             _renderer.color = Color.white;
             _knockback.Reset();
-            System.Array.Clear(_engagers, 0, EngageSlots);
+            if (_blocker == null) _blocker = GetComponent<Blocker>();
+            if (_blocker == null) _blocker = gameObject.AddComponent<Blocker>();
+            _blocker.Initialise(definition.maxHeld);
 
             transform.localScale = Vector3.one * Battlefield.UnitScale;
             Battlefield.MeasureBody(definition.animations, out _bodyRadius, out _bodyHeight);
