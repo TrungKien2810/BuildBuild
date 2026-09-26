@@ -73,9 +73,45 @@ Hai người chỉ cần **pull `main` TRƯỚC khi mở Unity**. Nếu `git sta
 > đầu wave vòng hồi chiêu đầy sẵn · gacha hero 60% / lính 20% / pháo 20% · độ hiếm 3 lính tạm N · Chainwarden tốc chạy 1,0 ·
 > Quật Xích 10 dmg · Ném Móc tầm 6, kéo 0,3s, choáng 0,8s, không có quái bắn xa thì kéo con xa nhất chưa bị mình giữ ·
 > quái bị Xích tô tím nhạt · lính và Chainwarden tạm dùng ảnh `identity` làm avatar/icon.
-> Chưa làm: FX Ném Móc / Quật Xích (art chờ duyệt / chưa có) · "tinh anh trói một nửa" (trên `main` chưa có `EnemyKind`
-> tinh anh — sau merge đổi `enemy.IsBoss` trong `Warden` thành boss **hoặc** tinh anh) · bãi chờ chưa lọc theo lính đã sở hữu
-> (hero cũng chưa lọc).
+
+#### A — việc CÒN LẠI (cập nhật 2026-09-26)
+
+Code A1–A4 + gacha đã có trên `feat/linh`, nhưng **chưa mục nào được chạy trong Unity** — chưa mục nào coi là "Xong khi".
+
+**Cần Unity (làm trước):**
+
+- [ ] Pull `feat/linh`, mở Unity 6000.4, xem Console không có lỗi compile (mới type-check bằng Unity 2022.3, có thể lệch API).
+- [ ] Chạy `BuildBuild/Scenes/Build Battle + Gacha` → commit asset sinh ra **kèm `.meta`** trong cùng commit:
+      `Assets/Data/Soldiers/`, `Anim_WarWolf/StoneTortoise/AcidLizard/Chainwarden`, `Hero_Chainwarden`, `Warden_Chainwarden`,
+      `SummonConfig`, `Units/Unit_soldier_*`, `GachaConfig` (đã nối lính vào pool), scene `Battle.unity` / `Gacha.unity`.
+- [ ] Nghiệm thu **A1**: 5 Goblin vào 1 Ironblade → đúng 3 con đứng đánh, 2 con đi tiếp; giết 1 con bị giữ → 1 con đang đi vào thế chỗ;
+      Ironblade chết → quái được thả, đi tiếp.
+- [ ] Nghiệm thu **A2**: 3 lính đúng hướng nhìn, đúng scale, animation attack ra đòn đúng frame (`hitFrame` Sói 3, Rùa 2, Kỳ nhông 2 —
+      đo bằng alpha, cần nhìn lại); đạn axit Kỳ nhông bay đúng cỡ (`projectileScale` tạm 1).
+- [ ] Nghiệm thu **A3**: bãi chờ nằm đúng sau thành (toạ độ `CampXPx` / `CampRowsPx` trong `SceneBuilder` là ước lượng, chưa nhìn trên nền thật);
+      kéo thả ra sân sinh đúng tốp; kéo ra ngoài sân / thiếu tài nguyên thì không ra gì; thanh tài nguyên chạy; hết wave dọn sạch lính.
+- [ ] Nghiệm thu **A4**: Chainwarden giữ được 4; quái bị Xích tô tím và ăn thêm 20% (kể cả đạn pháo sau khi merge B);
+      Quật Xích trói (đứng im vẫn đánh); Ném Móc kéo Goblin Ná về, choáng, Xích 4s.
+- [ ] Gacha: quay ra được lính, thẻ hiện icon lính.
+
+**Việc chung với B (lịch mục 4):**
+
+- [ ] Merge `feat/tru` + `feat/linh` vào `main` (đã merge thử: không xung đột, compile sạch). Merge xong **chạy lại builder** —
+      scene `Battle.unity` B đã commit là bản chưa có bãi lính / thanh tài nguyên / Chainwarden.
+- [ ] Chạy thử chung chặn + pháo, wave 1–12, rồi wave 1–30; chỉnh số trong ScriptableObject.
+- [ ] Cập nhật `HANDOFF.md`.
+
+**Còn dở trong code A:**
+
+- [ ] "Tinh anh bị trói / choáng một nửa": `main` chưa có tinh anh. Sau merge B (`EnemyKind.TinhAnh`) sửa `Warden.Sweep` và
+      `Warden.ThrowHook` từ `enemy.IsBoss` thành boss **hoặc** tinh anh.
+- [ ] Quái vừa bị Xích vừa bị làm chậm: `EnemyExtras` của B tô màu chậm trong `LateUpdate` đè mất màu tím Xích (chỉ là hình, sát
+      thương vẫn đúng). Chốt thứ tự ưu tiên màu với B.
+- [ ] FX Quật Xích (chưa có art) và Ném Móc (`hook-throw-body`, `hook-fx` chờ duyệt): duyệt xong gán vào `Warden_Chainwarden`
+      (`sweepFrames`, `hookFrames`) và clip `skill` của `Anim_Chainwarden`.
+- [ ] Avatar / icon riêng cho 3 lính + Chainwarden (đang tạm dùng ảnh `identity`).
+- [ ] Bãi chờ chưa lọc theo lính **đã sở hữu** (hiện mang cả 3 loại vào trận); bảng chọn hero cũng chưa lọc theo sở hữu.
+- [ ] Chốt các số tạm ở mục 6 (câu 1, 2, 7, 8) rồi sửa trong ScriptableObject.
 
 ### A1. Luật chặn quái (làm TRƯỚC — lính vô dụng nếu không chặn)
 
