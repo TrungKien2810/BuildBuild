@@ -1,0 +1,65 @@
+{
+  "target": "player",
+  "mode": "p2-death",
+  "source": "tempart/Wyrmspear/p2-death",
+  "cell_size": 128,
+  "align": "feet",
+  "ground_row": 101,
+  "status": "duyet 2026-09-28",
+  "frames": [
+    {
+      "frame": "death-1",
+      "aligned_bbox": [
+        29,
+        28,
+        101,
+        102
+      ]
+    },
+    {
+      "frame": "death-2",
+      "aligned_bbox": [
+        33,
+        33,
+        103,
+        102
+      ]
+    },
+    {
+      "frame": "death-3",
+      "aligned_bbox": [
+        38,
+        34,
+        101,
+        102
+      ]
+    },
+    {
+      "frame": "death-4",
+      "aligned_bbox": [
+        28,
+        58,
+        103,
+        102
+      ]
+    },
+    {
+      "frame": "death-5",
+      "aligned_bbox": [
+        28,
+        66,
+        103,
+        102
+      ]
+    },
+    {
+      "frame": "death-6",
+      "aligned_bbox": [
+        28,
+        68,
+        103,
+        102
+      ]
+    }
+  ]
+}

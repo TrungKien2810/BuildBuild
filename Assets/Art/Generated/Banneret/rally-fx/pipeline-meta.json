@@ -1,0 +1,49 @@
+{
+  "target": "player",
+  "mode": "rally-fx",
+  "source": "tempart/Banneret/rally-fx/final",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 2,
+  "align": "center",
+  "status": "duyet 2026-09-29",
+  "frames": [
+    {
+      "frame": "rally-fx-1",
+      "aligned_bbox": [
+        58,
+        54,
+        69,
+        73
+      ]
+    },
+    {
+      "frame": "rally-fx-2",
+      "aligned_bbox": [
+        57,
+        52,
+        70,
+        75
+      ]
+    },
+    {
+      "frame": "rally-fx-3",
+      "aligned_bbox": [
+        57,
+        51,
+        70,
+        76
+      ]
+    },
+    {
+      "frame": "rally-fx-4",
+      "aligned_bbox": [
+        57,
+        53,
+        70,
+        75
+      ]
+    }
+  ]
+}

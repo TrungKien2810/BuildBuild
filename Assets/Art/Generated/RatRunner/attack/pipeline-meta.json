@@ -1,0 +1,67 @@
+{
+  "target": "creature",
+  "mode": "attack",
+  "source": "tempart/RatRunner/attack/out",
+  "cell_size": 128,
+  "rows": 2,
+  "cols": 3,
+  "align": "feet",
+  "ground_row": 90,
+  "status": "duyet 2026-09-29",
+  "frames": [
+    {
+      "frame": "attack-1",
+      "aligned_bbox": [
+        45,
+        58,
+        82,
+        91
+      ]
+    },
+    {
+      "frame": "attack-2",
+      "aligned_bbox": [
+        46,
+        60,
+        91,
+        91
+      ]
+    },
+    {
+      "frame": "attack-3",
+      "aligned_bbox": [
+        31,
+        58,
+        84,
+        91
+      ]
+    },
+    {
+      "frame": "attack-4",
+      "aligned_bbox": [
+        44,
+        57,
+        83,
+        91
+      ]
+    },
+    {
+      "frame": "attack-5",
+      "aligned_bbox": [
+        47,
+        57,
+        81,
+        91
+      ]
+    },
+    {
+      "frame": "attack-6",
+      "aligned_bbox": [
+        45,
+        57,
+        82,
+        91
+      ]
+    }
+  ]
+}

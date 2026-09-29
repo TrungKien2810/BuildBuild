@@ -1,0 +1,68 @@
+{
+  "target": "player",
+  "mode": "death",
+  "source": "tempart/Banneret/death/final/graded",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 3,
+  "align": "feet",
+  "status": "duyet 2026-09-29",
+  "frames": [
+    {
+      "frame": "death-1",
+      "aligned_bbox": [
+        53,
+        36,
+        87,
+        93
+      ]
+    },
+    {
+      "frame": "death-2",
+      "aligned_bbox": [
+        36,
+        44,
+        81,
+        93
+      ]
+    },
+    {
+      "frame": "death-3",
+      "aligned_bbox": [
+        51,
+        64,
+        106,
+        93
+      ]
+    },
+    {
+      "frame": "death-4",
+      "aligned_bbox": [
+        40,
+        69,
+        102,
+        93
+      ]
+    },
+    {
+      "frame": "death-5",
+      "aligned_bbox": [
+        47,
+        70,
+        110,
+        93
+      ]
+    },
+    {
+      "frame": "death-6",
+      "aligned_bbox": [
+        47,
+        70,
+        109,
+        93
+      ]
+    }
+  ],
+  "ground_row": 92
+}

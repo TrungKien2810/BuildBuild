@@ -1,0 +1,65 @@
+{
+  "target": "player",
+  "mode": "walk",
+  "source": "tempart/Wyrmspear/walk/final",
+  "cell_size": 128,
+  "align": "feet",
+  "ground_row": 97,
+  "status": "TAM duyet",
+  "frames": [
+    {
+      "frame": "walk-1",
+      "aligned_bbox": [
+        44,
+        33,
+        84,
+        98
+      ]
+    },
+    {
+      "frame": "walk-2",
+      "aligned_bbox": [
+        44,
+        33,
+        83,
+        98
+      ]
+    },
+    {
+      "frame": "walk-3",
+      "aligned_bbox": [
+        44,
+        32,
+        84,
+        98
+      ]
+    },
+    {
+      "frame": "walk-4",
+      "aligned_bbox": [
+        44,
+        32,
+        84,
+        98
+      ]
+    },
+    {
+      "frame": "walk-5",
+      "aligned_bbox": [
+        44,
+        33,
+        83,
+        98
+      ]
+    },
+    {
+      "frame": "walk-6",
+      "aligned_bbox": [
+        44,
+        34,
+        84,
+        98
+      ]
+    }
+  ]
+}

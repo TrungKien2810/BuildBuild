@@ -1,0 +1,65 @@
+{
+  "target": "player",
+  "mode": "dialong-attack",
+  "source": "tempart/Wyrmspear/dialong-attack",
+  "cell_size": 128,
+  "align": "feet",
+  "ground_row": 104,
+  "status": "duyet 2026-09-28",
+  "frames": [
+    {
+      "frame": "attack-1",
+      "aligned_bbox": [
+        22,
+        48,
+        101,
+        105
+      ]
+    },
+    {
+      "frame": "attack-2",
+      "aligned_bbox": [
+        21,
+        59,
+        107,
+        105
+      ]
+    },
+    {
+      "frame": "attack-3",
+      "aligned_bbox": [
+        14,
+        49,
+        102,
+        105
+      ]
+    },
+    {
+      "frame": "attack-4",
+      "aligned_bbox": [
+        21,
+        59,
+        106,
+        105
+      ]
+    },
+    {
+      "frame": "attack-5",
+      "aligned_bbox": [
+        21,
+        53,
+        100,
+        105
+      ]
+    },
+    {
+      "frame": "attack-6",
+      "aligned_bbox": [
+        22,
+        48,
+        101,
+        105
+      ]
+    }
+  ]
+}

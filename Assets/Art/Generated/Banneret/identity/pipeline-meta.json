@@ -1,0 +1,23 @@
+{
+  "target": "player",
+  "mode": "identity",
+  "source": "tempart/Banneret/identity",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 1,
+  "cols": 1,
+  "align": "feet",
+  "status": "duyet 2026-09-29",
+  "frames": [
+    {
+      "frame": "identity-1",
+      "aligned_bbox": [
+        49,
+        37,
+        79,
+        93
+      ]
+    }
+  ],
+  "ground_row": 92
+}

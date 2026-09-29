@@ -1,0 +1,50 @@
+{
+  "target": "player",
+  "mode": "idle",
+  "source": "tempart/Banneret/idle/final",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 2,
+  "align": "feet",
+  "status": "duyet 2026-09-29",
+  "frames": [
+    {
+      "frame": "idle-1",
+      "aligned_bbox": [
+        49,
+        37,
+        79,
+        93
+      ]
+    },
+    {
+      "frame": "idle-2",
+      "aligned_bbox": [
+        48,
+        37,
+        79,
+        93
+      ]
+    },
+    {
+      "frame": "idle-3",
+      "aligned_bbox": [
+        48,
+        37,
+        79,
+        93
+      ]
+    },
+    {
+      "frame": "idle-4",
+      "aligned_bbox": [
+        49,
+        37,
+        79,
+        93
+      ]
+    }
+  ],
+  "ground_row": 92
+}

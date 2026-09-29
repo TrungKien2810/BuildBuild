@@ -1,0 +1,47 @@
+{
+  "target": "player",
+  "mode": "dialong-idle",
+  "source": "tempart/Wyrmspear/dialong-idle",
+  "cell_size": 128,
+  "align": "feet",
+  "ground_row": 104,
+  "status": "duyet 2026-09-28",
+  "frames": [
+    {
+      "frame": "idle-1",
+      "aligned_bbox": [
+        24,
+        48,
+        104,
+        105
+      ]
+    },
+    {
+      "frame": "idle-2",
+      "aligned_bbox": [
+        23,
+        47,
+        104,
+        105
+      ]
+    },
+    {
+      "frame": "idle-3",
+      "aligned_bbox": [
+        23,
+        48,
+        104,
+        105
+      ]
+    },
+    {
+      "frame": "idle-4",
+      "aligned_bbox": [
+        24,
+        48,
+        104,
+        105
+      ]
+    }
+  ]
+}

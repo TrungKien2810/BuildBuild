@@ -1,0 +1,83 @@
+{
+  "target": "player",
+  "mode": "skill-longhoa-transform",
+  "source": "tempart/Wyrmspear/skill-longhoa-transform/final",
+  "cell_size": 128,
+  "align": "feet",
+  "ground_row": 97,
+  "status": "duyet 2026-09-28",
+  "frames": [
+    {
+      "frame": "longhoa-1",
+      "aligned_bbox": [
+        42,
+        32,
+        89,
+        98
+      ]
+    },
+    {
+      "frame": "longhoa-2",
+      "aligned_bbox": [
+        40,
+        31,
+        92,
+        98
+      ]
+    },
+    {
+      "frame": "longhoa-3",
+      "aligned_bbox": [
+        39,
+        30,
+        91,
+        98
+      ]
+    },
+    {
+      "frame": "longhoa-4",
+      "aligned_bbox": [
+        35,
+        29,
+        95,
+        98
+      ]
+    },
+    {
+      "frame": "longhoa-5",
+      "aligned_bbox": [
+        30,
+        28,
+        105,
+        98
+      ]
+    },
+    {
+      "frame": "longhoa-6",
+      "aligned_bbox": [
+        34,
+        28,
+        93,
+        98
+      ]
+    },
+    {
+      "frame": "longhoa-7",
+      "aligned_bbox": [
+        32,
+        25,
+        93,
+        98
+      ]
+    },
+    {
+      "frame": "longhoa-8",
+      "aligned_bbox": [
+        33,
+        24,
+        93,
+        98
+      ]
+    }
+  ]
+}

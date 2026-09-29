@@ -1,0 +1,50 @@
+{
+  "target": "creature",
+  "mode": "idle",
+  "source": "tempart/Ruinjaw/idle/final/graded",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 2,
+  "align": "feet",
+  "ground_row": 120,
+  "status": "duyet 2026-09-29",
+  "frames": [
+    {
+      "frame": "idle-1",
+      "aligned_bbox": [
+        7,
+        24,
+        120,
+        121
+      ]
+    },
+    {
+      "frame": "idle-2",
+      "aligned_bbox": [
+        7,
+        24,
+        120,
+        121
+      ]
+    },
+    {
+      "frame": "idle-3",
+      "aligned_bbox": [
+        7,
+        24,
+        120,
+        121
+      ]
+    },
+    {
+      "frame": "idle-4",
+      "aligned_bbox": [
+        7,
+        24,
+        120,
+        121
+      ]
+    }
+  ]
+}

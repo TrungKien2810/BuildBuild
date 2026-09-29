@@ -1,0 +1,65 @@
+{
+  "target": "player",
+  "mode": "skill-cotda-fx",
+  "source": "tempart/Wyrmspear/skill-cotda-fx/final",
+  "cell_size": 128,
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet 2026-09-28",
+  "frames": [
+    {
+      "frame": "cotda-1",
+      "aligned_bbox": [
+        24,
+        66,
+        103,
+        119
+      ]
+    },
+    {
+      "frame": "cotda-2",
+      "aligned_bbox": [
+        25,
+        18,
+        100,
+        119
+      ]
+    },
+    {
+      "frame": "cotda-3",
+      "aligned_bbox": [
+        18,
+        30,
+        105,
+        120
+      ]
+    },
+    {
+      "frame": "cotda-4",
+      "aligned_bbox": [
+        18,
+        2,
+        113,
+        115
+      ]
+    },
+    {
+      "frame": "cotda-5",
+      "aligned_bbox": [
+        21,
+        4,
+        106,
+        114
+      ]
+    },
+    {
+      "frame": "cotda-6",
+      "aligned_bbox": [
+        9,
+        76,
+        115,
+        117
+      ]
+    }
+  ]
+}

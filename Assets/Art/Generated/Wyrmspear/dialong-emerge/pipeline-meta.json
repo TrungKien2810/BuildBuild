@@ -1,0 +1,65 @@
+{
+  "target": "player",
+  "mode": "dialong-emerge",
+  "source": "tempart/Wyrmspear/dialong-emerge",
+  "cell_size": 128,
+  "align": "feet",
+  "ground_row": 104,
+  "status": "duyet 2026-09-28",
+  "frames": [
+    {
+      "frame": "emerge-1",
+      "aligned_bbox": [
+        35,
+        39,
+        103,
+        105
+      ]
+    },
+    {
+      "frame": "emerge-2",
+      "aligned_bbox": [
+        20,
+        33,
+        103,
+        105
+      ]
+    },
+    {
+      "frame": "emerge-3",
+      "aligned_bbox": [
+        20,
+        41,
+        97,
+        105
+      ]
+    },
+    {
+      "frame": "emerge-4",
+      "aligned_bbox": [
+        22,
+        34,
+        103,
+        105
+      ]
+    },
+    {
+      "frame": "emerge-5",
+      "aligned_bbox": [
+        20,
+        24,
+        103,
+        105
+      ]
+    },
+    {
+      "frame": "emerge-6",
+      "aligned_bbox": [
+        21,
+        34,
+        100,
+        105
+      ]
+    }
+  ]
+}

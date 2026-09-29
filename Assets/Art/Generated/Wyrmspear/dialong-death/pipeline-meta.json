@@ -1,0 +1,65 @@
+{
+  "target": "player",
+  "mode": "dialong-death",
+  "source": "tempart/Wyrmspear/dialong-death",
+  "cell_size": 128,
+  "align": "feet",
+  "ground_row": 104,
+  "status": "duyet 2026-09-28",
+  "frames": [
+    {
+      "frame": "death-1",
+      "aligned_bbox": [
+        19,
+        48,
+        102,
+        105
+      ]
+    },
+    {
+      "frame": "death-2",
+      "aligned_bbox": [
+        18,
+        62,
+        101,
+        105
+      ]
+    },
+    {
+      "frame": "death-3",
+      "aligned_bbox": [
+        19,
+        72,
+        100,
+        105
+      ]
+    },
+    {
+      "frame": "death-4",
+      "aligned_bbox": [
+        21,
+        79,
+        102,
+        105
+      ]
+    },
+    {
+      "frame": "death-5",
+      "aligned_bbox": [
+        27,
+        87,
+        100,
+        105
+      ]
+    },
+    {
+      "frame": "death-6",
+      "aligned_bbox": [
+        40,
+        91,
+        77,
+        105
+      ]
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "target": "player",
+  "mode": "skill-longgiang-body",
+  "source": "tempart/Wyrmspear/skill-longgiang-body/final",
+  "cell_size": 128,
+  "align": "feet",
+  "ground_row": 101,
+  "status": "duyet 2026-09-28",
+  "frames": [
+    {
+      "frame": "longgiang-1",
+      "aligned_bbox": [
+        42,
+        41,
+        105,
+        102
+      ]
+    },
+    {
+      "frame": "longgiang-2",
+      "aligned_bbox": [
+        39,
+        26,
+        97,
+        102
+      ]
+    },
+    {
+      "frame": "longgiang-3",
+      "aligned_bbox": [
+        30,
+        26,
+        110,
+        102
+      ]
+    },
+    {
+      "frame": "longgiang-4",
+      "aligned_bbox": [
+        35,
+        32,
+        109,
+        102
+      ]
+    },
+    {
+      "frame": "longgiang-5",
+      "aligned_bbox": [
+        59,
+        27,
+        82,
+        102
+      ]
+    },
+    {
+      "frame": "longgiang-6",
+      "aligned_bbox": [
+        32,
+        38,
+        109,
+        102
+      ]
+    },
+    {
+      "frame": "longgiang-7",
+      "aligned_bbox": [
+        46,
+        38,
+        109,
+        102
+      ]
+    },
+    {
+      "frame": "longgiang-8",
+      "aligned_bbox": [
+        50,
+        28,
+        104,
+        102
+      ]
+    }
+  ]
+}

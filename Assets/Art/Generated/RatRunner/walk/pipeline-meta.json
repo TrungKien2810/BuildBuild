@@ -1,0 +1,67 @@
+{
+  "target": "creature",
+  "mode": "walk",
+  "source": "tempart/RatRunner/walk/out",
+  "cell_size": 128,
+  "rows": 3,
+  "cols": 2,
+  "align": "feet",
+  "ground_row": 82,
+  "status": "duyet 2026-09-29",
+  "frames": [
+    {
+      "frame": "walk-1",
+      "aligned_bbox": [
+        45,
+        50,
+        82,
+        83
+      ]
+    },
+    {
+      "frame": "walk-2",
+      "aligned_bbox": [
+        45,
+        51,
+        82,
+        83
+      ]
+    },
+    {
+      "frame": "walk-3",
+      "aligned_bbox": [
+        45,
+        49,
+        82,
+        83
+      ]
+    },
+    {
+      "frame": "walk-4",
+      "aligned_bbox": [
+        45,
+        50,
+        82,
+        83
+      ]
+    },
+    {
+      "frame": "walk-5",
+      "aligned_bbox": [
+        45,
+        51,
+        82,
+        83
+      ]
+    },
+    {
+      "frame": "walk-6",
+      "aligned_bbox": [
+        45,
+        50,
+        82,
+        83
+      ]
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "target": "player",
+  "mode": "zone-fx",
+  "source": "tempart/Banneret/zone-fx/final",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 2,
+  "align": "center",
+  "status": "duyet 2026-09-29",
+  "frames": [
+    {
+      "frame": "zone-fx-1",
+      "aligned_bbox": [
+        24,
+        44,
+        103,
+        83
+      ]
+    },
+    {
+      "frame": "zone-fx-2",
+      "aligned_bbox": [
+        25,
+        44,
+        103,
+        83
+      ]
+    },
+    {
+      "frame": "zone-fx-3",
+      "aligned_bbox": [
+        25,
+        46,
+        103,
+        81
+      ]
+    },
+    {
+      "frame": "zone-fx-4",
+      "aligned_bbox": [
+        25,
+        46,
+        103,
+        81
+      ]
+    }
+  ]
+}
