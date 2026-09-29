@@ -624,12 +624,13 @@ namespace BuildBuild.Combat
         }
 
         /// <summary>
-        /// Cot da trang cua dia long: tam = quai co NHIEU quai khac trong `descentRadius` nhat, chon trong tam danh cua rong.
-        /// Hat tung moi quai con song trong `descentRadius` quanh tam. Khong co quai trong tam rong thi khong troi.
+        /// Cot da trang cua dia long: tam = quai co NHIEU quai khac trong `descentRadius` nhat, chon trong vung hoat dong
+        /// cua rong (tam danh + day xich `leashRange`) — chi tam danh can chien 0,7 thi luc rong chua ap sat quai la mat cot
+        /// (nguoi dung chon 2026-09-29). Hat tung moi quai con song trong `descentRadius` quanh tam. Khong co quai thi khong troi.
         /// </summary>
         void Pillar()
         {
-            float reach = _dragon.CurrentAttackRange;
+            float reach = _dragon.CurrentAttackRange + _dragon.Definition.leashRange;
             Enemy best = null;
             int bestCount = 0;
             foreach (var enemy in Enemy.Alive)

@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
+  m_Name: Hero_Banneret
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
+  displayName: Banneret
+  unitId: banneret
+  maxHealth: 700
+  damage: 30
+  attackRate: 0.6
+  range: 1.5
+  moveSpeed: 1
+  leashRange: 3
+  maxHeld: 3
+  heldDamageBonus: 0
+  warden: {fileID: 0}
+  dragonRider: {fileID: 0}
+  banner: {fileID: 11400000, guid: 07c57de3d61f3a244bcf043247812834, type: 2}
+  projectileSpeed: 8
+  splashRadius: 0.8
+  projectileFrames: []
+  projectileScale: 1
+  impactFrames: []
+  impactScale: 1
+  knockbackOnHit: 0
+  skillKind: 10
+  skillTier: 0
+  skillCooldown: 0
+  manaMax: 5
+  manaPerSecond: 0.35
+  manaPerHit: 0.25
+  skillRadius: 1.6
+  skillDuration: 3
+  skillPower: 1
+  skillFrames: []
+  skillIntroFrames: []
+  stunFrames: []
+  summoner: {fileID: 0}
+  healsAllies: 0
+  healFrames: []
+  buffFrames: []
+  shieldAmount: 0
+  shieldFrames: []
+  shieldBreakFrames: []
+  passiveStar: 1
+  minorStar: 3
+  secondMinorStar: 3
+  passiveKind: 0
+  passivePower: 0
+  passiveThreshold: 0
+  passiveRadius: 0
+  passiveEvery: 1
+  ultimateText: "Hi\u1EC7u L\u1EC7nh Xung Phong: c\u1EA3 \u0111\u1ED9i tr\xEAn s\xE2n
+    +30% s\xE1t th\u01B0\u01A1ng trong 6s."
+  passiveText: "Qu\xE2n K\u1EF3: \u0111\u1ED3ng minh quanh K\u1EF3 Th\u1EE7 +15%
+    t\u1ED1c \u0111\xE1nh."
+  minorText: "C\u1EAFm C\u1EDD: c\xF3 \u0111\u1ED3ng minh \u0111ang \u0111\xE1nh
+    g\u1EA7n th\xEC c\u1EAFm c\u1EDD t\u1EA1i ch\u1ED7 \u2014 \u0111\u1ED3ng minh
+    trong v\xF9ng nh\u1EADn \xEDt h\u01A1n 25% s\xE1t th\u01B0\u01A1ng trong 5s."
+  secondMinorText: 
+  animations: {fileID: 11400000, guid: 6d5ddfcae08ea3a4792e3a7f6c63d837, type: 2}
+  artFacesRight: 0
+  avatar: {fileID: 21300000, guid: 6c1f6476661de8249b3ffa722a31f469, type: 3}

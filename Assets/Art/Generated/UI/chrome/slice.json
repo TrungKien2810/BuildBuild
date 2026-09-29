@@ -76,5 +76,89 @@
     "right": 0,
     "top": 0,
     "bottom": 0
+  },
+  "bar-fill-shard-full.png": {
+    "left": 3,
+    "right": 3,
+    "top": 0,
+    "bottom": 0
+  },
+  "bar-fill-shard.png": {
+    "left": 3,
+    "right": 3,
+    "top": 0,
+    "bottom": 0
+  },
+  "bar-frame-thin.png": {
+    "left": 6,
+    "right": 6,
+    "top": 4,
+    "bottom": 4
+  },
+  "btn-blue.png": {
+    "left": 6,
+    "right": 5,
+    "top": 6,
+    "bottom": 7
+  },
+  "btn-disabled.png": {
+    "left": 6,
+    "right": 5,
+    "top": 6,
+    "bottom": 7
+  },
+  "btn-purple.png": {
+    "left": 6,
+    "right": 5,
+    "top": 6,
+    "bottom": 7
+  },
+  "divider.png": {
+    "left": 10,
+    "right": 10,
+    "top": 0,
+    "bottom": 0
+  },
+  "level-badge.png": {
+    "left": 8,
+    "right": 8,
+    "top": 0,
+    "bottom": 0
+  },
+  "reward-slot-rare.png": {
+    "left": 10,
+    "right": 10,
+    "top": 10,
+    "bottom": 22
+  },
+  "reward-slot.png": {
+    "left": 10,
+    "right": 10,
+    "top": 10,
+    "bottom": 22
+  },
+  "section-header.png": {
+    "left": 10,
+    "right": 10,
+    "top": 5,
+    "bottom": 5
+  },
+  "stat-chip.png": {
+    "left": 24,
+    "right": 8,
+    "top": 4,
+    "bottom": 4
+  },
+  "tab-normal.png": {
+    "left": 10,
+    "right": 10,
+    "top": 10,
+    "bottom": 10
+  },
+  "tab-active.png": {
+    "left": 10,
+    "right": 10,
+    "top": 10,
+    "bottom": 10
   }
 }

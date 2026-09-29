@@ -42,6 +42,12 @@ namespace BuildBuild.UI
         [SerializeField] Sprite slotSkillSprite;
         [SerializeField] Sprite slotSelectedSprite;
         [SerializeField] Button cancelButton;
+        [Tooltip("\"Lv N\" moi dong, cung thu tu `roster`.")]
+        [SerializeField] Text[] rosterLevels;
+        [Tooltip("5 sao moi dong: dong i o [i*5 .. i*5+4].")]
+        [SerializeField] Image[] rosterStars;
+        [SerializeField] Sprite starOn;
+        [SerializeField] Sprite starOff;
 
         HeroSlot _pending;
 
@@ -86,6 +92,7 @@ namespace BuildBuild.UI
                 bool onBoard = OnBoard(roster[i]);
                 rosterButtons[i].interactable = !onBoard && Owned(roster[i]);
                 MarkSkillSlot(i, onBoard);
+                UnitCardView.ShowLevelAndStars(rosterLevels[i], rosterStars, i, Progression.Owned(roster[i].unitId), starOn, starOff);
             }
             pickerPanel.SetActive(true);
         }

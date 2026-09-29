@@ -43,7 +43,6 @@ namespace BuildBuild.Data
         [Tooltip("Gia nang level n -> n+1 = floor(upgradeCostBase x n^upgradeCostExponent).")]
         public float upgradeCostBase = 50f;
         public float upgradeCostExponent = 1.5f;
-        public int maxLevel = 20;
 
         [Header("Dan")]
         public float projectileSpeed = 14f;
@@ -63,7 +62,8 @@ namespace BuildBuild.Data
             "sprite Lien Thanh to cam / xanh (plan 2 thanh vien, muc B1).")]
         public Color tint = Color.white;
 
-        public int ClampLevel(int level) => Mathf.Clamp(level, 1, Mathf.Max(1, maxLevel));
+        /// <summary>Tran tren theo sao nam o `Progression.MaxLevel`; o day chi chan duoi.</summary>
+        public int ClampLevel(int level) => Mathf.Max(1, level);
 
         /// <summary>Sat thuong o level <paramref name="level"/>: goc x (1 + damagePerLevel x (level - 1)).</summary>
         public float DamageAt(int level) => damage * (1f + damagePerLevel * (ClampLevel(level) - 1));

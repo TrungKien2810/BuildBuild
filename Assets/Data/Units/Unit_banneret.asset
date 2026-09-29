@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 186cb99448708f049ad453912a3a5ce9, type: 3}
+  m_Name: Unit_banneret
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.UnitDefinition
+  id: banneret
+  displayName: "K\u1EF3 th\u1EE7"
+  category: 0
+  rarity: 2
+  icon: {fileID: 21300000, guid: 6c1f6476661de8249b3ffa722a31f469, type: 3}

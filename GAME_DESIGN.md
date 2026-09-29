@@ -15,8 +15,10 @@ Chống wave → nhận vàng → gacha ra hero/pháo → nâng cấp level → 
 - **Thua:** máu lâu đài về 0. Trận **dừng ngay tại wave đó**, không quay về wave 1. Người chơi phát
   triển thêm (xem tài nguyên ngoài trận ở mục 8) rồi đánh lại chính wave đó; **giữ toàn bộ** vàng +
   vật phẩm + level + bộ đếm pity.
-- **Thắng wave:** diệt hết quái của wave, nhận thưởng để nâng cấp. MVP dài **30 wave**, boss ở wave 10 / 20 / 30.
-- Endless sau wave 30: phạm vi mở rộng.
+- **Thắng wave:** diệt hết quái của wave, nhận thưởng để nâng cấp. **Không giới hạn wave** (người dùng chốt 2026-09-29):
+  máu, sát thương, số lượng quái tiếp tục tăng theo công thức mục 5; **boss mỗi 10 wave**.
+- Sau wave 30: wave thường dùng thành phần của 21–29 (hỗn hợp + 2 Gatebreaker), wave chia hết cho 10 dùng thành phần
+  wave 30 (boss), hệ số boss +1,5 mỗi 10 wave (30 ×3,5 → 40 ×5 → 50 ×6,5…) — `WaveTuning.bossMultiplierPer10Waves`.
 
 ## 2. Cơ chế
 
@@ -63,13 +65,24 @@ Thanh mana 4 đầy (buff 2026-09-29 từ 800/25/0,8, mana 5, 3×) → một nh�
 tốc chạy 1,1 của Ironblade (GDD không ghi).
 
 **Vespera (R, hồi máu) — kit chốt với người dùng 2026-09-28, số CHƯA cân.** Đòn thường hồi máu một đồng minh thấp máu
-nhất trong tầm (đã code). Vì phẩm R nên chỉ có **MỘT chiêu, chiêu lớn *Đèn Canh*** (thanh mana): đặt một vòng sáng
+nhất trong tầm (đã code). Vì phẩm R nên chỉ có **MỘT chiêu, chiêu lớn *Đèn Canh*** (thanh mana; không chiêu phụ, nội tại *Cứu Nguy* ở dưới): đặt một vòng sáng
 trên đất với **tâm là đồng minh thấp máu nhất** (vòng nhỏ, bán kính khoảng 1,5, bẹp 0,5 như `FrostZone`). Mọi hero
 trong vòng được hồi máu và nhận một **khiên ảo NHỎ** chặn một lượng sát thương có hạn trong vài giây, bị đánh hết thì
 khiên vỡ. Cast dùng lại clip attack. **Số tạm (code 2026-09-28, `SkillKind.Lantern`):** mana 5 (0,35/giây + 0,25 mỗi lần
 hồi máu), bán kính 1,5, hồi 2× đòn thường (40), khiên 60 sát thương trong 5 giây, cast lại thì làm mới chứ không cộng dồn.
 Vòng chỉ phủ hero kế bên CÙNG hàng (hàng trên/dưới cách 1,65, vòng bẹp chỉ vươn 0,75). FX: `Vespera/dencanh-ring`,
 `shield-loop`, `shield-break`; hồi máu từng người dùng lại `heal-fx`.
+
+**Nội tại hero bậc thấp (người dùng chốt 2026-09-29 theo đề xuất của Claude; số CHƯA cân).** "Chỉ một chiêu" của hero N/R
+nghĩa là không có chiêu phụ — nội tại vẫn có, mở ở 1★ như mọi hero. Code: `HeroDefinition.passiveKind` + `passive*`, `Hero.Passive.cs`.
+
+| Hero | Nội tại | Hiệu ứng |
+|---|---|---|
+| Ironblade (N) | *Truy Kích* | Đòn thường vào quái dưới 30% máu +50% sát thương — dọn quái Chém Quạt để sót |
+| Cragfist (R) | *Khiêu Khích* | Quái trong bán kính 1,5 bỏ unit khác, vào chỗ giữ của ông (khi ông còn chỗ); quái bắn xa đổi mục tiêu sang ông |
+| Hawkfletch (N) | *Nhắm Yếu Điểm* | Cứ phát thứ 4 chí mạng ×2 sát thương (tính cả lúc Bắn Nhanh) |
+| Frostweaver (N) | *Vỡ Băng* | Quái đang bị làm chậm (Vùng Băng, Pháo Băng…) chết trong tầm đánh → nổ, quái trong bán kính 1,0 quanh xác ăn 50% đòn thường; nổ được dây chuyền |
+| Vespera (R) | *Cứu Nguy* | Đồng minh dưới 30% máu được hồi +50% (cả đòn thường lẫn Đèn Canh) |
 
 **Pháp sư triệu hồi — bộ kỹ năng (chốt với người dùng 2026-09-13).** Chủ đề: quái chết → dựng thành
 xương đánh cho phe ta. Có hai NGUỒN lính xương. Mỗi nguồn có bộ đếm riêng, giới hạn riêng và con
@@ -154,7 +167,7 @@ Giai đoạn 2 — Long Nhân + Bạch Địa Long (2 chiêu thường):
 
 | | Nội tại *Long Uy · Long Giáp · Long Khế* | Chiêu thường 1 *Thiên Long Liên Thương* (người) | Chiêu thường 2 *Địa Long Chấn* (rồng) | Chiêu xịn *Thiên Địa Long Giáng* *(mana 5)* |
 |---|---|---|---|---|
-| Hiệu ứng | **Long Giáp:** +60% máu tối đa, −35% mọi sát thương nhận, miễn choáng/hất văng. **Long Uy:** +60% công; quái trong tầm −20% công; boss/tinh anh trong tầm nhận +15% sát thương từ mọi nguồn. **Long Nộ:** mỗi lần ông **hoặc địa long** chịu sát thương → +1 tầng, **cộng dồn tối đa 7**, mỗi tầng +5% giảm sát thương nhận và +8% công (7 tầng: +35% / +56%), ông và rồng cùng hưởng; **mỗi tầng còn +3% hút máu** (người dùng thêm 2026-09-28, 7 tầng 21%). **Long Khế:** địa long hưởng **một nửa** Long Giáp + Long Uy | Đâm liên hoàn 5 nhát cực nhanh một mục tiêu, nhát cuối **xuyên cả đường** phía sau; mỗi nhát vào boss đều ăn Nghịch Lân | Rồng dựng người đập hai chân trước: gai đá trắng quanh nó — sát thương vùng, **choáng 1,5s**, **phá giáp −30% trong 5s** | Rồng cắm đầu xuống đất, **cột đá trắng** (chiêu của rồng — rồng bị hạ thì không có cột) trồi ở **cụm quái đông nhất trong tầm đánh của rồng** (không theo mục tiêu của ông), hất tung cả cụm; ông dang cánh bay lên lao xuống cắm giáo → **đất nát** (chỉ vết nứt, người dùng chốt 2026-09-28). Sát thương rất lớn + % máu tối đa; **kết liễu quái thường/tinh anh dưới 20% máu**, boss thì ×2 sát thương; hạ được mục tiêu hoàn 2 mana |
+| Hiệu ứng | **Long Giáp:** +60% máu tối đa, −35% mọi sát thương nhận, miễn choáng/hất văng. **Long Uy:** +60% công; quái trong tầm −20% công; boss/tinh anh trong tầm nhận +15% sát thương từ mọi nguồn. **Long Nộ:** mỗi lần ông **hoặc địa long** chịu sát thương → +1 tầng, **cộng dồn tối đa 7**, mỗi tầng +5% giảm sát thương nhận và +8% công (7 tầng: +35% / +56%), ông và rồng cùng hưởng; **mỗi tầng còn +3% hút máu** (người dùng thêm 2026-09-28, 7 tầng 21%). **Long Khế:** địa long hưởng **một nửa** Long Giáp + Long Uy | Đâm liên hoàn 5 nhát cực nhanh một mục tiêu, nhát cuối **xuyên cả đường** phía sau; mỗi nhát vào boss đều ăn Nghịch Lân | Rồng dựng người đập hai chân trước: gai đá trắng quanh nó — sát thương vùng, **choáng 1,5s**, **phá giáp −30% trong 5s** | Rồng cắm đầu xuống đất, **cột đá trắng** (chiêu của rồng — rồng bị hạ thì không có cột) trồi ở **cụm quái đông nhất trong vùng hoạt động của rồng** (tầm đánh + dây xích, người dùng chốt 2026-09-29) (không theo mục tiêu của ông), hất tung cả cụm; ông dang cánh bay lên lao xuống cắm giáo → **đất nát** (chỉ vết nứt, người dùng chốt 2026-09-28). Sát thương rất lớn + % máu tối đa; **kết liễu quái thường/tinh anh dưới 20% máu**, boss thì ×2 sát thương; hạ được mục tiêu hoàn 2 mana |
 | Tinh anh/boss | — | Như trên | Choáng **một nửa** | Không kết liễu, ×2 sát thương |
 
 **Bạch Địa Long:** đứng **ô phía trước** Wyrmspear trên lane, **chặn tối đa 4 quái** (như Chainwarden); ông đứng
@@ -187,6 +200,7 @@ bộ clip + clip liên thương + clip bay-lao-cắm; địa long identity/idle/
 | **Bắn xa** | **Goblin Ná** | — | — | — | — |
 | **Tinh anh** | **Gatebreaker** | **1200** | **60** | **0.7** | **40** |
 | Boss | *Vua minotaur (chưa đặt tên)* | 5000 | 120 | 0.6 | 200 |
+| Boss wave 20 | *Pháp sư Orc lơ lửng (`OrcShaman`, chưa đặt tên)* | — | — | — | — |
 
 **Nhanh `Chuột Cống` (thêm 2026-09-29):** chuột cống cầm dao găm, con nhanh thứ hai bên cạnh Ashfang — máu giấy, chạy nhanh hơn Ashfang. Bốn con số là **đề xuất của Claude, chưa cân bằng**.
 
@@ -214,13 +228,22 @@ Số lượng   = 5 + floor(wave / 2)
 | 7–9 | Goblin + Ashfang + Goblin Ná + Orc |
 | 10 | BOSS + 6 Goblin hộ tống |
 | 11–19 | Hỗn hợp, tỉ lệ Orc tăng dần · **từ wave 12: +1 Gatebreaker** (trừ wave 20) |
-| 20 | BOSS (chỉ số ×2) + 4 Orc |
+| 20 | BOSS Minotaur (chỉ số ×2) + **BOSS Pháp sư Orc** + 4 Orc |
 | 21–29 | Hỗn hợp mật độ cao · **+2 Gatebreaker** |
-| 30 | BOSS (chỉ số ×3.5) — màn cuối |
+| 30 | BOSS (chỉ số ×3.5) + 6 quái hỗn hợp hộ tống (wave boss luôn có quái nhỏ để boss buff — người dùng 2026-09-29) |
+| 31+ | Lặp: 31–39 như 21–29, 40/50/… như wave 30 (boss +1,5 hệ số mỗi 10 wave) |
 
 **Boss (cơ chế, buộc đổi cách chơi):** giáp dày giảm cố định 30% sát thương · *Chấn Địa* mỗi 15s
 gây 80 dmg + choáng hero 2s · *Tiếng Thét* mỗi 20s tăng 30% tốc chạy mọi quái trong 5s · *Nổi Giận*
 dưới 30% máu tăng 50% tốc đánh và miễn slow.
+
+**Boss wave 20 — Pháp sư Orc lơ lửng (`OrcShaman`, chốt với người dùng 2026-09-29, tên và số CHƯA chốt).** Đi
+cùng Vua Minotaur ở wave 20: Minotaur đánh gần, pháp sư đánh xa. Ngoại hình: orc già gù, áo choàng rách đỏ-tím bầm,
+**trôi lơ lửng** (không thấy chân), gậy gỗ cháy treo sọ ngà với ngọn lửa lục-vàng độc; cao ~1,5× Gatebreaker.
+Bốn chiêu: *Đánh thường tầm xa* — dừng ở tầm xa bắn cầu lửa độc, ưu tiên hero/lính, hết mục tiêu mới bắn tường
+thành · *Miệng Hố Lửa* — mỗi ~12s đánh dấu vùng quanh cụm hero đông nhất, 1,5s sau nổ · *Khiên Phép* — mỗi ~18s
+bọc khiên hấp thụ sát thương lên Minotaur/quái gần nhất · *Dịch Chuyển* — hero cận chiến áp sát thì biến mất, hiện
+lại xa hơn về phía phải (hồi ~10s).
 
 ## 6. Gacha
 
@@ -239,7 +262,7 @@ Sau khi ra độ hiếm → chọn loại: 60% hero / 40% pháo.
 - **Pity mềm:** 30 lần liên tiếp không SR+ → lần 31 chắc chắn SR
 - **Pity cứng:** 80 lần liên tiếp không SSR → lần 81 chắc chắn SSR
 - Trùng: +20 mảnh; đủ 100 mảnh thì **người chơi bấm Nâng sao** (không tự lên khi quay — chốt 2026-09-28): −100 mảnh, +1 sao, **+15% máu và sát thương gốc** (cộng tuyến tính với +8%/level). Tối đa 5 sao (Claude đặt tạm)
-- **Mở kỹ năng theo sao (2026-09-28):** có unit là dùng được **đánh thường + chiêu cuối**; **nội tại** mở ở 1★, **chiêu phụ** ở 3★ (người dùng chốt 2026-09-28; Wyrmspear cả hai chiêu phụ đều 3★). **Nâng level chỉ tăng chỉ số**, không mở kỹ năng — ngưỡng từng hero ở `HeroDefinition`. Hero bậc thấp chỉ có chiêu cuối nên sao chỉ tăng chỉ số. Wyrmspear: Long Giáp/Uy/Nộ/Khế là hiệu ứng của biến hình (chiêu cuối) nên không khoá
+- **Mở kỹ năng theo sao (2026-09-28):** có unit là dùng được **đánh thường + chiêu cuối**; **nội tại** mở ở 1★, **chiêu phụ** ở 3★ (người dùng chốt 2026-09-28; Wyrmspear cả hai chiêu phụ đều 3★). **Nâng level chỉ tăng chỉ số**, không mở kỹ năng — ngưỡng từng hero ở `HeroDefinition`. Hero bậc thấp (N/R) không có chiêu phụ, chỉ có chiêu cuối, nhưng **vẫn có nội tại** (người dùng sửa 2026-09-29) — xem mục 3 *Nội tại hero bậc thấp*. Wyrmspear: Long Giáp/Uy/Nộ/Khế là hiệu ứng của biến hình (chiêu cuối) nên không khoá
 - Bộ đếm pity lưu vào save, **không reset khi thua**
 
 ## 7. Kinh tế
@@ -254,7 +277,8 @@ Sau khi ra độ hiếm → chọn loại: 60% hero / 40% pháo.
 đã giết thì dễ quá). Thưởng thắng nâng lên để bù phần vàng quái cũ. Chơi hết 10 wave đầu ≈ 2.000 vàng ≈ 4 lượt quay.
 
 Nâng level n → n+1: `50 × n^1.5` (làm tròn xuống). Mỗi level **+8% máu và +8% sát thương** so với
-chỉ số gốc (cộng tuyến tính). Level tối đa MVP: **20**.
+chỉ số gốc (cộng tuyến tính). **Trần level theo sao** (hero, lính, pháo — người dùng chốt 2026-09-29): 0–1★ lv 20,
+mỗi sao sau +20 (2★ 40, 3★ 60, 4★ 80), **5★ không giới hạn** — chỉ bị chặn bởi vàng. `Progression.MaxLevel(stars)`.
 
 ## 8. Phạm vi
 

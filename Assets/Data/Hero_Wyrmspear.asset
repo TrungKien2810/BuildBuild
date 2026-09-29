@@ -24,6 +24,7 @@ MonoBehaviour:
   heldDamageBonus: 0
   warden: {fileID: 0}
   dragonRider: {fileID: 11400000, guid: 6e5de7c8e3828264fb279759876fd78f, type: 2}
+  banner: {fileID: 0}
   projectileSpeed: 20
   splashRadius: 0.3
   projectileFrames: []
@@ -53,6 +54,11 @@ MonoBehaviour:
   passiveStar: 1
   minorStar: 3
   secondMinorStar: 3
+  passiveKind: 0
+  passivePower: 0
+  passiveThreshold: 0
+  passiveRadius: 0
+  passiveEvery: 1
   ultimateText: "Long Ho\xE1: bi\u1EBFn h\xECnh Long Nh\xE2n + g\u1ECDi B\u1EA1ch
     \u0110\u1ECBa Long (Long Gi\xE1p, Long Uy, Long N\u1ED9, Long Kh\u1EBF); l\u1EA7n
     sau: Thi\xEAn \u0110\u1ECBa Long Gi\xE1ng."

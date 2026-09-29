@@ -17,6 +17,9 @@ namespace BuildBuild.UI
     ///
     /// Hero va linh noi voi the qua `unitId`; so nhan cua level/sao lay tu `Progression` — cung ham `Hero.Initialise`
     /// dung, nen so tren man nay la so tren san. Phao giu level + gia rieng trong `CannonDefinition`.
+    ///
+    /// Art UI huong C dot 5 (2026-09-29): tab/nut tron doi SPRITE khi chon (khong tint), unit dung tren be da (frame idle
+    /// dau tien, khong co thi icon), sao / Lv / thanh manh la widget, chi so la cac o `stat-chip` (icon + ten + so).
     /// </summary>
     public class UnitsScreen : MonoBehaviour
     {
@@ -35,6 +38,9 @@ namespace BuildBuild.UI
         [SerializeField] Economy economy;
         [Tooltip("Moi unit gacha (ca unit chua vao pool) — luoi hien du, unit chua so huu thi xam.")]
         [SerializeField] UnitDefinition[] units;
+        [Tooltip("Pivot CHAN (0..1) cua frame idle dau tung unit, cung thu tu `units` — SceneBuilder do tu alpha PNG. "
+            + "Pivot trong sprite khong dung duoc: x luon giua o, y lech (Hawkfletch 2 px, Frostweaver 12 px).")]
+        [SerializeField] Vector2[] footPivots;
         [Tooltip("Chi so hero + linh (SoldierDefinition), khop the qua `unitId`.")]
         [SerializeField] HeroDefinition[] heroes;
         [SerializeField] CannonDefinition[] cannons;
@@ -44,6 +50,8 @@ namespace BuildBuild.UI
         [SerializeField] Text goldText;
         [Tooltip("3 tab, cung thu tu voi `Tabs`.")]
         [SerializeField] Button[] tabButtons;
+        [SerializeField] Sprite tabNormal;
+        [SerializeField] Sprite tabActive;
         [SerializeField] Button backButton;
         [SerializeField] Transform grid;
         [SerializeField] UnitCardView cardTemplate;
@@ -52,8 +60,34 @@ namespace BuildBuild.UI
         [SerializeField] Image detailIcon;
         [SerializeField] Text detailName;
         [SerializeField] Text detailSub;
-        [SerializeField] Text detailStats;
         [SerializeField] Text detailSkills;
+        [SerializeField] Image[] detailStars;
+        [SerializeField] Sprite starOn;
+        [SerializeField] Sprite starOff;
+        [SerializeField] GameObject detailLevelBadge;
+        [SerializeField] Text detailLevel;
+        [SerializeField] GameObject detailShardBar;
+        [SerializeField] RectTransform detailShardFill;
+        [SerializeField] Image detailShardFillImage;
+        [SerializeField] Text detailShardText;
+        [SerializeField] Sprite shardFillSprite;
+        [SerializeField] Sprite shardFullSprite;
+
+        [Header("O chi so (2 cot)")]
+        [SerializeField] GameObject[] chipRoots;
+        [SerializeField] Image[] chipIcons;
+        [SerializeField] Text[] chipLabels;
+        [SerializeField] Text[] chipValues;
+        [Tooltip("Dong xam canh tieu de CHI SO: % tang moi level / sao.")]
+        [SerializeField] Text statNote;
+        [SerializeField] Sprite iconHp;
+        [SerializeField] Sprite iconDamage;
+        [SerializeField] Sprite iconAttackSpeed;
+        [SerializeField] Sprite iconRange;
+        [SerializeField] Sprite iconSquad;
+        [SerializeField] Sprite iconCooldown;
+        [SerializeField] Sprite iconSplash;
+        [SerializeField] Sprite iconSlow;
         [SerializeField] Button levelButton;
         [SerializeField] Text levelLabel;
         [SerializeField] Button starButton;
@@ -63,6 +97,8 @@ namespace BuildBuild.UI
         [Tooltip("Hai nut doi cot giua giua Ky nang va Trang bi (GDD 10.3). Linh / tru an ca hai.")]
         [SerializeField] Button skillsTab;
         [SerializeField] Button gearTab;
+        [SerializeField] Sprite roundNormal;
+        [SerializeField] Sprite roundActive;
         [SerializeField] GameObject gearView;
         [SerializeField] Transform slotRow;
         [SerializeField] Transform bagRow;
@@ -79,9 +115,6 @@ namespace BuildBuild.UI
         bool _showGear;
         EquipmentSlot _slot;
         const int BagShown = 8;
-
-        public static string Stars(int stars) =>
-            new string('★', Mathf.Clamp(stars, 0, Progression.MaxStars)) + new string('☆', Mathf.Max(0, Progression.MaxStars - stars));
 
         void Start()
         {
@@ -112,7 +145,7 @@ namespace BuildBuild.UI
         void SelectTab(int tab)
         {
             for (int i = 0; i < tabButtons.Length; i++)
-                tabButtons[i].image.color = i == tab ? Color.white : TabIdle;
+                tabButtons[i].image.sprite = i == tab ? tabActive : tabNormal;
 
             foreach (var entry in _cards) Destroy(entry.card.gameObject);
             _cards.Clear();
@@ -164,18 +197,25 @@ namespace BuildBuild.UI
             bool gear = heroTab && _showGear;
             gearView.SetActive(gear);
             detailSkills.gameObject.SetActive(!gear);
-            skillsTab.image.color = gear ? TabIdle : Color.white;
-            gearTab.image.color = gear ? Color.white : TabIdle;
+            skillsTab.image.sprite = gear ? roundNormal : roundActive;
+            gearTab.image.sprite = gear ? roundActive : roundNormal;
             if (!any)
             {
-                detailName.text = detailSub.text = detailStats.text = detailSkills.text = "";
+                detailName.text = detailSub.text = statNote.text = detailSkills.text = "";
+                ShowChips(new List<(Sprite, string, string)>());
+                detailLevelBadge.SetActive(false);
+                detailShardBar.SetActive(false);
+                foreach (var star in detailStars) star.gameObject.SetActive(false);
                 return;
             }
 
             var owned = Owned(unit);
             var hero = HeroOf(unit);
             var cannon = CannonOf(unit);
-            detailIcon.sprite = unit.icon;
+            var anims = cannon != null ? cannon.animations : hero != null ? hero.animations : null;
+            detailIcon.sprite = anims != null && anims.idle.IsValid ? anims.idle.frames[0] : unit.icon;
+            detailIcon.enabled = detailIcon.sprite != null;
+            if (detailIcon.sprite != null) StandOnPedestal(detailIcon.rectTransform, detailIcon.sprite, FootPivot(unit, detailIcon.sprite));
             detailIcon.color = owned != null ? Color.white : TabIdle;
             detailName.text = hero != null && hero.displayName != unit.displayName ? $"{unit.displayName} · {hero.displayName}" : unit.displayName;
 
@@ -183,20 +223,31 @@ namespace BuildBuild.UI
             int stars = owned?.stars ?? 0;
             detailSub.text = owned == null
                 ? $"{unit.rarity}   ·   Chưa sở hữu — quay gacha để có"
-                : $"{unit.rarity}   ·   Lv {level}   ·   {Stars(stars)}   ·   Mảnh {owned.shards}/{config.shardsPerStar}";
+                : $"{unit.rarity}   ·   {Tabs[TabOf(unit)].name}";
+            detailLevelBadge.SetActive(owned != null);
+            detailShardBar.SetActive(owned != null);
+            foreach (var star in detailStars) star.gameObject.SetActive(owned != null);
+            if (owned != null)
+            {
+                detailLevel.text = $"Lv {level}";
+                UnitCardView.SetStars(detailStars, stars, starOn, starOff);
+                UnitCardView.SetShards(detailShardFill, detailShardFillImage, owned, config.shardsPerStar, shardFillSprite, shardFullSprite);
+                detailShardText.text = stars >= Progression.MaxStars ? "Tối đa" : $"{owned.shards}/{config.shardsPerStar}";
+            }
 
-            int maxLevel = cannon != null ? cannon.maxLevel : Progression.MaxLevel;
-            bool maxed = level >= maxLevel;
-            detailStats.text = cannon != null ? CannonStats(cannon, level, maxed)
-                : hero != null ? HeroStats(hero, level, maxed, heroTab ? equipment : null)
-                : "";
+            bool maxed = level >= Progression.MaxLevel(stars);
+            string note = "";
+            ShowChips(cannon != null ? CannonStats(cannon, level, maxed, out note)
+                : hero != null ? HeroStats(hero, level, maxed, heroTab ? equipment : null, out note)
+                : new List<(Sprite, string, string)>());
+            statNote.text = note;
             detailSkills.text = hero != null ? Skills(hero, stars) : "";
             if (gear) RefreshGear(unit, owned);
 
             int cost = cannon != null ? cannon.UpgradeCost(level) : Progression.LevelUpCost(level);
             levelButton.interactable = owned != null && !maxed && economy.Gold >= cost;
             levelLabel.text = owned == null ? "Nâng level"
-                : maxed ? "Level tối đa"
+                : maxed ? $"Tối đa Lv {level}\nNâng sao để mở thêm"
                 : $"Nâng level\n{cost:N0} vàng{(economy.Gold >= cost ? "" : " · thiếu")}";
 
             starButton.interactable = Progression.CanStarUp(owned, config.shardsPerStar);
@@ -204,36 +255,80 @@ namespace BuildBuild.UI
                 : $"Nâng sao\nMảnh {owned?.shards ?? 0}/{config.shardsPerStar}";
         }
 
-        /// <summary>So hien tai, kem so sau khi len 1 level (mau xanh) neu con nang duoc.</summary>
-        static string Row(string label, float now, float next, bool showNext, string format = "0.#") =>
-            showNext && !Mathf.Approximately(now, next)
-                ? $"{label}: {now.ToString(format)}  <color={Up}>→ {next.ToString(format)}</color>"
-                : $"{label}: {now.ToString(format)}";
-
-        /// <summary>Cung cong thuc `Hero.Initialise` (level + sao + trang bi); `equipment` null = linh, khong co trang bi.</summary>
-        static string HeroStats(HeroDefinition hero, int level, bool maxed, EquipmentConfig equipment)
+        /// <summary>Pivot chan builder da do cho unit; icon du phong (khong co frame idle) thi dung giua day anh.</summary>
+        Vector2 FootPivot(UnitDefinition unit, Sprite sprite)
         {
-            Progression.Multipliers(hero.unitId, equipment, out float health, out float damage, out float rate);
-            var sb = new StringBuilder();
-            sb.AppendLine(Row("Máu", hero.maxHealth * health, hero.maxHealth * (health + Progression.LevelBonus), !maxed, "0"));
-            sb.AppendLine(Row(hero.healsAllies ? "Hồi máu" : "Sát thương", hero.damage * damage,
-                hero.damage * (damage + Progression.LevelBonus), !maxed));
-            sb.AppendLine($"Tốc đánh: {hero.attackRate * rate:0.##}/s   ·   Tầm: {hero.range:0.#}");
-            if (hero is SoldierDefinition soldier)
-                sb.AppendLine($"Mỗi lần triệu hồi: {soldier.squadSize} con   ·   Hồi chiêu: {soldier.summonCooldown:0.#}s");
-            sb.Append($"<color={Locked}>Level +{Progression.LevelBonus * 100f:0}% · Sao +{Progression.StarBonus * 100f:0}% máu và sát thương gốc</color>");
-            return sb.ToString();
+            int i = System.Array.IndexOf(units, unit);
+            bool measured = sprite != unit.icon && footPivots != null && i >= 0 && i < footPivots.Length && footPivots[i] != Vector2.zero;
+            return measured ? footPivots[i] : new Vector2(0.5f, 0f);
         }
 
-        static string CannonStats(CannonDefinition cannon, int level, bool maxed)
+        /// <summary>
+        /// Anchor cua `detailIcon` nam o tam mat be; pivot rect = pivot chan cua unit thi chan dung giua be du nhan vat
+        /// nam lech trong o. O nho (<= 160 px) phong 2x nhu tren san.
+        /// </summary>
+        static void StandOnPedestal(RectTransform rect, Sprite sprite, Vector2 foot)
         {
-            var sb = new StringBuilder();
-            sb.AppendLine(Row("Sát thương", Progression.CannonDamage(cannon, level), Progression.CannonDamage(cannon, level + 1), !maxed));
-            sb.AppendLine($"Tốc bắn: {cannon.fireRate:0.##}/s   ·   Tầm: {cannon.range:0.#}");
-            if (cannon.aoeRadius > 0f) sb.AppendLine($"Nổ lan: bán kính {cannon.aoeRadius:0.#}");
-            if (cannon.slowPercent > 0f) sb.AppendLine($"Làm chậm {cannon.slowPercent * 100f:0}% trong {cannon.slowDuration:0.#}s");
-            sb.Append($"<color={Locked}>Level +{cannon.damagePerLevel * 100f:0}% · Sao +{Progression.StarBonus * 100f:0}% sát thương gốc</color>");
-            return sb.ToString();
+            var size = sprite.rect.size;
+            rect.sizeDelta = size * (size.y <= 160f ? 2f : 1f);
+            rect.pivot = foot;
+        }
+
+        /// <summary>Vi tri tab cua unit (thu tu `Tabs`) — enum `UnitCategory` khong cung thu tu voi tab.</summary>
+        static int TabOf(UnitDefinition unit) => System.Array.FindIndex(Tabs, t => t.category == unit.category);
+
+        /// <summary>So hien tai, kem so sau khi len 1 level (mau xanh) neu con nang duoc.</summary>
+        static string Value(float now, float next, bool showNext, string format = "0.#") =>
+            showNext && !Mathf.Approximately(now, next)
+                ? $"{now.ToString(format)} <color={Up}>→ {next.ToString(format)}</color>"
+                : now.ToString(format);
+
+        void ShowChips(List<(Sprite icon, string label, string value)> rows)
+        {
+            for (int i = 0; i < chipRoots.Length; i++)
+            {
+                bool on = i < rows.Count;
+                chipRoots[i].SetActive(on);
+                if (!on) continue;
+                chipIcons[i].sprite = rows[i].icon;
+                chipLabels[i].text = rows[i].label;
+                chipValues[i].text = rows[i].value;
+            }
+        }
+
+        /// <summary>Cung cong thuc `Hero.Initialise` (level + sao + trang bi); `equipment` null = linh, khong co trang bi.</summary>
+        List<(Sprite, string, string)> HeroStats(HeroDefinition hero, int level, bool maxed, EquipmentConfig equipment, out string note)
+        {
+            Progression.Multipliers(hero.unitId, equipment, out float health, out float damage, out float rate);
+            var rows = new List<(Sprite, string, string)>
+            {
+                (iconHp, "Máu", Value(hero.maxHealth * health, hero.maxHealth * (health + Progression.LevelBonus), !maxed, "0")),
+                (hero.healsAllies ? iconHp : iconDamage, hero.healsAllies ? "Hồi máu" : "Sát thương",
+                    Value(hero.damage * damage, hero.damage * (damage + Progression.LevelBonus), !maxed)),
+                (iconAttackSpeed, "Tốc đánh", $"{hero.attackRate * rate:0.##}/s"),
+                (iconRange, "Tầm", $"{hero.range:0.#}"),
+            };
+            if (hero is SoldierDefinition soldier)
+            {
+                rows.Add((iconSquad, "Mỗi lần gọi", $"{soldier.squadSize} con"));
+                rows.Add((iconCooldown, "Hồi chiêu", $"{soldier.summonCooldown:0.#}s"));
+            }
+            note = $"Level +{Progression.LevelBonus * 100f:0}% · Sao +{Progression.StarBonus * 100f:0}% máu, sát thương gốc";
+            return rows;
+        }
+
+        List<(Sprite, string, string)> CannonStats(CannonDefinition cannon, int level, bool maxed, out string note)
+        {
+            var rows = new List<(Sprite, string, string)>
+            {
+                (iconDamage, "Sát thương", Value(Progression.CannonDamage(cannon, level), Progression.CannonDamage(cannon, level + 1), !maxed)),
+                (iconAttackSpeed, "Tốc bắn", $"{cannon.fireRate:0.##}/s"),
+                (iconRange, "Tầm", $"{cannon.range:0.#}"),
+            };
+            if (cannon.aoeRadius > 0f) rows.Add((iconSplash, "Nổ lan", $"bán kính {cannon.aoeRadius:0.#}"));
+            if (cannon.slowPercent > 0f) rows.Add((iconSlow, "Làm chậm", $"{cannon.slowPercent * 100f:0}% · {cannon.slowDuration:0.#}s"));
+            note = $"Level +{cannon.damagePerLevel * 100f:0}% · Sao +{Progression.StarBonus * 100f:0}% sát thương gốc";
+            return rows;
         }
 
         /// <summary>Chieu cuoi luon mo; noi tai / chieu phu ghi "Mo o N★" khi chua du sao. O mo ta trong = hero khong co.</summary>
@@ -261,7 +356,7 @@ namespace BuildBuild.UI
             if (owned == null) return;
             var cannon = CannonOf(_selected);
             int level = Mathf.Max(1, owned.level);
-            if (level >= (cannon != null ? cannon.maxLevel : Progression.MaxLevel)) return;
+            if (level >= Progression.MaxLevel(owned.stars)) return;
             // TrySpend da ghi save + ban Changed -> Refresh; level phai tang TRUOC de Refresh doc so moi.
             int cost = cannon != null ? cannon.UpgradeCost(level) : Progression.LevelUpCost(level);
             if (economy.Gold < cost) return;

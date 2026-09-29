@@ -37,7 +37,7 @@ MonoBehaviour:
   - 14
   - 4
   lateWave: 30
-  weaponIcon: {fileID: 21300000, guid: 0388196e7cf9aa040a0ccf07a259f98d, type: 3}
-  armorIcon: {fileID: 21300000, guid: 7356f8dfe3f983c46a5a3a78f27d9a0a, type: 3}
-  helmetIcon: {fileID: 21300000, guid: 25d818bfc58d43e48b6cd5c48e08479a, type: 3}
-  ringIcon: {fileID: 21300000, guid: 96a6cd31ca095cb42be2d801cdb1a8cd, type: 3}
+  weaponIcon: {fileID: 21300000, guid: f82231081099f7a49a4cb7feca0c7ca9, type: 3}
+  armorIcon: {fileID: 21300000, guid: f3c579a787cd3d040be7c33e7cd09e17, type: 3}
+  helmetIcon: {fileID: 21300000, guid: 033f59aa1dd674a4f992a0a09c8f2e08, type: 3}
+  ringIcon: {fileID: 21300000, guid: 651bc3396a48f7b4faafeb8e4e51f330, type: 3}

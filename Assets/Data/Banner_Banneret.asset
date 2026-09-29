@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a706a568db013ae499bc40a5528971c4, type: 3}
+  m_Name: Banner_Banneret
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.BannerDefinition
+  strikeDuration: 4
+  strikeDamageBonus: 0.25
+  strikeRateBonus: 0.3
+  strikeShieldPower: 1.5
+  shieldFrames:
+  - {fileID: 21300000, guid: 8d90344e3f723bd40ad3dbed10d3f665, type: 3}
+  - {fileID: 21300000, guid: e6fb0771b5919fd43a255272291dd617, type: 3}
+  - {fileID: 21300000, guid: e50a0956eb9732f429a1574e755bba61, type: 3}
+  - {fileID: 21300000, guid: 25920402ed1b841448a496d98c97c549, type: 3}
+  shieldBreakFrames:
+  - {fileID: 21300000, guid: 34242bb973822244184693c10cc92d19, type: 3}
+  - {fileID: 21300000, guid: 81325b3286adb0249bff7c4ba98252ef, type: 3}
+  - {fileID: 21300000, guid: 2498283db5da6c441848f0d4f67a9c09, type: 3}
+  - {fileID: 21300000, guid: 642291fb69c38db439bfb653790893f4, type: 3}
+  rallyFrames:
+  - {fileID: 21300000, guid: 22a765d25e2fa524c93c312945e5ff82, type: 3}
+  - {fileID: 21300000, guid: bfcb9f041180a814984e2e069ec6ce96, type: 3}
+  - {fileID: 21300000, guid: fba51b6a6ae600f42be2b203f278b6ae, type: 3}
+  - {fileID: 21300000, guid: bddaeeadc09c6e44d83a8e591ac00ad8, type: 3}
+  auraRadius: 2
+  auraRateBonus: 0.15
+  plantCooldown: 10
+  plantRadius: 1.8
+  plantDuration: 5
+  plantDamageReduction: 0.25
+  plantBody:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: d037f25ac538e304ab747a330c71f761, type: 3}
+    - {fileID: 21300000, guid: adbd82f901c74f645a71cf1b1739b240, type: 3}
+    - {fileID: 21300000, guid: ed4c85b0fc3508f44bdb2774a89e43a5, type: 3}
+    - {fileID: 21300000, guid: 96cb2d1380ccfd74bb92dad4b88df26e, type: 3}
+    - {fileID: 21300000, guid: 75ca658a6ec56a3418728a0dc1f2e017, type: 3}
+    - {fileID: 21300000, guid: 54086f451b3e00544aa907e156179cb4, type: 3}
+    loop: 0
+    hitFrame: 0
+  zoneFrames:
+  - {fileID: 21300000, guid: e4c9fed340dcc354fbc51353021196ad, type: 3}
+  - {fileID: 21300000, guid: df40c153e29f7c046a20144fb9c203d6, type: 3}
+  - {fileID: 21300000, guid: ebfaae6ec701bd74a91da0a8a15f9ebd, type: 3}
+  - {fileID: 21300000, guid: 0086e2eeab2254c4ea791cf06676f3fa, type: 3}
+  rallyDamageBonus: 0.3
+  rallyDuration: 6

@@ -180,7 +180,11 @@ namespace BuildBuild.Combat
 
         void OnEnable() => Alive.Add(this);
 
-        void OnDisable() => Alive.Remove(this);
+        void OnDisable()
+        {
+            Alive.Remove(this);
+            Enemy.Killed -= OnEnemyKilled;     // Vo Bang — Hero.Passive.cs
+        }
 
         /// <param name="equipment">Chi hero dat tu doi hinh (`HeroBoard`) truyen vao; null = khong tinh trang bi.</param>
         public void Initialise(HeroDefinition definition, EquipmentConfig equipment = null)
@@ -209,6 +213,7 @@ namespace BuildBuild.Combat
             // Cai Nguc (Chainwarden) la noi tai: chua mo thi giu 3 quai nhu moi unit (GDD muc 2) va khong Xich.
             _blocker.Initialise(PassiveUnlocked ? definition.maxHeld : Mathf.Min(definition.maxHeld, 3),
                 PassiveUnlocked ? definition.heldDamageBonus : 0f);
+            InitialisePassive();    // Hero.Passive.cs
 
             transform.localScale = Vector3.one * Battlefield.UnitScale;
             Battlefield.MeasureBody(definition.animations, out _bodyRadius, out _bodyHeight);
@@ -720,6 +725,7 @@ namespace BuildBuild.Combat
             if (target == null || !InRange(target)) return;
 
             AuraMultipliers(out float damageMultiplier, out _);
+            damageMultiplier *= PassiveDamageMultiplier(target);    // Truy Kich / Nham Yeu Diem — Hero.Passive.cs
             // Wyrmspear dam truc tiep (giao dai, khong co dan) — Nghich Lan can biet muc tieu.
             if (_dragonLink != null && _dragonLink.Rider == this)
             {
