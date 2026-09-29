@@ -187,6 +187,14 @@ Sửa tay file YAML cũng được — chèn ngay trước
   animations: {fileID: 11400000, guid: ...}
 ```
 
+**Chiêu mới là nội tại hay chiêu phụ thì khoá nó theo sao.** Người chơi có hero là dùng được đánh thường + chiêu
+cuối ngay; nội tại và chiêu phụ chỉ chạy khi đủ sao. Ba ô ngưỡng nằm ở nhóm **Mo khoa theo sao** trong Inspector:
+`Passive Star` (mặc định 1), `Minor Star` (3), `Second Minor Star` (3, chỉ Wyrmspear). Trong code chiêu mới, chặn
+bằng `_hero.PassiveUnlocked` / `_hero.MinorUnlocked` ngay đầu nhánh chạy chiêu — ví dụ `Warden.Update` có
+`if (!_hero.MinorUnlocked) return;` trước khi đếm cooldown Quét Xích. `Hero` đọc số sao từ save (`Progression.Stars`)
+mỗi lần `Initialise`, nên nâng sao giữa wave thì từ wave sau mới có tác dụng. Test nhanh: F1 → Admin → nút **+★**
+cạnh unit.
+
 Thứ tự trong YAML không bắt buộc (Unity khớp theo tên field), nhưng lệch thứ tự khai báo thì lần
 Unity ghi lại file sẽ tạo diff giả trong git — giữ đúng thứ tự cho sạch.
 

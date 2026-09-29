@@ -13,7 +13,7 @@ giải thích lại khái niệm của bài trước.
 2. [unity-2d-lane-chieu-sau.md](unity-2d-lane-chieu-sau.md): dải đất có chiều sâu, sort theo trục y, ô đặt
    hero bấm được.
 3. [dung-scene-gameplay.md](dung-scene-gameplay.md): toạ độ pixel ↔ world, nền, lâu đài, quái/wave, HUD
-   9-slice, gacha/pity, save JSON — và vì sao scene dựng bằng `SceneBuilder`.
+   9-slice, gacha/pity, save JSON, màn Đội quân (nâng level/sao) — và vì sao scene dựng bằng `SceneBuilder`.
 4. [ky-nang-hero-va-hieu-ung-trang-thai.md](ky-nang-hero-va-hieu-ung-trang-thai.md): thêm một kỹ năng
    hero hoặc hiệu ứng trạng thái (đóng băng, choáng) từng bước.
 
