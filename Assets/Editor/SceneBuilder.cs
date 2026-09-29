@@ -1776,8 +1776,12 @@ namespace BuildBuild.Editor
             BuildStatChips(screen, detail.transform);
 
             // Ky nang / Trang bi: nut tron (sprite btn-round / btn-round-active), chu ben phai nut.
-            SetRef(screen, "skillsTab", RoundTab("SkillsTab", detail.transform, "Kỹ năng", new Vector2(40, -444)));
-            SetRef(screen, "gearTab", RoundTab("GearTab", detail.transform, "Trang bị", new Vector2(300, -444)));
+            SetRef(screen, "skillsTab", RoundTab("SkillsTab", detail.transform, "Kỹ năng", new Vector2(40, -436)));
+            SetRef(screen, "gearTab", RoundTab("GearTab", detail.transform, "Trang bị", new Vector2(300, -436)));
+            // Vach ngan (chrome/divider 80x8, 9-slice ngang) giua hai nut tron va noi dung ben duoi, nhu mock dot 5.
+            var divider = Img("TabDivider", detail.transform, UiSprite("chrome/divider"), TopLeft, new Vector2(40, -524), new Vector2(920, 16), sliced: true);
+            divider.raycastTarget = false;
+            SetRef(screen, "tabDivider", divider.gameObject);
             SetRef(screen, "roundNormal", UiSprite("chrome/btn-round"));
             SetRef(screen, "roundActive", UiSprite("chrome/btn-round-active"));
             SetRef(screen, "detailSkills", Block("Skills", detail.transform, 24, new Vector2(40, -548), new Vector2(920, 240)));

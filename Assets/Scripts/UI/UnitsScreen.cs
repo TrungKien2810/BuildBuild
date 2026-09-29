@@ -97,6 +97,7 @@ namespace BuildBuild.UI
         [Tooltip("Hai nut doi cot giua giua Ky nang va Trang bi (GDD 10.3). Linh / tru an ca hai.")]
         [SerializeField] Button skillsTab;
         [SerializeField] Button gearTab;
+        [SerializeField] GameObject tabDivider;
         [SerializeField] Sprite roundNormal;
         [SerializeField] Sprite roundActive;
         [SerializeField] GameObject gearView;
@@ -194,6 +195,7 @@ namespace BuildBuild.UI
             bool heroTab = any && unit.category == UnitCategory.Hero;
             skillsTab.gameObject.SetActive(heroTab);
             gearTab.gameObject.SetActive(heroTab);
+            tabDivider.SetActive(heroTab);
             bool gear = heroTab && _showGear;
             gearView.SetActive(gear);
             detailSkills.gameObject.SetActive(!gear);
