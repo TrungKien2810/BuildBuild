@@ -1,0 +1,32 @@
+{
+  "stat-strip.png": {
+    "left": 18,
+    "right": 6,
+    "top": 4,
+    "bottom": 4
+  },
+  "reward-row.png": {
+    "left": 6,
+    "right": 6,
+    "top": 5,
+    "bottom": 5
+  },
+  "hud-hero-card.png": {
+    "left": 5,
+    "right": 5,
+    "top": 5,
+    "bottom": 15
+  },
+  "hud-hero-card-empty.png": {
+    "left": 5,
+    "right": 5,
+    "top": 5,
+    "bottom": 5
+  },
+  "portrait-frame-big.png": {
+    "left": 6,
+    "right": 6,
+    "top": 6,
+    "bottom": 6
+  }
+}

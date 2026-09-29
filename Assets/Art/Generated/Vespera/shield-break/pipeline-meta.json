@@ -1,0 +1,43 @@
+{
+ "align": "feet",
+ "cell_size": 80,
+ "note": "aligned_bbox[3] GHIM TAY = hang neo, khong phai day alpha: cung neo voi shield-loop (frame 1 trung khien lap). Cat bang tempart/Vespera/skill-fx-build/slice_fx.py",
+ "frames": [
+  {
+   "label": "shield-break-1",
+   "aligned_bbox": [
+    16,
+    3,
+    66,
+    73
+   ]
+  },
+  {
+   "label": "shield-break-2",
+   "aligned_bbox": [
+    12,
+    5,
+    67,
+    73
+   ]
+  },
+  {
+   "label": "shield-break-3",
+   "aligned_bbox": [
+    15,
+    3,
+    68,
+    73
+   ]
+  },
+  {
+   "label": "shield-break-4",
+   "aligned_bbox": [
+    19,
+    62,
+    58,
+    73
+   ]
+  }
+ ]
+}

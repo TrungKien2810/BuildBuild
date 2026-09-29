@@ -1,0 +1,68 @@
+{
+  "target": "player",
+  "mode": "attack",
+  "source": "tempart/Banneret/attack/final/graded",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 3,
+  "align": "feet",
+  "status": "duyet 2026-09-29",
+  "frames": [
+    {
+      "frame": "attack-1",
+      "aligned_bbox": [
+        48,
+        37,
+        79,
+        93
+      ]
+    },
+    {
+      "frame": "attack-2",
+      "aligned_bbox": [
+        51,
+        37,
+        78,
+        93
+      ]
+    },
+    {
+      "frame": "attack-3",
+      "aligned_bbox": [
+        52,
+        38,
+        94,
+        93
+      ]
+    },
+    {
+      "frame": "attack-4",
+      "aligned_bbox": [
+        24,
+        41,
+        80,
+        93
+      ]
+    },
+    {
+      "frame": "attack-5",
+      "aligned_bbox": [
+        18,
+        46,
+        86,
+        93
+      ]
+    },
+    {
+      "frame": "attack-6",
+      "aligned_bbox": [
+        47,
+        37,
+        78,
+        93
+      ]
+    }
+  ],
+  "ground_row": 92
+}

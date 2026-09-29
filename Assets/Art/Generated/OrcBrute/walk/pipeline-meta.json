@@ -1,0 +1,67 @@
+{
+  "target": "creature",
+  "mode": "walk",
+  "source": "tempart/OrcBrute/walk/out",
+  "cell_size": 128,
+  "rows": 3,
+  "cols": 2,
+  "align": "feet",
+  "ground_row": 90,
+  "status": "duyet 2026-09-29",
+  "frames": [
+    {
+      "frame": "walk-1",
+      "aligned_bbox": [
+        40,
+        40,
+        87,
+        91
+      ]
+    },
+    {
+      "frame": "walk-2",
+      "aligned_bbox": [
+        40,
+        41,
+        87,
+        91
+      ]
+    },
+    {
+      "frame": "walk-3",
+      "aligned_bbox": [
+        40,
+        39,
+        88,
+        91
+      ]
+    },
+    {
+      "frame": "walk-4",
+      "aligned_bbox": [
+        40,
+        39,
+        87,
+        91
+      ]
+    },
+    {
+      "frame": "walk-5",
+      "aligned_bbox": [
+        40,
+        40,
+        88,
+        91
+      ]
+    },
+    {
+      "frame": "walk-6",
+      "aligned_bbox": [
+        40,
+        39,
+        87,
+        91
+      ]
+    }
+  ]
+}

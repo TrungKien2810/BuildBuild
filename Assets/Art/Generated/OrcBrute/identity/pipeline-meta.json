@@ -1,0 +1,22 @@
+{
+  "target": "creature",
+  "mode": "identity",
+  "source": "tempart/OrcBrute/identity",
+  "cell_size": 128,
+  "rows": 1,
+  "cols": 1,
+  "align": "feet",
+  "ground_row": 89,
+  "status": "duyet 2026-09-29",
+  "frames": [
+    {
+      "frame": "identity-1",
+      "aligned_bbox": [
+        40,
+        39,
+        87,
+        90
+      ]
+    }
+  ]
+}

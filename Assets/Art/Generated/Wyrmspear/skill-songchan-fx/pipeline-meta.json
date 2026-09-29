@@ -1,0 +1,65 @@
+{
+  "target": "player",
+  "mode": "skill-songchan-fx",
+  "source": "tempart/Wyrmspear/skill-songchan-fx/final",
+  "cell_size": 128,
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet 2026-09-28",
+  "frames": [
+    {
+      "frame": "songchan-1",
+      "aligned_bbox": [
+        48,
+        77,
+        78,
+        98
+      ]
+    },
+    {
+      "frame": "songchan-2",
+      "aligned_bbox": [
+        25,
+        71,
+        103,
+        104
+      ]
+    },
+    {
+      "frame": "songchan-3",
+      "aligned_bbox": [
+        5,
+        66,
+        123,
+        113
+      ]
+    },
+    {
+      "frame": "songchan-4",
+      "aligned_bbox": [
+        2,
+        58,
+        126,
+        110
+      ]
+    },
+    {
+      "frame": "songchan-5",
+      "aligned_bbox": [
+        2,
+        63,
+        126,
+        109
+      ]
+    },
+    {
+      "frame": "songchan-6",
+      "aligned_bbox": [
+        9,
+        63,
+        114,
+        112
+      ]
+    }
+  ]
+}

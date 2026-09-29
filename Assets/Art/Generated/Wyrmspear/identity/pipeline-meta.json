@@ -1,0 +1,20 @@
+{
+  "target": "player",
+  "mode": "identity",
+  "source": "tempart/Wyrmspear/identity",
+  "cell_size": 128,
+  "align": "feet",
+  "ground_row": 97,
+  "status": "duyet 2026-09-28",
+  "frames": [
+    {
+      "frame": "identity-1",
+      "aligned_bbox": [
+        44,
+        32,
+        83,
+        98
+      ]
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+ "align": "feet",
+ "cell_size": 160,
+ "note": "aligned_bbox[3] GHIM TAY = hang neo, khong phai day alpha: tam elip vong (0,5 bep theo mat dat) = diem dat tren chan dong minh. Cat bang tempart/Vespera/skill-fx-build/slice_fx.py",
+ "frames": [
+  {
+   "label": "ring-1",
+   "aligned_bbox": [
+    56,
+    83,
+    104,
+    92
+   ]
+  },
+  {
+   "label": "ring-2",
+   "aligned_bbox": [
+    18,
+    66,
+    142,
+    92
+   ]
+  },
+  {
+   "label": "ring-3",
+   "aligned_bbox": [
+    4,
+    54,
+    155,
+    92
+   ]
+  },
+  {
+   "label": "ring-4",
+   "aligned_bbox": [
+    4,
+    31,
+    156,
+    92
+   ]
+  },
+  {
+   "label": "ring-5",
+   "aligned_bbox": [
+    15,
+    44,
+    146,
+    92
+   ]
+  },
+  {
+   "label": "ring-6",
+   "aligned_bbox": [
+    18,
+    54,
+    141,
+    92
+   ]
+  }
+ ]
+}

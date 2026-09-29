@@ -1,0 +1,68 @@
+{
+  "target": "creature",
+  "mode": "death",
+  "source": "tempart/Ruinjaw/death/final/graded",
+  "cell_size": 192,
+  "cell_height": 192,
+  "rows": 2,
+  "cols": 3,
+  "align": "feet",
+  "ground_row": 175,
+  "status": "duyet 2026-09-29",
+  "frames": [
+    {
+      "frame": "death-1",
+      "aligned_bbox": [
+        33,
+        67,
+        156,
+        176
+      ]
+    },
+    {
+      "frame": "death-2",
+      "aligned_bbox": [
+        20,
+        77,
+        146,
+        176
+      ]
+    },
+    {
+      "frame": "death-3",
+      "aligned_bbox": [
+        16,
+        93,
+        152,
+        176
+      ]
+    },
+    {
+      "frame": "death-4",
+      "aligned_bbox": [
+        23,
+        100,
+        156,
+        176
+      ]
+    },
+    {
+      "frame": "death-5",
+      "aligned_bbox": [
+        17,
+        118,
+        157,
+        176
+      ]
+    },
+    {
+      "frame": "death-6",
+      "aligned_bbox": [
+        16,
+        118,
+        156,
+        176
+      ]
+    }
+  ]
+}

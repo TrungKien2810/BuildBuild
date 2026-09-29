@@ -1,0 +1,68 @@
+{
+  "target": "creature",
+  "mode": "attack",
+  "source": "tempart/Ruinjaw/attack/final/graded",
+  "cell_size": 192,
+  "cell_height": 208,
+  "rows": 2,
+  "cols": 3,
+  "align": "feet",
+  "ground_row": 179,
+  "status": "duyet 2026-09-29",
+  "frames": [
+    {
+      "frame": "attack-1",
+      "aligned_bbox": [
+        33,
+        86,
+        152,
+        180
+      ]
+    },
+    {
+      "frame": "attack-2",
+      "aligned_bbox": [
+        47,
+        60,
+        152,
+        180
+      ]
+    },
+    {
+      "frame": "attack-3",
+      "aligned_bbox": [
+        45,
+        33,
+        152,
+        180
+      ]
+    },
+    {
+      "frame": "attack-4",
+      "aligned_bbox": [
+        22,
+        90,
+        152,
+        180
+      ]
+    },
+    {
+      "frame": "attack-5",
+      "aligned_bbox": [
+        13,
+        100,
+        152,
+        180
+      ]
+    },
+    {
+      "frame": "attack-6",
+      "aligned_bbox": [
+        32,
+        86,
+        152,
+        180
+      ]
+    }
+  ]
+}

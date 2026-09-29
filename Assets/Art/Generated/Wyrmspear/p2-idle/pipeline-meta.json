@@ -1,0 +1,47 @@
+{
+  "target": "player",
+  "mode": "p2-idle",
+  "source": "tempart/Wyrmspear/p2-idle",
+  "cell_size": 128,
+  "align": "feet",
+  "ground_row": 101,
+  "status": "duyet 2026-09-28",
+  "frames": [
+    {
+      "frame": "idle-1",
+      "aligned_bbox": [
+        29,
+        28,
+        98,
+        102
+      ]
+    },
+    {
+      "frame": "idle-2",
+      "aligned_bbox": [
+        29,
+        28,
+        98,
+        102
+      ]
+    },
+    {
+      "frame": "idle-3",
+      "aligned_bbox": [
+        28,
+        28,
+        99,
+        102
+      ]
+    },
+    {
+      "frame": "idle-4",
+      "aligned_bbox": [
+        30,
+        28,
+        97,
+        102
+      ]
+    }
+  ]
+}

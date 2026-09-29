@@ -1,0 +1,49 @@
+{
+  "target": "creature",
+  "mode": "hurt",
+  "source": "tempart/RatRunner/hurt/out/graded",
+  "cell_size": 128,
+  "rows": 2,
+  "cols": 2,
+  "align": "feet",
+  "ground_row": 82,
+  "status": "duyet 2026-09-29",
+  "frames": [
+    {
+      "frame": "hurt-1",
+      "aligned_bbox": [
+        45,
+        50,
+        82,
+        83
+      ]
+    },
+    {
+      "frame": "hurt-2",
+      "aligned_bbox": [
+        45,
+        50,
+        82,
+        83
+      ]
+    },
+    {
+      "frame": "hurt-3",
+      "aligned_bbox": [
+        45,
+        49,
+        82,
+        83
+      ]
+    },
+    {
+      "frame": "hurt-4",
+      "aligned_bbox": [
+        45,
+        49,
+        82,
+        83
+      ]
+    }
+  ]
+}

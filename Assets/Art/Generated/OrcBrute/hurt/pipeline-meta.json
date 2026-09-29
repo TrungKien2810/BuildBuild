@@ -1,0 +1,49 @@
+{
+  "target": "creature",
+  "mode": "hurt",
+  "source": "tempart/OrcBrute/hurt/out",
+  "cell_size": 128,
+  "rows": 2,
+  "cols": 2,
+  "align": "feet",
+  "ground_row": 90,
+  "status": "duyet 2026-09-29",
+  "frames": [
+    {
+      "frame": "hurt-1",
+      "aligned_bbox": [
+        40,
+        40,
+        87,
+        91
+      ]
+    },
+    {
+      "frame": "hurt-2",
+      "aligned_bbox": [
+        39,
+        41,
+        89,
+        91
+      ]
+    },
+    {
+      "frame": "hurt-3",
+      "aligned_bbox": [
+        39,
+        39,
+        89,
+        91
+      ]
+    },
+    {
+      "frame": "hurt-4",
+      "aligned_bbox": [
+        40,
+        41,
+        87,
+        91
+      ]
+    }
+  ]
+}

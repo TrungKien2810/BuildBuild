@@ -1,0 +1,65 @@
+{
+  "target": "player",
+  "mode": "skill-diachan-body",
+  "source": "tempart/Wyrmspear/skill-diachan-body/final",
+  "cell_size": 128,
+  "align": "feet",
+  "ground_row": 104,
+  "status": "duyet 2026-09-28",
+  "frames": [
+    {
+      "frame": "diachan-1",
+      "aligned_bbox": [
+        16,
+        48,
+        106,
+        105
+      ]
+    },
+    {
+      "frame": "diachan-2",
+      "aligned_bbox": [
+        18,
+        35,
+        107,
+        105
+      ]
+    },
+    {
+      "frame": "diachan-3",
+      "aligned_bbox": [
+        21,
+        27,
+        106,
+        105
+      ]
+    },
+    {
+      "frame": "diachan-4",
+      "aligned_bbox": [
+        15,
+        57,
+        106,
+        105
+      ]
+    },
+    {
+      "frame": "diachan-5",
+      "aligned_bbox": [
+        16,
+        45,
+        108,
+        105
+      ]
+    },
+    {
+      "frame": "diachan-6",
+      "aligned_bbox": [
+        16,
+        50,
+        106,
+        105
+      ]
+    }
+  ]
+}

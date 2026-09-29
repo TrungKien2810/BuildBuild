@@ -1,0 +1,65 @@
+{
+  "target": "player",
+  "mode": "skill-xuyenlong-body",
+  "source": "tempart/Wyrmspear/skill-xuyenlong-body/final",
+  "cell_size": 128,
+  "align": "feet",
+  "ground_row": 97,
+  "status": "duyet 2026-09-28",
+  "frames": [
+    {
+      "frame": "xuyenlong-1",
+      "aligned_bbox": [
+        44,
+        32,
+        83,
+        98
+      ]
+    },
+    {
+      "frame": "xuyenlong-2",
+      "aligned_bbox": [
+        19,
+        51,
+        105,
+        98
+      ]
+    },
+    {
+      "frame": "xuyenlong-3",
+      "aligned_bbox": [
+        24,
+        51,
+        106,
+        98
+      ]
+    },
+    {
+      "frame": "xuyenlong-4",
+      "aligned_bbox": [
+        19,
+        52,
+        113,
+        98
+      ]
+    },
+    {
+      "frame": "xuyenlong-5",
+      "aligned_bbox": [
+        19,
+        52,
+        111,
+        98
+      ]
+    },
+    {
+      "frame": "xuyenlong-6",
+      "aligned_bbox": [
+        46,
+        31,
+        87,
+        98
+      ]
+    }
+  ]
+}

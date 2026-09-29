@@ -1,0 +1,43 @@
+{
+ "align": "feet",
+ "cell_size": 80,
+ "note": "aligned_bbox[3] GHIM TAY = hang neo, khong phai day alpha: tam vong day khien = chan hero. Cat bang tempart/Vespera/skill-fx-build/slice_fx.py",
+ "frames": [
+  {
+   "label": "shield-1",
+   "aligned_bbox": [
+    14,
+    5,
+    65,
+    73
+   ]
+  },
+  {
+   "label": "shield-2",
+   "aligned_bbox": [
+    14,
+    5,
+    65,
+    73
+   ]
+  },
+  {
+   "label": "shield-3",
+   "aligned_bbox": [
+    14,
+    3,
+    65,
+    73
+   ]
+  },
+  {
+   "label": "shield-4",
+   "aligned_bbox": [
+    14,
+    5,
+    65,
+    73
+   ]
+  }
+ ]
+}

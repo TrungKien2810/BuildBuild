@@ -1,0 +1,47 @@
+{
+  "target": "player",
+  "mode": "skill-lienthuong-fx",
+  "source": "tempart/Wyrmspear/skill-lienthuong-fx/final",
+  "cell_size": 128,
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet 2026-09-28",
+  "frames": [
+    {
+      "frame": "lienthuong-fx-1",
+      "aligned_bbox": [
+        16,
+        47,
+        118,
+        83
+      ]
+    },
+    {
+      "frame": "lienthuong-fx-2",
+      "aligned_bbox": [
+        13,
+        32,
+        112,
+        83
+      ]
+    },
+    {
+      "frame": "lienthuong-fx-3",
+      "aligned_bbox": [
+        16,
+        35,
+        116,
+        88
+      ]
+    },
+    {
+      "frame": "lienthuong-fx-4",
+      "aligned_bbox": [
+        23,
+        16,
+        103,
+        97
+      ]
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "target": "player",
+  "mode": "skill-gaida-fx",
+  "source": "tempart/Wyrmspear/skill-gaida-fx/final",
+  "cell_size": 128,
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet 2026-09-28",
+  "frames": [
+    {
+      "frame": "gaida-1",
+      "aligned_bbox": [
+        5,
+        80,
+        123,
+        109
+      ]
+    },
+    {
+      "frame": "gaida-2",
+      "aligned_bbox": [
+        4,
+        70,
+        124,
+        112
+      ]
+    },
+    {
+      "frame": "gaida-3",
+      "aligned_bbox": [
+        4,
+        51,
+        125,
+        114
+      ]
+    },
+    {
+      "frame": "gaida-4",
+      "aligned_bbox": [
+        1,
+        46,
+        127,
+        122
+      ]
+    },
+    {
+      "frame": "gaida-5",
+      "aligned_bbox": [
+        3,
+        16,
+        126,
+        115
+      ]
+    },
+    {
+      "frame": "gaida-6",
+      "aligned_bbox": [
+        4,
+        72,
+        125,
+        112
+      ]
+    }
+  ]
+}

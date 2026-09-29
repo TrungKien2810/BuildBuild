@@ -1,0 +1,23 @@
+{
+  "target": "creature",
+  "mode": "identity",
+  "source": "tempart/Ruinjaw/identity-v2",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 1,
+  "cols": 1,
+  "align": "feet",
+  "ground_row": 120,
+  "status": "duyet 2026-09-29",
+  "frames": [
+    {
+      "frame": "identity-1",
+      "aligned_bbox": [
+        8,
+        24,
+        120,
+        121
+      ]
+    }
+  ]
+}

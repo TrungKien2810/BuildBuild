@@ -1,0 +1,65 @@
+{
+  "target": "player",
+  "mode": "skill-longgiang-dialong",
+  "source": "tempart/Wyrmspear/skill-longgiang-dialong/final",
+  "cell_size": 128,
+  "align": "feet",
+  "ground_row": 104,
+  "status": "duyet 2026-09-28",
+  "frames": [
+    {
+      "frame": "longgiang-dialong-1",
+      "aligned_bbox": [
+        21,
+        48,
+        99,
+        105
+      ]
+    },
+    {
+      "frame": "longgiang-dialong-2",
+      "aligned_bbox": [
+        22,
+        43,
+        98,
+        105
+      ]
+    },
+    {
+      "frame": "longgiang-dialong-3",
+      "aligned_bbox": [
+        21,
+        59,
+        99,
+        105
+      ]
+    },
+    {
+      "frame": "longgiang-dialong-4",
+      "aligned_bbox": [
+        21,
+        62,
+        99,
+        105
+      ]
+    },
+    {
+      "frame": "longgiang-dialong-5",
+      "aligned_bbox": [
+        21,
+        56,
+        99,
+        105
+      ]
+    },
+    {
+      "frame": "longgiang-dialong-6",
+      "aligned_bbox": [
+        21,
+        47,
+        99,
+        105
+      ]
+    }
+  ]
+}

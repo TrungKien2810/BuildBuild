@@ -1,0 +1,47 @@
+{
+  "target": "player",
+  "mode": "dialong-hurt",
+  "source": "tempart/Wyrmspear/dialong-hurt-v2",
+  "cell_size": 128,
+  "align": "feet",
+  "ground_row": 104,
+  "status": "duyet 2026-09-28",
+  "frames": [
+    {
+      "frame": "hurt-1",
+      "aligned_bbox": [
+        23,
+        48,
+        99,
+        105
+      ]
+    },
+    {
+      "frame": "hurt-2",
+      "aligned_bbox": [
+        20,
+        50,
+        98,
+        105
+      ]
+    },
+    {
+      "frame": "hurt-3",
+      "aligned_bbox": [
+        24,
+        47,
+        97,
+        105
+      ]
+    },
+    {
+      "frame": "hurt-4",
+      "aligned_bbox": [
+        20,
+        47,
+        98,
+        105
+      ]
+    }
+  ]
+}

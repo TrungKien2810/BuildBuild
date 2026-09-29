@@ -1,0 +1,65 @@
+{
+  "target": "player",
+  "mode": "p2-attack",
+  "source": "tempart/Wyrmspear/p2-attack",
+  "cell_size": 128,
+  "align": "feet",
+  "ground_row": 101,
+  "status": "duyet 2026-09-28",
+  "frames": [
+    {
+      "frame": "attack-1",
+      "aligned_bbox": [
+        32,
+        29,
+        96,
+        102
+      ]
+    },
+    {
+      "frame": "attack-2",
+      "aligned_bbox": [
+        18,
+        29,
+        99,
+        102
+      ]
+    },
+    {
+      "frame": "attack-3",
+      "aligned_bbox": [
+        21,
+        35,
+        104,
+        102
+      ]
+    },
+    {
+      "frame": "attack-4",
+      "aligned_bbox": [
+        5,
+        31,
+        100,
+        102
+      ]
+    },
+    {
+      "frame": "attack-5",
+      "aligned_bbox": [
+        21,
+        35,
+        99,
+        102
+      ]
+    },
+    {
+      "frame": "attack-6",
+      "aligned_bbox": [
+        29,
+        29,
+        93,
+        102
+      ]
+    }
+  ]
+}

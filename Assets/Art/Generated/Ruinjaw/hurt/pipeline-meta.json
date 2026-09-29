@@ -1,0 +1,50 @@
+{
+  "target": "creature",
+  "mode": "hurt",
+  "source": "tempart/Ruinjaw/hurt/final/graded",
+  "cell_size": 160,
+  "cell_height": 160,
+  "rows": 2,
+  "cols": 2,
+  "align": "feet",
+  "ground_row": 153,
+  "status": "duyet 2026-09-29",
+  "frames": [
+    {
+      "frame": "hurt-1",
+      "aligned_bbox": [
+        20,
+        56,
+        136,
+        154
+      ]
+    },
+    {
+      "frame": "hurt-2",
+      "aligned_bbox": [
+        24,
+        55,
+        133,
+        154
+      ]
+    },
+    {
+      "frame": "hurt-3",
+      "aligned_bbox": [
+        29,
+        48,
+        139,
+        154
+      ]
+    },
+    {
+      "frame": "hurt-4",
+      "aligned_bbox": [
+        20,
+        56,
+        136,
+        154
+      ]
+    }
+  ]
+}

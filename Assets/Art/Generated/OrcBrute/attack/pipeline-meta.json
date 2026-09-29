@@ -1,0 +1,67 @@
+{
+  "target": "creature",
+  "mode": "attack",
+  "source": "tempart/OrcBrute/attack/out",
+  "cell_size": 128,
+  "rows": 2,
+  "cols": 3,
+  "align": "feet",
+  "ground_row": 94,
+  "status": "duyet 2026-09-29",
+  "frames": [
+    {
+      "frame": "attack-1",
+      "aligned_bbox": [
+        40,
+        44,
+        87,
+        95
+      ]
+    },
+    {
+      "frame": "attack-2",
+      "aligned_bbox": [
+        50,
+        43,
+        99,
+        95
+      ]
+    },
+    {
+      "frame": "attack-3",
+      "aligned_bbox": [
+        49,
+        40,
+        104,
+        95
+      ]
+    },
+    {
+      "frame": "attack-4",
+      "aligned_bbox": [
+        23,
+        54,
+        84,
+        95
+      ]
+    },
+    {
+      "frame": "attack-5",
+      "aligned_bbox": [
+        26,
+        56,
+        84,
+        95
+      ]
+    },
+    {
+      "frame": "attack-6",
+      "aligned_bbox": [
+        39,
+        44,
+        87,
+        95
+      ]
+    }
+  ]
+}

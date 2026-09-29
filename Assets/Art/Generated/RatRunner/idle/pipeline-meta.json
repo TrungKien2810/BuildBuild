@@ -1,0 +1,49 @@
+{
+  "target": "creature",
+  "mode": "idle",
+  "source": "tempart/RatRunner/idle/out",
+  "cell_size": 128,
+  "rows": 2,
+  "cols": 2,
+  "align": "feet",
+  "ground_row": 83,
+  "status": "duyet 2026-09-29",
+  "frames": [
+    {
+      "frame": "idle-1",
+      "aligned_bbox": [
+        45,
+        51,
+        82,
+        84
+      ]
+    },
+    {
+      "frame": "idle-2",
+      "aligned_bbox": [
+        45,
+        52,
+        82,
+        84
+      ]
+    },
+    {
+      "frame": "idle-3",
+      "aligned_bbox": [
+        46,
+        51,
+        82,
+        84
+      ]
+    },
+    {
+      "frame": "idle-4",
+      "aligned_bbox": [
+        45,
+        52,
+        83,
+        84
+      ]
+    }
+  ]
+}

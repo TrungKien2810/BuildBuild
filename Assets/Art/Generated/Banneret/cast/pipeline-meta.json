@@ -1,0 +1,68 @@
+{
+  "target": "player",
+  "mode": "cast",
+  "source": "tempart/Banneret/cast/final/graded",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 3,
+  "align": "feet",
+  "status": "duyet 2026-09-29",
+  "frames": [
+    {
+      "frame": "cast-1",
+      "aligned_bbox": [
+        49,
+        37,
+        79,
+        93
+      ]
+    },
+    {
+      "frame": "cast-2",
+      "aligned_bbox": [
+        48,
+        33,
+        78,
+        93
+      ]
+    },
+    {
+      "frame": "cast-3",
+      "aligned_bbox": [
+        52,
+        27,
+        91,
+        93
+      ]
+    },
+    {
+      "frame": "cast-4",
+      "aligned_bbox": [
+        51,
+        25,
+        93,
+        93
+      ]
+    },
+    {
+      "frame": "cast-5",
+      "aligned_bbox": [
+        51,
+        25,
+        83,
+        93
+      ]
+    },
+    {
+      "frame": "cast-6",
+      "aligned_bbox": [
+        49,
+        38,
+        79,
+        93
+      ]
+    }
+  ],
+  "ground_row": 92
+}

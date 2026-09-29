@@ -1,0 +1,68 @@
+{
+  "target": "creature",
+  "mode": "walk",
+  "source": "tempart/Ruinjaw/walk/final",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 3,
+  "cols": 2,
+  "align": "feet",
+  "ground_row": 121,
+  "status": "duyet 2026-09-29",
+  "frames": [
+    {
+      "frame": "walk-1",
+      "aligned_bbox": [
+        8,
+        24,
+        120,
+        122
+      ]
+    },
+    {
+      "frame": "walk-2",
+      "aligned_bbox": [
+        9,
+        23,
+        123,
+        122
+      ]
+    },
+    {
+      "frame": "walk-3",
+      "aligned_bbox": [
+        9,
+        23,
+        124,
+        122
+      ]
+    },
+    {
+      "frame": "walk-4",
+      "aligned_bbox": [
+        8,
+        26,
+        120,
+        122
+      ]
+    },
+    {
+      "frame": "walk-5",
+      "aligned_bbox": [
+        8,
+        26,
+        118,
+        122
+      ]
+    },
+    {
+      "frame": "walk-6",
+      "aligned_bbox": [
+        7,
+        25,
+        119,
+        122
+      ]
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "target": "player",
+  "mode": "skill-datnut-fx",
+  "source": "tempart/Wyrmspear/skill-datnut-fx/final",
+  "cell_size": 128,
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet 2026-09-28",
+  "frames": [
+    {
+      "frame": "datnut-1",
+      "aligned_bbox": [
+        40,
+        77,
+        83,
+        100
+      ]
+    },
+    {
+      "frame": "datnut-2",
+      "aligned_bbox": [
+        20,
+        76,
+        108,
+        105
+      ]
+    },
+    {
+      "frame": "datnut-3",
+      "aligned_bbox": [
+        4,
+        64,
+        124,
+        110
+      ]
+    },
+    {
+      "frame": "datnut-4",
+      "aligned_bbox": [
+        4,
+        40,
+        125,
+        106
+      ]
+    },
+    {
+      "frame": "datnut-5",
+      "aligned_bbox": [
+        6,
+        56,
+        121,
+        101
+      ]
+    },
+    {
+      "frame": "datnut-6",
+      "aligned_bbox": [
+        11,
+        75,
+        117,
+        99
+      ]
+    }
+  ]
+}
