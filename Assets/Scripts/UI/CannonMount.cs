@@ -8,7 +8,7 @@ namespace BuildBuild.UI
 {
     /// <summary>
     /// Mot be phao tren mat phao dai (GAME_DESIGN.md muc 2: 3 be xep doc). Bat cham qua Physics2DRaycaster tren camera
-    /// (can BoxCollider2D, phu ca be lan than phao); moi quyet dinh (mo bang chon, lap, go, nang cap) nam o `CannonBoard`.
+    /// (can BoxCollider2D, phu ca be lan than phao); moi quyet dinh (mo bang chon, lap, go) nam o `CannonBoard`.
     ///
     /// Khac `HeroSlot`: phao khong chet, khong roi be — `Occupant` song tu luc lap toi luc go, qua moi wave.
     /// </summary>

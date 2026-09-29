@@ -13,15 +13,17 @@ MonoBehaviour:
   m_Name: Hero_Ironblade
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
   displayName: Ironblade
-  maxHealth: 800
-  damage: 25
-  attackRate: 0.8
+  unitId: knight
+  maxHealth: 900
+  damage: 30
+  attackRate: 0.9
   range: 0.7
   moveSpeed: 1.1
   leashRange: 3
   maxHeld: 3
   heldDamageBonus: 0
   warden: {fileID: 0}
+  dragonRider: {fileID: 0}
   projectileSpeed: 20
   splashRadius: 0.3
   projectileFrames: []
@@ -32,12 +34,12 @@ MonoBehaviour:
   skillKind: 3
   skillTier: 0
   skillCooldown: 0
-  manaMax: 5
+  manaMax: 4
   manaPerSecond: 0.35
   manaPerHit: 0.25
   skillRadius: 1.6
   skillDuration: 3
-  skillPower: 3
+  skillPower: 4
   skillFrames:
   - {fileID: 21300000, guid: 20c8e488a75fec04e859bcbfd6dd56a4, type: 3}
   - {fileID: 21300000, guid: 050669afbabc8ee4197f6cbbfbc78c94, type: 3}
@@ -51,5 +53,17 @@ MonoBehaviour:
   healsAllies: 0
   healFrames: []
   buffFrames: []
+  shieldAmount: 0
+  shieldFrames: []
+  shieldBreakFrames: []
+  passiveStar: 1
+  minorStar: 3
+  secondMinorStar: 3
+  ultimateText: "Ch\xE9m Qu\u1EA1t: m\u1ED9t nh\xE1t ch\xE9m qu\u1EA1t d\xE0i tr\u01B0\u1EDBc
+    m\u1EB7t, s\xE1t th\u01B0\u01A1ng g\u1EA5p nhi\u1EC1u l\u1EA7n \u0111\xF2n th\u01B0\u1EDDng."
+  passiveText: 
+  minorText: 
+  secondMinorText: 
   animations: {fileID: 11400000, guid: 13828de805f8ae849bcf7387c2bea269, type: 2}
+  artFacesRight: 0
   avatar: {fileID: 21300000, guid: fbf77d7a51c84c1419fdbdd8113dba0f, type: 3}

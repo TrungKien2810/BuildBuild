@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
+  m_Name: Hero_Wyrmspear
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
+  displayName: Wyrmspear
+  unitId: wyrmspear
+  maxHealth: 900
+  damage: 40
+  attackRate: 0.8
+  range: 0.9
+  moveSpeed: 1.1
+  leashRange: 3
+  maxHeld: 3
+  heldDamageBonus: 0
+  warden: {fileID: 0}
+  dragonRider: {fileID: 11400000, guid: 6e5de7c8e3828264fb279759876fd78f, type: 2}
+  projectileSpeed: 20
+  splashRadius: 0.3
+  projectileFrames: []
+  projectileScale: 1
+  impactFrames: []
+  impactScale: 1
+  knockbackOnHit: 0
+  skillKind: 8
+  skillTier: 0
+  skillCooldown: 0
+  manaMax: 5
+  manaPerSecond: 0.35
+  manaPerHit: 0.25
+  skillRadius: 1.6
+  skillDuration: 3
+  skillPower: 1
+  skillFrames: []
+  skillIntroFrames: []
+  stunFrames: []
+  summoner: {fileID: 0}
+  healsAllies: 0
+  healFrames: []
+  buffFrames: []
+  shieldAmount: 0
+  shieldFrames: []
+  shieldBreakFrames: []
+  passiveStar: 1
+  minorStar: 3
+  secondMinorStar: 3
+  ultimateText: "Long Ho\xE1: bi\u1EBFn h\xECnh Long Nh\xE2n + g\u1ECDi B\u1EA1ch
+    \u0110\u1ECBa Long (Long Gi\xE1p, Long Uy, Long N\u1ED9, Long Kh\u1EBF); l\u1EA7n
+    sau: Thi\xEAn \u0110\u1ECBa Long Gi\xE1ng."
+  passiveText: "Ngh\u1ECBch L\xE2n: \u0111\xF2n v\xE0o boss/tinh anh c\u1ED9ng th\xEAm
+    % m\xE1u t\u1ED1i \u0111a m\u1EE5c ti\xEAu."
+  minorText: "Xuy\xEAn Long / Thi\xEAn Long Li\xEAn Th\u01B0\u01A1ng: \u0111\xE2m
+    xuy\xEAn m\u1ED9t \u0111\u01B0\u1EDDng, b\u1ECF qua gi\xE1p."
+  secondMinorText: "\u0110\u1ECBa Long Ch\u1EA5n (r\u1ED3ng): gai \u0111\xE1 quanh
+    r\u1ED3ng \u2014 s\xE1t th\u01B0\u01A1ng v\xF9ng, cho\xE1ng, ph\xE1 gi\xE1p."
+  animations: {fileID: 11400000, guid: 5ecbc40a901f5c049ba84f1dad6ff9e1, type: 2}
+  artFacesRight: 0
+  avatar: {fileID: 21300000, guid: b2725486826ba2e47bde70254fa47f83, type: 3}

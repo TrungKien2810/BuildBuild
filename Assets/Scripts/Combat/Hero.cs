@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using BuildBuild.Core;
 using BuildBuild.Data;
+using BuildBuild.Meta;
 using UnityEngine;
 
 namespace BuildBuild.Combat
@@ -31,7 +32,8 @@ namespace BuildBuild.Combat
     ///   - SummonKnight(Bonecaller)  : goi ky si tu than (hoac hoi day mau neu no con song), xem `Necromancer`;
     ///   - Charge      (Ky si tu than): phi `skillRadius` unit VE PHIA CUM QUAI DONG NHAT (ke ca huong cheo), `skillPower`
     ///     sat thuong + choang `skillDuration` giay moi quai tren duong, roi danh tiep tai cho (khong ep ve cho trieu hoi).
-    ///   - HookThrow   (Chainwarden) : Nem Moc — keo quai tam xa ve sat minh, xem `Warden`.
+    ///   - HookThrow   (Chainwarden) : Nem Moc keo quai ve roi bien hinh Cuong No, xem `Warden`.
+    ///   - Rally       (Banneret)    : Hieu Lenh Xung Phong ca doi +sat thuong, xem `Banneret`.
     /// Ky nang chia HAI TANG (`SkillTier`):
     ///   - Chieu LON: THANH MANA tich theo thoi gian VA theo so quai an don thuong, day thi tu cast
     ///     roi ve 0. Danh dong quai thi day nhanh hon — co chu dich: don khong che phai den dung luc
@@ -79,6 +81,12 @@ namespace BuildBuild.Combat
         Necromancer _necromancer;
         Necromancer _summoner;
         Warden _warden;
+        Banneret _banneret;
+        /// <summary>Level + sao + trang bi tu save (`Progression.Multipliers`), doc lai moi lan `Initialise`.</summary>
+        float _healthMultiplier = 1f, _damageMultiplier = 1f, _rateMultiplier = 1f;
+        int _stars;
+        /// <summary>Wyrmspear: component cua CHINH no. Bach Dia Long: component cua Wyrmspear da goi no. Con lai null.</summary>
+        DragonRider _dragonLink;
         Vector3 _anchor;
         float _cooldown;
         float _skillCooldown;
@@ -129,13 +137,44 @@ namespace BuildBuild.Combat
 
         bool IsRanged => _definition.range > MeleeRange;
         bool RapidFire => Time.time < _rapidFireUntil;
+        bool Raging => _warden != null && _warden.Raging;
+
+        /// <summary>Tam danh hien tai: Chainwarden Cuong No dung `rageRange` (hai xich dai), Long Nhan dung `dragonmanRange`.</summary>
+        float AttackRange => Raging ? _warden.RageRange
+            : _dragonLink != null ? _dragonLink.AttackRange(this, _definition.range) : _definition.range;
+
+        public float CurrentAttackRange => AttackRange;
+        public bool FacesRight => FacingRight;
+
+        /// <summary>Sat thuong goc da cong level + sao + trang bi; chua nhan hao quang / Cuong No.</summary>
+        float BaseDamage => _definition.damage * _damageMultiplier;
+
+        /// <summary>Mau toi da da cong level + sao + trang bi.</summary>
+        public float MaxHealth => _definition.maxHealth * _healthMultiplier;
+
+        /// <summary>Noi tai / chieu phu mo theo sao; danh thuong + chieu cuoi luon mo.</summary>
+        public bool PassiveUnlocked => _stars >= _definition.passiveStar;
+        public bool MinorUnlocked => _stars >= _definition.minorStar;
+        public bool SecondMinorUnlocked => _stars >= _definition.secondMinorStar;
+
+        /// <summary>Sat thuong mot don thuong luc nay (da nhan hao quang / Cuong No).</summary>
+        public float AttackDamage
+        {
+            get
+            {
+                AuraMultipliers(out float damage, out _);
+                return BaseDamage * damage;
+            }
+        }
 
         void Awake()
         {
             _renderer = GetComponent<SpriteRenderer>();
             _health = GetComponent<Health>();
             _health.Damaged += OnDamaged;
+            gameObject.AddComponent<CombatFeedback>().Init(ally: true, () => _bodyHeight);
             _health.Blocked += OnBlocked;
+            _health.ShieldBroken += OnShieldBroken;
             _health.Died += OnDied;
         }
 
@@ -143,9 +182,12 @@ namespace BuildBuild.Combat
 
         void OnDisable() => Alive.Remove(this);
 
-        public void Initialise(HeroDefinition definition)
+        /// <param name="equipment">Chi hero dat tu doi hinh (`HeroBoard`) truyen vao; null = khong tinh trang bi.</param>
+        public void Initialise(HeroDefinition definition, EquipmentConfig equipment = null)
         {
             _definition = definition;
+            Progression.Multipliers(definition.unitId, equipment, out _healthMultiplier, out _damageMultiplier, out _rateMultiplier);
+            _stars = Progression.Stars(definition.unitId);
             // Vi tri luc Initialise la o dat hero — moi khoang cach ve sau deu do tu day.
             _anchor = transform.position;
             _dying = false;
@@ -156,20 +198,23 @@ namespace BuildBuild.Combat
             _rapidFireUntil = 0f;
             _expiresAt = 0f;
             _summoner = null;
+            _dragonLink = null;
             _health.Invulnerable = false;
             _mana = 0f;
-            _health.ResetTo(definition.maxHealth);
+            _health.ResetTo(MaxHealth);
             _renderer.color = Color.white;
             _knockback.Reset();
             if (_blocker == null) _blocker = GetComponent<Blocker>();
             if (_blocker == null) _blocker = gameObject.AddComponent<Blocker>();
-            _blocker.Initialise(definition.maxHeld, definition.heldDamageBonus);
+            // Cai Nguc (Chainwarden) la noi tai: chua mo thi giu 3 quai nhu moi unit (GDD muc 2) va khong Xich.
+            _blocker.Initialise(PassiveUnlocked ? definition.maxHeld : Mathf.Min(definition.maxHeld, 3),
+                PassiveUnlocked ? definition.heldDamageBonus : 0f);
 
             transform.localScale = Vector3.one * Battlefield.UnitScale;
             Battlefield.MeasureBody(definition.animations, out _bodyRadius, out _bodyHeight);
 
-            // Art ve QUAY TRAI; hero nhin ve phia quai (ben phai) nen lat.
-            _renderer.flipX = true;
+            // Hero nhin ve phia quai (ben phai).
+            FacingRight = true;
 
             if (animator != null)
             {
@@ -187,6 +232,22 @@ namespace BuildBuild.Combat
                 _warden = GetComponent<Warden>();
                 if (_warden == null) _warden = gameObject.AddComponent<Warden>();
                 _warden.Initialise(this, definition.warden);
+            }
+
+            // Banneret: don thuong buff dong minh, Quan Ky, Cam Co, Hieu Lenh — xem `Banneret`.
+            if (definition.banner != null)
+            {
+                _banneret = GetComponent<Banneret>();
+                if (_banneret == null) _banneret = gameObject.AddComponent<Banneret>();
+                _banneret.Initialise(this, definition.banner);
+            }
+
+            // Wyrmspear: Nghich Lan, chieu thuong, bien hinh Long Nhan + Bach Dia Long — xem `DragonRider`.
+            if (definition.dragonRider != null)
+            {
+                _dragonLink = GetComponent<DragonRider>();
+                if (_dragonLink == null) _dragonLink = gameObject.AddComponent<DragonRider>();
+                _dragonLink.Initialise(this, definition.dragonRider);
             }
 
             if (definition.summoner != null)
@@ -213,6 +274,23 @@ namespace BuildBuild.Combat
             _expiresAt = lifetime > 0f ? Time.time + lifetime : 0f;
         }
 
+        /// <summary>
+        /// Unit trieu hoi (linh xuong, ky si tu than, Bach Dia Long) khong co id rieng: an level + sao cua
+        /// <paramref name="owner"/> (khong an trang bi). Goi SAU `Initialise`, day lai mau.
+        /// </summary>
+        public void InheritProgression(Hero owner)
+        {
+            _healthMultiplier = _damageMultiplier = Progression.StatMultiplier(owner._definition.unitId);
+            _health.ResetTo(MaxHealth);
+        }
+
+        /// <summary>Danh dau day la Bach Dia Long cua <paramref name="rider"/>; <paramref name="anchor"/> = cho ve khi het quai. Goi SAU `Initialise`.</summary>
+        public void MakeDragonMount(DragonRider rider, Vector3 anchor)
+        {
+            _dragonLink = rider;
+            _anchor = anchor;
+        }
+
         void Update()
         {
             if (_definition == null || _dying) return;
@@ -229,8 +307,12 @@ namespace BuildBuild.Combat
             _skillCooldown -= Time.deltaTime;
             // Chua bam bat dau wave thi thanh dung yen: mana theo thoi gian chi chay trong luc danh.
             // Dang Ban Nhanh thi khoa thanh: 3x don danh ma van tich mana thi chieu gan nhu lien hoan (2026-09-15).
+            // Cuong No van tich: bien hinh vinh vien, khoa thanh la mat chieu lon ca tran (nguoi dung 2026-09-29).
             if (UsesMana && WaveManager.Fighting && !RapidFire)
                 _mana = Mathf.Min(_definition.manaMax, _mana + _definition.manaPerSecond * Time.deltaTime);
+
+            UpdateShield();     // khien ao Den Canh het han — Hero.Support.cs
+            UpdateGuard();      // vung Cam Co cua Banneret — Hero.Support.cs
 
             // Hoa Da: bat dong la cai GIA cua mien sat thuong — khong di, khong danh (GDD muc 3).
             if (_petrified)
@@ -243,8 +325,9 @@ namespace BuildBuild.Combat
             if (UpdateStunned()) return;
 
             bool rapid = RapidFire;
-            AuraMultipliers(out float auraDamage, out _);
-            _renderer.color = rapid && !HasBuffFx ? RapidFireTint : auraDamage > 1f ? BoneAuraTint : Color.white;
+            AuraMultipliers(out float auraDamage, out _, buffs: false);
+            _renderer.color = Raging ? _warden.RageTint
+                : rapid && !HasBuffFx ? RapidFireTint : auraDamage > 1f ? BoneAuraTint : Color.white;
             if (animator != null) animator.Speed = rapid ? _definition.skillPower : 1f;
 
             if (_charging)
@@ -264,13 +347,20 @@ namespace BuildBuild.Combat
             // Hero hoi mau (Vespera) nham dong minh, khong nham quai.
             if (_definition.healsAllies)
             {
-                UpdateHealer();
+                UpdateSupport(WoundedAlly(inRangeOnly: false));
+                return;
+            }
+
+            // Banneret buff dong minh, khong nham quai.
+            if (_banneret != null)
+            {
+                UpdateSupport(_banneret.FollowTarget());
                 return;
             }
 
             // Phi xong KHONG ep di bo ve cho trieu hoi: ky si can chien quay lung di ve thi bi quai danh ma khong danh
             // lai (nguoi dung bat 2026-09-15). Het quai thi nhanh `target == null` ben duoi tu dua ve.
-            var target = FindTarget(float.PositiveInfinity);
+            var target = FindAttackTarget();
             if (target == null)
             {
                 ReturnHome();
@@ -281,7 +371,7 @@ namespace BuildBuild.Combat
             // danh — moi frame dung mot hanh dong, de chuoi animation doc ra dung viec hero dang lam.
             if (!InRange(target))
             {
-                if (CanReach(target.transform.position)) MoveToward(target.transform.position);
+                if (CanReach(target)) MoveToward(target.transform.position, leashed: !FightingAlly(target));
                 else ReturnHome();
                 return;
             }
@@ -304,17 +394,20 @@ namespace BuildBuild.Combat
         {
             var position = target.transform.position;
             return IsRanged
-                ? (position - transform.position).sqrMagnitude <= _definition.range * _definition.range
-                : Battlefield.GroundDistance(position, transform.position) - target.BodyRadius <= _definition.range;
+                ? (position - transform.position).sqrMagnitude <= AttackRange * AttackRange
+                : Battlefield.GroundDistance(position, transform.position) - target.BodyRadius <= AttackRange;
         }
 
         // Order theo chan sau khi moi dich chuyen trong frame da xong; vo da ve ngay tren than.
         void LateUpdate()
         {
             // Duoi quai / bi day lui / tach doi hinh / phi: khong buoc nao duoc xuyen qua thanh hay ra khoi san.
-            if (!_dying) transform.position = Battlefield.Clamp(transform.position, _bodyRadius, clampRight: true);
-            _renderer.sortingOrder = SortOrder.ForUnit(this);
+            // Long Nhan dang bay (Thien Dia Long Giang) thi o tren khong: khong kep vao san, ve de len moi unit.
+            bool airborne = _dragonLink != null && _dragonLink.Airborne(this);
+            if (!_dying && !airborne) transform.position = Battlefield.Clamp(transform.position, _bodyRadius, clampRight: true);
+            _renderer.sortingOrder = airborne ? SortOrder.Air : SortOrder.ForUnit(this);
             if (_petrifyRenderer != null) _petrifyRenderer.sortingOrder = _renderer.sortingOrder + 1;
+            if (_shieldRenderer != null) _shieldRenderer.sortingOrder = _renderer.sortingOrder + 1;
         }
 
         /// <summary>Can chien luon duoi; tam xa chi di khi cho dung ban duoc nam trong day xich tinh tu o.</summary>
@@ -327,8 +420,42 @@ namespace BuildBuild.Combat
             return fromAnchor.sqrMagnitude <= reach * reach;
         }
 
-        /// <summary>Buoc ve phia <paramref name="destination"/>; tam xa khong buoc ra ngoai `leashRange` tinh tu o.</summary>
-        void MoveToward(Vector3 destination)
+        /// <summary>
+        /// Quai dang danh nhau voi unit phe ta khac (bi giu, hoac dang nham unit khac): can chien dang tank thi tam xa
+        /// phai theo len xa sat thuong, khong dung o o vi day xich (nguoi dung 2026-09-29).
+        /// </summary>
+        bool FightingAlly(Enemy enemy) =>
+            enemy.Holder != null || (enemy.EngagedHero != null && enemy.EngagedHero != this);
+
+        bool CanReach(Enemy enemy) => FightingAlly(enemy) || CanReach(enemy.transform.position);
+
+        /// <summary>
+        /// Can chien: quai gan nhat. Tam xa: con gan nhat DANG trong tam truoc (dung tai cho ban), khong co thi con gan
+        /// nhat toi duoc — con gan nhat ngoai day xich khong duoc keo hero ve o trong khi con khac ban duoc.
+        /// </summary>
+        Enemy FindAttackTarget()
+        {
+            if (!IsRanged) return FindTarget(float.PositiveInfinity);
+            Enemy inRange = null, reachable = null;
+            float inRangeSqr = float.PositiveInfinity, reachableSqr = float.PositiveInfinity;
+            foreach (var enemy in Enemy.Alive)
+            {
+                if (enemy == null || enemy.IsDying) continue;
+                float sqr = (enemy.transform.position - transform.position).sqrMagnitude;
+                if (InRange(enemy))
+                {
+                    if (sqr < inRangeSqr) { inRangeSqr = sqr; inRange = enemy; }
+                }
+                else if (sqr < reachableSqr && CanReach(enemy)) { reachableSqr = sqr; reachable = enemy; }
+            }
+            return inRange != null ? inRange : reachable;
+        }
+
+        /// <summary>
+        /// Buoc ve phia <paramref name="destination"/>; tam xa <paramref name="leashed"/> khong buoc ra ngoai `leashRange`
+        /// tinh tu o — cham mep thi truot theo mep (truoc: dung im giua duong vi buoc thang toi quai bi chan).
+        /// </summary>
+        void MoveToward(Vector3 destination, bool leashed = true)
         {
             var direction = destination - transform.position;
             direction.z = 0f;
@@ -336,7 +463,13 @@ namespace BuildBuild.Combat
 
             Face(destination.x);
             var next = transform.position + direction.normalized * (_definition.moveSpeed * Time.deltaTime);
-            if (IsRanged && (next - _anchor).sqrMagnitude > _definition.leashRange * _definition.leashRange) return;
+            if (IsRanged && leashed)
+            {
+                var fromAnchor = next - _anchor;
+                fromAnchor.z = 0f;
+                if (fromAnchor.sqrMagnitude > _definition.leashRange * _definition.leashRange)
+                    next = _anchor + fromAnchor.normalized * _definition.leashRange;
+            }
 
             transform.position = next;
             if (animator != null) animator.Play("walk");
@@ -351,7 +484,7 @@ namespace BuildBuild.Combat
             if (toHome.magnitude <= Mathf.Max(step, HomeTolerance))
             {
                 transform.position = _anchor;
-                _renderer.flipX = true;
+                FacingRight = true;
                 PlayIdle();
                 return true;
             }
@@ -380,7 +513,7 @@ namespace BuildBuild.Combat
                 _skillCooldown = _definition.skillCooldown;
             }
             else _cooldown = 1f / Mathf.Max(0.01f,
-                _definition.attackRate * (RapidFire ? _definition.skillPower : 1f) * rateMultiplier);
+                _definition.attackRate * _rateMultiplier * (RapidFire ? _definition.skillPower : 1f) * rateMultiplier);
 
             if (skill && _definition.skillKind == SkillKind.Petrify)
             {
@@ -392,6 +525,9 @@ namespace BuildBuild.Combat
                 BeginCharge();
                 return;
             }
+
+            // Thien Dia Long Giang: chon muc tieu + cat canh ngay tu o 1 cua clip (don ra o o cham dat).
+            if (skill && _definition.skillKind == SkillKind.DragonRider && _dragonLink != null) _dragonLink.BeginUltimate();
 
             _casting = true;
             _released = false;
@@ -438,7 +574,7 @@ namespace BuildBuild.Combat
             _chargeLeft = _definition.skillRadius;
             // Ngam cum quai dong nhat trong tam phi (nguoi dung 2026-09-15: quai o huong cheo thi phi cheo), khong co
             // thi phi thang theo huong dang nhin.
-            var facing = new Vector3(_renderer.flipX ? 1f : -1f, 0f, 0f);
+            var facing = new Vector3(FacingRight ? 1f : -1f, 0f, 0f);
             var aim = DensestCluster(_definition.skillRadius, ChargeHalfWidth * 2f);
             var direction = aim.HasValue ? aim.Value - transform.position : facing;
             direction.z = 0f;
@@ -491,15 +627,56 @@ namespace BuildBuild.Combat
             return best;
         }
 
-        // Art ve QUAY TRAI: flipX = true la nhin sang PHAI. Quai lot qua sau lung thi hero quay lai.
-        void Face(float targetX) => _renderer.flipX = targetX >= transform.position.x;
+        /// <summary>
+        /// Huong dang nhin. Art mac dinh ve QUAY TRAI (flipX = nhin phai); 3 linh trieu hoi ve QUAY PHAI
+        /// (`artFacesRight`) nen flipX nguoc lai — moi cho doc/ghi huong di qua day, dung dung `flipX`.
+        /// </summary>
+        bool FacingRight
+        {
+            get => _renderer.flipX != _definition.artFacesRight;
+            set => _renderer.flipX = value != _definition.artFacesRight;
+        }
+
+        // Quai lot qua sau lung thi hero quay lai.
+        void Face(float targetX) => FacingRight = targetX >= transform.position.x;
+
+        /// <summary>Dang chay mot clip danh / chieu / `PlayAction` chua het.</summary>
+        public bool Casting => _casting;
+
+        /// <summary>Doi bo animation (Chainwarden Cuong No); null = ve bo cua `HeroDefinition`.</summary>
+        public void SwapAnimations(SpriteAnimationSet set)
+        {
+            if (animator != null) animator.Swap(set != null ? set : _definition.animations);
+        }
+
+        /// <summary>
+        /// Phat mot clip THAN khong ra don (bien hinh, Loc Xich): khoa danh + hurt toi het clip nhu mot lan cast.
+        /// Clip phai ten "skill" hoac "attack" de `OnClipFinished` mo khoa. Dang ban viec khac thi bo qua, tra false.
+        /// </summary>
+        public bool PlayAction(SpriteAnimationClip clip)
+        {
+            if (animator == null || clip == null || !clip.IsValid) return false;
+            if (_dying || _petrified || _charging || IsStunned) return false;
+            if (_casting && !_released) return false;   // don dang vung chua ra: dung cat ngang
+            _casting = true;
+            _released = true;
+            _castingSkill = false;
+            animator.Play(clip, restart: true);
+            return true;
+        }
 
         /// <summary>He so sat thuong / toc danh tu hao quang ky si tu than (chi linh xuong nhan).</summary>
-        void AuraMultipliers(out float damage, out float rate)
+        /// <param name="buffs">false = bo buff Banneret (don thuong, Hieu Lenh, Quan Ky) — cho to mau hao quang linh xuong.</param>
+        void AuraMultipliers(out float damage, out float rate, bool buffs = true)
         {
             damage = 1f;
             rate = 1f;
             if (_summoner != null) _summoner.BoneAura(this, ref damage, ref rate);
+            if (_warden != null) _warden.RageMultipliers(ref damage, ref rate);
+            if (_dragonLink != null) _dragonLink.Multipliers(this, ref damage);
+            if (!buffs) return;
+            BuffMultipliers(ref damage, ref rate);
+            Banneret.AuraRate(this, ref rate);
         }
 
         // Dan bay ra o frame cham don cua clip (`hitFrame`; clip khong khai thi o cuoi clip) — khop voi luc vu khi
@@ -513,7 +690,8 @@ namespace BuildBuild.Combat
                 _castingSkill = false;
                 switch (_definition.skillKind)
                 {
-                    case SkillKind.HookThrow: if (_warden != null) _warden.ThrowHook(); break;
+                    case SkillKind.HookThrow: if (_warden != null) _warden.CastUltimate(); break;
+                    case SkillKind.DragonRider: if (_dragonLink != null) _dragonLink.CastUltimate(); break;
                     case SkillKind.FrostZone: CastFrostZone(); break;
                     case SkillKind.ConeSweep: CastConeSweep(); break;
                     case SkillKind.RapidFire:
@@ -521,6 +699,8 @@ namespace BuildBuild.Combat
                         SpawnBuffFx(_definition.skillDuration);
                         break;
                     case SkillKind.SummonKnight: if (_necromancer != null) _necromancer.SummonKnight(); break;
+                    case SkillKind.Lantern: CastLantern(); break;
+                    case SkillKind.Rally: if (_banneret != null) _banneret.CastUltimate(); break;
                 }
                 return;
             }
@@ -530,19 +710,31 @@ namespace BuildBuild.Combat
                 HealAlly();
                 return;
             }
+            if (_banneret != null)
+            {
+                _banneret.Strike();
+                return;
+            }
 
-            var target = FindTarget(float.PositiveInfinity);
+            var target = FindAttackTarget();
             if (target == null || !InRange(target)) return;
 
             AuraMultipliers(out float damageMultiplier, out _);
+            // Wyrmspear dam truc tiep (giao dai, khong co dan) — Nghich Lan can biet muc tieu.
+            if (_dragonLink != null && _dragonLink.Rider == this)
+            {
+                _dragonLink.Strike(target, BaseDamage * damageMultiplier);
+                return;
+            }
             var go = new GameObject("Projectile");
-            // Art quay trai, flipX = nhin phai: dau gay nam o phia hero dang nhin.
+            // Dau gay nam o phia hero dang nhin.
             go.transform.position = transform.position +
-                new Vector3(_renderer.flipX ? MuzzleOffset.x : -MuzzleOffset.x, MuzzleOffset.y, 0f);
+                new Vector3(FacingRight ? MuzzleOffset.x : -MuzzleOffset.x, MuzzleOffset.y, 0f);
             go.transform.localScale = Vector3.one * (_definition.projectileScale * Battlefield.UnitScale);
             go.AddComponent<SpriteRenderer>().sortingOrder = SortOrder.Air;
-            go.AddComponent<Projectile>().Launch(target, _definition.damage * damageMultiplier, _definition.splashRadius,
+            go.AddComponent<Projectile>().Launch(target, BaseDamage * damageMultiplier, _definition.splashRadius,
                 _definition.projectileSpeed, _definition.projectileFrames, _definition.impactFrames, this);
+            if (Raging) _warden.OffhandStrike(target, BaseDamage * damageMultiplier);
         }
 
         /// <summary>Admin panel: day thanh mana ngay (chieu nho khong co thanh thi het cooldown).</summary>
@@ -551,6 +743,13 @@ namespace BuildBuild.Combat
             if (_definition == null) return;
             _mana = _definition.manaMax;
             _skillCooldown = 0f;
+        }
+
+        /// <summary>Hoan mana (Thien Dia Long Giang ha duoc muc tieu).</summary>
+        public void AddMana(float amount)
+        {
+            if (_definition == null || !UsesMana || amount <= 0f) return;
+            _mana = Mathf.Min(_definition.manaMax, _mana + amount);
         }
 
         /// <summary>`Projectile` bao ve so quai vua an don thuong — nguon mana thu hai ben canh thoi gian.</summary>
@@ -576,9 +775,9 @@ namespace BuildBuild.Combat
         /// </summary>
         void CastConeSweep()
         {
-            float facing = _renderer.flipX ? 1f : -1f;
+            float facing = FacingRight ? 1f : -1f;
             float length = _definition.skillRadius;
-            float damage = _definition.damage * _definition.skillPower;
+            float damage = BaseDamage * _definition.skillPower;
 
             foreach (var enemy in Enemy.Alive.ToArray())
             {
@@ -590,7 +789,7 @@ namespace BuildBuild.Combat
             }
 
             var fxPosition = transform.position + new Vector3(facing * length * 0.5f, MuzzleOffset.y, 0f);
-            OneShotFx.Spawn(fxPosition, _definition.skillFrames, _renderer.flipX, SortOrder.Air, Battlefield.UnitScale);
+            OneShotFx.Spawn(fxPosition, _definition.skillFrames, FacingRight, SortOrder.Air, Battlefield.UnitScale);
         }
 
         /// <summary>
@@ -630,8 +829,8 @@ namespace BuildBuild.Combat
         {
             if (_dying || _casting || _petrified || _charging || IsStunned || animator == null) return;
             animator.Play("hurt", restart: true);
-            // Lui NGUOC huong dang nhin (flipX = nhin phai -> lui sang trai).
-            _knockback.Trigger(_renderer.flipX ? -1f : 1f);
+            // Lui NGUOC huong dang nhin. Long Giap mien hat van.
+            if (_dragonLink == null || !_dragonLink.Unshakable(this)) _knockback.Trigger(FacingRight ? -1f : 1f);
         }
 
         void OnDied()

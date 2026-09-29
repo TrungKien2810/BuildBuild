@@ -14,17 +14,91 @@ MonoBehaviour:
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.WardenDefinition
   sweepCooldown: 10
   sweepRadius: 1
-  sweepDamage: 10
+  sweepDamage: 25
   rootDuration: 1.5
-  sweepFrames: []
+  sweepFrames:
+  - {fileID: 21300000, guid: d8a9d5edd93da5143811ec903f62437b, type: 3}
+  - {fileID: 21300000, guid: 459e3a21741092743b981024f133f1d5, type: 3}
+  - {fileID: 21300000, guid: 86f7062135cea174f9c1606485904c87, type: 3}
+  - {fileID: 21300000, guid: ba68fea96a205f84098de2979d7b32af, type: 3}
+  sweepBody:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: e23bfea948838c5478eca74aae2a8c07, type: 3}
+    - {fileID: 21300000, guid: f275074621e42d44cafae6885576e3fe, type: 3}
+    - {fileID: 21300000, guid: 20a180dbe5d1b144c98bf101ae600da8, type: 3}
+    - {fileID: 21300000, guid: e3e260cf9b32ff641a614886829dbd45, type: 3}
+    - {fileID: 21300000, guid: 1e93848e5bce6934597ede3ff7a41199, type: 3}
+    - {fileID: 21300000, guid: da5280d0c6e3de74aa1695607bc5e333, type: 3}
+    loop: 0
+    hitFrame: 0
+  rootFrames:
+  - {fileID: 21300000, guid: e7755f31100521749bff3be2e56405b8, type: 3}
+  - {fileID: 21300000, guid: 86e7fb0b370470441a39e5ea15617727, type: 3}
+  chainIconFrames:
+  - {fileID: 21300000, guid: 2316d19f6166f634bb7538a14783ecf8, type: 3}
+  - {fileID: 21300000, guid: f6aa2d875d949704296b436163385f38, type: 3}
   hookRange: 6
   hookPullTime: 0.3
   hookStun: 0.8
   hookChainBonus: 0.2
   hookChainDuration: 4
-  hookFrames: []
+  hookFrames:
+  - {fileID: 21300000, guid: aa35474c63f68a842a2539768dd6c606, type: 3}
+  - {fileID: 21300000, guid: 2d851b65c1a434942bdbeca5f422f5ea, type: 3}
+  hookBite: {fileID: 21300000, guid: 925308bff21446e468d2339975a90f94, type: 3}
+  chainLink: {fileID: 21300000, guid: e690e275b85dd0f429b1356359e011b6, type: 3}
+  hookHand: {x: -0.41, y: 0.33}
   stunFrames:
   - {fileID: 21300000, guid: 1a1fae456d75bfb42a8ffae427a8e2f3, type: 3}
   - {fileID: 21300000, guid: 5f10dad14feb11e48ab8189f300fd865, type: 3}
   - {fileID: 21300000, guid: 7213f6b7419d25048959c0318ee69916, type: 3}
   - {fileID: 21300000, guid: b54ff30fbe8e230408ef3ea33a794952, type: 3}
+  rageDamageMultiplier: 1.5
+  rageRateMultiplier: 1.3
+  rageRange: 2
+  rageDamageReduction: 0.2
+  rageLifesteal: 0.25
+  rageAnimations: {fileID: 11400000, guid: 1bdacbdc0f68f6c4d9a3bdcf8491f14b, type: 2}
+  rageTransform:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: fda9a53a466aa9b40a30361227768ed3, type: 3}
+    - {fileID: 21300000, guid: 199d7e158a020b34889d313cfdf2dae1, type: 3}
+    - {fileID: 21300000, guid: c7c292f66e43ee140b78bf5c1fc06664, type: 3}
+    - {fileID: 21300000, guid: 2d3157906579774428a6a26867059950, type: 3}
+    - {fileID: 21300000, guid: d43b63507b067cb40a4917fe4363cc53, type: 3}
+    - {fileID: 21300000, guid: 952f87d1609d1ee4ab9a38cea57f8577, type: 3}
+    - {fileID: 21300000, guid: 15be56815d51b104ca7718c771060e54, type: 3}
+    - {fileID: 21300000, guid: 20ed33c1c31ec1447908110319ba016d, type: 3}
+    loop: 0
+    hitFrame: 0
+  rageScale: 1.15
+  rageTint: {r: 1, g: 0.6, b: 0.55, a: 1}
+  stormCooldown: 4
+  stormRadius: 2
+  stormPower: 2
+  stormRootDuration: 1
+  stormFrames: []
+  yankCooldown: 8
+  yankMinHeld: 2
+  yankPower: 1
+  yankPowerPerHeld: 0.5
+  yankStun: 1
+  yankPullTime: 0.2
+  yankBody:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: 04764d87bb2b5d14da81fed94c1c9d16, type: 3}
+    - {fileID: 21300000, guid: aa0427ce329ea184da6136d91cc186e0, type: 3}
+    - {fileID: 21300000, guid: 34313378b2c854340965380064f53629, type: 3}
+    - {fileID: 21300000, guid: 1b1cbe0e63b923e489d2bb4e6deed669, type: 3}
+    - {fileID: 21300000, guid: 9230e3e07f650174684e236c124c2682, type: 3}
+    - {fileID: 21300000, guid: 1100c195e8d8ff54aa59da88c351289c, type: 3}
+    loop: 0
+    hitFrame: 3
+  yankFrames:
+  - {fileID: 21300000, guid: 77123c08f2c7b0e44926cd950b9bf4c0, type: 3}
+  - {fileID: 21300000, guid: 67a5bbed8587874489a1099ac2897919, type: 3}
+  - {fileID: 21300000, guid: 1e01d9056d88cf94ba96eb6fffc45f9f, type: 3}
+  - {fileID: 21300000, guid: 8bdacaa06c2b2e8478ff028dae6daa87, type: 3}

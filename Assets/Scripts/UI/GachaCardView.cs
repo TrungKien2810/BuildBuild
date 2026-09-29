@@ -33,7 +33,7 @@ namespace BuildBuild.UI
             icon.enabled = unit.icon != null;
             nameText.text = $"{unit.displayName}\n{unit.rarity}";
             noteText.text = result.isNew ? "MỚI"
-                : result.starUp ? $"+{result.shardsGained} mảnh · LÊN SAO"
+                : result.canStarUp ? $"+{result.shardsGained} mảnh · ĐỦ NÂNG SAO"
                 : $"+{result.shardsGained} mảnh";
         }
     }

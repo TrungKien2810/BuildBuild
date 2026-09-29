@@ -2,6 +2,7 @@ using BuildBuild.Combat;
 using BuildBuild.Core;
 using BuildBuild.Meta;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace BuildBuild.UI
 {
@@ -64,13 +65,19 @@ namespace BuildBuild.UI
 
             GUI.enabled = waves.IsFighting;
             if (GUILayout.Button("Giet het quai")) waves.DevKillAll();
-            if (SoldierCamp.Current != null && GUILayout.Button("Linh: day tai nguyen + hoi chieu")) SoldierCamp.Current.DevFill();
+            if (SoldierCamp.Current != null && GUILayout.Button("Linh: day vong hoi chieu")) SoldierCamp.Current.DevFill();
             GUI.enabled = true;
 
             if (GUILayout.Button("Day mana moi hero / linh"))
                 foreach (var hero in Hero.Alive.ToArray()) hero.DevFillMana();
 
             if (cannons != null && GUILayout.Button("So huu ca 3 phao (test be phao)")) cannons.DevOwnAll();
+            GUILayout.Label($"Tai khoan: {SaveSystem.Account}");
+            GUILayout.BeginHorizontal();
+            if (GUILayout.Button("Chinh")) SwitchAccount(SaveSystem.MainAccount);
+            if (GUILayout.Button("Test (du nv)")) SwitchAccount(SaveSystem.TestAccount);
+            if (GUILayout.Button("Moi (tu dau)")) SwitchAccount(SaveSystem.FreshAccount);
+            GUILayout.EndHorizontal();
 
             if (GUILayout.Button("Hoi day mau lau dai"))
             {
@@ -78,6 +85,11 @@ namespace BuildBuild.UI
                 hud.Refresh();
             }
             castle.Health.Invulnerable = GUILayout.Toggle(castle.Health.Invulnerable, " Lau dai bat tu");
+
+            // Dev: cho 1 mon moi o, do hiem ngau nhien — test man Doi quan khi chua thang wave nao.
+            if (GUILayout.Button("+4 trang bi (moi o 1 mon)"))
+                for (int slot = 0; slot < 4; slot++)
+                    Armory.Add((BuildBuild.Data.EquipmentSlot)slot, (BuildBuild.Data.Rarity)Random.Range(0, 4));
 
             GUILayout.Label($"Toc do game: x{Time.timeScale:0.#}");
             GUILayout.BeginHorizontal();
@@ -92,7 +104,18 @@ namespace BuildBuild.UI
             {
                 var unit = owned[i];
                 GUILayout.BeginHorizontal();
-                GUILayout.Label($"{unit.id}  Lv{unit.level} {unit.stars}★ {unit.shards}mv", GUILayout.Width(240f));
+                GUILayout.Label($"{unit.id}  Lv{unit.level} {unit.stars}★ {unit.shards}mv", GUILayout.Width(160f));
+                // Dev: nang mien phi de test mo skill theo sao; hero tren san an so moi tu wave sau (HeroBoard dung lai).
+                if (GUILayout.Button("+Lv", GUILayout.Width(40f)) && unit.level < Progression.MaxLevel)
+                {
+                    unit.level = Mathf.Max(1, unit.level) + 1;
+                    SaveSystem.Save();
+                }
+                if (GUILayout.Button("+★", GUILayout.Width(40f)) && unit.stars < Progression.MaxStars)
+                {
+                    unit.stars++;
+                    SaveSystem.Save();
+                }
                 if (GUILayout.Button("Xoa", GUILayout.Width(60f)))
                 {
                     owned.RemoveAt(i);
@@ -103,6 +126,14 @@ namespace BuildBuild.UI
             GUILayout.EndScrollView();
 
             GUILayout.EndArea();
+        }
+
+        // Nap lai scene: HeroBoard, Economy, bai linh... deu doc save trong Start.
+        static void SwitchAccount(string account)
+        {
+            SaveSystem.SwitchAccount(account);
+            Time.timeScale = 1f;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         void SetWave(int wave)

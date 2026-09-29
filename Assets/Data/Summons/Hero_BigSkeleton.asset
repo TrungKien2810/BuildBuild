@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Hero_BigSkeleton
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
   displayName: "X\u01B0\u01A1ng l\u1EDBn"
+  unitId: 
   maxHealth: 700
   damage: 40
   attackRate: 0.7
@@ -22,6 +23,7 @@ MonoBehaviour:
   maxHeld: 3
   heldDamageBonus: 0
   warden: {fileID: 0}
+  dragonRider: {fileID: 0}
   projectileSpeed: 20
   splashRadius: 0.3
   projectileFrames: []
@@ -45,5 +47,16 @@ MonoBehaviour:
   healsAllies: 0
   healFrames: []
   buffFrames: []
+  shieldAmount: 0
+  shieldFrames: []
+  shieldBreakFrames: []
+  passiveStar: 1
+  minorStar: 3
+  secondMinorStar: 3
+  ultimateText: 
+  passiveText: 
+  minorText: 
+  secondMinorText: 
   animations: {fileID: 11400000, guid: b2f39e6b8f36fff4685b81e3acf2146d, type: 2}
+  artFacesRight: 0
   avatar: {fileID: 0}

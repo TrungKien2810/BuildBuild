@@ -10,7 +10,8 @@ namespace BuildBuild.Meta
         public UnitDefinition unit;
         public bool isNew;
         public int shardsGained;
-        public bool starUp;
+        /// <summary>Du mang de bam nang sao (khong tu len — `Progression.TryStarUp`).</summary>
+        public bool canStarUp;
     }
 
     /// <summary>
@@ -34,15 +35,19 @@ namespace BuildBuild.Meta
             _save = save;
         }
 
-        public List<GachaResult> Roll(int count)
+        /// <summary>
+        /// <paramref name="only"/> = null: banner tong hop (chia loai theo `heroShare`/`soldierShare`). Co gia tri: banner
+        /// rieng mot loai — chi ra unit loai do, bac trong thi ha bac trong CUNG loai. Pity dung chung moi banner.
+        /// </summary>
+        public List<GachaResult> Roll(int count, UnitCategory? only = null)
         {
             var results = new List<GachaResult>(count);
             for (int i = 0; i < count; i++)
             {
-                var unit = PickUnit(RollRarityWithPity(), RollCategory());
+                var unit = PickUnit(RollRarityWithPity(), only ?? RollCategory(), fallbackOtherCategories: only == null);
                 if (unit == null)
                 {
-                    Debug.LogError("[Gacha] GachaConfig.pool chua co unit nao.");
+                    Debug.LogError($"[Gacha] GachaConfig.pool chua co unit nao{(only != null ? $" loai {only}" : "")}.");
                     break;
                 }
                 results.Add(Grant(unit));
@@ -73,14 +78,15 @@ namespace BuildBuild.Meta
 
         static readonly UnitCategory[] Categories = { UnitCategory.Hero, UnitCategory.Cannon, UnitCategory.Soldier };
 
-        /// <summary>Moi bac: loai da quay truoc, roi cac loai con lai; bac trong het thi ha xuong bac duoi.</summary>
-        UnitDefinition PickUnit(Rarity rarity, UnitCategory category)
+        /// <summary>Moi bac: loai da quay truoc, roi (banner tong hop) cac loai con lai; bac trong het thi ha xuong bac duoi.</summary>
+        UnitDefinition PickUnit(Rarity rarity, UnitCategory category, bool fallbackOtherCategories)
         {
             for (int tier = (int)rarity; tier >= 0; tier--)
             {
                 var unit = RandomUnit((Rarity)tier, category);
-                foreach (var other in Categories)
-                    if (unit == null && other != category) unit = RandomUnit((Rarity)tier, other);
+                if (fallbackOtherCategories)
+                    foreach (var other in Categories)
+                        if (unit == null && other != category) unit = RandomUnit((Rarity)tier, other);
                 if (unit != null) return unit;
             }
             return null;
@@ -105,12 +111,8 @@ namespace BuildBuild.Meta
 
             owned.shards += _config.shardsPerDuplicate;
             result.shardsGained = _config.shardsPerDuplicate;
-            while (owned.shards >= _config.shardsPerStar)
-            {
-                owned.shards -= _config.shardsPerStar;
-                owned.stars++;
-                result.starUp = true;
-            }
+            // Nang sao la nut bam, khong tu len khi quay (chot 2026-09-28) — mang du thi chi bao.
+            result.canStarUp = Progression.CanStarUp(owned, _config.shardsPerStar);
             return result;
         }
     }

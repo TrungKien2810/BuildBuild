@@ -31,7 +31,7 @@ namespace BuildBuild.Data
     ///   Mau quai   = Mau goc x (1 + 0.12 x wave)
     ///   Sat thuong = Goc      x (1 + 0.08 x wave)
     ///   So luong   = 5 + floor(wave / 2)
-    ///   Vang wave  = 50 + 10 x wave
+    ///   Vang wave  = 80 + 18 x wave (+ bossGoldReward o wave boss) — CHI khi thang, giet quai khong ra vang
     /// </summary>
     [CreateAssetMenu(menuName = "BuildBuild/Wave Tuning", fileName = "WaveTuning")]
     public class WaveTuning : ScriptableObject
@@ -42,8 +42,10 @@ namespace BuildBuild.Data
         public int baseEnemyCount = 5;
 
         [Header("Kinh te")]
-        public int waveGoldBase = 50;
-        public int waveGoldPerWave = 10;
+        [Tooltip("Vang thang wave = base + perWave x wave. Nguon vang DUY NHAT trong tran (giet quai khong ra vang).")]
+        public int waveGoldBase = 80;
+        public int waveGoldPerWave = 18;
+        [Tooltip("Cong them khi thang wave co boss.")]
         public int bossGoldReward = 200;
 
         [Header("Nhip do")]
@@ -69,7 +71,8 @@ namespace BuildBuild.Data
         /// <summary>So quai THUONG cua wave (khong tinh boss va tinh anh).</summary>
         public int RegularCount(int wave, WaveBand band) =>
             band != null && band.fixedCount >= 0 ? band.fixedCount : EnemyCount(wave);
-        public int WaveGold(int wave) => waveGoldBase + waveGoldPerWave * wave;
+        public int WaveGold(int wave) =>
+            waveGoldBase + waveGoldPerWave * wave + (BandFor(wave) is { hasBoss: true } ? bossGoldReward : 0);
 
         public WaveBand BandFor(int wave)
         {

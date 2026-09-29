@@ -7,19 +7,18 @@ using UnityEngine.UI;
 namespace BuildBuild.UI
 {
     /// <summary>
-    /// 3 be phao tren phao dai (GAME_DESIGN.md muc 2 + 4). Cham be -> bang chon phao: lap phao DANG SO HUU, go phao,
-    /// hoac nang level. Chi doi duoc giua cac wave (gia dinh giong hero — GDD khong noi ro, plan muc 6 cau 3).
+    /// 3 be phao tren phao dai (GAME_DESIGN.md muc 2 + 4). Cham giong het o hero (`HeroBoard`, nguoi dung chot
+    /// 2026-09-28): be trong -> bang chon phao DANG SO HUU; be dang co phao -> go phao. Chi doi duoc giua cac wave.
+    /// Nang level KHONG lam o be — o man Doi quan (`UnitsScreen`), nhu hero.
     ///
-    /// So huu + level doc tu save theo `CannonDefinition.unitId` (cung id voi gacha). Moi phao chi lap tren MOT be.
-    /// Nang level theo so trong `CannonDefinition` (GDD muc 7: gia floor(50 x n^1,5), +8%/level, toi da 20) — phao dang
-    /// lap an so moi ngay.
+    /// So huu + level doc tu save theo `CannonDefinition.unitId` (cung id voi gacha). Moi phao chi lap tren MOT be:
+    /// phao dang o be khac thi dong do khoa, nhu hero dang dung tren san.
     ///
     /// Doi hinh phao nam trong save (`SaveData.cannons`): sang man gacha roi quay lai van con nguyen.
     /// </summary>
     public class CannonBoard : MonoBehaviour
     {
         [SerializeField] WaveManager waves;
-        [SerializeField] Economy economy;
         [SerializeField] CannonMount[] mounts;
 
         [Header("Bang chon phao")]
@@ -29,10 +28,6 @@ namespace BuildBuild.UI
         [SerializeField] Button[] rosterButtons;
         [Tooltip("Cung thu tu voi roster: dong trang thai (level + chi so, hoac 'Chua so huu').")]
         [SerializeField] Text[] rosterInfo;
-        [Tooltip("Cung thu tu voi roster.")]
-        [SerializeField] Button[] upgradeButtons;
-        [SerializeField] Text[] upgradeLabels;
-        [SerializeField] Button removeButton;
         [SerializeField] Button cancelButton;
 
         CannonMount _pending;
@@ -43,14 +38,11 @@ namespace BuildBuild.UI
             {
                 int index = i;
                 if (i < rosterButtons.Length) rosterButtons[i].onClick.AddListener(() => Choose(index));
-                if (i < upgradeButtons.Length) upgradeButtons[i].onClick.AddListener(() => Upgrade(index));
             }
-            removeButton.onClick.AddListener(Remove);
             cancelButton.onClick.AddListener(ClosePicker);
             waves.WaveStarted += OnWaveStarted;
             waves.WaveCleared += OnWaveEnded;
             waves.Defeated += OnDefeated;
-            if (economy != null) economy.Changed += OnGoldChanged;
             ClosePicker();
             RestoreLoadout();
         }
@@ -63,12 +55,19 @@ namespace BuildBuild.UI
                 waves.WaveCleared -= OnWaveEnded;
                 waves.Defeated -= OnDefeated;
             }
-            if (economy != null) economy.Changed -= OnGoldChanged;
         }
 
         public void OnMountClicked(CannonMount mount)
         {
             if (waves.IsFighting) return;
+
+            if (mount.Occupant != null)
+            {
+                mount.Assign(null, 1);
+                SaveLoadout();
+                return;
+            }
+
             _pending = mount;
             RefreshPicker();
             pickerPanel.SetActive(true);
@@ -94,37 +93,11 @@ namespace BuildBuild.UI
 
         void Choose(int index)
         {
-            if (_pending == null || Owned(roster[index]) == null) return;
-
-            // Phao dang o be khac thi chuyen sang be nay (moi phao chi co mot khau).
-            foreach (var mount in mounts)
-                if (mount != _pending && mount.Definition == roster[index]) mount.Assign(null, 1);
+            if (_pending == null || Owned(roster[index]) == null || OnMount(roster[index])) return;
 
             _pending.Assign(roster[index], LevelOf(roster[index]));
             SaveLoadout();
             ClosePicker();
-        }
-
-        void Remove()
-        {
-            if (_pending == null) return;
-            _pending.Assign(null, 1);
-            SaveLoadout();
-            ClosePicker();
-        }
-
-        void Upgrade(int index)
-        {
-            var cannon = roster[index];
-            var owned = Owned(cannon);
-            if (owned == null || owned.level >= cannon.maxLevel) return;
-            if (economy == null || !economy.TrySpend(cannon.UpgradeCost(owned.level))) return;
-
-            owned.level = Mathf.Max(1, owned.level) + 1;
-            SaveSystem.Save();
-            foreach (var mount in mounts)
-                if (mount.Definition == cannon) mount.Occupant.SetLevel(owned.level);
-            RefreshPicker();
         }
 
         void RefreshPicker()
@@ -136,22 +109,20 @@ namespace BuildBuild.UI
                 int level = LevelOf(cannon);
 
                 if (i < rosterButtons.Length)
-                    rosterButtons[i].interactable = owned != null && (_pending == null || _pending.Definition != cannon);
+                    rosterButtons[i].interactable = owned != null && !OnMount(cannon);
 
                 if (i < rosterInfo.Length)
                     rosterInfo[i].text = owned == null
                         ? "Chưa sở hữu — quay gacha để nhận"
-                        : $"Lv {level}   ST {cannon.DamageAt(level):0.#}   {cannon.fireRate:0.#}/s   Tầm {cannon.range:0.#}{OnMountNote(cannon)}";
-
-                if (i < upgradeButtons.Length)
-                {
-                    bool maxed = level >= cannon.maxLevel;
-                    int cost = cannon.UpgradeCost(level);
-                    upgradeButtons[i].interactable = owned != null && !maxed && economy != null && economy.Gold >= cost;
-                    if (i < upgradeLabels.Length) upgradeLabels[i].text = maxed ? "Tối đa" : $"Nâng {cost}";
-                }
+                        : $"Lv {level}   ST {Progression.CannonDamage(cannon, level):0.#}   {cannon.fireRate:0.#}/s   Tầm {cannon.range:0.#}{OnMountNote(cannon)}";
             }
-            removeButton.gameObject.SetActive(_pending != null && _pending.Occupant != null);
+        }
+
+        bool OnMount(CannonDefinition cannon)
+        {
+            foreach (var mount in mounts)
+                if (mount.Definition == cannon) return true;
+            return false;
         }
 
         string OnMountNote(CannonDefinition cannon)
@@ -159,11 +130,6 @@ namespace BuildBuild.UI
             for (int i = 0; i < mounts.Length; i++)
                 if (mounts[i].Definition == cannon) return $"   (bệ {i + 1})";
             return "";
-        }
-
-        void OnGoldChanged(int _)
-        {
-            if (pickerPanel.activeSelf) RefreshPicker();
         }
 
         void OnWaveStarted(int wave)

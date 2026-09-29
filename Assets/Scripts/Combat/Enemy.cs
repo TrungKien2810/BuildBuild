@@ -45,6 +45,8 @@ namespace BuildBuild.Combat
         SpriteRenderer _renderer;
 
         float _damage;
+        float _aweWeaken, _aweVulnerability, _aweUntil;
+        float _armorBreak, _armorBrokenUntil;
         float _attackCooldown;
         float _frozenUntil;
         float _stunnedUntil;
@@ -53,7 +55,16 @@ namespace BuildBuild.Combat
         UnityEngine.Object _markedBy;
         float _markedUntil;
         GameObject _markFx;
+        GameObject _rootFx;
+        SpriteRenderer _rootRenderer;
+        GameObject _chainIcon;
+        SpriteRenderer _chainIconRenderer;
+
+        /// <summary>O khoa tren dau quai mang Xich — `Warden` gan khi Chainwarden ra san; null = khong ve.</summary>
+        public static Sprite[] ChainIconFrames;
+        static readonly Vector3 ChainIconOffset = new Vector3(0.2f, 0.65f, 0f);   // lech phai de khong chong sao choang
         Health _pendingHit;
+        SpriteAnimationClip _cast;
         SpriteRenderer _markRenderer;
         GameObject _stunFx;
         SpriteRenderer _stunRenderer;
@@ -68,6 +79,8 @@ namespace BuildBuild.Combat
         float _chainBonus;
         float _pullUntil;
         Vector3 _pullTo;
+        float _launchStart, _launchUntil, _launchHeight;
+        Vector3 _launchGround;
         readonly Knockback _knockback = new Knockback();
 
         /// <summary>Toc tach hai quai dang dung chong len nhau (xem `Battlefield.Separation`).</summary>
@@ -92,8 +105,8 @@ namespace BuildBuild.Combat
         /// <summary>Hero dang vay chay ra xa hon aggro x he so nay thi moi bo — tranh bo cho chi vi hero lui mot nhip.</summary>
         const float StickyAggro = 1.5f;
 
-        /// <summary>Ban ra khi quai chet han (da chay xong animation death). Tham so la vang thuong.</summary>
-        public event Action<Enemy, int> Died;
+        /// <summary>Ban ra khi quai chet han (da chay xong animation death).</summary>
+        public event Action<Enemy> Died;
 
         /// <summary>Ban ra NGAY LUC quai het mau (truoc animation death), cho moi quai — `Necromancer` nghe de dung linh xuong.</summary>
         public static event Action<Enemy> Killed;
@@ -104,6 +117,7 @@ namespace BuildBuild.Combat
         public bool IsFrozen => Time.time < _frozenUntil;
         bool IsStunned => Time.time < _stunnedUntil;
         public bool IsBoss => _definition != null && _definition.kind == EnemyKind.Boss;
+        public bool IsElite => _definition != null && _definition.kind == EnemyKind.TinhAnh;
 
         /// <summary>Bi troi (Quat Xich): dung im, van danh.</summary>
         public bool IsRooted => Time.time < _rootedUntil;
@@ -128,6 +142,18 @@ namespace BuildBuild.Combat
         /// <summary>Nua be ngang than tren mat dat (world) — tam can chien va vung no do toi MEP than, khong toi chan.</summary>
         public float BodyRadius => _bodyRadius;
 
+        /// <summary>Chieu cao than (world) — cho dat thanh mau tren dau.</summary>
+        public float BodyHeight => _bodyHeight;
+
+        /// <summary>Sat thuong moi don thuong (da nhan he so wave, tru Long Uy cua Wyrmspear neu dang dung trong tam).</summary>
+        public float Damage => _damage * (Time.time < _aweUntil ? 1f - _aweWeaken : 1f);
+
+        /// <summary>Dang chay clip than cua mot chieu (`PlayCast`) — dung di, dung danh toi het clip.</summary>
+        public bool IsCasting => _cast != null && animator != null && animator.CurrentClip == _cast.name && !animator.IsFinished;
+
+        /// <summary>Dang vung don thuong hoac dang cast — chieu moi phai doi, cat ngang la nuot mat don.</summary>
+        public bool IsBusy => IsCasting || (animator != null && animator.CurrentClip == "attack" && !animator.IsFinished);
+
         /// <summary>Giua than (world) — cho dan nham vao.</summary>
         public Vector3 BodyCenter => transform.position + new Vector3(0f, _bodyHeight * 0.5f, 0f);
 
@@ -145,6 +171,7 @@ namespace BuildBuild.Combat
             _renderer = GetComponent<SpriteRenderer>();
             _health = GetComponent<Health>();
             _health.Damaged += OnDamaged;
+            gameObject.AddComponent<CombatFeedback>().Init(ally: false, () => _bodyHeight);
             _health.Died += OnDied;
         }
 
@@ -162,10 +189,14 @@ namespace BuildBuild.Combat
             _dying = false;
             _markedBy = null;
             _markedUntil = 0f;
+            _cast = null;
             Disengage();
             _rootedUntil = 0f;
             _chainedUntil = 0f;
+            _aweUntil = 0f;
+            _armorBrokenUntil = 0f;
             _pullUntil = 0f;
+            _launchUntil = 0f;
             _health.Vulnerability = 0f;
             _knockback.Reset();
             Thaw();
@@ -270,10 +301,53 @@ namespace BuildBuild.Combat
         }
 
         /// <summary>Troi <paramref name="seconds"/> giay (Quat Xich): khong di, khong bi day, van danh. Chong nhau lay han dai hon.</summary>
-        public void ApplyRoot(float seconds)
+        public void ApplyRoot(float seconds, Sprite[] frames = null)
         {
             if (_dying || seconds <= 0f) return;
-            _rootedUntil = Mathf.Max(_rootedUntil, Time.time + seconds);
+            if (Time.time + seconds <= _rootedUntil) return;
+            _rootedUntil = Time.time + seconds;
+            // Vong xich quanh chan, lap toi het troi; troi moi dai hon thi dung lai vong cho khop han.
+            if (_rootFx != null) Destroy(_rootFx);
+            _rootFx = OneShotFx.SpawnLoop(transform, Vector3.zero, frames, seconds, SortOrder.ForUnit(this) + 1);
+            _rootRenderer = _rootFx != null ? _rootFx.GetComponent<SpriteRenderer>() : null;
+        }
+
+        /// <summary>O khoa tren dau hien/tat theo `IsChained` (Xich doi theo unit giu nen soat moi frame).</summary>
+        void UpdateChainIcon()
+        {
+            bool show = IsChained && ChainIconFrames != null && ChainIconFrames.Length > 0;
+            if (show == (_chainIcon != null)) return;
+            if (!show)
+            {
+                Destroy(_chainIcon);
+                _chainIcon = null;
+                _chainIconRenderer = null;
+                return;
+            }
+            _chainIcon = OneShotFx.SpawnLoop(transform, ChainIconOffset, ChainIconFrames, float.PositiveInfinity,
+                SortOrder.ForUnit(this) + 1);
+            _chainIconRenderer = _chainIcon != null ? _chainIcon.GetComponent<SpriteRenderer>() : null;
+        }
+
+        /// <summary>
+        /// Long Uy (Wyrmspear): dang trong tam thi giam cong <paramref name="weaken"/> va nhan them <paramref name="vulnerability"/>
+        /// sat thuong. Nguon goi MOI frame, het han ngay sau (0,2s) — ra khoi tam la mat. Hai nguon lay muc cao hon.
+        /// </summary>
+        public void ApplyAwe(float weaken, float vulnerability)
+        {
+            if (_dying) return;
+            bool active = Time.time < _aweUntil;
+            _aweWeaken = active ? Mathf.Max(_aweWeaken, weaken) : weaken;
+            _aweVulnerability = active ? Mathf.Max(_aweVulnerability, vulnerability) : vulnerability;
+            _aweUntil = Time.time + 0.2f;
+        }
+
+        /// <summary>Pha giap (Dia Long Chan): nhan them <paramref name="bonus"/> sat thuong tu moi nguon. Khong cong don.</summary>
+        public void ApplyArmorBreak(float bonus, float seconds)
+        {
+            if (_dying || bonus <= 0f || seconds <= 0f) return;
+            _armorBreak = Time.time < _armorBrokenUntil ? Mathf.Max(_armorBreak, bonus) : bonus;
+            _armorBrokenUntil = Mathf.Max(_armorBrokenUntil, Time.time + seconds);
         }
 
         /// <summary>Xich co thoi han (Nem Moc): nhan them <paramref name="bonus"/> sat thuong ke ca khi khong bi giu.</summary>
@@ -296,6 +370,45 @@ namespace BuildBuild.Combat
             _knockback.Reset();
             _pullTo = new Vector3(destination.x, destination.y, transform.position.z);
             _pullUntil = Time.time + Mathf.Max(0.01f, seconds);
+        }
+
+        /// <summary>Dang bi hat tung (cot da Bach Dia Long): khong di, khong danh, ve o lop Air.</summary>
+        public bool IsLaunched => _launchUntil > 0f;
+
+        /// <summary>
+        /// Hat tung cao <paramref name="height"/> (world) trong <paramref name="seconds"/> giay roi roi ve dung cho cu:
+        /// bo cho vay, khong di khong danh. Boss khong bi nhac len. Dang bay thi khong hat lai.
+        /// </summary>
+        public void KnockUp(float height, float seconds)
+        {
+            if (_dying || IsBoss || IsLaunched || seconds <= 0f) return;
+            Disengage();
+            _knockback.Reset();
+            _pullUntil = 0f;
+            _launchGround = transform.position;
+            _launchHeight = height;
+            _launchStart = Time.time;
+            _launchUntil = Time.time + seconds;
+        }
+
+        /// <summary>Dang bay thi dat do cao theo parabol va tra ve true; cham dat thi ve cho cu.</summary>
+        bool UpdateLaunch()
+        {
+            if (!IsLaunched) return false;
+            float u = (Time.time - _launchStart) / (_launchUntil - _launchStart);
+            if (u >= 1f)
+            {
+                Land();
+                return false;
+            }
+            transform.position = _launchGround + new Vector3(0f, 4f * _launchHeight * u * (1f - u), 0f);
+            return true;
+        }
+
+        void Land()
+        {
+            transform.position = _launchGround;
+            _launchUntil = 0f;
         }
 
         /// <summary>Dang bi keo thi truot mot nhip ve dich va tra ve true — frame nay khong di, khong danh.</summary>
@@ -339,10 +452,13 @@ namespace BuildBuild.Combat
             if (_dying || _definition == null) return;
 
             // Xich doi theo unit dang giu (con song, con giu) — dat lai moi frame, ke ca luc dang bi khoa.
-            _health.Vulnerability = ChainBonus;
+            _health.Vulnerability = ChainBonus
+                + (Time.time < _armorBrokenUntil ? _armorBreak : 0f)
+                + (Time.time < _aweUntil ? _aweVulnerability : 0f);
+            UpdateChainIcon();
 
             // Bi moc keo: truot ve phia Chainwarden, khong di khong danh (van ve mau/choang dung).
-            if (UpdatePull())
+            if (UpdateLaunch() || UpdatePull())
             {
                 UpdateFrozen();
                 return;
@@ -353,6 +469,9 @@ namespace BuildBuild.Combat
             if (UpdateFrozen()) return;
 
             _attackCooldown -= Time.deltaTime;
+
+            // Dang cast (boss dap dat / gam): dung yen toi het clip than.
+            if (IsCasting) return;
 
             // Bi day lui: frame nay chi lui, khong di khong danh (cooldown van chay tiep o tren). Bi troi thi dung chan.
             bool rooted = IsRooted;
@@ -393,11 +512,14 @@ namespace BuildBuild.Combat
         // Order theo chan sau khi moi dich chuyen trong frame da xong; dau an ky ve ngay tren than.
         void LateUpdate()
         {
-            if (!_dying) transform.position = Battlefield.Clamp(transform.position, _bodyRadius, clampRight: false);
+            // Dang bay: khong kep vao dai dat (do cao la toa do y) va ve de len moi unit.
+            if (!_dying && !IsLaunched) transform.position = Battlefield.Clamp(transform.position, _bodyRadius, clampRight: false);
             if (_renderer == null) return;
-            _renderer.sortingOrder = SortOrder.ForUnit(this);
+            _renderer.sortingOrder = IsLaunched ? SortOrder.Air : SortOrder.ForUnit(this);
             if (_markRenderer != null) _markRenderer.sortingOrder = _renderer.sortingOrder + 1;
             if (_stunRenderer != null) _stunRenderer.sortingOrder = _renderer.sortingOrder + 1;
+            if (_rootRenderer != null) _rootRenderer.sortingOrder = _renderer.sortingOrder + 1;
+            if (_chainIconRenderer != null) _chainIconRenderer.sortingOrder = _renderer.sortingOrder + 1;
         }
 
         /// <summary>
@@ -579,9 +701,20 @@ namespace BuildBuild.Combat
             if (clip == null || !clip.IsValid || clip.hitFrame <= 0) LandHit();
         }
 
+        /// <summary>
+        /// Chay clip than cua mot chieu (vd. boss dap dat). Trong luc clip chay quai dung yen, khong danh, khong giat
+        /// hurt. `HitFrame` / `ClipFinished` ban ra voi ten clip — nguoi goi nghe de ra don dung frame.
+        /// </summary>
+        public void PlayCast(SpriteAnimationClip clip)
+        {
+            if (_dying || animator == null || clip == null || !clip.IsValid) return;
+            _cast = clip;
+            animator.Play(clip, restart: true);
+        }
+
         void LandHit()
         {
-            if (_pendingHit != null && !_pendingHit.IsDead) _pendingHit.TakeDamage(_damage, _health);
+            if (_pendingHit != null && !_pendingHit.IsDead) _pendingHit.TakeDamage(Damage, _health);
             _pendingHit = null;
         }
 
@@ -594,7 +727,7 @@ namespace BuildBuild.Combat
         {
             if (_dying || animator == null || IsFrozen) return;
             // Dang vung attack thi khong giat hurt: cat clip la nuot mat don chua toi frame cham.
-            if (animator.CurrentClip == "attack" && !animator.IsFinished) return;
+            if (IsBusy) return;
             // Hurt khong duoc cat ngang death; death moi la thu chot. Dang dong bang thi cung khong
             // giat hurt — giu nguyen dang cung do moi doc ra la dang bi khoa.
             animator.Play("hurt", restart: true);
@@ -606,8 +739,12 @@ namespace BuildBuild.Combat
         {
             if (_dying) return;
             _dying = true;
+            if (IsLaunched) Land();     // chet giua khong trung -> clip death nam tren dat
             Killed?.Invoke(this);   // doc an ky TRUOC khi go FX; an ky dua tren thoi gian, khong tren FX
             if (_markFx != null) Destroy(_markFx);
+            if (_rootFx != null) Destroy(_rootFx);
+            if (_chainIcon != null) Destroy(_chainIcon);
+            _chainIcon = null;
             Thaw();     // chet trong luc dong bang van phai chay het animation death
             if (animator != null && animator.CurrentClip != null)
             {
@@ -625,7 +762,7 @@ namespace BuildBuild.Combat
 
         void Finish()
         {
-            Died?.Invoke(this, _definition != null ? _definition.goldReward : 0);
+            Died?.Invoke(this);
             Destroy(gameObject);
         }
     }

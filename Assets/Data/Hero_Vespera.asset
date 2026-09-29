@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Hero_Vespera
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
   displayName: Vespera
+  unitId: vespera
   maxHealth: 350
   damage: 20
   attackRate: 0.8
@@ -22,6 +23,7 @@ MonoBehaviour:
   maxHeld: 3
   heldDamageBonus: 0
   warden: {fileID: 0}
+  dragonRider: {fileID: 0}
   projectileSpeed: 8
   splashRadius: 0.8
   projectileFrames: []
@@ -29,16 +31,22 @@ MonoBehaviour:
   impactFrames: []
   impactScale: 1
   knockbackOnHit: 0
-  skillKind: 0
+  skillKind: 9
   skillTier: 0
   skillCooldown: 0
-  manaMax: 0
+  manaMax: 5
   manaPerSecond: 0.35
   manaPerHit: 0.25
-  skillRadius: 1.6
-  skillDuration: 3
-  skillPower: 1
-  skillFrames: []
+  skillRadius: 1.5
+  skillDuration: 5
+  skillPower: 2
+  skillFrames:
+  - {fileID: 21300000, guid: 2cd17623073d73449a42570952611b13, type: 3}
+  - {fileID: 21300000, guid: 14f900f9a4d8d434bb2490363fc82a1f, type: 3}
+  - {fileID: 21300000, guid: 950f3cbb35969464a9b273a968a64b0a, type: 3}
+  - {fileID: 21300000, guid: 9cf7601e85e6d6c42a32ec3fa75349a7, type: 3}
+  - {fileID: 21300000, guid: 81a3a94eda08f364c909e41d251abac5, type: 3}
+  - {fileID: 21300000, guid: a7ebdefb141d39449b827ae78e1716fb, type: 3}
   skillIntroFrames: []
   stunFrames: []
   summoner: {fileID: 0}
@@ -49,5 +57,24 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 41b269f7d7c011c40ab0eb398d1c8eb4, type: 3}
   - {fileID: 21300000, guid: 42ffb930453c8b24ca2dafcd2702fc1e, type: 3}
   buffFrames: []
+  shieldAmount: 60
+  shieldFrames:
+  - {fileID: 21300000, guid: 8d90344e3f723bd40ad3dbed10d3f665, type: 3}
+  - {fileID: 21300000, guid: e6fb0771b5919fd43a255272291dd617, type: 3}
+  - {fileID: 21300000, guid: e50a0956eb9732f429a1574e755bba61, type: 3}
+  - {fileID: 21300000, guid: 25920402ed1b841448a496d98c97c549, type: 3}
+  shieldBreakFrames:
+  - {fileID: 21300000, guid: 34242bb973822244184693c10cc92d19, type: 3}
+  - {fileID: 21300000, guid: 81325b3286adb0249bff7c4ba98252ef, type: 3}
+  - {fileID: 21300000, guid: 2498283db5da6c441848f0d4f67a9c09, type: 3}
+  - {fileID: 21300000, guid: 642291fb69c38db439bfb653790893f4, type: 3}
+  passiveStar: 1
+  minorStar: 3
+  secondMinorStar: 3
+  ultimateText: 
+  passiveText: 
+  minorText: 
+  secondMinorText: 
   animations: {fileID: 11400000, guid: 86d3e5a031c49414bb7af68d1d33e22d, type: 2}
+  artFacesRight: 0
   avatar: {fileID: 21300000, guid: 29cc412a2897537439bb7ed668cf02db, type: 3}

@@ -14,7 +14,8 @@ namespace BuildBuild.Core
     /// Thua (lau dai sup) cung dung tai wave do — lan bam sau danh lai dung wave vua thua, khong ve wave 1.
     /// Lau dai hoi day mau NGAY khi wave ket thuc (thang lan thua), khong doi den luc bam danh wave sau.
     ///
-    /// Lop nay khong tu cham vao vi tien; no chi cong vang qua `Economy`.
+    /// Vang CHI tra khi THANG wave (`WaveTuning.WaveGold`), giet quai khong ra vang: thua ma van co tien thi de qua
+    /// (nguoi dung chot 2026-09-29). Lop nay khong tu cham vao vi tien; no chi cong vang qua `Economy`.
     /// </summary>
     public class WaveManager : MonoBehaviour
     {
@@ -179,11 +180,10 @@ namespace BuildBuild.Core
             _alive.Add(enemy);
         }
 
-        void OnEnemyDied(Enemy enemy, int gold)
+        void OnEnemyDied(Enemy enemy)
         {
             enemy.Died -= OnEnemyDied;
             _alive.Remove(enemy);
-            if (economy != null) economy.Add(gold);
         }
 
         void OnCastleDestroyed()
@@ -203,11 +203,12 @@ namespace BuildBuild.Core
             NextWave = Mathf.Clamp(wave, 1, tuning.totalWaves);
         }
 
-        /// <summary>Admin panel: giet moi quai dang song (van cong vang, van tinh la thang neu da spawn het).</summary>
+        /// <summary>Admin panel: giet moi quai dang song (van tinh la thang neu da spawn het).</summary>
         public void DevKillAll()
         {
             foreach (var enemy in _alive.ToArray())
-                if (enemy != null && !enemy.IsDying) enemy.Health.TakeDamage(enemy.Health.Current);
+                if (enemy != null && !enemy.IsDying)   // chia bu Armor: boss giap 30% an Current thi con song
+                    enemy.Health.TakeDamage(enemy.Health.Current / Mathf.Max(0.01f, 1f - enemy.Health.Armor));
         }
 
         void ClearAlive()
@@ -216,6 +217,8 @@ namespace BuildBuild.Core
             {
                 if (enemy == null) continue;
                 enemy.Died -= OnEnemyDied;
+                // Tat NGAY: Destroy chi xoa cuoi frame, quai con lai trong frame van danh trung hero vua dung lai o het wave.
+                enemy.gameObject.SetActive(false);
                 Destroy(enemy.gameObject);
             }
             _alive.Clear();

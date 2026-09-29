@@ -3,8 +3,8 @@ using UnityEngine;
 namespace BuildBuild.Data
 {
     /// <summary>
-    /// Mot loai LINH TRIEU HOI (GAME_DESIGN.md muc 2, IDEAS #1): cho o bai dat sau thanh, day vong hoi chieu + du tai
-    /// nguyen thi keo tha ra san, sinh NGUYEN TOP `squadSize` con quanh diem tha. Het wave thi don sach.
+    /// Mot loai LINH TRIEU HOI (GAME_DESIGN.md muc 2, IDEAS #1): cho o bai dat sau thanh, day vong hoi chieu thi keo
+    /// tha ra san, sinh NGUYEN TOP `squadSize` con quanh diem tha. Het wave thi don sach.
     ///
     /// Ke thua `HeroDefinition`: tren san moi con linh la mot `Hero` nhu linh xuong cua Bonecaller — cung mau,
     /// animation, luat di chuyen (can chien duoi quai, tam xa co day xich tinh tu diem tha) va luat chan quai
@@ -18,9 +18,7 @@ namespace BuildBuild.Data
         [Header("Trieu hoi")]
         [Tooltip("So con sinh ra moi lan keo tha.")]
         [Min(1)] public int squadSize = 3;
-        [Tooltip("Giay de vong hoi chieu tren dau day lai sau moi lan trieu hoi.")]
+        [Tooltip("Giay de vong hoi chieu tren dau day — tinh ca tu dau wave lan sau moi lan trieu hoi.")]
         public float summonCooldown = 15f;
-        [Tooltip("Tai nguyen trieu hoi tru moi lan keo tha (xem `SummonConfig`).")]
-        public int summonCost = 30;
     }
 }

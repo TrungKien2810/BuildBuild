@@ -18,8 +18,8 @@ namespace BuildBuild.UI
     ///
     /// Doi hinh nam trong save (`SaveData.lineup`): sang man gacha roi quay lai van con nguyen.
     ///
-    /// `roster` hien la moi hero co art, chua loc theo so huu trong save — gacha chua ra duoc hero co
-    /// bo art chien dau nao.
+    /// `roster` la moi hero co art; chi hero DA SO HUU (`HeroDefinition.unitId` co trong save) moi bam
+    /// chon duoc — nhu bang phao. Doi hinh cu trong save co hero chua so huu thi o do de trong.
     /// </summary>
     public class HeroBoard : MonoBehaviour
     {
@@ -30,6 +30,8 @@ namespace BuildBuild.UI
         [Header("Bang chon hero")]
         [SerializeField] GameObject pickerPanel;
         [SerializeField] HeroDefinition[] roster;
+        [Tooltip("Trang bi hero dang mac cong chi so luc dat xuong san (`Hero.Initialise`).")]
+        [SerializeField] EquipmentConfig equipment;
         [Tooltip("Cung thu tu voi roster.")]
         [SerializeField] Button[] rosterButtons;
         [Tooltip(
@@ -82,7 +84,7 @@ namespace BuildBuild.UI
             for (int i = 0; i < rosterButtons.Length; i++)
             {
                 bool onBoard = OnBoard(roster[i]);
-                rosterButtons[i].interactable = !onBoard;
+                rosterButtons[i].interactable = !onBoard && Owned(roster[i]);
                 MarkSkillSlot(i, onBoard);
             }
             pickerPanel.SetActive(true);
@@ -100,7 +102,7 @@ namespace BuildBuild.UI
 
         void Choose(int index)
         {
-            if (_pending == null) return;
+            if (_pending == null || !Owned(roster[index])) return;
 
             _pending.Assign(roster[index]);
             Spawn(_pending);        // dat xong thay hero dung o o ngay, khong doi toi wave
@@ -151,7 +153,7 @@ namespace BuildBuild.UI
             if (slot.Definition == null) return;
 
             var hero = Instantiate(heroPrefab, slot.transform.position, Quaternion.identity);
-            hero.Initialise(slot.Definition);
+            hero.Initialise(slot.Definition, equipment);
             slot.SetOccupant(hero);
         }
 
@@ -161,7 +163,7 @@ namespace BuildBuild.UI
             for (int i = 0; i < slots.Length && i < lineup.Count; i++)
             {
                 var definition = System.Array.Find(roster, d => d != null && d.name == lineup[i]);
-                if (definition == null) continue;   // hero bi xoa khoi roster thi o de trong
+                if (definition == null || !Owned(definition)) continue;   // bi xoa khoi roster / chua so huu -> o trong
                 slots[i].Assign(definition);
                 Spawn(slots[i]);
             }
@@ -174,6 +176,9 @@ namespace BuildBuild.UI
             foreach (var slot in slots) lineup.Add(slot.Definition != null ? slot.Definition.name : "");
             SaveSystem.Save();
         }
+
+        static bool Owned(HeroDefinition definition) =>
+            !string.IsNullOrEmpty(definition.unitId) && SaveSystem.Data.Find(definition.unitId) != null;
 
         bool OnBoard(HeroDefinition definition)
         {

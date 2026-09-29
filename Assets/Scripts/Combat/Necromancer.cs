@@ -56,7 +56,7 @@ namespace BuildBuild.Combat
 
         void Update()
         {
-            if (_definition == null || _hero.IsDying) return;
+            if (_definition == null || _hero.IsDying || !_hero.MinorUnlocked) return;    // vong an ky la chieu phu
 
             _ringCooldown -= Time.deltaTime;
             if (_ringCooldown > 0f) return;
@@ -94,6 +94,7 @@ namespace BuildBuild.Combat
             // thi thu tiep ti le cua noi tai (GDD muc 3).
             if (enemy.IsMarkedBy(this) && Raise(position, _markUnits, ref _markCounter, 0f)) return;
 
+            if (!_hero.PassiveUnlocked) return;
             if ((position - _hero.transform.position).sqrMagnitude > _definition.raiseRadius * _definition.raiseRadius) return;
             if (Random.value >= _definition.raiseChance) return;
             Raise(position, _passiveUnits, ref _passiveCounter, _definition.passiveLifetime);
@@ -121,7 +122,7 @@ namespace BuildBuild.Combat
         {
             if (_knight != null && !_knight.IsDying)
             {
-                _knight.Health.ResetTo(_knight.Definition.maxHealth);
+                _knight.Health.ResetTo(_knight.MaxHealth);
                 return;
             }
 
@@ -144,6 +145,7 @@ namespace BuildBuild.Combat
             if (definition == null || _definition.unitPrefab == null) return null;
             var unit = Instantiate(_definition.unitPrefab, position, Quaternion.identity);
             unit.Initialise(definition);
+            unit.InheritProgression(_hero);
             unit.MakeSummon(this, lifetime);
             Summons.Add(unit);
             return unit;

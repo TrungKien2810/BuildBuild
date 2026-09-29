@@ -1,4 +1,6 @@
 using BuildBuild.Core;
+using BuildBuild.Data;
+using BuildBuild.Meta;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,8 +10,9 @@ namespace BuildBuild.UI
     /// <summary>
     /// HUD tran dau: mau lau dai, wave, vang, nut danh wave tiep va nut sang man gacha.
     ///
-    /// Nut gacha chi bam duoc khi KHONG dang danh: WaveManager song trong scene Battle, roi scene
-    /// giua wave la huy wave do. Giua hai wave (sau thang/thua) thi an toan.
+    /// Nut nao KHONG dung duoc trong tran thi AN HAN khi dang danh (khong chi xam) de man hinh thoang cho nguoi
+    /// choi xem tran — nguoi dung chot 2026-09-29, ap ca cho nut them sau nay: them vao `HiddenWhileFighting`.
+    /// Gacha/Doi quan roi scene Battle (huy wave dang danh) nen thuoc nhom nay.
     /// </summary>
     public class BattleHud : MonoBehaviour
     {
@@ -26,8 +29,11 @@ namespace BuildBuild.UI
         [SerializeField] Button startButton;
         [SerializeField] Text startLabel;
         [SerializeField] Button gachaButton;
+        [SerializeField] Button unitsButton;
         [Tooltip("Bang ket qua sau moi wave (thang/thua + vang). Khong gan thi HUD chi hien dong chu nhu cu.")]
         [SerializeField] ResultPopup resultPopup;
+        [Tooltip("Roi trang bi khi thang wave (`Armory.RollDrop`).")]
+        [SerializeField] EquipmentConfig equipment;
 
         void Start()
         {
@@ -42,6 +48,8 @@ namespace BuildBuild.UI
                 string hint = waves.AllCleared
                     ? "Đã qua hết các wave!"
                     : $"Xong wave {wave} — nâng cấp rồi đánh tiếp";
+                var drop = Armory.RollDrop(equipment, wave);
+                if (drop != null) hint += $"\nNhận trang bị: {EquipmentConfig.SlotName(drop.slot)} {drop.rarity}";
                 ShowMessage(hint);
                 if (resultPopup != null) resultPopup.Show(true, gold, hint);
                 Refresh();
@@ -58,6 +66,7 @@ namespace BuildBuild.UI
 
             startButton.onClick.AddListener(waves.StartWave);
             gachaButton.onClick.AddListener(() => SceneManager.LoadScene(SceneNames.Gacha));
+            unitsButton.onClick.AddListener(() => SceneManager.LoadScene(SceneNames.Units));
 
             ShowMessage("");
             Refresh();
@@ -68,10 +77,12 @@ namespace BuildBuild.UI
             waveText.text = $"Wave {waves.NextWave}";
             startLabel.text = $"Đánh wave {waves.NextWave}";
             startButton.gameObject.SetActive(!waves.IsFighting && !waves.AllCleared);
-            gachaButton.interactable = !waves.IsFighting;
+            foreach (var button in HiddenWhileFighting) button.gameObject.SetActive(!waves.IsFighting);
             RefreshCastle();
             RefreshGold();
         }
+
+        Button[] HiddenWhileFighting => new[] { gachaButton, unitsButton };
 
         void RefreshCastle()
         {

@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd908252f576da64397a5b25847f2aa3, type: 3}
+  m_Name: EquipmentConfig
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.EquipmentConfig
+  weaponDamage: 0.06
+  armorHealth: 0.08
+  helmetHealth: 0.05
+  ringAttackRate: 0.04
+  rarityMultiplier:
+  - 1
+  - 1.8
+  - 3
+  - 5
+  perLevel: 0.1
+  maxLevel: 10
+  upgradeCostBase: 60
+  dropChance: 0.35
+  guaranteedEvery: 10
+  earlyWeights:
+  - 75
+  - 20
+  - 5
+  - 0
+  lateWeights:
+  - 50
+  - 32
+  - 14
+  - 4
+  lateWave: 30
+  weaponIcon: {fileID: 21300000, guid: 0388196e7cf9aa040a0ccf07a259f98d, type: 3}
+  armorIcon: {fileID: 21300000, guid: 7356f8dfe3f983c46a5a3a78f27d9a0a, type: 3}
+  helmetIcon: {fileID: 21300000, guid: 25d818bfc58d43e48b6cd5c48e08479a, type: 3}
+  ringIcon: {fileID: 21300000, guid: 96a6cd31ca095cb42be2d801cdb1a8cd, type: 3}

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Soldier_AcidLizard
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.SoldierDefinition
   displayName: "K\u1EF3 nh\xF4ng axit"
+  unitId: soldier_acidlizard
   maxHealth: 150
   damage: 18
   attackRate: 0.8
@@ -22,6 +23,7 @@ MonoBehaviour:
   maxHeld: 3
   heldDamageBonus: 0
   warden: {fileID: 0}
+  dragonRider: {fileID: 0}
   projectileSpeed: 8
   splashRadius: 0.3
   projectileFrames:
@@ -53,8 +55,18 @@ MonoBehaviour:
   healsAllies: 0
   healFrames: []
   buffFrames: []
+  shieldAmount: 0
+  shieldFrames: []
+  shieldBreakFrames: []
+  passiveStar: 1
+  minorStar: 3
+  secondMinorStar: 3
+  ultimateText: 
+  passiveText: 
+  minorText: 
+  secondMinorText: 
   animations: {fileID: 11400000, guid: 11bfd1a5629463345b63f7a378925f16, type: 2}
-  avatar: {fileID: 21300000, guid: c8a88b553cca6fb4ca53bc412d1d2960, type: 3}
+  artFacesRight: 1
+  avatar: {fileID: 21300000, guid: 7aaaf3c7b2b6677459d9eab429662172, type: 3}
   squadSize: 3
   summonCooldown: 15
-  summonCost: 35

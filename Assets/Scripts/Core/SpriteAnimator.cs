@@ -57,13 +57,36 @@ namespace BuildBuild.Core
             Play("idle");
         }
 
+        /// <summary>
+        /// Doi bo animation ma giu clip dang chay (cung ten, cung frame) — bien hinh giua don danh thi don do chay tiep
+        /// bang art moi va `ClipFinished` van ban dung luc.
+        /// </summary>
+        public void Swap(SpriteAnimationSet animationSet)
+        {
+            set = animationSet;
+            var next = _clip != null ? set.Get(_clip.name) : null;
+            if (next == null || !next.IsValid)
+            {
+                _clip = null;
+                Play("idle");
+                return;
+            }
+            _clip = next;
+            _frame = Mathf.Min(_frame, next.frames.Length - 1);
+            _renderer.sprite = next.frames[_frame];
+        }
+
         /// <summary>Doi clip. Goi lai dung clip dang chay thi khong lam gi (tru khi `restart`).</summary>
         public void Play(string clipName, bool restart = false)
         {
             if (set == null) return;
+            Play(set.Get(clipName), restart);
+        }
 
-            var next = set.Get(clipName);
-            if (!next.IsValid) return;
+        /// <summary>Phat mot clip khong nam trong bo (vd. bien hinh). Ten clip la ten `ClipFinished` ban ra.</summary>
+        public void Play(SpriteAnimationClip next, bool restart = false)
+        {
+            if (next == null || !next.IsValid) return;
             if (_clip == next && !restart) return;
 
             _clip = next;

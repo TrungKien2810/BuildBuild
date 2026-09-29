@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -78,21 +79,28 @@ namespace BuildBuild.Editor
 
             var tuning = BuildWaveData(out var enemyPrefab);
             BuildNewEnemies(tuning);
+            BuildOrcAndRat(tuning);
             BuildHeroData();
             BuildVespera();
             BuildCannons();
             var gacha = BuildGachaData();
             BuildSoldiers();
             BuildChainwarden();
+            BuildWyrmspear();
+            BuildBanneret();
+            FillSkillTexts();
+            BuildEquipmentConfig();
             AssetDatabase.SaveAssets();
 
             BuildBattleScene(tuning, enemyPrefab);
             BuildGachaScene(gacha);
+            BuildUnitsScene();
 
             EditorBuildSettings.scenes = new[]
             {
                 new EditorBuildSettingsScene(ScenePath(SceneNames.Battle), true),
                 new EditorBuildSettingsScene(ScenePath(SceneNames.Gacha), true),
+                new EditorBuildSettingsScene(ScenePath(SceneNames.Units), true),
             };
             EditorSceneManager.OpenScene(ScenePath(SceneNames.Battle));
             Debug.Log("[SceneBuilder] Da dung Battle + Gacha, dang ky Build Settings. Bam Play tu scene Battle.");
@@ -133,7 +141,6 @@ namespace BuildBuild.Editor
                 goblinDef.baseDamage = 15f;
                 goblinDef.moveSpeed = 1.5f;
                 goblinDef.attackRange = 0.4f;   // tam voi frame cham 0,20 x UnitScale 2, do toi MEP than hero
-                goblinDef.goldReward = 5;
                 goblinDef.animations = anim;
                 EditorUtility.SetDirty(goblinDef);
             }
@@ -160,7 +167,6 @@ namespace BuildBuild.Editor
                 ashDef.baseDamage = 10f;
                 ashDef.moveSpeed = 3f;
                 ashDef.attackRange = 0.5f;   // (0,45 cu - nua than hero 0,2) x UnitScale 2, do toi MEP than hero
-                ashDef.goldReward = 4;
                 ashDef.animations = ashAnim;
                 EditorUtility.SetDirty(ashDef);
             }
@@ -226,12 +232,12 @@ namespace BuildBuild.Editor
                 AnimSet("Ironblade", "Ironblade/", attack: ("attack", "attack"), skill: ("cone-sweep-body", "cone-sweep-body"), hit: 4, skillHit: 3),
                 d =>
                 {
-                    d.maxHealth = 800f; d.damage = 25f; d.attackRate = 0.8f; d.range = 0.7f; d.moveSpeed = 1.1f;
+                    d.maxHealth = 900f; d.damage = 30f; d.attackRate = 0.9f; d.range = 0.7f; d.moveSpeed = 1.1f;
                     d.projectileSpeed = 20f; d.splashRadius = 0.3f;
                 },
                 SkillKind.ConeSweep, d =>
                 {
-                    d.manaMax = 5f; d.skillRadius = 1.6f; d.skillPower = 3f;   // dai = be rong art cone-sweep-fx x UnitScale
+                    d.manaMax = 4f; d.skillRadius = 1.6f; d.skillPower = 4f;   // dai = be rong art cone-sweep-fx x UnitScale
                     d.skillFrames = Frames(ArtRoot + "Ironblade/cone-sweep-fx", "cone-sweep-fx");
                 });
 
@@ -338,17 +344,20 @@ namespace BuildBuild.Editor
                 Unit("archer", "Cung thủ", UnitCategory.Hero, Rarity.N, "avatars/avatar-hawkfletch"),
                 Unit("mage_elemental", "Pháp sư nguyên tố", UnitCategory.Hero, Rarity.N, "avatars/avatar-frostweaver"),
                 Unit("mage_summoner", "Pháp sư triệu hồi", UnitCategory.Hero, Rarity.SR, "icons/icon-mage-summoner"),
+                // Do hiem theo suc manh (nguoi dung giao Claude 2026-09-26): Cragfist 1400 mau + Hoa Da mien sat thuong -> R.
+                Unit("cragfist", "Người đá", UnitCategory.Hero, Rarity.R, "avatars/avatar-cragfist"),
                 Unit("cannon_rapid", "Pháo Liên Thanh", UnitCategory.Cannon, Rarity.N, "icons/icon-cannon-rapid"),
                 Unit("cannon_blast", "Pháo Nổ", UnitCategory.Cannon, Rarity.N, "icons/icon-cannon-blast"),
                 Unit("cannon_frost", "Pháo Băng", UnitCategory.Cannon, Rarity.N, "icons/icon-cannon-frost"),
             };
 
-            var config = LoadOrCreate<GachaConfig>(DataDir + "/GachaConfig.asset", out bool created);
-            if (created)
-            {
-                config.pool = pool;
-                EditorUtility.SetDirty(config);
-            }
+            // Chi NOI THEM unit con thieu vao pool da co (nhu linh) — khong xoa unit chinh tay trong Inspector.
+            var config = LoadOrCreate<GachaConfig>(DataDir + "/GachaConfig.asset", out _);
+            var merged = (config.pool ?? Array.Empty<UnitDefinition>()).ToList();
+            foreach (var unit in pool)
+                if (!merged.Contains(unit)) merged.Add(unit);
+            config.pool = merged.ToArray();
+            EditorUtility.SetDirty(config);
             return config;
         }
 
@@ -372,7 +381,7 @@ namespace BuildBuild.Editor
                 {
                     d.maxHealth = 200f; d.damage = 14f; d.attackRate = 1.2f; d.range = 0.5f; d.moveSpeed = 2f;
                     d.projectileSpeed = 20f; d.splashRadius = 0.3f;
-                    d.squadSize = 3; d.summonCost = 30; d.summonCooldown = 12f;
+                    d.squadSize = 3; d.summonCooldown = 12f;
                 });
 
             var tortoise = SoldierDef("StoneTortoise", "Rùa đá khiên",
@@ -381,7 +390,7 @@ namespace BuildBuild.Editor
                 {
                     d.maxHealth = 700f; d.damage = 8f; d.attackRate = 0.5f; d.range = 0.6f; d.moveSpeed = 0.6f;
                     d.projectileSpeed = 20f; d.splashRadius = 0.3f;
-                    d.squadSize = 2; d.summonCost = 40; d.summonCooldown = 18f;
+                    d.squadSize = 2; d.summonCooldown = 18f;
                 });
 
             var lizard = SoldierDef("AcidLizard", "Kỳ nhông axit",
@@ -394,15 +403,16 @@ namespace BuildBuild.Editor
                     d.projectileSpeed = 8f; d.splashRadius = 0.3f; d.impactScale = 0.6f;
                     d.projectileFrames = Frames(ArtRoot + "AcidLizard/acid", "projectile");
                     d.impactFrames = Frames(ArtRoot + "AcidLizard/acid-impact", "impact");
-                    d.squadSize = 3; d.summonCost = 35; d.summonCooldown = 15f;
+                    d.squadSize = 3; d.summonCooldown = 15f;
                 });
 
-            // Linh co trong gacha (IDEAS #1). Do hiem tam N ca ba — CHUA CHOT. Chi NOI THEM vao pool da co.
+            // Linh co trong gacha (IDEAS #1). Do hiem theo suc manh (2026-09-26): Rua 700 mau x2 -> R, con lai N.
+            // Chi NOI THEM vao pool da co.
             var units = new[]
             {
-                SoldierUnit("soldier_warwolf", wolf),
-                SoldierUnit("soldier_stonetortoise", tortoise),
-                SoldierUnit("soldier_acidlizard", lizard),
+                SoldierUnit("soldier_warwolf", wolf, Rarity.N),
+                SoldierUnit("soldier_stonetortoise", tortoise, Rarity.R),
+                SoldierUnit("soldier_acidlizard", lizard, Rarity.N),
             };
             var gacha = AssetDatabase.LoadAssetAtPath<GachaConfig>(DataDir + "/GachaConfig.asset");
             if (gacha != null)
@@ -417,11 +427,13 @@ namespace BuildBuild.Editor
             return new[] { wolf, tortoise, lizard };
         }
 
-        /// <summary>UnitDefinition gacha cua mot loai linh; icon = anh identity (chua co icon rieng trong UI/).</summary>
-        static UnitDefinition SoldierUnit(string id, SoldierDefinition soldier)
+        /// <summary>UnitDefinition gacha cua mot loai linh; icon = avatar cua linh.</summary>
+        static UnitDefinition SoldierUnit(string id, SoldierDefinition soldier, Rarity rarity)
         {
-            var unit = Unit(id, soldier.displayName, UnitCategory.Soldier, Rarity.N, "");
-            if (unit.icon == null && soldier.avatar != null)
+            var unit = Unit(id, soldier.displayName, UnitCategory.Soldier, rarity, "");
+            soldier.unitId = id;
+            EditorUtility.SetDirty(soldier);
+            if (soldier.avatar != null && (unit.icon == null || IsIdentityPlaceholder(unit.icon)))
             {
                 unit.icon = soldier.avatar;
                 EditorUtility.SetDirty(unit);
@@ -431,7 +443,8 @@ namespace BuildBuild.Editor
 
         /// <summary>
         /// Hero SR Chainwarden (plan muc A4, kit chot 2026-09-24). So = GDD muc 3 (Claude de xuat, CHUA can bang); toc chay
-        /// GDD khong ghi -> 1,0 (giua Cragfist 0,9 va Ironblade 1,1). Nem Moc chua co art than -> dung clip attack.
+        /// GDD khong ghi -> 1,0 (giua Cragfist 0,9 va Ironblade 1,1). Nem Moc: clip than `skill` (moc bay ra o 3) + art
+        /// `hook-fx` (dau moc bay / ngoam / doan xich) cho `HookChain`.
         /// Hero nam o Data/ goc nen tu vao bang chon hero.
         /// </summary>
         static HeroDefinition BuildChainwarden()
@@ -439,21 +452,187 @@ namespace BuildBuild.Editor
             var warden = LoadOrCreate<WardenDefinition>(DataDir + "/Warden_Chainwarden.asset", out _);
             if (warden.stunFrames == null || warden.stunFrames.Length == 0)
                 warden.stunFrames = Frames(ArtRoot + "Enemy/stunned-status", "stun");
+            string hookDir = ArtRoot + "Chainwarden/hook-fx";
+            if (warden.hookFrames == null || warden.hookFrames.Length == 0) warden.hookFrames = Frames(hookDir, "hook");
+            if (warden.hookBite == null) warden.hookBite = LoadSprite(hookDir + "/hook-bite.png");
+            if (warden.chainLink == null) warden.chainLink = LoadSprite(hookDir + "/hook-chain.png");
+            // Quat Xich dang thuong (art duyet 2026-09-29): clip than + vong xich FX + vong troi chan + o khoa Xich.
+            string wardenDir = ArtRoot + "Chainwarden/";
+            if (warden.sweepFrames == null || warden.sweepFrames.Length == 0)
+                warden.sweepFrames = Frames(wardenDir + "whirl-ring-fx", "whirl-ring");
+            if (warden.sweepBody == null || !warden.sweepBody.IsValid)
+                warden.sweepBody = new SpriteAnimationClip
+                    { name = "skill", loop = false, frames = Frames(wardenDir + "whirl", "whirl") };
+            if (warden.rootFrames == null || warden.rootFrames.Length == 0)
+                warden.rootFrames = Frames(wardenDir + "chain-root", "root");
+            if (warden.chainIconFrames == null || warden.chainIconFrames.Length == 0)
+                warden.chainIconFrames = Frames(wardenDir + "chain-icon", "icon");
             EditorUtility.SetDirty(warden);
 
             var hero = HeroDef("Chainwarden", null,
-                AnimSet("Chainwarden", "Chainwarden/", attack: ("attack", "attack"), hit: 4),
+                AnimSet("Chainwarden", "Chainwarden/", attack: ("attack", "attack"), skill: ("skill", "skill"), hit: 4,
+                    skillHit: 3),   // hitFrame dem tu 1: o 3 = tay vung ra, moc roi tay
                 d =>
                 {
-                    d.maxHealth = 1000f; d.damage = 18f; d.attackRate = 0.7f; d.range = 0.6f; d.moveSpeed = 1f;
+                    d.maxHealth = 1200f; d.damage = 28f; d.attackRate = 0.8f; d.range = 0.6f; d.moveSpeed = 1f;
                     d.projectileSpeed = 20f; d.splashRadius = 0.3f;
                     d.maxHeld = 4; d.heldDamageBonus = 0.2f;
                 },
                 SkillKind.HookThrow, d => { d.manaMax = 5f; });
             if (hero.warden == null) hero.warden = warden;
-            // Chua co avatar trong UI/avatars/: tam dung anh identity.
-            if (hero.avatar == null) hero.avatar = LoadSprite(ArtRoot + "Chainwarden/identity/identity-1.png");
+            // Avatar ban than cat tu identity (tempart/ui-c/make_unit_avatars.py); thay anh identity tam cu.
+            if (hero.avatar == null || IsIdentityPlaceholder(hero.avatar))
+                hero.avatar = LoadSprite(ArtRoot + "UI/avatars/avatar-chainwarden.png")
+                    ?? LoadSprite(ArtRoot + "Chainwarden/identity/identity-1.png");
             EditorUtility.SetDirty(hero);
+
+            // Dang Cuong No (art giao 2026-09-26): death dung death thuong vi chet la EndRage; skill = Loc Xich (clip than).
+            string dir = ArtRoot + "Chainwarden/";
+            var rage = LoadOrCreate<SpriteAnimationSet>(DataDir + "/Anim_Chainwarden_Rage.asset", out bool newRage);
+            if (newRage)
+            {
+                rage.idle.frames = Frames(dir + "rage-idle", "idle");
+                rage.walk.frames = Frames(dir + "rage-walk", "walk");
+                rage.attack.frames = Frames(dir + "rage-attack", "attack");
+                rage.attack.hitFrame = 4;   // xich vuon xa nhat (bbox rong 111 px)
+                rage.hurt.frames = Frames(dir + "rage-hurt", "hurt");
+                rage.death.frames = Frames(dir + "death", "death");
+                rage.skill.frames = Frames(dir + "rage-storm", "storm");
+                EditorUtility.SetDirty(rage);
+            }
+            if (warden.rageAnimations == null) warden.rageAnimations = rage;
+            if (warden.rageTransform == null || !warden.rageTransform.IsValid)
+                warden.rageTransform = new SpriteAnimationClip
+                    { name = "skill", loop = false, frames = Frames(dir + "rage-transform", "transform") };
+            // Giat Xich (chieu phu 2, art giao 2026-09-29): clip than dang Cuong No, o 3 = cu giat; FX va dap tren tung quai.
+            if (warden.yankBody == null || !warden.yankBody.IsValid)
+                warden.yankBody = new SpriteAnimationClip
+                    { name = "skill", loop = false, hitFrame = 3, frames = Frames(dir + "rage-yank", "yank") };
+            if (warden.yankFrames == null || warden.yankFrames.Length == 0)
+                warden.yankFrames = Frames(dir + "yank-clash-fx", "clash");
+            EditorUtility.SetDirty(warden);
+
+            // Vao pool gacha khi du bo (GDD muc 9). Chi NOI THEM vao pool da co.
+            var unit = Unit("chainwarden", "Cai ngục móc xích", UnitCategory.Hero, Rarity.SR, "");
+            if (hero.avatar != null && (unit.icon == null || IsIdentityPlaceholder(unit.icon)))
+            {
+                unit.icon = hero.avatar;
+                EditorUtility.SetDirty(unit);
+            }
+            var gacha = AssetDatabase.LoadAssetAtPath<GachaConfig>(DataDir + "/GachaConfig.asset");
+            if (gacha != null && !gacha.pool.Contains(unit))
+            {
+                gacha.pool = gacha.pool.Append(unit).ToArray();
+                EditorUtility.SetDirty(gacha);
+            }
+            return hero;
+        }
+
+        /// <summary>
+        /// Hero SSR Wyrmspear (Long Ky Binh, kit chot 2026-09-27) + Bach Dia Long. So Claude de xuat, CHUA can bang. Hero nam o
+        /// Data/ goc nen tu vao bang chon hero; rong nam o Summons/ (khong qua bang chon). Vao pool gacha (nguoi dung chot
+        /// 2026-09-28) — unit SSR duy nhat cua pool. Chay rieng (khong dung lai scene) bang menu ben duoi.
+        /// </summary>
+        [MenuItem("BuildBuild/Data/Build Wyrmspear")]
+        public static HeroDefinition BuildWyrmspear()
+        {
+            string dir = ArtRoot + "Wyrmspear/";
+            string summons = DataDir + "/Summons";
+            var rider = LoadOrCreate<DragonRiderDefinition>(DataDir + "/DragonRider_Wyrmspear.asset", out _);
+
+            // Bach Dia Long: can chien, nhieu mau, giu 4 quai (GDD). skill = Dia Long Chan (clip than cua chieu thuong 2).
+            var dragonAnim = LoadOrCreate<SpriteAnimationSet>(DataDir + "/Anim_BachDiaLong.asset", out bool newDragonAnim);
+            if (newDragonAnim)
+            {
+                dragonAnim.idle.frames = Frames(dir + "dialong-idle", "idle");
+                dragonAnim.walk.frames = Frames(dir + "dialong-walk", "walk");
+                dragonAnim.attack.frames = Frames(dir + "dialong-attack", "attack");
+                dragonAnim.attack.hitFrame = 4;
+                dragonAnim.hurt.frames = Frames(dir + "dialong-hurt", "hurt");
+                dragonAnim.death.frames = Frames(dir + "dialong-death", "death");
+                dragonAnim.skill.frames = Frames(dir + "skill-diachan-body", "diachan");
+                dragonAnim.skill.hitFrame = 4;
+                EditorUtility.SetDirty(dragonAnim);
+            }
+            var dragon = HeroDef("BachDiaLong", null, dragonAnim, d =>
+                {
+                    d.displayName = "Bạch Địa Long";
+                    d.maxHealth = 1400f; d.damage = 30f; d.attackRate = 0.7f; d.range = 0.7f; d.moveSpeed = 0.9f;
+                    d.projectileSpeed = 20f; d.splashRadius = 0.3f; d.maxHeld = 4;
+                },
+                SkillKind.None, _ => { }, summons);
+
+            // Long Nhan: walk = hover (bay la la), skill = Thien Dia Long Giang (cam giao o 6).
+            var dragonman = LoadOrCreate<SpriteAnimationSet>(DataDir + "/Anim_Wyrmspear_Dragonman.asset", out bool newDragonman);
+            if (newDragonman)
+            {
+                dragonman.idle.frames = Frames(dir + "p2-idle", "idle");
+                dragonman.walk.frames = Frames(dir + "p2-hover", "hover");
+                dragonman.attack.frames = Frames(dir + "p2-attack", "attack");
+                dragonman.attack.hitFrame = 4;
+                dragonman.hurt.frames = Frames(dir + "p2-hurt", "hurt");
+                dragonman.death.frames = Frames(dir + "p2-death", "death");
+                dragonman.skill.frames = Frames(dir + "skill-longgiang-body", "longgiang");
+                dragonman.skill.hitFrame = rider.descentHitFrame;
+                EditorUtility.SetDirty(dragonman);
+            }
+
+            // Clip than chieu thuong + FX: chi dien khi con trong, so / frame chinh tay trong Inspector duoc giu.
+            if (!rider.pierceBody.IsValid) rider.pierceBody.frames = Frames(dir + "skill-xuyenlong-body", "xuyenlong");
+            if (!rider.lanceBody.IsValid)
+            {
+                // 8 o art -> 5 nhat: o 2/4/6 la ba nhat, lap 2 roi o 7 = nhat cuoi (brief wyrmspear-skills muc 5).
+                var art = Frames(dir + "skill-lienthuong-body", "lienthuong");
+                if (art.Length >= 8)
+                    rider.lanceBody.frames = new[] { 1, 2, 3, 4, 5, 6, 5, 2, 3, 7, 8 }.Select(i => art[i - 1]).ToArray();
+                rider.lanceHitFrames = new[] { 2, 4, 6, 8, 10 };
+            }
+            if (!rider.quakeBody.IsValid) rider.quakeBody.frames = Frames(dir + "skill-diachan-body", "diachan");
+            if (!rider.descentDragon.IsValid)
+                rider.descentDragon.frames = Frames(dir + "skill-longgiang-dialong", "longgiang-dialong");
+            if (!rider.emerge.IsValid) rider.emerge.frames = Frames(dir + "dialong-emerge", "emerge");
+            if (rider.pierceFx == null || rider.pierceFx.Length == 0) rider.pierceFx = Frames(dir + "skill-xuyenlong-fx", "xuyenlong-fx");
+            if (rider.lanceFx == null || rider.lanceFx.Length == 0) rider.lanceFx = Frames(dir + "skill-lienthuong-fx", "lienthuong-fx");
+            if (rider.crackFx == null || rider.crackFx.Length == 0) rider.crackFx = Frames(dir + "skill-datnut-fx", "datnut");
+            if (rider.quakeFx == null || rider.quakeFx.Length == 0) rider.quakeFx = Frames(dir + "skill-gaida-fx", "gaida");
+            if (rider.pillarFx == null || rider.pillarFx.Length == 0) rider.pillarFx = Frames(dir + "skill-cotda-fx", "cotda");
+            if (rider.shockwaveFx == null || rider.shockwaveFx.Length == 0) rider.shockwaveFx = Frames(dir + "skill-songchan-fx", "songchan");
+            if (rider.stunFrames == null || rider.stunFrames.Length == 0) rider.stunFrames = Frames(ArtRoot + "Enemy/stunned-status", "stun");
+            if (rider.dragonmanAnimations == null) rider.dragonmanAnimations = dragonman;
+            if (rider.dragon == null) rider.dragon = dragon;
+            if (rider.unitPrefab == null) rider.unitPrefab = AssetDatabase.LoadAssetAtPath<Hero>(PrefabDir + "/Hero.prefab");
+            EditorUtility.SetDirty(rider);
+
+            // GD1: skill = Long Hoa (bien hinh 8 o, ra don cuoi clip). Can chien giao dai.
+            var hero = HeroDef("Wyrmspear", null,
+                AnimSet("Wyrmspear", "Wyrmspear/", attack: ("attack", "attack"), skill: ("skill-longhoa-transform", "longhoa"),
+                    hit: 4),
+                d =>
+                {
+                    d.maxHealth = 900f; d.damage = 40f; d.attackRate = 0.8f; d.range = 0.9f; d.moveSpeed = 1.1f;
+                    d.projectileSpeed = 20f; d.splashRadius = 0.3f;
+                },
+                SkillKind.DragonRider, d => { d.manaMax = 5f; });
+            if (hero.dragonRider == null) hero.dragonRider = rider;
+            if (hero.avatar == null)
+                hero.avatar = LoadSprite(ArtRoot + "UI/avatars/avatar-wyrmspear.png")
+                    ?? LoadSprite(dir + "identity/identity-1.png");
+            EditorUtility.SetDirty(hero);
+
+            var unit = Unit("wyrmspear", "Long kỵ binh", UnitCategory.Hero, Rarity.SSR, "");
+            if (unit.icon == null && hero.avatar != null)
+            {
+                unit.icon = hero.avatar;
+                EditorUtility.SetDirty(unit);
+            }
+            // Chi NOI THEM vao pool da co.
+            var gacha = AssetDatabase.LoadAssetAtPath<GachaConfig>(DataDir + "/GachaConfig.asset");
+            if (gacha != null && !gacha.pool.Contains(unit))
+            {
+                gacha.pool = gacha.pool.Append(unit).ToArray();
+                EditorUtility.SetDirty(gacha);
+            }
+            AssetDatabase.SaveAssets();
             return hero;
         }
 
@@ -466,8 +645,12 @@ namespace BuildBuild.Editor
                 def.animations = anim;
                 stats(def);
             }
-            // Chua co avatar rieng cho linh: tam dung anh identity (icon gacha + bai cho).
-            if (def.avatar == null) def.avatar = LoadSprite($"{ArtRoot}{id}/identity/identity-1.png");
+            def.artFacesRight = true;   // ca 3 linh ve quay PHAI (khac hero)
+            // Avatar = tranh UI/avatars/avatar-<id>.png (cat tu identity, tempart/ui-c/make_unit_avatars.py); chua co thi
+            // tam dung anh identity. Anh tam cu duoc thay khi tranh da co, avatar gan tay khac thi giu.
+            if (def.avatar == null || IsIdentityPlaceholder(def.avatar))
+                def.avatar = LoadSprite($"{ArtRoot}UI/avatars/avatar-{id.ToLowerInvariant()}.png")
+                    ?? LoadSprite($"{ArtRoot}{id}/identity/identity-1.png");
             EditorUtility.SetDirty(def);
             return def;
         }
@@ -513,7 +696,6 @@ namespace BuildBuild.Editor
                 slinger.attackRange = 4f;
                 slinger.heroAggroRange = 4.5f;   // >= tam ban: hero / linh trong tam duoc chon truoc tuong
                 slinger.attackRate = 0.8f;
-                slinger.goldReward = 6;
                 slinger.projectileFrames = Frames(ArtRoot + "GoblinSlinger/stone", "projectile");
                 slinger.impactFrames = Frames(ArtRoot + "GoblinSlinger/stone-impact", "impact");
                 slinger.projectileSpeed = 7f;
@@ -543,7 +725,6 @@ namespace BuildBuild.Editor
                 gatebreaker.baseHealth = 1200f;
                 gatebreaker.baseDamage = 60f;
                 gatebreaker.moveSpeed = 0.7f;
-                gatebreaker.goldReward = 40;
                 gatebreaker.attackRange = 0.5f;
                 gatebreaker.attackRate = 0.6f;
                 gatebreaker.damageReduction = 0.15f;
@@ -558,6 +739,10 @@ namespace BuildBuild.Editor
                 bossKit.slamFrames = Frames(ArtRoot + "Boss/slam-fx", "slam-fx");
                 bossKit.roarFrames = Frames(ArtRoot + "Boss/roar-wave", "roar-wave");
                 bossKit.roarBuffFrames = Frames(ArtRoot + "Boss/roar-buff", "roar-buff");
+                bossKit.slamBody.frames = Frames(ArtRoot + "Boss/slam", "slam");
+                bossKit.slamBody.hitFrame = 5;   // dem tu 1: slam-5 bua cham dat (o 4 bua con vung ngang tren cao)
+                bossKit.roarBody.frames = Frames(ArtRoot + "Boss/roar", "roar");
+                bossKit.roarBody.hitFrame = 3;   // ha mom rong nhat
                 EditorUtility.SetDirty(bossKit);
             }
             var boss = LoadOrCreate<EnemyDefinition>(DataDir + "/Enemy_Boss.asset", out bool newBoss);
@@ -568,7 +753,6 @@ namespace BuildBuild.Editor
                 boss.baseHealth = 5000f;
                 boss.baseDamage = 120f;
                 boss.moveSpeed = 0.6f;
-                boss.goldReward = 200;
                 boss.attackRange = 0.8f;
                 boss.attackRate = 0.5f;
                 boss.heroAggroRange = 2.5f;
@@ -600,7 +784,101 @@ namespace BuildBuild.Editor
             EditorUtility.SetDirty(tuning);
         }
 
-        /// <summary>Hero R Vespera (don thuong hoi mau, kit chua chot — so tam) + FX buff tren dau Hawkfletch.</summary>
+        /// <summary>
+        /// Orc Bua Ta (tank, GDD muc 5: 400 / 40 / 0.8 / 12) + Chuot Cong Chay (nhanh, so tam Claude de xuat — GDD chua co)
+        /// + ghi lai bang wave de Orc vao dung cho GDD (7-9, 11-29, 4 Orc ho tong wave 20). Tam danh + hitFrame do tu alpha:
+        /// frame vuon xa nhat (Orc 4, Chuot 3), cung ty le px -> tam cua Goblin/Ashfang. Bang wave chi ghi lai khi chua co
+        /// Orc: da co nghia la da chay ban nay roi, so chinh tay trong Inspector duoc giu.
+        /// </summary>
+        static void BuildOrcAndRat(WaveTuning tuning)
+        {
+            var orc = LoadOrCreate<EnemyDefinition>(DataDir + "/Enemy_OrcBrute.asset", out bool newOrc);
+            if (newOrc)
+            {
+                orc.displayName = "Orc Búa Tạ";
+                orc.kind = EnemyKind.Tank;
+                orc.baseHealth = 400f;
+                orc.baseDamage = 40f;
+                orc.moveSpeed = 0.8f;
+                orc.attackRange = 0.7f;   // bua vuon 41 px truoc tam o 4 (Goblin 24 px -> 0,4)
+                orc.animations = AnimSet("OrcBrute", "OrcBrute/", attack: ("attack", "attack"), hit: 4);
+                EditorUtility.SetDirty(orc);
+            }
+
+            var rat = LoadOrCreate<EnemyDefinition>(DataDir + "/Enemy_RatRunner.asset", out bool newRat);
+            if (newRat)
+            {
+                rat.displayName = "Chuột Cống";
+                rat.kind = EnemyKind.Nhanh;
+                rat.baseHealth = 45f;
+                rat.baseDamage = 8f;
+                rat.moveSpeed = 3.5f;
+                rat.attackRange = 0.6f;   // dao dam 33 px truoc tam o 3
+                rat.animations = AnimSet("RatRunner", "RatRunner/", attack: ("attack", "attack"), hit: 3);
+                EditorUtility.SetDirty(rat);
+            }
+
+            if (tuning.bands != null && tuning.bands.Any(b => b.enemies != null && b.enemies.Contains(orc))) return;
+            var goblin = AssetDatabase.LoadAssetAtPath<EnemyDefinition>(DataDir + "/Enemy_Goblin.asset");
+            var ashfang = AssetDatabase.LoadAssetAtPath<EnemyDefinition>(DataDir + "/Enemy_Ashfang.asset");
+            var slinger = AssetDatabase.LoadAssetAtPath<EnemyDefinition>(DataDir + "/Enemy_GoblinSlinger.asset");
+            var mixed = new[] { goblin, ashfang, slinger, orc, rat };
+            tuning.bands = new[]
+            {
+                new WaveBand { fromWave = 1, toWave = 3, enemies = new[] { goblin } },
+                new WaveBand { fromWave = 4, toWave = 6, enemies = new[] { goblin, ashfang, rat } },
+                new WaveBand { fromWave = 7, toWave = 9, enemies = new[] { goblin, ashfang, slinger, orc } },
+                new WaveBand { fromWave = 10, toWave = 10, enemies = new[] { goblin }, hasBoss = true, bossStatMultiplier = 1f, fixedCount = 6 },
+                new WaveBand { fromWave = 11, toWave = 11, enemies = mixed },
+                new WaveBand { fromWave = 12, toWave = 19, enemies = mixed, eliteCount = 1 },
+                new WaveBand { fromWave = 20, toWave = 20, enemies = new[] { orc }, hasBoss = true, bossStatMultiplier = 2f, fixedCount = 4 },
+                new WaveBand { fromWave = 21, toWave = 29, enemies = mixed, eliteCount = 2 },
+                new WaveBand { fromWave = 30, toWave = 30, enemies = new EnemyDefinition[0], hasBoss = true, bossStatMultiplier = 3.5f, fixedCount = 0 },
+            };
+            EditorUtility.SetDirty(tuning);
+        }
+
+        /// <summary>
+        /// Hero SR Banneret (Ky Thu cam co, kit chot 2026-09-29; so de xuat, CHUA can). Don thuong KHONG danh quai: buff
+        /// ngau nhien (+sat thuong / +toc danh / khien) cho mot dong minh dang danh — xem `Banneret`. Walk CHUA duyet: clip
+        /// walk trong thi animator giu clip dang chay; giao walk xong chay lai builder la tu nap. Chua vao pool gacha (bo
+        /// chua du walk) — Admin panel cho so huu `banneret` de test, giong Vespera.
+        /// </summary>
+        static HeroDefinition BuildBanneret()
+        {
+            string dir = ArtRoot + "Banneret/";
+            var banner = LoadOrCreate<BannerDefinition>(DataDir + "/Banner_Banneret.asset", out _);
+            if (banner.rallyFrames == null || banner.rallyFrames.Length == 0) banner.rallyFrames = Frames(dir + "rally-fx", "rally-fx");
+            if (banner.zoneFrames == null || banner.zoneFrames.Length == 0) banner.zoneFrames = Frames(dir + "zone-fx", "zone-fx");
+            if (banner.plantBody == null || !banner.plantBody.IsValid)
+                banner.plantBody = new SpriteAnimationClip { name = "skill", loop = false, frames = Frames(dir + "plant", "plant") };
+            // Chua co art khien rieng: muon tam vo khien cua Vespera.
+            if (banner.shieldFrames == null || banner.shieldFrames.Length == 0)
+                banner.shieldFrames = Frames(ArtRoot + "Vespera/shield-loop", "shield");
+            if (banner.shieldBreakFrames == null || banner.shieldBreakFrames.Length == 0)
+                banner.shieldBreakFrames = Frames(ArtRoot + "Vespera/shield-break", "shield-break");
+            EditorUtility.SetDirty(banner);
+
+            var anim = AnimSet("Banneret", "Banneret/", attack: ("attack", "attack"), skill: ("cast", "cast"), hit: 4, skillHit: 4);
+            if (!anim.walk.IsValid)
+            {
+                anim.walk.frames = Frames(dir + "walk", "walk");
+                EditorUtility.SetDirty(anim);
+            }
+            var hero = HeroDef("Banneret", null, anim,
+                d =>
+                {
+                    // range 1,5 = can chien: di theo dong minh khap san, khong day xich.
+                    d.maxHealth = 700f; d.damage = 30f; d.attackRate = 0.6f; d.range = 1.5f; d.moveSpeed = 1f;
+                },
+                SkillKind.Rally, d => { d.manaMax = 5f; });
+            if (hero.banner == null) hero.banner = banner;
+            if (hero.avatar == null) hero.avatar = LoadSprite(dir + "identity/identity-1.png");
+            EditorUtility.SetDirty(hero);
+            return hero;
+        }
+
+        /// <summary>Hero R Vespera (don thuong hoi mau + chieu lon Den Canh, so CHUA can) + FX buff tren dau Hawkfletch.</summary>
         static void BuildVespera()
         {
             var vespera = HeroDef("Vespera", null,
@@ -611,7 +889,14 @@ namespace BuildBuild.Editor
                     d.healsAllies = true;
                     d.healFrames = Frames(ArtRoot + "Vespera/heal-fx", "impact");
                 },
-                SkillKind.None, null);
+                SkillKind.Lantern, d =>
+                {
+                    // Den Canh (GDD muc 3, 2026-09-28): vong r 1,5 hoi 2x don thuong (40) + khien 60 trong 5s.
+                    d.manaMax = 5f; d.skillRadius = 1.5f; d.skillPower = 2f; d.skillDuration = 5f; d.shieldAmount = 60f;
+                    d.skillFrames = Frames(ArtRoot + "Vespera/dencanh-ring", "ring");
+                    d.shieldFrames = Frames(ArtRoot + "Vespera/shield-loop", "shield");
+                    d.shieldBreakFrames = Frames(ArtRoot + "Vespera/shield-break", "shield-break");
+                });
             // Chua co avatar 128x128 trong UI/avatars: tam dung frame identity.
             if (vespera.avatar == null)
             {
@@ -628,37 +913,25 @@ namespace BuildBuild.Editor
         }
 
         /// <summary>
-        /// 3 phao GDD muc 4. Chi Lien Thanh co art (`CannonRapid/`); No va Bang tam dung chung bo sprite do, to cam / xanh
-        /// qua `tint` (plan muc B1). Co art rieng thi doi `animations` / frame dan trong asset.
+        /// 3 phao GDD muc 4. Lien Thanh (`CannonRapid/`) va No (`CannonBlast/`) co art rieng; Bang tam dung chung bo sprite
+        /// Lien Thanh, to xanh qua `tint` (plan muc B1). Co art rieng thi doi tham so `art` cua `CannonDef`.
         /// </summary>
         static CannonDefinition[] BuildCannons()
         {
             EnsureFolder(CannonDir);
-            string dir = ArtRoot + "CannonRapid/";
-            // Phao chi co idle + attack — khong goi AnimSet (se tim walk/hurt/death khong ton tai).
-            var anim = LoadOrCreate<SpriteAnimationSet>(DataDir + "/Anim_CannonRapid.asset", out bool newAnim);
-            if (newAnim)
-            {
-                anim.idle.frames = Frames(dir + "idle", "idle");
-                anim.attack.frames = Frames(dir + "attack", "attack");
-                anim.attack.hitFrame = 2;   // frame loe nong
-                EditorUtility.SetDirty(anim);
-            }
-
             return new[]
             {
-                CannonDef("Rapid", "cannon_rapid", "Pháo Liên Thanh", "icon-cannon-rapid", anim, c =>
+                CannonDef("Rapid", "cannon_rapid", "Pháo Liên Thanh", "icon-cannon-rapid", "CannonRapid", c =>
                 {
                     c.damage = 12f; c.fireRate = 2f; c.range = 8f;
                     c.projectileScale = 0.5f; c.impactScale = 0.6f;
                 }),
-                CannonDef("Blast", "cannon_blast", "Pháo Nổ", "icon-cannon-blast", anim, c =>
+                CannonDef("Blast", "cannon_blast", "Pháo Nổ", "icon-cannon-blast", "CannonBlast", c =>
                 {
                     c.damage = 30f; c.fireRate = 0.5f; c.range = 7f; c.aoeRadius = 2f;
                     c.projectileSpeed = 10f; c.projectileScale = 0.8f; c.impactScale = 2.5f;
-                    c.tint = new Color(1f, 0.62f, 0.3f);
                 }),
-                CannonDef("Frost", "cannon_frost", "Pháo Băng", "icon-cannon-frost", anim, c =>
+                CannonDef("Frost", "cannon_frost", "Pháo Băng", "icon-cannon-frost", "CannonRapid", c =>
                 {
                     c.damage = 8f; c.fireRate = 1f; c.range = 7f; c.slowPercent = 0.4f; c.slowDuration = 3f;
                     c.projectileScale = 0.6f; c.impactScale = 0.8f;
@@ -667,7 +940,22 @@ namespace BuildBuild.Editor
             };
         }
 
-        static CannonDefinition CannonDef(string id, string unitId, string displayName, string icon, SpriteAnimationSet anim,
+        /// <summary>Bo idle + attack cua mot thu muc art phao — khong goi AnimSet (se tim walk/hurt/death khong ton tai).</summary>
+        static SpriteAnimationSet CannonAnim(string art)
+        {
+            string dir = ArtRoot + art + "/";
+            var anim = LoadOrCreate<SpriteAnimationSet>($"{DataDir}/Anim_{art}.asset", out bool created);
+            if (created)
+            {
+                anim.idle.frames = Frames(dir + "idle", "idle");
+                anim.attack.frames = Frames(dir + "attack", "attack");
+                anim.attack.hitFrame = 2;   // frame loe nong
+                EditorUtility.SetDirty(anim);
+            }
+            return anim;
+        }
+
+        static CannonDefinition CannonDef(string id, string unitId, string displayName, string icon, string art,
             Action<CannonDefinition> stats)
         {
             var def = LoadOrCreate<CannonDefinition>($"{CannonDir}/Cannon_{id}.asset", out bool created);
@@ -675,10 +963,16 @@ namespace BuildBuild.Editor
             {
                 def.unitId = unitId;
                 def.displayName = displayName;
-                def.animations = anim;
-                def.projectileFrames = Frames(ArtRoot + "CannonRapid/bullet", "projectile");
-                def.impactFrames = Frames(ArtRoot + "CannonRapid/bullet-impact", "impact");
                 stats(def);
+            }
+            // Asset cu con tro bo art muon (vd. No dung tam Lien Thanh to cam) -> doi sang art rieng, bo tint tam.
+            var anim = CannonAnim(art);
+            if (def.animations != anim)
+            {
+                if (!created) def.tint = Color.white;
+                def.animations = anim;
+                def.projectileFrames = Frames(ArtRoot + art + "/bullet", "projectile");
+                def.impactFrames = Frames(ArtRoot + art + "/bullet-impact", "impact");
             }
             if (def.icon == null) def.icon = LoadSprite($"{UiDir}icons/{icon}.png");
             EditorUtility.SetDirty(def);
@@ -749,6 +1043,7 @@ namespace BuildBuild.Editor
             SetRef(board, "waves", waves);
             SetRef(board, "heroPrefab", heroPrefab);
             SetRefs(board, "slots", BuildHeroSlots(board));
+            SetRef(board, "equipment", AssetDatabase.LoadAssetAtPath<EquipmentConfig>(EquipmentConfigPath));
 
             CreateEventSystem();
             BuildBattleHud(CreateCanvas("HUD"), waves, castle, economy, board, roster);
@@ -769,6 +1064,7 @@ namespace BuildBuild.Editor
             HeroBoard board, HeroDefinition[] roster)
         {
             var hud = canvas.gameObject.AddComponent<BattleHud>();
+            SetRef(hud, "equipment", AssetDatabase.LoadAssetAtPath<EquipmentConfig>(EquipmentConfigPath));
             SetRef(hud, "waves", waves);
             SetRef(hud, "castle", castle);
             SetRef(hud, "economy", economy);
@@ -789,6 +1085,7 @@ namespace BuildBuild.Editor
 
             SetRef(hud, "goldText", GoldPill(canvas));
             SetRef(hud, "gachaButton", MakeButton("GachaButton", canvas, "Triệu hồi", TopRight, new Vector2(-24, -136), new Vector2(240, 72), out _));
+            SetRef(hud, "unitsButton", MakeButton("UnitsButton", canvas, "Đội quân", TopRight, new Vector2(-24, -224), new Vector2(240, 72), out _));
             SetRef(hud, "startButton", MakeButton("StartButton", canvas, "", Bottom, new Vector2(0, 48), new Vector2(320, 96), out var startLabel));
             SetRef(hud, "startLabel", startLabel);
             SetRef(hud, "messageText", Label("Message", canvas, "", 48, Center, new Vector2(0, 120), new Vector2(1400, 120)));
@@ -907,8 +1204,10 @@ namespace BuildBuild.Editor
         static readonly float[] CampRowsPx = { 360f, 525f, 690f };
 
         /// <summary>
-        /// `SoldierCamp` tren Game + moi loai linh mot `SoldierPost` o bai sau thanh + thanh tai nguyen tren HUD (ngay
-        /// duoi thanh mau lau dai, cung khung 3-slice). SummonConfig chi TAO khi chua co — so chinh tay khong bi ghi de.
+        /// `SoldierCamp` + `SoldierBoard` tren Game, 3 cho dung `SoldierPost` o bai sau thanh, bang chon linh trong HUD.
+        /// Cho dung cham giong o hero: trong -> bang chon, co linh -> bo chon; doi linh luu save. Khong co thanh tai
+        /// nguyen: linh chi cho vong hoi chieu. SummonConfig chi TAO khi chua co — so chinh tay khong bi ghi de.
+        /// Goi SAU `BuildBattleHud` (bang chon nam trong canvas HUD).
         /// </summary>
         static void BuildSoldierCamp(GameObject game, WaveManager waves, Hero heroPrefab)
         {
@@ -916,7 +1215,6 @@ namespace BuildBuild.Editor
             var roster = CampOrder
                 .Select(id => AssetDatabase.LoadAssetAtPath<SoldierDefinition>($"{SoldierDir}/Soldier_{id}.asset"))
                 .Where(def => def != null)
-                .Take(CampRowsPx.Length)
                 .ToArray();
 
             var camp = game.AddComponent<SoldierCamp>();
@@ -924,46 +1222,51 @@ namespace BuildBuild.Editor
             SetRef(camp, "config", config);
             SetRef(camp, "unitPrefab", heroPrefab);
             SetRefs(camp, "roster", roster);
+            SetInt(camp, "postCount", CampRowsPx.Length);
 
+            var board = game.AddComponent<SoldierBoard>();
+            SetRef(board, "camp", camp);
+
+            // Collider chung cho moi loai linh: lay than to nhat roster.
+            float radius = 0f, height = 0f;
+            foreach (var soldier in roster)
+            {
+                Battlefield.MeasureBody(soldier.animations, out float r, out float h);
+                radius = Mathf.Max(radius, r);
+                height = Mathf.Max(height, h);
+            }
             var root = new GameObject("SoldierPosts").transform;
-            for (int i = 0; i < roster.Length; i++)
-                BuildSoldierPost(root, camp, i, roster[i], PxToWorld(CampXPx, CampRowsPx[i]));
+            for (int i = 0; i < CampRowsPx.Length; i++)
+                BuildSoldierPost(root, camp, board, i, PxToWorld(CampXPx, CampRowsPx[i]), radius, height);
 
-            var canvas = Object.FindObjectOfType<BattleHud>().transform;
-            var frame = Img("SummonResource", canvas, UiSprite("chrome/bar-frame"), TopLeft, new Vector2(80, -100), Native(200, 23), sliced: true);
-            var fill = Img("Fill", frame.transform, UiSprite("chrome/bar-fill-xp"), Center, Vector2.zero, Vector2.zero);
-            Stretch(fill.rectTransform, 6 * UiScale, 5 * UiScale, 4 * UiScale, 4 * UiScale);
-            fill.type = Image.Type.Filled;
-            fill.fillMethod = Image.FillMethod.Horizontal;
-            Img("Icon", frame.transform, UiSprite("style-b/icons/icon-skill-summon-squad"), MidLeft, new Vector2(-56, 0), new Vector2(48, 48));
-            var value = Label("Value", frame.transform, "", 26, Center, Vector2.zero, Native(200, 23));
-            var hud = frame.gameObject.AddComponent<SummonHud>();
-            SetRef(hud, "camp", camp);
-            SetRef(hud, "fill", fill);
-            SetRef(hud, "valueText", value);
+            BuildSoldierPicker((RectTransform)Object.FindObjectOfType<BattleHud>().transform, board, roster);
         }
 
         /// <summary>
-        /// Mot con linh dung idle o bai (nhin sang phai), collider de keo, va canvas world-space tren dau: vong hoi chieu
-        /// (`ring-fill` Filled Radial) tren nen `ring-bg` + gia tai nguyen. Canvas 1 px = 0,01 unit nhu art.
+        /// Mot cho dung o bai: khung vet tren dat (cho trong), con linh idle (bo animation gan luc chay theo doi linh),
+        /// collider de cham/keo, va canvas world-space tren dau: vong hoi chieu (`ring-fill` Filled Radial) tren nen
+        /// `ring-bg`. Canvas 1 px = 0,01 unit nhu art.
         /// </summary>
-        static void BuildSoldierPost(Transform root, SoldierCamp camp, int index, SoldierDefinition soldier, Vector3 position)
+        static void BuildSoldierPost(Transform root, SoldierCamp camp, SoldierBoard board, int index, Vector3 position,
+            float radius, float height)
         {
-            var go = new GameObject("Post_" + soldier.name);
+            var go = new GameObject($"Post{index + 1}");
             go.transform.SetParent(root, false);
             go.transform.position = position;
 
-            Battlefield.MeasureBody(soldier.animations, out float radius, out float height);
             var collider = go.AddComponent<BoxCollider2D>();
             collider.size = new Vector2(Mathf.Max(0.8f, radius * 2f + 0.2f), height + 0.5f);
             collider.offset = new Vector2(0f, (height + 0.5f) * 0.5f);
 
-            var idle = soldier.animations != null && soldier.animations.idle.IsValid ? soldier.animations.idle.frames[0] : null;
-            var body = NewSprite("Body", go.transform, idle, 0);
+            // Vet tren dat nhu o hero: chi hien khi cho trong va dang chuan bi.
+            var frameSprite = UiSprite("hud/hud-dropzone-edge");
+            var frame = NewSprite("Frame", go.transform, frameSprite, SortOrder.GroundDecal);
+            if (frameSprite != null) frame.transform.localScale = Vector3.one * (SlotHeightPx / Ppu / frameSprite.bounds.size.y);
+
+            var body = NewSprite("Body", go.transform, null, 0);
             body.transform.localScale = Vector3.one * Battlefield.UnitScale;
-            body.flipX = true;      // art quay trai; o bai linh nhin ve phia san
             body.sortingOrder = SortOrder.ForUnit(body);
-            SetRef(body.gameObject.AddComponent<SpriteAnimator>(), "set", soldier.animations);
+            body.gameObject.AddComponent<SpriteAnimator>();
 
             var ringCanvas = new GameObject("Cooldown", typeof(RectTransform));
             ringCanvas.transform.SetParent(go.transform, false);
@@ -981,14 +1284,57 @@ namespace BuildBuild.Editor
             ring.fillMethod = Image.FillMethod.Radial360;
             ring.fillOrigin = (int)Image.Origin360.Top;
             ring.fillClockwise = true;
-            var cost = Label("Cost", canvasRect, soldier.summonCost.ToString(), 20, Center, new Vector2(0, -24), new Vector2(80, 24));
 
             var post = go.AddComponent<SoldierPost>();
             SetRef(post, "camp", camp);
+            SetRef(post, "board", board);
             SetInt(post, "index", index);
             SetRef(post, "body", body);
+            SetRef(post, "frame", frame);
             SetRef(post, "cooldownFill", ring);
-            SetRef(post, "costText", cost);
+        }
+
+        /// <summary>
+        /// Bang chon linh: cung skin + cach cham voi bang chon hero (`panels/`). Moi dong: chan dung + ten + chi so tu
+        /// SoldierDefinition. Duoi cung: huy. Dat TRUOC ResultPopup de bang ket qua luon de len tren.
+        /// </summary>
+        static void BuildSoldierPicker(RectTransform canvas, SoldierBoard board, SoldierDefinition[] roster)
+        {
+            const float rowStep = 132f;
+            float height = 108f + roster.Length * rowStep + 110f;
+            var picker = Img("SoldierPicker", canvas, UiSprite("panels/panel-hero"), Center, new Vector2(0, 60), new Vector2(680, height), sliced: true);
+            picker.raycastTarget = true;
+            var titleBar = Img("Title", picker.transform, UiSprite("panels/title-ribbon"), Top, new Vector2(0, 26), new Vector2(360, 64), sliced: true);
+            Label("Value", titleBar.transform, "Chọn lính", 34, Center, Vector2.zero, new Vector2(340, 64));
+
+            var buttons = new Object[roster.Length];
+            for (int i = 0; i < roster.Length; i++)
+            {
+                var soldier = roster[i];
+                float y = height / 2f - 108f - rowStep / 2f - i * rowStep;
+                var row = MakeButton("Soldier_" + soldier.name, picker.transform, "", Center, new Vector2(0, y),
+                    new Vector2(608, 118), out _, UiSprite("panels/stat-strip"));
+
+                var portrait = Img("Portrait", row.transform, UiSprite("panels/portrait-frame-big"), MidLeft, new Vector2(10, 0), new Vector2(98, 98), sliced: true);
+                if (soldier.avatar != null)
+                    Img("Avatar", portrait.transform, soldier.avatar, Center, Vector2.zero, new Vector2(72, 72));
+
+                var nameText = Label("Name", row.transform, soldier.displayName, 32, MidLeft, new Vector2(122, 26), new Vector2(300, 40), MidLeft);
+                nameText.alignment = TextAnchor.MiddleLeft;
+                var statText = Label("Stats", row.transform,
+                    $"ST {soldier.damage:0}   Tầm {soldier.range:0.#}   Máu {soldier.maxHealth:0}   Tốp {soldier.squadSize}",
+                    24, MidLeft, new Vector2(122, -18), new Vector2(460, 34), MidLeft);
+                statText.alignment = TextAnchor.MiddleLeft;
+                buttons[i] = row;
+            }
+            var cancel = MakeButton("Cancel", picker.transform, "Huỷ", Bottom, new Vector2(0, 24), new Vector2(200, 72), out _);
+
+            SetRef(board, "pickerPanel", picker.gameObject);
+            SetRefs(board, "rosterButtons", buttons);
+            SetRef(board, "cancelButton", cancel);
+
+            var popup = canvas.Find("ResultPopup");
+            if (popup != null) popup.SetAsLastSibling();
         }
 
         static void SetInt(Object target, string field, int value)
@@ -1046,7 +1392,6 @@ namespace BuildBuild.Editor
         {
             var board = game.AddComponent<CannonBoard>();
             SetRef(board, "waves", game.GetComponent<WaveManager>());
-            SetRef(board, "economy", game.GetComponent<Economy>());
             SetRefs(board, "mounts", BuildCannonMounts(castle, body, board));
             BuildCannonPicker((RectTransform)Object.FindObjectOfType<BattleHud>().transform, board);
             SetRef(game.GetComponent<AdminPanel>(), "cannons", board);
@@ -1082,8 +1427,9 @@ namespace BuildBuild.Editor
         }
 
         /// <summary>
-        /// Bang chon phao: cung skin voi bang chon hero (`panels/`). Moi dong: emblem + ten + dong chi so (CannonBoard dien
-        /// luc mo) + nut nang cap. Duoi cung: go phao / huy. Dat TRUOC ResultPopup de bang ket qua luon de len tren.
+        /// Bang chon phao: cung skin + cach cham voi bang chon hero (`panels/`). Moi dong: emblem + ten + dong chi so
+        /// (CannonBoard dien luc mo). Duoi cung: huy. Go phao = cham be dang co phao; nang level o man Doi quan.
+        /// Dat TRUOC ResultPopup de bang ket qua luon de len tren.
         /// </summary>
         static void BuildCannonPicker(RectTransform canvas, CannonBoard board)
         {
@@ -1102,8 +1448,6 @@ namespace BuildBuild.Editor
 
             var buttons = new Object[roster.Length];
             var infos = new Object[roster.Length];
-            var upgrades = new Object[roster.Length];
-            var upgradeLabels = new Object[roster.Length];
             for (int i = 0; i < roster.Length; i++)
             {
                 var cannon = roster[i];
@@ -1124,24 +1468,15 @@ namespace BuildBuild.Editor
                 info.alignment = TextAnchor.MiddleLeft;
                 info.horizontalOverflow = HorizontalWrapMode.Wrap;
 
-                var upgrade = MakeButton("Upgrade", row.transform, "", MidLeft, new Vector2(460, 0), new Vector2(136, 64), out var upgradeLabel);
-                upgradeLabel.fontSize = 24;
-
                 buttons[i] = row;
                 infos[i] = info;
-                upgrades[i] = upgrade;
-                upgradeLabels[i] = upgradeLabel;
             }
-            var remove = MakeButton("Remove", picker.transform, "Gỡ pháo", Bottom, new Vector2(-120, 24), new Vector2(200, 72), out _);
-            var cancel = MakeButton("Cancel", picker.transform, "Huỷ", Bottom, new Vector2(120, 24), new Vector2(200, 72), out _);
+            var cancel = MakeButton("Cancel", picker.transform, "Huỷ", Bottom, new Vector2(0, 24), new Vector2(200, 72), out _);
 
             SetRef(board, "pickerPanel", picker.gameObject);
             SetRefs(board, "roster", roster);
             SetRefs(board, "rosterButtons", buttons);
             SetRefs(board, "rosterInfo", infos);
-            SetRefs(board, "upgradeButtons", upgrades);
-            SetRefs(board, "upgradeLabels", upgradeLabels);
-            SetRef(board, "removeButton", remove);
             SetRef(board, "cancelButton", cancel);
 
             var popup = canvas.Find("ResultPopup");
@@ -1154,6 +1489,8 @@ namespace BuildBuild.Editor
         {
             var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
             config = AssetDatabase.LoadAssetAtPath<GachaConfig>(DataDir + "/GachaConfig.asset");   // ly do: xem BuildBattleScene
+            // Font built-in cung thanh fake null sau NewScene thu hai -> moi Text cua Gacha luu `m_Font: {fileID: 0}`, khong hien chu.
+            _font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
             CreateCamera(new Color(0.10f, 0.07f, 0.16f));
             var economy = new GameObject("Game").AddComponent<Economy>();
             CreateEventSystem();
@@ -1171,7 +1508,7 @@ namespace BuildBuild.Editor
                 Stretch(bg.rectTransform, 0, 0, 0, 0);
             }
 
-            Label("Title", canvas, "Triệu hồi", 56, Center, new Vector2(0, -24), new Vector2(800, 80), Top);
+            SetRef(screen, "titleText", Label("Title", canvas, "Triệu hồi", 56, Center, new Vector2(0, -24), new Vector2(800, 80), Top));
             SetRef(screen, "backButton", MakeButton("BackButton", canvas, "Quay lại", TopLeft, new Vector2(24, -24), new Vector2(200, 72), out _));
             SetRef(screen, "goldText", GoldPill(canvas));
 
@@ -1179,9 +1516,15 @@ namespace BuildBuild.Editor
             SetRef(screen, "ratesText", Label("Rates", info.transform, "", 30, Center, new Vector2(0, -14), new Vector2(1060, 44), Top));
             SetRef(screen, "pityText", Label("Pity", info.transform, "", 26, Center, new Vector2(0, 14), new Vector2(1060, 44), Bottom));
 
+            // 4 tab banner giua bang ti le va luoi ket qua; nhan tab do GachaScreen ghi.
+            var tabs = new Button[4];
+            for (int i = 0; i < tabs.Length; i++)
+                tabs[i] = MakeButton($"Banner{i}", canvas, "", Top, new Vector2((i - 1.5f) * 260f, -256), new Vector2(240, 72), out _);
+            SetRefs(screen, "bannerButtons", tabs);
+
             // 10 the = 2 hang x 5 cot, moi the 96x128 hien o 2x.
             var cell = Native(96, 128);
-            var gridRect = Rect("Results", canvas, Center, new Vector2(0, -30), new Vector2(5 * cell.x + 4 * 16, 2 * cell.y + 16));
+            var gridRect = Rect("Results", canvas, Center, new Vector2(0, -70), new Vector2(5 * cell.x + 4 * 16, 2 * cell.y + 16));
             var grid = gridRect.gameObject.AddComponent<GridLayoutGroup>();
             grid.cellSize = cell;
             grid.spacing = new Vector2(16, 16);
@@ -1197,6 +1540,243 @@ namespace BuildBuild.Editor
             SetRef(screen, "rollTenLabel", tenLabel);
 
             EditorSceneManager.SaveScene(scene, ScenePath(SceneNames.Gacha));
+        }
+
+        /// <summary>
+        /// Mo ta ky nang cho man Doi quan, theo `unitId`. Chi dien o con TRONG — sua chu trong Inspector thi build lai khong
+        /// ghi de. Chu tom tu comment kit trong code (`Warden`, `Necromancer`, `DragonRider`, `SkillKind`), chua doi chieu GDD.
+        /// </summary>
+        static void FillSkillTexts()
+        {
+            var texts = new Dictionary<string, (string ult, string passive, string minor, string minor2)>
+            {
+                ["mage_elemental"] = ("Vùng Băng: đặt vùng băng tại cụm quái đông nhất, tồn tại vài giây.", null, null, null),
+                ["cragfist"] = ("Hoá Đá: bất động + miễn sát thương vài giây, phản lại một phần sát thương nhận.", null, null, null),
+                ["knight"] = ("Chém Quạt: một nhát chém quạt dài trước mặt, sát thương gấp nhiều lần đòn thường.", null, null, null),
+                ["archer"] = ("Bắn Nhanh Liên Hoàn: tăng mạnh tốc đánh trong vài giây.", null, null, null),
+                ["mage_summoner"] = (
+                    "Gọi Kỵ Sĩ Tử Thần; kỵ sĩ còn sống thì hồi đầy máu cho nó. Lính xương gần kỵ sĩ được tăng công + tốc đánh.",
+                    "Dựng Xác: quái chết gần pháp sư có tỉ lệ đứng dậy thành lính xương.",
+                    "Vòng Ấn Ký: vòng trên đất tại cụm quái, sát thương thấp + ấn ký; quái chết khi còn ấn ký chắc chắn thành lính xương.",
+                    null),
+                ["chainwarden"] = (
+                    "Ném Móc: kéo quái bắn xa về sát mình + choáng, rồi Cuồng Nộ VĨNH VIỄN tới khi gục — hai xích dài, tăng công/tốc đánh, giảm sát thương nhận, hút máu.",
+                    "Cái Ngục: giữ tối đa 4 quái; quái đang bị giữ nhận +20% sát thương từ mọi nguồn.",
+                    "Quét Xích: quay xích quanh mình, sát thương thấp + trói (Cuồng Nộ: Lốc Xích 360°).",
+                    "Giật Xích: đang giữ từ 2 quái thì giật mạnh — mỗi quái bị giữ ăn sát thương tăng theo số quái bị giật + choáng 1s (Cuồng Nộ: kéo thêm mọi quái trong tầm xích)."),
+                ["banneret"] = (
+                    "Hiệu Lệnh Xung Phong: cả đội trên sân +30% sát thương trong 6s.",
+                    "Quân Kỳ: đồng minh quanh Kỳ Thủ +15% tốc đánh.",
+                    "Cắm Cờ: có đồng minh đang đánh gần thì cắm cờ tại chỗ — đồng minh trong vùng nhận ít hơn 25% sát thương trong 5s.",
+                    null),
+                ["wyrmspear"] = (
+                    "Long Hoá: biến hình Long Nhân + gọi Bạch Địa Long (Long Giáp, Long Uy, Long Nộ, Long Khế); lần sau: Thiên Địa Long Giáng.",
+                    "Nghịch Lân: đòn vào boss/tinh anh cộng thêm % máu tối đa mục tiêu.",
+                    "Xuyên Long / Thiên Long Liên Thương: đâm xuyên một đường, bỏ qua giáp.",
+                    "Địa Long Chấn (rồng): gai đá quanh rồng — sát thương vùng, choáng, phá giáp."),
+            };
+            foreach (var hero in LoadAll<HeroDefinition>(DataDir))
+            {
+                if (string.IsNullOrEmpty(hero.unitId) || !texts.TryGetValue(hero.unitId, out var t)) continue;
+                if (string.IsNullOrEmpty(hero.ultimateText)) hero.ultimateText = t.ult;
+                if (string.IsNullOrEmpty(hero.passiveText)) hero.passiveText = t.passive;
+                if (string.IsNullOrEmpty(hero.minorText)) hero.minorText = t.minor;
+                if (string.IsNullOrEmpty(hero.secondMinorText)) hero.secondMinorText = t.minor2;
+                EditorUtility.SetDirty(hero);
+            }
+        }
+
+        const string EquipmentConfigPath = DataDir + "/EquipmentConfig.asset";
+
+        /// <summary>Tao config trang bi neu chua co; icon o nao con trong thi gan icon chi so TAM (cho art GD5).</summary>
+        static void BuildEquipmentConfig()
+        {
+            var config = LoadOrCreate<EquipmentConfig>(EquipmentConfigPath, out _);
+            if (config.weaponIcon == null) config.weaponIcon = UiSprite("style-b/icons/icon-stat-damage");
+            if (config.armorIcon == null) config.armorIcon = UiSprite("style-b/icons/icon-hp");
+            if (config.helmetIcon == null) config.helmetIcon = UiSprite("style-b/icons/icon-role-melee");
+            if (config.ringIcon == null) config.ringIcon = UiSprite("style-b/icons/icon-stat-attack-speed");
+            EditorUtility.SetDirty(config);
+        }
+
+        static T[] LoadAll<T>(string folder) where T : Object =>
+            AssetDatabase.FindAssets($"t:{typeof(T).Name}", new[] { folder })
+                .Select(guid => AssetDatabase.LoadAssetAtPath<T>(AssetDatabase.GUIDToAssetPath(guid)))
+                .Where(asset => asset != null).ToArray();
+
+        /// <summary>Man Doi quan (GDD 10.2 + 10.3): trai luoi the cuon doc, phai bang chi tiet + 2 nut nang.</summary>
+        static void BuildUnitsScene()
+        {
+            var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+            var config = AssetDatabase.LoadAssetAtPath<GachaConfig>(DataDir + "/GachaConfig.asset");
+            _font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");    // ly do: xem BuildGachaScene
+            CreateCamera(new Color(0.08f, 0.09f, 0.14f));
+            var economy = new GameObject("Game").AddComponent<Economy>();
+            CreateEventSystem();
+
+            var canvas = CreateCanvas("UnitsUI");
+            var screen = canvas.gameObject.AddComponent<UnitsScreen>();
+            SetRef(screen, "config", config);
+            SetRef(screen, "economy", economy);
+            SetRefs(screen, "units", LoadAll<UnitDefinition>(DataDir + "/Units"));
+            SetRefs(screen, "heroes", LoadAll<HeroDefinition>(DataDir).Where(h => !string.IsNullOrEmpty(h.unitId)).ToArray());
+            SetRefs(screen, "cannons", LoadAll<CannonDefinition>(DataDir));
+            SetRef(screen, "equipment", AssetDatabase.LoadAssetAtPath<EquipmentConfig>(EquipmentConfigPath));
+
+            Label("Title", canvas, "Đội quân", 56, Center, new Vector2(0, -24), new Vector2(800, 80), Top);
+            SetRef(screen, "backButton", MakeButton("BackButton", canvas, "Quay lại", TopLeft, new Vector2(24, -24), new Vector2(200, 72), out _));
+            SetRef(screen, "goldText", GoldPill(canvas));
+
+            var tabs = new Button[3];
+            for (int i = 0; i < tabs.Length; i++)
+                tabs[i] = MakeButton($"Tab{i}", canvas, "", TopLeft, new Vector2(40 + i * 290, -120), new Vector2(270, 72), out _);
+            SetRefs(screen, "tabButtons", tabs);
+
+            // Trai: luoi the 4 cot trong khung cuon doc (the 96x128 hien o 2x nhu the gacha).
+            var cell = Native(96, 128);
+            var listPanel = Img("ListPanel", canvas, UiSprite("chrome/panel-wood"), TopLeft, new Vector2(24, -210),
+                new Vector2(4 * cell.x + 3 * 16 + 64, 846), sliced: true);
+            listPanel.raycastTarget = true;    // keo cuon tren khoang trong cua khung
+            var viewport = Rect("Viewport", listPanel.transform, Center, Vector2.zero, Vector2.zero);
+            Stretch(viewport, 24, 24, 24, 24);
+            viewport.gameObject.AddComponent<RectMask2D>();
+            var content = Rect("Content", viewport, Top, Vector2.zero, new Vector2(4 * cell.x + 3 * 16, 0));
+            var grid = content.gameObject.AddComponent<GridLayoutGroup>();
+            grid.cellSize = cell;
+            grid.spacing = new Vector2(16, 16);
+            grid.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+            grid.constraintCount = 4;
+            grid.childAlignment = TextAnchor.UpperCenter;
+            content.gameObject.AddComponent<ContentSizeFitter>().verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+            var scroll = listPanel.gameObject.AddComponent<ScrollRect>();
+            scroll.viewport = viewport;
+            scroll.content = content;
+            scroll.horizontal = false;
+            scroll.movementType = ScrollRect.MovementType.Clamped;
+            SetRef(screen, "grid", content);
+            SetRef(screen, "cardTemplate", BuildUnitCardTemplate(content));
+
+            // Phai: chi tiet unit dang chon.
+            var detail = Img("Detail", canvas, UiSprite("chrome/panel-wood"), TopRight, new Vector2(-24, -120), new Vector2(1000, 936), sliced: true);
+            SetRef(screen, "detailIcon", Img("Icon", detail.transform, null, TopLeft, new Vector2(40, -40), Native(96, 96)));
+            var name = Label("Name", detail.transform, "", 40, TopLeft, new Vector2(270, -44), new Vector2(690, 60));
+            name.alignment = TextAnchor.MiddleLeft;
+            SetRef(screen, "detailName", name);
+            var sub = Label("Sub", detail.transform, "", 28, TopLeft, new Vector2(270, -110), new Vector2(690, 44));
+            sub.alignment = TextAnchor.MiddleLeft;
+            SetRef(screen, "detailSub", sub);
+            SetRef(screen, "detailStats", Block("Stats", detail.transform, 28, new Vector2(40, -180), new Vector2(920, 230)));
+            SetRef(screen, "skillsTab", MakeButton("SkillsTab", detail.transform, "Kỹ năng", TopLeft, new Vector2(40, -420), new Vector2(220, 60), out _));
+            SetRef(screen, "gearTab", MakeButton("GearTab", detail.transform, "Trang bị", TopLeft, new Vector2(276, -420), new Vector2(220, 60), out _));
+            SetRef(screen, "detailSkills", Block("Skills", detail.transform, 24, new Vector2(40, -496), new Vector2(920, 300)));
+            BuildGearView(screen, detail.transform);
+
+            SetRef(screen, "levelButton", MakeButton("LevelButton", detail.transform, "", Bottom, new Vector2(-230, 30), new Vector2(400, 104), out var levelLabel));
+            SetRef(screen, "levelLabel", levelLabel);
+            SetRef(screen, "starButton", MakeButton("StarButton", detail.transform, "", Bottom, new Vector2(230, 30), new Vector2(400, 104), out var starLabel));
+            SetRef(screen, "starLabel", starLabel);
+
+            EditorSceneManager.SaveScene(scene, ScenePath(SceneNames.Units));
+        }
+
+        /// <summary>
+        /// Cot Trang bi (GDD 10.3): hang 4 o dang mac + thong tin/nut cua o dang chon ben phai, duoi la tui do cua o do.
+        /// O dung vien the unit 48x64 hien o 2x (96x128), chu 3 dong nam trong o.
+        /// </summary>
+        static void BuildGearView(UnitsScreen screen, Transform detail)
+        {
+            var view = Rect("GearView", detail, TopLeft, new Vector2(40, -496), new Vector2(920, 300));
+            SetRef(screen, "gearView", view.gameObject);
+
+            var cell = Native(48, 64);
+            SetRef(screen, "slotRow", Row("Slots", view, new Vector2(0, 0), 4, cell));
+            SetRef(screen, "bagRow", Row("Bag", view, new Vector2(0, -cell.y - 20), 8, cell));
+
+            var info = Label("Info", view, "", 22, TopLeft, new Vector2(4 * cell.x + 3 * 12 + 24, 0), new Vector2(480, 64));
+            info.alignment = TextAnchor.UpperLeft;
+            info.horizontalOverflow = HorizontalWrapMode.Wrap;
+            SetRef(screen, "gearInfo", info);
+            float buttonsX = 4 * cell.x + 3 * 12 + 24;
+            SetRef(screen, "upgradeButton", MakeButton("Upgrade", view, "", TopLeft, new Vector2(buttonsX, -70), new Vector2(230, 64), out var upgradeLabel));
+            upgradeLabel.fontSize = 22;
+            SetRef(screen, "upgradeLabel", upgradeLabel);
+            SetRef(screen, "unequipButton", MakeButton("Unequip", view, "Tháo", TopLeft, new Vector2(buttonsX + 246, -70), new Vector2(200, 64), out _));
+
+            // Mau o: vien do hiem + icon + chu, outline vang khi dang chon. Nam trong tui cho co san, UnitsScreen an di.
+            var root = Img("CellTemplate", view, UiSprite("hud/hud-hero-card"), TopLeft, Vector2.zero, cell);
+            root.raycastTarget = true;
+            var cellView = root.gameObject.AddComponent<EquipCellView>();
+            var button = root.gameObject.AddComponent<Button>();
+            var outline = root.gameObject.AddComponent<Outline>();
+            outline.effectColor = new Color(1f, 0.85f, 0.2f);
+            outline.effectDistance = new Vector2(5f, -5f);
+            var icon = Img("Icon", root.transform, null, Top, new Vector2(0, -10 * UiScale), Native(16, 16));
+            var frame = Img("Frame", root.transform, UiSprite("cards/card-frame-n"), Center, Vector2.zero, Vector2.zero);
+            Stretch(frame.rectTransform, 0, 0, 0, 0);
+            var label = Label("Label", root.transform, "", 15, Center, new Vector2(0, 8), new Vector2(92, 64), Bottom);
+            label.horizontalOverflow = HorizontalWrapMode.Wrap;
+            SetRef(cellView, "button", button);
+            SetRef(cellView, "frame", frame);
+            SetRef(cellView, "icon", icon);
+            SetRef(cellView, "label", label);
+            SetRef(cellView, "selectedOutline", outline);
+            SetRef(screen, "cellTemplate", cellView);
+            SetRefs(screen, "rarityFrames", new Object[]
+            {
+                UiSprite("cards/card-frame-n"), UiSprite("cards/card-frame-r"),
+                UiSprite("cards/card-frame-sr"), UiSprite("cards/card-frame-ssr"),
+            });
+        }
+
+        static RectTransform Row(string name, Transform parent, Vector2 pos, int columns, Vector2 cell)
+        {
+            var row = Rect(name, parent, TopLeft, pos, new Vector2(columns * cell.x + (columns - 1) * 12, cell.y));
+            var layout = row.gameObject.AddComponent<HorizontalLayoutGroup>();
+            layout.spacing = 12;
+            layout.childControlWidth = layout.childControlHeight = false;
+            layout.childForceExpandWidth = layout.childForceExpandHeight = false;
+            layout.childAlignment = TextAnchor.UpperLeft;
+            return row;
+        }
+
+        /// <summary>Khoi chu nhieu dong can trai-tren, xuong dong trong khung, co rich text (so xanh, dong khoa xam).</summary>
+        static Text Block(string name, Transform parent, int fontSize, Vector2 pos, Vector2 size)
+        {
+            var text = Label(name, parent, "", fontSize, TopLeft, pos, size);
+            text.alignment = TextAnchor.UpperLeft;
+            text.horizontalOverflow = HorizontalWrapMode.Wrap;
+            text.supportRichText = true;
+            text.lineSpacing = 1.15f;
+            return text;
+        }
+
+        static UnitCardView BuildUnitCardTemplate(Transform grid)
+        {
+            // Cung khuon the gacha: nen the hero, icon tren, vien do hiem phu len, chu o dai duoi.
+            var root = Img("CardTemplate", grid, UiSprite("hud/hud-hero-card"), Center, Vector2.zero, Native(96, 128));
+            root.raycastTarget = true;
+            var view = root.gameObject.AddComponent<UnitCardView>();
+            var button = root.gameObject.AddComponent<Button>();
+            var outline = root.gameObject.AddComponent<Outline>();
+            outline.effectColor = new Color(1f, 0.85f, 0.2f);
+            outline.effectDistance = new Vector2(6f, -6f);
+            var icon = Img("Icon", root.transform, null, Top, new Vector2(0, -20 * UiScale), Native(48, 48));
+            var frame = Img("Frame", root.transform, UiSprite("cards/card-frame-n"), Center, Vector2.zero, Vector2.zero);
+            Stretch(frame.rectTransform, 0, 0, 0, 0);
+            var nameText = Label("Name", root.transform, "", 17, Center, new Vector2(0, 8), new Vector2(180, 84), Bottom);
+            nameText.lineSpacing = 0.95f;
+
+            SetRef(view, "button", button);
+            SetRef(view, "background", root);
+            SetRef(view, "frame", frame);
+            SetRef(view, "icon", icon);
+            SetRef(view, "nameText", nameText);
+            SetRef(view, "selectedOutline", outline);
+            SetRef(view, "frameN", UiSprite("cards/card-frame-n"));
+            SetRef(view, "frameR", UiSprite("cards/card-frame-r"));
+            SetRef(view, "frameSR", UiSprite("cards/card-frame-sr"));
+            SetRef(view, "frameSSR", UiSprite("cards/card-frame-ssr"));
+            return view;
         }
 
         static GachaCardView BuildCardTemplate(Transform grid)
@@ -1362,6 +1942,10 @@ namespace BuildBuild.Editor
 
         static Sprite UiSprite(string relative) => LoadSprite(UiDir + relative + ".png");
 
+        /// <summary>Anh identity dung tam lam avatar / icon khi unit chua co tranh trong UI/avatars/.</summary>
+        static bool IsIdentityPlaceholder(Sprite sprite) =>
+            sprite != null && AssetDatabase.GetAssetPath(sprite).EndsWith("/identity/identity-1.png");
+
         static Sprite LoadSprite(string path)
         {
             var sprite = AssetDatabase.LoadAssetAtPath<Sprite>(path);
@@ -1412,9 +1996,21 @@ namespace BuildBuild.Editor
             }
             if (def.avatar == null && avatar != null)
                 def.avatar = LoadSprite($"{UiDir}avatars/{avatar}.png");
+            if (string.IsNullOrEmpty(def.unitId) && HeroUnitIds.TryGetValue(id, out string unitId)) def.unitId = unitId;
             EditorUtility.SetDirty(def);
             return def;
         }
+
+        /// <summary>
+        /// Hero -> id `UnitDefinition` gacha (dat duoc khi save so huu id nay). Vespera co id nhung CHUA vao pool gacha
+        /// (bo chua xong) nen chi Admin panel cho so huu de test.
+        /// </summary>
+        static readonly Dictionary<string, string> HeroUnitIds = new Dictionary<string, string>
+        {
+            { "Ironblade", "knight" }, { "Hawkfletch", "archer" }, { "Frostweaver", "mage_elemental" },
+            { "Bonecaller", "mage_summoner" }, { "Cragfist", "cragfist" }, { "Chainwarden", "chainwarden" },
+            { "Vespera", "vespera" }, { "Wyrmspear", "wyrmspear" }, { "Banneret", "banneret" },
+        };
 
         /// <summary>Frame `action-N.png` trong thu muc, xep theo N (khong lay sheet-transparent.png).</summary>
         static Sprite[] Frames(string folder, string action)

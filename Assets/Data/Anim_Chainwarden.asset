@@ -66,6 +66,12 @@ MonoBehaviour:
     hitFrame: 0
   skill:
     name: skill
-    frames: []
+    frames:
+    - {fileID: 21300000, guid: 1cfb687c64b76a5439b438c3b9ef4d01, type: 3}
+    - {fileID: 21300000, guid: c927d5a2fdd40ad42a602c5063bc879f, type: 3}
+    - {fileID: 21300000, guid: 034ae8f0777fdf245a2b07793ee3ad32, type: 3}
+    - {fileID: 21300000, guid: 12722a611a66db04095fe8c54bc34fa1, type: 3}
+    - {fileID: 21300000, guid: c7b0882a9730e5c488dede35e90bdaa0, type: 3}
+    - {fileID: 21300000, guid: 696d62e85c7c3b24d84e5f36713ea42c, type: 3}
     loop: 0
-    hitFrame: 0
+    hitFrame: 3

@@ -6,7 +6,8 @@ namespace BuildBuild.Combat
 {
     /// <summary>
     /// Thanh chi so ve tren dau hero: MAU (do, luon co — hero an don duoc nen phai doc duoc con bao
-    /// nhieu) va MANA (cyan, chi hero co chieu lon). Cung mot khung, khac mau + khac do cao.
+    /// nhieu) va MANA (cyan, chi hero co chieu lon). Cung mot khung, khac mau + khac do cao. Boss cung co thanh MAU
+    /// (rong hon — `BossWidth`) de nguoi choi doc duoc con bao lau nua ha duoc.
     ///
     /// Chrome TAM: chua co art thanh trong `Assets/Art/Generated/UI/` nen day dung sprite 1x1 to mau,
     /// giong cach `FrostZone` tu ve dia placeholder. Co art that thi thay hai sprite o `Pixel()`,
@@ -23,6 +24,8 @@ namespace BuildBuild.Combat
         static readonly Color ManaFill = new Color(0.45f, 0.85f, 1f);      // cung ho mau voi frost FX
 
         const float Width = 0.32f;
+        /// <summary>Boss to gap ~2 hero: thanh rong gap doi, tinh theo toa do LOCAL nhu hero.</summary>
+        const float BossWidth = 0.64f;
         const float Height = 0.035f;
         const int Order = SortOrder.Overlay;
 
@@ -31,29 +34,37 @@ namespace BuildBuild.Combat
 
         Func<float> _fraction;
         Transform _fill;
+        float _width;
 
         public static void AttachHealth(Hero hero) =>
-            Attach(hero, "HealthBar", HealthGap, HealthFill, () => hero.Health.Fraction);
+            Attach(hero.transform, hero.BodyHeight, "HealthBar", HealthGap, HealthFill, Width, () => hero.Health.Fraction);
 
-        public static void AttachMana(Hero hero) =>
-            Attach(hero, "ManaBar", ManaGap, ManaFill, () => hero.ManaFraction);
+        public static void AttachMana(Hero hero) => AttachMana(hero, hero);
 
-        static void Attach(Hero hero, string name, float gap, Color fill, Func<float> fraction)
+        /// <summary>Thanh mana tren dau <paramref name="hero"/> nhung doc mana cua <paramref name="owner"/> (Bach Dia Long hien mana Wyrmspear).</summary>
+        public static void AttachMana(Hero hero, Hero owner) =>
+            Attach(hero.transform, hero.BodyHeight, "ManaBar", ManaGap, ManaFill, Width, () => owner.ManaFraction);
+
+        public static void AttachHealth(Enemy enemy) =>
+            Attach(enemy.transform, enemy.BodyHeight, "HealthBar", HealthGap, HealthFill, BossWidth, () => enemy.Health.Fraction);
+
+        static void Attach(Transform owner, float bodyHeight, string name, float gap, Color fill, float width, Func<float> fraction)
         {
             var go = new GameObject(name);
-            go.transform.SetParent(hero.transform, worldPositionStays: false);
-            go.transform.localPosition = new Vector3(0f, hero.BodyHeight / hero.transform.lossyScale.y + gap, 0f);
-            go.AddComponent<StatBar>().Build(fill, fraction);
+            go.transform.SetParent(owner, worldPositionStays: false);
+            go.transform.localPosition = new Vector3(0f, bodyHeight / owner.lossyScale.y + gap, 0f);
+            go.AddComponent<StatBar>().Build(fill, width, fraction);
         }
 
-        void Build(Color fill, Func<float> fraction)
+        void Build(Color fill, float width, Func<float> fraction)
         {
             _fraction = fraction;
-            Piece("Background", Pixel(centred: true), Background, Vector3.zero, new Vector3(Width, Height, 1f));
+            _width = width;
+            Piece("Background", Pixel(centred: true), Background, Vector3.zero, new Vector3(width, Height, 1f));
 
             // Pivot trai => scale x la be rong that, thanh day tu trai sang phai. Dat o mep trai cua nen.
             _fill = Piece("Fill", Pixel(centred: false), fill,
-                new Vector3(-Width * 0.5f, 0f, 0f), new Vector3(0f, Height, 1f));
+                new Vector3(-width * 0.5f, 0f, 0f), new Vector3(0f, Height, 1f));
         }
 
         Transform Piece(string name, Sprite sprite, Color color, Vector3 localPosition, Vector3 localScale)
@@ -73,7 +84,7 @@ namespace BuildBuild.Combat
         void Update()
         {
             if (_fraction == null || _fill == null) return;
-            _fill.localScale = new Vector3(Width * _fraction(), Height, 1f);
+            _fill.localScale = new Vector3(_width * _fraction(), Height, 1f);
         }
 
         // pixelsPerUnit = 1 => sprite rong dung 1 unit, nen localScale doc thang ra don vi the gioi.

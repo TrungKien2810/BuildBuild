@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Hero_Bonecaller
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
   displayName: Bonecaller
+  unitId: mage_summoner
   maxHealth: 300
   damage: 15
   attackRate: 0.7
@@ -22,6 +23,7 @@ MonoBehaviour:
   maxHeld: 3
   heldDamageBonus: 0
   warden: {fileID: 0}
+  dragonRider: {fileID: 0}
   projectileSpeed: 8
   splashRadius: 0.3
   projectileFrames:
@@ -53,5 +55,21 @@ MonoBehaviour:
   healsAllies: 0
   healFrames: []
   buffFrames: []
+  shieldAmount: 0
+  shieldFrames: []
+  shieldBreakFrames: []
+  passiveStar: 1
+  minorStar: 3
+  secondMinorStar: 3
+  ultimateText: "G\u1ECDi K\u1EF5 S\u0129 T\u1EED Th\u1EA7n; k\u1EF5 s\u0129 c\xF2n
+    s\u1ED1ng th\xEC h\u1ED3i \u0111\u1EA7y m\xE1u cho n\xF3. L\xEDnh x\u01B0\u01A1ng
+    g\u1EA7n k\u1EF5 s\u0129 \u0111\u01B0\u1EE3c t\u0103ng c\xF4ng + t\u1ED1c \u0111\xE1nh."
+  passiveText: "D\u1EF1ng X\xE1c: qu\xE1i ch\u1EBFt g\u1EA7n ph\xE1p s\u01B0 c\xF3
+    t\u1EC9 l\u1EC7 \u0111\u1EE9ng d\u1EADy th\xE0nh l\xEDnh x\u01B0\u01A1ng."
+  minorText: "V\xF2ng \u1EA4n K\xFD: v\xF2ng tr\xEAn \u0111\u1EA5t t\u1EA1i c\u1EE5m
+    qu\xE1i, s\xE1t th\u01B0\u01A1ng th\u1EA5p + \u1EA5n k\xFD; qu\xE1i ch\u1EBFt
+    khi c\xF2n \u1EA5n k\xFD ch\u1EAFc ch\u1EAFn th\xE0nh l\xEDnh x\u01B0\u01A1ng."
+  secondMinorText: 
   animations: {fileID: 11400000, guid: ed18e66d09b85894fa270c5cf011fd0b, type: 2}
+  artFacesRight: 0
   avatar: {fileID: 21300000, guid: 5437067a70cfbb346b6643aaa2f92803, type: 3}

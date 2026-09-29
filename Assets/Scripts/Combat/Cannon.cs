@@ -1,5 +1,6 @@
 using BuildBuild.Core;
 using BuildBuild.Data;
+using BuildBuild.Meta;
 using UnityEngine;
 
 namespace BuildBuild.Combat
@@ -59,7 +60,7 @@ namespace BuildBuild.Combat
         public void SetLevel(int level)
         {
             Level = _definition.ClampLevel(level);
-            _damage = _definition.DamageAt(Level);
+            _damage = Progression.CannonDamage(_definition, Level);    // level + sao
         }
 
         void Update()
