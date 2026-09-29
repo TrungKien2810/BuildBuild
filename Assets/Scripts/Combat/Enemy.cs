@@ -529,6 +529,19 @@ namespace BuildBuild.Combat
         /// </summary>
         Hero EngageHero()
         {
+            // Khieu Khich (Cragfist): dung trong vong cua ong va ong con cho thi bo unit dang danh, sang ong.
+            var taunter = Hero.Taunter(this);
+            if (taunter != null && taunter.Unit != _engaged)
+            {
+                if (!CanBeHeld)
+                {
+                    Disengage();
+                    _engaged = taunter.Unit;
+                    return _engaged;
+                }
+                if (HoldBy(taunter)) return _engaged;
+            }
+
             bool stillOn = _engaged != null && !_engaged.IsDying && (!CanBeHeld || Holder != null);
             if (stillOn)
             {
@@ -597,7 +610,10 @@ namespace BuildBuild.Combat
             var heroPosition = hero.transform.position;
             if (swinging) return;
 
-            bool inReach = Battlefield.GroundDistance(heroPosition, transform.position) - hero.BodyRadius <= _definition.attackRange;
+            // Quai ban xa con ngoai mep phai man thi chua tinh la vao tam: dung ban tu ngoai man thi hero (bi kep trong
+            // mep phai) khong bao gio toi duoc.
+            bool inReach = Battlefield.GroundDistance(heroPosition, transform.position) - hero.BodyRadius <= _definition.attackRange
+                && Battlefield.InsideRight(transform.position, _bodyRadius);
             if (inReach && _attackCooldown <= 0f)
             {
                 Face(heroPosition.x);

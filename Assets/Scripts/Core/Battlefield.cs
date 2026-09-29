@@ -96,6 +96,10 @@ namespace BuildBuild.Core
                 && position.y >= _current.laneBottom && position.y <= _current.laneTop;
         }
 
+        /// <summary>Than (<paramref name="radius"/>) da vao trong mep phai man. Chua co Battlefield thi coi nhu da vao.</summary>
+        public static bool InsideRight(Vector3 position, float radius) =>
+            _current == null || position.x <= _current.rightBound - radius;
+
         public static float GroundDistance(Vector3 a, Vector3 b)
         {
             float dx = a.x - b.x;

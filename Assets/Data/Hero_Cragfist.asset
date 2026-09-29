@@ -24,6 +24,7 @@ MonoBehaviour:
   heldDamageBonus: 0
   warden: {fileID: 0}
   dragonRider: {fileID: 0}
+  banner: {fileID: 0}
   projectileSpeed: 20
   splashRadius: 0.3
   projectileFrames: []
@@ -61,10 +62,17 @@ MonoBehaviour:
   passiveStar: 1
   minorStar: 3
   secondMinorStar: 3
+  passiveKind: 2
+  passivePower: 0
+  passiveThreshold: 0
+  passiveRadius: 1.5
+  passiveEvery: 1
   ultimateText: "Ho\xE1 \u0110\xE1: b\u1EA5t \u0111\u1ED9ng + mi\u1EC5n s\xE1t th\u01B0\u01A1ng
     v\xE0i gi\xE2y, ph\u1EA3n l\u1EA1i m\u1ED9t ph\u1EA7n s\xE1t th\u01B0\u01A1ng
     nh\u1EADn."
-  passiveText: 
+  passiveText: "Khi\xEAu Kh\xEDch: qu\xE1i \u0111\u1EE9ng g\u1EA7n Ng\u01B0\u1EDDi
+    \u0111\xE1 b\u1ECF hero kh\xE1c, quay sang \u0111\xE1nh \xF4ng (khi \xF4ng c\xF2n
+    ch\u1ED7 gi\u1EEF)."
   minorText: 
   secondMinorText: 
   animations: {fileID: 11400000, guid: 29def75c320feff41b26b600cbcd277f, type: 2}

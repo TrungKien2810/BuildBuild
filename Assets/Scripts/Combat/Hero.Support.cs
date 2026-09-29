@@ -191,7 +191,7 @@ namespace BuildBuild.Combat
             var ally = WoundedAlly(inRangeOnly: true);
             if (ally == null) return;
             AuraMultipliers(out float multiplier, out _);
-            ally.Health.Heal(BaseDamage * multiplier);
+            ally.Health.Heal(BaseDamage * multiplier * RescueMultiplier(ally));
             var at = ally.transform.position + new Vector3(0f, ally.BodyHeight * 0.5f, 0f);
             OneShotFx.Spawn(at, _definition.healFrames, false, SortOrder.Air);
             OnHitsLanded(1);    // healer khong danh trung quai: moi lan hoi tinh nhu mot don trung de nap mana
@@ -214,7 +214,7 @@ namespace BuildBuild.Combat
             {
                 if (ally == null || ally.IsDying || ally._definition == null) continue;
                 if (Battlefield.GroundDistance(ally.transform.position, at) > radius) continue;
-                ally.Health.Heal(heal);
+                ally.Health.Heal(heal * RescueMultiplier(ally));
                 var fxAt = ally.transform.position + new Vector3(0f, ally.BodyHeight * 0.5f, 0f);
                 OneShotFx.Spawn(fxAt, _definition.healFrames, false, SortOrder.Air);
                 ally.ApplyShield(_definition.shieldAmount, _definition.skillDuration,

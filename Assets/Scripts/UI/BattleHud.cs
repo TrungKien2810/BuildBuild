@@ -45,20 +45,21 @@ namespace BuildBuild.UI
             };
             waves.WaveCleared += (wave, gold) =>
             {
-                string hint = waves.AllCleared
-                    ? "Đã qua hết các wave!"
-                    : $"Xong wave {wave} — nâng cấp rồi đánh tiếp";
+                string hint = $"Xong wave {wave} — nâng cấp rồi đánh tiếp";
                 var drop = Armory.RollDrop(equipment, wave);
-                if (drop != null) hint += $"\nNhận trang bị: {EquipmentConfig.SlotName(drop.slot)} {drop.rarity}";
-                ShowMessage(hint);
-                if (resultPopup != null) resultPopup.Show(true, gold, hint);
+                string dropName = drop != null ? $"{EquipmentConfig.SlotName(drop.slot)} {drop.rarity}" : "";
+                // Co popup thi thuong (vang + do roi) nam trong o cua popup, khong in them chu len san.
+                if (resultPopup != null)
+                    resultPopup.Show(true, gold, hint, drop != null ? equipment.Icon(drop.slot) : null, dropName);
+                else
+                    ShowMessage(drop != null ? $"{hint}\nNhận trang bị: {dropName}" : hint);
                 Refresh();
             };
             waves.Defeated += wave =>
             {
                 string hint = $"Thua wave {wave} — phát triển thêm rồi đánh lại";
-                ShowMessage(hint);
                 if (resultPopup != null) resultPopup.Show(false, 0, hint);
+                else ShowMessage(hint);
                 Refresh();
             };
             castle.Health.Damaged += _ => RefreshCastle();
@@ -76,7 +77,7 @@ namespace BuildBuild.UI
         {
             waveText.text = $"Wave {waves.NextWave}";
             startLabel.text = $"Đánh wave {waves.NextWave}";
-            startButton.gameObject.SetActive(!waves.IsFighting && !waves.AllCleared);
+            startButton.gameObject.SetActive(!waves.IsFighting);
             foreach (var button in HiddenWhileFighting) button.gameObject.SetActive(!waves.IsFighting);
             RefreshCastle();
             RefreshGold();

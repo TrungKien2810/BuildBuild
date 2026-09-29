@@ -44,6 +44,28 @@ namespace BuildBuild.Data
     }
 
     /// <summary>
+    /// Noi tai cua hero KHONG co bo chieu rieng (chot 2026-09-29). Hero co component rieng (Bonecaller, Chainwarden,
+    /// Wyrmspear, Banneret) giu noi tai trong do, o nay de None. Y nghia cua `passive*` doi theo loai.
+    /// </summary>
+    public enum PassiveKind
+    {
+        None,
+        /// <summary>Ironblade Truy Kich: don thuong vao quai duoi `passiveThreshold` mau +`passivePower` sat thuong.</summary>
+        Execute,
+        /// <summary>Cragfist Khieu Khich: quai trong `passiveRadius` bo unit khac, vao cho cua hero nay (con cho trong).</summary>
+        Taunt,
+        /// <summary>Hawkfletch Nham Yeu Diem: cu phat thu `passiveEvery` sat thuong x `passivePower`.</summary>
+        Crit,
+        /// <summary>
+        /// Frostweaver Vo Bang: quai dang bi lam cham chet trong tam danh -> no, quai trong `passiveRadius` an
+        /// don thuong x `passivePower`.
+        /// </summary>
+        Shatter,
+        /// <summary>Vespera Cuu Nguy: dong minh duoi `passiveThreshold` mau duoc hoi +`passivePower`.</summary>
+        Rescue,
+    }
+
+    /// <summary>
     /// Chi so chien dau cua mot hero dat xuong san. So goc lay tu GAME_DESIGN.md muc 3 — la gia tri
     /// KHOI DIEM de can bang, nen de o asset chu khong hard-code trong script.
     /// </summary>
@@ -165,10 +187,22 @@ namespace BuildBuild.Data
         [Tooltip("Chieu phu thu hai: Wyrmspear Dia Long Chan (cua rong), Chainwarden Giat Xich.")]
         [Min(0)] public int secondMinorStar = 3;
 
+        [Header("Noi tai hero khong co bo chieu rieng (mo theo passiveStar, chot 2026-09-29; so CHUA can)")]
+        [Tooltip("Loai noi tai — y nghia tung o ben duoi doi theo loai, xem `PassiveKind`.")]
+        public PassiveKind passiveKind;
+        [Tooltip("Execute/Rescue: +ti le (0,5 = +50%). Crit: he so nhan. Shatter: he so don thuong cua vu no.")]
+        public float passivePower;
+        [Tooltip("Execute/Rescue: nguong mau muc tieu (0,3 = duoi 30%).")]
+        public float passiveThreshold;
+        [Tooltip("Taunt: ban kinh keo quai. Shatter: ban kinh vu no.")]
+        public float passiveRadius;
+        [Tooltip("Crit: cu phat thu may.")]
+        [Min(1)] public int passiveEvery = 1;
+
         [Header("Mo ta ky nang (man Doi quan)")]
         [Tooltip("\"Ten: mo ta\" cua chieu cuoi. Trong = hero khong co chieu cuoi.")]
         [TextArea(2, 4)] public string ultimateText;
-        [Tooltip("Noi tai — trong = khong co (hero bac thap).")]
+        [Tooltip("Noi tai — moi hero deu co (hero N/R chi thieu chieu phu).")]
         [TextArea(2, 4)] public string passiveText;
         [TextArea(2, 4)] public string minorText;
         [Tooltip("Chieu phu thu hai (Wyrmspear, Chainwarden).")]

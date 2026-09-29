@@ -106,7 +106,7 @@ namespace BuildBuild.UI
                 GUILayout.BeginHorizontal();
                 GUILayout.Label($"{unit.id}  Lv{unit.level} {unit.stars}★ {unit.shards}mv", GUILayout.Width(160f));
                 // Dev: nang mien phi de test mo skill theo sao; hero tren san an so moi tu wave sau (HeroBoard dung lai).
-                if (GUILayout.Button("+Lv", GUILayout.Width(40f)) && unit.level < Progression.MaxLevel)
+                if (GUILayout.Button("+Lv", GUILayout.Width(40f)) && unit.level < Progression.MaxLevel(unit.stars))
                 {
                     unit.level = Mathf.Max(1, unit.level) + 1;
                     SaveSystem.Save();

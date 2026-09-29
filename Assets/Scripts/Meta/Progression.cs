@@ -5,20 +5,25 @@ namespace BuildBuild.Meta
 {
     /// <summary>
     /// Level + sao cua mot unit da so huu (GAME_DESIGN.md muc 6-7, luat mo skill chot 2026-09-28):
-    ///   - level n -> n+1 ton `floor(50 x n^1,5)` vang, moi level +8% mau va sat thuong goc, toi da 20;
+    ///   - level n -> n+1 ton `floor(50 x n^1,5)` vang, moi level +8% mau va sat thuong goc; tran level theo sao
+    ///     (`MaxLevel`, nguoi dung chot 2026-09-29): 0-1 sao lv 20, moi sao sau +20, du sao thi khong gioi han;
     ///   - sao la NUT BAM ton mang (`GachaConfig.shardsPerStar`), khong tu len khi quay; moi sao +15% mau va sat thuong
     ///     goc; toi da `MaxStars` (GDD chua co tran — Claude dat tam);
     ///   - so huu la dung duoc danh thuong + chieu cuoi; noi tai / chieu phu mo theo sao (`HeroDefinition.passiveStar`...).
     /// Level va sao CONG tuyen tinh voi nhau tren chi so goc, khong nhan chong.
     /// Unit khong co id (linh xuong, ky si, dia long) khong co tien trien: he so 1, moi thu mo san.
-    /// Phao giu gia/level rieng trong `CannonDefinition` (co tu truoc) — o day chi cong them sao.
+    /// Phao giu gia/level rieng trong `CannonDefinition` (co tu truoc) — o day chi cong them sao; tran level dung chung.
     /// </summary>
     public static class Progression
     {
-        public const int MaxLevel = 20;
+        public const int LevelsPerStar = 20;
         public const float LevelBonus = 0.08f;
         public const int MaxStars = 5;
         public const float StarBonus = 0.15f;
+
+        /// <summary>Level toi da o so sao nay (hero, linh, phao): 0-1 sao 20, 2 sao 40 … du sao `int.MaxValue`.</summary>
+        public static int MaxLevel(int stars) =>
+            stars >= MaxStars ? int.MaxValue : LevelsPerStar * Mathf.Max(1, stars);
 
         public static OwnedUnit Owned(string unitId) =>
             string.IsNullOrEmpty(unitId) ? null : SaveSystem.Data.Find(unitId);

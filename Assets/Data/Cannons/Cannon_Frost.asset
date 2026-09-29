@@ -24,7 +24,6 @@ MonoBehaviour:
   damagePerLevel: 0.08
   upgradeCostBase: 50
   upgradeCostExponent: 1.5
-  maxLevel: 20
   projectileSpeed: 14
   projectileFrames:
   - {fileID: 21300000, guid: a5a21d807c95cf94e828ff213a0fae65, type: 3}

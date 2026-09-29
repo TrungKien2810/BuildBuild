@@ -24,6 +24,7 @@ MonoBehaviour:
   heldDamageBonus: 0.2
   warden: {fileID: 11400000, guid: 0247abe292fb2014b8704e3578486eb3, type: 2}
   dragonRider: {fileID: 0}
+  banner: {fileID: 0}
   projectileSpeed: 20
   splashRadius: 0.3
   projectileFrames: []
@@ -53,6 +54,11 @@ MonoBehaviour:
   passiveStar: 1
   minorStar: 3
   secondMinorStar: 3
+  passiveKind: 0
+  passivePower: 0
+  passiveThreshold: 0
+  passiveRadius: 0
+  passiveEvery: 1
   ultimateText: "N\xE9m M\xF3c: k\xE9o qu\xE1i b\u1EAFn xa v\u1EC1 s\xE1t m\xECnh
     + cho\xE1ng, r\u1ED3i Cu\u1ED3ng N\u1ED9 V\u0128NH VI\u1EC4N t\u1EDBi khi g\u1EE5c
     \u2014 hai x\xEDch d\xE0i, t\u0103ng c\xF4ng/t\u1ED1c \u0111\xE1nh, gi\u1EA3m

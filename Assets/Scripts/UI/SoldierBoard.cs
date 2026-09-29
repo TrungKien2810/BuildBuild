@@ -1,5 +1,6 @@
 using BuildBuild.Combat;
 using BuildBuild.Core;
+using BuildBuild.Meta;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +18,12 @@ namespace BuildBuild.UI
         [Tooltip("Cung thu tu voi `SoldierCamp.roster`.")]
         [SerializeField] Button[] rosterButtons;
         [SerializeField] Button cancelButton;
+        [Tooltip("\"Lv N\" moi dong, cung thu tu `rosterButtons`.")]
+        [SerializeField] Text[] rosterLevels;
+        [Tooltip("5 sao moi dong: dong i o [i*5 .. i*5+4].")]
+        [SerializeField] Image[] rosterStars;
+        [SerializeField] Sprite starOn;
+        [SerializeField] Sprite starOff;
 
         int _pending = -1;
 
@@ -52,6 +59,7 @@ namespace BuildBuild.UI
             {
                 var soldier = camp.Soldier(i);
                 rosterButtons[i].interactable = SoldierCamp.Owned(soldier) && !camp.InLineup(soldier);
+                UnitCardView.ShowLevelAndStars(rosterLevels[i], rosterStars, i, Progression.Owned(soldier.unitId), starOn, starOff);
             }
             pickerPanel.SetActive(true);
         }

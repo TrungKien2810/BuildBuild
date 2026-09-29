@@ -1,0 +1,68 @@
+{
+  "target": "player",
+  "mode": "walk",
+  "source": "tempart/Banneret/walk/v2-g2/graded",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 3,
+  "align": "feet",
+  "status": "duyet 2026-09-29",
+  "frames": [
+    {
+      "frame": "walk-1",
+      "aligned_bbox": [
+        48,
+        39,
+        79,
+        93
+      ]
+    },
+    {
+      "frame": "walk-2",
+      "aligned_bbox": [
+        48,
+        39,
+        79,
+        93
+      ]
+    },
+    {
+      "frame": "walk-3",
+      "aligned_bbox": [
+        48,
+        37,
+        79,
+        93
+      ]
+    },
+    {
+      "frame": "walk-4",
+      "aligned_bbox": [
+        48,
+        37,
+        79,
+        93
+      ]
+    },
+    {
+      "frame": "walk-5",
+      "aligned_bbox": [
+        48,
+        39,
+        79,
+        93
+      ]
+    },
+    {
+      "frame": "walk-6",
+      "aligned_bbox": [
+        48,
+        39,
+        79,
+        93
+      ]
+    }
+  ],
+  "ground_row": 92
+}

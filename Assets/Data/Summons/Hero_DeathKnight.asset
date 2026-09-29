@@ -24,6 +24,7 @@ MonoBehaviour:
   heldDamageBonus: 0
   warden: {fileID: 0}
   dragonRider: {fileID: 0}
+  banner: {fileID: 0}
   projectileSpeed: 20
   splashRadius: 1.2
   projectileFrames: []
@@ -57,6 +58,11 @@ MonoBehaviour:
   passiveStar: 1
   minorStar: 3
   secondMinorStar: 3
+  passiveKind: 0
+  passivePower: 0
+  passiveThreshold: 0
+  passiveRadius: 0
+  passiveEvery: 1
   ultimateText: 
   passiveText: 
   minorText: 

@@ -105,10 +105,15 @@ MonoBehaviour:
     eliteCount: 2
   - fromWave: 30
     toWave: 30
-    enemies: []
+    enemies:
+    - {fileID: 11400000, guid: ce5cee30680d48f409bb70b0a72805af, type: 2}
+    - {fileID: 11400000, guid: 841baa938d951e348bf41f08a568610c, type: 2}
+    - {fileID: 11400000, guid: b282b025a6acb76488bc492db863ca62, type: 2}
+    - {fileID: 11400000, guid: 31c7ed2da1d9ed444b569d3e2a607fa2, type: 2}
+    - {fileID: 11400000, guid: 2c115065415c8a1418dc02c4e2b39692, type: 2}
     hasBoss: 1
     bossStatMultiplier: 3.5
-    fixedCount: 0
+    fixedCount: 6
     eliteCount: 0
   boss: {fileID: 11400000, guid: 36a86bc566c8d184ca3ab63733c7812b, type: 2}
   elite: {fileID: 11400000, guid: 0ec892b7db0b8e24f93ff69260c150c6, type: 2}

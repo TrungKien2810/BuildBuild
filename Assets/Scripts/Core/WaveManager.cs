@@ -48,7 +48,6 @@ namespace BuildBuild.Core
         /// <summary>Ban tinh cua `IsFighting` cho unit khong giu tham chieu (Hero chi hoi mana khi dang danh).</summary>
         public static bool Fighting { get; private set; }
         public bool IsFighting { get => Fighting; private set => Fighting = value; }
-        public bool AllCleared => tuning != null && NextWave > tuning.totalWaves;
 
         public event Action<int> WaveStarted;
         /// <summary>Tham so: wave vua thang, vang thuong.</summary>
@@ -69,7 +68,7 @@ namespace BuildBuild.Core
 
         public void StartWave()
         {
-            if (IsFighting || AllCleared) return;
+            if (IsFighting) return;
             if (tuning == null || enemyPrefab == null || spawnPoint == null)
             {
                 Debug.LogError("[WaveManager] Thieu tuning / enemyPrefab / spawnPoint — khong chay duoc.");
@@ -127,7 +126,7 @@ namespace BuildBuild.Core
         /// <summary>
         /// Thu tu spawn cua mot wave (GAME_DESIGN.md muc 5): quai thuong boc ngau nhien tu bang, tinh anh (`eliteCount`)
         /// rai deu giua doan, boss ra SAU hai con ho tong dau tien (khong co ho tong thi ra ngay). Boss dung
-        /// `bossStatMultiplier` thay cho cong thuc len thang theo wave.
+        /// `WaveTuning.BossMultiplier` thay cho cong thuc len thang theo wave.
         /// </summary>
         List<SpawnEntry> BuildSpawnQueue(int wave, WaveBand band)
         {
@@ -157,12 +156,10 @@ namespace BuildBuild.Core
                 }
 
             if (band.hasBoss && tuning.boss != null)
-                queue.Insert(Mathf.Min(2, queue.Count), new SpawnEntry
-                {
-                    definition = tuning.boss,
-                    health = band.bossStatMultiplier,
-                    damage = band.bossStatMultiplier,
-                });
+            {
+                float boss = tuning.BossMultiplier(wave, band);
+                queue.Insert(Mathf.Min(2, queue.Count), new SpawnEntry { definition = tuning.boss, health = boss, damage = boss });
+            }
 
             return queue;
         }
@@ -200,7 +197,7 @@ namespace BuildBuild.Core
         public void DevSetWave(int wave)
         {
             if (IsFighting || tuning == null) return;
-            NextWave = Mathf.Clamp(wave, 1, tuning.totalWaves);
+            NextWave = Mathf.Max(1, wave);
         }
 
         /// <summary>Admin panel: giet moi quai dang song (van tinh la thang neu da spawn het).</summary>

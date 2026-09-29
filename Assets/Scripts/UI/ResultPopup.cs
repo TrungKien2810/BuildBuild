@@ -12,6 +12,7 @@ namespace BuildBuild.UI
     ///
     /// Sprite lay tu `Assets/Art/Generated/UI/panels/` (dot UI thu 3). Ruy bang thang/thua dung CHUNG
     /// mot `Image`, chi doi sprite — hai file da duoc cat trung khit bbox (80x27) nen doi khong xe khung.
+    /// Crest thang/thua (`lobby/victory-crest`, `lobby/defeat-crest`, dot UI C 5) cung dung chung mot `Image`.
     /// </summary>
     public class ResultPopup : MonoBehaviour
     {
@@ -27,11 +28,18 @@ namespace BuildBuild.UI
         [SerializeField] Sprite victoryRibbon;
         [SerializeField] Sprite defeatRibbon;
         [SerializeField] Text titleText;
+        [SerializeField] Image crest;
+        [SerializeField] Sprite victoryCrest;
+        [SerializeField] Sprite defeatCrest;
 
         [Header("Dong phan thuong")]
-        [Tooltip("Ca dong (nen + icon vang + so) — thua thi an di, khong hien '+0 vang'.")]
+        [Tooltip("O thuong (khung reward-slot + icon vang + so) — thua thi an di, khong hien '+0 vang'.")]
         [SerializeField] GameObject rewardRow;
         [SerializeField] Text goldText;
+        [Tooltip("O do roi (khung reward-slot-rare + icon trang bi + ten). Khong roi do thi an, o vang ve giua.")]
+        [SerializeField] GameObject dropSlot;
+        [SerializeField] Image dropIcon;
+        [SerializeField] Text dropText;
 
         [SerializeField] Text hintText;
         [SerializeField] Button closeButton;
@@ -43,11 +51,20 @@ namespace BuildBuild.UI
         }
 
         /// <param name="gold">Vang nhan duoc cua wave vua danh. Thua thi truyen 0 — dong phan thuong se an.</param>
-        public void Show(bool victory, int gold, string hint)
+        /// <param name="drop">Icon trang bi vua roi (null = khong roi); `dropName` ghi duoi icon, vd "Nhẫn R".</param>
+        public void Show(bool victory, int gold, string hint, Sprite drop = null, string dropName = "")
         {
+            bool hasDrop = drop != null;
+            dropSlot.SetActive(hasDrop);
+            dropIcon.sprite = drop;
+            dropText.text = dropName;
+            var goldRect = (RectTransform)rewardRow.transform;
+            goldRect.anchoredPosition = new Vector2(hasDrop ? -80f : 0f, goldRect.anchoredPosition.y);
             ribbon.sprite = victory ? victoryRibbon : defeatRibbon;
             titleText.text = victory ? "CHIẾN THẮNG" : "THẤT BẠI";
-            titleText.color = victory ? new Color(0.28f, 0.20f, 0.09f) : new Color(0.86f, 0.86f, 0.90f);
+            // Chu thang mau kem sang: long ruy bang thang trong suot, tia sang vang cua crest nam ngay sau chu.
+            titleText.color = victory ? new Color(1f, 0.95f, 0.78f) : new Color(0.86f, 0.86f, 0.90f);
+            if (crest != null) crest.sprite = victory ? victoryCrest : defeatCrest;
             rewardRow.SetActive(gold > 0);
             goldText.text = "+" + gold.ToString("N0");
             hintText.text = hint;
