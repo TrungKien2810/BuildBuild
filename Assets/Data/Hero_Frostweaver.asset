@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Hero_Frostweaver
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
   displayName: Frostweaver
+  unitId: mage_elemental
   maxHealth: 260
   damage: 35
   attackRate: 0.6
@@ -22,6 +23,7 @@ MonoBehaviour:
   maxHeld: 3
   heldDamageBonus: 0
   warden: {fileID: 0}
+  dragonRider: {fileID: 0}
   projectileSpeed: 8
   splashRadius: 0.45
   projectileFrames:
@@ -57,5 +59,17 @@ MonoBehaviour:
   healsAllies: 0
   healFrames: []
   buffFrames: []
+  shieldAmount: 0
+  shieldFrames: []
+  shieldBreakFrames: []
+  passiveStar: 1
+  minorStar: 3
+  secondMinorStar: 3
+  ultimateText: "V\xF9ng B\u0103ng: \u0111\u1EB7t v\xF9ng b\u0103ng t\u1EA1i c\u1EE5m
+    qu\xE1i \u0111\xF4ng nh\u1EA5t, t\u1ED3n t\u1EA1i v\xE0i gi\xE2y."
+  passiveText: 
+  minorText: 
+  secondMinorText: 
   animations: {fileID: 11400000, guid: db1208e2e599f1a4cb023a8ab90b0028, type: 2}
+  artFacesRight: 0
   avatar: {fileID: 21300000, guid: 32fbf95ad7b1d7340ae5627b8119d6cf, type: 3}

@@ -111,7 +111,7 @@ namespace BuildBuild.Combat
                 if (enemy == null || enemy.IsDying) continue;
                 if (_singleTarget ? enemy != _target
                     : Battlefield.GroundDistance(enemy.transform.position, _groundPoint) > _splashRadius + enemy.BodyRadius) continue;
-                enemy.Health.TakeDamage(_damage);
+                enemy.Health.TakeDamage(_damage, _owner != null ? _owner.Health : null);
                 if (_pushDirection != 0f) enemy.PushBack(_pushDirection);
                 if (_slowPercent > 0f) enemy.ApplySlow(_slowPercent, _slowDuration);
                 hits++;

@@ -13,15 +13,17 @@ MonoBehaviour:
   m_Name: Hero_Chainwarden
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
   displayName: Chainwarden
-  maxHealth: 1000
-  damage: 18
-  attackRate: 0.7
+  unitId: chainwarden
+  maxHealth: 1200
+  damage: 28
+  attackRate: 0.8
   range: 0.6
   moveSpeed: 1
   leashRange: 3
   maxHeld: 4
   heldDamageBonus: 0.2
   warden: {fileID: 11400000, guid: 0247abe292fb2014b8704e3578486eb3, type: 2}
+  dragonRider: {fileID: 0}
   projectileSpeed: 20
   splashRadius: 0.3
   projectileFrames: []
@@ -45,5 +47,24 @@ MonoBehaviour:
   healsAllies: 0
   healFrames: []
   buffFrames: []
+  shieldAmount: 0
+  shieldFrames: []
+  shieldBreakFrames: []
+  passiveStar: 1
+  minorStar: 3
+  secondMinorStar: 3
+  ultimateText: "N\xE9m M\xF3c: k\xE9o qu\xE1i b\u1EAFn xa v\u1EC1 s\xE1t m\xECnh
+    + cho\xE1ng, r\u1ED3i Cu\u1ED3ng N\u1ED9 V\u0128NH VI\u1EC4N t\u1EDBi khi g\u1EE5c
+    \u2014 hai x\xEDch d\xE0i, t\u0103ng c\xF4ng/t\u1ED1c \u0111\xE1nh, gi\u1EA3m
+    s\xE1t th\u01B0\u01A1ng nh\u1EADn, h\xFAt m\xE1u."
+  passiveText: "C\xE1i Ng\u1EE5c: gi\u1EEF t\u1ED1i \u0111a 4 qu\xE1i; qu\xE1i \u0111ang
+    b\u1ECB gi\u1EEF nh\u1EADn +20% s\xE1t th\u01B0\u01A1ng t\u1EEB m\u1ECDi ngu\u1ED3n."
+  minorText: "Qu\xE9t X\xEDch: quay x\xEDch quanh m\xECnh, s\xE1t th\u01B0\u01A1ng
+    th\u1EA5p + tr\xF3i (Cu\u1ED3ng N\u1ED9: L\u1ED1c X\xEDch 360\xB0)."
+  secondMinorText: "Gi\u1EADt X\xEDch: \u0111ang gi\u1EEF t\u1EEB 2 qu\xE1i th\xEC
+    gi\u1EADt m\u1EA1nh \u2014 m\u1ED7i qu\xE1i b\u1ECB gi\u1EEF \u0103n s\xE1t th\u01B0\u01A1ng
+    t\u0103ng theo s\u1ED1 qu\xE1i b\u1ECB gi\u1EADt + cho\xE1ng 1s (Cu\u1ED3ng N\u1ED9:
+    k\xE9o th\xEAm m\u1ECDi qu\xE1i trong t\u1EA7m x\xEDch)."
   animations: {fileID: 11400000, guid: 185708e0c20d8434f8871f0eeba5ae06, type: 2}
-  avatar: {fileID: 21300000, guid: 230b30f7bc1cff648aaf0b74dcff5c16, type: 3}
+  artFacesRight: 0
+  avatar: {fileID: 21300000, guid: 62cc5cf95fb7b0c4192688c5e3e02282, type: 3}

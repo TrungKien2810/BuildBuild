@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Hero_DeathKnight
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
   displayName: "K\u1EF5 s\u0129 t\u1EED th\u1EA7n"
+  unitId: 
   maxHealth: 1800
   damage: 55
   attackRate: 1
@@ -22,6 +23,7 @@ MonoBehaviour:
   maxHeld: 3
   heldDamageBonus: 0
   warden: {fileID: 0}
+  dragonRider: {fileID: 0}
   projectileSpeed: 20
   splashRadius: 1.2
   projectileFrames: []
@@ -49,5 +51,16 @@ MonoBehaviour:
   healsAllies: 0
   healFrames: []
   buffFrames: []
+  shieldAmount: 0
+  shieldFrames: []
+  shieldBreakFrames: []
+  passiveStar: 1
+  minorStar: 3
+  secondMinorStar: 3
+  ultimateText: 
+  passiveText: 
+  minorText: 
+  secondMinorText: 
   animations: {fileID: 11400000, guid: 707b410f960a90c47a33b0490fe9ac6c, type: 2}
+  artFacesRight: 0
   avatar: {fileID: 0}

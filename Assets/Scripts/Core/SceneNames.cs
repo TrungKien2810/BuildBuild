@@ -5,5 +5,6 @@ namespace BuildBuild.Core
     {
         public const string Battle = "Battle";
         public const string Gacha = "Gacha";
+        public const string Units = "Units";
     }
 }

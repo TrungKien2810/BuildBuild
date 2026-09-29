@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Hero_Skeleton
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
   displayName: "L\xEDnh x\u01B0\u01A1ng"
+  unitId: 
   maxHealth: 150
   damage: 12
   attackRate: 1
@@ -22,6 +23,7 @@ MonoBehaviour:
   maxHeld: 3
   heldDamageBonus: 0
   warden: {fileID: 0}
+  dragonRider: {fileID: 0}
   projectileSpeed: 20
   splashRadius: 0.3
   projectileFrames: []
@@ -45,5 +47,16 @@ MonoBehaviour:
   healsAllies: 0
   healFrames: []
   buffFrames: []
+  shieldAmount: 0
+  shieldFrames: []
+  shieldBreakFrames: []
+  passiveStar: 1
+  minorStar: 3
+  secondMinorStar: 3
+  ultimateText: 
+  passiveText: 
+  minorText: 
+  secondMinorText: 
   animations: {fileID: 11400000, guid: 5fde44f4558b9d544a57cb334e70a964, type: 2}
+  artFacesRight: 0
   avatar: {fileID: 0}

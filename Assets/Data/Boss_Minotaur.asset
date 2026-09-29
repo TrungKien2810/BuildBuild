@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4747510520256debab9ec5e299c95862, type: 3}
   m_Name: Boss_Minotaur
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.BossDefinition
+  cleaveRadius: 1.5
   slamInterval: 15
   slamDamage: 80
   slamRadius: 2
+  slamReach: 2.24
   slamStun: 2
   slamFrames:
   - {fileID: 21300000, guid: 507910b986601d2499fe74483174f3f8, type: 3}
@@ -23,6 +25,17 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 464194d4d4881c84a9673922667d3ca2, type: 3}
   - {fileID: 21300000, guid: 62b01c4728dd9d4409b85dff20cbaeae, type: 3}
   - {fileID: 21300000, guid: e63c4cad2d958ae4c87eccea2de27d1e, type: 3}
+  slamBody:
+    name: slam
+    frames:
+    - {fileID: 21300000, guid: 66ad63886a29c054da8e8c458a77d454, type: 3}
+    - {fileID: 21300000, guid: 683af4efaf10947448951df2af43dfe0, type: 3}
+    - {fileID: 21300000, guid: a5f762f66a31ab2428c3150cbbe911f7, type: 3}
+    - {fileID: 21300000, guid: 41f96e9e1a5dcf34d974962393f05693, type: 3}
+    - {fileID: 21300000, guid: edf2f39540071bf428739670e67b1dd5, type: 3}
+    - {fileID: 21300000, guid: a98cfa9f6b5375b4e9ea5cf5b22f77d9, type: 3}
+    loop: 0
+    hitFrame: 5
   roarInterval: 20
   roarHaste: 0.3
   roarDuration: 5
@@ -38,5 +51,16 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e706b21d5b8bbe84983abcae3057c359, type: 3}
   - {fileID: 21300000, guid: 528401b13fd566540aeb612927ba288b, type: 3}
   - {fileID: 21300000, guid: 413e3edf9f2b758458a398def85c83c0, type: 3}
+  roarBody:
+    name: roar
+    frames:
+    - {fileID: 21300000, guid: 1740c2a14b8c2d241a950fc478b02504, type: 3}
+    - {fileID: 21300000, guid: 91fbf2d5b44d43e4a8aaf34a17a44cc9, type: 3}
+    - {fileID: 21300000, guid: 5eb6a226cf849494687119aacad80357, type: 3}
+    - {fileID: 21300000, guid: ee5c794655b4bb54e8c35af2058b144b, type: 3}
+    - {fileID: 21300000, guid: 4575610ac534b7642a83c43624e1dc3a, type: 3}
+    - {fileID: 21300000, guid: 7f0af54349b92f34abc32c81079ca3f7, type: 3}
+    loop: 0
+    hitFrame: 3
   enrageBelow: 0.3
   enrageAttackRateBonus: 0.5

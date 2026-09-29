@@ -28,8 +28,6 @@ namespace BuildBuild.Data
         public float baseDamage = 15f;
         [Tooltip("Don vi the gioi moi giay. Goblin 1.5, Ashfang 3.0, Orc 0.8.")]
         public float moveSpeed = 1.5f;
-        [Tooltip("Vang roi ra khi bi diet.")]
-        public int goldReward = 5;
 
         [Header("Tam va nhip danh")]
         [Tooltip("Khoang cach toi muc tieu du de bat dau danh (don vi the gioi).")]

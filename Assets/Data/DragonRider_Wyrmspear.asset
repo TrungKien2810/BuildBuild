@@ -1,0 +1,162 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e4f8603645d20d4ebc0b269c53a8816, type: 3}
+  m_Name: DragonRider_Wyrmspear
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.DragonRiderDefinition
+  reverseScalePercent: 0.02
+  pierceCooldown: 7
+  piercePower: 2.5
+  pierceLength: 5
+  pierceHalfWidth: 0.45
+  pierceBody:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: c37519f7e0a527d4ab39702b6accd41b, type: 3}
+    - {fileID: 21300000, guid: 1059e0bd57b72b8428dbd5c32553d63d, type: 3}
+    - {fileID: 21300000, guid: f7fadb9f47381f340b631951ff441359, type: 3}
+    - {fileID: 21300000, guid: e4e5e1b3ee0a7f14ebb7dfa35818e503, type: 3}
+    - {fileID: 21300000, guid: ded47fc7827870c41911486202519d53, type: 3}
+    - {fileID: 21300000, guid: d407db209c1509c418b4ad07b3e78824, type: 3}
+    loop: 0
+    hitFrame: 4
+  pierceFx:
+  - {fileID: 21300000, guid: 98ccb7da4dc9894439f62406e9225dea, type: 3}
+  - {fileID: 21300000, guid: 574902f81221f384aaeeec47d40d5ad7, type: 3}
+  - {fileID: 21300000, guid: 63864321ce381b54fb351c2a61eeb2dd, type: 3}
+  - {fileID: 21300000, guid: c9c135f4593b3484fa1bf04f686e4155, type: 3}
+  dragonmanAnimations: {fileID: 11400000, guid: 853a2b885b9457d459c305b5cd22477a, type: 2}
+  dragonmanRange: 2
+  crackFx:
+  - {fileID: 21300000, guid: a6e26aa83db05284a8dc8610553aa671, type: 3}
+  - {fileID: 21300000, guid: 34c206bb2e11d3f4a8fa5b12d62cf4fa, type: 3}
+  - {fileID: 21300000, guid: dfb882e769a7db644b5d8fe0daaa8d4e, type: 3}
+  - {fileID: 21300000, guid: 8e4fbdb5190649943940c9e6e891191a, type: 3}
+  - {fileID: 21300000, guid: 785218908fb6c9b4a867629e7d38cc0a, type: 3}
+  - {fileID: 21300000, guid: 7fe21f8306fc1554dac9b3294b8edddb, type: 3}
+  armorHealthBonus: 0.6
+  armorReduction: 0.35
+  aweDamageBonus: 0.6
+  aweRadius: 2.5
+  aweWeaken: 0.2
+  aweVulnerability: 0.15
+  rageMaxStacks: 7
+  rageReductionPerStack: 0.05
+  rageDamagePerStack: 0.08
+  rageLifestealPerStack: 0.03
+  rageStackInterval: 0.5
+  rageDecayDelay: 4
+  rageDecayInterval: 1
+  pactShare: 0.5
+  lanceCooldown: 6
+  lancePower: 0.8
+  lanceFinalPower: 1.5
+  lanceBody:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: da560ce8e5d82944b8e1f9800482ffb1, type: 3}
+    - {fileID: 21300000, guid: 2a5518d19bad5ee4398d1d27f69212fe, type: 3}
+    - {fileID: 21300000, guid: 3917eb45fcd0fc24f8f0d1db7916597e, type: 3}
+    - {fileID: 21300000, guid: 0ab4c858b81d8ef4fa74ab72860a823b, type: 3}
+    - {fileID: 21300000, guid: f7edec8b4cf50b749aa20a3c7e09b42d, type: 3}
+    - {fileID: 21300000, guid: 4b6bbd4c4a3e20042885dd64d6ab2e0d, type: 3}
+    - {fileID: 21300000, guid: f7edec8b4cf50b749aa20a3c7e09b42d, type: 3}
+    - {fileID: 21300000, guid: 2a5518d19bad5ee4398d1d27f69212fe, type: 3}
+    - {fileID: 21300000, guid: 3917eb45fcd0fc24f8f0d1db7916597e, type: 3}
+    - {fileID: 21300000, guid: 70a1a88d2f6f0cd43a0cf984cc6dcb61, type: 3}
+    - {fileID: 21300000, guid: b5e798346536c814091582b55c125457, type: 3}
+    loop: 0
+    hitFrame: 0
+  lanceHitFrames: 020000000400000006000000080000000a000000
+  lanceFx:
+  - {fileID: 21300000, guid: cd66fea4733133a4c92d50601ad9f770, type: 3}
+  - {fileID: 21300000, guid: 7f463e2dca108344289826bab589eca9, type: 3}
+  - {fileID: 21300000, guid: fa9f533e1d29a904c8ea04cd2a50fd55, type: 3}
+  - {fileID: 21300000, guid: 58891386c6d6b9440964fcb7274081c7, type: 3}
+  quakeCooldown: 8
+  quakeRadius: 1.8
+  quakePower: 1.5
+  quakeStun: 1.5
+  armorBreak: 0.3
+  armorBreakDuration: 5
+  quakeBody:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: a6f5e18d2872ca84387b03b0876700fe, type: 3}
+    - {fileID: 21300000, guid: 3fb0a7c89927046469f24d89a93f809a, type: 3}
+    - {fileID: 21300000, guid: e28113bf2a9abeb43bf3375a0b3f91ff, type: 3}
+    - {fileID: 21300000, guid: e9a461dfd76ca674693b7a4911f93c78, type: 3}
+    - {fileID: 21300000, guid: b56b0708b46bf3441a272a23a79dedd0, type: 3}
+    - {fileID: 21300000, guid: ae75fcd1933546749b8917eb83a8710c, type: 3}
+    loop: 0
+    hitFrame: 4
+  quakeFx:
+  - {fileID: 21300000, guid: 7f7bea036177af1408aeb2606a3c0f8c, type: 3}
+  - {fileID: 21300000, guid: 3557445783578114ab782614e3af40d3, type: 3}
+  - {fileID: 21300000, guid: 1e39f8a022184f348bba56c4779a4ce5, type: 3}
+  - {fileID: 21300000, guid: 02f0b5762ac245d459c453e908627576, type: 3}
+  - {fileID: 21300000, guid: 11ece94ecca6b464d8c9ca2d25690720, type: 3}
+  - {fileID: 21300000, guid: 290067e188e0f5b45b223d87949cebd6, type: 3}
+  stunFrames:
+  - {fileID: 21300000, guid: 1a1fae456d75bfb42a8ffae427a8e2f3, type: 3}
+  - {fileID: 21300000, guid: 5f10dad14feb11e48ab8189f300fd865, type: 3}
+  - {fileID: 21300000, guid: 7213f6b7419d25048959c0318ee69916, type: 3}
+  - {fileID: 21300000, guid: b54ff30fbe8e230408ef3ea33a794952, type: 3}
+  descentPower: 5
+  descentMaxHealthPercent: 0.08
+  descentRadius: 1.8
+  descentRange: 7
+  executeThreshold: 0.2
+  bossMultiplier: 2
+  killManaRefund: 2
+  descentDragon:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: 1fbf2542d337957479be6b07aaa9624b, type: 3}
+    - {fileID: 21300000, guid: bf19e56208ddc85419e7df5af81ee4b4, type: 3}
+    - {fileID: 21300000, guid: 39dcda0103411344eaa453d14d6839d4, type: 3}
+    - {fileID: 21300000, guid: 02071349dd1222a409deb4ff5f36c490, type: 3}
+    - {fileID: 21300000, guid: 7f338ed4d7401594ba870f5412e3fbdb, type: 3}
+    - {fileID: 21300000, guid: 3885602c2cc5fac4994c6fa19cf71fcf, type: 3}
+    loop: 0
+    hitFrame: 0
+  descentHitFrame: 6
+  pillarFx:
+  - {fileID: 21300000, guid: a8596ca774dedf04d9f3f538935fe0a1, type: 3}
+  - {fileID: 21300000, guid: bdee7baae0cf11c45883a732cdfb875b, type: 3}
+  - {fileID: 21300000, guid: 8fd879e59413ca54caddbb98bc4ca24d, type: 3}
+  - {fileID: 21300000, guid: ced4dac63dced0d41be79f4db50a372f, type: 3}
+  - {fileID: 21300000, guid: b49797f2fb0f00c4b8c2735771581b67, type: 3}
+  - {fileID: 21300000, guid: 795b36dd70e0934459846012d636795a, type: 3}
+  shockwaveFx:
+  - {fileID: 21300000, guid: 81ab52cfd256cba4384cab7629bfa3ae, type: 3}
+  - {fileID: 21300000, guid: 70c5d39f2854d834d9e838ed31c8dce5, type: 3}
+  - {fileID: 21300000, guid: 56d01831d805b224ebdfd1b67aae6148, type: 3}
+  - {fileID: 21300000, guid: aa9bd878bb0c91b4d87ea067c9713d40, type: 3}
+  - {fileID: 21300000, guid: 2dff4e405fbc6194fadfd8342abed81c, type: 3}
+  - {fileID: 21300000, guid: e0d36b73233d5b04d812165c8c80388f, type: 3}
+  pillarKnockUpHeight: 1.2
+  pillarKnockUpDuration: 0.8
+  dragon: {fileID: 11400000, guid: 77c64a9b49ed6aa4b99c0e42a4f2e700, type: 2}
+  unitPrefab: {fileID: 6379297408595509390, guid: 5222ae2c40cd08941985b2adc396e8e1, type: 3}
+  emerge:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: 1c6555285bac2054b8a6328005e4c16d, type: 3}
+    - {fileID: 21300000, guid: 44ee83381a7c5f44ba571254a65c0672, type: 3}
+    - {fileID: 21300000, guid: ebc68d632b5e0f847963a716f15d1cb7, type: 3}
+    - {fileID: 21300000, guid: c76d2a3c988b6d94aa10217dfdb0a041, type: 3}
+    - {fileID: 21300000, guid: 11ec05f533dd47c459c54eb16a1b1591, type: 3}
+    - {fileID: 21300000, guid: 25a1759fd4b2ce941be69f814a0d3711, type: 3}
+    loop: 0
+    hitFrame: 0
+  dragonForward: 1.1
+  dragonRespawn: 15

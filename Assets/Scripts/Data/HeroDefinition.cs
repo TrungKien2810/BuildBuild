@@ -32,6 +32,15 @@ namespace BuildBuild.Data
         Charge,
         /// <summary>Chainwarden Nem Moc: keo quai tam xa ve sat minh + choang + Xich. So nam o `warden`.</summary>
         HookThrow,
+        /// <summary>Wyrmspear: lan dau Long Hoa (bien hinh + goi dia long), sau do Thien Dia Long Giang. So nam o `dragonRider`.</summary>
+        DragonRider,
+        /// <summary>
+        /// Vespera Den Canh: vong ban kinh `skillRadius` dat quanh dong minh thap mau nhat trong tam; moi hero trong vong
+        /// hoi damage x `skillPower` mau + khien `shieldAmount` trong `skillDuration` giay.
+        /// </summary>
+        Lantern,
+        /// <summary>Banneret Hieu Lenh Xung Phong: ca doi +sat thuong. So nam o `banner`.</summary>
+        Rally,
     }
 
     /// <summary>
@@ -42,6 +51,10 @@ namespace BuildBuild.Data
     public class HeroDefinition : ScriptableObject
     {
         public string displayName = "Frostweaver";
+        [Tooltip(
+            "Id `UnitDefinition` trong gacha (vd. knight, soldier_warwolf). Chi dat/trieu hoi duoc khi save da so huu id " +
+            "nay. Trong = khong bao gio so huu (linh xuong/ky si cua Bonecaller khong can — khong qua bang chon).")]
+        public string unitId;
 
         [Header("Chi so goc (GAME_DESIGN.md muc 3)")]
         [Tooltip("Mau cua hero. Hero AN DON nhu moi thu khac tren san — het mau la chet, het wave moi song lai.")]
@@ -69,6 +82,10 @@ namespace BuildBuild.Data
         [Min(0f)] public float heldDamageBonus;
         [Tooltip("Chi Chainwarden: chieu thuong Quat Xich + so cua chieu lon Nem Moc. Trong = khong co.")]
         public WardenDefinition warden;
+        [Tooltip("Chi Wyrmspear: noi tai Nghich Lan, chieu thuong, bien hinh Long Nhan + Bach Dia Long. Trong = khong co.")]
+        public DragonRiderDefinition dragonRider;
+        [Tooltip("Chi Banneret: don thuong buff ngau nhien 1 dong minh, noi tai Quan Ky, Cam Co, Hieu Lenh. Trong = khong co.")]
+        public BannerDefinition banner;
 
         [Header("Dan")]
         public float projectileSpeed = 8f;
@@ -99,13 +116,13 @@ namespace BuildBuild.Data
         public float manaPerSecond = 0.35f;
         [Tooltip("Mana cong them cho MOI con quai an don thuong — danh dong thi day thanh nhanh hon.")]
         public float manaPerHit = 0.25f;
-        [Tooltip("FrostZone: ban kinh vung. ConeSweep: chieu dai nhat chem.")]
+        [Tooltip("FrostZone: ban kinh vung. ConeSweep: chieu dai nhat chem. Lantern: ban kinh vong Den Canh.")]
         public float skillRadius = 1.6f;
-        [Tooltip("FrostZone: vung ton tai bao lau. Petrify: bat dong bao lau. RapidFire: buff bao lau.")]
+        [Tooltip("FrostZone: vung ton tai bao lau. Petrify: bat dong bao lau. RapidFire: buff bao lau. Lantern: khien ton tai bao lau.")]
         public float skillDuration = 3f;
-        [Tooltip("ConeSweep: he so x damage. RapidFire: he so x toc danh. Petrify: ti le sat thuong phan lai (0,2 = 20%).")]
+        [Tooltip("ConeSweep: he so x damage. RapidFire: he so x toc danh. Petrify: ti le sat thuong phan lai (0,2 = 20%). Lantern: mau hoi = damage x he so.")]
         public float skillPower = 1f;
-        [Tooltip("FrostZone: frame vung bang (trong = placeholder). ConeSweep: frame vet chem. Petrify: vo da LAP trong luc hoa da.")]
+        [Tooltip("FrostZone: frame vung bang (trong = placeholder). ConeSweep: frame vet chem. Petrify: vo da LAP trong luc hoa da. Lantern: vong tren dat.")]
         public Sprite[] skillFrames;
         [Tooltip("Petrify: vo da moc len, chay MOT lan truoc khi lap skillFrames.")]
         public Sprite[] skillIntroFrames;
@@ -131,9 +148,36 @@ namespace BuildBuild.Data
         public Sprite[] healFrames;
         [Tooltip("RapidFire: FX lap tren dau trong luc buff. Trong = to mau cam nhu cu.")]
         public Sprite[] buffFrames;
+        [Tooltip("Lantern: luong sat thuong khien ao chan duoc.")]
+        public float shieldAmount;
+        [Tooltip("Lantern: vo khien LAP quanh than nguoi duoc che.")]
+        public Sprite[] shieldFrames;
+        [Tooltip("Lantern: khien vo (chay mot lan khi bi danh het).")]
+        public Sprite[] shieldBreakFrames;
+
+        [Header("Mo khoa theo sao (chot 2026-09-28)")]
+        [Tooltip(
+            "So sao can de mo NOI TAI (Chainwarden Cai Nguc, Bonecaller dung xac, Wyrmspear Nghich Lan). Danh thuong + " +
+            "chieu cuoi luon mo tu 0 sao. Hero khong co noi tai bo qua o nay.")]
+        [Min(0)] public int passiveStar = 1;
+        [Tooltip("So sao can de mo CHIEU PHU (Quat Xich, vong an ky, Xuyen Long + Lien Thuong).")]
+        [Min(0)] public int minorStar = 3;
+        [Tooltip("Chieu phu thu hai: Wyrmspear Dia Long Chan (cua rong), Chainwarden Giat Xich.")]
+        [Min(0)] public int secondMinorStar = 3;
+
+        [Header("Mo ta ky nang (man Doi quan)")]
+        [Tooltip("\"Ten: mo ta\" cua chieu cuoi. Trong = hero khong co chieu cuoi.")]
+        [TextArea(2, 4)] public string ultimateText;
+        [Tooltip("Noi tai — trong = khong co (hero bac thap).")]
+        [TextArea(2, 4)] public string passiveText;
+        [TextArea(2, 4)] public string minorText;
+        [Tooltip("Chieu phu thu hai (Wyrmspear, Chainwarden).")]
+        [TextArea(2, 4)] public string secondMinorText;
 
         [Header("Animation")]
         public SpriteAnimationSet animations;
+        [Tooltip("Art ve QUAY PHAI (3 linh trieu hoi). Mac dinh du an la quay trai — sai o nay la unit danh quay lung.")]
+        public bool artFacesRight;
 
         [Header("Chan dung")]
         [Tooltip(

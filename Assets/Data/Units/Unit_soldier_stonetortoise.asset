@@ -15,5 +15,5 @@ MonoBehaviour:
   id: soldier_stonetortoise
   displayName: "R\xF9a \u0111\xE1 khi\xEAn"
   category: 2
-  rarity: 0
-  icon: {fileID: 21300000, guid: 15072ec9ec70b414d8570b3f07fe1f49, type: 3}
+  rarity: 1
+  icon: {fileID: 21300000, guid: 48dfedac396eabb45b448a4130391ee2, type: 3}

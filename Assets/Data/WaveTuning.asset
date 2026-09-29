@@ -15,8 +15,8 @@ MonoBehaviour:
   healthPerWave: 0.12
   damagePerWave: 0.08
   baseEnemyCount: 5
-  waveGoldBase: 50
-  waveGoldPerWave: 10
+  waveGoldBase: 80
+  waveGoldPerWave: 18
   bossGoldReward: 200
   totalWaves: 30
   spawnInterval: 1.2
@@ -35,6 +35,7 @@ MonoBehaviour:
     enemies:
     - {fileID: 11400000, guid: ce5cee30680d48f409bb70b0a72805af, type: 2}
     - {fileID: 11400000, guid: 841baa938d951e348bf41f08a568610c, type: 2}
+    - {fileID: 11400000, guid: 2c115065415c8a1418dc02c4e2b39692, type: 2}
     hasBoss: 0
     bossStatMultiplier: 1
     fixedCount: -1
@@ -45,6 +46,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: ce5cee30680d48f409bb70b0a72805af, type: 2}
     - {fileID: 11400000, guid: 841baa938d951e348bf41f08a568610c, type: 2}
     - {fileID: 11400000, guid: b282b025a6acb76488bc492db863ca62, type: 2}
+    - {fileID: 11400000, guid: 31c7ed2da1d9ed444b569d3e2a607fa2, type: 2}
     hasBoss: 0
     bossStatMultiplier: 1
     fixedCount: -1
@@ -63,6 +65,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: ce5cee30680d48f409bb70b0a72805af, type: 2}
     - {fileID: 11400000, guid: 841baa938d951e348bf41f08a568610c, type: 2}
     - {fileID: 11400000, guid: b282b025a6acb76488bc492db863ca62, type: 2}
+    - {fileID: 11400000, guid: 31c7ed2da1d9ed444b569d3e2a607fa2, type: 2}
+    - {fileID: 11400000, guid: 2c115065415c8a1418dc02c4e2b39692, type: 2}
     hasBoss: 0
     bossStatMultiplier: 1
     fixedCount: -1
@@ -73,6 +77,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: ce5cee30680d48f409bb70b0a72805af, type: 2}
     - {fileID: 11400000, guid: 841baa938d951e348bf41f08a568610c, type: 2}
     - {fileID: 11400000, guid: b282b025a6acb76488bc492db863ca62, type: 2}
+    - {fileID: 11400000, guid: 31c7ed2da1d9ed444b569d3e2a607fa2, type: 2}
+    - {fileID: 11400000, guid: 2c115065415c8a1418dc02c4e2b39692, type: 2}
     hasBoss: 0
     bossStatMultiplier: 1
     fixedCount: -1
@@ -80,7 +86,7 @@ MonoBehaviour:
   - fromWave: 20
     toWave: 20
     enemies:
-    - {fileID: 11400000, guid: ce5cee30680d48f409bb70b0a72805af, type: 2}
+    - {fileID: 11400000, guid: 31c7ed2da1d9ed444b569d3e2a607fa2, type: 2}
     hasBoss: 1
     bossStatMultiplier: 2
     fixedCount: 4
@@ -91,6 +97,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: ce5cee30680d48f409bb70b0a72805af, type: 2}
     - {fileID: 11400000, guid: 841baa938d951e348bf41f08a568610c, type: 2}
     - {fileID: 11400000, guid: b282b025a6acb76488bc492db863ca62, type: 2}
+    - {fileID: 11400000, guid: 31c7ed2da1d9ed444b569d3e2a607fa2, type: 2}
+    - {fileID: 11400000, guid: 2c115065415c8a1418dc02c4e2b39692, type: 2}
     hasBoss: 0
     bossStatMultiplier: 1
     fixedCount: -1
