@@ -49,7 +49,7 @@ Hai người chỉ cần **pull `main` TRƯỚC khi mở Unity**. Nếu `git sta
 > `Hero_Chainwarden`, `Warden_Chainwarden`, `SummonConfig`, `Units/Unit_soldier_*` rồi commit kèm `.meta`.
 > Script mới đã có `.meta` (GUID tự tạo) trong cùng commit.
 >
-> **Thử nhanh:** Admin panel (F1) có nút "Linh: day tai nguyen + hoi chieu" (chỉ bấm được lúc đang đánh).
+> **Thử nhanh:** Admin panel (F1) có nút "Linh: day vong hoi chieu" (chỉ bấm được lúc đang đánh); muốn đủ nhân vật thì đổi sang tài khoản "Test (du nv)".
 > A1: để mỗi Ironblade trên sân, đánh wave 1 (đúng 5 Goblin) — chọn Ironblade trong Hierarchy, Scene view vẽ Gizmos
 > chỗ vây (xanh = trống, đỏ = có quái).
 >
@@ -147,9 +147,9 @@ Lính dùng lại luật di chuyển của hero (đuổi quái gần nhất; t�
 Theo GDD mục 2 + IDEAS #1:
 
 - **Bãi chờ sau thành** (trái pháo đài): mỗi loại lính đang mang vào trận hiện 1 icon/sprite, **vòng hồi chiêu trên đầu**.
-- Tài nguyên triệu hồi **tích theo thời gian + theo số quái bị giết**. Tên tài nguyên + tốc độ tích **chưa chốt** → tạm: +1/giây, +2/mỗi kill, trần 100 (số trong ScriptableObject).
-- Vòng đầy + đủ tài nguyên → **kéo thả** ra sân → sinh **nguyên tốp** quanh điểm thả (lệch theo y, dùng `Battlefield.Clamp`).
-- **Hết wave → dọn sạch lính** (như lính xương). Tài nguyên có giữ qua wave không: **chưa chốt**, tạm reset về 0.
+- **Không có tài nguyên (người dùng chốt 2026-09-26)** — bỏ bản tạm "+1/giây, +2/kill, trần 100". Chỉ vòng hồi chiêu: **đầu wave vòng rỗng**, đầy dần trong lúc đánh (`summonCooldown`), thả xong về rỗng. Chỉ lính **đã sở hữu** (quay gacha ra) mới hiện ở bãi.
+- Vòng đầy → **kéo thả** ra sân → sinh **nguyên tốp** quanh điểm thả (lệch theo y, dùng `Battlefield.Clamp`).
+- **Hết wave → dọn sạch lính** (như lính xương).
 - Lính **có trong gacha** (IDEAS #1) → thêm vào `GachaConfig` sau khi B và A đã merge `UnitCategory`.
 
 ### A4. Nối Chainwarden (hero SR, kit đã chốt 2026-09-24)
@@ -160,6 +160,7 @@ Chainwarden sống chung với luật chặn nên để A làm:
 - Nội tại *Cai Ngục*: `Blocker.maxHeld = 4`; quái đang bị giữ mang trạng thái **Xích** = nhận **+20% sát thương từ mọi nguồn** (cài ở `Health`, để pháo của B cũng hưởng).
 - *Quật Xích* (cooldown ẩn ~10s): bán kính ~1,0, sát thương thấp + **trói 1,5s** (đứng im, vẫn đánh); tinh anh/boss trói một nửa.
 - *Ném Móc* (mana): kéo quái tầm xa (ưu tiên `GoblinSlinger`) về sát mình + choáng ngắn + Xích 4s. Art `hook-throw-body` / `hook-fx` **đang chờ duyệt** → làm cuối, hoặc để sau.
+  **Đổi 2026-09-26:** Ném Móc thành mở đầu cho biến hình **Cuồng Nộ 8s** (GDD mục 3) — code đã có trong `Warden` (`CastUltimate`, `OffhandStrike`, hút máu qua `Health.DamageDealt`), số ở `Warden_Chainwarden` (`rage*`, `storm*`).
 
 ---
 
@@ -254,7 +255,7 @@ Cập nhật `WaveTuning` theo bảng thành phần wave GDD mục 5.
 
 ## 6. Câu hỏi cần chủ dự án chốt (đang dùng số tạm)
 
-1. Tài nguyên triệu hồi lính: tên, tốc độ tích, có giữ qua wave không.
+1. ~~Tài nguyên triệu hồi lính~~ — chốt 2026-09-26: không có tài nguyên, chỉ vòng hồi chiêu.
 2. Cỡ tốp + chỉ số 3 lính.
 3. Pháo đổi được giữa wave hay chỉ giữa các wave.
 4. Chỉ số + wave xuất hiện của Goblin Ná.

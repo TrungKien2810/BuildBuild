@@ -40,7 +40,7 @@ nên đặt một hero 260 máu ở hàng ngoài cùng là một quyết định
 
 | Hero | Vai trò | Máu | Sát thương | Tốc đánh | Tầm | Mana |
 |---|---|---|---|---|---|---|
-| Hiệp sĩ (Ironblade) | Cận chiến thiên sát thương | 800 | 25 | 0.8/s | 0.55 | 5 |
+| Hiệp sĩ (Ironblade) | Cận chiến thiên sát thương | 900 | 30 | 0.9/s | 0.55 | 4 |
 | Người đá (Cragfist) | Tank thuần, chịu đòn thay đồng đội | 1400 | 10 | 0.5/s | 0.6 | 6 |
 | Cung thủ | Sát thương đơn mục tiêu | 220 | 45 | 1.2/s | 6.0 | 4 |
 | Pháp sư nguyên tố | Sát thương diện rộng | 260 | 35 | 0.6/s | 5.0 | 6 |
@@ -58,9 +58,18 @@ Bất động là cái GIÁ, không phải phụ phẩm — miễn sát thương
 quyết định gì để chơi.
 
 **Chiêu lớn Ironblade — Chém Quạt (code 2026-09-15, art `cone-sweep-body` + `cone-sweep-fx` đã có).**
-Thanh mana 5 đầy → một nhát chém vòng cung trước mặt: mọi quái trong 0,8 unit phía trước (bề ngang
-±0,4 theo trục y — khớp bề rộng art `cone-sweep-fx`; bản đầu 2,0/±1,0 rộng gấp 3 vết chém) ăn **3× sát thương đòn thường** (75). *Số Claude đề xuất, CHƯA cân bằng*, gồm cả
+Thanh mana 4 đầy (buff 2026-09-29 từ 800/25/0,8, mana 5, 3×) → một nhát chém vòng cung trước mặt: mọi quái trong 0,8 unit phía trước (bề ngang
+±0,4 theo trục y — khớp bề rộng art `cone-sweep-fx`; bản đầu 2,0/±1,0 rộng gấp 3 vết chém) ăn **4× sát thương đòn thường** (120). *Số Claude đề xuất, CHƯA cân bằng*, gồm cả
 tốc chạy 1,1 của Ironblade (GDD không ghi).
+
+**Vespera (R, hồi máu) — kit chốt với người dùng 2026-09-28, số CHƯA cân.** Đòn thường hồi máu một đồng minh thấp máu
+nhất trong tầm (đã code). Vì phẩm R nên chỉ có **MỘT chiêu, chiêu lớn *Đèn Canh*** (thanh mana): đặt một vòng sáng
+trên đất với **tâm là đồng minh thấp máu nhất** (vòng nhỏ, bán kính khoảng 1,5, bẹp 0,5 như `FrostZone`). Mọi hero
+trong vòng được hồi máu và nhận một **khiên ảo NHỎ** chặn một lượng sát thương có hạn trong vài giây, bị đánh hết thì
+khiên vỡ. Cast dùng lại clip attack. **Số tạm (code 2026-09-28, `SkillKind.Lantern`):** mana 5 (0,35/giây + 0,25 mỗi lần
+hồi máu), bán kính 1,5, hồi 2× đòn thường (40), khiên 60 sát thương trong 5 giây, cast lại thì làm mới chứ không cộng dồn.
+Vòng chỉ phủ hero kế bên CÙNG hàng (hàng trên/dưới cách 1,65, vòng bẹp chỉ vươn 0,75). FX: `Vespera/dencanh-ring`,
+`shield-loop`, `shield-break`; hồi máu từng người dùng lại `heal-fx`.
 
 **Pháp sư triệu hồi — bộ kỹ năng (chốt với người dùng 2026-09-13).** Chủ đề: quái chết → dựng thành
 xương đánh cho phe ta. Có hai NGUỒN lính xương. Mỗi nguồn có bộ đếm riêng, giới hạn riêng và con
@@ -116,13 +125,48 @@ gậy, nên đạn đọc ra là "đầu lâu trên gậy bắn ra". Đạn đơ
 khống chế + khuếch đại sát thương — kéo quái về, giữ chặt tại chỗ để đồng đội và pháo dồn đòn. Ba ô móc vào
 nhau qua trạng thái **Xích** (quái bị Xích nhận thêm sát thương từ mọi nguồn).
 
-| | Nội tại *Cai Ngục* *(luôn chạy)* | Chiêu thường *Quật Xích* *(cooldown ẩn)* | Chiêu xịn *Ném Móc* *(thanh mana 5)* |
+| | Nội tại *Cai Ngục* *(luôn chạy)* | Chiêu thường *Quật Xích* *(cooldown ẩn)* | Chiêu xịn *Ném Móc → Cuồng Nộ* *(thanh mana 5)* |
 |---|---|---|---|
-| Hiệu ứng | Giữ tối đa **4 quái** (unit khác 3). Quái đang bị ông chặn bị **Xích**: **+20% sát thương nhận từ mọi nguồn** | Quay xích quanh mình: sát thương thấp + **trói** (đứng im, vẫn đánh được) mọi quái trong bán kính | Ném móc kéo quái tầm xa (ưu tiên Goblin Ná) về sát mình + choáng ngắn + **Xích 4s** |
-| Tinh anh/boss | Như quái thường | Trói **một nửa** thời gian | — |
+| Hiệu ứng | Giữ tối đa **4 quái** (unit khác 3). Quái đang bị ông chặn bị **Xích**: **+20% sát thương nhận từ mọi nguồn** | Quay xích quanh mình: sát thương thấp + **trói** (đứng im, vẫn đánh được) mọi quái trong bán kính | Ném móc kéo quái tầm xa (ưu tiên Goblin Ná) về sát mình + choáng ngắn + **Xích 4s**, rồi **biến hình Cuồng Nộ VĨNH VIỄN** (tới khi gục — người dùng chốt 2026-09-29, bỏ giới hạn 8s): xích thành **hai xích dài hai bên** — tầm đánh ~2,0, mỗi đòn trúng thêm một con **bên kia**, **+50% công, +30% tốc đánh, −20% sát thương nhận vào, hút máu 25% sát thương gây ra**; Quật Xích đổi thành **Lốc Xích** (quay 360°, bán kính 2,0, 2× đòn đánh, trói 1s, hồi 4s). Không tích mana trong lúc Cuồng Nộ |
+| Tinh anh/boss | Như quái thường | Trói **một nửa** thời gian | Choáng + trói Lốc Xích **một nửa** |
 
-*Số khởi điểm Claude đề xuất, CHƯA cân bằng:* 1000 máu / 18 dmg / 0,7 đòn/s / tầm 0,6 / mana 5 · Quật Xích
-bán kính ~1,0, trói 1,5s, cooldown ~10s. Bỏ ý cũ "chiêu nhỏ móc lại quái lọt hàng" vì trùng chủ đề chiêu lớn.
+*Số khởi điểm Claude đề xuất, CHƯA cân bằng:* 1200 máu / 28 dmg / 0,8 đòn/s / tầm 0,6 / mana 5 (buff 2026-09-29 từ 1000/18/0,7 — quá yếu cho SR) · Quật Xích
+bán kính ~1,0, 25 sát thương (cũ 10), trói 1,5s, cooldown ~10s. Bỏ ý cũ "chiêu nhỏ móc lại quái lọt hàng" vì trùng chủ đề chiêu lớn.
+Chiêu xịn đổi 2026-09-26 (người dùng: Ném Móc một mình "quá yếu" cho SR) — Ném Móc giữ làm mở đầu, thêm biến hình
+Cuồng Nộ; số trong `Warden_Chainwarden` (`rage*`, `storm*`).
+**Chiêu phụ 2 *Giật Xích* (người dùng chốt 2026-09-29, mở ở `secondMinorStar` 3):** cooldown ẩn ~8s, chỉ tung khi đang
+giữ ≥ 2 quái — giật mạnh hai xích, mỗi quái đang bị giữ ăn đòn thường × (1 + 0,5 × số quái bị giật) + choáng 1s (boss/tinh
+anh nửa). Cuồng Nộ: kéo thêm mọi quái chưa bị giữ trong tầm 2,0 về sát mình vào cú giật. Ăn thẳng vào nội tại giữ 4 quái.
+Art chỉ vẽ dạng Cuồng Nộ (`rage-yank` + FX `yank-clash-fx`); dạng thường chỉ FX. Số trong `Warden_Chainwarden` (`yank*`).
+
+**Long Kỵ Binh (Wyrmspear, SSR) — bộ kỹ năng (chốt với người dùng 2026-09-27).** Vai: diệt boss/tinh anh.
+Cơ chế riêng: **biến hình VĨNH VIỄN** (giống Chainwarden Cuồng Nộ) — lần tung chiêu xịn đầu tiên hoá **Long Nhân** (mọc sừng,
+đuôi, áo choàng thành cánh thật) và gọi **Bạch Địa Long** trồi lên đánh cùng; từ đó cả bộ kỹ năng đổi hẳn. Chủ đề
+*Thiên – Địa song long*: người là rồng TRỜI (mũi giáo, đánh từ trên xuống), địa long là rồng ĐẤT (tường, giữ trận).
+
+Giai đoạn 1 — Kỵ Sĩ (1 chiêu thường, để biến hình thành một bước nhảy lớn):
+
+| | Nội tại *Nghịch Lân* | Chiêu thường *Xuyên Long* *(cooldown ẩn)* | Chiêu xịn *Long Hoá* *(thanh mana 5)* |
+|---|---|---|---|
+| Hiệu ứng | Đòn đánh vào boss/tinh anh cộng thêm % máu tối đa mục tiêu | Đâm xuyên một đường, bỏ qua giáp | Biến hình vĩnh viễn: đất nứt, Bạch Địa Long trồi lên cạnh ông |
+
+Giai đoạn 2 — Long Nhân + Bạch Địa Long (2 chiêu thường):
+
+| | Nội tại *Long Uy · Long Giáp · Long Khế* | Chiêu thường 1 *Thiên Long Liên Thương* (người) | Chiêu thường 2 *Địa Long Chấn* (rồng) | Chiêu xịn *Thiên Địa Long Giáng* *(mana 5)* |
+|---|---|---|---|---|
+| Hiệu ứng | **Long Giáp:** +60% máu tối đa, −35% mọi sát thương nhận, miễn choáng/hất văng. **Long Uy:** +60% công; quái trong tầm −20% công; boss/tinh anh trong tầm nhận +15% sát thương từ mọi nguồn. **Long Nộ:** mỗi lần ông **hoặc địa long** chịu sát thương → +1 tầng, **cộng dồn tối đa 7**, mỗi tầng +5% giảm sát thương nhận và +8% công (7 tầng: +35% / +56%), ông và rồng cùng hưởng; **mỗi tầng còn +3% hút máu** (người dùng thêm 2026-09-28, 7 tầng 21%). **Long Khế:** địa long hưởng **một nửa** Long Giáp + Long Uy | Đâm liên hoàn 5 nhát cực nhanh một mục tiêu, nhát cuối **xuyên cả đường** phía sau; mỗi nhát vào boss đều ăn Nghịch Lân | Rồng dựng người đập hai chân trước: gai đá trắng quanh nó — sát thương vùng, **choáng 1,5s**, **phá giáp −30% trong 5s** | Rồng cắm đầu xuống đất, **cột đá trắng** (chiêu của rồng — rồng bị hạ thì không có cột) trồi ở **cụm quái đông nhất trong tầm đánh của rồng** (không theo mục tiêu của ông), hất tung cả cụm; ông dang cánh bay lên lao xuống cắm giáo → **đất nát** (chỉ vết nứt, người dùng chốt 2026-09-28). Sát thương rất lớn + % máu tối đa; **kết liễu quái thường/tinh anh dưới 20% máu**, boss thì ×2 sát thương; hạ được mục tiêu hoàn 2 mana |
+| Tinh anh/boss | — | Như trên | Choáng **một nửa** | Không kết liễu, ×2 sát thương |
+
+**Bạch Địa Long:** đứng **ô phía trước** Wyrmspear trên lane, **chặn tối đa 4 quái** (như Chainwarden); ông đứng
+sau **đâm qua đầu rồng** (tầm ~2). Đòn thường táp + quật đuôi, sát thương vừa, nhiều máu. Bị hạ thì chui xuống đất,
+**trồi lại sau ~15s** (trong lúc vắng: mất Long Khế, đòn đánh vào rồng không cộng Long Nộ). Tạo hình: rồng **không
+cánh**, thân thấp nặng như thằn lằn khổng lồ, vảy **trắng ngà**, gai lưng **xám đá**, chỉ sừng + móng **vàng đồng
+nhạt** để nối với giáp Wyrmspear.
+
+*Số khởi điểm Claude đề xuất, CHƯA cân bằng.* Long Nộ (code 2026-09-28, số chưa cân): tối thiểu 0,5s giữa hai lần cộng tầng
+(không thì 1 bầy quái đánh là đầy 7 ngay), không chịu đòn 4s thì rơi 1 tầng/giây. Art giai đoạn 2 nặng: Long Nhân đủ
+bộ clip + clip liên thương + clip bay-lao-cắm; địa long identity/idle/walk 4 chân/attack/đập đất/cắm đầu/hurt/death
+(chui xuống đất); clip biến hình 8 ô + clip rồng trồi lên; FX gai đá, cột đá, sóng chấn, đường xuyên, icon tầng Long Nộ.
 
 ## 4. Pháo (3 loại MVP)
 
@@ -139,9 +183,12 @@ bán kính ~1,0, trói 1,5s, cooldown ~10s. Bỏ ý cũ "chiêu nhỏ móc lại
 | Thường | Goblin | 100 | 15 | 1.5 | 5 |
 | Nhanh | Ashfang (chó sói) | 60 | 10 | 3.0 | 4 |
 | Tank | Orc | 400 | 40 | 0.8 | 12 |
+| Nhanh | Chuột Cống (`RatRunner`) | 45 | 8 | 3.5 | 3 |
 | **Bắn xa** | **Goblin Ná** | — | — | — | — |
 | **Tinh anh** | **Gatebreaker** | **1200** | **60** | **0.7** | **40** |
 | Boss | *Vua minotaur (chưa đặt tên)* | 5000 | 120 | 0.6 | 200 |
+
+**Nhanh `Chuột Cống` (thêm 2026-09-29):** chuột cống cầm dao găm, con nhanh thứ hai bên cạnh Ashfang — máu giấy, chạy nhanh hơn Ashfang. Bốn con số là **đề xuất của Claude, chưa cân bằng**.
 
 **Bắn xa `Goblin Ná` (thêm 2026-09-21, người dùng chốt):** goblin cầm ná cao su chữ Y, bắn viên đá. **Ưu tiên bắn hero và lính phe ta** trong tầm; **hết mục tiêu mới bắn tường thành**. Chỉ số, tầm và wave xuất hiện chưa chốt. Art: identity đang sinh (`tempart/GoblinSlinger/`).
 
@@ -163,8 +210,8 @@ Số lượng   = 5 + floor(wave / 2)
 | Wave | Thành phần |
 |---|---|
 | 1–3 | Goblin |
-| 4–6 | Goblin + Ashfang |
-| 7–9 | Goblin + Ashfang + Orc |
+| 4–6 | Goblin + Ashfang + Chuột Cống |
+| 7–9 | Goblin + Ashfang + Goblin Ná + Orc |
 | 10 | BOSS + 6 Goblin hộ tống |
 | 11–19 | Hỗn hợp, tỉ lệ Orc tăng dần · **từ wave 12: +1 Gatebreaker** (trừ wave 20) |
 | 20 | BOSS (chỉ số ×2) + 4 Orc |
@@ -186,22 +233,25 @@ dưới 30% máu tăng 50% tốc đánh và miễn slow.
 
 Sau khi ra độ hiếm → chọn loại: 60% hero / 40% pháo.
 
+**4 banner (2026-09-26):** *Tổng hợp* (chia loại như trên, `heroShare`/`soldierShare` trong `GachaConfig`) · *Hero* · *Lính* · *Trụ* (pháo) — banner riêng chỉ ra đúng loại đó, bậc trống thì hạ bậc trong cùng loại. Giá, tỉ lệ độ hiếm và pity **dùng chung** cả 4 banner.
+
 - Quay 1: **500 vàng** · Quay 10: **4.500 vàng**
 - **Pity mềm:** 30 lần liên tiếp không SR+ → lần 31 chắc chắn SR
 - **Pity cứng:** 80 lần liên tiếp không SSR → lần 81 chắc chắn SSR
-- Trùng: +20 mảnh; đủ 100 mảnh → +1 sao (+15% mọi chỉ số)
+- Trùng: +20 mảnh; đủ 100 mảnh thì **người chơi bấm Nâng sao** (không tự lên khi quay — chốt 2026-09-28): −100 mảnh, +1 sao, **+15% máu và sát thương gốc** (cộng tuyến tính với +8%/level). Tối đa 5 sao (Claude đặt tạm)
+- **Mở kỹ năng theo sao (2026-09-28):** có unit là dùng được **đánh thường + chiêu cuối**; **nội tại** mở ở 1★, **chiêu phụ** ở 3★ (người dùng chốt 2026-09-28; Wyrmspear cả hai chiêu phụ đều 3★). **Nâng level chỉ tăng chỉ số**, không mở kỹ năng — ngưỡng từng hero ở `HeroDefinition`. Hero bậc thấp chỉ có chiêu cuối nên sao chỉ tăng chỉ số. Wyrmspear: Long Giáp/Uy/Nộ/Khế là hiệu ứng của biến hình (chiêu cuối) nên không khoá
 - Bộ đếm pity lưu vào save, **không reset khi thua**
 
 ## 7. Kinh tế
 
 | Nguồn vàng | Công thức |
 |---|---|
-| Hoàn thành wave | 50 + 10 × wave |
-| Diệt quái | Theo bảng mục 5 |
-| Hạ boss | 200 |
+| Thắng wave | 80 + 18 × wave |
+| Thắng wave boss (10/20/30) | +200 |
 | Đăng nhập hằng ngày | 300 *(mở rộng)* |
 
-Chơi hết 10 wave đầu ≈ 1.800–2.000 vàng ≈ 3–4 lượt quay.
+**Chỉ THẮNG wave mới có vàng — diệt quái không ra vàng** (người dùng chốt 2026-09-29: thua mà vẫn có tiền từ quái
+đã giết thì dễ quá). Thưởng thắng nâng lên để bù phần vàng quái cũ. Chơi hết 10 wave đầu ≈ 2.000 vàng ≈ 4 lượt quay.
 
 Nâng level n → n+1: `50 × n^1.5` (làm tròn xuống). Mỗi level **+8% máu và +8% sát thương** so với
 chỉ số gốc (cộng tuyến tính). Level tối đa MVP: **20**.
@@ -214,7 +264,7 @@ quái + boss có cơ chế · UI: menu chính, màn chơi, gacha, nâng cấp, k
 level/pity.
 
 **Mở rộng (ưu tiên giảm dần):** trang bị · hero 5–8 và pháo mới · nâng cấp lâu đài · endless ·
-âm thanh · particle nâng cao · banner gacha thứ hai · leaderboard (Firebase/PlayFab, không tự viết backend).
+âm thanh · particle nâng cao · leaderboard (Firebase/PlayFab, không tự viết backend).
 
 **Tài nguyên ngoài trận (mở rộng, người dùng thêm 2026-09-11, chưa có số):** đây là đường để người chơi
 mạnh lên sau khi thua một wave.
@@ -223,6 +273,7 @@ mạnh lên sau khi thua một wave.
 - **Lính triệu hồi** (phe ta, theo tốp, để chặn quái): xem `docs/project-state/IDEAS.md`.
 
 Trang bị bị đẩy khỏi MVP vì kéo theo stat cộng dồn + UI riêng + mở rộng cấu trúc save.
+**Trang bị — đưa lại vào làm (người dùng, 2026-09-28):** chỉ hero, **4 ô** (Vũ khí · Giáp · Mũ · Nhẫn), **chỉ cộng chỉ số**, không đổi sprite; độ hiếm **N/R/SR/SSR** (màu như thẻ unit), chỉ số theo độ hiếm; **nâng cấp đồ** bằng vàng. Nguồn đầu tiên: **rơi khi thắng wave** (boss chắc rơi); sau: banner trang bị. **Số TẠM (Claude, chưa cân):** bậc N lv1 vũ khí +6% sát thương, giáp +8% máu, mũ +5% máu, nhẫn +4% tốc đánh; ×1 / 1,8 / 3 / 5 theo N/R/SR/SSR; +10%/level, tối đa lv 10; giá nâng 60 × hệ số độ hiếm × level; rơi 35% mỗi wave thường, wave 10/20/30 chắc rơi ≥R. Số nằm ở `EquipmentConfig`. Plan: `docs/project-state/IDEAS.md` #5.
 
 ## 9. Điểm còn TRỐNG — cần chốt trước khi sinh art tương ứng
 
@@ -233,10 +284,14 @@ Trang bị bị đẩy khỏi MVP vì kéo theo stat cộng dồn + UI riêng + 
   humanoid đứng thẳng nên silhouette tách ra tức thì — đúng thứ "quái nhanh" cần. Palette xám tro
   ngả ấm + accent đỏ máu (mắt, vòng cổ gai). Chi tiết ở AD-6.
 - ~~Định dạng save~~ **ĐÃ CHỐT 2026-09-11: JSON file** `Application.persistentDataPath/save.json`
-  (vàng, danh sách sở hữu + level/sao/mảnh, 2 bộ đếm pity).
+  (vàng, danh sách sở hữu + level/sao/mảnh, 2 bộ đếm pity). **Theo tài khoản (2026-09-26):** mỗi acc một file
+  (`save.json` = acc chính, `save-<tên>.json`), đổi acc ở Admin (F1). Acc mới được **tặng Frostweaver**; acc `test`
+  sở hữu mọi unit kể cả unit chưa vào gacha; acc `fresh` xoá làm lại mỗi lần chọn (xem lại lúc mới chơi).
 - **Độ hiếm ĐÃ CHỐT 2026-09-11: gắn CỐ ĐỊNH vào từng unit.** Hero hiện tại đều N, riêng Pháp sư
-  triệu hồi ở bậc cao hơn (đặt SR, sửa trong `Unit_mage_summoner.asset`); 3 pháo tạm N. Quay ra bậc
-  chưa có unit (R/SSR hiện trống) thì hạ xuống bậc thấp hơn còn unit; pity đếm theo bậc QUAY RA.
+  triệu hồi ở bậc cao hơn (đặt SR, sửa trong `Unit_mage_summoner.asset`); 3 pháo tạm N.
+  **Định lại theo sức mạnh (người dùng giao Claude, 2026-09-26):** N = Ironblade, Hawkfletch, Frostweaver, Sói chiến,
+  Kỳ nhông axit, 3 pháo · R = Cragfist, Rùa đá khiên · SR = Bonecaller, Chainwarden (vào pool 2026-09-26). Vespera (R) vào gacha
+  khi xong bộ. Quay ra bậc chưa có unit (SSR hiện trống) thì hạ xuống bậc thấp hơn còn unit; pity đếm theo bậc QUAY RA.
   → Với roster hiện tại, tỉ lệ thực tế ≈ 90% N / 10% Pháp sư triệu hồi cho tới khi có unit R/SSR.
 - **"Giới hạn vùng và số lượng" khi đặt hero** chưa có con số cụ thể (vùng rộng bao nhiêu, tối đa
   mấy hero trên sân).

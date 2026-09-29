@@ -189,8 +189,11 @@ Một lượt quay chạy theo thứ tự sau (`GachaSystem`):
 
 1. Quay **độ hiếm** theo bảng 60 / 30 / 9 / 1.
 2. **Pity:** đã 80 lượt liên tiếp không SSR thì ép SSR; đã 30 lượt không SR+ thì nâng lên ít nhất SR.
-3. Quay **loại**: 60% hero / 40% pháo.
-4. Chọn unit có **đúng độ hiếm + loại**. Nếu không có unit nào thì thử loại kia; vẫn không có thì hạ một bậc.
+3. Chọn **loại** theo banner đang mở (4 tab trên màn Gacha). Banner *Tổng hợp* quay loại theo `heroShare` /
+   `soldierShare` trong `GachaConfig` (phần còn lại là pháo); banner *Hero* / *Lính* / *Trụ* dùng luôn loại đó
+   (`GachaSystem.Roll(count, only)`, `only = null` là banner tổng hợp).
+4. Chọn unit có **đúng độ hiếm + loại**. Banner tổng hợp: không có unit nào thì thử các loại khác; vẫn không có thì
+   hạ một bậc. Banner riêng: chỉ hạ bậc **trong cùng loại**, không bao giờ ra loại khác.
 5. Đã sở hữu thì cộng **+20 mảnh**; đủ 100 mảnh thì **+1 sao**.
 
 Roster hiện tại chỉ có N (3 hero + 3 pháo) và một SR (Pháp sư triệu hồi). Vì vậy R (30%) rơi về
@@ -203,3 +206,55 @@ N, SSR (1%) rơi về SR. Tỉ lệ thực tế khoảng **90% N / 10% Triệu h
 Dòng "Chắc chắn SR trong N lượt" có **+1**: bộ đếm = 30 nghĩa là lượt **kế tiếp** chắc chắn SR,
 nên lúc bộ đếm = 0 thì phải hiện "trong 31 lượt", không phải 30.
 
+## 8. Màn Đội quân: xem và nâng Hero / Lính / Trụ
+
+Màn này là scene riêng `Assets/Scenes/Units.unity`, dựng bằng code như Battle và Gacha.
+
+1. **Dựng lại:** menu **BuildBuild → Scenes → Build Battle + Gacha**. Lệnh này dựng cả ba scene và thêm `Units` vào
+   Build Settings. Bạn cần dựng lại mỗi khi thêm unit mới (`Assets/Data/Units/Unit_*.asset`), vì danh sách unit được
+   nạp lúc dựng scene chứ không phải lúc chạy.
+2. **Mở trong game:** trên màn trận, lúc nghỉ giữa hai wave, bấm nút **Đội quân** dưới nút Triệu hồi. Trong lúc đang
+   đánh wave thì nút này bị xám.
+3. **Dùng:** chọn tab Hero / Lính / Trụ, bấm vào một thẻ. Bảng bên phải hiện chỉ số hiện tại. Số màu xanh sau `→` là
+   chỉ số sau khi nâng thêm 1 level.
+   - **Nâng level** tốn vàng: hero và lính theo `floor(50 × n^1,5)`, pháo theo giá riêng trong `CannonDefinition`. Level
+     chỉ tăng chỉ số.
+   - **Nâng sao** tốn `GachaConfig.shardsPerStar` mảnh (100). Nút sáng lên khi đủ mảnh. Sao vừa tăng chỉ số vừa mở kỹ
+     năng.
+
+**Code làm gì bên trong:**
+- `SceneBuilder.BuildUnitsScene` nạp mọi `UnitDefinition` trong `Assets/Data/Units`, mọi `HeroDefinition` có `unitId`
+  (gồm cả lính, vì `SoldierDefinition` kế thừa `HeroDefinition`) và mọi `CannonDefinition`, rồi gán các danh sách này
+  vào `UnitsScreen`.
+- `UnitsScreen` ghép thẻ với chỉ số qua id: thẻ `UnitDefinition.id` khớp với `HeroDefinition.unitId` hoặc
+  `CannonDefinition.unitId`. Đọc level, sao và mảnh từ save qua `SaveSystem.Data.Find(id)`. Unit chưa sở hữu thì thẻ
+  bị tô xám.
+- Hệ số chỉ số lấy từ `Progression`, cũng là hàm mà `Hero.Initialise` dùng trên sân. Công thức:
+  `1 + 8% × (level − 1) + 15% × sao`, nhân vào máu và sát thương gốc.
+- Chữ trong phần "KỸ NĂNG" lấy từ 4 ô `Ultimate Text` / `Passive Text` / `Minor Text` / `Second Minor Text` trong
+  Inspector của hero. `SceneBuilder.FillSkillTexts` chỉ điền vào ô còn trống, nên bạn sửa chữ trong Inspector thì lần
+  dựng lại sau cũng không bị ghi đè. Ô nào để trống thì dòng kỹ năng đó không hiện.
+- Dòng kỹ năng chưa đủ sao hiện màu xám, kèm `Mở ở N★`. Ngưỡng sao lấy từ `Passive Star` / `Minor Star` /
+  `Second Minor Star` của hero.
+
+### Trang bị (tab Trang bị trong bảng chi tiết hero)
+
+1. Chọn một hero, bấm **Trang bị**. Hàng trên có 4 ô Vũ khí / Giáp / Mũ / Nhẫn. Ô viền màu theo độ hiếm; ô xám là
+   ô trống.
+2. Bấm vào một ô để chọn. Hàng dưới hiện các món cùng loại đang nằm trong túi (tối đa 8 món tốt nhất). Bấm vào một món
+   để mặc. Món đang mặc ở ô đó (nếu có) tự về túi.
+3. **Nâng cấp** tốn vàng; **Tháo** trả món về túi.
+4. Muốn có đồ để thử mà chưa thắng wave nào: F1 → Admin → **+4 trang bị** (mỗi ô 1 món, độ hiếm ngẫu nhiên).
+
+**Code làm gì bên trong:**
+- Không có asset riêng cho từng món. Một món là một dòng `OwnedEquipment` trong save, gồm `slot`, `rarity`,
+  `level` và `heroId` (unitId của hero đang mặc; để trống nghĩa là món đó nằm trong túi). `Armory` lo việc mặc, tháo,
+  cộng chỉ số và rơi đồ.
+- Mọi con số nằm ở `Assets/Data/EquipmentConfig.asset`: % của bậc N ở level 1, hệ số theo độ hiếm, % tăng mỗi level,
+  giá nâng, tỉ lệ rơi, và 4 icon. Sửa số trong Inspector là game dùng số mới ngay.
+- Công thức một món: `% gốc của ô × hệ số độ hiếm × (1 + 10% × (level − 1))`. Vũ khí cộng sát thương, giáp và mũ cộng
+  máu, nhẫn cộng tốc đánh.
+- `Progression.Multipliers` cộng dồn level + sao + đồ thành một hệ số rồi nhân vào chỉ số gốc. `Hero.Initialise` nhận
+  config đồ từ `HeroBoard`, nên đổi đồ trong màn Đội quân thì từ wave sau hero trên sân mới dùng số mới.
+- Khi thắng wave, `BattleHud` gọi `Armory.RollDrop`: wave thường rơi đồ theo `dropChance`; wave chia hết cho
+  `guaranteedEvery` (wave boss) chắc chắn rơi, ít nhất bậc R. Món nhận được hiện thành một dòng trong popup thắng.
