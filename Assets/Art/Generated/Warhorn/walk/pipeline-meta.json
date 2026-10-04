@@ -1,0 +1,51 @@
+{
+  "target": "creature",
+  "mode": "walk",
+  "source": "tempart/Warhorn/walk/skeleton",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 2,
+  "align": "feet",
+  "status": "duyet 2026-09-30",
+  "dx": 1,
+  "frames": [
+    {
+      "frame": "walk-1",
+      "aligned_bbox": [
+        34,
+        61,
+        93,
+        93
+      ]
+    },
+    {
+      "frame": "walk-2",
+      "aligned_bbox": [
+        36,
+        60,
+        93,
+        93
+      ]
+    },
+    {
+      "frame": "walk-3",
+      "aligned_bbox": [
+        36,
+        61,
+        93,
+        93
+      ]
+    },
+    {
+      "frame": "walk-4",
+      "aligned_bbox": [
+        36,
+        60,
+        93,
+        93
+      ]
+    }
+  ],
+  "ground_row": 92
+}

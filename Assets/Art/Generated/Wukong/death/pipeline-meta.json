@@ -1,0 +1,65 @@
+{
+  "target": "player",
+  "mode": "death",
+  "source": "tempart/Wukong/death/final",
+  "cell_size": 128,
+  "align": "feet",
+  "ground_row": 95,
+  "status": "duyet 2026-09-30",
+  "frames": [
+    {
+      "frame": "death-1",
+      "aligned_bbox": [
+        34,
+        40,
+        99,
+        96
+      ]
+    },
+    {
+      "frame": "death-2",
+      "aligned_bbox": [
+        39,
+        44,
+        94,
+        96
+      ]
+    },
+    {
+      "frame": "death-3",
+      "aligned_bbox": [
+        42,
+        42,
+        92,
+        96
+      ]
+    },
+    {
+      "frame": "death-4",
+      "aligned_bbox": [
+        35,
+        62,
+        98,
+        96
+      ]
+    },
+    {
+      "frame": "death-5",
+      "aligned_bbox": [
+        35,
+        70,
+        99,
+        96
+      ]
+    },
+    {
+      "frame": "death-6",
+      "aligned_bbox": [
+        35,
+        71,
+        99,
+        96
+      ]
+    }
+  ]
+}

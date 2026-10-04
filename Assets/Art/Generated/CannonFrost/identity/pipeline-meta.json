@@ -1,0 +1,23 @@
+{
+  "target": "asset",
+  "mode": "identity",
+  "source": "tempart/CannonFrost/identity",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 1,
+  "cols": 1,
+  "align": "feet",
+  "status": "duyet 2026-09-30",
+  "frames": [
+    {
+      "frame": "identity-1",
+      "aligned_bbox": [
+        15,
+        21,
+        94,
+        96
+      ]
+    }
+  ],
+  "ground_row": 95
+}

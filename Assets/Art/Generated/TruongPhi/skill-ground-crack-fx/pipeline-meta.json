@@ -1,0 +1,51 @@
+{
+  "target": "player",
+  "mode": "skill-ground-crack-fx",
+  "source": "tempart/TruongPhi/ground-crack-fx/final",
+  "cell_size": 96,
+  "frame_size": [
+    96,
+    48
+  ],
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet 2026-10-02",
+  "frames": [
+    {
+      "frame": "ground-crack-fx-1",
+      "aligned_bbox": [
+        22,
+        23,
+        74,
+        36
+      ]
+    },
+    {
+      "frame": "ground-crack-fx-2",
+      "aligned_bbox": [
+        3,
+        11,
+        92,
+        43
+      ]
+    },
+    {
+      "frame": "ground-crack-fx-3",
+      "aligned_bbox": [
+        3,
+        17,
+        92,
+        41
+      ]
+    },
+    {
+      "frame": "ground-crack-fx-4",
+      "aligned_bbox": [
+        21,
+        20,
+        76,
+        34
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "target": "player",
+  "mode": "skill-deflect-spark-fx",
+  "source": "tempart/Wukong/deflect-spark-fx/final",
+  "cell_size": 64,
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet 2026-09-30",
+  "frames": [
+    {
+      "frame": "deflect-spark-1",
+      "aligned_bbox": [
+        23,
+        22,
+        43,
+        42
+      ]
+    },
+    {
+      "frame": "deflect-spark-2",
+      "aligned_bbox": [
+        16,
+        19,
+        48,
+        44
+      ]
+    },
+    {
+      "frame": "deflect-spark-3",
+      "aligned_bbox": [
+        19,
+        19,
+        46,
+        41
+      ]
+    },
+    {
+      "frame": "deflect-spark-4",
+      "aligned_bbox": [
+        21,
+        21,
+        42,
+        40
+      ]
+    }
+  ]
+}

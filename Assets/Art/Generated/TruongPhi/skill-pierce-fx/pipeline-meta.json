@@ -1,0 +1,51 @@
+{
+  "target": "player",
+  "mode": "skill-pierce-fx",
+  "source": "tempart/TruongPhi/pierce-fx/final",
+  "cell_size": 96,
+  "frame_size": [
+    96,
+    48
+  ],
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet 2026-10-02",
+  "frames": [
+    {
+      "frame": "pierce-fx-1",
+      "aligned_bbox": [
+        49,
+        20,
+        85,
+        29
+      ]
+    },
+    {
+      "frame": "pierce-fx-2",
+      "aligned_bbox": [
+        2,
+        16,
+        88,
+        34
+      ]
+    },
+    {
+      "frame": "pierce-fx-3",
+      "aligned_bbox": [
+        2,
+        9,
+        88,
+        38
+      ]
+    },
+    {
+      "frame": "pierce-fx-4",
+      "aligned_bbox": [
+        30,
+        20,
+        88,
+        29
+      ]
+    }
+  ]
+}

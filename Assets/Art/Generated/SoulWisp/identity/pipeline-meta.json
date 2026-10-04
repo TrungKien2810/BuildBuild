@@ -1,0 +1,23 @@
+{
+  "target": "creature",
+  "mode": "identity",
+  "source": "tempart/SoulWisp/identity",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 1,
+  "cols": 1,
+  "align": "feet",
+  "status": "duyet 2026-10-01",
+  "frames": [
+    {
+      "frame": "identity-1",
+      "aligned_bbox": [
+        29,
+        39,
+        98,
+        100
+      ]
+    }
+  ],
+  "ground_row": 99
+}

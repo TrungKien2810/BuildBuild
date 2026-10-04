@@ -1,0 +1,49 @@
+{
+  "target": "asset",
+  "mode": "bolt",
+  "source": "tempart/CannonBallista/bolt",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 2,
+  "align": "center",
+  "status": "duyet 2026-10-01",
+  "frames": [
+    {
+      "frame": "projectile-1",
+      "aligned_bbox": [
+        1,
+        53,
+        126,
+        75
+      ]
+    },
+    {
+      "frame": "projectile-2",
+      "aligned_bbox": [
+        1,
+        52,
+        126,
+        75
+      ]
+    },
+    {
+      "frame": "projectile-3",
+      "aligned_bbox": [
+        1,
+        53,
+        126,
+        74
+      ]
+    },
+    {
+      "frame": "projectile-4",
+      "aligned_bbox": [
+        1,
+        52,
+        126,
+        75
+      ]
+    }
+  ]
+}

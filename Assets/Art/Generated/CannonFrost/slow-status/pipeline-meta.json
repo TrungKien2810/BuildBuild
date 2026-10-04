@@ -1,0 +1,49 @@
+{
+  "target": "asset",
+  "mode": "slow-status",
+  "source": "tempart/CannonFrost/slow-status",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 2,
+  "align": "center",
+  "status": "duyet 2026-09-30",
+  "frames": [
+    {
+      "frame": "impact-1",
+      "aligned_bbox": [
+        25,
+        21,
+        102,
+        107
+      ]
+    },
+    {
+      "frame": "impact-2",
+      "aligned_bbox": [
+        23,
+        22,
+        104,
+        106
+      ]
+    },
+    {
+      "frame": "impact-3",
+      "aligned_bbox": [
+        21,
+        23,
+        107,
+        104
+      ]
+    },
+    {
+      "frame": "impact-4",
+      "aligned_bbox": [
+        22,
+        22,
+        106,
+        106
+      ]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "target": "player",
+  "mode": "skill-heal-ring-fx",
+  "source": "tempart/LuuBi/heal-ring-fx/final",
+  "cell_size": 64,
+  "frame_size": [
+    64,
+    64
+  ],
+  "align": "feet",
+  "ground_row": 51,
+  "status": "duyet 2026-10-02",
+  "frames": [
+    {
+      "frame": "heal-ring-fx-1",
+      "aligned_bbox": [
+        10,
+        44,
+        55,
+        51
+      ]
+    },
+    {
+      "frame": "heal-ring-fx-2",
+      "aligned_bbox": [
+        2,
+        23,
+        61,
+        51
+      ]
+    },
+    {
+      "frame": "heal-ring-fx-3",
+      "aligned_bbox": [
+        5,
+        8,
+        58,
+        51
+      ]
+    },
+    {
+      "frame": "heal-ring-fx-4",
+      "aligned_bbox": [
+        5,
+        13,
+        58,
+        51
+      ]
+    }
+  ]
+}

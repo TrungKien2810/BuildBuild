@@ -1,0 +1,68 @@
+{
+  "target": "creature",
+  "mode": "death",
+  "source": "tempart/Gloomwing/death/frames",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 3,
+  "cols": 2,
+  "align": "feet",
+  "status": "duyet 2026-10-01",
+  "ground_row": 99,
+  "frames": [
+    {
+      "frame": "death-1",
+      "aligned_bbox": [
+        22,
+        49,
+        106,
+        100
+      ]
+    },
+    {
+      "frame": "death-2",
+      "aligned_bbox": [
+        27,
+        58,
+        79,
+        100
+      ]
+    },
+    {
+      "frame": "death-3",
+      "aligned_bbox": [
+        51,
+        63,
+        79,
+        100
+      ]
+    },
+    {
+      "frame": "death-4",
+      "aligned_bbox": [
+        32,
+        79,
+        104,
+        100
+      ]
+    },
+    {
+      "frame": "death-5",
+      "aligned_bbox": [
+        24,
+        79,
+        95,
+        100
+      ]
+    },
+    {
+      "frame": "death-6",
+      "aligned_bbox": [
+        25,
+        79,
+        96,
+        100
+      ]
+    }
+  ]
+}

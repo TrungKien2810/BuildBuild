@@ -1,0 +1,68 @@
+{
+  "target": "creature",
+  "mode": "breath",
+  "source": "tempart/Dreadwyrm/breath/frames",
+  "cell_size": 384,
+  "cell_height": 384,
+  "rows": 2,
+  "cols": 3,
+  "align": "feet",
+  "status": "duyet 2026-10-01",
+  "frames": [
+    {
+      "frame": "breath-1",
+      "aligned_bbox": [
+        59,
+        79,
+        315,
+        301
+      ]
+    },
+    {
+      "frame": "breath-2",
+      "aligned_bbox": [
+        86,
+        87,
+        323,
+        301
+      ]
+    },
+    {
+      "frame": "breath-3",
+      "aligned_bbox": [
+        88,
+        88,
+        321,
+        301
+      ]
+    },
+    {
+      "frame": "breath-4",
+      "aligned_bbox": [
+        45,
+        85,
+        314,
+        301
+      ]
+    },
+    {
+      "frame": "breath-5",
+      "aligned_bbox": [
+        50,
+        96,
+        313,
+        301
+      ]
+    },
+    {
+      "frame": "breath-6",
+      "aligned_bbox": [
+        56,
+        84,
+        322,
+        301
+      ]
+    }
+  ],
+  "ground_row": 300
+}

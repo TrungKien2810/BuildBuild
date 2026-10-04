@@ -1,0 +1,49 @@
+{
+  "target": "creature",
+  "mode": "soul-burst",
+  "source": "tempart/Dreadwyrm/soul-burst/frames",
+  "cell_size": 60,
+  "cell_height": 68,
+  "rows": 2,
+  "cols": 2,
+  "align": "center",
+  "status": "duyet 2026-10-01",
+  "frames": [
+    {
+      "frame": "soul-burst-1",
+      "aligned_bbox": [
+        23,
+        24,
+        45,
+        53
+      ]
+    },
+    {
+      "frame": "soul-burst-2",
+      "aligned_bbox": [
+        4,
+        11,
+        56,
+        64
+      ]
+    },
+    {
+      "frame": "soul-burst-3",
+      "aligned_bbox": [
+        13,
+        4,
+        55,
+        60
+      ]
+    },
+    {
+      "frame": "soul-burst-4",
+      "aligned_bbox": [
+        16,
+        10,
+        44,
+        57
+      ]
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "target": "creature",
+  "mode": "claw-slash",
+  "source": "tempart/Dreadwyrm/claw-slash/frames",
+  "cell_size": 66,
+  "cell_height": 68,
+  "rows": 2,
+  "cols": 2,
+  "align": "center",
+  "status": "duyet 2026-10-01",
+  "frames": [
+    {
+      "frame": "claw-slash-1",
+      "aligned_bbox": [
+        11,
+        9,
+        61,
+        58
+      ]
+    },
+    {
+      "frame": "claw-slash-2",
+      "aligned_bbox": [
+        4,
+        7,
+        62,
+        64
+      ]
+    },
+    {
+      "frame": "claw-slash-3",
+      "aligned_bbox": [
+        10,
+        4,
+        62,
+        56
+      ]
+    },
+    {
+      "frame": "claw-slash-4",
+      "aligned_bbox": [
+        11,
+        5,
+        59,
+        54
+      ]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "target": "player",
+  "mode": "skill-burn-fx",
+  "source": "tempart/EmberApprentice/burn-fx/final",
+  "cell_size": 24,
+  "frame_size": [
+    24,
+    24
+  ],
+  "align": "feet",
+  "ground_row": 20,
+  "status": "duyet 2026-10-03",
+  "frames": [
+    {
+      "frame": "burn-fx-1",
+      "aligned_bbox": [
+        4,
+        4,
+        22,
+        20
+      ]
+    },
+    {
+      "frame": "burn-fx-2",
+      "aligned_bbox": [
+        3,
+        5,
+        20,
+        20
+      ]
+    },
+    {
+      "frame": "burn-fx-3",
+      "aligned_bbox": [
+        4,
+        3,
+        21,
+        20
+      ]
+    },
+    {
+      "frame": "burn-fx-4",
+      "aligned_bbox": [
+        3,
+        4,
+        20,
+        20
+      ]
+    }
+  ]
+}

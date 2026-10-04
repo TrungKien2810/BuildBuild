@@ -1,0 +1,50 @@
+{
+  "target": "creature",
+  "mode": "idle",
+  "source": "tempart/Gloomwing/idle/frames",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 2,
+  "align": "feet",
+  "status": "duyet 2026-10-01",
+  "ground_row": 99,
+  "frames": [
+    {
+      "frame": "idle-1",
+      "aligned_bbox": [
+        25,
+        50,
+        105,
+        100
+      ]
+    },
+    {
+      "frame": "idle-2",
+      "aligned_bbox": [
+        36,
+        42,
+        81,
+        100
+      ]
+    },
+    {
+      "frame": "idle-3",
+      "aligned_bbox": [
+        25,
+        54,
+        99,
+        100
+      ]
+    },
+    {
+      "frame": "idle-4",
+      "aligned_bbox": [
+        43,
+        52,
+        79,
+        100
+      ]
+    }
+  ]
+}

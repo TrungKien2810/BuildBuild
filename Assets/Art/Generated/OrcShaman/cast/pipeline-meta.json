@@ -1,0 +1,69 @@
+{
+  "target": "creature",
+  "mode": "cast",
+  "source": "tempart/OrcShaman/cast/final/graded",
+  "cell_size": 256,
+  "cell_height": 256,
+  "rows": 2,
+  "cols": 3,
+  "align": "feet",
+  "status": "duyet 2026-09-29",
+  "dx": 16,
+  "frames": [
+    {
+      "frame": "cast-1",
+      "aligned_bbox": [
+        72,
+        106,
+        182,
+        244
+      ]
+    },
+    {
+      "frame": "cast-2",
+      "aligned_bbox": [
+        71,
+        83,
+        181,
+        244
+      ]
+    },
+    {
+      "frame": "cast-3",
+      "aligned_bbox": [
+        73,
+        66,
+        184,
+        244
+      ]
+    },
+    {
+      "frame": "cast-4",
+      "aligned_bbox": [
+        75,
+        75,
+        186,
+        244
+      ]
+    },
+    {
+      "frame": "cast-5",
+      "aligned_bbox": [
+        70,
+        99,
+        181,
+        244
+      ]
+    },
+    {
+      "frame": "cast-6",
+      "aligned_bbox": [
+        72,
+        105,
+        182,
+        244
+      ]
+    }
+  ],
+  "ground_row": 243
+}

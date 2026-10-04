@@ -1,0 +1,51 @@
+{
+  "target": "player",
+  "mode": "skill-poison-drop-fx",
+  "source": "tempart/BogWitch/poison-drop-fx/final",
+  "cell_size": 16,
+  "frame_size": [
+    16,
+    16
+  ],
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet 2026-10-03",
+  "frames": [
+    {
+      "frame": "poison-drop-fx-1",
+      "aligned_bbox": [
+        3,
+        3,
+        12,
+        13
+      ]
+    },
+    {
+      "frame": "poison-drop-fx-2",
+      "aligned_bbox": [
+        3,
+        3,
+        13,
+        12
+      ]
+    },
+    {
+      "frame": "poison-drop-fx-3",
+      "aligned_bbox": [
+        3,
+        3,
+        12,
+        13
+      ]
+    },
+    {
+      "frame": "poison-drop-fx-4",
+      "aligned_bbox": [
+        3,
+        2,
+        14,
+        12
+      ]
+    }
+  ]
+}

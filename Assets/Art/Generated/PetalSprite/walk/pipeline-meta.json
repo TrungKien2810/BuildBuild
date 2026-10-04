@@ -1,0 +1,62 @@
+{
+  "align": "feet",
+  "cell_size": 128,
+  "frames": [
+    {
+      "frame": "walk-1",
+      "aligned_bbox": [
+        51,
+        53,
+        77,
+        94
+      ]
+    },
+    {
+      "frame": "walk-2",
+      "aligned_bbox": [
+        51,
+        54,
+        77,
+        94
+      ]
+    },
+    {
+      "frame": "walk-3",
+      "aligned_bbox": [
+        51,
+        52,
+        77,
+        94
+      ]
+    },
+    {
+      "frame": "walk-4",
+      "aligned_bbox": [
+        51,
+        53,
+        77,
+        94
+      ]
+    },
+    {
+      "frame": "walk-5",
+      "aligned_bbox": [
+        51,
+        54,
+        77,
+        93
+      ]
+    },
+    {
+      "frame": "walk-6",
+      "aligned_bbox": [
+        51,
+        52,
+        77,
+        93
+      ]
+    }
+  ],
+  "source": "tempart\\PetalSprite\\walk\\final",
+  "approved": "2026-10-04"
+}

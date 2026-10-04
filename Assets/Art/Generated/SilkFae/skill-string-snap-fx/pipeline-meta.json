@@ -1,0 +1,42 @@
+{
+  "target": "player",
+  "mode": "skill-string-snap-fx",
+  "source": "tempart/SilkFae/string-snap-fx/final",
+  "cell_size": 24,
+  "frame_size": [
+    24,
+    48
+  ],
+  "align": "feet",
+  "ground_row": 48,
+  "status": "duyet 2026-10-03",
+  "frames": [
+    {
+      "frame": "string-snap-fx-1",
+      "aligned_bbox": [
+        3,
+        4,
+        21,
+        48
+      ]
+    },
+    {
+      "frame": "string-snap-fx-2",
+      "aligned_bbox": [
+        4,
+        3,
+        20,
+        48
+      ]
+    },
+    {
+      "frame": "string-snap-fx-3",
+      "aligned_bbox": [
+        10,
+        23,
+        15,
+        48
+      ]
+    }
+  ]
+}

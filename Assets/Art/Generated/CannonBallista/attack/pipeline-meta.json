@@ -1,0 +1,68 @@
+{
+  "target": "asset",
+  "mode": "attack",
+  "source": "tempart/CannonBallista/attack",
+  "cell_size": 144,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 3,
+  "align": "feet",
+  "status": "duyet 2026-10-01",
+  "frames": [
+    {
+      "frame": "attack-1",
+      "aligned_bbox": [
+        10,
+        12,
+        119,
+        96
+      ]
+    },
+    {
+      "frame": "attack-2",
+      "aligned_bbox": [
+        15,
+        12,
+        118,
+        96
+      ]
+    },
+    {
+      "frame": "attack-3",
+      "aligned_bbox": [
+        18,
+        12,
+        119,
+        96
+      ]
+    },
+    {
+      "frame": "attack-4",
+      "aligned_bbox": [
+        36,
+        12,
+        110,
+        96
+      ]
+    },
+    {
+      "frame": "attack-5",
+      "aligned_bbox": [
+        36,
+        12,
+        122,
+        96
+      ]
+    },
+    {
+      "frame": "attack-6",
+      "aligned_bbox": [
+        10,
+        11,
+        119,
+        96
+      ]
+    }
+  ],
+  "ground_row": 95
+}

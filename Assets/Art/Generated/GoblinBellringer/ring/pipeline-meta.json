@@ -1,0 +1,69 @@
+{
+  "target": "creature",
+  "mode": "ring",
+  "source": "tempart/GoblinBellringer/ring/graded",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 3,
+  "align": "feet",
+  "status": "duyet 2026-10-01",
+  "dx": 0,
+  "frames": [
+    {
+      "frame": "ring-1",
+      "aligned_bbox": [
+        40,
+        36,
+        86,
+        92
+      ]
+    },
+    {
+      "frame": "ring-2",
+      "aligned_bbox": [
+        43,
+        21,
+        90,
+        92
+      ]
+    },
+    {
+      "frame": "ring-3",
+      "aligned_bbox": [
+        22,
+        31,
+        85,
+        92
+      ]
+    },
+    {
+      "frame": "ring-4",
+      "aligned_bbox": [
+        22,
+        31,
+        85,
+        92
+      ]
+    },
+    {
+      "frame": "ring-5",
+      "aligned_bbox": [
+        43,
+        22,
+        90,
+        92
+      ]
+    },
+    {
+      "frame": "ring-6",
+      "aligned_bbox": [
+        41,
+        36,
+        87,
+        92
+      ]
+    }
+  ],
+  "ground_row": 91
+}

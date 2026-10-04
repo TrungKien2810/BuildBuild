@@ -1,0 +1,51 @@
+{
+  "target": "player",
+  "mode": "skill-whirlpool-fx",
+  "source": "tempart/TritonGuard/whirlpool-fx/final",
+  "cell_size": 64,
+  "frame_size": [
+    64,
+    32
+  ],
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet 2026-10-03",
+  "frames": [
+    {
+      "frame": "whirlpool-fx-1",
+      "aligned_bbox": [
+        2,
+        3,
+        62,
+        30
+      ]
+    },
+    {
+      "frame": "whirlpool-fx-2",
+      "aligned_bbox": [
+        2,
+        3,
+        62,
+        30
+      ]
+    },
+    {
+      "frame": "whirlpool-fx-3",
+      "aligned_bbox": [
+        2,
+        3,
+        62,
+        30
+      ]
+    },
+    {
+      "frame": "whirlpool-fx-4",
+      "aligned_bbox": [
+        2,
+        3,
+        62,
+        30
+      ]
+    }
+  ]
+}

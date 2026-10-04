@@ -1,0 +1,47 @@
+{
+  "target": "player",
+  "mode": "hurt",
+  "source": "tempart/Wukong/hurt/final",
+  "cell_size": 128,
+  "align": "feet",
+  "ground_row": 95,
+  "status": "duyet 2026-09-30",
+  "frames": [
+    {
+      "frame": "hurt-1",
+      "aligned_bbox": [
+        33,
+        36,
+        96,
+        96
+      ]
+    },
+    {
+      "frame": "hurt-2",
+      "aligned_bbox": [
+        33,
+        38,
+        96,
+        96
+      ]
+    },
+    {
+      "frame": "hurt-3",
+      "aligned_bbox": [
+        33,
+        37,
+        97,
+        96
+      ]
+    },
+    {
+      "frame": "hurt-4",
+      "aligned_bbox": [
+        33,
+        36,
+        97,
+        96
+      ]
+    }
+  ]
+}

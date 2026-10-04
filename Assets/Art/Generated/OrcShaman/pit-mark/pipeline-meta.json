@@ -1,0 +1,50 @@
+{
+  "target": "creature",
+  "mode": "pit-mark",
+  "source": "tempart/OrcShaman/pit-mark/final",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 2,
+  "align": "center",
+  "status": "duyet 2026-09-29",
+  "dx": 0,
+  "frames": [
+    {
+      "frame": "pit-mark-1",
+      "aligned_bbox": [
+        17,
+        52,
+        111,
+        87
+      ]
+    },
+    {
+      "frame": "pit-mark-2",
+      "aligned_bbox": [
+        17,
+        52,
+        111,
+        87
+      ]
+    },
+    {
+      "frame": "pit-mark-3",
+      "aligned_bbox": [
+        16,
+        48,
+        112,
+        91
+      ]
+    },
+    {
+      "frame": "pit-mark-4",
+      "aligned_bbox": [
+        17,
+        52,
+        111,
+        87
+      ]
+    }
+  ]
+}

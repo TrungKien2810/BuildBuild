@@ -1,0 +1,69 @@
+{
+  "target": "creature",
+  "mode": "walk",
+  "source": "tempart/GoblinAlchemist/walk/aligned/graded",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 3,
+  "align": "feet",
+  "status": "duyet 2026-09-30",
+  "dx": 0,
+  "frames": [
+    {
+      "frame": "walk-1",
+      "aligned_bbox": [
+        44,
+        45,
+        83,
+        86
+      ]
+    },
+    {
+      "frame": "walk-2",
+      "aligned_bbox": [
+        44,
+        45,
+        83,
+        86
+      ]
+    },
+    {
+      "frame": "walk-3",
+      "aligned_bbox": [
+        44,
+        46,
+        83,
+        86
+      ]
+    },
+    {
+      "frame": "walk-4",
+      "aligned_bbox": [
+        45,
+        46,
+        83,
+        86
+      ]
+    },
+    {
+      "frame": "walk-5",
+      "aligned_bbox": [
+        44,
+        45,
+        83,
+        86
+      ]
+    },
+    {
+      "frame": "walk-6",
+      "aligned_bbox": [
+        44,
+        45,
+        83,
+        86
+      ]
+    }
+  ],
+  "ground_row": 85
+}

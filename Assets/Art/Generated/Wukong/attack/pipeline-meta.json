@@ -1,0 +1,65 @@
+{
+  "target": "player",
+  "mode": "attack",
+  "source": "tempart/Wukong/attack/final",
+  "cell_size": 128,
+  "align": "feet",
+  "ground_row": 95,
+  "status": "duyet 2026-09-30",
+  "frames": [
+    {
+      "frame": "attack-1",
+      "aligned_bbox": [
+        33,
+        37,
+        98,
+        96
+      ]
+    },
+    {
+      "frame": "attack-2",
+      "aligned_bbox": [
+        29,
+        36,
+        103,
+        96
+      ]
+    },
+    {
+      "frame": "attack-3",
+      "aligned_bbox": [
+        33,
+        25,
+        99,
+        96
+      ]
+    },
+    {
+      "frame": "attack-4",
+      "aligned_bbox": [
+        28,
+        35,
+        103,
+        96
+      ]
+    },
+    {
+      "frame": "attack-5",
+      "aligned_bbox": [
+        24,
+        40,
+        108,
+        96
+      ]
+    },
+    {
+      "frame": "attack-6",
+      "aligned_bbox": [
+        36,
+        37,
+        105,
+        96
+      ]
+    }
+  ]
+}

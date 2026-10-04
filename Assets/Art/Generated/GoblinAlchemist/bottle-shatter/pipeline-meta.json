@@ -1,0 +1,50 @@
+{
+  "target": "creature",
+  "mode": "bottle-shatter",
+  "source": "tempart/GoblinAlchemist/bottle-shatter",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 2,
+  "align": "center",
+  "status": "duyet 2026-09-30",
+  "dx": 0,
+  "frames": [
+    {
+      "frame": "impact-1",
+      "aligned_bbox": [
+        47,
+        51,
+        80,
+        77
+      ]
+    },
+    {
+      "frame": "impact-2",
+      "aligned_bbox": [
+        44,
+        52,
+        83,
+        75
+      ]
+    },
+    {
+      "frame": "impact-3",
+      "aligned_bbox": [
+        47,
+        52,
+        80,
+        75
+      ]
+    },
+    {
+      "frame": "impact-4",
+      "aligned_bbox": [
+        48,
+        58,
+        80,
+        70
+      ]
+    }
+  ]
+}

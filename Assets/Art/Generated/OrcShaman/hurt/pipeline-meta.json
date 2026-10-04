@@ -1,0 +1,51 @@
+{
+  "target": "creature",
+  "mode": "hurt",
+  "source": "tempart/OrcShaman/hurt/final/graded",
+  "cell_size": 256,
+  "cell_height": 256,
+  "rows": 2,
+  "cols": 2,
+  "align": "feet",
+  "status": "duyet 2026-09-29",
+  "dx": 16,
+  "frames": [
+    {
+      "frame": "hurt-1",
+      "aligned_bbox": [
+        73,
+        95,
+        182,
+        235
+      ]
+    },
+    {
+      "frame": "hurt-2",
+      "aligned_bbox": [
+        60,
+        99,
+        184,
+        235
+      ]
+    },
+    {
+      "frame": "hurt-3",
+      "aligned_bbox": [
+        62,
+        101,
+        187,
+        235
+      ]
+    },
+    {
+      "frame": "hurt-4",
+      "aligned_bbox": [
+        71,
+        95,
+        181,
+        235
+      ]
+    }
+  ],
+  "ground_row": 234
+}

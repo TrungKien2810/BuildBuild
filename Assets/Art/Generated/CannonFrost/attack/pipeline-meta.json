@@ -1,0 +1,50 @@
+{
+  "target": "asset",
+  "mode": "attack",
+  "source": "tempart/CannonFrost/attack",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 2,
+  "align": "feet",
+  "status": "duyet 2026-09-30",
+  "frames": [
+    {
+      "frame": "attack-1",
+      "aligned_bbox": [
+        24,
+        19,
+        95,
+        96
+      ]
+    },
+    {
+      "frame": "attack-2",
+      "aligned_bbox": [
+        16,
+        20,
+        95,
+        96
+      ]
+    },
+    {
+      "frame": "attack-3",
+      "aligned_bbox": [
+        23,
+        20,
+        98,
+        96
+      ]
+    },
+    {
+      "frame": "attack-4",
+      "aligned_bbox": [
+        18,
+        20,
+        97,
+        96
+      ]
+    }
+  ],
+  "ground_row": 95
+}

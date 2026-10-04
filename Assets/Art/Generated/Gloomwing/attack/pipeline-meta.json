@@ -1,0 +1,50 @@
+{
+  "target": "creature",
+  "mode": "attack",
+  "source": "tempart/Gloomwing/attack/frames",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 2,
+  "align": "feet",
+  "status": "duyet 2026-10-01",
+  "ground_row": 99,
+  "frames": [
+    {
+      "frame": "attack-1",
+      "aligned_bbox": [
+        25,
+        47,
+        99,
+        100
+      ]
+    },
+    {
+      "frame": "attack-2",
+      "aligned_bbox": [
+        26,
+        38,
+        92,
+        100
+      ]
+    },
+    {
+      "frame": "attack-3",
+      "aligned_bbox": [
+        33,
+        41,
+        98,
+        100
+      ]
+    },
+    {
+      "frame": "attack-4",
+      "aligned_bbox": [
+        21,
+        43,
+        99,
+        100
+      ]
+    }
+  ]
+}

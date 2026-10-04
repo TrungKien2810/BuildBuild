@@ -1,0 +1,69 @@
+{
+  "target": "player",
+  "mode": "skill-silk-revive-fx",
+  "source": "tempart/LuuBi/silk-revive-fx/final",
+  "cell_size": 36,
+  "frame_size": [
+    36,
+    72
+  ],
+  "align": "feet",
+  "ground_row": 63,
+  "status": "duyet 2026-10-02",
+  "frames": [
+    {
+      "frame": "silk-revive-fx-1",
+      "aligned_bbox": [
+        3,
+        40,
+        33,
+        63
+      ]
+    },
+    {
+      "frame": "silk-revive-fx-2",
+      "aligned_bbox": [
+        4,
+        24,
+        32,
+        63
+      ]
+    },
+    {
+      "frame": "silk-revive-fx-3",
+      "aligned_bbox": [
+        4,
+        9,
+        32,
+        63
+      ]
+    },
+    {
+      "frame": "silk-revive-fx-4",
+      "aligned_bbox": [
+        3,
+        3,
+        34,
+        63
+      ]
+    },
+    {
+      "frame": "silk-revive-fx-5",
+      "aligned_bbox": [
+        2,
+        6,
+        35,
+        63
+      ]
+    },
+    {
+      "frame": "silk-revive-fx-6",
+      "aligned_bbox": [
+        9,
+        17,
+        29,
+        63
+      ]
+    }
+  ]
+}

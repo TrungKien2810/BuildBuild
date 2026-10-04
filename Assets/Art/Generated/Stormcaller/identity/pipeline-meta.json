@@ -1,0 +1,24 @@
+{
+  "target": "player",
+  "mode": "identity",
+  "source": "tempart/Stormcaller/identity",
+  "cell_size": 128,
+  "frame_size": [
+    128,
+    128
+  ],
+  "align": "feet",
+  "ground_row": 96,
+  "status": "duyet 2026-10-01",
+  "frames": [
+    {
+      "frame": "identity-1",
+      "aligned_bbox": [
+        41,
+        32,
+        87,
+        96
+      ]
+    }
+  ]
+}

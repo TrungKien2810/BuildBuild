@@ -1,0 +1,51 @@
+{
+  "target": "player",
+  "mode": "skill-puppet-strings-fx",
+  "source": "tempart/SilkFae/puppet-strings-fx/final",
+  "cell_size": 24,
+  "frame_size": [
+    24,
+    48
+  ],
+  "align": "feet",
+  "ground_row": 48,
+  "status": "duyet 2026-10-03",
+  "frames": [
+    {
+      "frame": "puppet-strings-fx-1",
+      "aligned_bbox": [
+        1,
+        2,
+        23,
+        48
+      ]
+    },
+    {
+      "frame": "puppet-strings-fx-2",
+      "aligned_bbox": [
+        1,
+        2,
+        23,
+        48
+      ]
+    },
+    {
+      "frame": "puppet-strings-fx-3",
+      "aligned_bbox": [
+        1,
+        2,
+        23,
+        48
+      ]
+    },
+    {
+      "frame": "puppet-strings-fx-4",
+      "aligned_bbox": [
+        1,
+        2,
+        23,
+        48
+      ]
+    }
+  ]
+}

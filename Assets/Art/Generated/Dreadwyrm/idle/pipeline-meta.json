@@ -1,0 +1,50 @@
+{
+  "target": "creature",
+  "mode": "idle",
+  "source": "tempart/Dreadwyrm/idle/frames",
+  "cell_size": 384,
+  "cell_height": 384,
+  "rows": 2,
+  "cols": 2,
+  "align": "feet",
+  "status": "duyet 2026-10-01",
+  "frames": [
+    {
+      "frame": "idle-1",
+      "aligned_bbox": [
+        75,
+        57,
+        305,
+        301
+      ]
+    },
+    {
+      "frame": "idle-2",
+      "aligned_bbox": [
+        75,
+        93,
+        307,
+        301
+      ]
+    },
+    {
+      "frame": "idle-3",
+      "aligned_bbox": [
+        75,
+        140,
+        306,
+        301
+      ]
+    },
+    {
+      "frame": "idle-4",
+      "aligned_bbox": [
+        75,
+        78,
+        310,
+        301
+      ]
+    }
+  ],
+  "ground_row": 300
+}

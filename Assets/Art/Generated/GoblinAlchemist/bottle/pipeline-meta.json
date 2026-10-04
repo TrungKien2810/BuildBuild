@@ -1,0 +1,50 @@
+{
+  "target": "creature",
+  "mode": "bottle",
+  "source": "tempart/GoblinAlchemist/bottle",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 2,
+  "align": "center",
+  "status": "duyet 2026-09-30",
+  "dx": 0,
+  "frames": [
+    {
+      "frame": "projectile-1",
+      "aligned_bbox": [
+        59,
+        57,
+        68,
+        70
+      ]
+    },
+    {
+      "frame": "projectile-2",
+      "aligned_bbox": [
+        56,
+        59,
+        71,
+        68
+      ]
+    },
+    {
+      "frame": "projectile-3",
+      "aligned_bbox": [
+        59,
+        57,
+        68,
+        70
+      ]
+    },
+    {
+      "frame": "projectile-4",
+      "aligned_bbox": [
+        56,
+        60,
+        72,
+        68
+      ]
+    }
+  ]
+}

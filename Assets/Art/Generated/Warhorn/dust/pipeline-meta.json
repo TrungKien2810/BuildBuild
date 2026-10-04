@@ -1,0 +1,50 @@
+{
+  "target": "creature",
+  "mode": "dust",
+  "source": "tempart/Warhorn/dust-fx",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 2,
+  "align": "center",
+  "status": "duyet 2026-09-30",
+  "dx": 0,
+  "frames": [
+    {
+      "frame": "dust-1",
+      "aligned_bbox": [
+        30,
+        84,
+        97,
+        102
+      ]
+    },
+    {
+      "frame": "dust-2",
+      "aligned_bbox": [
+        28,
+        68,
+        100,
+        102
+      ]
+    },
+    {
+      "frame": "dust-3",
+      "aligned_bbox": [
+        27,
+        76,
+        101,
+        102
+      ]
+    },
+    {
+      "frame": "dust-4",
+      "aligned_bbox": [
+        27,
+        91,
+        100,
+        102
+      ]
+    }
+  ]
+}

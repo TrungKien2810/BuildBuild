@@ -1,0 +1,69 @@
+{
+  "target": "player",
+  "mode": "skill-toxic-mist-fx",
+  "source": "tempart/BogWitch/toxic-mist-fx/final",
+  "cell_size": 96,
+  "frame_size": [
+    96,
+    48
+  ],
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet 2026-10-03",
+  "frames": [
+    {
+      "frame": "toxic-mist-fx-1",
+      "aligned_bbox": [
+        4,
+        12,
+        93,
+        43
+      ]
+    },
+    {
+      "frame": "toxic-mist-fx-2",
+      "aligned_bbox": [
+        4,
+        12,
+        93,
+        42
+      ]
+    },
+    {
+      "frame": "toxic-mist-fx-3",
+      "aligned_bbox": [
+        4,
+        13,
+        93,
+        42
+      ]
+    },
+    {
+      "frame": "toxic-mist-fx-4",
+      "aligned_bbox": [
+        3,
+        12,
+        93,
+        43
+      ]
+    },
+    {
+      "frame": "toxic-mist-fx-5",
+      "aligned_bbox": [
+        6,
+        15,
+        89,
+        40
+      ]
+    },
+    {
+      "frame": "toxic-mist-fx-6",
+      "aligned_bbox": [
+        15,
+        17,
+        84,
+        38
+      ]
+    }
+  ]
+}

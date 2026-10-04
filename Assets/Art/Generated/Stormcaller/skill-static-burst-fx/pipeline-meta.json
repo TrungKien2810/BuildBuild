@@ -1,0 +1,69 @@
+{
+  "target": "player",
+  "mode": "skill-static-burst-fx",
+  "source": "tempart/Stormcaller/static-burst-fx/final",
+  "cell_size": 96,
+  "frame_size": [
+    96,
+    48
+  ],
+  "align": "feet",
+  "ground_row": 34,
+  "status": "duyet 2026-10-01",
+  "frames": [
+    {
+      "frame": "static-burst-fx-1",
+      "aligned_bbox": [
+        40,
+        29,
+        55,
+        34
+      ]
+    },
+    {
+      "frame": "static-burst-fx-2",
+      "aligned_bbox": [
+        18,
+        12,
+        77,
+        34
+      ]
+    },
+    {
+      "frame": "static-burst-fx-3",
+      "aligned_bbox": [
+        3,
+        1,
+        93,
+        34
+      ]
+    },
+    {
+      "frame": "static-burst-fx-4",
+      "aligned_bbox": [
+        4,
+        15,
+        92,
+        34
+      ]
+    },
+    {
+      "frame": "static-burst-fx-5",
+      "aligned_bbox": [
+        10,
+        23,
+        87,
+        34
+      ]
+    },
+    {
+      "frame": "static-burst-fx-6",
+      "aligned_bbox": [
+        34,
+        27,
+        69,
+        34
+      ]
+    }
+  ]
+}

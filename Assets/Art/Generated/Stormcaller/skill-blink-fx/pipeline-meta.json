@@ -1,0 +1,51 @@
+{
+  "target": "player",
+  "mode": "skill-blink-fx",
+  "source": "tempart/Stormcaller/blink-fx/final",
+  "cell_size": 44,
+  "frame_size": [
+    44,
+    88
+  ],
+  "align": "feet",
+  "ground_row": 75,
+  "status": "duyet 2026-10-01",
+  "frames": [
+    {
+      "frame": "blink-fx-1",
+      "aligned_bbox": [
+        5,
+        7,
+        42,
+        75
+      ]
+    },
+    {
+      "frame": "blink-fx-2",
+      "aligned_bbox": [
+        5,
+        8,
+        39,
+        75
+      ]
+    },
+    {
+      "frame": "blink-fx-3",
+      "aligned_bbox": [
+        13,
+        8,
+        35,
+        75
+      ]
+    },
+    {
+      "frame": "blink-fx-4",
+      "aligned_bbox": [
+        15,
+        25,
+        27,
+        75
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "target": "player",
+  "mode": "skill-hair-poof-fx",
+  "source": "tempart/Wukong/hair-poof-fx/final",
+  "cell_size": 128,
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet 2026-09-30",
+  "frames": [
+    {
+      "frame": "hair-poof-1",
+      "aligned_bbox": [
+        45,
+        62,
+        85,
+        94
+      ]
+    },
+    {
+      "frame": "hair-poof-2",
+      "aligned_bbox": [
+        25,
+        34,
+        100,
+        98
+      ]
+    },
+    {
+      "frame": "hair-poof-3",
+      "aligned_bbox": [
+        27,
+        30,
+        102,
+        92
+      ]
+    },
+    {
+      "frame": "hair-poof-4",
+      "aligned_bbox": [
+        28,
+        33,
+        97,
+        92
+      ]
+    }
+  ]
+}

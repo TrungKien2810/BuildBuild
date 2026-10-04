@@ -1,0 +1,50 @@
+{
+  "target": "creature",
+  "mode": "shield-fx",
+  "source": "tempart/OrcShaman/shield-fx/final",
+  "cell_size": 256,
+  "cell_height": 256,
+  "rows": 2,
+  "cols": 2,
+  "align": "center",
+  "status": "duyet 2026-09-29",
+  "dx": 0,
+  "frames": [
+    {
+      "frame": "shield-fx-1",
+      "aligned_bbox": [
+        44,
+        19,
+        213,
+        238
+      ]
+    },
+    {
+      "frame": "shield-fx-2",
+      "aligned_bbox": [
+        40,
+        20,
+        215,
+        238
+      ]
+    },
+    {
+      "frame": "shield-fx-3",
+      "aligned_bbox": [
+        43,
+        20,
+        213,
+        226
+      ]
+    },
+    {
+      "frame": "shield-fx-4",
+      "aligned_bbox": [
+        44,
+        20,
+        211,
+        227
+      ]
+    }
+  ]
+}

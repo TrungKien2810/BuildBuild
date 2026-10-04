@@ -1,0 +1,23 @@
+{
+  "target": "creature",
+  "mode": "identity",
+  "source": "tempart/Dreadwyrm/identity",
+  "cell_size": 256,
+  "cell_height": 256,
+  "rows": 1,
+  "cols": 1,
+  "align": "feet",
+  "status": "duyet 2026-10-01",
+  "frames": [
+    {
+      "frame": "identity-1",
+      "aligned_bbox": [
+        13,
+        22,
+        243,
+        233
+      ]
+    }
+  ],
+  "ground_row": 232
+}

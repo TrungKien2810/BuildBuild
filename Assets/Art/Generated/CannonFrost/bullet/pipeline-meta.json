@@ -1,0 +1,49 @@
+{
+  "target": "asset",
+  "mode": "bullet",
+  "source": "tempart/CannonFrost/bullet",
+  "cell_size": 64,
+  "cell_height": 64,
+  "rows": 2,
+  "cols": 2,
+  "align": "center",
+  "status": "duyet 2026-09-30",
+  "frames": [
+    {
+      "frame": "projectile-1",
+      "aligned_bbox": [
+        22,
+        27,
+        41,
+        36
+      ]
+    },
+    {
+      "frame": "projectile-2",
+      "aligned_bbox": [
+        22,
+        27,
+        41,
+        36
+      ]
+    },
+    {
+      "frame": "projectile-3",
+      "aligned_bbox": [
+        22,
+        27,
+        41,
+        36
+      ]
+    },
+    {
+      "frame": "projectile-4",
+      "aligned_bbox": [
+        22,
+        27,
+        41,
+        36
+      ]
+    }
+  ]
+}

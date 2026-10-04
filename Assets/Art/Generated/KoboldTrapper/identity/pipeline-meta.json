@@ -1,0 +1,17 @@
+{
+  "align": "feet",
+  "cell_size": 35,
+  "frames": [
+    {
+      "frame": "identity-1",
+      "aligned_bbox": [
+        0,
+        0,
+        35,
+        38
+      ]
+    }
+  ],
+  "source": "tempart\\KoboldTrapper\\identity",
+  "approved": "2026-10-04"
+}

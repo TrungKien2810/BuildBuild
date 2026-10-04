@@ -1,0 +1,24 @@
+{
+  "target": "creature",
+  "mode": "identity",
+  "source": "tempart/GoblinBellringer/identity",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 1,
+  "cols": 1,
+  "align": "feet",
+  "status": "duyet 2026-10-01",
+  "dx": 0,
+  "frames": [
+    {
+      "frame": "identity-1",
+      "aligned_bbox": [
+        41,
+        37,
+        86,
+        92
+      ]
+    }
+  ],
+  "ground_row": 91
+}

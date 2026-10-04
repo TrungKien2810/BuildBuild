@@ -1,0 +1,51 @@
+{
+  "target": "player",
+  "mode": "skill-bolt-hit-fx",
+  "source": "tempart/Stormcaller/bolt-hit-fx/final",
+  "cell_size": 64,
+  "frame_size": [
+    64,
+    64
+  ],
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet 2026-10-01",
+  "frames": [
+    {
+      "frame": "bolt-hit-fx-1",
+      "aligned_bbox": [
+        18,
+        18,
+        46,
+        48
+      ]
+    },
+    {
+      "frame": "bolt-hit-fx-2",
+      "aligned_bbox": [
+        4,
+        7,
+        59,
+        61
+      ]
+    },
+    {
+      "frame": "bolt-hit-fx-3",
+      "aligned_bbox": [
+        9,
+        5,
+        57,
+        52
+      ]
+    },
+    {
+      "frame": "bolt-hit-fx-4",
+      "aligned_bbox": [
+        23,
+        19,
+        42,
+        42
+      ]
+    }
+  ]
+}

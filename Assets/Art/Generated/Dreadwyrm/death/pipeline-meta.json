@@ -1,0 +1,68 @@
+{
+  "target": "creature",
+  "mode": "death",
+  "source": "tempart/Dreadwyrm/death/frames",
+  "cell_size": 384,
+  "cell_height": 384,
+  "rows": 2,
+  "cols": 3,
+  "align": "feet",
+  "status": "duyet 2026-10-01",
+  "frames": [
+    {
+      "frame": "death-1",
+      "aligned_bbox": [
+        97,
+        73,
+        329,
+        301
+      ]
+    },
+    {
+      "frame": "death-2",
+      "aligned_bbox": [
+        67,
+        114,
+        338,
+        301
+      ]
+    },
+    {
+      "frame": "death-3",
+      "aligned_bbox": [
+        72,
+        172,
+        337,
+        301
+      ]
+    },
+    {
+      "frame": "death-4",
+      "aligned_bbox": [
+        68,
+        179,
+        339,
+        301
+      ]
+    },
+    {
+      "frame": "death-5",
+      "aligned_bbox": [
+        72,
+        201,
+        338,
+        301
+      ]
+    },
+    {
+      "frame": "death-6",
+      "aligned_bbox": [
+        69,
+        201,
+        339,
+        301
+      ]
+    }
+  ],
+  "ground_row": 300
+}

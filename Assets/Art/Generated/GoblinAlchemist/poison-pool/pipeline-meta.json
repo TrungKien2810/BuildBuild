@@ -1,0 +1,50 @@
+{
+  "target": "creature",
+  "mode": "poison-pool",
+  "source": "tempart/GoblinAlchemist/poison-pool",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 2,
+  "align": "center",
+  "status": "duyet 2026-09-30",
+  "dx": 0,
+  "frames": [
+    {
+      "frame": "pool-1",
+      "aligned_bbox": [
+        32,
+        52,
+        95,
+        75
+      ]
+    },
+    {
+      "frame": "pool-2",
+      "aligned_bbox": [
+        32,
+        52,
+        96,
+        76
+      ]
+    },
+    {
+      "frame": "pool-3",
+      "aligned_bbox": [
+        32,
+        47,
+        95,
+        81
+      ]
+    },
+    {
+      "frame": "pool-4",
+      "aligned_bbox": [
+        32,
+        52,
+        96,
+        76
+      ]
+    }
+  ]
+}

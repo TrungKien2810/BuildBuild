@@ -1,0 +1,51 @@
+{
+  "target": "creature",
+  "mode": "idle",
+  "source": "tempart/Warhorn/idle",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 2,
+  "align": "feet",
+  "status": "duyet 2026-09-30",
+  "dx": 0,
+  "frames": [
+    {
+      "frame": "idle-1",
+      "aligned_bbox": [
+        36,
+        60,
+        92,
+        93
+      ]
+    },
+    {
+      "frame": "idle-2",
+      "aligned_bbox": [
+        35,
+        58,
+        92,
+        93
+      ]
+    },
+    {
+      "frame": "idle-3",
+      "aligned_bbox": [
+        35,
+        56,
+        92,
+        93
+      ]
+    },
+    {
+      "frame": "idle-4",
+      "aligned_bbox": [
+        35,
+        60,
+        92,
+        93
+      ]
+    }
+  ],
+  "ground_row": 92
+}

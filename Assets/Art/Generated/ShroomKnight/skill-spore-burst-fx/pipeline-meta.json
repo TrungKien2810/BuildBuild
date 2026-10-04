@@ -1,0 +1,51 @@
+{
+  "target": "player",
+  "mode": "skill-spore-burst-fx",
+  "source": "tempart/ShroomKnight/spore-burst-fx/final",
+  "cell_size": 48,
+  "frame_size": [
+    48,
+    48
+  ],
+  "align": "feet",
+  "ground_row": 38,
+  "status": "duyet 2026-10-03",
+  "frames": [
+    {
+      "frame": "spore-burst-fx-1",
+      "aligned_bbox": [
+        5,
+        11,
+        42,
+        38
+      ]
+    },
+    {
+      "frame": "spore-burst-fx-2",
+      "aligned_bbox": [
+        1,
+        7,
+        46,
+        38
+      ]
+    },
+    {
+      "frame": "spore-burst-fx-3",
+      "aligned_bbox": [
+        1,
+        8,
+        48,
+        38
+      ]
+    },
+    {
+      "frame": "spore-burst-fx-4",
+      "aligned_bbox": [
+        5,
+        12,
+        44,
+        38
+      ]
+    }
+  ]
+}

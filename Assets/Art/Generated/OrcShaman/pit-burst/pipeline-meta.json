@@ -1,0 +1,68 @@
+{
+  "target": "creature",
+  "mode": "pit-burst",
+  "source": "tempart/OrcShaman/pit-burst/final",
+  "cell_size": 160,
+  "cell_height": 160,
+  "rows": 2,
+  "cols": 3,
+  "align": "center",
+  "status": "duyet 2026-09-29",
+  "dx": 0,
+  "frames": [
+    {
+      "frame": "pit-burst-1",
+      "aligned_bbox": [
+        33,
+        97,
+        127,
+        146
+      ]
+    },
+    {
+      "frame": "pit-burst-2",
+      "aligned_bbox": [
+        35,
+        45,
+        124,
+        146
+      ]
+    },
+    {
+      "frame": "pit-burst-3",
+      "aligned_bbox": [
+        31,
+        19,
+        128,
+        146
+      ]
+    },
+    {
+      "frame": "pit-burst-4",
+      "aligned_bbox": [
+        32,
+        25,
+        128,
+        146
+      ]
+    },
+    {
+      "frame": "pit-burst-5",
+      "aligned_bbox": [
+        33,
+        46,
+        126,
+        146
+      ]
+    },
+    {
+      "frame": "pit-burst-6",
+      "aligned_bbox": [
+        31,
+        107,
+        127,
+        146
+      ]
+    }
+  ]
+}

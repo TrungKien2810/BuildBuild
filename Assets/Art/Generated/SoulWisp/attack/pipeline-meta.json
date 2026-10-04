@@ -1,0 +1,50 @@
+{
+  "target": "creature",
+  "mode": "attack",
+  "source": "tempart/SoulWisp/attack/frames",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 2,
+  "align": "feet",
+  "status": "duyet 2026-10-01",
+  "frames": [
+    {
+      "frame": "attack-1",
+      "aligned_bbox": [
+        29,
+        38,
+        99,
+        100
+      ]
+    },
+    {
+      "frame": "attack-2",
+      "aligned_bbox": [
+        24,
+        39,
+        91,
+        100
+      ]
+    },
+    {
+      "frame": "attack-3",
+      "aligned_bbox": [
+        25,
+        32,
+        104,
+        100
+      ]
+    },
+    {
+      "frame": "attack-4",
+      "aligned_bbox": [
+        22,
+        30,
+        90,
+        100
+      ]
+    }
+  ],
+  "ground_row": 99
+}

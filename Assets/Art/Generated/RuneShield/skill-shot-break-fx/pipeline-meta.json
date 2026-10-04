@@ -1,0 +1,42 @@
+{
+  "target": "player",
+  "mode": "skill-shot-break-fx",
+  "source": "tempart/RuneShield/shot-break-fx/final",
+  "cell_size": 32,
+  "frame_size": [
+    32,
+    32
+  ],
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet 2026-10-03",
+  "frames": [
+    {
+      "frame": "shot-break-fx-1",
+      "aligned_bbox": [
+        11,
+        11,
+        20,
+        21
+      ]
+    },
+    {
+      "frame": "shot-break-fx-2",
+      "aligned_bbox": [
+        11,
+        8,
+        25,
+        22
+      ]
+    },
+    {
+      "frame": "shot-break-fx-3",
+      "aligned_bbox": [
+        12,
+        11,
+        20,
+        22
+      ]
+    }
+  ]
+}

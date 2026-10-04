@@ -1,0 +1,50 @@
+{
+  "target": "asset",
+  "mode": "idle",
+  "source": "tempart/CannonBallista/idle",
+  "cell_size": 144,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 2,
+  "align": "feet",
+  "status": "duyet 2026-10-01",
+  "frames": [
+    {
+      "frame": "idle-1",
+      "aligned_bbox": [
+        6,
+        11,
+        125,
+        96
+      ]
+    },
+    {
+      "frame": "idle-2",
+      "aligned_bbox": [
+        6,
+        15,
+        125,
+        96
+      ]
+    },
+    {
+      "frame": "idle-3",
+      "aligned_bbox": [
+        5,
+        15,
+        122,
+        96
+      ]
+    },
+    {
+      "frame": "idle-4",
+      "aligned_bbox": [
+        5,
+        12,
+        125,
+        96
+      ]
+    }
+  ],
+  "ground_row": 95
+}

@@ -1,0 +1,17 @@
+{
+  "align": "feet",
+  "cell_size": 44,
+  "frames": [
+    {
+      "frame": "identity-1",
+      "aligned_bbox": [
+        0,
+        0,
+        44,
+        46
+      ]
+    }
+  ],
+  "source": "tempart\\SigilMage\\identity",
+  "approved": "2026-10-04"
+}

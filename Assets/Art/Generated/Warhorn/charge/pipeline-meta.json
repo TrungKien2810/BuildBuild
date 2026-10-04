@@ -1,0 +1,69 @@
+{
+  "target": "creature",
+  "mode": "charge",
+  "source": "tempart/Warhorn/charge",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 3,
+  "align": "feet",
+  "status": "duyet 2026-09-30",
+  "dx": 0,
+  "frames": [
+    {
+      "frame": "charge-1",
+      "aligned_bbox": [
+        37,
+        63,
+        93,
+        93
+      ]
+    },
+    {
+      "frame": "charge-2",
+      "aligned_bbox": [
+        38,
+        67,
+        92,
+        93
+      ]
+    },
+    {
+      "frame": "charge-3",
+      "aligned_bbox": [
+        36,
+        64,
+        93,
+        93
+      ]
+    },
+    {
+      "frame": "charge-4",
+      "aligned_bbox": [
+        36,
+        71,
+        93,
+        93
+      ]
+    },
+    {
+      "frame": "charge-5",
+      "aligned_bbox": [
+        38,
+        63,
+        92,
+        93
+      ]
+    },
+    {
+      "frame": "charge-6",
+      "aligned_bbox": [
+        38,
+        56,
+        91,
+        93
+      ]
+    }
+  ],
+  "ground_row": 92
+}

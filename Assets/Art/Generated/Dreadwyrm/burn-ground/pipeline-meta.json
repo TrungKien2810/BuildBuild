@@ -1,0 +1,49 @@
+{
+  "target": "creature",
+  "mode": "burn-ground",
+  "source": "tempart/Dreadwyrm/burn-ground/frames",
+  "cell_size": 86,
+  "cell_height": 48,
+  "rows": 2,
+  "cols": 2,
+  "align": "center",
+  "status": "duyet 2026-10-01",
+  "frames": [
+    {
+      "frame": "burn-ground-1",
+      "aligned_bbox": [
+        5,
+        15,
+        82,
+        44
+      ]
+    },
+    {
+      "frame": "burn-ground-2",
+      "aligned_bbox": [
+        4,
+        15,
+        82,
+        44
+      ]
+    },
+    {
+      "frame": "burn-ground-3",
+      "aligned_bbox": [
+        5,
+        4,
+        82,
+        37
+      ]
+    },
+    {
+      "frame": "burn-ground-4",
+      "aligned_bbox": [
+        4,
+        4,
+        82,
+        37
+      ]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "target": "player",
+  "mode": "skill-poison-bubble-fx",
+  "source": "tempart/BogWitch/poison-bubble-fx/final",
+  "cell_size": 20,
+  "frame_size": [
+    20,
+    20
+  ],
+  "align": "feet",
+  "ground_row": 17,
+  "status": "duyet 2026-10-03",
+  "frames": [
+    {
+      "frame": "poison-bubble-fx-1",
+      "aligned_bbox": [
+        4,
+        11,
+        17,
+        17
+      ]
+    },
+    {
+      "frame": "poison-bubble-fx-2",
+      "aligned_bbox": [
+        3,
+        5,
+        15,
+        17
+      ]
+    },
+    {
+      "frame": "poison-bubble-fx-3",
+      "aligned_bbox": [
+        4,
+        4,
+        17,
+        17
+      ]
+    },
+    {
+      "frame": "poison-bubble-fx-4",
+      "aligned_bbox": [
+        3,
+        9,
+        16,
+        17
+      ]
+    }
+  ]
+}

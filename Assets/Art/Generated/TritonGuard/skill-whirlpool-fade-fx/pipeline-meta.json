@@ -1,0 +1,42 @@
+{
+  "target": "player",
+  "mode": "skill-whirlpool-fade-fx",
+  "source": "tempart/TritonGuard/whirlpool-fade-fx/final",
+  "cell_size": 64,
+  "frame_size": [
+    64,
+    32
+  ],
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet 2026-10-03",
+  "frames": [
+    {
+      "frame": "whirlpool-fade-fx-1",
+      "aligned_bbox": [
+        6,
+        9,
+        62,
+        24
+      ]
+    },
+    {
+      "frame": "whirlpool-fade-fx-2",
+      "aligned_bbox": [
+        8,
+        9,
+        57,
+        23
+      ]
+    },
+    {
+      "frame": "whirlpool-fade-fx-3",
+      "aligned_bbox": [
+        12,
+        12,
+        51,
+        22
+      ]
+    }
+  ]
+}
