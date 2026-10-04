@@ -1,0 +1,50 @@
+{
+  "target": "creature",
+  "mode": "idle",
+  "source": "tempart/SoulWisp/idle/frames",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 2,
+  "align": "feet",
+  "status": "duyet 2026-10-01",
+  "frames": [
+    {
+      "frame": "idle-1",
+      "aligned_bbox": [
+        29,
+        39,
+        99,
+        100
+      ]
+    },
+    {
+      "frame": "idle-2",
+      "aligned_bbox": [
+        28,
+        37,
+        103,
+        100
+      ]
+    },
+    {
+      "frame": "idle-3",
+      "aligned_bbox": [
+        29,
+        37,
+        101,
+        100
+      ]
+    },
+    {
+      "frame": "idle-4",
+      "aligned_bbox": [
+        27,
+        38,
+        106,
+        100
+      ]
+    }
+  ],
+  "ground_row": 99
+}

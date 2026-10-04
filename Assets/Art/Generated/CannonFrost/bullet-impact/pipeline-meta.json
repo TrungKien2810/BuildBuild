@@ -1,0 +1,49 @@
+{
+  "target": "asset",
+  "mode": "bullet-impact",
+  "source": "tempart/CannonFrost/bullet-impact",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 2,
+  "align": "center",
+  "status": "duyet 2026-09-30",
+  "frames": [
+    {
+      "frame": "impact-1",
+      "aligned_bbox": [
+        52,
+        51,
+        75,
+        76
+      ]
+    },
+    {
+      "frame": "impact-2",
+      "aligned_bbox": [
+        43,
+        44,
+        85,
+        84
+      ]
+    },
+    {
+      "frame": "impact-3",
+      "aligned_bbox": [
+        47,
+        47,
+        81,
+        81
+      ]
+    },
+    {
+      "frame": "impact-4",
+      "aligned_bbox": [
+        52,
+        52,
+        75,
+        75
+      ]
+    }
+  ]
+}

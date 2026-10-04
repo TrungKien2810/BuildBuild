@@ -1,0 +1,51 @@
+{
+  "target": "player",
+  "mode": "skill-crescent-wave-fx",
+  "source": "tempart/QuanVu/crescent-wave-fx/final",
+  "cell_size": 48,
+  "frame_size": [
+    48,
+    72
+  ],
+  "align": "feet",
+  "ground_row": 61,
+  "status": "duyet 2026-10-02",
+  "frames": [
+    {
+      "frame": "crescent-wave-fx-1",
+      "aligned_bbox": [
+        3,
+        6,
+        35,
+        61
+      ]
+    },
+    {
+      "frame": "crescent-wave-fx-2",
+      "aligned_bbox": [
+        2,
+        7,
+        38,
+        61
+      ]
+    },
+    {
+      "frame": "crescent-wave-fx-3",
+      "aligned_bbox": [
+        2,
+        5,
+        44,
+        61
+      ]
+    },
+    {
+      "frame": "crescent-wave-fx-4",
+      "aligned_bbox": [
+        2,
+        6,
+        37,
+        61
+      ]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "target": "player",
+  "mode": "skill-fireball-fall-fx",
+  "source": "tempart/EmberApprentice/fireball-fall-fx/final",
+  "cell_size": 24,
+  "frame_size": [
+    24,
+    48
+  ],
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet 2026-10-03",
+  "frames": [
+    {
+      "frame": "fireball-fall-fx-1",
+      "aligned_bbox": [
+        1,
+        2,
+        23,
+        45
+      ]
+    },
+    {
+      "frame": "fireball-fall-fx-2",
+      "aligned_bbox": [
+        0,
+        3,
+        22,
+        45
+      ]
+    },
+    {
+      "frame": "fireball-fall-fx-3",
+      "aligned_bbox": [
+        1,
+        4,
+        23,
+        45
+      ]
+    },
+    {
+      "frame": "fireball-fall-fx-4",
+      "aligned_bbox": [
+        0,
+        3,
+        23,
+        45
+      ]
+    }
+  ]
+}

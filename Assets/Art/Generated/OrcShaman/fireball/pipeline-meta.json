@@ -1,0 +1,50 @@
+{
+  "target": "creature",
+  "mode": "fireball",
+  "source": "tempart/OrcShaman/fireball/final",
+  "cell_size": 32,
+  "cell_height": 32,
+  "rows": 2,
+  "cols": 2,
+  "align": "center",
+  "status": "duyet 2026-09-29",
+  "dx": 0,
+  "frames": [
+    {
+      "frame": "fireball-1",
+      "aligned_bbox": [
+        5,
+        14,
+        26,
+        25
+      ]
+    },
+    {
+      "frame": "fireball-2",
+      "aligned_bbox": [
+        3,
+        10,
+        28,
+        26
+      ]
+    },
+    {
+      "frame": "fireball-3",
+      "aligned_bbox": [
+        4,
+        6,
+        27,
+        22
+      ]
+    },
+    {
+      "frame": "fireball-4",
+      "aligned_bbox": [
+        3,
+        11,
+        29,
+        25
+      ]
+    }
+  ]
+}

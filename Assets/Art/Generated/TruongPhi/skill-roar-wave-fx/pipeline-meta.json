@@ -1,0 +1,69 @@
+{
+  "target": "player",
+  "mode": "skill-roar-wave-fx",
+  "source": "tempart/TruongPhi/roar-wave-fx/final",
+  "cell_size": 128,
+  "frame_size": [
+    128,
+    64
+  ],
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet 2026-10-02",
+  "frames": [
+    {
+      "frame": "roar-wave-fx-1",
+      "aligned_bbox": [
+        43,
+        20,
+        86,
+        43
+      ]
+    },
+    {
+      "frame": "roar-wave-fx-2",
+      "aligned_bbox": [
+        23,
+        16,
+        104,
+        49
+      ]
+    },
+    {
+      "frame": "roar-wave-fx-3",
+      "aligned_bbox": [
+        9,
+        11,
+        119,
+        55
+      ]
+    },
+    {
+      "frame": "roar-wave-fx-4",
+      "aligned_bbox": [
+        5,
+        11,
+        124,
+        54
+      ]
+    },
+    {
+      "frame": "roar-wave-fx-5",
+      "aligned_bbox": [
+        7,
+        10,
+        122,
+        56
+      ]
+    },
+    {
+      "frame": "roar-wave-fx-6",
+      "aligned_bbox": [
+        6,
+        13,
+        122,
+        53
+      ]
+    }
+  ]
+}

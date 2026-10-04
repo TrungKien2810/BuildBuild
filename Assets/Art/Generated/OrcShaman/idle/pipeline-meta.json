@@ -1,0 +1,51 @@
+{
+  "target": "creature",
+  "mode": "idle",
+  "source": "tempart/OrcShaman/idle/final",
+  "cell_size": 256,
+  "cell_height": 256,
+  "rows": 2,
+  "cols": 2,
+  "align": "feet",
+  "status": "duyet 2026-09-29",
+  "dx": 0,
+  "frames": [
+    {
+      "frame": "idle-1",
+      "aligned_bbox": [
+        74,
+        61,
+        181,
+        202
+      ]
+    },
+    {
+      "frame": "idle-2",
+      "aligned_bbox": [
+        75,
+        55,
+        181,
+        202
+      ]
+    },
+    {
+      "frame": "idle-3",
+      "aligned_bbox": [
+        75,
+        62,
+        181,
+        202
+      ]
+    },
+    {
+      "frame": "idle-4",
+      "aligned_bbox": [
+        75,
+        62,
+        181,
+        202
+      ]
+    }
+  ],
+  "ground_row": 201
+}

@@ -1,0 +1,51 @@
+{
+  "target": "player",
+  "mode": "skill-wind-hit-fx",
+  "source": "tempart/Galemonk/wind-hit-fx/final",
+  "cell_size": 48,
+  "frame_size": [
+    48,
+    48
+  ],
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet 2026-10-01",
+  "frames": [
+    {
+      "frame": "wind-hit-fx-1",
+      "aligned_bbox": [
+        14,
+        14,
+        35,
+        34
+      ]
+    },
+    {
+      "frame": "wind-hit-fx-2",
+      "aligned_bbox": [
+        4,
+        4,
+        45,
+        43
+      ]
+    },
+    {
+      "frame": "wind-hit-fx-3",
+      "aligned_bbox": [
+        4,
+        2,
+        44,
+        43
+      ]
+    },
+    {
+      "frame": "wind-hit-fx-4",
+      "aligned_bbox": [
+        6,
+        5,
+        41,
+        41
+      ]
+    }
+  ]
+}

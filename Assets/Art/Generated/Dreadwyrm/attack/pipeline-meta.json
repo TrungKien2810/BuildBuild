@@ -1,0 +1,68 @@
+{
+  "target": "creature",
+  "mode": "attack",
+  "source": "tempart/Dreadwyrm/attack/frames",
+  "cell_size": 384,
+  "cell_height": 384,
+  "rows": 2,
+  "cols": 3,
+  "align": "feet",
+  "status": "duyet 2026-10-01",
+  "frames": [
+    {
+      "frame": "attack-1",
+      "aligned_bbox": [
+        69,
+        72,
+        314,
+        301
+      ]
+    },
+    {
+      "frame": "attack-2",
+      "aligned_bbox": [
+        98,
+        71,
+        329,
+        301
+      ]
+    },
+    {
+      "frame": "attack-3",
+      "aligned_bbox": [
+        47,
+        103,
+        313,
+        301
+      ]
+    },
+    {
+      "frame": "attack-4",
+      "aligned_bbox": [
+        58,
+        103,
+        312,
+        301
+      ]
+    },
+    {
+      "frame": "attack-5",
+      "aligned_bbox": [
+        65,
+        73,
+        315,
+        301
+      ]
+    },
+    {
+      "frame": "attack-6",
+      "aligned_bbox": [
+        70,
+        71,
+        318,
+        301
+      ]
+    }
+  ],
+  "ground_row": 300
+}

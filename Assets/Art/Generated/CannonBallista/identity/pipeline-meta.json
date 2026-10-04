@@ -1,0 +1,23 @@
+{
+  "target": "asset",
+  "mode": "identity",
+  "source": "tempart/CannonBallista/identity",
+  "cell_size": 144,
+  "cell_height": 128,
+  "rows": 1,
+  "cols": 1,
+  "align": "feet",
+  "status": "duyet 2026-10-01",
+  "frames": [
+    {
+      "frame": "identity-1",
+      "aligned_bbox": [
+        4,
+        10,
+        127,
+        96
+      ]
+    }
+  ],
+  "ground_row": 95
+}

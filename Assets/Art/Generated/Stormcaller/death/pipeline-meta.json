@@ -1,0 +1,69 @@
+{
+  "target": "player",
+  "mode": "death",
+  "source": "tempart/Stormcaller/death/aligned/graded",
+  "cell_size": 128,
+  "frame_size": [
+    128,
+    128
+  ],
+  "align": "feet",
+  "ground_row": 96,
+  "status": "duyet 2026-10-01",
+  "frames": [
+    {
+      "frame": "death-1",
+      "aligned_bbox": [
+        40,
+        40,
+        88,
+        96
+      ]
+    },
+    {
+      "frame": "death-2",
+      "aligned_bbox": [
+        37,
+        43,
+        90,
+        96
+      ]
+    },
+    {
+      "frame": "death-3",
+      "aligned_bbox": [
+        37,
+        41,
+        91,
+        96
+      ]
+    },
+    {
+      "frame": "death-4",
+      "aligned_bbox": [
+        34,
+        62,
+        94,
+        96
+      ]
+    },
+    {
+      "frame": "death-5",
+      "aligned_bbox": [
+        34,
+        70,
+        93,
+        96
+      ]
+    },
+    {
+      "frame": "death-6",
+      "aligned_bbox": [
+        34,
+        69,
+        93,
+        96
+      ]
+    }
+  ]
+}

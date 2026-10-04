@@ -1,0 +1,50 @@
+{
+  "target": "creature",
+  "mode": "haste-status",
+  "source": "tempart/GoblinBellringer/haste-status",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 2,
+  "align": "center",
+  "status": "duyet 2026-10-01",
+  "dx": 0,
+  "frames": [
+    {
+      "frame": "impact-1",
+      "aligned_bbox": [
+        58,
+        58,
+        69,
+        69
+      ]
+    },
+    {
+      "frame": "impact-2",
+      "aligned_bbox": [
+        57,
+        58,
+        71,
+        69
+      ]
+    },
+    {
+      "frame": "impact-3",
+      "aligned_bbox": [
+        59,
+        58,
+        69,
+        69
+      ]
+    },
+    {
+      "frame": "impact-4",
+      "aligned_bbox": [
+        58,
+        58,
+        69,
+        69
+      ]
+    }
+  ]
+}

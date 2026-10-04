@@ -1,0 +1,65 @@
+{
+  "target": "player",
+  "mode": "skill-smash-cast",
+  "source": "tempart/Wukong/smash-cast/final",
+  "cell_size": 128,
+  "align": "feet",
+  "ground_row": 95,
+  "status": "duyet 2026-09-30",
+  "frames": [
+    {
+      "frame": "smash-cast-1",
+      "aligned_bbox": [
+        34,
+        36,
+        96,
+        96
+      ]
+    },
+    {
+      "frame": "smash-cast-2",
+      "aligned_bbox": [
+        34,
+        30,
+        95,
+        96
+      ]
+    },
+    {
+      "frame": "smash-cast-3",
+      "aligned_bbox": [
+        31,
+        5,
+        99,
+        96
+      ]
+    },
+    {
+      "frame": "smash-cast-4",
+      "aligned_bbox": [
+        34,
+        17,
+        95,
+        96
+      ]
+    },
+    {
+      "frame": "smash-cast-5",
+      "aligned_bbox": [
+        29,
+        33,
+        101,
+        96
+      ]
+    },
+    {
+      "frame": "smash-cast-6",
+      "aligned_bbox": [
+        34,
+        36,
+        96,
+        96
+      ]
+    }
+  ]
+}

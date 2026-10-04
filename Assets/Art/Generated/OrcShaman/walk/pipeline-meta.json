@@ -1,0 +1,51 @@
+{
+  "target": "creature",
+  "mode": "walk",
+  "source": "tempart/OrcShaman/walk/final/graded",
+  "cell_size": 256,
+  "cell_height": 256,
+  "rows": 2,
+  "cols": 2,
+  "align": "feet",
+  "status": "duyet 2026-09-29",
+  "dx": 17,
+  "frames": [
+    {
+      "frame": "walk-1",
+      "aligned_bbox": [
+        70,
+        98,
+        200,
+        232
+      ]
+    },
+    {
+      "frame": "walk-2",
+      "aligned_bbox": [
+        63,
+        98,
+        195,
+        232
+      ]
+    },
+    {
+      "frame": "walk-3",
+      "aligned_bbox": [
+        63,
+        97,
+        213,
+        232
+      ]
+    },
+    {
+      "frame": "walk-4",
+      "aligned_bbox": [
+        66,
+        95,
+        193,
+        232
+      ]
+    }
+  ],
+  "ground_row": 231
+}

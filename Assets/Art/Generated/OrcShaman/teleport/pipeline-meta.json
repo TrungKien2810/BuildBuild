@@ -1,0 +1,69 @@
+{
+  "target": "creature",
+  "mode": "teleport",
+  "source": "tempart/OrcShaman/teleport/final",
+  "cell_size": 256,
+  "cell_height": 256,
+  "rows": 2,
+  "cols": 3,
+  "align": "feet",
+  "status": "duyet 2026-09-29",
+  "dx": 17,
+  "frames": [
+    {
+      "frame": "teleport-1",
+      "aligned_bbox": [
+        73,
+        90,
+        182,
+        228
+      ]
+    },
+    {
+      "frame": "teleport-2",
+      "aligned_bbox": [
+        87,
+        81,
+        201,
+        227
+      ]
+    },
+    {
+      "frame": "teleport-3",
+      "aligned_bbox": [
+        83,
+        75,
+        201,
+        228
+      ]
+    },
+    {
+      "frame": "teleport-4",
+      "aligned_bbox": [
+        94,
+        62,
+        193,
+        228
+      ]
+    },
+    {
+      "frame": "teleport-5",
+      "aligned_bbox": [
+        119,
+        79,
+        168,
+        225
+      ]
+    },
+    {
+      "frame": "teleport-6",
+      "aligned_bbox": [
+        129,
+        119,
+        159,
+        227
+      ]
+    }
+  ],
+  "ground_row": 228
+}

@@ -1,0 +1,42 @@
+{
+  "target": "player",
+  "mode": "skill-mushroom-grow-fx",
+  "source": "tempart/ShroomKnight/mushroom-grow-fx/final",
+  "cell_size": 32,
+  "frame_size": [
+    32,
+    32
+  ],
+  "align": "feet",
+  "ground_row": 27,
+  "status": "duyet 2026-10-03",
+  "frames": [
+    {
+      "frame": "mushroom-grow-fx-1",
+      "aligned_bbox": [
+        9,
+        24,
+        21,
+        27
+      ]
+    },
+    {
+      "frame": "mushroom-grow-fx-2",
+      "aligned_bbox": [
+        8,
+        15,
+        24,
+        27
+      ]
+    },
+    {
+      "frame": "mushroom-grow-fx-3",
+      "aligned_bbox": [
+        7,
+        7,
+        25,
+        27
+      ]
+    }
+  ]
+}

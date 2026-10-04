@@ -1,0 +1,42 @@
+{
+  "target": "player",
+  "mode": "skill-charge-pips",
+  "source": "tempart/Stormcaller/charge-pips/final",
+  "cell_size": 20,
+  "frame_size": [
+    20,
+    20
+  ],
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet 2026-10-01",
+  "frames": [
+    {
+      "frame": "charge-pips-1",
+      "aligned_bbox": [
+        7,
+        5,
+        14,
+        16
+      ]
+    },
+    {
+      "frame": "charge-pips-2",
+      "aligned_bbox": [
+        3,
+        5,
+        17,
+        16
+      ]
+    },
+    {
+      "frame": "charge-pips-3",
+      "aligned_bbox": [
+        2,
+        5,
+        18,
+        16
+      ]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "target": "player",
+  "mode": "skill-fire-pool-fx",
+  "source": "tempart/EmberApprentice/fire-pool-fx/final",
+  "cell_size": 64,
+  "frame_size": [
+    64,
+    32
+  ],
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet 2026-10-03",
+  "frames": [
+    {
+      "frame": "fire-pool-fx-1",
+      "aligned_bbox": [
+        0,
+        7,
+        63,
+        29
+      ]
+    },
+    {
+      "frame": "fire-pool-fx-2",
+      "aligned_bbox": [
+        1,
+        7,
+        64,
+        28
+      ]
+    },
+    {
+      "frame": "fire-pool-fx-3",
+      "aligned_bbox": [
+        0,
+        7,
+        63,
+        28
+      ]
+    },
+    {
+      "frame": "fire-pool-fx-4",
+      "aligned_bbox": [
+        1,
+        7,
+        64,
+        28
+      ]
+    }
+  ]
+}

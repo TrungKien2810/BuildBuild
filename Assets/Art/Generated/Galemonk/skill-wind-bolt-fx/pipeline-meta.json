@@ -1,0 +1,51 @@
+{
+  "target": "player",
+  "mode": "skill-wind-bolt-fx",
+  "source": "tempart/Galemonk/wind-bolt-fx/final",
+  "cell_size": 48,
+  "frame_size": [
+    48,
+    24
+  ],
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet 2026-10-01",
+  "frames": [
+    {
+      "frame": "wind-bolt-fx-1",
+      "aligned_bbox": [
+        13,
+        7,
+        40,
+        19
+      ]
+    },
+    {
+      "frame": "wind-bolt-fx-2",
+      "aligned_bbox": [
+        12,
+        6,
+        36,
+        19
+      ]
+    },
+    {
+      "frame": "wind-bolt-fx-3",
+      "aligned_bbox": [
+        13,
+        7,
+        44,
+        20
+      ]
+    },
+    {
+      "frame": "wind-bolt-fx-4",
+      "aligned_bbox": [
+        11,
+        7,
+        35,
+        18
+      ]
+    }
+  ]
+}

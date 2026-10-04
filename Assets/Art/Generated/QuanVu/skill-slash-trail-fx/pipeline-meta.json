@@ -1,0 +1,51 @@
+{
+  "target": "player",
+  "mode": "skill-slash-trail-fx",
+  "source": "tempart/QuanVu/slash-trail-fx/final",
+  "cell_size": 64,
+  "frame_size": [
+    64,
+    64
+  ],
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet 2026-10-02",
+  "frames": [
+    {
+      "frame": "slash-trail-fx-1",
+      "aligned_bbox": [
+        29,
+        3,
+        61,
+        32
+      ]
+    },
+    {
+      "frame": "slash-trail-fx-2",
+      "aligned_bbox": [
+        2,
+        3,
+        62,
+        63
+      ]
+    },
+    {
+      "frame": "slash-trail-fx-3",
+      "aligned_bbox": [
+        3,
+        2,
+        62,
+        61
+      ]
+    },
+    {
+      "frame": "slash-trail-fx-4",
+      "aligned_bbox": [
+        14,
+        3,
+        59,
+        56
+      ]
+    }
+  ]
+}

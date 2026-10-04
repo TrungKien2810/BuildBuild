@@ -1,0 +1,69 @@
+{
+  "target": "creature",
+  "mode": "death",
+  "source": "tempart/Warhorn/death",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 3,
+  "align": "feet",
+  "status": "duyet 2026-09-30",
+  "dx": 0,
+  "frames": [
+    {
+      "frame": "death-1",
+      "aligned_bbox": [
+        36,
+        52,
+        87,
+        93
+      ]
+    },
+    {
+      "frame": "death-2",
+      "aligned_bbox": [
+        34,
+        63,
+        90,
+        93
+      ]
+    },
+    {
+      "frame": "death-3",
+      "aligned_bbox": [
+        35,
+        63,
+        88,
+        93
+      ]
+    },
+    {
+      "frame": "death-4",
+      "aligned_bbox": [
+        33,
+        68,
+        90,
+        93
+      ]
+    },
+    {
+      "frame": "death-5",
+      "aligned_bbox": [
+        33,
+        72,
+        90,
+        93
+      ]
+    },
+    {
+      "frame": "death-6",
+      "aligned_bbox": [
+        34,
+        72,
+        89,
+        93
+      ]
+    }
+  ],
+  "ground_row": 92
+}

@@ -1,0 +1,50 @@
+{
+  "target": "creature",
+  "mode": "fireball-impact",
+  "source": "tempart/OrcShaman/fireball-impact/final",
+  "cell_size": 64,
+  "cell_height": 64,
+  "rows": 2,
+  "cols": 2,
+  "align": "center",
+  "status": "duyet 2026-09-29",
+  "dx": 0,
+  "frames": [
+    {
+      "frame": "fireball-impact-1",
+      "aligned_bbox": [
+        26,
+        25,
+        45,
+        45
+      ]
+    },
+    {
+      "frame": "fireball-impact-2",
+      "aligned_bbox": [
+        9,
+        15,
+        51,
+        53
+      ]
+    },
+    {
+      "frame": "fireball-impact-3",
+      "aligned_bbox": [
+        18,
+        10,
+        54,
+        45
+      ]
+    },
+    {
+      "frame": "fireball-impact-4",
+      "aligned_bbox": [
+        17,
+        11,
+        44,
+        44
+      ]
+    }
+  ]
+}

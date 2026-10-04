@@ -1,0 +1,69 @@
+{
+  "target": "creature",
+  "mode": "attack",
+  "source": "tempart/OrcShaman/attack/final/graded",
+  "cell_size": 256,
+  "cell_height": 256,
+  "rows": 2,
+  "cols": 3,
+  "align": "feet",
+  "status": "duyet 2026-09-29",
+  "dx": 17,
+  "frames": [
+    {
+      "frame": "attack-1",
+      "aligned_bbox": [
+        73,
+        105,
+        181,
+        246
+      ]
+    },
+    {
+      "frame": "attack-2",
+      "aligned_bbox": [
+        66,
+        75,
+        196,
+        246
+      ]
+    },
+    {
+      "frame": "attack-3",
+      "aligned_bbox": [
+        58,
+        65,
+        194,
+        246
+      ]
+    },
+    {
+      "frame": "attack-4",
+      "aligned_bbox": [
+        40,
+        109,
+        191,
+        246
+      ]
+    },
+    {
+      "frame": "attack-5",
+      "aligned_bbox": [
+        47,
+        112,
+        189,
+        246
+      ]
+    },
+    {
+      "frame": "attack-6",
+      "aligned_bbox": [
+        73,
+        105,
+        182,
+        246
+      ]
+    }
+  ],
+  "ground_row": 245
+}

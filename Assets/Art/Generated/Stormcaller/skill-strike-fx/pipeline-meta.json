@@ -1,0 +1,69 @@
+{
+  "target": "player",
+  "mode": "skill-strike-fx",
+  "source": "tempart/Stormcaller/strike-fx/final",
+  "cell_size": 64,
+  "frame_size": [
+    64,
+    128
+  ],
+  "align": "feet",
+  "ground_row": 109,
+  "status": "duyet 2026-10-01",
+  "frames": [
+    {
+      "frame": "strike-fx-1",
+      "aligned_bbox": [
+        26,
+        0,
+        40,
+        109
+      ]
+    },
+    {
+      "frame": "strike-fx-2",
+      "aligned_bbox": [
+        15,
+        0,
+        45,
+        109
+      ]
+    },
+    {
+      "frame": "strike-fx-3",
+      "aligned_bbox": [
+        0,
+        0,
+        61,
+        109
+      ]
+    },
+    {
+      "frame": "strike-fx-4",
+      "aligned_bbox": [
+        4,
+        0,
+        61,
+        109
+      ]
+    },
+    {
+      "frame": "strike-fx-5",
+      "aligned_bbox": [
+        13,
+        0,
+        48,
+        109
+      ]
+    },
+    {
+      "frame": "strike-fx-6",
+      "aligned_bbox": [
+        10,
+        98,
+        50,
+        109
+      ]
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "target": "creature",
+  "mode": "walk",
+  "source": "tempart/GoblinBellringer/walk/graded",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 3,
+  "align": "feet",
+  "status": "duyet 2026-10-01",
+  "dx": 0,
+  "frames": [
+    {
+      "frame": "walk-1",
+      "aligned_bbox": [
+        41,
+        37,
+        86,
+        92
+      ]
+    },
+    {
+      "frame": "walk-2",
+      "aligned_bbox": [
+        41,
+        38,
+        86,
+        92
+      ]
+    },
+    {
+      "frame": "walk-3",
+      "aligned_bbox": [
+        41,
+        38,
+        86,
+        92
+      ]
+    },
+    {
+      "frame": "walk-4",
+      "aligned_bbox": [
+        41,
+        37,
+        86,
+        92
+      ]
+    },
+    {
+      "frame": "walk-5",
+      "aligned_bbox": [
+        41,
+        38,
+        86,
+        92
+      ]
+    },
+    {
+      "frame": "walk-6",
+      "aligned_bbox": [
+        41,
+        37,
+        86,
+        92
+      ]
+    }
+  ],
+  "ground_row": 91
+}

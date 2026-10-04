@@ -1,0 +1,50 @@
+{
+  "target": "asset",
+  "mode": "idle",
+  "source": "tempart/CannonFrost/idle",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 2,
+  "align": "feet",
+  "status": "duyet 2026-09-30",
+  "frames": [
+    {
+      "frame": "idle-1",
+      "aligned_bbox": [
+        16,
+        21,
+        95,
+        96
+      ]
+    },
+    {
+      "frame": "idle-2",
+      "aligned_bbox": [
+        16,
+        21,
+        95,
+        96
+      ]
+    },
+    {
+      "frame": "idle-3",
+      "aligned_bbox": [
+        16,
+        21,
+        95,
+        96
+      ]
+    },
+    {
+      "frame": "idle-4",
+      "aligned_bbox": [
+        16,
+        21,
+        95,
+        96
+      ]
+    }
+  ],
+  "ground_row": 95
+}

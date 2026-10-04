@@ -1,0 +1,42 @@
+{
+  "target": "player",
+  "mode": "skill-sword-qi-hit-fx",
+  "source": "tempart/LuuBi/sword-qi-hit-fx/final",
+  "cell_size": 32,
+  "frame_size": [
+    32,
+    32
+  ],
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet 2026-10-03",
+  "frames": [
+    {
+      "frame": "sword-qi-hit-fx-1",
+      "aligned_bbox": [
+        10,
+        10,
+        22,
+        21
+      ]
+    },
+    {
+      "frame": "sword-qi-hit-fx-2",
+      "aligned_bbox": [
+        6,
+        6,
+        27,
+        26
+      ]
+    },
+    {
+      "frame": "sword-qi-hit-fx-3",
+      "aligned_bbox": [
+        7,
+        8,
+        25,
+        24
+      ]
+    }
+  ]
+}

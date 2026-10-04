@@ -1,0 +1,49 @@
+{
+  "target": "creature",
+  "mode": "gale-wind",
+  "source": "tempart/Dreadwyrm/gale-wind/frames",
+  "cell_size": 90,
+  "cell_height": 68,
+  "rows": 2,
+  "cols": 2,
+  "align": "center",
+  "status": "duyet 2026-10-01",
+  "frames": [
+    {
+      "frame": "gale-wind-1",
+      "aligned_bbox": [
+        50,
+        12,
+        86,
+        56
+      ]
+    },
+    {
+      "frame": "gale-wind-2",
+      "aligned_bbox": [
+        4,
+        9,
+        86,
+        64
+      ]
+    },
+    {
+      "frame": "gale-wind-3",
+      "aligned_bbox": [
+        8,
+        4,
+        82,
+        53
+      ]
+    },
+    {
+      "frame": "gale-wind-4",
+      "aligned_bbox": [
+        8,
+        15,
+        56,
+        46
+      ]
+    }
+  ]
+}

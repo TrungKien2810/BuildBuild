@@ -1,0 +1,51 @@
+{
+  "target": "creature",
+  "mode": "idle",
+  "source": "tempart/GoblinAlchemist/idle",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 2,
+  "align": "feet",
+  "status": "duyet 2026-09-30",
+  "dx": 0,
+  "frames": [
+    {
+      "frame": "idle-1",
+      "aligned_bbox": [
+        44,
+        46,
+        83,
+        86
+      ]
+    },
+    {
+      "frame": "idle-2",
+      "aligned_bbox": [
+        44,
+        47,
+        83,
+        86
+      ]
+    },
+    {
+      "frame": "idle-3",
+      "aligned_bbox": [
+        43,
+        44,
+        85,
+        86
+      ]
+    },
+    {
+      "frame": "idle-4",
+      "aligned_bbox": [
+        44,
+        45,
+        83,
+        86
+      ]
+    }
+  ],
+  "ground_row": 85
+}

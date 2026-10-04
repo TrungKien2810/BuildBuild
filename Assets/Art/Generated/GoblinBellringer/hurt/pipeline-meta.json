@@ -1,0 +1,51 @@
+{
+  "target": "creature",
+  "mode": "hurt",
+  "source": "tempart/GoblinBellringer/hurt/graded",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 2,
+  "align": "feet",
+  "status": "duyet 2026-10-01",
+  "dx": 0,
+  "frames": [
+    {
+      "frame": "hurt-1",
+      "aligned_bbox": [
+        41,
+        36,
+        87,
+        92
+      ]
+    },
+    {
+      "frame": "hurt-2",
+      "aligned_bbox": [
+        38,
+        36,
+        89,
+        92
+      ]
+    },
+    {
+      "frame": "hurt-3",
+      "aligned_bbox": [
+        37,
+        36,
+        90,
+        92
+      ]
+    },
+    {
+      "frame": "hurt-4",
+      "aligned_bbox": [
+        40,
+        36,
+        87,
+        92
+      ]
+    }
+  ],
+  "ground_row": 91
+}

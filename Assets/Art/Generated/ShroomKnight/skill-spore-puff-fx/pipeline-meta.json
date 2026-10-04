@@ -1,0 +1,42 @@
+{
+  "target": "player",
+  "mode": "skill-spore-puff-fx",
+  "source": "tempart/ShroomKnight/spore-puff-fx/final",
+  "cell_size": 24,
+  "frame_size": [
+    24,
+    24
+  ],
+  "align": "feet",
+  "ground_row": 20,
+  "status": "duyet 2026-10-03",
+  "frames": [
+    {
+      "frame": "spore-puff-fx-1",
+      "aligned_bbox": [
+        9,
+        18,
+        15,
+        20
+      ]
+    },
+    {
+      "frame": "spore-puff-fx-2",
+      "aligned_bbox": [
+        5,
+        9,
+        19,
+        20
+      ]
+    },
+    {
+      "frame": "spore-puff-fx-3",
+      "aligned_bbox": [
+        6,
+        15,
+        16,
+        20
+      ]
+    }
+  ]
+}

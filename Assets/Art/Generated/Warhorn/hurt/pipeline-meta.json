@@ -1,0 +1,51 @@
+{
+  "target": "creature",
+  "mode": "hurt",
+  "source": "tempart/Warhorn/hurt",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 2,
+  "align": "feet",
+  "status": "duyet 2026-09-30",
+  "dx": 0,
+  "frames": [
+    {
+      "frame": "hurt-1",
+      "aligned_bbox": [
+        35,
+        60,
+        92,
+        93
+      ]
+    },
+    {
+      "frame": "hurt-2",
+      "aligned_bbox": [
+        39,
+        53,
+        89,
+        93
+      ]
+    },
+    {
+      "frame": "hurt-3",
+      "aligned_bbox": [
+        38,
+        50,
+        90,
+        93
+      ]
+    },
+    {
+      "frame": "hurt-4",
+      "aligned_bbox": [
+        35,
+        59,
+        92,
+        93
+      ]
+    }
+  ],
+  "ground_row": 92
+}

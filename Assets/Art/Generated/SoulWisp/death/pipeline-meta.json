@@ -1,0 +1,68 @@
+{
+  "target": "creature",
+  "mode": "death",
+  "source": "tempart/SoulWisp/death/frames",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 3,
+  "align": "feet",
+  "status": "duyet 2026-10-01",
+  "frames": [
+    {
+      "frame": "death-1",
+      "aligned_bbox": [
+        29,
+        41,
+        96,
+        100
+      ]
+    },
+    {
+      "frame": "death-2",
+      "aligned_bbox": [
+        22,
+        47,
+        83,
+        100
+      ]
+    },
+    {
+      "frame": "death-3",
+      "aligned_bbox": [
+        33,
+        36,
+        93,
+        100
+      ]
+    },
+    {
+      "frame": "death-4",
+      "aligned_bbox": [
+        23,
+        57,
+        77,
+        100
+      ]
+    },
+    {
+      "frame": "death-5",
+      "aligned_bbox": [
+        32,
+        61,
+        86,
+        100
+      ]
+    },
+    {
+      "frame": "death-6",
+      "aligned_bbox": [
+        28,
+        67,
+        78,
+        100
+      ]
+    }
+  ],
+  "ground_row": 99
+}

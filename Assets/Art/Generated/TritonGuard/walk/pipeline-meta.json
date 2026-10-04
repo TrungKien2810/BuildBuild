@@ -1,0 +1,69 @@
+{
+  "target": "player",
+  "mode": "walk",
+  "source": "tempart/TritonGuard/walk/final",
+  "cell_size": 128,
+  "frame_size": [
+    128,
+    128
+  ],
+  "align": "feet",
+  "ground_row": 93,
+  "status": "duyet 2026-10-03",
+  "frames": [
+    {
+      "frame": "walk-1",
+      "aligned_bbox": [
+        48,
+        37,
+        80,
+        94
+      ]
+    },
+    {
+      "frame": "walk-2",
+      "aligned_bbox": [
+        48,
+        38,
+        80,
+        94
+      ]
+    },
+    {
+      "frame": "walk-3",
+      "aligned_bbox": [
+        48,
+        36,
+        80,
+        94
+      ]
+    },
+    {
+      "frame": "walk-4",
+      "aligned_bbox": [
+        48,
+        37,
+        80,
+        94
+      ]
+    },
+    {
+      "frame": "walk-5",
+      "aligned_bbox": [
+        48,
+        38,
+        80,
+        93
+      ]
+    },
+    {
+      "frame": "walk-6",
+      "aligned_bbox": [
+        48,
+        36,
+        80,
+        93
+      ]
+    }
+  ]
+}

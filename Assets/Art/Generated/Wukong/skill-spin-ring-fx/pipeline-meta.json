@@ -1,0 +1,47 @@
+{
+  "target": "player",
+  "mode": "skill-spin-ring-fx",
+  "source": "tempart/Wukong/spin-ring-fx/final",
+  "cell_size": 128,
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet 2026-09-30",
+  "frames": [
+    {
+      "frame": "spin-ring-1",
+      "aligned_bbox": [
+        28,
+        35,
+        101,
+        93
+      ]
+    },
+    {
+      "frame": "spin-ring-2",
+      "aligned_bbox": [
+        27,
+        35,
+        101,
+        93
+      ]
+    },
+    {
+      "frame": "spin-ring-3",
+      "aligned_bbox": [
+        28,
+        34,
+        101,
+        92
+      ]
+    },
+    {
+      "frame": "spin-ring-4",
+      "aligned_bbox": [
+        27,
+        34,
+        100,
+        92
+      ]
+    }
+  ]
+}

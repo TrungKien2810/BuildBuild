@@ -1,0 +1,51 @@
+{
+  "target": "creature",
+  "mode": "hurt",
+  "source": "tempart/GoblinAlchemist/hurt/aligned/graded",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 2,
+  "align": "feet",
+  "status": "duyet 2026-09-30",
+  "dx": 0,
+  "frames": [
+    {
+      "frame": "hurt-1",
+      "aligned_bbox": [
+        44,
+        45,
+        82,
+        86
+      ]
+    },
+    {
+      "frame": "hurt-2",
+      "aligned_bbox": [
+        47,
+        46,
+        86,
+        86
+      ]
+    },
+    {
+      "frame": "hurt-3",
+      "aligned_bbox": [
+        47,
+        45,
+        87,
+        86
+      ]
+    },
+    {
+      "frame": "hurt-4",
+      "aligned_bbox": [
+        45,
+        45,
+        83,
+        86
+      ]
+    }
+  ],
+  "ground_row": 85
+}

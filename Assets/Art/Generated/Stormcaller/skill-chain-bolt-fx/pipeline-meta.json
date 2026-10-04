@@ -1,0 +1,51 @@
+{
+  "target": "player",
+  "mode": "skill-chain-bolt-fx",
+  "source": "tempart/Stormcaller/chain-bolt-fx/final",
+  "cell_size": 128,
+  "frame_size": [
+    128,
+    32
+  ],
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet 2026-10-01",
+  "frames": [
+    {
+      "frame": "chain-bolt-fx-1",
+      "aligned_bbox": [
+        0,
+        10,
+        128,
+        29
+      ]
+    },
+    {
+      "frame": "chain-bolt-fx-2",
+      "aligned_bbox": [
+        0,
+        8,
+        128,
+        27
+      ]
+    },
+    {
+      "frame": "chain-bolt-fx-3",
+      "aligned_bbox": [
+        0,
+        5,
+        128,
+        29
+      ]
+    },
+    {
+      "frame": "chain-bolt-fx-4",
+      "aligned_bbox": [
+        0,
+        7,
+        128,
+        21
+      ]
+    }
+  ]
+}

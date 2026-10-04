@@ -1,0 +1,24 @@
+{
+  "target": "creature",
+  "mode": "identity",
+  "source": "tempart/Warhorn/identity",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 1,
+  "cols": 1,
+  "align": "feet",
+  "status": "duyet 2026-09-30",
+  "dx": 0,
+  "frames": [
+    {
+      "frame": "identity-1",
+      "aligned_bbox": [
+        35,
+        60,
+        92,
+        93
+      ]
+    }
+  ],
+  "ground_row": 92
+}

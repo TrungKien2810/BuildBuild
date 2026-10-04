@@ -1,0 +1,24 @@
+{
+  "target": "creature",
+  "mode": "identity",
+  "source": "tempart/OrcShaman/identity/final",
+  "cell_size": 256,
+  "cell_height": 256,
+  "rows": 1,
+  "cols": 1,
+  "align": "feet",
+  "status": "duyet 2026-09-29",
+  "dx": 0,
+  "frames": [
+    {
+      "frame": "identity-1",
+      "aligned_bbox": [
+        74,
+        59,
+        181,
+        199
+      ]
+    }
+  ],
+  "ground_row": 198
+}

@@ -1,0 +1,50 @@
+{
+  "target": "creature",
+  "mode": "ring-wave",
+  "source": "tempart/GoblinBellringer/ring-wave",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 2,
+  "align": "center",
+  "status": "duyet 2026-10-01",
+  "dx": 0,
+  "frames": [
+    {
+      "frame": "impact-1",
+      "aligned_bbox": [
+        39,
+        54,
+        89,
+        74
+      ]
+    },
+    {
+      "frame": "impact-2",
+      "aligned_bbox": [
+        20,
+        50,
+        107,
+        77
+      ]
+    },
+    {
+      "frame": "impact-3",
+      "aligned_bbox": [
+        15,
+        49,
+        112,
+        79
+      ]
+    },
+    {
+      "frame": "impact-4",
+      "aligned_bbox": [
+        16,
+        49,
+        111,
+        79
+      ]
+    }
+  ]
+}

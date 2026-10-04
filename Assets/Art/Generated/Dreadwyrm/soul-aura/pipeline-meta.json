@@ -1,0 +1,49 @@
+{
+  "target": "creature",
+  "mode": "soul-aura",
+  "source": "tempart/Dreadwyrm/soul-aura/frames",
+  "cell_size": 72,
+  "cell_height": 64,
+  "rows": 2,
+  "cols": 2,
+  "align": "center",
+  "status": "duyet 2026-10-01",
+  "frames": [
+    {
+      "frame": "soul-aura-1",
+      "aligned_bbox": [
+        6,
+        23,
+        68,
+        60
+      ]
+    },
+    {
+      "frame": "soul-aura-2",
+      "aligned_bbox": [
+        4,
+        10,
+        67,
+        60
+      ]
+    },
+    {
+      "frame": "soul-aura-3",
+      "aligned_bbox": [
+        4,
+        4,
+        68,
+        55
+      ]
+    },
+    {
+      "frame": "soul-aura-4",
+      "aligned_bbox": [
+        4,
+        5,
+        68,
+        55
+      ]
+    }
+  ]
+}

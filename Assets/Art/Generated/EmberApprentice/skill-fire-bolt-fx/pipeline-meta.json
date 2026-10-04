@@ -1,0 +1,51 @@
+{
+  "target": "player",
+  "mode": "skill-fire-bolt-fx",
+  "source": "tempart/EmberApprentice/fire-bolt-fx/final",
+  "cell_size": 32,
+  "frame_size": [
+    32,
+    16
+  ],
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet 2026-10-03",
+  "frames": [
+    {
+      "frame": "fire-bolt-fx-1",
+      "aligned_bbox": [
+        7,
+        4,
+        26,
+        11
+      ]
+    },
+    {
+      "frame": "fire-bolt-fx-2",
+      "aligned_bbox": [
+        6,
+        5,
+        26,
+        12
+      ]
+    },
+    {
+      "frame": "fire-bolt-fx-3",
+      "aligned_bbox": [
+        7,
+        5,
+        26,
+        11
+      ]
+    },
+    {
+      "frame": "fire-bolt-fx-4",
+      "aligned_bbox": [
+        6,
+        4,
+        24,
+        11
+      ]
+    }
+  ]
+}

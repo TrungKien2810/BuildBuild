@@ -1,0 +1,49 @@
+{
+  "target": "creature",
+  "mode": "breath-stream",
+  "source": "tempart/Dreadwyrm/breath-stream/frames",
+  "cell_size": 186,
+  "cell_height": 56,
+  "rows": 2,
+  "cols": 2,
+  "align": "center",
+  "status": "duyet 2026-10-01",
+  "frames": [
+    {
+      "frame": "breath-stream-1",
+      "aligned_bbox": [
+        14,
+        18,
+        182,
+        52
+      ]
+    },
+    {
+      "frame": "breath-stream-2",
+      "aligned_bbox": [
+        8,
+        9,
+        182,
+        48
+      ]
+    },
+    {
+      "frame": "breath-stream-3",
+      "aligned_bbox": [
+        4,
+        4,
+        182,
+        47
+      ]
+    },
+    {
+      "frame": "breath-stream-4",
+      "aligned_bbox": [
+        9,
+        4,
+        182,
+        42
+      ]
+    }
+  ]
+}

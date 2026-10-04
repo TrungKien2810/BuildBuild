@@ -1,0 +1,69 @@
+{
+  "target": "creature",
+  "mode": "attack",
+  "source": "tempart/Warhorn/attack",
+  "cell_size": 128,
+  "cell_height": 128,
+  "rows": 2,
+  "cols": 3,
+  "align": "feet",
+  "status": "duyet 2026-09-30",
+  "dx": 0,
+  "frames": [
+    {
+      "frame": "attack-1",
+      "aligned_bbox": [
+        35,
+        59,
+        92,
+        93
+      ]
+    },
+    {
+      "frame": "attack-2",
+      "aligned_bbox": [
+        36,
+        61,
+        91,
+        93
+      ]
+    },
+    {
+      "frame": "attack-3",
+      "aligned_bbox": [
+        36,
+        57,
+        91,
+        93
+      ]
+    },
+    {
+      "frame": "attack-4",
+      "aligned_bbox": [
+        36,
+        49,
+        92,
+        93
+      ]
+    },
+    {
+      "frame": "attack-5",
+      "aligned_bbox": [
+        36,
+        59,
+        92,
+        93
+      ]
+    },
+    {
+      "frame": "attack-6",
+      "aligned_bbox": [
+        35,
+        59,
+        92,
+        93
+      ]
+    }
+  ],
+  "ground_row": 92
+}

@@ -1,0 +1,65 @@
+{
+  "target": "player",
+  "mode": "skill-giant-staff-fx",
+  "source": "tempart/Wukong/giant-staff-fx/final",
+  "cell_size": 320,
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet 2026-09-30",
+  "frames": [
+    {
+      "frame": "giant-staff-1",
+      "aligned_bbox": [
+        38,
+        102,
+        285,
+        184
+      ]
+    },
+    {
+      "frame": "giant-staff-2",
+      "aligned_bbox": [
+        24,
+        128,
+        294,
+        215
+      ]
+    },
+    {
+      "frame": "giant-staff-3",
+      "aligned_bbox": [
+        24,
+        161,
+        293,
+        220
+      ]
+    },
+    {
+      "frame": "giant-staff-4",
+      "aligned_bbox": [
+        28,
+        137,
+        296,
+        202
+      ]
+    },
+    {
+      "frame": "giant-staff-5",
+      "aligned_bbox": [
+        27,
+        150,
+        295,
+        202
+      ]
+    },
+    {
+      "frame": "giant-staff-6",
+      "aligned_bbox": [
+        33,
+        157,
+        281,
+        204
+      ]
+    }
+  ]
+}
