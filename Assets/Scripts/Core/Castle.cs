@@ -1,4 +1,5 @@
 using System;
+using BuildBuild.Combat;
 using UnityEngine;
 
 namespace BuildBuild.Core
@@ -13,7 +14,7 @@ namespace BuildBuild.Core
     /// van can thanh mau tren HUD.
     /// </summary>
     [RequireComponent(typeof(Health))]
-    public class Castle : MonoBehaviour
+    public class Castle : Unit
     {
         [SerializeField] SpriteRenderer body;
 
@@ -28,7 +29,25 @@ namespace BuildBuild.Core
 
         Health _health;
 
-        public Health Health => _health;
+        public override Health Health => _health;
+        public override bool IsDying => _health == null || _health.IsDead;
+
+        // Lau dai la `Unit` de hero chu dong tien danh (Chinh Phat) nham duoc thanh dich. Tuong la mot duong thang dung
+        // tai x cua lau dai (cung quy uoc quai dang dung): khong be ngang, khong bi khong che, khong bi day / keo.
+        public override float BodyRadius => 0f;
+        public override float BodyHeight => WallAimHeight;
+        public override Vector3 AimPoint(Vector3 from) => new Vector3(transform.position.x, from.y, from.z);
+        public override bool IsStunned => false;
+        public override void ApplyStun(float seconds, Sprite[] frames = null) { }
+        public override void ApplyFreeze(float seconds) { }
+        public override void PushBack(float direction) { }
+        protected override bool Unmovable => true;
+        // Chuan bi Chinh Phat: thanh NPC da dung tren san nhung chua danh — hero can chien (duoi moi khoang cach) khong
+        // duoc lao sang danh truoc khi bam bat dau.
+        public override bool TargetableBy(Hero hero) => WaveManager.Fighting;
+
+        /// <summary>Dan nham vao mat tuong cao chung nay x2 (giua than) tinh tu hang cua ke ban.</summary>
+        const float WallAimHeight = 1.5f;
         public event Action Destroyed;
 
         void Awake()

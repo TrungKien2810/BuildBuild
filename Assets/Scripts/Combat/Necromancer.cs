@@ -48,11 +48,11 @@ namespace BuildBuild.Combat
             _hero = hero;
             _definition = definition;
             _ringCooldown = definition.ringCooldown;
-            Enemy.Killed -= OnEnemyKilled;
-            Enemy.Killed += OnEnemyKilled;
+            Unit.Killed -= OnEnemyKilled;
+            Unit.Killed += OnEnemyKilled;
         }
 
-        void OnDestroy() => Enemy.Killed -= OnEnemyKilled;
+        void OnDestroy() => Unit.Killed -= OnEnemyKilled;
 
         void Update()
         {
@@ -72,19 +72,22 @@ namespace BuildBuild.Combat
         {
             // Lap vong `ringFxDuration` giay: 4 frame chay mot lan chi ~0,44 s, nguoi choi khong kip thay (2026-09-15).
             OneShotFx.SpawnLoop(null, centre, _definition.ringFrames, _definition.ringFxDuration, 5);
-            foreach (var enemy in Enemy.Alive.ToArray())
+            foreach (var enemy in Unit.Hostiles(_hero.Side).ToArray())
             {
                 if (enemy == null || enemy.IsDying) continue;
-                float dx = (enemy.transform.position.x - centre.x) / _definition.ringRadius;
-                float dy = (enemy.transform.position.y - centre.y) / (_definition.ringRadius * 0.5f);
+                var foot = enemy.AimPoint(centre);
+                float dx = (foot.x - centre.x) / _definition.ringRadius;
+                float dy = (foot.y - centre.y) / (_definition.ringRadius * 0.5f);
                 if (dx * dx + dy * dy > 1f) continue;
                 enemy.ApplyMark(this, _definition.markDuration, _definition.markFrames);
-                enemy.Health.TakeDamage(_definition.ringDamage);
+                enemy.Health.TakeDamage(_definition.ringDamage, _hero.Health);
             }
         }
 
-        void OnEnemyKilled(Enemy enemy)
+        void OnEnemyKilled(Unit dead)
         {
+            if (_hero == null || dead == null || !dead.IsHostileTo(_hero.Side)) return;   // xac cua doi thu phe minh
+            var enemy = dead;
             if (_definition == null || _hero == null || _hero.IsDying) return;
             Prune(_passiveUnits);
             Prune(_markUnits);

@@ -43,7 +43,7 @@ namespace BuildBuild.UI
             if (GUI.Button(new Rect(left, bottom - 48f, 120f, 48f), _open ? "ADMIN ▼" : "ADMIN ▲")) _open = !_open;
             if (!_open) return;
 
-            const float panelHeight = 720f;
+            const float panelHeight = 760f;
             GUILayout.BeginArea(new Rect(left, bottom - 48f - 12f - panelHeight, 360f, panelHeight), GUI.skin.box);
             GUILayout.Label($"Wave tiep: {waves.NextWave}   {(waves.IsFighting ? "(dang danh)" : "")}");
 
@@ -68,6 +68,23 @@ namespace BuildBuild.UI
             if (SoldierCamp.Current != null && GUILayout.Button("Linh: day vong hoi chieu")) SoldierCamp.Current.DevFill();
             GUI.enabled = true;
 
+            GUI.enabled = !waves.IsFighting;
+            if (GUILayout.Button(WaveManager.InConquest ? "Roi Chinh Phat" : "Chinh Phat (vao chuan bi)"))
+            {
+                if (WaveManager.InConquest) waves.LeaveConquest();
+                else waves.EnterConquest();
+                hud.Refresh();
+            }
+            GUI.enabled = true;
+            if (GUILayout.Button($"Reset luot Chinh Phat ({ConquestMap.AttacksLeft}/{ConquestMap.AttacksPerDay})"))
+                ConquestMap.DevResetAttacks();
+
+            if (GUILayout.Button("Tha 1 hero NPC (phe do)"))
+            {
+                var board = FindAnyObjectByType<HeroBoard>();
+                if (board != null) board.DevSpawnNpc();
+            }
+
             if (GUILayout.Button("Day mana moi hero / linh"))
                 foreach (var hero in Hero.Alive.ToArray()) hero.DevFillMana();
 
@@ -79,6 +96,11 @@ namespace BuildBuild.UI
             if (GUILayout.Button("Moi (tu dau)")) SwitchAccount(SaveSystem.FreshAccount);
             GUILayout.EndHorizontal();
 
+            if (GUILayout.Button("Ruong AFK: +4 gio"))
+            {
+                AfkChest.DevAddHours(4f);
+                hud.Refresh();
+            }
             if (GUILayout.Button("Hoi day mau lau dai"))
             {
                 castle.Repair();

@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e60089b8c9bf8424dbefbdb4fca6851a, type: 3}
+  m_Name: Stormcaller_Stormcaller
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.StormcallerDefinition
+  chainBounces: 3
+  chainRadius: 2
+  chainFalloff: 0.3
+  boltFrames:
+  - {fileID: 21300000, guid: f3a40293a4ab11a459fe4b57667c905c, type: 3}
+  - {fileID: 21300000, guid: 25cb8627ca6011b46b793a6598a2bcf8, type: 3}
+  - {fileID: 21300000, guid: fee2de65ed91b9648ac9f88cb56eb9e5, type: 3}
+  - {fileID: 21300000, guid: e716937d81befce48ad719d00c80b69b, type: 3}
+  hitFrames:
+  - {fileID: 21300000, guid: 552458f7a492bbc4f8f8e1318c192108, type: 3}
+  - {fileID: 21300000, guid: ac5539474de95f14aad75161777f737c, type: 3}
+  - {fileID: 21300000, guid: 09e711b960f59034e9d34b0ee238eda8, type: 3}
+  - {fileID: 21300000, guid: 0ce33ff21b3d867498e16fd95174785b, type: 3}
+  maxCharges: 3
+  overloadBonus: 0.6
+  overloadStun: 0.3
+  paralyzeBonus: 0.35
+  shieldMultiplier: 2
+  chargePipFrames:
+  - {fileID: 21300000, guid: ee66559953e09be40a0a7432ef968898, type: 3}
+  - {fileID: 21300000, guid: 72cba060d69848a4fab8636a6771bdd6, type: 3}
+  - {fileID: 21300000, guid: eb2d5df13f05b4544baf4b7e226a723a, type: 3}
+  burstFrames:
+  - {fileID: 21300000, guid: f163fcb522716d94c801828baf651489, type: 3}
+  - {fileID: 21300000, guid: 1918ec24359d7e64c8c7d93999c1faf9, type: 3}
+  - {fileID: 21300000, guid: 55e6375ea6729a645bda9b65e9bfa8be, type: 3}
+  - {fileID: 21300000, guid: edbe3549e16ef8e438bacd6352f737d3, type: 3}
+  - {fileID: 21300000, guid: 855a23884f2a4654aadae28a8259b790, type: 3}
+  - {fileID: 21300000, guid: dc41107330435d94cb1cd24fed515830, type: 3}
+  rodCooldown: 9
+  rodLifetime: 6
+  rodTickInterval: 1
+  rodRadius: 1.2
+  rodPower: 0.5
+  rodBonusBounces: 2
+  rodFrames:
+  - {fileID: 21300000, guid: c8315c6a814644741b6d13fa7b3a3023, type: 3}
+  - {fileID: 21300000, guid: fd12249afbd85e84d8c0143c8a90f0c0, type: 3}
+  - {fileID: 21300000, guid: 98f8c98ddb1a1ec489ca88308bbf1544, type: 3}
+  - {fileID: 21300000, guid: aa8c76006d8efdb4da7a03ea7036c53c, type: 3}
+  blinkCooldown: 8
+  blinkTrigger: 0.8
+  blinkDistance: 2
+  blinkBurstRadius: 1.2
+  blinkStun: 0.5
+  blinkPower: 0.5
+  blinkFrames:
+  - {fileID: 21300000, guid: 37b685eb0d377e9478dbfbec50efeb5b, type: 3}
+  - {fileID: 21300000, guid: 3058d3526e31fd842b66e30cea4ea83c, type: 3}
+  - {fileID: 21300000, guid: 8342c1ffa33490e4c96d7b1a71de344a, type: 3}
+  - {fileID: 21300000, guid: 4b27a7361f2d0654cacf40c2dc54d2b4, type: 3}
+  stormBolts: 5
+  stormInterval: 0.12
+  strikeFrames:
+  - {fileID: 21300000, guid: fa78c19c7a56b45459a10fd9d09d4454, type: 3}
+  - {fileID: 21300000, guid: d2656c6c83f504847bdc1aba307e9cd0, type: 3}
+  - {fileID: 21300000, guid: fc48b66d89dc68f45aab7d97f4322d9c, type: 3}
+  - {fileID: 21300000, guid: e58c0ff2a559d9b4e8dd94b808fbfa5e, type: 3}
+  - {fileID: 21300000, guid: 6c4fe10b2380b814eadc8cb084d2abb9, type: 3}
+  - {fileID: 21300000, guid: 1b8dd5f4f8e6b2d4f895d181b2c459c7, type: 3}

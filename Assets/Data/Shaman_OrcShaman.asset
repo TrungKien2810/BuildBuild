@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d0061ab576303a4ba56ff9fe74ec437, type: 3}
+  m_Name: Shaman_OrcShaman
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.ShamanDefinition
+  pitInterval: 12
+  pitRange: 7
+  pitRadius: 1.2
+  pitDelay: 1.5
+  pitDamage: 100
+  pitMarkFrames:
+  - {fileID: 21300000, guid: e2ac9f2034bb8a243a2341d76ef5af39, type: 3}
+  - {fileID: 21300000, guid: d117cfcaafe038b428c90a1de2661d76, type: 3}
+  - {fileID: 21300000, guid: 506b3ec3ca4b1184693521f37de842de, type: 3}
+  - {fileID: 21300000, guid: 9dfc17ccc261c7a4d81e45f237f26cb7, type: 3}
+  pitBurstFrames:
+  - {fileID: 21300000, guid: d992d28792cadd144bcc4c2e5c14e40a, type: 3}
+  - {fileID: 21300000, guid: a2646d9b84762ed459a6f2ba9914c128, type: 3}
+  - {fileID: 21300000, guid: 59755bfda0b33674f9072a08de36536c, type: 3}
+  - {fileID: 21300000, guid: 55b55c8ef52f2ec47a520534b807f42e, type: 3}
+  - {fileID: 21300000, guid: f26c8f81388e6b8489ae3c4b779efd64, type: 3}
+  - {fileID: 21300000, guid: 7b26c6d800127044996d44c83b2d3ed9, type: 3}
+  shieldInterval: 18
+  shieldAmount: 400
+  shieldDuration: 6
+  shieldRange: 6
+  shieldFrames:
+  - {fileID: 21300000, guid: 04cf9c6482f3b51429196e9b46f280fb, type: 3}
+  - {fileID: 21300000, guid: 71b5822c811ffb64ca0fa309842edf74, type: 3}
+  - {fileID: 21300000, guid: 689f4dd7b2029dd468572244be67c97e, type: 3}
+  - {fileID: 21300000, guid: b0a31312c7cd7f84db5c0bbf8fcc47e0, type: 3}
+  teleportCooldown: 10
+  teleportTrigger: 1.5
+  teleportDistance: 3
+  castBody:
+    name: cast
+    frames:
+    - {fileID: 21300000, guid: 75ffaf5755fff074ab1d702296b80300, type: 3}
+    - {fileID: 21300000, guid: c8d48ac5639b53545871606768062dc1, type: 3}
+    - {fileID: 21300000, guid: bd1525aeb17414f48ba5dd3b849cb992, type: 3}
+    - {fileID: 21300000, guid: 4165353bd36966148862c2b2ee8db4bd, type: 3}
+    - {fileID: 21300000, guid: 5e2566135411f6342bb0835dd19ca1fb, type: 3}
+    - {fileID: 21300000, guid: 7adf86ad41cb62f47a20df7a3406eebe, type: 3}
+    loop: 0
+    hitFrame: 4
+  vanishBody:
+    name: vanish
+    frames:
+    - {fileID: 21300000, guid: 60def7ffc71d9994daaa4756a7b13da0, type: 3}
+    - {fileID: 21300000, guid: 9a8732c7f80904646a9d88b0858db5a7, type: 3}
+    - {fileID: 21300000, guid: 7b376b7060155334fa60971a1075e746, type: 3}
+    - {fileID: 21300000, guid: bc6fc10b7ddee854f9d1ee37af4b9d1b, type: 3}
+    - {fileID: 21300000, guid: f63d80fef860fff49add118d9c18a515, type: 3}
+    - {fileID: 21300000, guid: 694acbc8bc434fc44ab4c33b137f85d9, type: 3}
+    loop: 0
+    hitFrame: 0
+  appearBody:
+    name: appear
+    frames:
+    - {fileID: 21300000, guid: 694acbc8bc434fc44ab4c33b137f85d9, type: 3}
+    - {fileID: 21300000, guid: f63d80fef860fff49add118d9c18a515, type: 3}
+    - {fileID: 21300000, guid: bc6fc10b7ddee854f9d1ee37af4b9d1b, type: 3}
+    - {fileID: 21300000, guid: 7b376b7060155334fa60971a1075e746, type: 3}
+    - {fileID: 21300000, guid: 9a8732c7f80904646a9d88b0858db5a7, type: 3}
+    - {fileID: 21300000, guid: 60def7ffc71d9994daaa4756a7b13da0, type: 3}
+    loop: 0
+    hitFrame: 0

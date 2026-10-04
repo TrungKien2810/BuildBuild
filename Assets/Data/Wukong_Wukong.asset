@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df5e6bf276cf41a4e9c83249e746c442, type: 3}
+  m_Name: Wukong_Wukong
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.WukongDefinition
+  substituteHealth: 0.4
+  cloneReturnHeal: 0.08
+  lifesteal: 0.1
+  cloneCooldown: 10
+  cloneCount: 2
+  cloneLifetime: 8
+  cloneDefinition: {fileID: 11400000, guid: 5796a3009185a0a42b275aaa07776fcd, type: 2}
+  unitPrefab: {fileID: 6379297408595509390, guid: 5222ae2c40cd08941985b2adc396e8e1, type: 3}
+  cloneTint: {r: 1, g: 0.85, b: 0.7, a: 0.7}
+  cloneBody:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: 06c64198a42c4714abe88873ca8ff590, type: 3}
+    - {fileID: 21300000, guid: 52810368d0a23c34fbfc260083a4b012, type: 3}
+    - {fileID: 21300000, guid: b97205042293c654e81dd17c695a5bdf, type: 3}
+    - {fileID: 21300000, guid: 789999ce4485eb241a681ea21261005f, type: 3}
+    - {fileID: 21300000, guid: 2c14433b402c7554f98e03c9f7262bc3, type: 3}
+    - {fileID: 21300000, guid: 8f78ca1e12fe8b24c91ad6d1475146c2, type: 3}
+    loop: 0
+    hitFrame: 4
+  poofFrames:
+  - {fileID: 21300000, guid: b6242a3a14b43934fa8c95311ace629b, type: 3}
+  - {fileID: 21300000, guid: 214705c3f87b13848a34c23f8233dee5, type: 3}
+  - {fileID: 21300000, guid: bef85d0083c586e478429d054d165ab0, type: 3}
+  - {fileID: 21300000, guid: 9d63659debd3ef54b891b14dadc5c821, type: 3}
+  spinCooldown: 6
+  spinDuration: 3
+  spinRadius: 1.2
+  spinPower: 1
+  spinHealPerHit: 0.03
+  spinHealCap: 0.25
+  spinBody:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: a65a10d531ebf0d4790617e4e095228b, type: 3}
+    - {fileID: 21300000, guid: b77c1d5ed5af95343aef58e375674258, type: 3}
+    - {fileID: 21300000, guid: e9ad4e3a451c80449b40db69bcf50508, type: 3}
+    - {fileID: 21300000, guid: 2b154ba07ab20224c8deead7d52e4194, type: 3}
+    - {fileID: 21300000, guid: 7f468b2a25ee02147bbfb86ea0886c9e, type: 3}
+    - {fileID: 21300000, guid: 61ebbce884558ec4f92ee72560f9a3d3, type: 3}
+    loop: 0
+    hitFrame: 0
+  spinRingFrames:
+  - {fileID: 21300000, guid: 2db74533a54c29f40916d9a72406da7e, type: 3}
+  - {fileID: 21300000, guid: 79a5d471f6dd0204799ab75d92847a11, type: 3}
+  - {fileID: 21300000, guid: 24a4ad00141eb004cae0b4fb3b641fef, type: 3}
+  - {fileID: 21300000, guid: ec008c5684ff7f04188f8b584eb51b72, type: 3}
+  deflectFrames:
+  - {fileID: 21300000, guid: e9560cc8ec5fd5949ac6e628d98908bd, type: 3}
+  - {fileID: 21300000, guid: 2fe114810ad49ac45b592eaf4c62ff46, type: 3}
+  - {fileID: 21300000, guid: 2beb69e468ce5fa40b1eff5acab643ae, type: 3}
+  - {fileID: 21300000, guid: d3a17c42ac5f2714783b0e70b35f30e4, type: 3}
+  ultimateRange: 6
+  staffHalfWidth: 0.5
+  crackSlow: 0.4
+  crackDuration: 3
+  cloneSmashPower: 0.3
+  giantStaffFrames:
+  - {fileID: 21300000, guid: 7c811207396ef6642856ac5c3f080709, type: 3}
+  - {fileID: 21300000, guid: 0cebcd1fd49f6d144af467d7a4b9dc91, type: 3}
+  - {fileID: 21300000, guid: 0904a64ed0baf20419ab25f6a0119e01, type: 3}
+  - {fileID: 21300000, guid: c4fd5c7f39b80e5458f07e4c0ca46f36, type: 3}
+  - {fileID: 21300000, guid: 539fbdb59424dc34f810e5c0ba095989, type: 3}
+  - {fileID: 21300000, guid: 7cc0d69322e8fd144a6f769f9dee6650, type: 3}
+  healFrames:
+  - {fileID: 21300000, guid: 01440e0d3fb5273468edf56b317f5f26, type: 3}
+  - {fileID: 21300000, guid: 090507418cb2aeb4eb88d70c18a33e28, type: 3}
+  - {fileID: 21300000, guid: 41b269f7d7c011c40ab0eb398d1c8eb4, type: 3}
+  - {fileID: 21300000, guid: 42ffb930453c8b24ca2dafcd2702fc1e, type: 3}

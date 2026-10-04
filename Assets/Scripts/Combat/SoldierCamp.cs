@@ -39,6 +39,9 @@ namespace BuildBuild.Combat
         readonly List<Hero> _summoned = new List<Hero>();
         SoldierDefinition[] _lineup = Array.Empty<SoldierDefinition>();
         float[] _cooldownLeft = Array.Empty<float>();
+        // Chinh Phat: bai linh phe NPC — tu tha top tai vach thanh NPC moi khi vong day.
+        SoldierDefinition[] _rivalLineup = Array.Empty<SoldierDefinition>();
+        float[] _rivalCooldownLeft = Array.Empty<float>();
 
         public int RosterCount => roster != null ? roster.Length : 0;
         public SoldierDefinition Soldier(int index) => roster[index];
@@ -79,6 +82,21 @@ namespace BuildBuild.Combat
             if (!WaveManager.Fighting) return;
             for (int i = 0; i < _cooldownLeft.Length; i++)
                 _cooldownLeft[i] = Mathf.Max(0f, _cooldownLeft[i] - Time.deltaTime);
+            UpdateRivals();
+        }
+
+        void UpdateRivals()
+        {
+            var match = ConquestMatch.Current;
+            if (match == null || match.Rival == null) return;
+            for (int i = 0; i < _rivalLineup.Length; i++)
+            {
+                _rivalCooldownLeft[i] -= Time.deltaTime;
+                if (_rivalCooldownLeft[i] > 0f) continue;
+                var soldier = _rivalLineup[i];
+                _rivalCooldownLeft[i] = soldier.summonCooldown;
+                SpawnSquad(soldier, new Vector3(match.Rival.transform.position.x, Battlefield.RandomY(), 0f), Faction.Npc);
+            }
         }
 
         /// <summary>0..1 cho vong hoi chieu tren dau linh o cho dung <paramref name="post"/>: 1 = day, keo tha duoc.</summary>
@@ -157,7 +175,7 @@ namespace BuildBuild.Combat
         /// Top xep doc quanh diem tha (lech theo y, hang le lui nua buoc cho khoi thanh mot duong ke), moi con keo
         /// vao trong san. Vi tri luc Initialise la goc day xich cua linh tam xa.
         /// </summary>
-        List<Hero> SpawnSquad(SoldierDefinition soldier, Vector3 centre)
+        List<Hero> SpawnSquad(SoldierDefinition soldier, Vector3 centre, Faction side = Faction.Player)
         {
             var squad = new List<Hero>(soldier.squadSize);
             float spacing = config != null ? config.squadSpacing : 0.4f;
@@ -166,7 +184,8 @@ namespace BuildBuild.Combat
                 var offset = new Vector3(i % 2 == 1 ? -spacing * 0.5f : 0f, (i - (soldier.squadSize - 1) * 0.5f) * spacing, 0f);
                 var position = Battlefield.Clamp(centre + offset, Battlefield.PersonalSpace * 0.5f, clampRight: true);
                 var unit = Instantiate(unitPrefab, position, Quaternion.identity);
-                unit.Initialise(soldier);
+                unit.Initialise(soldier, side: side);
+                unit.Aggressive = WaveManager.InConquest;   // Chinh Phat: hai phe tien danh thanh doi phuong
                 SummonBurst.Spawn(unit.transform.position, unit.BodyRadius, config != null ? config.spawnFxFrames : null);
                 _summoned.Add(unit);
                 squad.Add(unit);
@@ -175,7 +194,33 @@ namespace BuildBuild.Combat
         }
 
         // Dau wave: bai sach, moi vong RONG — phai cho vong day moi tha duoc top dau tien.
-        void OnWaveStarted(int wave) => ResetCamp();
+        void OnWaveStarted(int wave)
+        {
+            ResetCamp();
+            if (WaveManager.InConquest) PickRivals();
+        }
+
+        /// <summary>
+        /// Chinh Phat: bai NPC co bang ay cho dung nhu bai minh, moi cho mot loai boc ngau nhien tu roster (khong can so
+        /// huu), vong bat dau RONG nhu phe ta — TAM, chua suy tu luc chien.
+        /// </summary>
+        void PickRivals()
+        {
+            var pool = Array.FindAll(roster, s => s != null);
+            if (pool.Length == 0) return;
+            var target = ConquestMatch.Current?.Target;
+            // Co thanh tren ban do: dung so loai linh luc Do Tham da tinh vao luc chien NPC, khong lap day moi cho.
+            int count = target != null && target.soldiers.Count > 0 ? Mathf.Min(postCount, target.soldiers.Count) : postCount;
+            _rivalLineup = new SoldierDefinition[count];
+            _rivalCooldownLeft = new float[count];
+            for (int i = 0; i < count; i++)
+            {
+                _rivalLineup[i] = target != null && target.soldiers.Count > 0
+                    ? ConquestMap.Find(pool, target.soldiers[i % target.soldiers.Count]) ?? pool[0]
+                    : pool[UnityEngine.Random.Range(0, pool.Length)];
+                _rivalCooldownLeft[i] = _rivalLineup[i].summonCooldown;
+            }
+        }
 
         // Het wave cung reset: giua hai wave hoi chieu dung dem, de nguyen thi vong dung o muc do dang.
         void OnWaveCleared(int wave, int gold) => ResetCamp();
@@ -185,6 +230,8 @@ namespace BuildBuild.Combat
         void ResetCamp()
         {
             DespawnAll();
+            _rivalLineup = Array.Empty<SoldierDefinition>();
+            _rivalCooldownLeft = Array.Empty<float>();
             for (int i = 0; i < _cooldownLeft.Length; i++)
                 _cooldownLeft[i] = _lineup[i] != null ? _lineup[i].summonCooldown : 0f;
         }

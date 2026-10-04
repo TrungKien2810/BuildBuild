@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
+  m_Name: Hero_QuanVu
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
+  displayName: "Quan V\u0169"
+  unitId: quanvu
+  maxHealth: 1100
+  damage: 42
+  attackRate: 0.75
+  range: 0.9
+  moveSpeed: 1.1
+  leashRange: 3
+  maxHeld: 3
+  heldDamageBonus: 0
+  warden: {fileID: 0}
+  dragonRider: {fileID: 0}
+  banner: {fileID: 0}
+  wukong: {fileID: 0}
+  stormcaller: {fileID: 0}
+  galemonk: {fileID: 0}
+  daoVien: {fileID: 11400000, guid: 9d7ee7b11c5af4644b803631fe7a9f86, type: 2}
+  swornBrother: 2
+  projectileSpeed: 8
+  splashRadius: 0.8
+  projectileFrames: []
+  projectileScale: 1
+  impactFrames: []
+  impactScale: 1
+  knockbackOnHit: 0
+  fireSfx: 
+  impactSfx: 
+  skillSfx: 
+  skillKind: 14
+  skillTier: 0
+  skillCooldown: 0
+  manaMax: 6
+  manaPerSecond: 0.35
+  manaPerHit: 0.25
+  skillRadius: 1.6
+  skillDuration: 3
+  skillPower: 5
+  skillFrames: []
+  skillIntroFrames: []
+  skillOutroFrames: []
+  stunFrames: []
+  summoner: {fileID: 0}
+  healsAllies: 0
+  healFrames: []
+  buffFrames: []
+  shieldAmount: 0
+  shieldFrames: []
+  shieldBreakFrames: []
+  passiveStar: 1
+  minorStar: 3
+  secondMinorStar: 3
+  passiveKind: 0
+  passivePower: 0
+  passiveThreshold: 0
+  passiveRadius: 0
+  passiveEvery: 1
+  passiveDuration: 0
+  passiveFrames: []
+  ultimateText: "Thanh Long Hi\u1EC7n: h\u1ED3n r\u1ED3ng l\u1EE5c lao d\u1ECDc lane
+    xuy\xEAn m\u1ECDi qu\xE1i, s\xE1t th\u01B0\u01A1ng \xD75 + th\xEAm theo m\xE1u
+    \u0111\xE3 m\u1EA5t; m\u1ED7i qu\xE1i b\u1ECB h\u1EA1 ho\xE0n 10% mana."
+  passiveText: "K\u1EBFt Ngh\u0129a (nh\u01B0 L\u01B0u B\u1ECB). V\xF5 Th\xE1nh:
+    \u0111\xF2n th\u01B0\u1EDDng ch\xE9m qu\u1EA1t tr\xFAng t\u1EDBi 3 qu\xE1i; m\u1ED7i
+    qu\xE1i b\u1ECB h\u1EA1 +1 t\u1EA7ng Uy (+5% c\xF4ng, +2% h\xFAt m\xE1u, t\u1ED1i
+    \u0111a 6, m\u1EA5t khi h\u1EBFt wave)."
+  minorText: "Thanh Long Y\u1EC3n Nguy\u1EC7t: s\xF3ng \u0111ao tr\u0103ng khuy\u1EBFt
+    bay d\u1ECDc lane, xuy\xEAn qu\xE1i, \xD72 s\xE1t th\u01B0\u01A1ng."
+  secondMinorText: "Th\xE1c \u0110ao K\u1EBF: m\xE1u d\u01B0\u1EDBi 40% \u2192 l\xF9i
+    1 \xF4 gi\u1EA3 thua r\u1ED3i quay l\u1EA1i ch\xE9m \xD73 v\xE0o qu\xE1i \u0111u\u1ED5i
+    theo (1 l\u1EA7n m\u1ED7i wave)."
+  ultimateIcon: {fileID: 21300000, guid: ba3bf4a54decd374c816ec95d59d9f20, type: 3}
+  minorIcon: {fileID: 21300000, guid: aabbc373feb885940b4fbf23dab314b3, type: 3}
+  passiveIcon: {fileID: 21300000, guid: f8ba8eaca69cbdc4db48af8452218953, type: 3}
+  secondMinorIcon: {fileID: 21300000, guid: dd3f3c9e1b8bb8f4f87992532451c0ce, type: 3}
+  animations: {fileID: 11400000, guid: b80643ab1dd19cf4cbc4d5944886c289, type: 2}
+  artFacesRight: 0
+  avatar: {fileID: 21300000, guid: 35ee4f2b99f2f4d4f9165dd83dded274, type: 3}

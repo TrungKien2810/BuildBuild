@@ -21,6 +21,12 @@ namespace BuildBuild.Data
         public int fixedCount = -1;
         [Tooltip("So tinh anh (`WaveTuning.elite`) spawn THEM trong wave. GDD: tu wave 12 la 1, wave 21+ la 2, khong co o wave boss.")]
         public int eliteCount;
+        [Tooltip("Tinh anh rieng cua band nay (wave 21+: Ruinjaw, Gatebreaker nang cap). Trong = `WaveTuning.elite`.")]
+        public EnemyDefinition elite;
+        [Tooltip("Boss di KEM boss chinh (wave 20: Phap su Orc), cung he so chi so boss. Chi co tac dung khi `hasBoss`.")]
+        public EnemyDefinition[] extraBosses;
+        [Tooltip("Boss chinh rieng cua band nay (wave 30+: Rong Ma Hoa). Trong = `WaveTuning.boss`.")]
+        public EnemyDefinition boss;
 
         public bool Contains(int wave) => wave >= fromWave && wave <= toWave;
     }

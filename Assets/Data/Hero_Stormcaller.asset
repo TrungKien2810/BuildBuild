@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
+  m_Name: Hero_Stormcaller
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
+  displayName: "Ph\xE1p s\u01B0 s\u1EA5m s\xE9t"
+  unitId: stormcaller
+  maxHealth: 520
+  damage: 40
+  attackRate: 0.8
+  range: 5.5
+  moveSpeed: 1.1
+  leashRange: 3
+  maxHeld: 3
+  heldDamageBonus: 0
+  warden: {fileID: 0}
+  dragonRider: {fileID: 0}
+  banner: {fileID: 0}
+  wukong: {fileID: 0}
+  stormcaller: {fileID: 11400000, guid: ce78a7671e4f9f24aa61d2c048dd6171, type: 2}
+  galemonk: {fileID: 0}
+  daoVien: {fileID: 0}
+  swornBrother: 0
+  projectileSpeed: 8
+  splashRadius: 0.8
+  projectileFrames: []
+  projectileScale: 1
+  impactFrames: []
+  impactScale: 1
+  knockbackOnHit: 0
+  fireSfx: spell
+  impactSfx: 
+  skillSfx: skill-thunder
+  skillKind: 12
+  skillTier: 0
+  skillCooldown: 0
+  manaMax: 6
+  manaPerSecond: 0.35
+  manaPerHit: 0.25
+  skillRadius: 1.6
+  skillDuration: 0.5
+  skillPower: 3
+  skillFrames: []
+  skillIntroFrames: []
+  skillOutroFrames: []
+  stunFrames:
+  - {fileID: 21300000, guid: 1a1fae456d75bfb42a8ffae427a8e2f3, type: 3}
+  - {fileID: 21300000, guid: 5f10dad14feb11e48ab8189f300fd865, type: 3}
+  - {fileID: 21300000, guid: 7213f6b7419d25048959c0318ee69916, type: 3}
+  - {fileID: 21300000, guid: b54ff30fbe8e230408ef3ea33a794952, type: 3}
+  summoner: {fileID: 0}
+  healsAllies: 0
+  healFrames: []
+  buffFrames: []
+  shieldAmount: 0
+  shieldFrames: []
+  shieldBreakFrames: []
+  passiveStar: 1
+  minorStar: 3
+  secondMinorStar: 3
+  passiveKind: 0
+  passivePower: 0
+  passiveThreshold: 0
+  passiveRadius: 0
+  passiveEvery: 1
+  passiveDuration: 0
+  passiveFrames: []
+  ultimateText: "L\xF4i B\u1EA1o: 5 c\u1ED9t s\xE9t gi\xE1ng xu\u1ED1ng ch\u1ED7
+    qu\xE1i \u0111\u1EE9ng trong t\u1EA7m \u2014 m\u1ED7i c\u1ED9t s\xE1t th\u01B0\u01A1ng
+    l\u1EDBn + cho\xE1ng 0,5s."
+  passiveText: "Qu\xE1 T\u1EA3i: m\u1ED7i tia s\xE9t tr\xFAng qu\xE1i +1 t\u1EA7ng
+    \u0111i\u1EC7n, \u0111\u1EE7 3 th\xEC n\u1ED5 (+60% s\xE1t th\u01B0\u01A1ng,
+    cho\xE1ng 0,3s). Qu\xE1i \u0111ang cho\xE1ng \u0103n +35% s\xE9t; s\xE9t v\xE0o
+    khi\xEAn \xD72."
+  minorText: "C\u1ED9t Thu L\xF4i: c\u1EAFm c\u1ED9t \u0111\u1ED3ng gi\u1EEFa \u0111\xE1m
+    qu\xE1i 6s, m\u1ED7i gi\xE2y gi\u1EADt qu\xE1i k\u1EC1 c\u1ED9t; X\xEDch L\xF4i
+    n\u1EA3y qua c\u1ED9t +2 l\u1EA7n n\u1EA3y, kh\xF4ng gi\u1EA3m s\xE1t th\u01B0\u01A1ng."
+  secondMinorText: "L\xF4i B\u1ED9: qu\xE1i \xE1p s\xE1t th\xEC ho\xE1 tia s\xE9t
+    l\xF9i 2 \xF4, ch\u1ED7 c\u0169 n\u1ED5 cho\xE1ng 0,5s."
+  ultimateIcon: {fileID: 21300000, guid: 1f3f8f3f1c74cda41ab55c39d2235cd3, type: 3}
+  minorIcon: {fileID: 21300000, guid: 9b8de2cf042f3434aba1532787ea9162, type: 3}
+  passiveIcon: {fileID: 21300000, guid: cd70fc253354de542a9ba3903d8c7fe2, type: 3}
+  secondMinorIcon: {fileID: 21300000, guid: 9d1d18cafaa45ae43860ebaa7d581991, type: 3}
+  animations: {fileID: 11400000, guid: 3220ec1749356444a895ce80110af3d9, type: 2}
+  artFacesRight: 0
+  avatar: {fileID: 21300000, guid: 32689b331e8b6df4fbf4df3816237fe4, type: 3}

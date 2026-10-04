@@ -1,3 +1,4 @@
+using BuildBuild.Combat;
 using BuildBuild.Core;
 using BuildBuild.Data;
 using BuildBuild.Meta;
@@ -21,6 +22,9 @@ namespace BuildBuild.UI
         [SerializeField] WaveManager waves;
         [SerializeField] CannonMount[] mounts;
 
+        /// <summary>So be phao dang co — luc chien Chinh Phat dem phao theo so nay.</summary>
+        public int MountCount => mounts.Length;
+
         [Header("Bang chon phao")]
         [SerializeField] GameObject pickerPanel;
         [SerializeField] CannonDefinition[] roster;
@@ -31,6 +35,8 @@ namespace BuildBuild.UI
         [SerializeField] Button cancelButton;
 
         CannonMount _pending;
+        /// <summary>Phao tren thanh NPC cua tran Chinh Phat dang danh.</summary>
+        readonly System.Collections.Generic.List<Cannon> _rivals = new System.Collections.Generic.List<Cannon>();
 
         void Start()
         {
@@ -64,6 +70,7 @@ namespace BuildBuild.UI
             if (mount.Occupant != null)
             {
                 mount.Assign(null, 1);
+                Sfx.Play("unit-remove");
                 SaveLoadout();
                 return;
             }
@@ -71,6 +78,7 @@ namespace BuildBuild.UI
             _pending = mount;
             RefreshPicker();
             pickerPanel.SetActive(true);
+            Sfx.Play("ui-open");
         }
 
         /// <summary>Admin panel: so huu ca roster phao (test khi chua quay gacha ra).</summary>
@@ -96,6 +104,7 @@ namespace BuildBuild.UI
             if (_pending == null || Owned(roster[index]) == null || OnMount(roster[index])) return;
 
             _pending.Assign(roster[index], LevelOf(roster[index]));
+            Sfx.Play("unit-place");
             SaveLoadout();
             ClosePicker();
         }
@@ -136,11 +145,44 @@ namespace BuildBuild.UI
         {
             ClosePicker();
             ShowFrames(false);
+            if (WaveManager.InConquest) SpawnRivals();
         }
 
-        void OnWaveEnded(int wave, int gold) => ShowFrames(true);
+        void OnWaveEnded(int wave, int gold) => OnDefeated(wave);
 
-        void OnDefeated(int wave) => ShowFrames(true);
+        void OnDefeated(int wave)
+        {
+            ShowFrames(true);
+            foreach (var cannon in _rivals)
+                if (cannon != null) Destroy(cannon.gameObject);
+            _rivals.Clear();
+        }
+
+        /// <summary>
+        /// Chinh Phat: moi be co mot phao NPC tai vi tri doi xung tren thanh NPC, loai boc ngau nhien tu roster, level theo
+        /// save nhu phao minh — TAM, chua suy tu luc chien.
+        /// </summary>
+        void SpawnRivals()
+        {
+            var match = ConquestMatch.Current;
+            var pool = System.Array.FindAll(roster, c => c != null);
+            if (match == null || pool.Length == 0) return;
+            for (int i = 0; i < mounts.Length; i++)
+            {
+                var mount = mounts[i];
+                var target = match.Target;
+                var definition = target == null ? pool[Random.Range(0, pool.Length)]
+                    : i < target.cannons.Count ? ConquestMap.Find(roster, target.cannons[i]) : null;   // be ngoai so phao luc Do Tham: de trong
+                if (definition == null) continue;
+                var go = new GameObject("RivalCannon_" + definition.name);
+                go.transform.position = match.Mirror(mount.transform.position);
+                go.AddComponent<SpriteRenderer>().sortingOrder = SortOrder.Castle + 1;
+                go.AddComponent<SpriteAnimator>();
+                var cannon = go.AddComponent<Cannon>();
+                cannon.Initialise(definition, target != null ? target.cannonLevel : LevelOf(definition), Faction.Npc);
+                _rivals.Add(cannon);
+            }
+        }
 
         void ShowFrames(bool show)
         {

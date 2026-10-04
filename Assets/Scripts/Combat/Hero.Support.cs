@@ -42,6 +42,8 @@ namespace BuildBuild.Combat
         float _guard;
         float _guardUntil;
         GameObject _rallyFx;
+        float _shoveUntil;
+        float _shoveVelocity;
 
         struct TimedBuff
         {
@@ -49,16 +51,53 @@ namespace BuildBuild.Combat
             public float damage, rate, until;
         }
 
-        public bool IsStunned => Time.time < _stunnedUntil;
+        public override bool IsStunned => Time.time < _stunnedUntil;
 
         bool HasBuffFx => _definition != null && _definition.buffFrames != null && _definition.buffFrames.Length > 0;
 
         /// <summary>Choang <paramref name="seconds"/> giay: khong di, khong danh, animation dung hinh. Hoa Da (mien sat thuong) thi mien luon choang.</summary>
-        public void ApplyStun(float seconds)
+        public override void ApplyStun(float seconds, Sprite[] frames = null)
         {
             if (_dying || seconds <= 0f || _health.Invulnerable) return;
             if (_dragonLink != null && _dragonLink.Unshakable(this)) return;   // Long Giap mien choang
+            if (_brother != null && _brother.StunImmune) return;               // Tuy Tuu (Truong Phi)
             _stunnedUntil = Mathf.Max(_stunnedUntil, Time.time + seconds);
+        }
+
+        /// <summary>Hero chua co trang thai dong bang rieng: khoa nhu choang.</summary>
+        public override void ApplyFreeze(float seconds) => ApplyStun(seconds);
+
+        /// <summary>Day lui mot nhip (don danh co `knockbackOnHit`).</summary>
+        public override void PushBack(float direction)
+        {
+            if (!_dying) _knockback.Trigger(direction);
+        }
+
+        /// <summary>
+        /// Hat lui <paramref name="dx"/> (world, co dau) trong <paramref name="seconds"/> giay — bi day thi khong di, khong
+        /// danh. Long Giap mien nhu mien choang.
+        /// </summary>
+        public void Shove(float dx, float seconds)
+        {
+            if (_dying || seconds <= 0f || _health.Invulnerable || _petrified) return;
+            if (_dragonLink != null && _dragonLink.Unshakable(this)) return;
+            _shoveVelocity = dx / seconds;
+            _shoveUntil = Time.time + seconds;
+        }
+
+        /// <summary>Thieu Hon: khong hoi mau, khong tich mana trong <paramref name="seconds"/> giay.</summary>
+        public void ApplyScorch(float seconds)
+        {
+            if (_dying || seconds <= 0f) return;
+            _health.NoHealUntil = Mathf.Max(_health.NoHealUntil, Time.time + seconds);
+        }
+
+        bool UpdateShove()
+        {
+            if (Time.time >= _shoveUntil) return false;
+            var to = transform.position + new Vector3(_shoveVelocity * Time.deltaTime, 0f, 0f);
+            transform.position = Battlefield.Clamp(to, _bodyRadius, clampRight: true);
+            return true;
         }
 
         void InitialiseSupport() => ClearSupport();
@@ -66,6 +105,8 @@ namespace BuildBuild.Combat
         void ClearSupport()
         {
             _stunnedUntil = 0f;
+            _shoveUntil = 0f;
+            _health.NoHealUntil = 0f;
             _stunVisual = false;
             if (animator != null) animator.Paused = false;
             if (_buffFx != null) Destroy(_buffFx);
@@ -86,9 +127,9 @@ namespace BuildBuild.Combat
             {
                 _stunVisual = stunned;
                 if (animator != null) animator.Paused = stunned;
-                if (!stunned) _renderer.color = Color.white;
+                if (!stunned) Paint(_baseTint);
             }
-            if (stunned) _renderer.color = StunnedTint;
+            if (stunned) Paint(StunnedTint);
             return stunned;
         }
 
@@ -174,7 +215,7 @@ namespace BuildBuild.Combat
 
             if (!InHealRange(ally))
             {
-                if (CanReach(ally.transform.position)) MoveToward(ally.transform.position);
+                if (CanReach(ally.transform.position)) MoveToward(ally.transform.position, leashed: !Aggressive);
                 else ReturnHome();
                 return;
             }
@@ -191,7 +232,7 @@ namespace BuildBuild.Combat
             var ally = WoundedAlly(inRangeOnly: true);
             if (ally == null) return;
             AuraMultipliers(out float multiplier, out _);
-            ally.Health.Heal(BaseDamage * multiplier * RescueMultiplier(ally));
+            ally.Health.Heal(BaseDamage * multiplier * RescueMultiplier(ally), _health);
             var at = ally.transform.position + new Vector3(0f, ally.BodyHeight * 0.5f, 0f);
             OneShotFx.Spawn(at, _definition.healFrames, false, SortOrder.Air);
             OnHitsLanded(1);    // healer khong danh trung quai: moi lan hoi tinh nhu mot don trung de nap mana
@@ -212,13 +253,13 @@ namespace BuildBuild.Combat
             float heal = BaseDamage * _definition.skillPower * multiplier;
             foreach (var ally in Alive)
             {
-                if (ally == null || ally.IsDying || ally._definition == null) continue;
+                if (ally == null || ally.IsDying || ally._definition == null || ally.Side != Side) continue;
                 if (Battlefield.GroundDistance(ally.transform.position, at) > radius) continue;
-                ally.Health.Heal(heal * RescueMultiplier(ally));
+                ally.Health.Heal(heal * RescueMultiplier(ally), _health);
                 var fxAt = ally.transform.position + new Vector3(0f, ally.BodyHeight * 0.5f, 0f);
                 OneShotFx.Spawn(fxAt, _definition.healFrames, false, SortOrder.Air);
                 ally.ApplyShield(_definition.shieldAmount, _definition.skillDuration,
-                    _definition.shieldFrames, _definition.shieldBreakFrames);
+                    _definition.shieldFrames, _definition.shieldBreakFrames, _health);
             }
         }
 
@@ -228,10 +269,10 @@ namespace BuildBuild.Combat
         float ShieldLocalScale => _bodyHeight * ShieldPerBody / (ShieldArtHeight * Mathf.Max(0.01f, transform.lossyScale.y));
 
         /// <summary>Khien ao `amount` sat thuong trong `seconds` giay; dat lai thi lam moi (khong cong don).</summary>
-        public void ApplyShield(float amount, float seconds, Sprite[] loop, Sprite[] broken)
+        public void ApplyShield(float amount, float seconds, Sprite[] loop, Sprite[] broken, Health caster = null)
         {
             if (_dying || amount <= 0f || seconds <= 0f) return;
-            _health.AddShield(amount);
+            _health.AddShield(amount, caster);
             _shieldUntil = Time.time + seconds;
             _shieldBreakFrames = broken;
             if (_shieldFx != null) Destroy(_shieldFx);
@@ -269,7 +310,7 @@ namespace BuildBuild.Combat
             float bestFraction = 1f;
             foreach (var ally in Alive)
             {
-                if (ally == null || ally.IsDying || ally._definition == null) continue;
+                if (ally == null || ally.IsDying || ally._definition == null || ally.Side != Side) continue;
                 float fraction = ally.Health.Fraction;
                 if (fraction >= bestFraction) continue;
                 if (inRangeOnly ? !InHealRange(ally) : !CanReach(ally.transform.position)) continue;

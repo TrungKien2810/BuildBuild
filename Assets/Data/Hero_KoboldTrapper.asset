@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
+  m_Name: Hero_KoboldTrapper
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
+  displayName: "Kobold g\xE0i b\u1EABy"
+  unitId: koboldtrapper
+  maxHealth: 300
+  damage: 15
+  attackRate: 0.8
+  range: 3.5
+  moveSpeed: 1.2
+  leashRange: 3
+  maxHeld: 3
+  heldDamageBonus: 0
+  warden: {fileID: 0}
+  dragonRider: {fileID: 0}
+  banner: {fileID: 0}
+  wukong: {fileID: 0}
+  stormcaller: {fileID: 0}
+  galemonk: {fileID: 0}
+  daoVien: {fileID: 0}
+  bloodswordsman: {fileID: 0}
+  soulbinder: {fileID: 0}
+  swornBrother: 0
+  projectileSpeed: 8
+  splashRadius: 0.1
+  projectileFrames:
+  - {fileID: 21300000, guid: 63990f069bf2c89479f5b79d4b635ddd, type: 3}
+  - {fileID: 21300000, guid: f1fff4071120a6042aef4d5082dcec3f, type: 3}
+  - {fileID: 21300000, guid: 1bfd5c4212115b4489b2c89b5b9f315e, type: 3}
+  - {fileID: 21300000, guid: 403218420fe80514caf2d415e1afe17c, type: 3}
+  projectileScale: 1
+  impactFrames: []
+  impactScale: 1
+  knockbackOnHit: 0
+  fireSfx: 
+  impactSfx: 
+  skillSfx: 
+  skillKind: 24
+  skillTier: 0
+  skillCooldown: 0
+  manaMax: 6
+  manaPerSecond: 0.35
+  manaPerHit: 0.25
+  skillRadius: 0.8
+  skillDuration: 3
+  skillPower: 1
+  skillFrames:
+  - {fileID: 21300000, guid: 677b4a4d70f3f004d82dc53ae11e7ad1, type: 3}
+  - {fileID: 21300000, guid: 71bbe6591b88e6c4889eec6cec2ef370, type: 3}
+  - {fileID: 21300000, guid: 687bc5882d88b3e489e833e2cfc148d4, type: 3}
+  - {fileID: 21300000, guid: 0885dd02cf95c5349b39ec9c6b180b7d, type: 3}
+  skillIntroFrames:
+  - {fileID: 21300000, guid: 54347149245fd0e42a05129ae6755690, type: 3}
+  - {fileID: 21300000, guid: b414ed67a19ae8841b5ffdb5e8c2a8d2, type: 3}
+  - {fileID: 21300000, guid: e81ae5107f67f6d41a7e76b0b54d4937, type: 3}
+  skillOutroFrames: []
+  stunFrames: []
+  summoner: {fileID: 0}
+  healsAllies: 0
+  healFrames: []
+  buffFrames: []
+  shieldAmount: 0
+  shieldFrames: []
+  shieldBreakFrames: []
+  passiveStar: 1
+  minorStar: 3
+  secondMinorStar: 3
+  passiveKind: 14
+  passivePower: 0
+  passiveThreshold: 0
+  passiveRadius: 0
+  passiveEvery: 1
+  passiveDuration: 0
+  passiveFrames:
+  - {fileID: 21300000, guid: 8daff7f0352fb8645b1fe78f03e37d23, type: 3}
+  ultimateText: "K\xEDch N\u1ED5: m\u1ECDi b\u1EABy n\u1ED5 3\xD7 quanh n\xF3 v\xE0
+    tr\xF3i 1s (tinh anh 0,5s), r\u1ED3i \u0111\u1EB7t l\u1EA1i 3 b\u1EABy."
+  passiveText: "\u0110\u1EB7t B\u1EABy: m\u1ED7i 8s \u0111\u1EB7t 1 b\u1EABy, t\u1ED1i
+    \u0111a 3; gi\u1EABm g\xE2y 1\xD7 v\xE0 tr\xF3i 1,5s (tinh anh 0,75s, boss mi\u1EC5n
+    tr\xF3i)."
+  minorText: 
+  secondMinorText: 
+  ultimateIcon: {fileID: 0}
+  minorIcon: {fileID: 0}
+  passiveIcon: {fileID: 0}
+  secondMinorIcon: {fileID: 0}
+  animations: {fileID: 11400000, guid: 7ac5d985b6d547243b3739d6a6c7aee2, type: 2}
+  artFacesRight: 0
+  avatar: {fileID: 21300000, guid: dbd4d1c322095a74c8d01fb81fb345a0, type: 3}

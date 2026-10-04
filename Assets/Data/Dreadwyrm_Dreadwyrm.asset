@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f5adc517e8d3d4448b88612f4c400e3, type: 3}
+  m_Name: Dreadwyrm_Dreadwyrm
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.DreadwyrmDefinition
+  cleaveTargets: 3
+  cleaveRadius: 1.6
+  clawFrames:
+  - {fileID: 21300000, guid: 255ea4bc60656f8419928595adff74a4, type: 3}
+  - {fileID: 21300000, guid: 0b9e8478e1dda02489701d8f55d54a74, type: 3}
+  - {fileID: 21300000, guid: f992a3fce88e0724f92946b3b4ebada9, type: 3}
+  - {fileID: 21300000, guid: d2940a2514cfde3438543445b1a25979, type: 3}
+  breathInterval: 12
+  breathDamage: 60
+  breathLength: 4.5
+  breathHalfWidth: 0.8
+  breathFrames:
+  - {fileID: 21300000, guid: 1b9df3a5c1036c84183fbd4d658b4fa8, type: 3}
+  - {fileID: 21300000, guid: bb50528c503943240a366ba24a4dff1b, type: 3}
+  - {fileID: 21300000, guid: 21611316ca55e2a469335f826501b2bd, type: 3}
+  - {fileID: 21300000, guid: 34f04e6305837394fb0f8eec00691dfc, type: 3}
+  burnDuration: 4
+  burnDamagePerSecond: 15
+  scorchSeconds: 1
+  burnPatches: 3
+  burnRadius: 0.8
+  burnFrames:
+  - {fileID: 21300000, guid: 106f9c9f7d2040f4bb070ba5907e988b, type: 3}
+  - {fileID: 21300000, guid: f18110cda4d21d74788225cf8b93f52c, type: 3}
+  - {fileID: 21300000, guid: 65dcd580f990ee24caa2869d879d0143, type: 3}
+  - {fileID: 21300000, guid: fa0fe16d68a3c564abfb4cb3829e9f55, type: 3}
+  galeInterval: 16
+  galeRadius: 3
+  galeShove: 1.2
+  galeShoveSeconds: 0.25
+  galeFrames:
+  - {fileID: 21300000, guid: b1878e036fa9e184fbe52c9c9b434918, type: 3}
+  - {fileID: 21300000, guid: 30c2aaa4843a7e147a90c1f178cfb7d4, type: 3}
+  - {fileID: 21300000, guid: 8be66881f39092b4fb994f1dbd56c34c, type: 3}
+  - {fileID: 21300000, guid: a189d8ed165e54c4c851f42c7869aa4d, type: 3}
+  soulInterval: 20
+  soulDamageBonus: 0.25
+  soulBurstDamage: 30
+  soulBurstRadius: 1
+  soulAuraFrames:
+  - {fileID: 21300000, guid: c3259a4a3e3e5504da07636f8a002f27, type: 3}
+  - {fileID: 21300000, guid: 2e6df3c5799186c45b0813aec7cce56c, type: 3}
+  - {fileID: 21300000, guid: 9890eb4b5193a6642b3936c1b3d91c44, type: 3}
+  - {fileID: 21300000, guid: 2992810a03bc13e4cabb66764eac7b83, type: 3}
+  soulBurstFrames:
+  - {fileID: 21300000, guid: 66f0b948a899aa64eb90577dc28acf16, type: 3}
+  - {fileID: 21300000, guid: 9d7fa531ce5a10c49b4b3dd622b65310, type: 3}
+  - {fileID: 21300000, guid: 984330fb7a73e8d4f886f36885c7a022, type: 3}
+  - {fileID: 21300000, guid: 2729eeb9d3505b14dab0c18e27ed7a93, type: 3}
+  wispMin: 2
+  wispMax: 3
+  wisp: {fileID: 11400000, guid: 3adaba5353a13254f8a966cf4a63995a, type: 2}
+  enrageBelow: 0.3
+  enrageAttackRateBonus: 0.5
+  enrageBreathSpeedup: 2
+  enrageTint: {r: 1, g: 0.72, b: 0.45, a: 1}
+  breathBody:
+    name: breath
+    frames:
+    - {fileID: 21300000, guid: e6d8d0d52f103ee4580c5018588a94d5, type: 3}
+    - {fileID: 21300000, guid: b7dd516bfe03b914a9f1eef1106c9c76, type: 3}
+    - {fileID: 21300000, guid: a3c997c3a5a28fc4d831b23c7ee930a7, type: 3}
+    - {fileID: 21300000, guid: 0f0ce2dfac114c34ead5cf78b214fe8d, type: 3}
+    - {fileID: 21300000, guid: ff255a09be5e9e34a93074790b33eea0, type: 3}
+    - {fileID: 21300000, guid: e305a19d10708484da1432f659a069dc, type: 3}
+    loop: 0
+    hitFrame: 4
+  galeBody:
+    name: gale
+    frames:
+    - {fileID: 21300000, guid: 5658d3edae77d6f48a638071fad4ffe0, type: 3}
+    - {fileID: 21300000, guid: 44273263b0130394e91da1c29033cf77, type: 3}
+    - {fileID: 21300000, guid: 77a5795876ac6e34282acc67db489afb, type: 3}
+    - {fileID: 21300000, guid: 8f7d2311f0f5f044aa7cd58b7b3ccefd, type: 3}
+    - {fileID: 21300000, guid: 120081d5d50980248b0f101888c3cfbc, type: 3}
+    - {fileID: 21300000, guid: 5465e084f00a3544fb2fcc17683700fe, type: 3}
+    loop: 0
+    hitFrame: 4
+  roarBody:
+    name: roar
+    frames:
+    - {fileID: 21300000, guid: fc5998660b282464fa509226bdbc819c, type: 3}
+    - {fileID: 21300000, guid: f9ddcee13f8d03c40a7990411a198253, type: 3}
+    - {fileID: 21300000, guid: bf9f008edf01c86449cc88c561b60509, type: 3}
+    - {fileID: 21300000, guid: 4e92406067ba73042ac34846a1b73497, type: 3}
+    loop: 0
+    hitFrame: 3
+  mouth: {x: -2.48, y: 1.8}
+  bite: {x: -2.28, y: 1.46}

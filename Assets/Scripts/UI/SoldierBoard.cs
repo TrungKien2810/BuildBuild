@@ -51,6 +51,7 @@ namespace BuildBuild.UI
             if (camp.Assigned(post.Index) != null)
             {
                 camp.Assign(post.Index, null);
+                Sfx.Play("unit-remove");
                 return;
             }
 
@@ -62,12 +63,14 @@ namespace BuildBuild.UI
                 UnitCardView.ShowLevelAndStars(rosterLevels[i], rosterStars, i, Progression.Owned(soldier.unitId), starOn, starOff);
             }
             pickerPanel.SetActive(true);
+            Sfx.Play("ui-open");
         }
 
         void Choose(int index)
         {
             if (_pending < 0 || index >= camp.RosterCount) return;
             camp.Assign(_pending, camp.Soldier(index));
+            Sfx.Play("unit-place");
             ClosePicker();
         }
 

@@ -1,3 +1,4 @@
+using BuildBuild.Core;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -43,10 +44,20 @@ namespace BuildBuild.UI
 
         [SerializeField] Text hintText;
         [SerializeField] Button closeButton;
+        [SerializeField] Button statsButton;
+        [SerializeField] ContributionPanel contributionPanel;
+
+        /// <summary>Nguoi choi bam dong bang (khong tinh `Hide` tu code luc bat dau wave).</summary>
+        public event System.Action Closed;
 
         void Awake()
         {
-            closeButton.onClick.AddListener(Hide);
+            closeButton.onClick.AddListener(() =>
+            {
+                Hide();
+                Closed?.Invoke();
+            });
+            statsButton.onClick.AddListener(OpenStats);
             Hide();
         }
 
@@ -54,7 +65,9 @@ namespace BuildBuild.UI
         /// <param name="drop">Icon trang bi vua roi (null = khong roi); `dropName` ghi duoi icon, vd "Nhẫn R".</param>
         public void Show(bool victory, int gold, string hint, Sprite drop = null, string dropName = "")
         {
+            Sfx.Play(victory ? "jingle-win" : "jingle-lose");
             bool hasDrop = drop != null;
+            if (hasDrop) Sfx.Play("item-drop");
             dropSlot.SetActive(hasDrop);
             dropIcon.sprite = drop;
             dropText.text = dropName;
@@ -62,9 +75,10 @@ namespace BuildBuild.UI
             goldRect.anchoredPosition = new Vector2(hasDrop ? -80f : 0f, goldRect.anchoredPosition.y);
             ribbon.sprite = victory ? victoryRibbon : defeatRibbon;
             titleText.text = victory ? "CHIẾN THẮNG" : "THẤT BẠI";
-            // Chu thang mau kem sang: long ruy bang thang trong suot, tia sang vang cua crest nam ngay sau chu.
-            titleText.color = victory ? new Color(1f, 0.95f, 0.78f) : new Color(0.86f, 0.86f, 0.90f);
+            // Chu thang mau navy toi tren long ruy bang thang dac.
+            titleText.color = victory ? new Color(0.08f, 0.12f, 0.27f) : new Color(0.86f, 0.86f, 0.90f);
             if (crest != null) crest.sprite = victory ? victoryCrest : defeatCrest;
+            statsButton.gameObject.SetActive(true);
             rewardRow.SetActive(gold > 0);
             goldText.text = "+" + gold.ToString("N0");
             hintText.text = hint;
@@ -74,10 +88,33 @@ namespace BuildBuild.UI
             root.SetActive(true);
         }
 
+        /// <summary>
+        /// Bang NHAN THUONG khong phai ket qua wave (ruong AFK): ruy bang thang + <paramref name="title"/>, khong nut thong ke.
+        /// </summary>
+        public void ShowReward(string title, int gold, string hint, Sprite drop = null, string dropName = "")
+        {
+            Show(true, gold, hint, drop, dropName);
+            titleText.text = title;
+            statsButton.gameObject.SetActive(false);
+        }
+
         public void Hide()
         {
             root.SetActive(false);
             dim.SetActive(false);
+        }
+
+        void OpenStats()
+        {
+            root.SetActive(false);
+            dim.SetActive(false);
+            if (contributionPanel != null) contributionPanel.Show(this);
+        }
+
+        public void ShowAgain()
+        {
+            dim.SetActive(true);
+            root.SetActive(true);
         }
     }
 }

@@ -22,15 +22,34 @@ namespace BuildBuild.Combat
 
         /// <param name="scale">Art ve theo co than unit (vet chem) thi truyen `Battlefield.UnitScale`; art ve dung ban kinh gameplay thi 1.</param>
         /// <param name="fps">Nhip phat. FX it frame ma can nhin ro (quang trieu hoi 4 frame) thi ha xuong.</param>
+        /// <param name="degrees">Xoay quanh truc z (vd. luong lua rong chui tu mieng xuong dat).</param>
         public static void Spawn(Vector3 position, Sprite[] frames, bool flipX, int sortingOrder, float scale = 1f,
-            float fps = FramesPerSecond)
+            float fps = FramesPerSecond, float degrees = 0f)
         {
             var fx = Create(frames, sortingOrder);
             if (fx == null) return;
             fx._frameDuration = 1f / fps;
             fx.transform.position = position;
+            fx.transform.rotation = Quaternion.Euler(0f, 0f, degrees);
             fx.transform.localScale = Vector3.one * scale;
             fx._renderer.flipX = flipX;
+        }
+
+        /// <summary>
+        /// Tia noi <paramref name="from"/> -> <paramref name="to"/> (tia set Stormcaller): art ve ngang tu trai sang phai, pivot
+        /// tam o -> dat o trung diem, xoay theo huong, keo dan chieu dai cho vua khoang cach; be day giu <paramref name="thickness"/>.
+        /// </summary>
+        public static void SpawnBeam(Vector3 from, Vector3 to, Sprite[] frames, int sortingOrder, float thickness)
+        {
+            var fx = Create(frames, sortingOrder);
+            if (fx == null) return;
+            fx._frameDuration = 1f / FramesPerSecond;
+            var delta = to - from;
+            delta.z = 0f;
+            float artLength = frames[0].bounds.size.x;
+            fx.transform.position = (from + to) * 0.5f;
+            fx.transform.rotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(delta.y, delta.x) * Mathf.Rad2Deg);
+            fx.transform.localScale = new Vector3(artLength > 0f ? delta.magnitude / artLength : 1f, thickness, 1f);
         }
 
         /// <summary>

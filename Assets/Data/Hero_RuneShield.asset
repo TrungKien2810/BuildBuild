@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
+  m_Name: Hero_RuneShield
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
+  displayName: "Ng\u01B0\u1EDDi l\xF9n khi\xEAn rune"
+  unitId: runeshield
+  maxHealth: 1100
+  damage: 14
+  attackRate: 0.7
+  range: 0.55
+  moveSpeed: 1
+  leashRange: 3
+  maxHeld: 3
+  heldDamageBonus: 0
+  warden: {fileID: 0}
+  dragonRider: {fileID: 0}
+  banner: {fileID: 0}
+  wukong: {fileID: 0}
+  stormcaller: {fileID: 0}
+  galemonk: {fileID: 0}
+  daoVien: {fileID: 0}
+  swornBrother: 0
+  projectileSpeed: 20
+  splashRadius: 0.3
+  projectileFrames: []
+  projectileScale: 1
+  impactFrames: []
+  impactScale: 1
+  knockbackOnHit: 0
+  fireSfx: 
+  impactSfx: 
+  skillSfx: 
+  skillKind: 19
+  skillTier: 0
+  skillCooldown: 0
+  manaMax: 6
+  manaPerSecond: 0.35
+  manaPerHit: 0.25
+  skillRadius: 2.5
+  skillDuration: 5
+  skillPower: 1
+  skillFrames:
+  - {fileID: 21300000, guid: c1b457bde8bc3ba4884055050b690baf, type: 3}
+  - {fileID: 21300000, guid: 3bf2f567825f7524a894120603291929, type: 3}
+  - {fileID: 21300000, guid: 53a37fdd2c26f174d828afe659afb89f, type: 3}
+  skillIntroFrames:
+  - {fileID: 21300000, guid: 0bed52e1f6f67d844829b84368e442df, type: 3}
+  - {fileID: 21300000, guid: 4af8c25f2b2394d45a24e9a1e2f11c98, type: 3}
+  - {fileID: 21300000, guid: 0ee851364377f5d4ba8de353d2ebe6a1, type: 3}
+  skillOutroFrames:
+  - {fileID: 21300000, guid: 157bfe6ffb78fe54d918351ca1d6b810, type: 3}
+  - {fileID: 21300000, guid: 309bdafdc482a3847a5524c49795348e, type: 3}
+  - {fileID: 21300000, guid: bf9f21c099bbb3c4c8974fc8da8c68fd, type: 3}
+  stunFrames: []
+  summoner: {fileID: 0}
+  healsAllies: 0
+  healFrames: []
+  buffFrames: []
+  shieldAmount: 0
+  shieldFrames: []
+  shieldBreakFrames: []
+  passiveStar: 1
+  minorStar: 3
+  secondMinorStar: 3
+  passiveKind: 11
+  passivePower: 0
+  passiveThreshold: 0
+  passiveRadius: 0
+  passiveEvery: 1
+  passiveDuration: 0
+  passiveFrames:
+  - {fileID: 21300000, guid: e08970fb4cb656f448b4abca5c7a6d4a, type: 3}
+  - {fileID: 21300000, guid: ca443cac13399344686ea3a0bdd79a2c, type: 3}
+  - {fileID: 21300000, guid: 46debe3cf54d2c04eaa1da63be5b8505, type: 3}
+  ultimateText: "T\u01B0\u1EDDng Rune: c\u1EAFm khi\xEAn d\u1EF1ng t\u01B0\u1EDDng
+    rune 5s tr\u01B0\u1EDBc m\u1EB7t, ph\u1EE7 h\xE0ng c\u1EE7a \xF4ng v\xE0 hai
+    h\xE0ng k\u1EC1 \u2014 ch\u1EB7n \u0111\u1EE9ng qu\xE1i v\xE0 \u0111\u1EA1n qu\xE1i;
+    \xF4ng \u0111\u1EE9ng y\xEAn sau khi\xEAn."
+  passiveText: "Ch\u1EAFn \u0110\u1EA1n: \u0111\u1EA1n c\u1EE7a qu\xE1i b\u1EAFn
+    xa tr\xFAng \xF4ng th\xEC v\u1EE1, kh\xF4ng g\xE2y s\xE1t th\u01B0\u01A1ng."
+  minorText: 
+  secondMinorText: 
+  ultimateIcon: {fileID: 0}
+  minorIcon: {fileID: 0}
+  passiveIcon: {fileID: 0}
+  secondMinorIcon: {fileID: 0}
+  animations: {fileID: 11400000, guid: b0da9612352bf3941aacd84a6a11d7f2, type: 2}
+  artFacesRight: 0
+  avatar: {fileID: 21300000, guid: 1fec3a2450ee33c4f9773e0eb557a733, type: 3}

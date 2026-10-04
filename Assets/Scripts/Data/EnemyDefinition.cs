@@ -15,6 +15,7 @@ namespace BuildBuild.Data
     /// Boss             5000 /120 / 0.6 / 200
     /// TinhAnh Gatebreaker 1200 / 60 / 0.7 / 40   giap -15%
     /// BanXa   GoblinSlinger 80 / 12 / 1.3 / 6    tam 4 (so tam, GDD chua chot)
+    /// BanXa   GoblinAlchemist 90 / 10 / 1.2 / -  tam 4,5, vung doc 12/s x 3s (so Claude de xuat, CHUA can)
     /// </summary>
     [CreateAssetMenu(menuName = "BuildBuild/Enemy Definition", fileName = "Enemy_")]
     public class EnemyDefinition : ScriptableObject
@@ -40,6 +41,13 @@ namespace BuildBuild.Data
             "di, nhung khong duoc keo ca doi hinh ve mot hero o cuoi san.")]
         public float heroAggroRange = 2f;
 
+        [Header("Bay cao (Gloomwing)")]
+        [Tooltip(
+            "Bay CAO: khong bi chan, chi hero / linh BAN XA va phao danh trung. Bay thang ve thanh, bo qua unit; bi hero / " +
+            "linh ban xa danh thi quay sang phan don ke do, bi phao ban thi khong phan ung. Quai bay THAP (Ma Hoa, Rong) " +
+            "de false: van bi chan, bi danh nhu quai dat.")]
+        public bool flyHigh;
+
         [Header("Phong thu")]
         [Tooltip("0..1 — phan sat thuong bi giap an mat. Gatebreaker 0,15, boss 0,3.")]
         [Range(0f, 1f)] public float damageReduction;
@@ -56,8 +64,23 @@ namespace BuildBuild.Data
 
         public bool IsRanged => projectileFrames != null && projectileFrames.Length > 0;
 
+        [Header("Nem cong + vung doc (Goblin Nem Binh Doc; 0 = ban thang, khong vung)")]
+        [Tooltip("Do cao dinh parabol (don vi the gioi). > 0 = nem cong roi xuong chan muc tieu thay vi bay thang.")]
+        public float projectileArc;
+        [Tooltip("Vung doc tai cho binh vo. Trong = khong de vung.")]
+        public Sprite[] poolFrames;
+        public float poolDuration = 3f;
+        [Tooltip("Ban kinh vung (tren mat dat, toi MEP than unit).")]
+        public float poolRadius = 0.6f;
+        [Tooltip("Sat thuong moi giay len moi hero / linh dung trong vung (nhan he so sat thuong wave).")]
+        public float poolDamagePerSecond;
+
         [Header("Boss (bo trong = khong co co che boss)")]
         public BossDefinition boss;
+        [Tooltip("Boss Phap su Orc: Ho Lua, Khien Phep, Dich Chuyen. Trong = khong co.")]
+        public ShamanDefinition shaman;
+        [Tooltip("Boss Rong Ma Hoa: Hoi Tho, Vo Canh, Goi Hon Lua, Noi Gian. Trong = khong co.")]
+        public DreadwyrmDefinition dragon;
 
         [Header("Animation")]
         public SpriteAnimationSet animations;

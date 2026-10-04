@@ -21,13 +21,13 @@ namespace BuildBuild.Combat
         Hero _hero;
         SpriteRenderer _heroRenderer;
         Vector3 _hand;          // toa do LOCAL art (quay trai), chua nhan scale
-        Enemy _target;
+        Unit _target;
         Sprite[] _fly;
         Sprite _bite;
         Sprite _link;
         float _linkLength;
         float _pullTime;
-        Action<Enemy> _onLatch;
+        Action<Unit> _onLatch;
 
         SpriteRenderer _head;
         readonly List<SpriteRenderer> _links = new List<SpriteRenderer>();
@@ -36,8 +36,8 @@ namespace BuildBuild.Combat
         float _frameTimer;
         int _frame;
 
-        public static void Launch(Hero hero, Vector2 handLocal, Enemy target, Sprite[] fly, Sprite bite, Sprite link,
-            float pullTime, Action<Enemy> onLatch)
+        public static void Launch(Hero hero, Vector2 handLocal, Unit target, Sprite[] fly, Sprite bite, Sprite link,
+            float pullTime, Action<Unit> onLatch)
         {
             var go = new GameObject("HookChain");
             var chain = go.AddComponent<HookChain>();

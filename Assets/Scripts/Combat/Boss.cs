@@ -133,7 +133,7 @@ namespace BuildBuild.Combat
             var primary = _enemy.EngagedHero;
             foreach (var hero in Hero.Alive.ToArray())
             {
-                if (hero == null || hero.IsDying || hero == primary) continue;
+                if (hero == null || hero.IsDying || !hero.IsHostileTo(_enemy.Side) || hero == primary) continue;
                 if (Battlefield.GroundDistance(hero.transform.position, transform.position) - hero.BodyRadius > _definition.cleaveRadius)
                     continue;
                 hero.Health.TakeDamage(_enemy.Damage, _enemy.Health);
@@ -152,7 +152,7 @@ namespace BuildBuild.Combat
             transform.position + new Vector3(_renderer != null && _renderer.flipX ? _definition.slamReach : -_definition.slamReach, 0f, 0f);
 
         bool InSlam(Hero hero) =>
-            hero != null && !hero.IsDying &&
+            hero != null && !hero.IsDying && hero.IsHostileTo(_enemy.Side) &&
             Battlefield.GroundDistance(hero.transform.position, SlamPoint) - hero.BodyRadius <= _definition.slamRadius;
 
         void Slam()
@@ -163,6 +163,7 @@ namespace BuildBuild.Combat
                 hero.Health.TakeDamage(_definition.slamDamage * _damageScale, _enemy.Health);
                 hero.ApplyStun(_definition.slamStun);
             }
+            Sfx.Play("boss-slam");
             OneShotFx.Spawn(SlamPoint, _definition.slamFrames, false, SortOrder.GroundDecal + 1,
                 Battlefield.UnitScale);
         }
@@ -176,6 +177,7 @@ namespace BuildBuild.Combat
                 OneShotFx.SpawnLoop(enemy.transform, BuffOffset, _definition.roarBuffFrames, _definition.roarDuration,
                     SortOrder.Air, scale: BuffFxScale);
             }
+            Sfx.Play("boss-roar");
             OneShotFx.Spawn(_enemy.BodyCenter, _definition.roarFrames, false, SortOrder.Air, Battlefield.UnitScale);
         }
     }

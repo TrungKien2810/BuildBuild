@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
+  m_Name: Hero_Soulbinder
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
+  displayName: "Thu\u1EADt s\u0129 k\u1EBFt h\u1ED3n"
+  unitId: soulbinder
+  maxHealth: 320
+  damage: 24
+  attackRate: 0.8
+  range: 4.5
+  moveSpeed: 1.2
+  leashRange: 3
+  maxHeld: 3
+  heldDamageBonus: 0
+  warden: {fileID: 0}
+  dragonRider: {fileID: 0}
+  banner: {fileID: 0}
+  wukong: {fileID: 0}
+  stormcaller: {fileID: 0}
+  galemonk: {fileID: 0}
+  daoVien: {fileID: 0}
+  bloodswordsman: {fileID: 0}
+  soulbinder: {fileID: 11400000, guid: 21b33c411c36f054db42ac710c86dd88, type: 2}
+  swornBrother: 0
+  projectileSpeed: 8
+  splashRadius: 0.1
+  projectileFrames:
+  - {fileID: 21300000, guid: cd222b4ca2c0cea4f8d59eb9dff5fa1c, type: 3}
+  - {fileID: 21300000, guid: 2ad7ba62948f6df43baf5b7e6f92e75b, type: 3}
+  - {fileID: 21300000, guid: a04667f2d966b4a4e9a21f51ce0a976a, type: 3}
+  - {fileID: 21300000, guid: 5a200c47e4c29654c908475cf029be1b, type: 3}
+  projectileScale: 1
+  impactFrames:
+  - {fileID: 21300000, guid: 6100734399585ea49b3cb2da9209553a, type: 3}
+  - {fileID: 21300000, guid: 6b0b714440f2aea44a1c96b9242d33c9, type: 3}
+  - {fileID: 21300000, guid: 9b67f6eb0b0446a4697ffbb7d18d051a, type: 3}
+  - {fileID: 21300000, guid: d595a69b2c735d048a62a51e78e014ed, type: 3}
+  impactScale: 1
+  knockbackOnHit: 0
+  fireSfx: 
+  impactSfx: 
+  skillSfx: 
+  skillKind: 22
+  skillTier: 0
+  skillCooldown: 0
+  manaMax: 6
+  manaPerSecond: 0.35
+  manaPerHit: 0.25
+  skillRadius: 1.6
+  skillDuration: 3
+  skillPower: 1
+  skillFrames: []
+  skillIntroFrames: []
+  skillOutroFrames: []
+  stunFrames: []
+  summoner: {fileID: 0}
+  healsAllies: 0
+  healFrames: []
+  buffFrames: []
+  shieldAmount: 0
+  shieldFrames: []
+  shieldBreakFrames: []
+  passiveStar: 1
+  minorStar: 3
+  secondMinorStar: 3
+  passiveKind: 0
+  passivePower: 0
+  passiveThreshold: 0
+  passiveRadius: 0
+  passiveEvery: 1
+  passiveDuration: 0
+  passiveFrames: []
+  ultimateText: "\u0110\u1EA1i H\u1ED3n Kh\u1EBF: n\u1ED1i t\u1ED1i \u0111a 5 \u0111\u1ECBch
+    trong 8s, lan 40%; H\u1ED3n Ch\u1EA5n 2\xD7 v\xE0o g\u1ED1c. S\xE1t th\u01B0\u01A1ng
+    sao kh\xF4ng lan ti\u1EBFp."
+  passiveText: "Chuy\u1EC3n K\u1EBFt: \u0111\u1ECBch li\xEAn k\u1EBFt ch\u1EBFt th\xEC
+    d\xE2y chuy\u1EC3n sang \u0111\u1ECBch g\u1EA7n nh\u1EA5t trong v\xF9ng ch\u1ECDn,
+    gi\u1EEF th\u1EDDi gian c\xF2n l\u1EA1i."
+  minorText: "Tam H\u1ED3n K\u1EBFt: n\u1ED1i t\u1ED1i \u0111a 3 \u0111\u1ECBch trong
+    6s; s\xE1t th\u01B0\u01A1ng tr\u1EF1c ti\u1EBFp lan 25% HP th\u1EF1c m\u1EA5t
+    l\xEAn m\u1ED7i \u0111\u1ECBch kh\xE1c. H\u1ED3i 10s."
+  secondMinorText: "Gi\u1EADt H\u1ED3n: cho\xE1ng c\xE1c \u0111\u1ECBch \u0111ang
+    n\u1ED1i, m\u1ED7i h\u1ED3n g\xE2y 1,5\xD7 l\xEAn g\u1ED1c; t\u1ED5ng s\xE1t
+    th\u01B0\u01A1ng lan \u0111\xFAng m\u1ED9t l\u1EA7n. H\u1ED3i 10s."
+  ultimateIcon: {fileID: 0}
+  minorIcon: {fileID: 0}
+  passiveIcon: {fileID: 0}
+  secondMinorIcon: {fileID: 0}
+  animations: {fileID: 11400000, guid: 5afb723703d95c240a46784f626bbe24, type: 2}
+  artFacesRight: 0
+  avatar: {fileID: 21300000, guid: 2633654b5a97f2c419f45f1deebe79d0, type: 3}

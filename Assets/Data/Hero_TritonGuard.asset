@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
+  m_Name: Hero_TritonGuard
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
+  displayName: "Ng\u01B0 nh\xE2n \u0111inh ba"
+  unitId: tritonguard
+  maxHealth: 800
+  damage: 22
+  attackRate: 0.8
+  range: 0.9
+  moveSpeed: 1.1
+  leashRange: 3
+  maxHeld: 3
+  heldDamageBonus: 0
+  warden: {fileID: 0}
+  dragonRider: {fileID: 0}
+  banner: {fileID: 0}
+  wukong: {fileID: 0}
+  stormcaller: {fileID: 0}
+  galemonk: {fileID: 0}
+  daoVien: {fileID: 0}
+  swornBrother: 0
+  projectileSpeed: 20
+  splashRadius: 0.1
+  projectileFrames: []
+  projectileScale: 1
+  impactFrames: []
+  impactScale: 1
+  knockbackOnHit: 0
+  fireSfx: 
+  impactSfx: 
+  skillSfx: 
+  skillKind: 17
+  skillTier: 0
+  skillCooldown: 0
+  manaMax: 5
+  manaPerSecond: 0.35
+  manaPerHit: 0.25
+  skillRadius: 1
+  skillDuration: 4
+  skillPower: 0.5
+  skillFrames:
+  - {fileID: 21300000, guid: 2f1e8f99714381e43a662a30aebe4005, type: 3}
+  - {fileID: 21300000, guid: 412b6f0f6e4620847aa8c47e19f58371, type: 3}
+  - {fileID: 21300000, guid: fe9d9f60571ce5f4b96fc1e7391a2f7f, type: 3}
+  - {fileID: 21300000, guid: 47961a6bfc113fc45bb55577aec4391b, type: 3}
+  skillIntroFrames: []
+  skillOutroFrames:
+  - {fileID: 21300000, guid: 784bf6bdb0a04374aaf24909fc1b8cc2, type: 3}
+  - {fileID: 21300000, guid: 4d5db693615ddec48a09cfc1be35ac59, type: 3}
+  - {fileID: 21300000, guid: a7c577232fd2b1c40b71ebd50e957772, type: 3}
+  stunFrames: []
+  summoner: {fileID: 0}
+  healsAllies: 0
+  healFrames: []
+  buffFrames: []
+  shieldAmount: 0
+  shieldFrames: []
+  shieldBreakFrames: []
+  passiveStar: 1
+  minorStar: 3
+  secondMinorStar: 3
+  passiveKind: 9
+  passivePower: 0.5
+  passiveThreshold: 0
+  passiveRadius: 0.6
+  passiveEvery: 1
+  passiveDuration: 0
+  passiveFrames: []
+  ultimateText: "Xo\xE1y N\u01B0\u1EDBc: xo\xE1y n\u01B0\u1EDBc quanh ch\xE2n 4s
+    \u2014 qu\xE1i trong xo\xE1y kh\xF4ng \u0111\xE1nh \u0111\u01B0\u1EE3c v\xE0
+    m\u1EA5t m\xE1u m\u1ED7i gi\xE2y (tinh anh ch\u1EC9 \u221250% s\xE1t th\u01B0\u01A1ng,
+    boss kh\xF4ng b\u1ECB kho\xE1)."
+  passiveText: "Th\u1ECDc H\xE0ng: \u0111\xF2n th\u01B0\u1EDDng xuy\xEAn qua, qu\xE1i
+    \u0111\u1EE9ng ngay sau m\u1EE5c ti\xEAu \u0103n 50% s\xE1t th\u01B0\u01A1ng."
+  minorText: 
+  secondMinorText: 
+  ultimateIcon: {fileID: 0}
+  minorIcon: {fileID: 0}
+  passiveIcon: {fileID: 0}
+  secondMinorIcon: {fileID: 0}
+  animations: {fileID: 11400000, guid: 63e1d654fac829340927f888a8b304de, type: 2}
+  artFacesRight: 0
+  avatar: {fileID: 21300000, guid: 192603a1e5c45734a9ac12b84296601d, type: 3}

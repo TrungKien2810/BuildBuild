@@ -62,8 +62,15 @@ namespace BuildBuild.Core
         [SerializeField] float rightBound;
 
         static Battlefield _current;
+        float _screenRight;
+        Vector2 _waveLane;
 
-        void Awake() => _current = this;
+        void Awake()
+        {
+            _current = this;
+            _screenRight = rightBound;
+            _waveLane = new Vector2(laneBottom, laneTop);
+        }
 
         void OnDestroy()
         {
@@ -71,6 +78,24 @@ namespace BuildBuild.Core
         }
 
         public float RandomLaneY() => Random.Range(laneBottom, laneTop);
+
+        /// <summary>y ngau nhien trong dai dat cua san dang mo; chua co Battlefield thi 0.</summary>
+        public static float RandomY() => _current != null ? _current.RandomLaneY() : 0f;
+
+        /// <summary>Chinh Phat: bien phai = vach thanh NPC (<paramref name="x"/>); null tra ve mep phai man.</summary>
+        public static void OverrideRight(float? x)
+        {
+            if (_current != null) _current.rightBound = x ?? _current._screenRight;
+        }
+
+        /// <summary>Chinh Phat: dai dat cua nen rong (x = day, y = dinh, world y); null tra ve dai tran wave.</summary>
+        public static void OverrideLane(Vector2? lane)
+        {
+            if (_current == null) return;
+            var l = lane ?? _current._waveLane;
+            _current.laneBottom = l.x;
+            _current.laneTop = l.y;
+        }
 
         /// <summary>
         /// Keo vi tri ve trong san: than (<paramref name="radius"/>) khong lan qua vach thanh, chan khong ra khoi

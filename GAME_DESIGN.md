@@ -35,6 +35,20 @@ Chống wave → nhận vàng → gacha ra hero/pháo → nâng cấp level → 
 
 Lâu đài MVP: 3 tầng cố định, **HP 2000**. Nâng cấp lâu đài (tăng HP, mở tầng 4–5) là phạm vi mở rộng.
 
+**Nâng cấp thành trì — người dùng chốt hướng 2026-10-01 (hệ thống thật trong meta, CHƯA code; số là TẠM, Claude
+chưa cân):** thành có **3 cấp**, mỗi cấp đổi hẳn hình (fantasy đá xám-lam → thành ấn rune) và mở thêm bệ pháo.
+
+| Cấp | Tên | Bệ pháo | HP thành | Giá (vàng) | Điều kiện mở |
+|---|---|---|---|---|---|
+| 1 | Đồn Đá Biên | 3 | 2000 | — | mặc định |
+| 2 | Thành Đá Lam | 4 | 3000 | 3.000 | đã thắng wave 10 |
+| 3 | Thành Ấn Rune | 5 | 4500 | 8.000 | đã thắng wave 20 |
+
+- Mỗi cấp có 3 sprite (lành / hư 1 / hư 2), cùng vách phải + đáy để quái và 9 ô hero không phải dời.
+- Nâng cấp làm ở sảnh giữa các wave, có hiệu lực từ wave sau; bệ mới trống, người chơi tự lắp pháo.
+- **Chinh Phạt:** thành NPC dùng chung bộ sprite, lật gương + đổi màu cờ bằng code; cấp thành NPC theo độ khó
+  (khớp 3 icon bản đồ `map-castle-npc-small/mid/large`).
+
 ## 3. Hero (4 vai trò, không trùng chức năng)
 
 Cột **Máu** là số thật đang chạy trong game (`HeroDefinition.maxHealth`) — quái nhắm hero ở gần hơn là nhắm lâu đài,
@@ -83,6 +97,95 @@ nghĩa là không có chiêu phụ — nội tại vẫn có, mở ở 1★ như
 | Hawkfletch (N) | *Nhắm Yếu Điểm* | Cứ phát thứ 4 chí mạng ×2 sát thương (tính cả lúc Bắn Nhanh) |
 | Frostweaver (N) | *Vỡ Băng* | Quái đang bị làm chậm (Vùng Băng, Pháo Băng…) chết trong tầm đánh → nổ, quái trong bán kính 1,0 quanh xác ăn 50% đòn thường; nổ được dây chuyền |
 | Vespera (R) | *Cứu Nguy* | Đồng minh dưới 30% máu được hồi +50% (cả đòn thường lẫn Đèn Canh) |
+
+**Bộ hero N fantasy mới — kit ĐÃ CHỐT (Claude đề xuất, người dùng duyệt 2026-10-02; số CHƯA cân).**
+Theo khung N: 1 nội tại (1★) + 1 chiêu xịn (thanh mana), không chiêu phụ. Chỉ số neo vào roster N hiện có (Frostweaver 260/35/0,6/5,0).
+
+| Hero | Vai | Máu | Sát thương | Tốc đánh | Tầm | Mana |
+|---|---|---|---|---|---|---|
+| Pháp Sư Lửa Tập Sự (`EmberApprentice`) | Tầm xa, sát thương theo thời gian | 240 | 22 + cháy | 0,8/s | 5,0 | 5 |
+| Người Lùn Khiên Rune (`RuneShield`) | Chặn đường, chắn đạn | 1100 | 14 | 0,7/s | 0,55 | 6 |
+| Phù Thuỷ Đầm Lầy (`BogWitch`) | Hao mòn, phá giáp | 250 | 14 + độc | 0,9/s | 4,5 | 5 |
+
+- **Pháp Sư Lửa.** Đòn thường bắn **đốm lửa** (đạn bay), trúng thì quái **Cháy** 3 s, 5 sát thương/s (trúng lại thì làm mới, không cộng dồn).
+  *Nội tại Bén Lửa:* quái đang Cháy mà chết thì lửa nhảy sang quái gần nhất trong bán kính 1,2 (Cháy 3 s mới) — dây chuyền được.
+  *Chiêu Mưa Tàn Lửa:* 3 quả cầu lửa rơi lệch nhau quanh cụm quái đông nhất trong tầm, mỗi quả nổ bán kính 0,7 gây 2× đòn thường + Cháy,
+  để lại **vũng lửa** 4 s (quái đứng trong bị Cháy liên tục; dùng lại cơ chế `PoisonPool`). Cast: clip **cast** riêng (giơ gậy lên trời).
+  FX cần vẽ: đạn đốm lửa · lửa Cháy nhỏ trên người quái (loop) · cầu lửa rơi + nổ · vũng lửa loop.
+- **Người Lùn Khiên Rune.** Đòn thường đập khiên + nện búa (cận chiến, chặn 2 quái như hero cận chiến khác).
+  *Nội tại Chắn Đạn:* **đạn của quái bắn xa trúng ông thì vỡ, không gây sát thương** (cận chiến vẫn ăn đủ) — khắc chế Goblin Ná/quái bắn xa;
+  quái bắn xa nhắm hero gần nhất nên ông đứng hàng đầu là hút đạn cho cả đội.
+  *Chiêu Tường Rune:* cắm khiên xuống đất, dựng **tường rune 5 s** ngang trước mặt phủ hàng của ông và hai hàng kề: quái chạm tường bị
+  chặn đứng như gặp hero (không đi vòng — lane không có tìm đường), đạn quái không bay qua; tường không có máu, hết giờ thì tan.
+  Trong 5 s đó ông đứng yên sau khiên. Cast: clip **cast** riêng (nâng khiên, cắm xuống, giữ thế).
+  FX cần vẽ: tường rune (mọc lên 3 frame + loop + tan) · tia đạn vỡ trên khiên (nhỏ, 3 frame).
+- **Phù Thuỷ Đầm Lầy.** Đòn thường hất **giọt độc** (đạn bay vòng cung), mỗi trúng +1 tầng **Độc** (tối đa 5), mỗi tầng 2 sát thương/s,
+  tầng làm mới 4 s. *Nội tại Ngấm Độc* chính là cơ chế cộng dồn này (không thêm gì khác — một câu là hiểu).
+  *Chiêu Vạc Sương Độc:* màn sương bán kính 1,3 ở cụm quái đông nhất trong tầm, kéo dài 5 s: quái trong sương +1 tầng Độc mỗi giây và
+  **−20% giáp**. Cast: clip **cast** riêng (khuấy muôi như khuấy vạc).
+  FX cần vẽ: đạn giọt độc · bong bóng độc nhỏ trên người quái (loop, đậm theo tầng thì code chỉnh alpha) · màn sương loop + tan.
+
+Ba chiêu đều KHÔNG trùng niche đã có (vùng chậm Frostweaver, hoá đá Cragfist, vùng độc của quái Alchemist là phe địch).
+Asset thêm ngoài 5 clip cơ bản: **3 clip cast + 10 FX** — brief riêng sau khi bộ clip cơ bản được duyệt.
+
+**Bộ hero N fantasy đợt 2 (N5–N8) — kit ĐỀ XUẤT (Claude, 2026-10-03; số CHƯA cân).** Người dùng (2026-10-03): **Gnome Đạo Chích BỎ HẲN**; Hiệp Sĩ Nấm ĐẠT; Tiên Dệt Tơ đổi sang Múa Rối, Ngư Nhân đổi chiêu sang Xoáy Nước (v1 bị chê).
+Identity đã duyệt 2026-10-03 (`tempart/<Unit>/identity/`). Cùng khung N: 1 nội tại (1★) + 1 chiêu xịn (thanh mana), không chiêu phụ.
+
+| Hero | Vai | Máu | Sát thương | Tốc đánh | Tầm | Mana |
+|---|---|---|---|---|---|---|
+| Tiên Dệt Tơ (`SilkFae`) | Tầm xa, khống chế nhóm | 230 | 16 | 0,8/s | 4,5 | 6 |
+| Hiệp Sĩ Nấm (`ShroomKnight`) | Chặn đường giá rẻ | 1000 | 12 | 0,7/s | 0,55 | 6 |
+| Ngư Nhân Đinh Ba (`TritonGuard`) | Cận chiến tầm nhỉnh | 800 | 22 | 0,8/s | 0,9 | 5 |
+
+- **Tiên Dệt Tơ — skill v2 "Múa Rối" (người dùng chọn 2026-10-03).** Đòn thường bắn **sợi tơ bạc** (đạn bay thẳng).
+  *Nội tại Dây Rối:* quái trúng đòn thường bị tơ vướng tay — **25% đòn của nó trượt** trong 2 s (trúng lại thì làm mới, không cộng dồn).
+  *Chiêu Múa Rối:* giật tơ lên quái **nhiều máu nhất** trong tầm (trừ boss): **4 s nó quay sang đánh quái phe mình** (tinh anh 2 s), hết giờ trở lại phe địch, đứng nguyên chỗ.
+  Cast: clip **cast** riêng (hai tay giật tơ như người múa rối).
+  FX cần vẽ: đạn sợi tơ · dây rối bạc nối từ trên đầu quái bị điều khiển (loop) + đứt tơ (3 frame).
+- **Hiệp Sĩ Nấm.** Đòn thường chém kiếm gỗ (cận chiến, chặn 2 quái).
+  *Nội tại Bào Tử:* mỗi lần bị đánh cận chiến thì nhả bào tử, quái trong bán kính 0,8 ăn 4 sát thương (tối đa 2 lần/giây — chống spam khi bị vây).
+  *Chiêu Nở Nấm:* 3 cây nấm mọc quanh chân (bán kính 1,0), 2 s sau nổ bào tử, mỗi cây gây 3× đòn thường trong bán kính 0,6.
+  Cast: clip **cast** riêng (cắm kiếm xuống đất).
+  FX cần vẽ: bụi bào tử (3 frame) · nấm mọc (3 frame) + nổ bào tử (4 frame).
+- **Ngư Nhân Đinh Ba — skill v2 "Xoáy Nước" (người dùng chọn 2026-10-03).** Đòn thường thọc đinh ba, tầm 0,9 (xa nhất trong nhóm cận chiến).
+  *Nội tại Thọc Hàng:* đòn thường xuyên qua, quái đứng ngay sau mục tiêu (trong 0,6) ăn 50%.
+  *Chiêu Xoáy Nước:* cắm đinh ba, **xoáy nước bán kính 1,0 quanh chân trong 4 s**: quái trong xoáy **không đánh được** (bị cuốn) và mất 0,5× đòn thường mỗi giây; ông vẫn đánh bình thường.
+  Tinh anh đánh được nhưng −50% sát thương; boss không bị khoá đòn, chỉ ăn sát thương. Cast: clip **cast** riêng (cắm đinh ba xuống đất).
+  FX cần vẽ: xoáy nước quanh chân (loop 4 s) + tan (3 frame).
+
+Asset thêm ngoài 5 clip cơ bản: **3 clip cast + 8 FX** (Tiên 3 · Nấm 3 · Ngư Nhân 2).
+
+**Bộ hero N fantasy đợt 3 (N9–N11) — kit ĐÃ CHỐT (Claude đề xuất, người dùng duyệt cả 3 ngày 2026-10-03; số CHƯA cân).** Hoa Yêu chọn Hạt Bám; Kobold chiêu đổi sang Kích Nổ.
+Cùng khung N: 1 nội tại (1★) + 1 chiêu xịn (thanh mana), không chiêu phụ. Identity đã duyệt 2026-10-03 (`tempart/<Unit>/identity/`).
+
+| Hero | Vai | Máu | Sát thương | Tốc đánh | Tầm | Mana |
+|---|---|---|---|---|---|---|
+| Hoa Yêu Bắn Hạt (`PetalSprite`) | Tầm xa, dọn quái lẻ | 220 | 24 | 1,0/s | 4,5 | 5 |
+| Kobold Gài Bẫy (`KoboldTrapper`) | Khống chế rẻ | 300 | 15 | 0,8/s | 3,5 | 6 |
+| Thầy Bùa Ấn Sao (`SigilMage`) | Hỗ trợ sát thương | 240 | 18 | 0,8/s | 4,5 | 6 |
+
+- **Hoa Yêu Bắn Hạt.** Đòn thường nhổ **hạt** từ tâm hoa (đạn bay thẳng).
+  *Nội tại Hạt Bám (người dùng chọn 2026-10-03):* mỗi đòn cắm 1 hạt lên quái, **đủ 3 hạt thì nảy mầm nổ** gây 2× đòn thường lên
+  chính nó (không lan), hạt bám 4 s kể từ hạt cuối — dồn sát thương đơn mục tiêu.
+  *Chiêu Mưa Hạt:* bắn liên tiếp 8 hạt trong 1,6 s vào cụm quái đông nhất trong tầm, mỗi hạt = đòn thường (đi kèm nội tại đã chọn).
+  Cast: clip **cast** riêng (ngửa bông hoa lên, rung cánh).
+  FX cần vẽ: đạn hạt · hạt dính trên quái (1 frame, code xếp 1–3 cái) + mầm nổ 4 frame.
+- **Kobold Gài Bẫy.** Đòn thường ném **dao nhỏ** (đạn bay thẳng, tầm ngắn 3,5).
+  *Nội tại Đặt Bẫy:* mỗi 8 s rải 1 **bẫy kẹp** lên đường quái phía trước trong tầm (tối đa 3 trên sân); quái đầu tiên giẫm phải
+  **đứng im 1,5 s** + ăn 1× đòn thường, bẫy mất. Tinh anh đứng im 0,75 s; boss không bị giữ (dùng `Unit.ApplyRoot`, boss `Unmovable`).
+  Hết wave dọn sạch bẫy.
+  *Chiêu Kích Nổ (người dùng chọn 2026-10-03, thay Rải Bẫy):* giật dây cho **mọi bẫy đang nằm trên sân nổ cùng lúc** — mỗi bẫy nổ
+  bán kính 0,8, gây 3× đòn thường + đứng im 1 s (tinh anh 0,5 s, boss chỉ ăn sát thương), rồi lập tức đặt lại 3 bẫy mới. Không có bẫy nào
+  thì vẫn đặt 3 bẫy. Cast: clip **cast** riêng (giật mạnh sợi dây nối các bẫy).
+  FX cần vẽ: đạn dao · bẫy nằm đất (mở, 1 frame) · bẫy sập (3 frame, frame cuối giữ trên chân quái lúc đứng im) · bẫy nổ (4 frame).
+- **Thầy Bùa Ấn Sao.** Đòn thường bắn **ấn sao nhỏ** (đạn bay thẳng).
+  *Nội tại Ấn Yếu:* quái trong bán kính 2,0 quanh ông nhận **+15% sát thương từ mọi nguồn** (dùng lại `Unit.ApplyArmorBreak` làm mới liên
+  tục — hệ quả: KHÔNG cộng với −20% giáp của Vạc Sương Độc, lấy mức cao hơn).
+  *Chiêu Bùa Nổ:* gắn ấn sao lên **3 quái nhiều máu nhất** trong tầm, 2 s sau mỗi ấn nổ 3× đòn thường bán kính 0,6.
+  Cast: clip **cast** riêng (mở sách bùa, giơ tay vẽ sao).
+  FX cần vẽ: đạn ấn sao · vòng ấn mờ dưới chân (loop, cỡ bán kính 2) · ấn sao trên đầu quái (loop) · nổ sao (4 frame).
+
+Asset thêm ngoài 5 clip cơ bản: **3 clip cast + 10 FX** (Hoa 3 · Kobold 4 · Thầy Bùa 4).
 
 **Pháp sư triệu hồi — bộ kỹ năng (chốt với người dùng 2026-09-13).** Chủ đề: quái chết → dựng thành
 xương đánh cho phe ta. Có hai NGUỒN lính xương. Mỗi nguồn có bộ đếm riêng, giới hạn riêng và con
@@ -181,6 +284,93 @@ nhạt** để nối với giáp Wyrmspear.
 bộ clip + clip liên thương + clip bay-lao-cắm; địa long identity/idle/walk 4 chân/attack/đập đất/cắm đầu/hurt/death
 (chui xuống đất); clip biến hình 8 ô + clip rồng trồi lên; FX gai đá, cột đá, sóng chấn, đường xuyên, icon tầng Long Nộ.
 
+**Tôn Ngộ Không (Wukong, SSR) — bộ kỹ năng (chốt với người dùng 2026-09-30).** Vai: đấu sĩ cận chiến dọn đám đông,
+dùng **phân thân** làm thêm người chặn quái (ăn luật mỗi unit giữ 3 quái) và **hồi máu liên tục** để trụ lâu ở tuyến đầu.
+Di chuyển = cưỡi Cân Đẩu Vân (clip walk).
+
+| | Nội tại *Thế Thân · Lông Về Thân* | Chiêu thường *Nhổ Lông Phân Thân* *(cooldown ẩn)* | Chiêu phụ 2 *Toàn Phong Côn* *(cooldown ẩn, `secondMinorStar` 3)* | Chiêu xịn *Như Ý Thiên Trụ* *(thanh mana 5)* |
+|---|---|---|---|---|
+| Hiệu ứng | **Thế Thân:** lần đầu hết máu trong mỗi wave, bản thể hoá nhúm lông bay đi; còn phân thân thì một con **trở thành bản thể** với 40% máu tối đa, không còn thì chết như thường. **Lông Về Thân:** mỗi phân thân tan (hết giờ hoặc bị hạ) → bản thể **hồi 8% máu tối đa**; đòn đánh thường **hút máu 10%** | Nhổ nắm lông thổi ra: **2 phân thân** sống 8s, mỗi con 40% công/máu bản thể, tự đánh cận chiến, **mỗi con chặn 3 quái** | Xoay gậy quanh người 3s: **chặn và bật ngược đạn** bay tới (đạn ná, bình độc…) về phía quái; sát thương quanh mình mỗi 0,5s; **mỗi quái trúng mỗi nhát hồi 3% máu tối đa** (trần 25%/lần xoay), đạn bật trúng quái cũng hồi 3% | Ném gậy lên trời, gậy **biến lớn** dập nằm ngang xuống **cụm quái đông nhất trong tầm**: sát thương lớn theo vệt dài dọc sân, choáng 1,5s, để lại **vết nứt làm chậm 3s**. Mọi phân thân đang sống dập gậy nhỏ cùng lúc (mỗi cú 30%) |
+
+*Số khởi điểm Claude đề xuất, CHƯA cân bằng:* Nhổ Lông ~10s · Toàn Phong Côn ~7s (người dùng: "hồi máu nhiều, cooldown
+không quá lâu"), bán kính xoay 1,2 · Như Ý Thiên Trụ vệt dài ~4 × rộng ~1. Chọn *Lông Về Thân* thay *Bàn Đào Tiên Đan* vì
+ăn khớp với phân thân (người dùng chốt 2026-09-30). Art: phân thân dùng lại sprite Wukong tô nhạt bằng
+code; hồi máu dùng lại `Vespera/heal-fx`. Clip thân `clone-cast`, `smash-cast`, `spin`; FX khói lông (phân thân xuất hiện/tan,
+Thế Thân), gậy khổng lồ + vết nứt, vòng gió xoay gậy, tia chặn đạn.
+
+**Pháp sư sấm sét (Stormcaller, SSR, tên mã tạm) — hướng chốt với người dùng 2026-10-01, kit là đề xuất của Claude.**
+Vai: **SSR đánh xa** (hai SSR trước đều cận chiến), sét **nảy theo chuỗi quái** — khác Frostweaver (nổ vùng quanh một
+điểm). Khắc Khiên Phép của OrcShaman và đám đông chạy nhanh (RatRunner).
+
+| | Nội tại *Quá Tải* *(ghép A+D, người dùng chốt 2026-10-01)* | Đòn thường *Xích Lôi* | Chiêu xịn *Lôi Bạo* *(thanh mana)* |
+|---|---|---|---|
+| Hiệu ứng | **Tầng điện:** mỗi tia sét trúng quái (kể cả tia Cột Thu Lôi, cột Lôi Bạo) +1 tầng, tối đa 3; đủ 3 → **nổ**: đòn đó +60% sát thương + **choáng 0,3s**, xoá tầng (boss/tinh anh không choáng, vẫn ăn nổ). **Tê Liệt:** quái đang choáng ăn **+35%** sát thương sét, sét nảy **ưu tiên** quái đang choáng. Sét vào **khiên** (Khiên Phép OrcShaman, khiên hút) **×2** | Tia sét trúng 1 quái rồi **nảy sang tối đa 3 quái** gần nhất (bán kính 2), mỗi lần nảy −30% sát thương | **5 cột sét** giáng xuống chỗ quái đứng trong tầm, mỗi cột sát thương lớn + **choáng 0,5s** |
+
+*Số khởi điểm Claude đề xuất, CHƯA cân bằng:* 520 máu / 40 dmg / 0,8 đòn/s / tầm 5,5 / mana 6 · Lôi Bạo mỗi cột 120.
+**Chiêu phụ 2 *Lôi Bộ* (người dùng duyệt 2026-10-01, mở ở `secondMinorStar` 3):** cooldown ẩn, tự tung khi có quái áp sát —
+hoá tia sét dịch lùi 2 ô, để lại cú nổ ở chỗ cũ **choáng 0,5s**. Art: chớp biến mất/hiện ra + nổ đất, không cần clip thân mới.
+**Chiêu thường *Cột Thu Lôi* (người dùng duyệt 2026-10-01):** cooldown ẩn, cắm 1 cột đồng xuống giữa đám quái, sống 6s —
+mỗi 1s giật quái kề cột; *Xích Lôi* nảy được qua cột, nảy qua cột thì **+2 lần nảy, không bị giảm sát thương**.
+Art: clip cắm trượng (hoặc dùng lại attack), sprite cột + tia lặp.
+Nội tại: icon tầng điện nhỏ (1–3) trên đầu quái + chớp nổ. Cân bằng: để ý khoá choáng cả cụm (nổ tầng + Lôi Bộ + Lôi Bạo). Art: identity → idle → attack (vung
+trượng), hurt, death, cast Lôi Bạo, walk; FX tia sét nảy (đoạn lặp), cột sét + chớp trên đất.
+
+**Võ Tăng Gió (`Galemonk`, SR, tên mã tạm) — người dùng chọn 2026-10-01 trong 5 ý; kit + đủ bộ art người dùng DUYỆT 2026-10-01, đã nối vào game.**
+Vai: **khống chế vị trí** — roster chưa ai đẩy lùi cả hàng hay gom quái. Gom xong là combo cho Pháo Nổ (AOE), Stormcaller
+(sét nảy), Frostweaver (nổ vùng). Tạo hình: nhà sư giang hồ đội **nón tre rộng vành**, áo vạt tăng xanh ngọc nhạt, tay không.
+
+| | Nội tại *Thuận Phong* | Đòn thường *Chưởng Phong* | Chiêu phụ *Phong Tảo* (3★) | Chiêu xịn *Long Quyển* *(thanh mana)* |
+|---|---|---|---|---|
+| Hiệu ứng | Quái bị gió đẩy/hút **chậm 20% trong 2s** | Đạn gió tầm 2,5 trúng quái đầu tiên, **đẩy lùi 0,3 ô** | Cooldown ẩn ~10s: chưởng thẳng dọc lane, **xuyên cả hàng**, đẩy lùi 1,5 ô | Lốc xoáy ở cụm quái đông nhất, **hút quái bán kính 2,5 về tâm, giữ 3s**, sát thương mỗi giây |
+
+**Tinh anh: bị hút (Long Quyển) nhưng KHÔNG bị đẩy lùi** (người dùng chốt 2026-10-01). Boss: không bị đẩy/hút, chỉ ăn chậm. Đẩy lùi không bỏ qua luật chặn — quái đang bị giữ vẫn bị đẩy ra rồi đi lại.
+*Số khởi điểm Claude đề xuất, CHƯA cân:* 700 máu / 22 dmg / 0,9 đòn/s / tầm 2,5 / mana 6 · Long Quyển 30/giây.
+**Identity g2 (tụ khí) — Claude chọn theo ủy quyền người dùng 2026-10-01.** **Walk = LƠ LỬNG trên một luồng gió xoáy dưới chân** (người dùng chốt 2026-10-01): thân giữ thế, trôi nhẹ lên xuống, gió xoáy dưới chân lặp — không chu kỳ hai chân, chấm như clip hover (Gloomwing/Ma Hỏa), không dùng `gait_sort`.
+Art: identity → idle → walk (lơ lửng trên gió)/attack (đẩy chưởng)/hurt/death → cast Long Quyển + FX đạn gió, sóng Phong Tảo, lốc xoáy lặp.
+
+**Bộ Đào Viên — Lưu Bị / Quan Vũ / Trương Phi (SSR) — kit người dùng DUYỆT 2026-10-02 (đề xuất Claude, sửa 2 vòng).**
+Vai: Lưu Bị hỗ trợ (1 kiếm) · Quan Vũ sát thương cận chiến (Thanh Long Đao) · Trương Phi chống chịu + khống chế (xà mâu).
+**Nội tại chung *Kết Nghĩa*:** 2/3 anh em trên sân → cả ba +10% công và máu; đủ 3/3 → thêm +25% tốc hồi mana. Gọi chi viện đúng anh em còn thiếu cũng kích hoạt.
+
+| | Nội tại riêng | Chiêu thường *(cooldown ẩn)* | Chiêu phụ 2 *(3★)* | Chiêu xịn *(thanh mana)* |
+|---|---|---|---|---|
+| **Lưu Bị** | *Nhân Đức*: hero trong bán kính 2,5 hồi mana +15% (anh em kết nghĩa ×2) | *Ân Đức*: đồng minh mất máu nhiều nhất hồi 15% máu tối đa + giải độc/choáng | *Đồng Sinh Cộng Tử*: anh em kết nghĩa ngã xuống lần đầu mỗi wave → dải lụa đào kéo dậy sau 1s với 30% máu + 2s bất tử (mỗi người 1 lần/wave). Người dùng loại bản gánh sát thương ("Lưu Bị chết sớm hơn") | *Đào Viên Kết Nghĩa*: hoa đào rơi khắp sân, mọi đồng minh hồi 25% máu + 30% công 6s; anh em kết nghĩa +2 mana |
+| **Quan Vũ** | *Võ Thánh*: đòn thường chém quạt trúng tối đa 3 quái; mỗi quái bị hạ +1 tầng Uy (+5% công **và +2% hút máu**, tối đa 6, mất khi hết wave) | *Thanh Long Yển Nguyệt*: sóng đao trăng khuyết lục bay dọc lane, xuyên quái, ×2 | *Thác Đao Kế*: máu dưới 40% → lùi 1 ô giả thua rồi quay lại chém ×3 vào quái đuổi theo | *Thanh Long Hiện* (người dùng chọn rồng): hồn rồng lục trong suốt từ lưỡi đao lao dọc lane xuyên mọi quái, ×5 + thêm theo % máu đã mất; mỗi quái bị hạ hoàn 10% mana. Chỉ là FX, không phải vật cưỡi (khác Bạch Địa Long của Wyrmspear) |
+| **Trương Phi** | *Vạn Nhân Địch*: mỗi quái trong bán kính 1,5 −6% sát thương nhận (tối đa 30%) | *Bát Xà Mâu*: đâm xuyên 2 ô, quái trúng phá giáp (+15% sát thương nhận 4s) | *Túy Tửu*: tu bầu rượu, hồi 20% máu, miễn choáng, −30% sát thương nhận 5s (người dùng: giáp thay tốc đánh cho đúng vai tank) | *Đương Dương Kiều Hống*: dậm chân gầm, nứt đất; quái bán kính 4 ăn ×3, hất lùi 2 ô + choáng 3s + phá giáp 30% 6s; Trương Phi khiêu khích cả vùng + −50% sát thương nhận 6s. Tinh anh bị hất lùi; boss chỉ chậm 50% + phá giáp |
+
+*Số khởi điểm Claude đề xuất, CHƯA cân.* Art kỹ năng: Lưu Bị clip `cast` (giơ kiếm ban phúc, dùng cho Ân Đức + chiêu xịn) + FX hoa đào rơi, vòng hồi máu hồng đào, lụa kéo hồi sinh · Quan Vũ clip `slash-cast` (sóng đao + chiêu xịn) + FX sóng đao trăng khuyết, rồng linh hồn lục, vệt chém Thác Đao · Trương Phi clip `roar` (dậm + gầm), `drink` (tu bầu rượu) + FX sóng âm, đất nứt, dấu sợ trên đầu quái, vệt đâm xuyên. Bát Xà Mâu: clip `pierce-cast` riêng (người dùng 2026-10-02: xoay xà mâu nạp lực hai tay → lao bước dài đâm thẳng; trước đó dùng lại attack). 9 icon kỹ năng ở lane UI, làm sau.
+
+
+**Bộ hero bậc thấp tiếp theo — Bọ Hung (N), Song Đao (R), Chuông Bạc (R).** Người dùng chọn bộ này ngày 2026-10-03; người dùng **DUYỆT kit ngày 2026-10-03**, số CHƯA cân.
+Cùng khung N/R: đòn thường + 1 nội tại mở ở 1★ + 1 chiêu mana dùng ngay khi sở hữu; không chiêu phụ.
+
+| Hero | Vai | Máu | Sát thương | Tốc đánh | Tầm | Mana |
+|---|---|---|---|---|---|---|
+| Hiệp Sĩ Bọ Hung (`BeetleKnight`, N) | Chặn, khống chế quanh thân | 1050 | 20 | 0,8/s | 0,65 | 6 |
+| Hiệp Khách Song Đao (`Twinblade`, R) | Bám một mục tiêu, dồn sát thương | 800 | 32 | 1,2/s | 0,65 | 6 |
+| Nữ Tu Chuông Bạc (`BellNun`, R) | Giải hiệu ứng cho đội | 360 | 14 | 0,7/s | 4,0 | 7 |
+
+- **Hiệp Sĩ Bọ Hung — “đập đủ ba nhát thì đẩy, húc đất thì choáng”.** Đòn thường nện chùy cận chiến, chặn 3 đối thủ theo khung hero hiện tại.
+  *Nội tại Chấn Động:* mỗi đòn thường thứ 3 trúng mục tiêu hất nó lùi 0,5 unit; tinh anh lùi 0,25, boss không bị đẩy. Đếm đòn trúng, không đếm đánh hụt; không thêm sát thương.
+  *Chiêu Húc Sừng:* cúi sừng húc xuống đất tại chỗ; một xung quanh chân bán kính 1,0 gây 3× đòn thường và choáng 1 s; tinh anh/boss choáng 0,5 s. Không lao sang vị trí khác, không tạo vùng tồn tại.
+  Cast riêng: hạ trọng tâm → sừng chạm đất → hồi thế. Body chỉ chứa chuyển động thân; bụi/xung đất ở sheet riêng.
+  Art identity: giáp vỏ cứng tím-đồng trầm, một sừng đầu, chùy ngắn nặng; hai chân nhìn rõ, khác khiên Rune và mũ Nấm.
+  FX cần: vệt chùy 3 frame dùng cho nhát thứ 3; xung đất có hướng lan ra quanh điểm chạm 4 frame; dấu choáng nhỏ loop 4 frame (dùng chung).
+- **Hiệp Khách Song Đao — “càng chém cùng một con càng mạnh; chiêu dồn hết vào con đó”.** Đòn thường luân phiên hai đoản đao; chặn 3 đối thủ theo khung hero hiện tại.
+  *Nội tại Liên Hoàn:* mỗi đòn thường trúng cùng mục tiêu tăng 12% sát thương đòn thường kế tiếp, tối đa 5 tầng (+60%). Đổi mục tiêu hoặc 2 s không đánh trúng thì mất tầng. Nhát đầu chưa hưởng tầng mới; bonus không tăng sát thương của đồng minh.
+  *Chiêu Bão Đao:* khoá mục tiêu đang đánh, chém 6 nhát trong 3 s; mỗi nhát gây 65% đòn thường và hưởng số tầng Liên Hoàn lúc bắt đầu. Giữ nguyên bonus đó trong cả chiêu, không tạo thêm tầng; kết thúc xoá tầng. Mục tiêu chết/mất tầm thì ngừng, không nhảy sang con khác; không bất tử khi chém.
+  Cast riêng: thu hai đao → chuỗi chém trái/phải nhanh → hồi thế. Không quay thành lốc diện rộng, không phân thân.
+  Art identity: áo chẽn đỏ gạch/xám than, hai đoản đao thép, tóc buộc cao; tránh xanh ngọc của Ngư Nhân và silhouette đại kiếm Ironblade.
+  FX cần: dấu Liên Hoàn trên mục tiêu, 5 frame ứng với 1–5 tầng (không phải loop); cặp vệt đao ngắn hướng về mục tiêu 4 frame; chạm đao 3 frame. Không có projectile.
+- **Nữ Tu Chuông Bạc — “chuông nhỏ gỡ một hiệu ứng, hồi chuông lớn cứu cả đội khỏi khống chế”.** Đòn thường rung chuông, bắn một sóng âm nhỏ gây sát thương; không hồi máu bằng đòn thường.
+  *Nội tại Thanh Tẩy:* mỗi 10 s gỡ 1 hiệu ứng Độc/Cháy/Chậm khỏi hero đồng minh bị ảnh hưởng gần nhất trong tầm 4,0 (có thể là bản thân). Nếu có nhiều loại, ưu tiên Độc → Cháy → Chậm; gỡ Độc là xoá toàn bộ tầng độc. Không có ai cần thì giữ sẵn lượt thanh tẩy đến khi có mục tiêu.
+  *Chiêu Hồi Chuông:* rung một tiếng lan toàn sân; gỡ Độc, Cháy, Chậm, Trói, Khoá Đòn và Choáng hiện có khỏi mọi hero cùng phe, gồm bản thân; đồng thời đối thủ chậm 30% trong 3 s (tinh anh 15%, boss không chậm). Không hồi máu, không tạo khiên, không cho miễn hiệu ứng sau tiếng chuông; không xoá dấu kỹ năng riêng hay đổi phe.
+  Cast riêng: đưa chuông lên cao → rung mạnh → hạ tay. Sóng âm là FX riêng trên đất, quét một lượt rồi tan; vùng nhìn thấy phải thể hiện nhịp lan, không là biểu tượng đứng yên.
+  Art identity: áo tu trắng ngà/bạc xám, khăn trùm, chuông cầm tay; viền xanh xám nhỏ, khác đèn/áo tím của Vespera.
+  FX cần: đạn sóng âm nhỏ 4 frame; thanh tẩy trên người đồng minh 4 frame; sóng hồi chuông lan + tan 6 frame. Không vẽ vòng hồi máu.
+
+Lộ trình asset theo kit đã duyệt: mỗi hero identity trước; sau đó idle/walk/attack/hurt/death + cast riêng, FX tách body. Ba bộ có 9 sheet FX (Bọ Hung 3, Song Đao 3, Chuông Bạc 3). Neo art/camera/scale vào Frostweaver theo `art-style.md`. Người dùng duyệt cả ba identity và yêu cầu full animation ngày 2026-10-04. Đã xuất đủ 18 clip thân + 9 sheet FX qua image_gen/sprite-forge, PNG/GIF/meta ở `tempart/{BeetleKnight,Twinblade,BellNun}/<action>/final/`; người dùng duyệt các clip/FX trừ walk cả ba ngày 2026-10-04, đồng thời báo một số animation sai trục; guide walk v2 8 pose CHỜ DUYỆT theo yêu cầu người dùng trước khi sinh walk mới, ở mục `low-trio-walk-guide-v2-20261004` đầu `tempart/REVIEW.html`; đã sửa neo trục đứng cho Bọ Hung attack/cast và Song Đao attack, bản `<action>/axis-v2/` chờ xem lại; chưa giao Unity/code.
+
 ## 4. Pháo (3 loại MVP)
 
 | Pháo | Sát thương | Tốc bắn | Tầm | Đặc điểm |
@@ -188,6 +378,7 @@ bộ clip + clip liên thương + clip bay-lao-cắm; địa long identity/idle/
 | Liên Thanh | 12 | 2.0/s | 8 | Đơn mục tiêu, ổn định |
 | Nổ | 30 | 0.5/s | 7 | AOE bán kính 2 ô |
 | Băng | 8 | 1.0/s | 7 | Làm chậm 40% trong 3s |
+| *Nỏ Xuyên* | *22* | *0.6/s* | *9* | *Lao bay thẳng xuyên tối đa 3 quái (số Claude đề xuất 2026-10-01, chưa cân)* |
 
 ## 5. Quái
 
@@ -198,13 +389,28 @@ bộ clip + clip liên thương + clip bay-lao-cắm; địa long identity/idle/
 | Tank | Orc | 400 | 40 | 0.8 | 12 |
 | Nhanh | Chuột Cống (`RatRunner`) | 45 | 8 | 3.5 | 3 |
 | **Bắn xa** | **Goblin Ná** | — | — | — | — |
+| **Bắn xa** | **Goblin Ném Bình Độc** (`GoblinAlchemist`, tên mã tạm) | *90* | *10 + vũng 12/s × 3s* | *1.2* | — |
 | **Tinh anh** | **Gatebreaker** | **1200** | **60** | **0.7** | **40** |
 | Boss | *Vua minotaur (chưa đặt tên)* | 5000 | 120 | 0.6 | 200 |
-| Boss wave 20 | *Pháp sư Orc lơ lửng (`OrcShaman`, chưa đặt tên)* | — | — | — | — |
+| Boss wave 20 | *Pháp sư Orc lơ lửng (`OrcShaman`, chưa đặt tên)* | *2500* | *60* | *0.7* | — |
+| Boss wave 30 | *Rồng Ma Hỏa (`Dreadwyrm`, tên mã tạm)* | *5000* | *100* | *0.55* | — |
+| Triệu hồi của rồng | *Ma Hỏa (`SoulWisp`, tên mã tạm)* | *60* | *12* | *2.4* | — |
+| **Bay cao** | **Dơi Quỷ** (`Gloomwing`, tên mã tạm) | *45* | *12* | *1.8* | — |
+
+**Bay CAO vs bay THẤP (người dùng 2026-10-01):** Dơi Quỷ là quái **bay cao** đầu tiên. Ma Hỏa, Rồng Ma Hỏa, Pháp sư Orc
+chỉ bay/lơ lửng **thấp** — tính như quái mặt đất: bị luật chặn giữ, cận chiến đánh đủ.
+
+**Bay cao `Dơi Quỷ` (`Gloomwing`, cơ chế A người dùng chốt 2026-10-01; số Claude đề xuất, CHƯA cân):** dơi khổng lồ cánh
+màng tím bầm, máu giấy. **Không bị chặn**; chỉ **hero bắn xa, lính bắn xa và trụ/pháo** đánh trúng (đòn + chiêu + khống
+chế của đơn vị cận chiến đều không với tới). Bay thẳng về thành, **bỏ qua** mọi unit không đánh nó; bị hero/lính bắn xa
+đánh thì **quay sang phản đòn kẻ đó** tới khi kẻ đó chết; bị trụ bắn thì **không phản ứng**, vẫn lao vào đập thành.
+Xuất hiện từ wave 11 trong các wave hỗn hợp đã có Goblin Ná.
 
 **Nhanh `Chuột Cống` (thêm 2026-09-29):** chuột cống cầm dao găm, con nhanh thứ hai bên cạnh Ashfang — máu giấy, chạy nhanh hơn Ashfang. Bốn con số là **đề xuất của Claude, chưa cân bằng**.
 
 **Bắn xa `Goblin Ná` (thêm 2026-09-21, người dùng chốt):** goblin cầm ná cao su chữ Y, bắn viên đá. **Ưu tiên bắn hero và lính phe ta** trong tầm; **hết mục tiêu mới bắn tường thành**. Chỉ số, tầm và wave xuất hiện chưa chốt. Art: identity đang sinh (`tempart/GoblinSlinger/`).
+
+**Bắn xa `Goblin Ném Bình Độc` (`GoblinAlchemist`, người dùng chọn 2026-09-30):** goblin bịt mặt khăn xám + kính đồng trên trán, ném bình thuỷ tinh lục-vàng theo đường cong. Bình vỡ thành **vũng độc ~3 s**, hero/lính đứng trong vũng mất máu dần → ép dời hero giữa wave (khác Goblin Ná: sát thương vùng theo thời gian, không đơn mục tiêu). Chỉ số, tầm, wave xuất hiện chưa chốt. Art: identity đang sinh (`tempart/GoblinAlchemist/`); sau đó idle/walk/attack/hurt/death + bình bay + vỡ + vũng độc.
 
 **Tinh anh `Gatebreaker` (thêm 2026-09-12):** hạng quái giữa Orc và boss — cùng dòng giống với boss,
 đọc ra như "lính của nó". Vác một cánh cổng thành gỗ đã vỡ: **giảm 15% sát thương** (nửa của boss).
@@ -213,7 +419,8 @@ Xuất hiện **từ wave 12, 1 con mỗi wave; wave 21+ thì 2 con**; **không*
 khởi điểm tôi đề xuất, chưa qua cân bằng** — chỉnh trong ScriptableObject khi chơi thử.
 Art identity ĐÃ CÓ (`tempart/Gatebreaker/identity/`, 94×81 px), còn 5 action.
 **Ruinjaw** (2026-09-13): bản vẽ từng dự định làm boss, được chấm là "Gatebreaker nâng cấp một bậc" →
-dùng làm **dạng nâng cấp của Gatebreaker**, không phải boss. Cách xuất hiện và chỉ số chưa chốt.
+dùng làm **dạng nâng cấp của Gatebreaker**, không phải boss. **Số tạm (code 2026-09-30, chưa cân):** thay 2 Gatebreaker ở
+wave 21–29 (và wave thường sau 30); 1800 máu / 90 sát thương / tốc 0,65 / 0,55 đòn/s / giáp 20%.
 
 ```
 Máu quái   = Máu gốc × (1 + 0.12 × wave)
@@ -227,11 +434,14 @@ Số lượng   = 5 + floor(wave / 2)
 | 4–6 | Goblin + Ashfang + Chuột Cống |
 | 7–9 | Goblin + Ashfang + Goblin Ná + Orc |
 | 10 | BOSS + 6 Goblin hộ tống |
-| 11–19 | Hỗn hợp, tỉ lệ Orc tăng dần · **từ wave 12: +1 Gatebreaker** (trừ wave 20) |
+| 11–19 | Hỗn hợp (+ Dơi Quỷ bay cao), tỉ lệ Orc tăng dần · **từ wave 12: +1 Gatebreaker** (trừ wave 20) |
 | 20 | BOSS Minotaur (chỉ số ×2) + **BOSS Pháp sư Orc** + 4 Orc |
 | 21–29 | Hỗn hợp mật độ cao · **+2 Gatebreaker** |
 | 30 | BOSS (chỉ số ×3.5) + 6 quái hỗn hợp hộ tống (wave boss luôn có quái nhỏ để boss buff — người dùng 2026-09-29) |
 | 31+ | Lặp: 31–39 như 21–29, 40/50/… như wave 30 (boss +1,5 hệ số mỗi 10 wave) |
+
+*Số in nghiêng ở hai dòng Goblin Ném Bình / Pháp sư Orc là số Claude đề xuất lúc code (2026-09-30), CHƯA cân bằng.*
+*Rồng Ma Hỏa / Ma Hỏa: số Claude đề xuất lúc code (2026-10-01), CHƯA cân. Rồng THAY Minotaur ở wave 30 (giả định của Claude, chờ người dùng chốt).*
 
 **Boss (cơ chế, buộc đổi cách chơi):** giáp dày giảm cố định 30% sát thương · *Chấn Địa* mỗi 15s
 gây 80 dmg + choáng hero 2s · *Tiếng Thét* mỗi 20s tăng 30% tốc chạy mọi quái trong 5s · *Nổi Giận*
@@ -244,6 +454,17 @@ Bốn chiêu: *Đánh thường tầm xa* — dừng ở tầm xa bắn cầu l�
 thành · *Miệng Hố Lửa* — mỗi ~12s đánh dấu vùng quanh cụm hero đông nhất, 1,5s sau nổ · *Khiên Phép* — mỗi ~18s
 bọc khiên hấp thụ sát thương lên Minotaur/quái gần nhất · *Dịch Chuyển* — hero cận chiến áp sát thì biến mất, hiện
 lại xa hơn về phía phải (hồi ~10s).
+
+**Boss wave 30 — Rồng Ma Hỏa (`Dreadwyrm`, người dùng chốt kit 2026-09-30, tên và số CHƯA chốt; thay hay đi cùng
+Minotaur CHƯA chốt).** Rồng xác sống: xương than đen, thịt/cánh da đỏ-tím bầm rách thủng, lửa ma lục-vàng (cùng lửa
+Pháp sư Orc — pháp sư gọi nó dậy) cháy trong lồng ngực, hốc mắt, khoé mõm; một sừng gãy. Identity đã duyệt
+(`tempart/Dreadwyrm/identity/`). **Bay là là sát đất nhưng tính như QUÁI MẶT ĐẤT:** bị luật chặn 3 quái giữ, cận chiến
+đánh đủ (người dùng: boss bay thẳng vào thành thì không thắng được). Di chuyển = trôi ngang + vỗ cánh, không có walk chân.
+*Xác Không Đau* (nội tại) — giảm 25% mọi sát thương; đòn thường cắn/vuốt quét trúng **cả 3 unit đang chặn** ·
+*Hơi Thở Ma Hỏa* ~12s — ngóc đầu 0,5s báo trước, phun lửa dải dọc lane phía trước, để lại đất cháy 4s + *Thiêu Hồn*
+(hero đứng trong lửa không hồi máu/mana) · *Vỗ Cánh Cuồng Phong* ~16s — dang cánh 0,5s báo trước, đập cánh hất lùi mọi
+unit đang chặn ~1 ô · *Gọi Hồn Lửa* ~20s — gầm, 6 quái hộ tống bốc lửa ma +25% sát thương, chết nổ lửa nhỏ, **và sinh thêm 2–3 Ma Hỏa** (`SoulWisp`, tên mã tạm; người dùng chốt 2026-09-30: hồn lửa lơ lửng — sọ đen chạy lửa lục-vàng, đuôi lửa tan khói tím, không chân; quái nhỏ lao vào đánh lính/hero; số lượng, máu, sát thương CHƯA chốt) ·
+*Nổi Giận* <30% máu — lửa chuyển cam-rực (đổi màu bằng code), +50% tốc đánh, miễn slow, Hơi Thở hồi nhanh gấp đôi.
 
 ## 6. Gacha
 
@@ -295,6 +516,32 @@ mạnh lên sau khi thua một wave.
 - **Phó bản công thành:** đi đánh lâu đài của NPC khác để lấy tài nguyên.
 - **AFK:** thoát game rồi vào lại thì nhận tài nguyên theo thời gian vắng mặt.
 - **Lính triệu hồi** (phe ta, theo tốp, để chặn quái): xem `docs/project-state/IDEAS.md`.
+
+**Phó bản công thành "Chinh Phạt" + rương AFK — người dùng chốt hướng 2026-09-30, số là TẠM (Claude, chưa cân):**
+- **Trận:** hai thành đối xứng. Thành mình bên trái như trận thường; **thành NPC bên phải** có hero đứng ô 3×3 trước
+  thành, 3 pháo trên thành, lính NPC tràn sang trái thay cho quái. Lính mình tràn sang phải đánh thành NPC. Thành NPC
+  về 0 máu thì thắng, thành mình về 0 thì thua.
+- **Phe NPC = lãnh chúa người đối thủ:** dùng lại hero/lính/pháo của mình, lật quay trái, đánh dấu phe đỏ (thân
+  phủ đỏ + thanh máu đỏ lúc chạy game; sprite chỉ đổi viền bằng script). Thành NPC = pháo đài mình lật + đổi màu cờ.
+- **Chọn ải = bản đồ do thám:** vào từ **Tháp Do Thám** trên sân sảnh. Bản đồ vùng phủ sương, thành mình ở giữa. Bấm
+  **Do Thám** → vòng quét lan ra, lộ **3 thành NPC**: Dễ (lực chiến ≈ 0,85× mình), Ngang (≈ 1,0×), Khó (≈ 1,2×), cả ba
+  nhân thêm **(1 + 0,06 × chuỗi thắng)** → càng thắng liên tiếp đối thủ càng mạnh, thưởng càng to.
+- **Xem trước thành:** bấm thành trên bản đồ → bảng: chân dung + tên lãnh chúa, **lực chiến** so với mình (xanh/vàng/đỏ),
+  đội hình 3×3 hero (avatar), loại lính, 3 pháo, máu thành, thưởng (vàng, cơ hội rơi trang bị, mảnh), nút **Tấn công**.
+- **Lực chiến** (TẠM): tổng mọi unit mình đang dùng, mỗi unit = chỉ số gốc × (1 + 0,08 × (lv − 1)) × hệ số sao.
+- **Luật lượt** (TẠM): 5 lượt tấn công/ngày; mỗi thành đánh 1 lần; thắng → chuỗi +1, thua → chuỗi về 0; quét lại miễn
+  phí mỗi 30 phút, quét ngay tốn vàng.
+- **Rương AFK trên sân sảnh** (thay Hive): 3 hình theo thời gian tích luỹ — đóng (< 1 giờ), hé sáng (1–8 giờ), đầy tràn
+  (≥ 8 giờ), **trần 12 giờ**; đồng hồ tích luỹ trên rương. Bấm → popup nhận: vàng + XP người chơi + cơ hội mảnh/trang
+  bị, mức thưởng/giờ theo wave cao nhất đã thắng.
+  **Code 2026-10-01 (số TẠM, Claude):** vàng/giờ = 0,5 × vàng thắng wave cao nhất (`nextWave − 1`, thua không lùi wave);
+  mỗi tròn 2 giờ 25% được 1 mảnh cho một unit đang sở hữu (ngẫu nhiên); mỗi tròn 4 giờ một lượt rơi trang bị như thắng
+  wave (tối đa 1 món/lần nhận). **Bỏ XP người chơi** (người dùng 2026-10-01 — chưa có cấp tài khoản). Rương nằm dưới nút
+  Đội quân, ẩn khi đang đánh. Số ở hằng trong `AfkChest.cs`.
+- **Code bản đồ 2026-10-01 (số TẠM, Claude):** vào bằng nút "Phó bản" trên HUD sảnh (chưa có Tháp Do Thám trên sân). Lực chiến unit (sửa 2026-10-02) = √(máu × sát thương × tốc đánh), cả ba đã nhân hệ số level/sao/trang bị (lính × số con) — trung bình nhân để hệ số NPC ×k cho lực chiến đúng ×k (công thức cộng cũ: ×1,2 thực tế mạnh ×1,44); pháo = sát thương × tốc bắn × 3; mọi unit × hệ số phẩm N 1 / R 1,15 / SR 1,3 / SSR 1,5 (chỉ số gốc không đo hết bộ chiêu). NPC dùng đúng số pháo / số loại lính của mình lúc Do Thám, mỗi unit NPC **cùng phẩm** với unit tương ứng của mình. **Nhịp trận (2026-10-02):** trong Chinh Phạt mọi unit hai phe + cả hai thành máu ×2,5; thành NPC giữ **quân tiếp viện** 2 / 3 / 4 hero (Dễ / Ngang / Khó, đã tính vào lực chiến), ra từ cổng thành theo đợt 2 hero khi tuyến đầu NPC còn một nửa hoặc mỗi 25 giây. Chi viện (sửa 2026-10-02): **mỗi phe chỉ 1 hero chi viện mỗi trận**. Một đồng hồ chung hai phe điểm mỗi 10 giây: NPC ra hero tiếp viện từ cổng thành; phe ta trận tạm dừng, chọn 1 hero đã sở hữu chưa có trong trận, hero ra từ cổng thành mình (Huỷ = bỏ lượt, lượt sau hỏi lại). Bảng Đóng góp sau trận Chinh Phạt có tab Phe ta / Phe địch. NPC: một hệ số nhân máu + sát thương cho mọi hero/lính NPC, giải cho đúng lực chiến mục tiêu; sao hero NPC = sao trung bình đội mình. Quét ngay = vàng thắng wave hiện tại. Thưởng vàng × 0,8 / 1 / 1,4 theo độ khó × chuỗi thắng; mảnh 0 / 1 / 2. Số ở `Meta/ConquestMap.cs`.
+- **Hero NPC (người dùng chốt 2026-10-01):** hero HAI PHE thật, có chiêu — nội tại / chiêu phụ mở theo **sao của chính
+  hero NPC** như luật hero mình (GDD 6–7). Sao + level + sức mạnh NPC suy ra từ **lực chiến tổng của phe ta** (× hệ số
+  Dễ/Ngang/Khó × chuỗi thắng ở trên). Không làm bản "NPC = quái chỉ đánh thường".
 
 Trang bị bị đẩy khỏi MVP vì kéo theo stat cộng dồn + UI riêng + mở rộng cấu trúc save.
 **Trang bị — đưa lại vào làm (người dùng, 2026-09-28):** chỉ hero, **4 ô** (Vũ khí · Giáp · Mũ · Nhẫn), **chỉ cộng chỉ số**, không đổi sprite; độ hiếm **N/R/SR/SSR** (màu như thẻ unit), chỉ số theo độ hiếm; **nâng cấp đồ** bằng vàng. Nguồn đầu tiên: **rơi khi thắng wave** (boss chắc rơi); sau: banner trang bị. **Số TẠM (Claude, chưa cân):** bậc N lv1 vũ khí +6% sát thương, giáp +8% máu, mũ +5% máu, nhẫn +4% tốc đánh; ×1 / 1,8 / 3 / 5 theo N/R/SR/SSR; +10%/level, tối đa lv 10; giá nâng 60 × hệ số độ hiếm × level; rơi 35% mỗi wave thường, wave 10/20/30 chắc rơi ≥R. Số nằm ở `EquipmentConfig`. Plan: `docs/project-state/IDEAS.md` #5.

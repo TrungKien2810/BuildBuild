@@ -75,13 +75,13 @@ namespace BuildBuild.Combat
 
         float SweepRadius => Raging ? _definition.stormRadius : _definition.sweepRadius;
 
-        bool InSweep(Enemy enemy) =>
-            Battlefield.GroundDistance(enemy.transform.position, transform.position) - enemy.BodyRadius <= SweepRadius;
+        bool InSweep(Unit enemy) =>
+            Battlefield.GroundDistance(enemy.AimPoint(transform.position), transform.position) - enemy.BodyRadius <= SweepRadius;
 
         bool AnyInSweep()
         {
-            foreach (var enemy in Enemy.Alive)
-                if (enemy != null && !enemy.IsDying && InSweep(enemy)) return true;
+            foreach (var enemy in Unit.Hostiles(_hero.Side))
+                if (enemy != null && !enemy.IsDying && !enemy.FliesHigh && InSweep(enemy)) return true;
             return false;
         }
 
@@ -93,7 +93,7 @@ namespace BuildBuild.Combat
         {
             float root = Raging ? _definition.stormRootDuration : _definition.rootDuration;
             float damage = Raging ? _hero.AttackDamage * _definition.stormPower : _definition.sweepDamage;
-            foreach (var enemy in Enemy.Alive.ToArray())
+            foreach (var enemy in Unit.Hostiles(_hero.Side).ToArray())
             {
                 if (enemy == null || enemy.IsDying || !InSweep(enemy)) continue;
                 enemy.ApplyRoot(enemy.IsBoss ? root * 0.5f : root, _definition.rootFrames);
@@ -148,13 +148,13 @@ namespace BuildBuild.Combat
         {
             if (_hero.IsDying) return;
             var own = _hero.Blocker;
-            var victims = new System.Collections.Generic.List<Enemy>();
-            foreach (var enemy in Enemy.Alive)
+            var victims = new System.Collections.Generic.List<Unit>();
+            foreach (var enemy in Unit.Hostiles(_hero.Side))
             {
                 if (enemy == null || enemy.IsDying) continue;
                 if (own != null && own.Holds(enemy)) { victims.Add(enemy); continue; }
                 if (!Raging) continue;
-                float reach = Battlefield.GroundDistance(enemy.transform.position, transform.position) - enemy.BodyRadius;
+                float reach = Battlefield.GroundDistance(enemy.AimPoint(transform.position), transform.position) - enemy.BodyRadius;
                 if (reach > _definition.rageRange) continue;
                 float side = enemy.transform.position.x >= transform.position.x ? 1f : -1f;
                 var destination = transform.position +
@@ -195,16 +195,16 @@ namespace BuildBuild.Combat
         /// Xich thu hai: moi don thuong luc Cuong No trung them con GAN NHAT o phia ben kia <paramref name="main"/>
         /// (khong co thi con gan nhat cung phia) trong `rageRange`.
         /// </summary>
-        public void OffhandStrike(Enemy main, float damage)
+        public void OffhandStrike(Unit main, float damage)
         {
             if (!Raging || main == null) return;
             float mainSide = Mathf.Sign(main.transform.position.x - transform.position.x);
-            Enemy opposite = null, sameSide = null;
+            Unit opposite = null, sameSide = null;
             float oppositeBest = float.PositiveInfinity, sameBest = float.PositiveInfinity;
-            foreach (var enemy in Enemy.Alive)
+            foreach (var enemy in Unit.Hostiles(_hero.Side))
             {
-                if (enemy == null || enemy.IsDying || enemy == main) continue;
-                float reach = Battlefield.GroundDistance(enemy.transform.position, transform.position) - enemy.BodyRadius;
+                if (enemy == null || enemy.IsDying || enemy == main || enemy.FliesHigh) continue;
+                float reach = Battlefield.GroundDistance(enemy.AimPoint(transform.position), transform.position) - enemy.BodyRadius;
                 if (reach > _definition.rageRange) continue;
                 bool isOpposite = Mathf.Sign(enemy.transform.position.x - transform.position.x) != mainSide;
                 if (isOpposite && reach < oppositeBest) { oppositeBest = reach; opposite = enemy; }
@@ -242,7 +242,7 @@ namespace BuildBuild.Combat
 
         void OnDamageDealt(float amount)
         {
-            if (Raging && amount > 0f) _hero.Health.Heal(amount * _definition.rageLifesteal);
+            if (Raging && amount > 0f) _hero.Health.Heal(amount * _definition.rageLifesteal, _hero.Health);
         }
 
         void OnDestroy()
@@ -275,7 +275,7 @@ namespace BuildBuild.Combat
             return true;
         }
 
-        void Latch(Enemy target, Vector3 destination)
+        void Latch(Unit target, Vector3 destination)
         {
             float stun = target.IsBoss ? _definition.hookStun * 0.5f : _definition.hookStun;
             target.PullTo(destination, _definition.hookPullTime);
@@ -287,17 +287,17 @@ namespace BuildBuild.Combat
         /// Quai BAN XA gan nhat trong tam (GDD: uu tien Goblin Na); khong co thi con XA nhat chua bi Chainwarden giu —
         /// keo con dung sat roi thi phi chieu.
         /// </summary>
-        Enemy PickHookTarget()
+        Unit PickHookTarget()
         {
             float rangeSqr = _definition.hookRange * _definition.hookRange;
-            Enemy ranged = null, far = null;
+            Unit ranged = null, far = null;
             float rangedSqr = float.PositiveInfinity, farSqr = -1f;
             var own = _hero.Blocker;
 
-            foreach (var enemy in Enemy.Alive)
+            foreach (var enemy in Unit.Hostiles(_hero.Side))
             {
-                if (enemy == null || enemy.IsDying) continue;
-                float sqr = (enemy.transform.position - transform.position).sqrMagnitude;
+                if (enemy == null || enemy.IsDying || enemy.FliesHigh) continue;
+                float sqr = (enemy.AimPoint(transform.position) - transform.position).sqrMagnitude;
                 if (sqr > rangeSqr) continue;
 
                 if (!enemy.CanBeHeld)

@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
+  m_Name: Hero_ShroomKnight
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
+  displayName: "Hi\u1EC7p s\u0129 n\u1EA5m"
+  unitId: shroomknight
+  maxHealth: 1000
+  damage: 12
+  attackRate: 0.7
+  range: 0.55
+  moveSpeed: 1
+  leashRange: 3
+  maxHeld: 3
+  heldDamageBonus: 0
+  warden: {fileID: 0}
+  dragonRider: {fileID: 0}
+  banner: {fileID: 0}
+  wukong: {fileID: 0}
+  stormcaller: {fileID: 0}
+  galemonk: {fileID: 0}
+  daoVien: {fileID: 0}
+  swornBrother: 0
+  projectileSpeed: 20
+  splashRadius: 0.3
+  projectileFrames: []
+  projectileScale: 1
+  impactFrames: []
+  impactScale: 1
+  knockbackOnHit: 0
+  fireSfx: 
+  impactSfx: 
+  skillSfx: 
+  skillKind: 16
+  skillTier: 0
+  skillCooldown: 0
+  manaMax: 6
+  manaPerSecond: 0.35
+  manaPerHit: 0.25
+  skillRadius: 1
+  skillDuration: 2
+  skillPower: 3
+  skillFrames:
+  - {fileID: 21300000, guid: bec7b1f16872ae243ac4fec3afb7c68a, type: 3}
+  - {fileID: 21300000, guid: f830e88e8335bb34f95cbf43e44c3bed, type: 3}
+  - {fileID: 21300000, guid: 06411937e5ad30e4f80a67d728d23db9, type: 3}
+  - {fileID: 21300000, guid: 26e9377f22c7a2a40aaff0fc94191380, type: 3}
+  skillIntroFrames:
+  - {fileID: 21300000, guid: 3cc038743aef5024bac6c89de787a770, type: 3}
+  - {fileID: 21300000, guid: 9c199fb2ca5d9d544be0946827a5f75b, type: 3}
+  - {fileID: 21300000, guid: 307d6adb813766449a50720ceccb451b, type: 3}
+  skillOutroFrames: []
+  stunFrames: []
+  summoner: {fileID: 0}
+  healsAllies: 0
+  healFrames: []
+  buffFrames: []
+  shieldAmount: 0
+  shieldFrames: []
+  shieldBreakFrames: []
+  passiveStar: 1
+  minorStar: 3
+  secondMinorStar: 3
+  passiveKind: 8
+  passivePower: 4
+  passiveThreshold: 0
+  passiveRadius: 0.8
+  passiveEvery: 1
+  passiveDuration: 0
+  passiveFrames:
+  - {fileID: 21300000, guid: ac1bb55bd09f1024183cd572d27f2ac0, type: 3}
+  - {fileID: 21300000, guid: 75af0c84860d8c6498b6254030a4c6ad, type: 3}
+  - {fileID: 21300000, guid: 0e71b522c2c7f1048b7046658fbc0d66, type: 3}
+  ultimateText: "N\u1EDF N\u1EA5m: 3 c\xE2y n\u1EA5m m\u1ECDc quanh ch\xE2n, 2s sau
+    n\u1ED5 b\xE0o t\u1EED \u2014 m\u1ED7i c\xE2y g\xE2y g\u1EA5p 3 \u0111\xF2n th\u01B0\u1EDDng
+    cho qu\xE1i quanh n\xF3."
+  passiveText: "B\xE0o T\u1EED: b\u1ECB \u0111\xE1nh c\u1EADn chi\u1EBFn th\xEC nh\u1EA3
+    b\xE0o t\u1EED, qu\xE1i quanh m\xECnh \u0103n 4 s\xE1t th\u01B0\u01A1ng (t\u1ED1i
+    \u0111a 2 l\u1EA7n/gi\xE2y)."
+  minorText: 
+  secondMinorText: 
+  ultimateIcon: {fileID: 0}
+  minorIcon: {fileID: 0}
+  passiveIcon: {fileID: 0}
+  secondMinorIcon: {fileID: 0}
+  animations: {fileID: 11400000, guid: febd644f10b5ea44c8f74bf96595409d, type: 2}
+  artFacesRight: 0
+  avatar: {fileID: 21300000, guid: 2a0522dc83d891246a0f7e995551823a, type: 3}

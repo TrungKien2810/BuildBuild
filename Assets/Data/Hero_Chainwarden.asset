@@ -25,6 +25,11 @@ MonoBehaviour:
   warden: {fileID: 11400000, guid: 0247abe292fb2014b8704e3578486eb3, type: 2}
   dragonRider: {fileID: 0}
   banner: {fileID: 0}
+  wukong: {fileID: 0}
+  stormcaller: {fileID: 0}
+  galemonk: {fileID: 0}
+  daoVien: {fileID: 0}
+  swornBrother: 0
   projectileSpeed: 20
   splashRadius: 0.3
   projectileFrames: []
@@ -32,6 +37,9 @@ MonoBehaviour:
   impactFrames: []
   impactScale: 1
   knockbackOnHit: 0
+  fireSfx: 
+  impactSfx: 
+  skillSfx: skill-chain
   skillKind: 7
   skillTier: 0
   skillCooldown: 0
@@ -43,6 +51,7 @@ MonoBehaviour:
   skillPower: 1
   skillFrames: []
   skillIntroFrames: []
+  skillOutroFrames: []
   stunFrames: []
   summoner: {fileID: 0}
   healsAllies: 0
@@ -59,6 +68,8 @@ MonoBehaviour:
   passiveThreshold: 0
   passiveRadius: 0
   passiveEvery: 1
+  passiveDuration: 0
+  passiveFrames: []
   ultimateText: "N\xE9m M\xF3c: k\xE9o qu\xE1i b\u1EAFn xa v\u1EC1 s\xE1t m\xECnh
     + cho\xE1ng, r\u1ED3i Cu\u1ED3ng N\u1ED9 V\u0128NH VI\u1EC4N t\u1EDBi khi g\u1EE5c
     \u2014 hai x\xEDch d\xE0i, t\u0103ng c\xF4ng/t\u1ED1c \u0111\xE1nh, gi\u1EA3m
@@ -71,6 +82,10 @@ MonoBehaviour:
     gi\u1EADt m\u1EA1nh \u2014 m\u1ED7i qu\xE1i b\u1ECB gi\u1EEF \u0103n s\xE1t th\u01B0\u01A1ng
     t\u0103ng theo s\u1ED1 qu\xE1i b\u1ECB gi\u1EADt + cho\xE1ng 1s (Cu\u1ED3ng N\u1ED9:
     k\xE9o th\xEAm m\u1ECDi qu\xE1i trong t\u1EA7m x\xEDch)."
+  ultimateIcon: {fileID: 21300000, guid: a4073ff71ed337c4892d71982a9a95b9, type: 3}
+  minorIcon: {fileID: 21300000, guid: 48b13c093fc380b43879d6aa0ca3c095, type: 3}
+  passiveIcon: {fileID: 21300000, guid: 62089d64f516dc6458d5a6215fb9371f, type: 3}
+  secondMinorIcon: {fileID: 21300000, guid: 42b3a34dde165164fb0fa6a4883ea61b, type: 3}
   animations: {fileID: 11400000, guid: 185708e0c20d8434f8871f0eeba5ae06, type: 2}
   artFacesRight: 0
   avatar: {fileID: 21300000, guid: 62cc5cf95fb7b0c4192688c5e3e02282, type: 3}

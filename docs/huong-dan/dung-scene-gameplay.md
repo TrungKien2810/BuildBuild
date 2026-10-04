@@ -231,7 +231,10 @@ Màn này là scene riêng `Assets/Scenes/Units.unity`, dựng bằng code như 
   bị tô xám.
 - Hệ số chỉ số lấy từ `Progression`, cũng là hàm mà `Hero.Initialise` dùng trên sân. Công thức:
   `1 + 8% × (level − 1) + 15% × sao`, nhân vào máu và sát thương gốc.
-- Chữ trong phần "KỸ NĂNG" lấy từ 4 ô `Ultimate Text` / `Passive Text` / `Minor Text` / `Second Minor Text` trong
+- Tab "Kỹ năng" là tối đa 4 dòng, mỗi dòng một icon 48 px bên trái + chữ bên phải. Icon lấy từ ô `Ultimate Icon` /
+  `Minor Icon` / `Second Minor Icon` của hero (nội tại không có icon); `FillSkillTexts` gán lại icon `UI/icons/icon-skill-*`
+  theo `unitId` MỖI lần dựng, nên muốn đổi icon thì sửa bảng `icons` trong hàm đó chứ không sửa Inspector.
+- Chữ trong tab "Kỹ năng" lấy từ 4 ô `Ultimate Text` / `Passive Text` / `Minor Text` / `Second Minor Text` trong
   Inspector của hero. `SceneBuilder.FillSkillTexts` chỉ điền vào ô còn trống, nên bạn sửa chữ trong Inspector thì lần
   dựng lại sau cũng không bị ghi đè. Ô nào để trống thì dòng kỹ năng đó không hiện.
 - Dòng kỹ năng chưa đủ sao hiện màu xám, kèm `Mở ở N★`. Ngưỡng sao lấy từ `Passive Star` / `Minor Star` /

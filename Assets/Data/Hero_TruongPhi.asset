@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
+  m_Name: Hero_TruongPhi
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
+  displayName: "Tr\u01B0\u01A1ng Phi"
+  unitId: truongphi
+  maxHealth: 1700
+  damage: 28
+  attackRate: 0.7
+  range: 1
+  moveSpeed: 1
+  leashRange: 3
+  maxHeld: 3
+  heldDamageBonus: 0
+  warden: {fileID: 0}
+  dragonRider: {fileID: 0}
+  banner: {fileID: 0}
+  wukong: {fileID: 0}
+  stormcaller: {fileID: 0}
+  galemonk: {fileID: 0}
+  daoVien: {fileID: 11400000, guid: 9d7ee7b11c5af4644b803631fe7a9f86, type: 2}
+  swornBrother: 3
+  projectileSpeed: 8
+  splashRadius: 0.8
+  projectileFrames: []
+  projectileScale: 1
+  impactFrames: []
+  impactScale: 1
+  knockbackOnHit: 0
+  fireSfx: 
+  impactSfx: 
+  skillSfx: 
+  skillKind: 14
+  skillTier: 0
+  skillCooldown: 0
+  manaMax: 7
+  manaPerSecond: 0.35
+  manaPerHit: 0.25
+  skillRadius: 4
+  skillDuration: 3
+  skillPower: 3
+  skillFrames: []
+  skillIntroFrames: []
+  skillOutroFrames: []
+  stunFrames:
+  - {fileID: 21300000, guid: 1a1fae456d75bfb42a8ffae427a8e2f3, type: 3}
+  - {fileID: 21300000, guid: 5f10dad14feb11e48ab8189f300fd865, type: 3}
+  - {fileID: 21300000, guid: 7213f6b7419d25048959c0318ee69916, type: 3}
+  - {fileID: 21300000, guid: b54ff30fbe8e230408ef3ea33a794952, type: 3}
+  summoner: {fileID: 0}
+  healsAllies: 0
+  healFrames: []
+  buffFrames: []
+  shieldAmount: 0
+  shieldFrames: []
+  shieldBreakFrames: []
+  passiveStar: 1
+  minorStar: 3
+  secondMinorStar: 3
+  passiveKind: 0
+  passivePower: 0
+  passiveThreshold: 0
+  passiveRadius: 0
+  passiveEvery: 1
+  passiveDuration: 0
+  passiveFrames: []
+  ultimateText: "\u0110\u01B0\u01A1ng D\u01B0\u01A1ng Ki\u1EC1u H\u1ED1ng: d\u1EADm
+    ch\xE2n g\u1EA7m \u2014 qu\xE1i b\xE1n k\xEDnh 4 \u0103n \xD73, h\u1EA5t l\xF9i
+    + cho\xE1ng 3s + ph\xE1 gi\xE1p 30%; \xF4ng khi\xEAu kh\xEDch c\u1EA3 v\xF9ng,
+    \u221250% s\xE1t th\u01B0\u01A1ng nh\u1EADn 6s. Boss ch\u1EC9 b\u1ECB ch\u1EADm
+    + ph\xE1 gi\xE1p."
+  passiveText: "K\u1EBFt Ngh\u0129a (nh\u01B0 L\u01B0u B\u1ECB). V\u1EA1n Nh\xE2n
+    \u0110\u1ECBch: m\u1ED7i qu\xE1i quanh \xF4ng \u22126% s\xE1t th\u01B0\u01A1ng
+    nh\u1EADn (t\u1ED1i \u0111a 30%)."
+  minorText: "B\xE1t X\xE0 M\xE2u: xoay x\xE0 m\xE2u n\u1EA1p l\u1EF1c r\u1ED3i \u0111\xE2m
+    xuy\xEAn 2 \xF4, qu\xE1i tr\xFAng b\u1ECB ph\xE1 gi\xE1p 15% trong 4s."
+  secondMinorText: "T\xFAy T\u1EEDu: m\xE1u d\u01B0\u1EDBi 60% th\xEC tu b\u1EA7u
+    r\u01B0\u1EE3u \u2014 h\u1ED3i 20% m\xE1u, mi\u1EC5n cho\xE1ng, \u221230% s\xE1t
+    th\u01B0\u01A1ng nh\u1EADn 5s."
+  ultimateIcon: {fileID: 21300000, guid: 32ed772a5c7328e43adf62e5d3b36072, type: 3}
+  minorIcon: {fileID: 21300000, guid: 734cd05094700364a83d930b1b35566d, type: 3}
+  passiveIcon: {fileID: 21300000, guid: cb105b868ab5df84fad3b156a7534ecb, type: 3}
+  secondMinorIcon: {fileID: 21300000, guid: 70bec298a03361348ae88773aaf3cf98, type: 3}
+  animations: {fileID: 11400000, guid: 38cddc7ab32d43442ab2d936d102055d, type: 2}
+  artFacesRight: 0
+  avatar: {fileID: 21300000, guid: bcc7827bcd49da5448b1ba2aca55fe1a, type: 3}

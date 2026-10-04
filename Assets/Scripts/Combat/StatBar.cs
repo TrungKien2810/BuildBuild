@@ -48,6 +48,16 @@ namespace BuildBuild.Combat
         public static void AttachHealth(Enemy enemy) =>
             Attach(enemy.transform, enemy.BodyHeight, "HealthBar", HealthGap, HealthFill, BossWidth, () => enemy.Health.Fraction);
 
+        /// <summary>Thanh mau thanh NPC (Chinh Phat) tai <paramref name="worldPosition"/>, to gap 3 thanh cua boss.</summary>
+        public static void AttachHealth(Castle castle, Vector3 worldPosition)
+        {
+            var go = new GameObject("HealthBar");
+            go.transform.SetParent(castle.transform, worldPositionStays: false);
+            go.transform.position = worldPosition;
+            go.transform.localScale = Vector3.one * 3f;
+            go.AddComponent<StatBar>().Build(HealthFill, BossWidth, () => castle.Health.Fraction);
+        }
+
         static void Attach(Transform owner, float bodyHeight, string name, float gap, Color fill, float width, Func<float> fraction)
         {
             var go = new GameObject(name);

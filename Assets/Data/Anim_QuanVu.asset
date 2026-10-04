@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5872530a42e740c4aa90cd38c8fa0e67, type: 3}
+  m_Name: Anim_QuanVu
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.SpriteAnimationSet
+  framesPerSecond: 9
+  idle:
+    name: idle
+    frames:
+    - {fileID: 21300000, guid: fdf0f03eca58892428b7ab10d92c60e7, type: 3}
+    - {fileID: 21300000, guid: b31d1d66125d1e04daeb4138001c7000, type: 3}
+    - {fileID: 21300000, guid: e9ecc81d25e12994daf9458198510c38, type: 3}
+    - {fileID: 21300000, guid: 1ecac0e7950f69a41b29dc915b8b6400, type: 3}
+    loop: 1
+    hitFrame: 0
+  walk:
+    name: walk
+    frames:
+    - {fileID: 21300000, guid: 3a5e807a33c9f5144b3c6334824d260b, type: 3}
+    - {fileID: 21300000, guid: 4b9e63b0fa74b1049a2886ed0105e78f, type: 3}
+    - {fileID: 21300000, guid: 91d8be589a6c2c64da0e9d8c30831acb, type: 3}
+    - {fileID: 21300000, guid: 179cb67260c6f4c47b8e5e5782051cc9, type: 3}
+    - {fileID: 21300000, guid: c7da9836136d86848b6a2ae155bd98b7, type: 3}
+    - {fileID: 21300000, guid: 120281d30d07fdd4f95a5428613d7a95, type: 3}
+    loop: 1
+    hitFrame: 0
+  attack:
+    name: attack
+    frames:
+    - {fileID: 21300000, guid: 8836789cf5f5bb142b09949693f48556, type: 3}
+    - {fileID: 21300000, guid: 199e27cfbbb34fb428927d07ec17a2f6, type: 3}
+    - {fileID: 21300000, guid: f82ca08b2b303fa468917e02882fb677, type: 3}
+    - {fileID: 21300000, guid: fa0fc5db41bc2c24ebead8f59602f8ef, type: 3}
+    - {fileID: 21300000, guid: 60610685944c69148a95c48092f42d29, type: 3}
+    - {fileID: 21300000, guid: eb82c408675187c4aa90c90de4aea6ed, type: 3}
+    loop: 0
+    hitFrame: 4
+  hurt:
+    name: hurt
+    frames:
+    - {fileID: 21300000, guid: 1b7a04ab682a8ac4182a18baa29c186a, type: 3}
+    - {fileID: 21300000, guid: d0448918b95c25e4785951393a86bd00, type: 3}
+    - {fileID: 21300000, guid: 4bc8958c67ea21246882346224e287ec, type: 3}
+    - {fileID: 21300000, guid: c7d7573a86923074e841ee329d206598, type: 3}
+    loop: 0
+    hitFrame: 0
+  death:
+    name: death
+    frames:
+    - {fileID: 21300000, guid: 01c5af079ba1817478f1a28745c54f6d, type: 3}
+    - {fileID: 21300000, guid: cdf90b5905962654c855ddb7462cb152, type: 3}
+    - {fileID: 21300000, guid: 0eaecab075cf9eb4faaea6e05a159d55, type: 3}
+    - {fileID: 21300000, guid: 62b636c9ae635084e924f7b8b7b788cf, type: 3}
+    - {fileID: 21300000, guid: 798a5f0ec0606904b8b5b85fa46b974b, type: 3}
+    - {fileID: 21300000, guid: 2f4e3f4f57f568644a3193d0d5dbecf4, type: 3}
+    loop: 0
+    hitFrame: 0
+  skill:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: 24faa292be92cb7489ff8b2feab8e4a7, type: 3}
+    - {fileID: 21300000, guid: 95bb12e598a6a0f40ad658a625c4225f, type: 3}
+    - {fileID: 21300000, guid: b8dbe9f4cf4806f4db4638570ceb56f9, type: 3}
+    - {fileID: 21300000, guid: 9deeb3c5fe7594341908c5f844beaf26, type: 3}
+    - {fileID: 21300000, guid: 93dd25c528d6a1749bbd4ed05fec3ff9, type: 3}
+    - {fileID: 21300000, guid: c2933d7285eb5dc419583469338d5041, type: 3}
+    loop: 0
+    hitFrame: 4

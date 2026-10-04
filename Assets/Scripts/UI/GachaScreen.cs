@@ -1,8 +1,10 @@
+using System.Collections;
 using System.Collections.Generic;
 using BuildBuild.Core;
 using BuildBuild.Data;
 using BuildBuild.Meta;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -46,6 +48,8 @@ namespace BuildBuild.UI
         GachaSystem _gacha;
         int _banner;
         readonly List<GachaCardView> _shown = new List<GachaCardView>();
+        bool _revealing;
+        bool _fast;
 
         void Start()
         {
@@ -81,8 +85,9 @@ namespace BuildBuild.UI
 
         void Roll(int count, int cost)
         {
-            if (!economy.TrySpend(cost)) return;
+            if (_revealing || !economy.TrySpend(cost)) return;
 
+            Sfx.Play("gacha-roll");
             foreach (var card in _shown) Destroy(card.gameObject);
             _shown.Clear();
 
@@ -91,9 +96,63 @@ namespace BuildBuild.UI
                 var card = Instantiate(cardTemplate, resultGrid);
                 card.gameObject.SetActive(true);
                 card.Show(result);
+                card.FaceDown();
                 _shown.Add(card);
             }
+            StartCoroutine(Reveal());
+        }
+
+        /// <summary>
+        /// Chia the up roi lat tung the theo thu tu. SR/SSR tu co nhip nin + chop (GachaCardView); SSR rung ca luoi.
+        /// Cham man hinh khi dang lat = tua nhanh x6.
+        /// </summary>
+        IEnumerator Reveal()
+        {
+            _revealing = true;
+            _fast = false;
             Refresh();
+
+            foreach (var card in _shown)
+            {
+                StartCoroutine(card.Deal(Step));
+                yield return Wait(0.04f);
+            }
+            yield return Wait(0.2f);
+
+            foreach (var card in _shown)
+            {
+                yield return card.Reveal(Step, card.Rarity == Rarity.SSR ? () => StartCoroutine(Shake()) : null);
+                yield return Wait(card.Rarity >= Rarity.SR ? 0.3f : 0.1f);
+            }
+
+            _revealing = false;
+            Refresh();
+        }
+
+        void Update()
+        {
+            var pointer = Pointer.current;
+            if (_revealing && pointer != null && pointer.press.wasPressedThisFrame) _fast = true;
+        }
+
+        float Step() => Time.unscaledDeltaTime * (_fast ? 6f : 1f);
+
+        IEnumerator Wait(float seconds)
+        {
+            for (float t = 0f; t < seconds; t += Step()) yield return null;
+        }
+
+        /// <summary>Rung luoi ket qua khi lat trung SSR.</summary>
+        IEnumerator Shake()
+        {
+            var grid = (RectTransform)resultGrid;
+            Vector2 home = grid.anchoredPosition;
+            for (float t = 0f; t < 1f; t += Time.unscaledDeltaTime / 0.35f)
+            {
+                grid.anchoredPosition = home + Random.insideUnitCircle * 14f * (1f - t);
+                yield return null;
+            }
+            grid.anchoredPosition = home;
         }
 
         void Refresh()
@@ -103,10 +162,10 @@ namespace BuildBuild.UI
             // +1: luot duoc dam bao cung tinh — bo dem 30 nghia la luot KE TIEP chac chan SR.
             pityText.text = $"Chắc chắn SR trong {config.softPity + 1 - save.rollsSinceSR} lượt  ·  SSR trong {config.hardPity + 1 - save.rollsSinceSSR} lượt";
             // Nut xam khong du ro: ghi thang "thieu vang" de khong tuong la game do.
-            rollOneButton.interactable = economy.Gold >= config.singleCost;
-            rollTenButton.interactable = economy.Gold >= config.tenCost;
-            rollOneLabel.text = $"Quay 1\n{config.singleCost:N0} vàng{(rollOneButton.interactable ? "" : " · thiếu")}";
-            rollTenLabel.text = $"Quay 10\n{config.tenCost:N0} vàng{(rollTenButton.interactable ? "" : " · thiếu")}";
+            rollOneButton.interactable = !_revealing && economy.Gold >= config.singleCost;
+            rollTenButton.interactable = !_revealing && economy.Gold >= config.tenCost;
+            rollOneLabel.text = $"Quay 1\n{config.singleCost:N0} vàng{(_revealing || rollOneButton.interactable ? "" : " · thiếu")}";
+            rollTenLabel.text = $"Quay 10\n{config.tenCost:N0} vàng{(_revealing || rollTenButton.interactable ? "" : " · thiếu")}";
         }
     }
 }

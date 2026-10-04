@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
+  m_Name: Hero_BogWitch
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
+  displayName: "Ph\xF9 thu\u1EF7 \u0111\u1EA7m l\u1EA7y"
+  unitId: bogwitch
+  maxHealth: 250
+  damage: 14
+  attackRate: 0.9
+  range: 4.5
+  moveSpeed: 1.1
+  leashRange: 3
+  maxHeld: 3
+  heldDamageBonus: 0
+  warden: {fileID: 0}
+  dragonRider: {fileID: 0}
+  banner: {fileID: 0}
+  wukong: {fileID: 0}
+  stormcaller: {fileID: 0}
+  galemonk: {fileID: 0}
+  daoVien: {fileID: 0}
+  swornBrother: 0
+  projectileSpeed: 7
+  splashRadius: 0.3
+  projectileFrames:
+  - {fileID: 21300000, guid: 60341231c06c1354a897e9fd5564a554, type: 3}
+  - {fileID: 21300000, guid: 44792c80c49b05048bb8cea65fccf3da, type: 3}
+  - {fileID: 21300000, guid: d3b6c83b9650e214db6dc420112af673, type: 3}
+  - {fileID: 21300000, guid: 5dae83d014f0ff04b90c945e59dd2f79, type: 3}
+  projectileScale: 1
+  impactFrames: []
+  impactScale: 1
+  knockbackOnHit: 0
+  fireSfx: 
+  impactSfx: 
+  skillSfx: 
+  skillKind: 15
+  skillTier: 0
+  skillCooldown: 0
+  manaMax: 5
+  manaPerSecond: 0.35
+  manaPerHit: 0.25
+  skillRadius: 1.3
+  skillDuration: 5
+  skillPower: 0.2
+  skillFrames:
+  - {fileID: 21300000, guid: 8cf13daf919f9054d97e0c1bba79e2e3, type: 3}
+  - {fileID: 21300000, guid: e3ece8036f4f86843a06eb20929cf4c0, type: 3}
+  - {fileID: 21300000, guid: 758a67d02f0cc46478cc666c24daa846, type: 3}
+  - {fileID: 21300000, guid: 1ab2951acf9f45347b509d558aff7389, type: 3}
+  - {fileID: 21300000, guid: 5c2d3790d7a424d459d098062158b93b, type: 3}
+  - {fileID: 21300000, guid: 21fa330e14f2f2b498e8c6b96afa0d5e, type: 3}
+  skillIntroFrames: []
+  skillOutroFrames: []
+  stunFrames: []
+  summoner: {fileID: 0}
+  healsAllies: 0
+  healFrames: []
+  buffFrames: []
+  shieldAmount: 0
+  shieldFrames: []
+  shieldBreakFrames: []
+  passiveStar: 1
+  minorStar: 3
+  secondMinorStar: 3
+  passiveKind: 7
+  passivePower: 2
+  passiveThreshold: 0
+  passiveRadius: 0
+  passiveEvery: 5
+  passiveDuration: 4
+  passiveFrames:
+  - {fileID: 21300000, guid: d1ef92a75135a4f4fba7eb2339ae9d54, type: 3}
+  - {fileID: 21300000, guid: 9592683d059652149aafc4380d673661, type: 3}
+  - {fileID: 21300000, guid: eef9e002ecf4fc4478006b35dc1e4cd7, type: 3}
+  - {fileID: 21300000, guid: 7dbd537e6f7c6ff45b9d64bcd53ca795, type: 3}
+  ultimateText: "V\u1EA1c S\u01B0\u01A1ng \u0110\u1ED9c: m\xE0n s\u01B0\u01A1ng \u0111\u1ED9c
+    b\xE1n k\xEDnh 1,3 \u1EDF c\u1EE5m qu\xE1i \u0111\xF4ng nh\u1EA5t trong 5s \u2014
+    qu\xE1i trong s\u01B0\u01A1ng +1 t\u1EA7ng \u0110\u1ED9c m\u1ED7i gi\xE2y v\xE0
+    nh\u1EADn th\xEAm 20% s\xE1t th\u01B0\u01A1ng."
+  passiveText: "Ng\u1EA5m \u0110\u1ED9c: m\u1ED7i gi\u1ECDt \u0111\u1ED9c tr\xFAng
+    +1 t\u1EA7ng \u0110\u1ED9c (t\u1ED1i \u0111a 5), m\u1ED7i t\u1EA7ng 2 s\xE1t
+    th\u01B0\u01A1ng/gi\xE2y, tr\xFAng l\u1EA1i l\xE0m m\u1EDBi 4s."
+  minorText: 
+  secondMinorText: 
+  ultimateIcon: {fileID: 0}
+  minorIcon: {fileID: 0}
+  passiveIcon: {fileID: 0}
+  secondMinorIcon: {fileID: 0}
+  animations: {fileID: 11400000, guid: 7862d138c58f4484a95c43212f527bd8, type: 2}
+  artFacesRight: 0
+  avatar: {fileID: 21300000, guid: 7092e011b1bd7df449c402b59992da52, type: 3}

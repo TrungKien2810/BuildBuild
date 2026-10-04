@@ -160,15 +160,17 @@ namespace BuildBuild.Combat
         }
 
         /// <summary>Don thuong cua Wyrmspear (dam truc tiep, khong dan). Nghich Lan cong % mau toi da boss/tinh anh.</summary>
-        public void Strike(Enemy target, float damage)
+        public void Strike(Unit target, float damage)
         {
             if (target == null || target.IsDying) return;
             target.Health.TakeDamage(damage + ReverseScale(target), _hero.Health);
             _hero.OnHitsLanded(1);
         }
 
-        float ReverseScale(Enemy enemy) =>
-            _hero.PassiveUnlocked && (enemy.IsBoss || enemy.IsElite) ? enemy.Health.Max * _definition.reverseScalePercent : 0f;
+        /// <summary>Tran = mot nua don thuong hien tai: % mau boss khong duoc lan at level / trang bi cua chinh Wyrmspear.</summary>
+        float ReverseScale(Unit enemy) =>
+            _hero.PassiveUnlocked && (enemy.IsBoss || enemy.IsElite)
+                ? Mathf.Min(ConquestMatch.PercentBase(enemy.Health.Max) * _definition.reverseScalePercent, _hero.AttackDamage * 0.5f) : 0f;
 
         /// <summary>Goi tu `Hero.FinishCast` khi thanh mana day: lan dau Long Hoa, tu do ve sau Thien Dia Long Giang.</summary>
         public void CastUltimate()
@@ -222,10 +224,10 @@ namespace BuildBuild.Combat
         void ApplyAwe(Hero unit, float share)
         {
             var position = unit.transform.position;
-            foreach (var enemy in Enemy.Alive)
+            foreach (var enemy in Unit.Hostiles(_hero.Side))
             {
                 if (enemy == null || enemy.IsDying) continue;
-                if (Battlefield.GroundDistance(enemy.transform.position, position) - enemy.BodyRadius > _definition.aweRadius) continue;
+                if (Battlefield.GroundDistance(enemy.AimPoint(position), position) - enemy.BodyRadius > _definition.aweRadius) continue;
                 float vulnerability = enemy.IsBoss || enemy.IsElite ? _definition.aweVulnerability * share : 0f;
                 enemy.ApplyAwe(_definition.aweWeaken * share, vulnerability);
             }
@@ -280,7 +282,7 @@ namespace BuildBuild.Combat
         {
             if (!_transformed || amount <= 0f || unit == null || unit.IsDying) return;
             float steal = RageStacks * _definition.rageLifestealPerStack;
-            if (steal > 0f) unit.Health.Heal(amount * steal);
+            if (steal > 0f) unit.Health.Heal(amount * steal, _hero.Health);
         }
 
         void UpdateRageLabel()
@@ -310,14 +312,14 @@ namespace BuildBuild.Combat
         // ------------------------------------------------------------------ GD1: Xuyen Long
 
         /// <summary>Quai gan nhat trong tam danh hien tai cua Wyrmspear; null = chua giap tran.</summary>
-        Enemy EngagedTarget()
+        Unit EngagedTarget()
         {
-            Enemy best = null;
+            Unit best = null;
             float bestReach = _hero.CurrentAttackRange;
-            foreach (var enemy in Enemy.Alive)
+            foreach (var enemy in Unit.Hostiles(_hero.Side))
             {
                 if (enemy == null || enemy.IsDying) continue;
-                float reach = Battlefield.GroundDistance(enemy.transform.position, transform.position) - enemy.BodyRadius;
+                float reach = Battlefield.GroundDistance(enemy.AimPoint(transform.position), transform.position) - enemy.BodyRadius;
                 if (reach > bestReach) continue;
                 bestReach = reach;
                 best = enemy;
@@ -341,10 +343,10 @@ namespace BuildBuild.Combat
         void PierceLine(float facing, Vector2 tip, float damage, bool ignoreArmor, bool reverseScale)
         {
             float length = _definition.pierceLength;
-            foreach (var enemy in Enemy.Alive.ToArray())
+            foreach (var enemy in Unit.Hostiles(_hero.Side).ToArray())
             {
                 if (enemy == null || enemy.IsDying) continue;
-                var offset = enemy.transform.position - transform.position;
+                var offset = enemy.AimPoint(transform.position) - transform.position;
                 float forward = offset.x * facing;
                 if (forward < -enemy.BodyRadius || forward > length + enemy.BodyRadius) continue;
                 if (Mathf.Abs(offset.y) > _definition.pierceHalfWidth + enemy.BodyRadius * Battlefield.DepthSquash) continue;
@@ -439,7 +441,7 @@ namespace BuildBuild.Combat
             }
             if (_rageLabel != null) _rageLabel.text = "";
             // Chu chet thi rong chui xuong dat theo (chay clip death, tu xoa).
-            if (DragonUp) _dragon.Health.TakeDamage(_dragon.Health.Current * 100f, null, ignoreArmor: true);
+            if (DragonUp) _dragon.Health.TakeDamage(_dragon.Health.Current * 100f, _dragon.Health, ignoreArmor: true);
         }
 
         void OnDestroy()
@@ -503,14 +505,14 @@ namespace BuildBuild.Combat
 
         // ------------------------------------------------------------------ GD2: Dia Long Chan
 
-        bool InQuake(Enemy enemy) =>
-            Battlefield.GroundDistance(enemy.transform.position, _dragon.transform.position) - enemy.BodyRadius
+        bool InQuake(Unit enemy) =>
+            Battlefield.GroundDistance(enemy.AimPoint(_dragon.transform.position), _dragon.transform.position) - enemy.BodyRadius
             <= _definition.quakeRadius;
 
         void TryQuake()
         {
             bool any = false;
-            foreach (var enemy in Enemy.Alive)
+            foreach (var enemy in Unit.Hostiles(_hero.Side))
                 if (enemy != null && !enemy.IsDying && InQuake(enemy)) { any = true; break; }
             if (!any || !_dragon.PlayAction(_definition.quakeBody)) return;
             _quakeCooldown = _definition.quakeCooldown;
@@ -520,7 +522,7 @@ namespace BuildBuild.Combat
             {
                 if (dragon == null || dragon.IsDying) return;
                 float damage = dragon.AttackDamage * _definition.quakePower;
-                foreach (var enemy in Enemy.Alive.ToArray())
+                foreach (var enemy in Unit.Hostiles(_hero.Side).ToArray())
                 {
                     if (enemy == null || enemy.IsDying || !InQuake(enemy)) continue;
                     bool tough = enemy.IsBoss || enemy.IsElite;
@@ -545,13 +547,13 @@ namespace BuildBuild.Combat
         {
             _descentLocked = false;
             if (!_transformed) return;
-            Enemy target = null;
+            Unit target = null;
             float best = -1f;
             float rangeSqr = _definition.descentRange * _definition.descentRange;
-            foreach (var enemy in Enemy.Alive)
+            foreach (var enemy in Unit.Hostiles(_hero.Side))
             {
                 if (enemy == null || enemy.IsDying) continue;
-                if ((enemy.transform.position - transform.position).sqrMagnitude > rangeSqr) continue;
+                if ((enemy.AimPoint(transform.position) - transform.position).sqrMagnitude > rangeSqr) continue;
                 if (enemy.Health.Current <= best) continue;
                 best = enemy.Health.Current;
                 target = enemy;
@@ -606,12 +608,12 @@ namespace BuildBuild.Combat
 
             float baseDamage = _hero.AttackDamage * _definition.descentPower;
             bool killed = false;
-            foreach (var enemy in Enemy.Alive.ToArray())
+            foreach (var enemy in Unit.Hostiles(_hero.Side).ToArray())
             {
                 if (enemy == null || enemy.IsDying) continue;
-                if (Battlefield.GroundDistance(enemy.transform.position, centre) - enemy.BodyRadius > _definition.descentRadius)
+                if (Battlefield.GroundDistance(enemy.AimPoint(centre), centre) - enemy.BodyRadius > _definition.descentRadius)
                     continue;
-                float damage = baseDamage + enemy.Health.Max * _definition.descentMaxHealthPercent;
+                float damage = baseDamage + ConquestMatch.PercentBase(enemy.Health.Max) * _definition.descentMaxHealthPercent;
                 if (enemy.IsBoss) damage *= _definition.bossMultiplier;
                 enemy.Health.TakeDamage(damage, _hero.Health);
                 // Ket lieu quai thuong / tinh anh con duoi nguong sau don.
@@ -631,15 +633,15 @@ namespace BuildBuild.Combat
         void Pillar()
         {
             float reach = _dragon.CurrentAttackRange + _dragon.Definition.leashRange;
-            Enemy best = null;
+            Unit best = null;
             int bestCount = 0;
-            foreach (var enemy in Enemy.Alive)
+            foreach (var enemy in Unit.Hostiles(_hero.Side))
             {
                 if (enemy == null || enemy.IsDying) continue;
-                if (Battlefield.GroundDistance(enemy.transform.position, _dragon.transform.position) - enemy.BodyRadius > reach)
+                if (Battlefield.GroundDistance(enemy.AimPoint(_dragon.transform.position), _dragon.transform.position) - enemy.BodyRadius > reach)
                     continue;
                 int count = 0;
-                foreach (var other in Enemy.Alive)
+                foreach (var other in Unit.Hostiles(_hero.Side))
                     if (other != null && !other.IsDying && InPillar(other, enemy.transform.position)) count++;
                 if (count <= bestCount) continue;
                 bestCount = count;
@@ -652,13 +654,13 @@ namespace BuildBuild.Combat
                 Battlefield.UnitScale);
             OneShotFx.Spawn(centre + new Vector3(0f, FxCell * 0.2f, 0f), _definition.shockwaveFx, false, SortOrder.Air - 1,
                 Battlefield.UnitScale);
-            foreach (var enemy in Enemy.Alive.ToArray())
+            foreach (var enemy in Unit.Hostiles(_hero.Side).ToArray())
                 if (enemy != null && !enemy.IsDying && InPillar(enemy, centre))
                     enemy.KnockUp(_definition.pillarKnockUpHeight, _definition.pillarKnockUpDuration);
         }
 
-        bool InPillar(Enemy enemy, Vector3 centre) =>
-            Battlefield.GroundDistance(enemy.transform.position, centre) - enemy.BodyRadius <= _definition.descentRadius;
+        bool InPillar(Unit enemy, Vector3 centre) =>
+            Battlefield.GroundDistance(enemy.AimPoint(centre), centre) - enemy.BodyRadius <= _definition.descentRadius;
 
         // ------------------------------------------------------------------ tien ich
 

@@ -10,7 +10,7 @@ namespace BuildBuild.Combat
     ///   - Moi quai bi giu dung o mot CHO rieng canh unit, lech nhau theo truc y (xem `SlotPosition`);
     ///   - quai thu MaxHeld+1 tro di khong bi giu, di tiep ve lau dai (`Enemy.EngageHero` bo qua unit het cho);
     ///   - quai bi giu chet -> con GAN NHAT chua bi ai giu va dang trong tam nhin cua no vao the cho. Bao ngay
-    ///     luc het mau (`Enemy.Killed`), khong cho het animation death;
+    ///     luc het mau (`Unit.Killed`), khong cho het animation death;
     ///   - unit chan chet -> tha het quai no dang giu.
     ///
     /// `Hero` tu gan component nay trong `Initialise`. Quai TU nhan cho (`Enemy.HoldBy`); lop nay chi giu so cho
@@ -54,13 +54,13 @@ namespace BuildBuild.Combat
         void OnEnable()
         {
             Active.Add(this);
-            Enemy.Killed += OnEnemyKilled;
+            BuildBuild.Combat.Unit.Killed += OnEnemyKilled;
         }
 
         void OnDisable()
         {
             Active.Remove(this);
-            Enemy.Killed -= OnEnemyKilled;
+            BuildBuild.Combat.Unit.Killed -= OnEnemyKilled;
             ReleaseAll();
         }
 
@@ -90,10 +90,10 @@ namespace BuildBuild.Combat
             }
         }
 
-        public bool Holds(Enemy enemy) => enemy != null && System.Array.IndexOf(_held, enemy) >= 0;
+        public bool Holds(Unit enemy) => enemy != null && System.Array.IndexOf(_held, enemy) >= 0;
 
         /// <summary>Con cho cho <paramref name="enemy"/> (hoac no dang giu san mot cho).</summary>
-        public bool HasFreeSlot(Enemy enemy)
+        public bool HasFreeSlot(Unit enemy)
         {
             if (IsDown) return false;
             for (int i = 0; i < _held.Length; i++)
@@ -153,7 +153,7 @@ namespace BuildBuild.Combat
         /// Quai dang bi giu vua het mau: nha cho va goi con GAN NHAT chua bi ai giu, dang nhin thay unit nay
         /// (trong `heroAggroRange` cua chinh no), vao the. Quai ban xa khong vao cho (`Enemy.CanBeHeld`).
         /// </summary>
-        void OnEnemyKilled(Enemy dead)
+        void OnEnemyKilled(BuildBuild.Combat.Unit dead)
         {
             int slot = System.Array.IndexOf(_held, dead);
             if (slot < 0) return;
@@ -164,9 +164,9 @@ namespace BuildBuild.Combat
             float bestSqr = float.PositiveInfinity;
             foreach (var enemy in Enemy.Alive)
             {
-                if (enemy == null || enemy.IsDying || !enemy.CanBeHeld || enemy.Holder != null) continue;
+                if (enemy == null || enemy.IsDying || !enemy.CanBeHeld || enemy.Holder != null || !enemy.IsHostileTo(Unit.Side)) continue;
                 float aggro = enemy.Definition.heroAggroRange;
-                float sqr = (enemy.transform.position - transform.position).sqrMagnitude;
+                float sqr = (enemy.AimPoint(transform.position) - transform.position).sqrMagnitude;
                 if (sqr > aggro * aggro || sqr >= bestSqr) continue;
                 bestSqr = sqr;
                 best = enemy;
