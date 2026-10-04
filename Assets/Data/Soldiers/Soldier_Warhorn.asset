@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21934289f9624743841fea630ce87914, type: 3}
+  m_Name: Soldier_Warhorn
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.SoldierDefinition
+  displayName: "T\xEA gi\xE1c chi\u1EBFn"
+  unitId: soldier_warhorn
+  maxHealth: 1500
+  damage: 45
+  attackRate: 0.7
+  range: 0.7
+  moveSpeed: 1.4
+  leashRange: 3
+  maxHeld: 3
+  heldDamageBonus: 0
+  warden: {fileID: 0}
+  dragonRider: {fileID: 0}
+  banner: {fileID: 0}
+  wukong: {fileID: 0}
+  stormcaller: {fileID: 0}
+  galemonk: {fileID: 0}
+  daoVien: {fileID: 0}
+  swornBrother: 0
+  projectileSpeed: 20
+  splashRadius: 0.3
+  projectileFrames: []
+  projectileScale: 1
+  impactFrames: []
+  impactScale: 1
+  knockbackOnHit: 1
+  fireSfx: 
+  impactSfx: 
+  skillSfx: 
+  skillKind: 6
+  skillTier: 1
+  skillCooldown: 8
+  manaMax: 0
+  manaPerSecond: 0.35
+  manaPerHit: 0.25
+  skillRadius: 4
+  skillDuration: 1
+  skillPower: 120
+  skillFrames:
+  - {fileID: 21300000, guid: a65d74356411bce4aa753d10edf63fcb, type: 3}
+  - {fileID: 21300000, guid: d55f5944fc72b9a4997b211f03dc391b, type: 3}
+  - {fileID: 21300000, guid: e1cd91fc40fe7c948bd644a24566e701, type: 3}
+  - {fileID: 21300000, guid: c6a00e9df017f9549abeacea791317fa, type: 3}
+  skillIntroFrames: []
+  skillOutroFrames: []
+  stunFrames:
+  - {fileID: 21300000, guid: 1a1fae456d75bfb42a8ffae427a8e2f3, type: 3}
+  - {fileID: 21300000, guid: 5f10dad14feb11e48ab8189f300fd865, type: 3}
+  - {fileID: 21300000, guid: 7213f6b7419d25048959c0318ee69916, type: 3}
+  - {fileID: 21300000, guid: b54ff30fbe8e230408ef3ea33a794952, type: 3}
+  summoner: {fileID: 0}
+  healsAllies: 0
+  healFrames: []
+  buffFrames: []
+  shieldAmount: 0
+  shieldFrames: []
+  shieldBreakFrames: []
+  passiveStar: 0
+  minorStar: 3
+  secondMinorStar: 3
+  passiveKind: 6
+  passivePower: 0.5
+  passiveThreshold: 0
+  passiveRadius: 0
+  passiveEvery: 1
+  passiveDuration: 0
+  passiveFrames: []
+  ultimateText: 
+  passiveText: "Kh\u1EAFc Ch\u1EBF: \u0111\xF2n th\u01B0\u1EDDng v\xE0 c\xFA h\xFAc
+    v\xE0o tinh anh/boss +50% s\xE1t th\u01B0\u01A1ng."
+  minorText: "H\xFAc: phi xuy\xEAn h\xE0ng qu\xE1i, cho\xE1ng + \u0111\u1EA9y l\xF9i
+    m\u1ECDi qu\xE1i tr\xEAn \u0111\u01B0\u1EDDng."
+  secondMinorText: 
+  ultimateIcon: {fileID: 0}
+  minorIcon: {fileID: 21300000, guid: 773ac668711bdca4cb33ef5c93298064, type: 3}
+  passiveIcon: {fileID: 21300000, guid: 9d03a6e37749f3c49b5b9d5f53c002e4, type: 3}
+  secondMinorIcon: {fileID: 0}
+  animations: {fileID: 11400000, guid: 0bfc0dd6bf4329945bc0742ebc33c712, type: 2}
+  artFacesRight: 1
+  avatar: {fileID: 21300000, guid: 27214b698023a9641832304b2e49281a, type: 3}
+  squadSize: 1
+  summonCooldown: 25

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using BuildBuild.Core;
 using BuildBuild.Data;
 using BuildBuild.Meta;
@@ -60,7 +59,11 @@ namespace BuildBuild.UI
         [SerializeField] Image detailIcon;
         [SerializeField] Text detailName;
         [SerializeField] Text detailSub;
-        [SerializeField] Text detailSkills;
+        [Tooltip("Khoi ky nang: cac dong icon + chu. An o tab Trang bi.")]
+        [SerializeField] GameObject detailSkills;
+        [Tooltip("Moi dong ky nang: icon ben trai, chu ben phai; dong = cha cua o chu.")]
+        [SerializeField] Image[] skillIcons;
+        [SerializeField] Text[] skillTexts;
         [SerializeField] Image[] detailStars;
         [SerializeField] Sprite starOn;
         [SerializeField] Sprite starOff;
@@ -136,7 +139,11 @@ namespace BuildBuild.UI
             unequipButton.onClick.AddListener(() =>
             {
                 var item = SelectedGear();
-                if (item != null) Armory.Unequip(item);
+                if (item != null)
+                {
+                    Armory.Unequip(item);
+                    Sfx.Play("unequip");
+                }
                 Refresh();
             });
             economy.Changed += _ => Refresh();
@@ -198,12 +205,13 @@ namespace BuildBuild.UI
             tabDivider.SetActive(heroTab);
             bool gear = heroTab && _showGear;
             gearView.SetActive(gear);
-            detailSkills.gameObject.SetActive(!gear);
+            detailSkills.SetActive(!gear);
             skillsTab.image.sprite = gear ? roundNormal : roundActive;
             gearTab.image.sprite = gear ? roundActive : roundNormal;
             if (!any)
             {
-                detailName.text = detailSub.text = statNote.text = detailSkills.text = "";
+                detailName.text = detailSub.text = statNote.text = "";
+                ShowSkills(null, 0);
                 ShowChips(new List<(Sprite, string, string)>());
                 detailLevelBadge.SetActive(false);
                 detailShardBar.SetActive(false);
@@ -243,7 +251,7 @@ namespace BuildBuild.UI
                 : hero != null ? HeroStats(hero, level, maxed, heroTab ? equipment : null, out note)
                 : new List<(Sprite, string, string)>());
             statNote.text = note;
-            detailSkills.text = hero != null ? Skills(hero, stars) : "";
+            ShowSkills(hero, stars);
             if (gear) RefreshGear(unit, owned);
 
             int cost = cannon != null ? cannon.UpgradeCost(level) : Progression.LevelUpCost(level);
@@ -334,22 +342,30 @@ namespace BuildBuild.UI
         }
 
         /// <summary>Chieu cuoi luon mo; noi tai / chieu phu ghi "Mo o N★" khi chua du sao. O mo ta trong = hero khong co.</summary>
-        static string Skills(HeroDefinition hero, int stars)
+        void ShowSkills(HeroDefinition hero, int stars)
         {
-            var sb = new StringBuilder();
-            void Add(string tag, string text, int needStars)
+            int row = 0;
+            void Add(Sprite icon, string tag, string text, int needStars)
             {
-                if (string.IsNullOrEmpty(text)) return;
+                if (string.IsNullOrEmpty(text) || row >= skillTexts.Length) return;
                 bool open = stars >= needStars;
-                sb.AppendLine(open
+                skillIcons[row].sprite = icon;
+                skillIcons[row].enabled = icon != null;
+                skillIcons[row].color = open ? Color.white : TabIdle;
+                skillTexts[row].text = open
                     ? $"<b>{tag}</b> — {text}"
-                    : $"<color={Locked}><b>{tag}</b> · Mở ở {needStars}★ — {text}</color>");
+                    : $"<color={Locked}><b>{tag}</b> · Mở ở {needStars}★ — {text}</color>";
+                skillTexts[row].transform.parent.gameObject.SetActive(true);
+                row++;
             }
-            Add("Chiêu cuối", hero.ultimateText, 0);
-            Add("Nội tại", hero.passiveText, hero.passiveStar);
-            Add("Chiêu phụ", hero.minorText, hero.minorStar);
-            Add("Chiêu phụ", hero.secondMinorText, hero.secondMinorStar);
-            return sb.Length == 0 ? "" : "KỸ NĂNG\n" + sb.ToString().TrimEnd();
+            if (hero != null)
+            {
+                Add(hero.ultimateIcon, "Chiêu cuối", hero.ultimateText, 0);
+                Add(hero.passiveIcon, "Nội tại", hero.passiveText, hero.passiveStar);
+                Add(hero.minorIcon, "Chiêu phụ", hero.minorText, hero.minorStar);
+                Add(hero.secondMinorIcon, "Chiêu phụ", hero.secondMinorText, hero.secondMinorStar);
+            }
+            for (int i = row; i < skillTexts.Length; i++) skillTexts[i].transform.parent.gameObject.SetActive(false);
         }
 
         void LevelUp()
@@ -364,6 +380,7 @@ namespace BuildBuild.UI
             if (economy.Gold < cost) return;
             owned.level = level + 1;
             economy.TrySpend(cost);
+            Sfx.Play("upgrade");
         }
 
         // ---------------------------------------------------------------- trang bi
@@ -404,7 +421,7 @@ namespace BuildBuild.UI
                     var target = item;
                     Cell(bagRow).Show(rarityFrames[(int)item.rarity], equipment.Icon(item.slot),
                         $"{item.rarity} Lv{item.level}\n{Describe(item)}", true, false,
-                        () => { Armory.Equip(target, unit.id); Refresh(); });
+                        () => { Armory.Equip(target, unit.id); Sfx.Play("equip"); Refresh(); });
                 }
 
             string slotName = EquipmentConfig.SlotName(_slot);
@@ -439,12 +456,15 @@ namespace BuildBuild.UI
             if (economy.Gold < cost) return;
             item.level++;              // tang TRUOC: TrySpend ghi save + ban Changed -> Refresh doc so moi
             economy.TrySpend(cost);
+            Sfx.Play("upgrade");
         }
 
         void StarUp()
         {
             var owned = _selected != null ? Owned(_selected) : null;
-            if (Progression.TryStarUp(owned, config.shardsPerStar)) Refresh();
+            if (!Progression.TryStarUp(owned, config.shardsPerStar)) return;
+            Sfx.Play("upgrade");
+            Refresh();
         }
     }
 }

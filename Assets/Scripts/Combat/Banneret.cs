@@ -106,9 +106,12 @@ namespace BuildBuild.Combat
         /// <summary>
         /// Dong minh de di toi: dang danh gan nhat; khong ai dang danh ma san con quai thi dong minh gan nhat; het quai thi
         /// null (ve o). Chon GAN NHAT chu khong ngau nhien — ngau nhien moi frame thi Banneret di giat qua lai.
+        /// Chua bam bat dau thi null: luc chuan bi Chinh Phat thanh NPC da dung tren san (tinh la "con quai").
         /// </summary>
         public Hero FollowTarget()
         {
+            if (!WaveManager.Fighting) return null;
+
             Hero engaged = null, any = null;
             float engagedDistance = float.MaxValue, anyDistance = float.MaxValue;
             foreach (var ally in Hero.Alive)
@@ -126,7 +129,7 @@ namespace BuildBuild.Combat
                     engaged = ally;
                 }
             }
-            return engaged != null ? engaged : AnyEnemy() ? any : null;
+            return engaged != null ? engaged : AnyEnemy(_hero.Side) ? any : null;
         }
 
         /// <summary>Goi o hitFrame cua clip attack: chon lai nguoi nhan luc do (nguoi cu co the da chet / ra khoi tam).</summary>
@@ -149,7 +152,7 @@ namespace BuildBuild.Combat
                     break;
                 default:
                     ally.ApplyShield(_hero.AttackDamage * _definition.strikeShieldPower, seconds,
-                        _definition.shieldFrames, _definition.shieldBreakFrames);
+                        _definition.shieldFrames, _definition.shieldBreakFrames, _hero.Health);
                     label = "Khiên";
                     break;
             }
@@ -184,23 +187,23 @@ namespace BuildBuild.Combat
 
         bool InReach(Hero ally, float range) => (ally.transform.position - transform.position).sqrMagnitude <= range * range;
 
-        static bool IsAlly(Hero ally) => ally != null && !ally.IsDying && ally.Definition != null;
+        bool IsAlly(Hero ally) => ally != null && !ally.IsDying && ally.Definition != null && ally.Side == _hero.Side;
 
         /// <summary>Dang danh = co quai con song trong tam danh hien tai cua no (do toi mep than quai).</summary>
         static bool Engaged(Hero ally)
         {
             float range = ally.CurrentAttackRange;
-            foreach (var enemy in Enemy.Alive)
+            foreach (var enemy in Unit.Hostiles(ally.Side))
             {
                 if (enemy == null || enemy.IsDying) continue;
-                if ((enemy.transform.position - ally.transform.position).magnitude - enemy.BodyRadius <= range) return true;
+                if ((enemy.AimPoint(ally.transform.position) - ally.transform.position).magnitude - enemy.BodyRadius <= range) return true;
             }
             return false;
         }
 
-        static bool AnyEnemy()
+        static bool AnyEnemy(Faction side)
         {
-            foreach (var enemy in Enemy.Alive)
+            foreach (var enemy in Unit.Hostiles(side))
                 if (enemy != null && !enemy.IsDying) return true;
             return false;
         }

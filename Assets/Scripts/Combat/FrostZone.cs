@@ -29,11 +29,12 @@ namespace BuildBuild.Combat
         SpriteRenderer _renderer;
         Sprite[] _frames;
         float _radius;
+        Faction _side;   // phe dat vung — chi dong bang doi thu cua phe nay
         float _remaining;
         float _timer;
         int _frame;
 
-        public static void Spawn(Vector3 position, float radius, float duration, Sprite[] frames)
+        public static void Spawn(Vector3 position, float radius, float duration, Sprite[] frames, Faction side)
         {
             var go = new GameObject("FrostZone");
             go.transform.position = position;
@@ -42,7 +43,9 @@ namespace BuildBuild.Combat
             var renderer = go.AddComponent<SpriteRenderer>();
             renderer.sortingOrder = 5;
 
-            go.AddComponent<FrostZone>().Begin(radius, duration, frames);
+            var zone = go.AddComponent<FrostZone>();
+            zone._side = side;
+            zone.Begin(radius, duration, frames);
         }
 
         void Begin(float radius, float duration, Sprite[] frames)
@@ -75,7 +78,7 @@ namespace BuildBuild.Combat
                 return;
             }
 
-            foreach (var enemy in Enemy.Alive)
+            foreach (var enemy in Unit.Hostiles(_side))
             {
                 if (enemy == null || enemy.IsDying) continue;
                 if (!Contains(enemy.transform.position)) continue;

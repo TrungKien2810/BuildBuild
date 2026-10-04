@@ -17,16 +17,15 @@ namespace BuildBuild.Combat
     [RequireComponent(typeof(SpriteRenderer), typeof(SpriteAnimator))]
     public class Cannon : MonoBehaviour
     {
-        /// <summary>Nong phao tinh tu chan (pivot) o co art 1x, phia NONG (ben trai art). Nhan scale than khi dung.</summary>
-        static readonly Vector3 MuzzleOffset = new Vector3(-0.3f, 0.3f, 0f);
 
         CannonDefinition _definition;
         SpriteRenderer _renderer;
         SpriteAnimator _animator;
         float _damage;
         float _cooldown;
-        Enemy _pending;
+        Unit _pending;
         bool _firing;
+        Faction _side;
 
         public CannonDefinition Definition => _definition;
         public int Level { get; private set; }
@@ -37,17 +36,21 @@ namespace BuildBuild.Combat
             _animator = GetComponent<SpriteAnimator>();
         }
 
-        public void Initialise(CannonDefinition definition, int level)
+        /// <summary><paramref name="side"/> = Npc: phao tren thanh NPC (Chinh Phat) — quay trai, ban phe ta.</summary>
+        public void Initialise(CannonDefinition definition, int level, Faction side = Faction.Player)
         {
             _definition = definition;
+            _side = side;
             SetLevel(level);
             _cooldown = 0f;
             _pending = null;
             _firing = false;
 
             transform.localScale = Vector3.one * definition.displayScale;
-            _renderer.flipX = true;
+            _renderer.flipX = side == Faction.Player;
             _renderer.color = definition.tint;
+            if (definition.slowIconFrames != null && definition.slowIconFrames.Length > 0)
+                EnemyExtras.SlowIconFrames = definition.slowIconFrames;
 
             _animator.Bind(definition.animations);
             _animator.HitFrame -= OnHitFrame;
@@ -80,17 +83,17 @@ namespace BuildBuild.Combat
             if (clip == null || !clip.IsValid || clip.hitFrame <= 0) Release();
         }
 
-        /// <summary>Quai con song trong tam, gan lau dai nhat (x nho nhat).</summary>
-        Enemy FindTarget()
+        /// <summary>Doi thu con song trong tam, gan thanh minh nhat (phe ta: x nho nhat; thanh NPC ben phai: x lon nhat).</summary>
+        Unit FindTarget()
         {
-            Enemy best = null;
+            Unit best = null;
             float bestX = float.MaxValue;
             float rangeSqr = _definition.range * _definition.range;
-            foreach (var enemy in Enemy.Alive)
+            foreach (var enemy in Unit.Hostiles(_side))
             {
                 if (enemy == null || enemy.IsDying) continue;
-                if ((enemy.transform.position - transform.position).sqrMagnitude > rangeSqr) continue;
-                float x = enemy.transform.position.x;
+                if ((enemy.AimPoint(transform.position) - transform.position).sqrMagnitude > rangeSqr) continue;
+                float x = _side == Faction.Player ? enemy.transform.position.x : -enemy.transform.position.x;
                 if (x >= bestX) continue;
                 bestX = x;
                 best = enemy;
@@ -118,7 +121,7 @@ namespace BuildBuild.Combat
             if (_definition.animations == null || !_definition.animations.attack.IsValid) _firing = false;
             if (target == null) return;
 
-            var muzzle = MuzzleOffset * _definition.displayScale;
+            var muzzle = (Vector3)_definition.muzzle * _definition.displayScale;
             if (_renderer.flipX) muzzle.x = -muzzle.x;
 
             var go = new GameObject("CannonShot");
@@ -127,7 +130,8 @@ namespace BuildBuild.Combat
             var renderer = go.AddComponent<SpriteRenderer>();
             renderer.sortingOrder = SortOrder.Air;
             renderer.color = _definition.tint;
-            go.AddComponent<Projectile>().LaunchCannon(target, _damage, _definition);
+            go.AddComponent<Projectile>().LaunchCannon(target, _damage, _definition, _side);
+            Sfx.Play(_definition.fireSfx);
         }
     }
 }

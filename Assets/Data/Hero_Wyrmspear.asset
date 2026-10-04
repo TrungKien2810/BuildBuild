@@ -25,6 +25,11 @@ MonoBehaviour:
   warden: {fileID: 0}
   dragonRider: {fileID: 11400000, guid: 6e5de7c8e3828264fb279759876fd78f, type: 2}
   banner: {fileID: 0}
+  wukong: {fileID: 0}
+  stormcaller: {fileID: 0}
+  galemonk: {fileID: 0}
+  daoVien: {fileID: 0}
+  swornBrother: 0
   projectileSpeed: 20
   splashRadius: 0.3
   projectileFrames: []
@@ -32,6 +37,9 @@ MonoBehaviour:
   impactFrames: []
   impactScale: 1
   knockbackOnHit: 0
+  fireSfx: 
+  impactSfx: 
+  skillSfx: skill-dragon
   skillKind: 8
   skillTier: 0
   skillCooldown: 0
@@ -43,6 +51,7 @@ MonoBehaviour:
   skillPower: 1
   skillFrames: []
   skillIntroFrames: []
+  skillOutroFrames: []
   stunFrames: []
   summoner: {fileID: 0}
   healsAllies: 0
@@ -59,6 +68,8 @@ MonoBehaviour:
   passiveThreshold: 0
   passiveRadius: 0
   passiveEvery: 1
+  passiveDuration: 0
+  passiveFrames: []
   ultimateText: "Long Ho\xE1: bi\u1EBFn h\xECnh Long Nh\xE2n + g\u1ECDi B\u1EA1ch
     \u0110\u1ECBa Long (Long Gi\xE1p, Long Uy, Long N\u1ED9, Long Kh\u1EBF); l\u1EA7n
     sau: Thi\xEAn \u0110\u1ECBa Long Gi\xE1ng."
@@ -68,6 +79,10 @@ MonoBehaviour:
     xuy\xEAn m\u1ED9t \u0111\u01B0\u1EDDng, b\u1ECF qua gi\xE1p."
   secondMinorText: "\u0110\u1ECBa Long Ch\u1EA5n (r\u1ED3ng): gai \u0111\xE1 quanh
     r\u1ED3ng \u2014 s\xE1t th\u01B0\u01A1ng v\xF9ng, cho\xE1ng, ph\xE1 gi\xE1p."
+  ultimateIcon: {fileID: 21300000, guid: 1eeb45a5d75fbd348900a69f64024fb6, type: 3}
+  minorIcon: {fileID: 21300000, guid: 1e04a540d9614764ebdce76caf229461, type: 3}
+  passiveIcon: {fileID: 21300000, guid: df8e70892ae66f649bad543c2f5f7213, type: 3}
+  secondMinorIcon: {fileID: 21300000, guid: 1c00f03aab1f4144c9cba583eef7147b, type: 3}
   animations: {fileID: 11400000, guid: 5ecbc40a901f5c049ba84f1dad6ff9e1, type: 2}
   artFacesRight: 0
-  avatar: {fileID: 21300000, guid: b2725486826ba2e47bde70254fa47f83, type: 3}
+  avatar: {fileID: 21300000, guid: bd16bdcf549ba964dbf3dc63d910b642, type: 3}

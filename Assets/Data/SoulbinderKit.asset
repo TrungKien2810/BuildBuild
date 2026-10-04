@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31895ddfbeebb2c4398c61c8b3199773, type: 3}
+  m_Name: SoulbinderKit
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.SoulbinderKit
+  linkCooldown: 10
+  ripCooldown: 10
+  linkRadius: 2.5
+  minorDuration: 6
+  minorShare: 0.25
+  pactDuration: 8
+  pactShare: 0.4
+  link:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: 33f7bbf243201cf4d91bef821aa17ca0, type: 3}
+    - {fileID: 21300000, guid: a4918edf137fad44f86c2080db6664df, type: 3}
+    - {fileID: 21300000, guid: 1a941746a82681e45b9cff70a6f9741a, type: 3}
+    - {fileID: 21300000, guid: 549ce3586d28eda4d9bc54da964234e3, type: 3}
+    - {fileID: 21300000, guid: b25722b20ee357e40b8ae42dd0e1a74d, type: 3}
+    - {fileID: 21300000, guid: 01ba21c386322ca46a0780a49a788b9c, type: 3}
+    loop: 0
+    hitFrame: 3
+  rip:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: d42fc2e9276c84f47a301668ea1e9e00, type: 3}
+    - {fileID: 21300000, guid: db14db883b896e04790cd7a64a52be80, type: 3}
+    - {fileID: 21300000, guid: eabe280455fe06f4e8b23613022c48f4, type: 3}
+    - {fileID: 21300000, guid: e1dd90fbc05325e4ebda878cd40d5106, type: 3}
+    - {fileID: 21300000, guid: 0f7d2d238eb4438479588be9bcc29a9e, type: 3}
+    - {fileID: 21300000, guid: 3804692360d123642a949e7ed7773580, type: 3}
+    loop: 0
+    hitFrame: 4
+  marker:
+  - {fileID: 21300000, guid: cd713dc82a43f7049b90487d8419d904, type: 3}
+  - {fileID: 21300000, guid: d1848a4623ee3184faef4be5ccaa9ca1, type: 3}
+  - {fileID: 21300000, guid: fde4d55a79dd1a64a82aafdeacde672d, type: 3}
+  - {fileID: 21300000, guid: 85283417c25ee1f4d83ecb6584c1f95f, type: 3}
+  pactMarker:
+  - {fileID: 21300000, guid: 2a77e901bcbfab7498cd6717f8383b70, type: 3}
+  - {fileID: 21300000, guid: a85d42f230fe6554e877e4d7ca00d265, type: 3}
+  - {fileID: 21300000, guid: e177e7fa4208c7b4e9e7cddf7e66a64c, type: 3}
+  - {fileID: 21300000, guid: 8e671dc54a2ef9e43be35a56429651ad, type: 3}
+  segment:
+  - {fileID: 21300000, guid: 3dfc76a4d0d43dd4eac26a2dfd2a8aa8, type: 3}
+  - {fileID: 21300000, guid: 3031efa63bf4c514aa472cb0e995eb99, type: 3}
+  - {fileID: 21300000, guid: 0898147d9be860c4ca6155448397ce21, type: 3}
+  - {fileID: 21300000, guid: 7a905e8c8b93f6c4d892d9c5a20264c9, type: 3}
+  fade:
+  - {fileID: 21300000, guid: 9a3c1e7cbb6ae9549aee2db19acb04d3, type: 3}
+  - {fileID: 21300000, guid: c3d28b34eaee57340bd30ecfdefa72ff, type: 3}
+  - {fileID: 21300000, guid: f2c6d1e7143600a4ea9477e0d69e5350, type: 3}
+  - {fileID: 21300000, guid: e699c9d9180c1af4b8f64faca00224a9, type: 3}
+  transfer:
+  - {fileID: 21300000, guid: a517bd1ee2192404f82cd92063fe38a0, type: 3}
+  - {fileID: 21300000, guid: 30daa3e54eff2fb4e8c6f07814aeeaa4, type: 3}
+  - {fileID: 21300000, guid: a4fea2b0de777cb4d8e189732d714eaf, type: 3}
+  - {fileID: 21300000, guid: 1c4bd4375b2e3f5418cb8c19a0440c9d, type: 3}
+  fragment:
+  - {fileID: 21300000, guid: e69dd5f01a489b945ad9ae3ae9e0dcdd, type: 3}
+  - {fileID: 21300000, guid: b8c294e700898af408096033575e4567, type: 3}
+  - {fileID: 21300000, guid: d7429cfe38dabfb4b83c2de9151c79d6, type: 3}
+  - {fileID: 21300000, guid: 28f81794f6555664a98cc595c8dd3a6f, type: 3}
+  ripHit:
+  - {fileID: 21300000, guid: 3814d438c8fa0fd4e864e7bab17d88b2, type: 3}
+  - {fileID: 21300000, guid: e7e7e85b0ba3ad54bb0dc9283fc732a5, type: 3}
+  - {fileID: 21300000, guid: aa83c93bb2196a64c9212ccbf375ad92, type: 3}
+  - {fileID: 21300000, guid: 989788daef634e740a12d44a4a559cb5, type: 3}
+  pactHit:
+  - {fileID: 21300000, guid: a26aa18516b518b448ce42d62513cba4, type: 3}
+  - {fileID: 21300000, guid: 45c0919dc9ab8e944be5e57923a928a4, type: 3}
+  - {fileID: 21300000, guid: 624a39e8792d59e4cbcb916431f75826, type: 3}
+  - {fileID: 21300000, guid: f16b2a4f4bf7bc24aabbcebf9130dd49, type: 3}

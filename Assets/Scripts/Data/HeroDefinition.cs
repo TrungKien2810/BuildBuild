@@ -41,6 +41,58 @@ namespace BuildBuild.Data
         Lantern,
         /// <summary>Banneret Hieu Lenh Xung Phong: ca doi +sat thuong. So nam o `banner`.</summary>
         Rally,
+        /// <summary>
+        /// Wukong Nhu Y Thien Tru: gay khong lo dap vet dai `skillRadius` vao cum quai, damage x `skillPower`, choang
+        /// `skillDuration`. Phan con lai cua bo chieu nam o `wukong`.
+        /// </summary>
+        GiantStaff,
+        /// <summary>
+        /// Stormcaller Loi Bao: cot set giang xuong quai trong tam, damage x `skillPower` moi cot, choang `skillDuration`.
+        /// Phan con lai cua bo chieu nam o `stormcaller`.
+        /// </summary>
+        ThunderStorm,
+        /// <summary>
+        /// Galemonk Long Quyen: loc xoay o cum quai dong nhat, hut quai trong `skillRadius`, giu `skillDuration` giay, moi
+        /// giay damage x `skillPower`. Phan con lai cua bo chieu nam o `galemonk`.
+        /// </summary>
+        Whirlwind,
+        /// <summary>
+        /// Bo Dao Vien: Luu Bi Dao Vien Ket Nghia / Quan Vu Thanh Long Hien / Truong Phi Duong Duong Kieu Hong — nghia cua
+        /// `skillPower` / `skillRadius` / `skillDuration` doi theo hero, xem `DaoVienDefinition`.
+        /// </summary>
+        DaoVien,
+        /// <summary>
+        /// Phu Thuy Dam Lay Vac Suong Doc: suong ban kinh `skillRadius` o cum quai dong nhat, ton tai `skillDuration` giay;
+        /// quai trong suong +1 tang Doc moi giay va bi pha giap `skillPower` (0,2 = nhan them 20%). So Doc lay o noi tai Venom.
+        /// </summary>
+        ToxicMist,
+        /// <summary>
+        /// Hiep Si Nam No Nam: 3 cay nam moc quanh chan cach `skillRadius`, `skillDuration` giay sau no bao tu — moi cay
+        /// damage x `skillPower` cho quai trong 0,6.
+        /// </summary>
+        MushroomBloom,
+        /// <summary>
+        /// Ngu Nhan Xoay Nuoc: xoay ban kinh `skillRadius` quanh chan `skillDuration` giay — quai trong xoay khong danh duoc
+        /// (tinh anh -50% sat thuong, boss khong bi khoa), moi giay an damage x `skillPower`.
+        /// </summary>
+        Whirlpool,
+        /// <summary>
+        /// Phap Su Lua Mua Tan Lua: 3 cau lua roi lech nhau quanh cum quai dong nhat, moi qua no ban kinh `skillRadius` gay
+        /// damage x `skillPower` + Chay, de lai vung lua `skillDuration` giay. FX: `skillIntroFrames` cau roi,
+        /// `skillOutroFrames` vu no, `skillFrames` vung lua lap. So Chay lay o noi tai Ignite.
+        /// </summary>
+        EmberRain,
+        /// <summary>
+        /// Nguoi Lun Tuong Rune: tuong doc dai `skillRadius` moi phia truoc mat, `skillDuration` giay — chan quai + dan quai,
+        /// hero dung yen sau khien toi het gio. FX: `skillIntroFrames` moc, `skillFrames` lap, `skillOutroFrames` tan.
+        /// </summary>
+        RuneWall,
+        /// <summary>
+        /// Tien Det To Mua Roi: quai nhieu mau nhat trong tam (tru boss) sang phe minh `skillDuration` giay (tinh anh mot
+        /// nua). FX: `skillFrames` day roi lap, `skillOutroFrames` dut to.
+        /// </summary>
+        Puppet,
+        BloodShatter, SoulPact, SeedRain, TrapDetonation, SigilBombs,
     }
 
     /// <summary>
@@ -63,6 +115,27 @@ namespace BuildBuild.Data
         Shatter,
         /// <summary>Vespera Cuu Nguy: dong minh duoi `passiveThreshold` mau duoc hoi +`passivePower`.</summary>
         Rescue,
+        /// <summary>Warhorn Khac Che: moi don (ke ca huc) vao tinh anh / boss +`passivePower` sat thuong.</summary>
+        BossBane,
+        /// <summary>
+        /// Phu Thuy Dam Lay Ngam Doc: moi quai an don thuong +1 tang Doc (toi da `passiveEvery`), moi tang `passivePower`
+        /// sat thuong/giay, trung lai lam moi `passiveDuration` giay.
+        /// </summary>
+        Venom,
+        /// <summary>Hiep Si Nam Bao Tu: bi danh can chien thi quai trong `passiveRadius` an `passivePower` (toi da 2 lan/giay).</summary>
+        Spores,
+        /// <summary>Ngu Nhan Thoc Hang: don thuong xuyen qua — quai dung ngay sau muc tieu (trong `passiveRadius`) an x `passivePower`.</summary>
+        Pierce,
+        /// <summary>
+        /// Phap Su Lua Ben Lua: don thuong (luon) gay Chay `passivePower` sat thuong/giay trong `passiveDuration` giay, lam moi
+        /// khong cong don; noi tai mo thi quai dang Chay chet -> lua nhay sang quai gan nhat trong `passiveRadius`.
+        /// </summary>
+        Ignite,
+        /// <summary>Nguoi Lun Chan Dan: dan quai ban xa trung ong thi vo, khong sat thuong. `passiveFrames` = tia dan vo.</summary>
+        ShotBreak,
+        /// <summary>Tien Det To Day Roi: quai an don thuong bi `passivePower` (0,25 = 25%) don truot trong `passiveDuration` giay.</summary>
+        Tangle,
+        SeedStacks, Traps, SigilWeakness,
     }
 
     /// <summary>
@@ -108,6 +181,18 @@ namespace BuildBuild.Data
         public DragonRiderDefinition dragonRider;
         [Tooltip("Chi Banneret: don thuong buff ngau nhien 1 dong minh, noi tai Quan Ky, Cam Co, Hieu Lenh. Trong = khong co.")]
         public BannerDefinition banner;
+        [Tooltip("Chi Wukong: The Than, Nho Long Phan Than, Toan Phong Con, so phu cua Nhu Y Thien Tru. Trong = khong co.")]
+        public WukongDefinition wukong;
+        [Tooltip("Chi Stormcaller: Xich Loi nay chuoi, Qua Tai, Cot Thu Loi, Loi Bo, so phu cua Loi Bao. Trong = khong co.")]
+        public StormcallerDefinition stormcaller;
+        [Tooltip("Chi Galemonk: Chuong Phong day lui, Thuan Phong, Phong Tao, so phu cua Long Quyen. Trong = khong co.")]
+        public GalemonkDefinition galemonk;
+        [Tooltip("Chi bo Dao Vien (Luu Bi / Quan Vu / Truong Phi): noi tai Ket Nghia chung + bo chieu tung nguoi. Trong = khong co.")]
+        public DaoVienDefinition daoVien;
+        public BloodswordsmanKit bloodswordsman;
+        public SoulbinderKit soulbinder;
+        [Tooltip("Hero nao trong bo Dao Vien — quyet dinh phan nao cua `daoVien` chay.")]
+        public SwornBrother swornBrother;
 
         [Header("Dan")]
         public float projectileSpeed = 8f;
@@ -119,8 +204,16 @@ namespace BuildBuild.Data
         public Sprite[] impactFrames;
         [Tooltip("Scale frame NO (nhan them UnitScale). Frost-impact ve to -> 0,6.")]
         public float impactScale = 1f;
-        [Tooltip("Don thuong day lui moi quai trung, ke ca quai dang vung attack (ky si tu than).")]
+        [Tooltip("Don thuong day lui moi quai trung, ke ca quai dang vung attack (ky si tu than). Charge: quai bi huc cung bi day lui.")]
         public bool knockbackOnHit;
+
+        [Header("Am thanh (ten file trong Resources/Audio/SFX, rong = im)")]
+        [Tooltip("Luc ra don thuong (nha day cung, tung phep). Don can chien da co tieng trung chung, de rong.")]
+        public string fireSfx;
+        [Tooltip("Luc dan trung dich (chi hero co dan bay).")]
+        public string impactSfx;
+        [Tooltip("Luc tung chieu lon.")]
+        public string skillSfx;
 
         [Header("Ky nang")]
         [Tooltip("None = khong co ky nang. Loai quyet dinh 3 o Radius / Duration / Power ben duoi nghia la gi.")]
@@ -144,10 +237,12 @@ namespace BuildBuild.Data
         public float skillDuration = 3f;
         [Tooltip("ConeSweep: he so x damage. RapidFire: he so x toc danh. Petrify: ti le sat thuong phan lai (0,2 = 20%). Lantern: mau hoi = damage x he so.")]
         public float skillPower = 1f;
-        [Tooltip("FrostZone: frame vung bang (trong = placeholder). ConeSweep: frame vet chem. Petrify: vo da LAP trong luc hoa da. Lantern: vong tren dat.")]
+        [Tooltip("FrostZone: frame vung bang (trong = placeholder). ConeSweep: frame vet chem. Petrify: vo da LAP trong luc hoa da. Lantern: vong tren dat. Charge: bui tung o chan luc bat dau phi.")]
         public Sprite[] skillFrames;
-        [Tooltip("Petrify: vo da moc len, chay MOT lan truoc khi lap skillFrames.")]
+        [Tooltip("Petrify: vo da moc len, chay MOT lan truoc khi lap skillFrames. MushroomBloom: nam moc len (giu frame cuoi toi khi no).")]
         public Sprite[] skillIntroFrames;
+        [Tooltip("Whirlpool: xoay tan, chay MOT lan khi het chieu.")]
+        public Sprite[] skillOutroFrames;
         [Tooltip("Charge (Ky si tu than): sao choang LAP tren dau quai trong luc bi choang. Trong = khong co FX.")]
         public Sprite[] stunFrames;
 
@@ -190,14 +285,18 @@ namespace BuildBuild.Data
         [Header("Noi tai hero khong co bo chieu rieng (mo theo passiveStar, chot 2026-09-29; so CHUA can)")]
         [Tooltip("Loai noi tai — y nghia tung o ben duoi doi theo loai, xem `PassiveKind`.")]
         public PassiveKind passiveKind;
-        [Tooltip("Execute/Rescue: +ti le (0,5 = +50%). Crit: he so nhan. Shatter: he so don thuong cua vu no.")]
+        [Tooltip("Execute/Rescue/BossBane: +ti le (0,5 = +50%). Crit: he so nhan. Shatter: he so don thuong cua vu no.")]
         public float passivePower;
         [Tooltip("Execute/Rescue: nguong mau muc tieu (0,3 = duoi 30%).")]
         public float passiveThreshold;
         [Tooltip("Taunt: ban kinh keo quai. Shatter: ban kinh vu no.")]
         public float passiveRadius;
-        [Tooltip("Crit: cu phat thu may.")]
+        [Tooltip("Crit: cu phat thu may. Venom: so tang Doc toi da.")]
         [Min(1)] public int passiveEvery = 1;
+        [Tooltip("Venom: tang Doc ton tai bao lau (trung lai thi dem lai).")]
+        public float passiveDuration;
+        [Tooltip("Venom: bong bong doc LAP o chan quai trung doc. Spores: bui bao tu quanh chan khi nha.")]
+        public Sprite[] passiveFrames;
 
         [Header("Mo ta ky nang (man Doi quan)")]
         [Tooltip("\"Ten: mo ta\" cua chieu cuoi. Trong = hero khong co chieu cuoi.")]
@@ -207,6 +306,12 @@ namespace BuildBuild.Data
         [TextArea(2, 4)] public string minorText;
         [Tooltip("Chieu phu thu hai (Wyrmspear, Chainwarden).")]
         [TextArea(2, 4)] public string secondMinorText;
+        [Tooltip("Icon canh dong ky nang (UI/icons/icon-skill-*). Trong = de trong o icon.")]
+        public Sprite ultimateIcon;
+        public Sprite minorIcon;
+        [Tooltip("Icon dong noi tai (UI/icons/icon-passive-*).")]
+        public Sprite passiveIcon;
+        public Sprite secondMinorIcon;
 
         [Header("Animation")]
         public SpriteAnimationSet animations;

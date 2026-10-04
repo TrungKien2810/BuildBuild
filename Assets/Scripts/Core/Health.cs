@@ -1,8 +1,10 @@
 using System;
 using UnityEngine;
+using BuildBuild.Combat;
 
 namespace BuildBuild.Core
 {
+    public enum DamageKind { Direct, Periodic, Reflected, Linked }
     /// <summary>
     /// Mau cua bat ky thu gi an duoc sat thuong: quai, hero, lau dai.
     /// Tach rieng khoi controller de lau dai va quai dung chung mot duong sat thuong.
@@ -50,28 +52,65 @@ namespace BuildBuild.Core
         /// <summary>Ban ra khi duoc hoi mau (luong thuc te da cong).</summary>
         public event Action<float> Healed;
 
+        /// <summary>Thong bao chung de thong ke wave nhan mau that, khien da an va nguon don.</summary>
+        public static event Action<Health, Health, float, float, Health> AnyDamaged;
+        public static event Action<Health, Health, float> AnyHealed;
+        public static event Action<Health, Health, float, Faction?> DirectDamage;
+        public static event Action<Health, Health, DamageKind> KilledBy;
+        public Func<float, Health, float> AdjustDirectHit { get; set; }
+
+        public void SpendBlood(float fraction)
+        {
+            if (!IsDead) Current -= Mathf.Min(Current - 1f, Mathf.Floor(Current * fraction));
+        }
+
         /// <summary>
         /// Khien ao (Den Canh cua Vespera): an sat thuong TRUOC mau, sau giap. Het khien thi ban `ShieldBroken`; het han
         /// thi nguoi dat khien goi `ClearShield`.
         /// </summary>
         public float Shield { get; private set; }
 
+        /// <summary>
+        /// Chan tron mot don TRUOC khi tinh giap/khien (Toan Phong Con cua Wukong bat dan quai ban xa): tra ve true = don bi
+        /// chan, bao `Blocked`, khong tru mau. null = khong chan gi.
+        /// </summary>
+        public Func<float, Health, bool> Deflects { get; set; }
+
         public event Action ShieldBroken;
 
-        /// <summary>Cast lai khong cong don — lay luong lon hon, tuc la lam moi khien.</summary>
-        public void AddShield(float amount) => Shield = Mathf.Max(Shield, amount);
+        /// <summary>
+        /// Bo QUA im lang don tu nguon nay (quai bay cao: can chien khong voi toi) — khong tru mau, khong bao `Blocked`.
+        /// null = nhan moi don.
+        /// </summary>
+        public Func<Health, bool> IgnoresHitFrom { get; set; }
 
-        public void ClearShield() => Shield = 0f;
+        /// <summary>Nguoi dung khien dang giu (de ghi cong "Hoi mau" khi khien an don) — null neu khong ro.</summary>
+        Health _shieldCaster;
+
+        /// <summary>Cast lai khong cong don — lay luong lon hon, tuc la lam moi khien.</summary>
+        public void AddShield(float amount, Health caster = null)
+        {
+            if (amount > Shield) _shieldCaster = caster;
+            Shield = Mathf.Max(Shield, amount);
+        }
+
+        public void ClearShield() { Shield = 0f; _shieldCaster = null; }
+
+        /// <summary>Khong nhan hoi mau toi moc nay (Thieu Hon cua Dreadwyrm).</summary>
+        public float NoHealUntil { get; set; }
+        public bool HealBlocked => Time.time < NoHealUntil;
 
         void Awake() => ResetTo(maxHealth);
 
         /// <summary>Hoi mau, khong vuot `Max`; da chet thi khong hoi.</summary>
-        public void Heal(float amount)
+        public void Heal(float amount, Health healer = null)
         {
-            if (IsDead || amount <= 0f || Current >= maxHealth) return;
+            if (IsDead || amount <= 0f || Current >= maxHealth || HealBlocked) return;
             float before = Current;
             Current = Mathf.Min(maxHealth, Current + amount);
-            Healed?.Invoke(Current - before);
+            float healed = Current - before;
+            Healed?.Invoke(healed);
+            AnyHealed?.Invoke(this, healer, healed);
         }
 
         public void ResetTo(float value)
@@ -79,7 +118,11 @@ namespace BuildBuild.Core
             maxHealth = Mathf.Max(1f, value);
             Current = maxHealth;
             Shield = 0f;
+            _shieldCaster = null;
         }
+
+        /// <summary>Keo day tu 0 mau (Dong Sinh Cong Tu cua Luu Bi): dat mau hien tai, giu mau toi da.</summary>
+        public void Revive(float value) => Current = Mathf.Clamp(value, 1f, maxHealth);
 
         /// <summary>Doi mau toi da, giu nguyen TI LE mau hien tai (Long Giap cua Wyrmspear +60% giua tran).</summary>
         public void SetMax(float value)
@@ -91,10 +134,17 @@ namespace BuildBuild.Core
 
         /// <param name="source">Health cua ke danh — can cho hieu ung phan don; dan/FX khong ro nguon thi de null.</param>
         /// <param name="ignoreArmor">Bo qua `Armor` (Xuyen Long cua Wyrmspear). Vulnerability van tinh.</param>
-        public void TakeDamage(float amount, Health source = null, bool ignoreArmor = false)
+        public void TakeDamage(float amount, Health source = null, bool ignoreArmor = false, DamageKind kind = DamageKind.Direct, Faction? side = null)
         {
             if (IsDead || amount <= 0f) return;
+            if (IgnoresHitFrom != null && IgnoresHitFrom(source)) return;
             amount *= 1f + Mathf.Max(0f, Vulnerability);
+
+            if (Deflects != null && Deflects(amount, source))
+            {
+                Blocked?.Invoke(amount, source);
+                return;
+            }
 
             if (Invulnerable)
             {
@@ -102,17 +152,24 @@ namespace BuildBuild.Core
                 return;
             }
 
+            if (kind == DamageKind.Direct && AdjustDirectHit != null) amount = AdjustDirectHit(amount, source);
+
             if (!ignoreArmor) amount *= 1f - Mathf.Clamp01(Armor);
             amount *= 1f - Mathf.Clamp01(Guard);
+            float shieldAbsorbed = 0f;
+            Health shieldCaster = _shieldCaster;
             if (Shield > 0f)
             {
                 float absorbed = Mathf.Min(Shield, amount);
+                shieldAbsorbed = absorbed;
                 Shield -= absorbed;
                 amount -= absorbed;
-                if (Shield <= 0f) ShieldBroken?.Invoke();
+                if (Shield <= 0f) { _shieldCaster = null; ShieldBroken?.Invoke(); }
                 // Khien an tron don: bao `Blocked` cho feedback "Chan", khong tru mau.
                 if (amount <= 0f)
                 {
+                    AnyDamaged?.Invoke(this, source, 0f, shieldAbsorbed, shieldCaster);
+                    if (kind == DamageKind.Direct) DirectDamage?.Invoke(this, source, 0f, side);
                     Blocked?.Invoke(absorbed, source);
                     return;
                 }
@@ -120,9 +177,16 @@ namespace BuildBuild.Core
             float before = Current;
             Current = Mathf.Max(0f, Current - amount);
             Damaged?.Invoke(amount);
-            if (source != null) source.DamageDealt?.Invoke(before - Current);
+            // Tu tru mau (het han, rong tan) truyen chinh minh lam nguon de thong ke loai ra — khong tinh la hut mau.
+            if (source != null && source != this && kind != DamageKind.Linked) source.DamageDealt?.Invoke(before - Current);
+            AnyDamaged?.Invoke(this, source, before - Current, shieldAbsorbed, shieldCaster);
+            if (kind == DamageKind.Direct) DirectDamage?.Invoke(this, source, before - Current, side);
 
-            if (Current <= 0f) Died?.Invoke();
+            if (Current <= 0f)
+            {
+                KilledBy?.Invoke(this, source, kind);
+                Died?.Invoke();
+            }
         }
     }
 }

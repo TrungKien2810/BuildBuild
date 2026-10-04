@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f28d9e270dec892bd61fa3960bb4436, type: 3}
+  m_Name: Cannon_Ballista
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.CannonDefinition
+  displayName: "N\u1ECF Xuy\xEAn"
+  unitId: cannon_ballista
+  icon: {fileID: 21300000, guid: 0b6637531e5de254dad946c142aaaf24, type: 3}
+  damage: 22
+  fireRate: 0.6
+  range: 9
+  aoeRadius: 0
+  slowPercent: 0
+  slowDuration: 0
+  slowIconFrames: []
+  pierceCount: 3
+  damagePerLevel: 0.08
+  upgradeCostBase: 50
+  upgradeCostExponent: 1.5
+  projectileSpeed: 16
+  projectileFrames:
+  - {fileID: 21300000, guid: 40a6e98f45dbbe249a7fa465d874738e, type: 3}
+  - {fileID: 21300000, guid: f64945927e2cc3a439ba9fb5cadafd1d, type: 3}
+  - {fileID: 21300000, guid: 3dd1da8ead142194a91fd3c50206b5c3, type: 3}
+  - {fileID: 21300000, guid: f30f0e4af9b49b34bb3b22a5426117f8, type: 3}
+  projectileScale: 0.7
+  impactFrames:
+  - {fileID: 21300000, guid: 8dabcbd9bbfea8a408ea6144fe382d6a, type: 3}
+  - {fileID: 21300000, guid: 74e9b591347484649b339333944b6edc, type: 3}
+  - {fileID: 21300000, guid: a27cd839ed0285243b50e46ae66e1376, type: 3}
+  - {fileID: 21300000, guid: 79bbbbd06ca17f94cb72431d8b5c86b3, type: 3}
+  impactScale: 0.6
+  fireSfx: shot-bow
+  impactSfx: hit-arrow
+  animations: {fileID: 11400000, guid: 5709bae44d22aec46833af7e0de60a77, type: 2}
+  displayScale: 1.4
+  muzzle: {x: -0.1, y: 0.49}
+  tint: {r: 1, g: 1, b: 1, a: 1}

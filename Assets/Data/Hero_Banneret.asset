@@ -25,6 +25,11 @@ MonoBehaviour:
   warden: {fileID: 0}
   dragonRider: {fileID: 0}
   banner: {fileID: 11400000, guid: 07c57de3d61f3a244bcf043247812834, type: 2}
+  wukong: {fileID: 0}
+  stormcaller: {fileID: 0}
+  galemonk: {fileID: 0}
+  daoVien: {fileID: 0}
+  swornBrother: 0
   projectileSpeed: 8
   splashRadius: 0.8
   projectileFrames: []
@@ -32,6 +37,9 @@ MonoBehaviour:
   impactFrames: []
   impactScale: 1
   knockbackOnHit: 0
+  fireSfx: 
+  impactSfx: 
+  skillSfx: skill-rally
   skillKind: 10
   skillTier: 0
   skillCooldown: 0
@@ -43,6 +51,7 @@ MonoBehaviour:
   skillPower: 1
   skillFrames: []
   skillIntroFrames: []
+  skillOutroFrames: []
   stunFrames: []
   summoner: {fileID: 0}
   healsAllies: 0
@@ -59,6 +68,8 @@ MonoBehaviour:
   passiveThreshold: 0
   passiveRadius: 0
   passiveEvery: 1
+  passiveDuration: 0
+  passiveFrames: []
   ultimateText: "Hi\u1EC7u L\u1EC7nh Xung Phong: c\u1EA3 \u0111\u1ED9i tr\xEAn s\xE2n
     +30% s\xE1t th\u01B0\u01A1ng trong 6s."
   passiveText: "Qu\xE2n K\u1EF3: \u0111\u1ED3ng minh quanh K\u1EF3 Th\u1EE7 +15%
@@ -67,6 +78,10 @@ MonoBehaviour:
     g\u1EA7n th\xEC c\u1EAFm c\u1EDD t\u1EA1i ch\u1ED7 \u2014 \u0111\u1ED3ng minh
     trong v\xF9ng nh\u1EADn \xEDt h\u01A1n 25% s\xE1t th\u01B0\u01A1ng trong 5s."
   secondMinorText: 
+  ultimateIcon: {fileID: 21300000, guid: 787a25ad30d42f84a8c8c744fa9fe101, type: 3}
+  minorIcon: {fileID: 21300000, guid: 2f76198499c384d4da71f6c67bce84a8, type: 3}
+  passiveIcon: {fileID: 21300000, guid: a5eab37a71cce5e4a8e38dc6b70edc9a, type: 3}
+  secondMinorIcon: {fileID: 0}
   animations: {fileID: 11400000, guid: 6d5ddfcae08ea3a4792e3a7f6c63d837, type: 2}
   artFacesRight: 0
-  avatar: {fileID: 21300000, guid: 6c1f6476661de8249b3ffa722a31f469, type: 3}
+  avatar: {fileID: 21300000, guid: 4fa38094e1fdf3540a843005623f58fb, type: 3}

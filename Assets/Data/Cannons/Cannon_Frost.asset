@@ -21,22 +21,31 @@ MonoBehaviour:
   aoeRadius: 0
   slowPercent: 0.4
   slowDuration: 3
+  slowIconFrames:
+  - {fileID: 21300000, guid: ba4981642b2a8d447950a2f3ee207ca3, type: 3}
+  - {fileID: 21300000, guid: a06fc26af7d729b409b0e80acf7e5424, type: 3}
+  - {fileID: 21300000, guid: 85e6464b21e75fa40a789bf7dd347c29, type: 3}
+  - {fileID: 21300000, guid: b8d17731afcdbab489f7cdb0f5a58c2e, type: 3}
+  pierceCount: 0
   damagePerLevel: 0.08
   upgradeCostBase: 50
   upgradeCostExponent: 1.5
   projectileSpeed: 14
   projectileFrames:
-  - {fileID: 21300000, guid: a5a21d807c95cf94e828ff213a0fae65, type: 3}
-  - {fileID: 21300000, guid: 2b274595a1cd27345b70fd1ed3abb06f, type: 3}
-  - {fileID: 21300000, guid: 1815d1df201a7c64384a8589a0c4f2a2, type: 3}
-  - {fileID: 21300000, guid: d16451e59a66e3e4ca8765bf0f2a4da9, type: 3}
+  - {fileID: 21300000, guid: 8f906d1596e940e4295ab69886b60063, type: 3}
+  - {fileID: 21300000, guid: 127860ea007c79a4fa70e9cc969a2abb, type: 3}
+  - {fileID: 21300000, guid: 448f165a5d71b5646a767b2473b27550, type: 3}
+  - {fileID: 21300000, guid: 3d157468487f679498b97e3d8593baed, type: 3}
   projectileScale: 0.6
   impactFrames:
-  - {fileID: 21300000, guid: 5272f77141305ac4888783a51aa6672f, type: 3}
-  - {fileID: 21300000, guid: d6e4ad9c4cd5e5847ab49a9f9d4242d0, type: 3}
-  - {fileID: 21300000, guid: 44fd04c65fa0a4143a7b6cd48011620a, type: 3}
-  - {fileID: 21300000, guid: 071a7a0c8b4f3954d83915b09ac8e78f, type: 3}
+  - {fileID: 21300000, guid: 60950850f14151542bf18ce73e8d13f7, type: 3}
+  - {fileID: 21300000, guid: 3450754462bb275429e620dac5651fa8, type: 3}
+  - {fileID: 21300000, guid: 2f5639fe592de2f429f1c533efa5c843, type: 3}
+  - {fileID: 21300000, guid: d97c80a2cf6c2234e9879d3e6accde77, type: 3}
   impactScale: 0.8
-  animations: {fileID: 11400000, guid: fc72ddb63bc7fab43950e75bec075088, type: 2}
+  fireSfx: cannon-fire
+  impactSfx: frost
+  animations: {fileID: 11400000, guid: 5fe78691b79528d4893bd6ad54899116, type: 2}
   displayScale: 1.4
-  tint: {r: 0.55, g: 0.8, b: 1, a: 1}
+  muzzle: {x: -0.3, y: 0.3}
+  tint: {r: 1, g: 1, b: 1, a: 1}

@@ -1,0 +1,110 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
+  m_Name: Hero_EmberApprentice
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
+  displayName: "Ph\xE1p s\u01B0 l\u1EEDa t\u1EADp s\u1EF1"
+  unitId: emberapprentice
+  maxHealth: 240
+  damage: 22
+  attackRate: 0.8
+  range: 5
+  moveSpeed: 1.1
+  leashRange: 3
+  maxHeld: 3
+  heldDamageBonus: 0
+  warden: {fileID: 0}
+  dragonRider: {fileID: 0}
+  banner: {fileID: 0}
+  wukong: {fileID: 0}
+  stormcaller: {fileID: 0}
+  galemonk: {fileID: 0}
+  daoVien: {fileID: 0}
+  swornBrother: 0
+  projectileSpeed: 8
+  splashRadius: 0.3
+  projectileFrames:
+  - {fileID: 21300000, guid: 1b15c33664db65f4885ccd3fcfa8e946, type: 3}
+  - {fileID: 21300000, guid: 9b78d5f927e9f4448a25ee565aa341a3, type: 3}
+  - {fileID: 21300000, guid: 67ec6726156b61545a03d443d017d91b, type: 3}
+  - {fileID: 21300000, guid: de741f5be545701488a310709560b2fc, type: 3}
+  projectileScale: 1
+  impactFrames: []
+  impactScale: 1
+  knockbackOnHit: 0
+  fireSfx: 
+  impactSfx: 
+  skillSfx: 
+  skillKind: 18
+  skillTier: 0
+  skillCooldown: 0
+  manaMax: 5
+  manaPerSecond: 0.35
+  manaPerHit: 0.25
+  skillRadius: 0.7
+  skillDuration: 4
+  skillPower: 2
+  skillFrames:
+  - {fileID: 21300000, guid: 25de146ca6639db4781ecd6b4a6bb3fd, type: 3}
+  - {fileID: 21300000, guid: bb45098efcc4b0f4baf386f231a462aa, type: 3}
+  - {fileID: 21300000, guid: 2ee350a4b45bdf749b6dd60d91c21d9b, type: 3}
+  - {fileID: 21300000, guid: 5fb7457734747b84cb175103a72ab208, type: 3}
+  skillIntroFrames:
+  - {fileID: 21300000, guid: 65d09818b5c675f489107576d9dfe0ba, type: 3}
+  - {fileID: 21300000, guid: a2c7e9f6e9536574fb05efcfd299cffe, type: 3}
+  - {fileID: 21300000, guid: 503c5b1f3b830dd4bac47e4d2b937305, type: 3}
+  - {fileID: 21300000, guid: d767438c96509964eba0ee81e5bbe6f0, type: 3}
+  skillOutroFrames:
+  - {fileID: 21300000, guid: ef07b805aad5b234d8a53374085a0ada, type: 3}
+  - {fileID: 21300000, guid: 5be946927d450bc4a828a466e79a42e4, type: 3}
+  - {fileID: 21300000, guid: efacdd2bb8b22f24b9fe21f90a6f336b, type: 3}
+  - {fileID: 21300000, guid: e748c7a0707a620458837d756e1c80b6, type: 3}
+  - {fileID: 21300000, guid: 55f57684940bd2449bdc6178a71f06da, type: 3}
+  - {fileID: 21300000, guid: cc67a5e308909fe4c8a736940abd4bdf, type: 3}
+  stunFrames: []
+  summoner: {fileID: 0}
+  healsAllies: 0
+  healFrames: []
+  buffFrames: []
+  shieldAmount: 0
+  shieldFrames: []
+  shieldBreakFrames: []
+  passiveStar: 1
+  minorStar: 3
+  secondMinorStar: 3
+  passiveKind: 10
+  passivePower: 5
+  passiveThreshold: 0
+  passiveRadius: 1.2
+  passiveEvery: 1
+  passiveDuration: 3
+  passiveFrames:
+  - {fileID: 21300000, guid: 8228fd751bde5914b90c715ffde182d2, type: 3}
+  - {fileID: 21300000, guid: f1800b32521ea0c4b9e5d1a00027bc98, type: 3}
+  - {fileID: 21300000, guid: 76458bbaee342e649ad3be52aaa719be, type: 3}
+  - {fileID: 21300000, guid: cfd74b3052f429a4aa4cbb252a41534e, type: 3}
+  ultimateText: "M\u01B0a T\xE0n L\u1EEDa: 3 qu\u1EA3 c\u1EA7u l\u1EEDa r\u01A1i
+    quanh c\u1EE5m qu\xE1i \u0111\xF4ng nh\u1EA5t \u2014 m\u1ED7i qu\u1EA3 n\u1ED5
+    g\xE2y g\u1EA5p \u0111\xF4i \u0111\xF2n th\u01B0\u1EDDng + Ch\xE1y, \u0111\u1EC3
+    l\u1EA1i v\u0169ng l\u1EEDa 4s."
+  passiveText: "B\xE9n L\u1EEDa: \u0111\xF2n th\u01B0\u1EDDng g\xE2y Ch\xE1y 3s (5
+    s\xE1t th\u01B0\u01A1ng/gi\xE2y); qu\xE1i \u0111ang Ch\xE1y m\xE0 ch\u1EBFt th\xEC
+    l\u1EEDa nh\u1EA3y sang qu\xE1i g\u1EA7n nh\u1EA5t."
+  minorText: 
+  secondMinorText: 
+  ultimateIcon: {fileID: 0}
+  minorIcon: {fileID: 0}
+  passiveIcon: {fileID: 0}
+  secondMinorIcon: {fileID: 0}
+  animations: {fileID: 11400000, guid: c200f53402d2a064e8e8b9b68e2f62e3, type: 2}
+  artFacesRight: 0
+  avatar: {fileID: 21300000, guid: eb0cdccc83f709f4eb355e25db375a1f, type: 3}

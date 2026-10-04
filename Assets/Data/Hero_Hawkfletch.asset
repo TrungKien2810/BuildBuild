@@ -25,6 +25,11 @@ MonoBehaviour:
   warden: {fileID: 0}
   dragonRider: {fileID: 0}
   banner: {fileID: 0}
+  wukong: {fileID: 0}
+  stormcaller: {fileID: 0}
+  galemonk: {fileID: 0}
+  daoVien: {fileID: 0}
+  swornBrother: 0
   projectileSpeed: 12
   splashRadius: 0.3
   projectileFrames:
@@ -40,6 +45,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a42d3da1e6cd0054c8cbd79bb01f7bfa, type: 3}
   impactScale: 1
   knockbackOnHit: 0
+  fireSfx: shot-bow
+  impactSfx: hit-arrow
+  skillSfx: skill-rapid
   skillKind: 4
   skillTier: 0
   skillCooldown: 0
@@ -51,6 +59,7 @@ MonoBehaviour:
   skillPower: 3
   skillFrames: []
   skillIntroFrames: []
+  skillOutroFrames: []
   stunFrames: []
   summoner: {fileID: 0}
   healsAllies: 0
@@ -71,12 +80,18 @@ MonoBehaviour:
   passiveThreshold: 0
   passiveRadius: 0
   passiveEvery: 4
+  passiveDuration: 0
+  passiveFrames: []
   ultimateText: "B\u1EAFn Nhanh Li\xEAn Ho\xE0n: t\u0103ng m\u1EA1nh t\u1ED1c \u0111\xE1nh
     trong v\xE0i gi\xE2y."
   passiveText: "Nh\u1EAFm Y\u1EBFu \u0110i\u1EC3m: c\u1EE9 ph\xE1t th\u1EE9 4 l\xE0
     ch\xED m\u1EA1ng, g\u1EA5p \u0111\xF4i s\xE1t th\u01B0\u01A1ng."
   minorText: 
   secondMinorText: 
+  ultimateIcon: {fileID: 21300000, guid: 9857a967451a8bb4e9fa26496937c20e, type: 3}
+  minorIcon: {fileID: 0}
+  passiveIcon: {fileID: 21300000, guid: 5d60c477055dd2148838df71e89629bc, type: 3}
+  secondMinorIcon: {fileID: 0}
   animations: {fileID: 11400000, guid: aaba1a3b05739ea4581857647bb28840, type: 2}
   artFacesRight: 0
   avatar: {fileID: 21300000, guid: 855dacc74ee61234da969f8eb3b8e02b, type: 3}

@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 505e5ef04f70452448a64507e11a0c68, type: 3}
+  m_Name: Enemy_SoulWisp
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.EnemyDefinition
+  displayName: "Ma H\u1ECFa"
+  kind: 1
+  baseHealth: 60
+  baseDamage: 12
+  moveSpeed: 2.4
+  attackRange: 0.5
+  attackRate: 1
+  heroAggroRange: 4
+  damageReduction: 0
+  projectileFrames: []
+  impactFrames: []
+  projectileSpeed: 7
+  projectileScale: 0.5
+  projectileArc: 0
+  poolFrames: []
+  poolDuration: 3
+  poolRadius: 0.6
+  poolDamagePerSecond: 0
+  boss: {fileID: 0}
+  shaman: {fileID: 0}
+  dragon: {fileID: 0}
+  animations: {fileID: 11400000, guid: 9da24b6f971c55a4faef10dd491c9d7d, type: 2}

@@ -20,9 +20,13 @@ namespace BuildBuild.Combat
     ///
     /// Quai BAN XA (tam > `RangedReach`) khong bi giu va khong chiem cho: no chon unit gan nhat trong tam nhin
     /// va dung xa ban — de no chiem mot trong 3 cho thi con can chien phia sau lot qua het.
+    ///
+    /// Quai BAY CAO (`EnemyDefinition.flyHigh`, Gloomwing): khong bi giu, bay thang ve lau dai bo qua moi unit; chi hero /
+    /// linh ban xa va phao danh trung (don can chien bi `Health.IgnoresHitFrom` nuot im). Bi hero / linh ban xa danh thi
+    /// quay sang phan don ke do toi khi no chet; bi phao ban thi khong phan ung. Quai bay THAP (Ma Hoa, Rong) la quai dat.
     /// </summary>
     [RequireComponent(typeof(Health))]
-    public class Enemy : MonoBehaviour
+    public class Enemy : Unit
     {
         /// <summary>Moi con quai dang song trong scene — hero va dan quet danh sach nay de tim muc tieu.</summary>
         public static readonly List<Enemy> Alive = new List<Enemy>();
@@ -45,18 +49,11 @@ namespace BuildBuild.Combat
         SpriteRenderer _renderer;
 
         float _damage;
-        float _aweWeaken, _aweVulnerability, _aweUntil;
-        float _armorBreak, _armorBrokenUntil;
         float _attackCooldown;
         float _frozenUntil;
         float _stunnedUntil;
         bool _frozenVisual;
         bool _dying;
-        UnityEngine.Object _markedBy;
-        float _markedUntil;
-        GameObject _markFx;
-        GameObject _rootFx;
-        SpriteRenderer _rootRenderer;
         GameObject _chainIcon;
         SpriteRenderer _chainIconRenderer;
 
@@ -65,29 +62,19 @@ namespace BuildBuild.Combat
         static readonly Vector3 ChainIconOffset = new Vector3(0.2f, 0.65f, 0f);   // lech phai de khong chong sao choang
         Health _pendingHit;
         SpriteAnimationClip _cast;
-        SpriteRenderer _markRenderer;
         GameObject _stunFx;
         SpriteRenderer _stunRenderer;
         float _bodyRadius;
         float _bodyHeight;
         Hero _engaged;
+        Hero _avenging;     // bay cao: hero / linh ban xa da danh trung no — phan don ke nay
         Blocker _blocker;   // unit dang GIU quai nay (quai ban xa danh ma khong bi giu: _engaged co, _blocker null)
         int _slot = -1;
         float _slotSide;
-        float _rootedUntil;
-        float _chainedUntil;
-        float _chainBonus;
-        float _pullUntil;
-        Vector3 _pullTo;
-        float _launchStart, _launchUntil, _launchHeight;
-        Vector3 _launchGround;
         readonly Knockback _knockback = new Knockback();
 
         /// <summary>Toc tach hai quai dang dung chong len nhau (xem `Battlefield.Separation`).</summary>
         const float SeparationRate = 6f;
-
-        /// <summary>Tren dau quai (toa do LOCAL, da nhan scale than) — cho dat FX an ky.</summary>
-        static readonly Vector3 MarkOffset = new Vector3(0f, 0.65f, 0f);
 
         /// <summary>
         /// Scale LOCAL cua FX choang. Art ve tren canvas 128px @100 PPU = 1,28 unit, ma FX gan vao than quai
@@ -108,19 +95,13 @@ namespace BuildBuild.Combat
         /// <summary>Ban ra khi quai chet han (da chay xong animation death).</summary>
         public event Action<Enemy> Died;
 
-        /// <summary>Ban ra NGAY LUC quai het mau (truoc animation death), cho moi quai — `Necromancer` nghe de dung linh xuong.</summary>
-        public static event Action<Enemy> Killed;
-
         public EnemyDefinition Definition => _definition;
-        public Health Health => _health;
-        public bool IsDying => _dying;
+        public override Health Health => _health;
+        public override bool IsDying => _dying;
         public bool IsFrozen => Time.time < _frozenUntil;
-        bool IsStunned => Time.time < _stunnedUntil;
-        public bool IsBoss => _definition != null && _definition.kind == EnemyKind.Boss;
-        public bool IsElite => _definition != null && _definition.kind == EnemyKind.TinhAnh;
-
-        /// <summary>Bi troi (Quat Xich): dung im, van danh.</summary>
-        public bool IsRooted => Time.time < _rootedUntil;
+        public override bool IsStunned => Time.time < _stunnedUntil;
+        public override bool IsBoss => _definition != null && _definition.kind == EnemyKind.Boss;
+        public override bool IsElite => _definition != null && _definition.kind == EnemyKind.TinhAnh;
 
         /// <summary>
         /// Phan sat thuong nhan them do Xich (Chainwarden, GDD muc 3): dang bi mot unit co `heldDamageBonus` giu,
@@ -132,21 +113,23 @@ namespace BuildBuild.Combat
             {
                 var holder = Holder;
                 float held = holder != null ? holder.HeldDamageBonus : 0f;
-                float hooked = Time.time < _chainedUntil ? _chainBonus : 0f;
-                return Mathf.Max(held, hooked);
+                return Mathf.Max(held, TimedChainBonus);
             }
         }
 
         public bool IsChained => ChainBonus > 0f;
 
         /// <summary>Nua be ngang than tren mat dat (world) — tam can chien va vung no do toi MEP than, khong toi chan.</summary>
-        public float BodyRadius => _bodyRadius;
+        public override float BodyRadius => _bodyRadius;
 
         /// <summary>Chieu cao than (world) — cho dat thanh mau tren dau.</summary>
-        public float BodyHeight => _bodyHeight;
+        public override float BodyHeight => _bodyHeight;
 
         /// <summary>Sat thuong moi don thuong (da nhan he so wave, tru Long Uy cua Wyrmspear neu dang dung trong tam).</summary>
-        public float Damage => _damage * (Time.time < _aweUntil ? 1f - _aweWeaken : 1f);
+        public float Damage => _damage * (1f + DamageBonus) * (1f - AweWeaken);
+
+        /// <summary>Cong them vao sat thuong don thuong (Goi Hon Lua cua Dreadwyrm 0,25 = +25%).</summary>
+        public float DamageBonus { get; set; }
 
         /// <summary>Dang chay clip than cua mot chieu (`PlayCast`) — dung di, dung danh toi het clip.</summary>
         public bool IsCasting => _cast != null && animator != null && animator.CurrentClip == _cast.name && !animator.IsFinished;
@@ -154,17 +137,20 @@ namespace BuildBuild.Combat
         /// <summary>Dang vung don thuong hoac dang cast — chieu moi phai doi, cat ngang la nuot mat don.</summary>
         public bool IsBusy => IsCasting || (animator != null && animator.CurrentClip == "attack" && !animator.IsFinished);
 
-        /// <summary>Giua than (world) — cho dan nham vao.</summary>
-        public Vector3 BodyCenter => transform.position + new Vector3(0f, _bodyHeight * 0.5f, 0f);
-
         /// <summary>Unit phe ta quai nay dang danh (bi giu, hoac quai ban xa dang nham); null = di ve lau dai.</summary>
-        public Hero EngagedHero => _engaged;
+        public override Hero EngagedHero => _engaged;
 
         /// <summary>Unit dang GIU quai nay (con song, con giu no); null = khong bi ai giu.</summary>
-        public Blocker Holder => _blocker != null && !_blocker.IsDown && _blocker.Holds(this) ? _blocker : null;
+        public override Blocker Holder => _blocker != null && !_blocker.IsDown && _blocker.Holds(this) ? _blocker : null;
 
-        /// <summary>Quai can chien moi bi giu; quai ban xa dung xa danh, khong chiem cho cua unit.</summary>
-        public bool CanBeHeld => _definition != null && _definition.attackRange <= RangedReach;
+        /// <summary>Quai can chien moi bi giu; quai ban xa dung xa danh, khong chiem cho cua unit. Bay cao khong ai giu.</summary>
+        public override bool CanBeHeld => _definition != null && _definition.attackRange <= RangedReach && !FliesHigh;
+
+        /// <summary>Bay cao (Gloomwing): chi hero / linh ban xa va phao danh trung.</summary>
+        public override bool FliesHigh => _definition != null && _definition.flyHigh;
+
+        /// <summary><paramref name="hero"/> co nham / danh trung duoc quai nay khong (can chien khong voi toi quai bay cao).</summary>
+        public override bool TargetableBy(Hero hero) => !FliesHigh || (hero != null && hero.IsRangedUnit);
 
         void Awake()
         {
@@ -175,9 +161,46 @@ namespace BuildBuild.Combat
             _health.Died += OnDied;
         }
 
-        void OnEnable() => Alive.Add(this);
+        /// <summary>Bay cao: khong bi troi / keo / hat tung.</summary>
+        protected override bool Unmovable => FliesHigh;
 
-        void OnDisable() => Alive.Remove(this);
+        /// <summary>Bi keo / hat tung: nha cho vay, dung day lui dang chay.</summary>
+        protected override void OnDisplaced()
+        {
+            Disengage();
+            _knockback.Reset();
+        }
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            Side = Faction.Npc;
+            Alive.Add(this);
+            Health.AnyDamaged += OnAnyDamaged;
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            Alive.Remove(this);
+            Health.AnyDamaged -= OnAnyDamaged;
+        }
+
+        /// <summary>Don can chien vao quai bay cao: nguon la Health cua hero / linh khong ban xa. Phao (nguon null) trung.</summary>
+        bool IgnoresHit(Health source)
+        {
+            if (source == null) return false;
+            var hero = source.GetComponent<Hero>();
+            return hero != null && !hero.IsRangedUnit;
+        }
+
+        /// <summary>Bay cao bi hero / linh ban xa danh trung thi nho ke do de phan don; phao ban thi bo qua.</summary>
+        void OnAnyDamaged(Health victim, Health source, float dealt, float shield, Health shieldCaster)
+        {
+            if (victim != _health || _dying || !FliesHigh || source == null) return;
+            var hero = source.GetComponent<Hero>();
+            if (hero != null && hero.IsRangedUnit && !hero.IsDying) _avenging = hero;
+        }
 
         /// <summary>
         /// Goi ngay sau khi spawn. Hai he so la muc len thang theo wave, do `WaveTuning` tinh.
@@ -186,17 +209,12 @@ namespace BuildBuild.Combat
         {
             _definition = definition;
             _damage = definition.baseDamage * damageMultiplier;
+            _avenging = null;
+            _health.IgnoresHitFrom = definition.flyHigh ? IgnoresHit : (System.Func<Health, bool>)null;
             _dying = false;
-            _markedBy = null;
-            _markedUntil = 0f;
+            ResetStatus();
             _cast = null;
             Disengage();
-            _rootedUntil = 0f;
-            _chainedUntil = 0f;
-            _aweUntil = 0f;
-            _armorBrokenUntil = 0f;
-            _pullUntil = 0f;
-            _launchUntil = 0f;
             _health.Vulnerability = 0f;
             _knockback.Reset();
             Thaw();
@@ -223,16 +241,17 @@ namespace BuildBuild.Combat
         /// moi frame voi thoi gian CON LAI cua no; `Max` nen hai nguon chong nhau tu lay cai dai hon
         /// ma khong ben nao phai dem so nguon.
         /// </summary>
-        public void ApplyFreeze(float seconds)
+        public override void ApplyFreeze(float seconds)
         {
             if (_dying || seconds <= 0f) return;
             _frozenUntil = Mathf.Max(_frozenUntil, Time.time + seconds);
         }
 
         /// <summary>Choang: khoa y nhu dong bang (khong di, khong danh, dung animation), phu mau vang + sao choang tren dau.</summary>
-        public void ApplyStun(float seconds, Sprite[] frames)
+        public override void ApplyStun(float seconds, Sprite[] frames = null)
         {
-            if (_dying || seconds <= 0f) return;
+            // Moi nguon choang hien co deu la can chien (phi, dap dat, xich) — khong voi toi quai bay cao.
+            if (_dying || seconds <= 0f || FliesHigh) return;
             bool alreadyStunned = IsStunned;
             _stunnedUntil = Mathf.Max(_stunnedUntil, Time.time + seconds);
             if (alreadyStunned || frames == null || frames.Length == 0) return;
@@ -244,72 +263,20 @@ namespace BuildBuild.Combat
 
         // ---------------------------------------------------------------- he so toc (nhanh Tru, plan muc B1.4)
 
-        float _slowUntil;
-        float _slowPercent;
-        float _hasteUntil;
-        float _hastePercent;
-
-        /// <summary>Dang bi lam cham (va khong mien).</summary>
-        public bool IsSlowed => Time.time < _slowUntil && !SlowImmune;
-
-        /// <summary>Mien moi lam cham (boss Noi Gian). Bat len thi slow dang chay cung mat tac dung.</summary>
-        public bool SlowImmune { get; set; }
-
         /// <summary>He so toc DANH (boss Noi Gian 1,5). Doc moi lan vung don.</summary>
         public float AttackRateMultiplier { get; set; } = 1f;
 
         /// <summary>Toc chay hien tai: goc x (1 - cham) x (1 + tang toc). Moi buoc di doc so nay.</summary>
-        float MoveSpeed
-        {
-            get
-            {
-                float speed = _definition.moveSpeed;
-                if (IsSlowed) speed *= 1f - _slowPercent;
-                if (Time.time < _hasteUntil) speed *= 1f + _hastePercent;
-                return speed;
-            }
-        }
-
-        /// <summary>
-        /// Lam cham <paramref name="percent"/> (0..1) trong <paramref name="seconds"/> giay (phao Bang). Hai nguon chong
-        /// nhau thi lay muc MANH hon va thoi han DAI hon — khong cong don.
-        /// </summary>
-        public void ApplySlow(float percent, float seconds)
-        {
-            if (_dying || SlowImmune || percent <= 0f || seconds <= 0f) return;
-            bool active = Time.time < _slowUntil;
-            _slowPercent = active ? Mathf.Max(_slowPercent, Mathf.Clamp01(percent)) : Mathf.Clamp01(percent);
-            _slowUntil = Mathf.Max(_slowUntil, Time.time + seconds);
-        }
-
-        /// <summary>Tang toc chay <paramref name="percent"/> trong <paramref name="seconds"/> giay (boss Tieng Thet). Khong cong don.</summary>
-        public void ApplyHaste(float percent, float seconds)
-        {
-            if (_dying || percent <= 0f || seconds <= 0f) return;
-            _hastePercent = Mathf.Max(Time.time < _hasteUntil ? _hastePercent : 0f, percent);
-            _hasteUntil = Mathf.Max(_hasteUntil, Time.time + seconds);
-        }
+        float MoveSpeed => _definition.moveSpeed * SpeedFactor;
 
         /// <summary>
         /// Day lui do don danh co `knockbackOnHit` (ky si tu than). Khac `OnDamaged`: day ca khi quai dang vung attack —
         /// quai vay danh ky si thi luc nao cung dang vung, bo qua thi khong bao gio thay lui.
         /// </summary>
-        public void PushBack(float direction)
+        public override void PushBack(float direction)
         {
             if (_dying) return;
             _knockback.Trigger(direction);
-        }
-
-        /// <summary>Troi <paramref name="seconds"/> giay (Quat Xich): khong di, khong bi day, van danh. Chong nhau lay han dai hon.</summary>
-        public void ApplyRoot(float seconds, Sprite[] frames = null)
-        {
-            if (_dying || seconds <= 0f) return;
-            if (Time.time + seconds <= _rootedUntil) return;
-            _rootedUntil = Time.time + seconds;
-            // Vong xich quanh chan, lap toi het troi; troi moi dai hon thi dung lai vong cho khop han.
-            if (_rootFx != null) Destroy(_rootFx);
-            _rootFx = OneShotFx.SpawnLoop(transform, Vector3.zero, frames, seconds, SortOrder.ForUnit(this) + 1);
-            _rootRenderer = _rootFx != null ? _rootFx.GetComponent<SpriteRenderer>() : null;
         }
 
         /// <summary>O khoa tren dau hien/tat theo `IsChained` (Xich doi theo unit giu nen soat moi frame).</summary>
@@ -329,117 +296,6 @@ namespace BuildBuild.Combat
             _chainIconRenderer = _chainIcon != null ? _chainIcon.GetComponent<SpriteRenderer>() : null;
         }
 
-        /// <summary>
-        /// Long Uy (Wyrmspear): dang trong tam thi giam cong <paramref name="weaken"/> va nhan them <paramref name="vulnerability"/>
-        /// sat thuong. Nguon goi MOI frame, het han ngay sau (0,2s) — ra khoi tam la mat. Hai nguon lay muc cao hon.
-        /// </summary>
-        public void ApplyAwe(float weaken, float vulnerability)
-        {
-            if (_dying) return;
-            bool active = Time.time < _aweUntil;
-            _aweWeaken = active ? Mathf.Max(_aweWeaken, weaken) : weaken;
-            _aweVulnerability = active ? Mathf.Max(_aweVulnerability, vulnerability) : vulnerability;
-            _aweUntil = Time.time + 0.2f;
-        }
-
-        /// <summary>Pha giap (Dia Long Chan): nhan them <paramref name="bonus"/> sat thuong tu moi nguon. Khong cong don.</summary>
-        public void ApplyArmorBreak(float bonus, float seconds)
-        {
-            if (_dying || bonus <= 0f || seconds <= 0f) return;
-            _armorBreak = Time.time < _armorBrokenUntil ? Mathf.Max(_armorBreak, bonus) : bonus;
-            _armorBrokenUntil = Mathf.Max(_armorBrokenUntil, Time.time + seconds);
-        }
-
-        /// <summary>Xich co thoi han (Nem Moc): nhan them <paramref name="bonus"/> sat thuong ke ca khi khong bi giu.</summary>
-        public void ApplyChain(float bonus, float seconds)
-        {
-            if (_dying || bonus <= 0f || seconds <= 0f) return;
-            bool active = Time.time < _chainedUntil;
-            _chainBonus = active ? Mathf.Max(_chainBonus, bonus) : bonus;
-            _chainedUntil = Mathf.Max(_chainedUntil, Time.time + seconds);
-        }
-
-        /// <summary>
-        /// Bi KEO ve <paramref name="destination"/> trong <paramref name="seconds"/> giay (Nem Moc). Bo cho vay dang giu:
-        /// toi noi, quai tu nhan cho moi o unit gan nhat nhu binh thuong.
-        /// </summary>
-        public void PullTo(Vector3 destination, float seconds)
-        {
-            if (_dying) return;
-            Disengage();
-            _knockback.Reset();
-            _pullTo = new Vector3(destination.x, destination.y, transform.position.z);
-            _pullUntil = Time.time + Mathf.Max(0.01f, seconds);
-        }
-
-        /// <summary>Dang bi hat tung (cot da Bach Dia Long): khong di, khong danh, ve o lop Air.</summary>
-        public bool IsLaunched => _launchUntil > 0f;
-
-        /// <summary>
-        /// Hat tung cao <paramref name="height"/> (world) trong <paramref name="seconds"/> giay roi roi ve dung cho cu:
-        /// bo cho vay, khong di khong danh. Boss khong bi nhac len. Dang bay thi khong hat lai.
-        /// </summary>
-        public void KnockUp(float height, float seconds)
-        {
-            if (_dying || IsBoss || IsLaunched || seconds <= 0f) return;
-            Disengage();
-            _knockback.Reset();
-            _pullUntil = 0f;
-            _launchGround = transform.position;
-            _launchHeight = height;
-            _launchStart = Time.time;
-            _launchUntil = Time.time + seconds;
-        }
-
-        /// <summary>Dang bay thi dat do cao theo parabol va tra ve true; cham dat thi ve cho cu.</summary>
-        bool UpdateLaunch()
-        {
-            if (!IsLaunched) return false;
-            float u = (Time.time - _launchStart) / (_launchUntil - _launchStart);
-            if (u >= 1f)
-            {
-                Land();
-                return false;
-            }
-            transform.position = _launchGround + new Vector3(0f, 4f * _launchHeight * u * (1f - u), 0f);
-            return true;
-        }
-
-        void Land()
-        {
-            transform.position = _launchGround;
-            _launchUntil = 0f;
-        }
-
-        /// <summary>Dang bi keo thi truot mot nhip ve dich va tra ve true — frame nay khong di, khong danh.</summary>
-        bool UpdatePull()
-        {
-            if (_pullUntil <= 0f) return false;
-            float left = _pullUntil - Time.time;
-            if (left <= Time.deltaTime)
-            {
-                transform.position = _pullTo;
-                _pullUntil = 0f;
-                return false;
-            }
-            transform.position += (_pullTo - transform.position) * (Time.deltaTime / left);
-            return true;
-        }
-
-        /// <summary>An ky cua <paramref name="marker"/> trong <paramref name="seconds"/> giay; an lai thi dem lai tu dau.</summary>
-        public void ApplyMark(UnityEngine.Object marker, float seconds, Sprite[] frames)
-        {
-            if (_dying || seconds <= 0f) return;
-            _markedBy = marker;
-            _markedUntil = Time.time + seconds;
-            if (_markFx != null) Destroy(_markFx);
-            _markFx = OneShotFx.SpawnLoop(transform, MarkOffset, frames, seconds, SortOrder.ForUnit(this) + 1);
-            _markRenderer = _markFx != null ? _markFx.GetComponent<SpriteRenderer>() : null;
-        }
-
-        public bool IsMarkedBy(UnityEngine.Object marker) =>
-            marker != null && _markedBy == marker && Time.time < _markedUntil;
-
         /// <summary>Muc tieu MAC DINH khi khong co hero nao gan — `WaveManager` dat lau dai vao day.</summary>
         public void SetTarget(Health target)
         {
@@ -452,9 +308,7 @@ namespace BuildBuild.Combat
             if (_dying || _definition == null) return;
 
             // Xich doi theo unit dang giu (con song, con giu) — dat lai moi frame, ke ca luc dang bi khoa.
-            _health.Vulnerability = ChainBonus
-                + (Time.time < _armorBrokenUntil ? _armorBreak : 0f)
-                + (Time.time < _aweUntil ? _aweVulnerability : 0f);
+            _health.Vulnerability = ChainBonus + StatusVulnerability;
             UpdateChainIcon();
 
             // Bi moc keo: truot ve phia Chainwarden, khong di khong danh (van ve mau/choang dung).
@@ -481,8 +335,11 @@ namespace BuildBuild.Combat
             // tach nhau: tach giua chung la nuot mat don, va la nguon lam quai "vua di vua danh" truoc day.
             bool swinging = animator != null && animator.CurrentClip == "attack" && !animator.IsFinished;
 
+            // Bi Mua Roi (Tien Det To): quay sang danh phe cu toi het gio.
+            if (UpdatePuppet(swinging)) return;
+
             // Ca doi hinh khong don khit vao mot diem truoc hero hay truoc tuong.
-            if (!swinging && !rooted)
+            if (!swinging && !rooted && !FliesHigh)
                 transform.position += Battlefield.Separation(this, Alive) * Mathf.Min(1f, SeparationRate * Time.deltaTime);
 
             var hero = EngageHero();
@@ -513,13 +370,98 @@ namespace BuildBuild.Combat
         void LateUpdate()
         {
             // Dang bay: khong kep vao dai dat (do cao la toa do y) va ve de len moi unit.
-            if (!_dying && !IsLaunched) transform.position = Battlefield.Clamp(transform.position, _bodyRadius, clampRight: false);
+            if (!_dying && !IsLaunched)
+            {
+                transform.position = RuneWall.Clamp(this, transform.position);   // Tuong Rune chan nhu gap hero
+                transform.position = Battlefield.Clamp(transform.position, _bodyRadius, clampRight: false);
+            }
             if (_renderer == null) return;
-            _renderer.sortingOrder = IsLaunched ? SortOrder.Air : SortOrder.ForUnit(this);
-            if (_markRenderer != null) _markRenderer.sortingOrder = _renderer.sortingOrder + 1;
+            _renderer.sortingOrder = IsLaunched || FliesHigh ? SortOrder.Air : SortOrder.ForUnit(this);
+            SortStatusFx(_renderer.sortingOrder);
             if (_stunRenderer != null) _stunRenderer.sortingOrder = _renderer.sortingOrder + 1;
-            if (_rootRenderer != null) _rootRenderer.sortingOrder = _renderer.sortingOrder + 1;
             if (_chainIconRenderer != null) _chainIconRenderer.sortingOrder = _renderer.sortingOrder + 1;
+            if (_puppetRenderer != null) _puppetRenderer.sortingOrder = _renderer.sortingOrder + 1;
+        }
+
+        Faction _homeSide;
+        float _puppetUntil;
+        GameObject _puppetFx;
+        SpriteRenderer _puppetRenderer;
+        Sprite[] _puppetSnap;
+
+        /// <summary>Dang bi Mua Roi: tam thoi thuoc phe nguoi giat to.</summary>
+        public bool IsPuppet => _puppetUntil > 0f;
+
+        /// <summary>
+        /// Mua Roi (Tien Det To): `seconds` giay quai nay sang phe <paramref name="side"/> va danh quai phe cu gan nhat; het
+        /// gio tro lai phe cu, dung nguyen cho. Boss mien. <paramref name="strings"/> lap tren nguoi, <paramref name="snap"/>
+        /// chay mot lan luc dut to.
+        /// </summary>
+        public void ApplyPuppet(Faction side, float seconds, Sprite[] strings, Sprite[] snap)
+        {
+            if (_dying || IsBoss || seconds <= 0f) return;
+            if (!IsPuppet) _homeSide = Side;
+            Disengage();
+            Side = side;
+            _puppetUntil = Time.time + seconds;
+            _puppetSnap = snap;
+            if (_puppetFx != null) Destroy(_puppetFx);
+            _puppetFx = OneShotFx.SpawnLoop(transform, Vector3.zero, strings, seconds, SortOrder.ForUnit(this) + 1);
+            _puppetRenderer = _puppetFx != null ? _puppetFx.GetComponent<SpriteRenderer>() : null;
+        }
+
+        /// <summary>Tra ve true neu frame nay da xu ly xong theo Mua Roi (di toi / danh quai phe cu).</summary>
+        bool UpdatePuppet(bool swinging)
+        {
+            if (!IsPuppet) return false;
+            if (Time.time >= _puppetUntil)
+            {
+                EndPuppet(snap: true);
+                return false;
+            }
+            if (swinging) return true;
+
+            Unit best = null;
+            float bestDistance = float.PositiveInfinity;
+            foreach (var unit in Unit.Hostiles(Side))
+            {
+                if (unit == null || unit == this || unit.IsDying || unit is Castle) continue;
+                if (unit.FliesHigh && !_definition.IsRanged) continue;
+                float distance = Battlefield.GroundDistance(unit.AimPoint(transform.position), transform.position) - unit.BodyRadius;
+                if (distance >= bestDistance) continue;
+                bestDistance = distance;
+                best = unit;
+            }
+            if (best == null)
+            {
+                if (animator != null && animator.CurrentClip == "walk") animator.Play("idle");
+                return true;
+            }
+            if (bestDistance <= _definition.attackRange)
+            {
+                Face(best.transform.position.x);
+                if (_attackCooldown <= 0f) Attack(best.Health);
+                else if (animator != null && animator.CurrentClip == "walk") animator.Play("idle");
+                return true;
+            }
+            if (!IsRooted)
+            {
+                var to = best.transform.position - transform.position;
+                to.z = 0f;
+                Advance(to);
+            }
+            return true;
+        }
+
+        void EndPuppet(bool snap)
+        {
+            Side = _homeSide;
+            _puppetUntil = 0f;
+            if (_puppetFx != null) Destroy(_puppetFx);
+            _puppetFx = null;
+            _puppetRenderer = null;
+            if (snap)
+                OneShotFx.Spawn(transform.position, _puppetSnap, false, SortOrder.ForUnit(this) + 1, Battlefield.UnitScale);
         }
 
         /// <summary>
@@ -529,6 +471,14 @@ namespace BuildBuild.Combat
         /// </summary>
         Hero EngageHero()
         {
+            // Bay cao: khong khieu khich, khong aggro — chi phan don hero / linh ban xa da danh trung no.
+            if (FliesHigh)
+            {
+                if (_avenging != null && _avenging.IsDying) _avenging = null;
+                _engaged = _avenging;
+                return _engaged;
+            }
+
             // Khieu Khich (Cragfist): dung trong vong cua ong va ong con cho thi bo unit dang danh, sang ong.
             var taunter = Hero.Taunter(this);
             if (taunter != null && taunter.Unit != _engaged)
@@ -554,7 +504,7 @@ namespace BuildBuild.Combat
             float bestSqr = _definition.heroAggroRange * _definition.heroAggroRange;
             foreach (var blocker in Blocker.Active)
             {
-                if (blocker == null || blocker.IsDown) continue;
+                if (blocker == null || blocker.IsDown || !blocker.Unit.IsHostileTo(Side)) continue;
                 if (CanBeHeld && !blocker.HasFreeSlot(this)) continue;
                 float sqr = (blocker.transform.position - transform.position).sqrMagnitude;
                 if (sqr > bestSqr) continue;
@@ -689,6 +639,11 @@ namespace BuildBuild.Combat
         {
             // Quy uoc du an: sprite ve QUAY TRAI, va quai di sang trai — nen khong lat flipX.
             if (_renderer != null) _renderer.flipX = false;
+            if (RuneWall.Stops(this, -1f))
+            {
+                if (animator != null && animator.CurrentClip == "walk") animator.Play("idle");
+                return;
+            }
             transform.position += Vector3.left * (MoveSpeed * Time.deltaTime);
             if (animator != null && animator.CurrentClip != "hurt") animator.Play("walk");
         }
@@ -697,6 +652,11 @@ namespace BuildBuild.Combat
         void Advance(Vector3 direction)
         {
             if (Mathf.Abs(direction.x) > 0.01f) Face(transform.position.x + direction.x);
+            if (RuneWall.Stops(this, direction.x))
+            {
+                if (animator != null && animator.CurrentClip == "walk") animator.Play("idle");
+                return;
+            }
             // Khong buoc qua dich: cho vay o gan hon mot buoc thi dung dung vao cho.
             float step = Mathf.Min(MoveSpeed * Time.deltaTime, direction.magnitude);
             transform.position += direction.normalized * step;
@@ -707,6 +667,7 @@ namespace BuildBuild.Combat
         {
             if (_attackCooldown > 0f) return;
             if (_definition.attackRate <= 0f) return;
+            if (IsDisarmed) return;     // bi cuon trong Xoay Nuoc: dung yen, het cuon thi danh ngay
 
             _attackCooldown = 1f / (_definition.attackRate * AttackRateMultiplier);
             // Sat thuong ra o frame cham don cua clip (`hitFrame`), khong phai luc vua gio vu khi. Clip khong
@@ -728,9 +689,20 @@ namespace BuildBuild.Combat
             animator.Play(clip, restart: true);
         }
 
+        /// <summary>
+        /// Quai ban xa (`EnemyExtras`) gan vao day: frame ra tay chi THA vien dan, sat thuong tru luc vien dan cham muc tieu.
+        /// null = can chien, tru mau ngay o frame cham.
+        /// </summary>
+        public System.Action<Health, float> FireShot;
+
         void LandHit()
         {
-            if (_pendingHit != null && !_pendingHit.IsDead) _pendingHit.TakeDamage(Damage, _health);
+            // Day Roi: don truot (ca quai ban xa — khong tha dan).
+            if (_pendingHit != null && !_pendingHit.IsDead && !RollMiss())
+            {
+                if (FireShot != null) FireShot(_pendingHit, Damage);
+                else _pendingHit.TakeDamage(Damage, _health);
+            }
             _pendingHit = null;
         }
 
@@ -742,6 +714,9 @@ namespace BuildBuild.Combat
         void OnDamaged(float _)
         {
             if (_dying || animator == null || IsFrozen) return;
+            // Boss khong giat hurt / khong bi day lui: bi ca doi hinh danh don dap thi hurt + lui moi 0,6s cat
+            // nhip danh lien tuc, boss gan nhu khong ra don. Choang / dong bang van khoa boss nhu thuong.
+            if (IsBoss) return;
             // Dang vung attack thi khong giat hurt: cat clip la nuot mat don chua toi frame cham.
             if (IsBusy) return;
             // Hurt khong duoc cat ngang death; death moi la thu chot. Dang dong bang thi cung khong
@@ -755,10 +730,11 @@ namespace BuildBuild.Combat
         {
             if (_dying) return;
             _dying = true;
+            Sfx.Play("enemy-die");
+            if (IsPuppet) EndPuppet(snap: false);   // chet luc bi giat to: tinh la quai phe cu
             if (IsLaunched) Land();     // chet giua khong trung -> clip death nam tren dat
-            Killed?.Invoke(this);   // doc an ky TRUOC khi go FX; an ky dua tren thoi gian, khong tren FX
-            if (_markFx != null) Destroy(_markFx);
-            if (_rootFx != null) Destroy(_rootFx);
+            RaiseKilled(this);   // doc an ky TRUOC khi go FX; an ky dua tren thoi gian, khong tren FX
+            ClearStatusFx();
             if (_chainIcon != null) Destroy(_chainIcon);
             _chainIcon = null;
             Thaw();     // chet trong luc dong bang van phai chay het animation death

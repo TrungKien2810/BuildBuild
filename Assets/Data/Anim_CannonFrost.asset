@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5872530a42e740c4aa90cd38c8fa0e67, type: 3}
+  m_Name: Anim_CannonFrost
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.SpriteAnimationSet
+  framesPerSecond: 9
+  idle:
+    name: idle
+    frames:
+    - {fileID: 21300000, guid: 583caa927edaa7d4399b2ba50e1e9808, type: 3}
+    - {fileID: 21300000, guid: 1218fb771df873d48b632f4a3fbf7c79, type: 3}
+    - {fileID: 21300000, guid: 187b46b3c35321e4f954f3ac735038a2, type: 3}
+    - {fileID: 21300000, guid: 513f6a318c9884b4ba381c28f8bf5873, type: 3}
+    loop: 1
+    hitFrame: 0
+  walk:
+    name: walk
+    frames: []
+    loop: 1
+    hitFrame: 0
+  attack:
+    name: attack
+    frames:
+    - {fileID: 21300000, guid: 2cf78fcd2bfdd2246aee1b06912f15a5, type: 3}
+    - {fileID: 21300000, guid: 91758fbb2241e384a878f8c16923bb37, type: 3}
+    - {fileID: 21300000, guid: fd4760471bd66434a88e45aeaad973f5, type: 3}
+    - {fileID: 21300000, guid: c5f70299a20c380409b61079e25547a7, type: 3}
+    loop: 0
+    hitFrame: 2
+  hurt:
+    name: hurt
+    frames: []
+    loop: 0
+    hitFrame: 0
+  death:
+    name: death
+    frames: []
+    loop: 0
+    hitFrame: 0
+  skill:
+    name: skill
+    frames: []
+    loop: 0
+    hitFrame: 0

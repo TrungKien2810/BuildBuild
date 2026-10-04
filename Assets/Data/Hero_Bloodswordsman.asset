@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
+  m_Name: Hero_Bloodswordsman
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
+  displayName: "Huy\u1EBFt ki\u1EBFm kh\xE1ch"
+  unitId: bloodswordsman
+  maxHealth: 900
+  damage: 32
+  attackRate: 0.8
+  range: 0.8
+  moveSpeed: 1.2
+  leashRange: 3
+  maxHeld: 3
+  heldDamageBonus: 0
+  warden: {fileID: 0}
+  dragonRider: {fileID: 0}
+  banner: {fileID: 0}
+  wukong: {fileID: 0}
+  stormcaller: {fileID: 0}
+  galemonk: {fileID: 0}
+  daoVien: {fileID: 0}
+  bloodswordsman: {fileID: 11400000, guid: 5c24de15f188a92488e0b94ad15a3cc2, type: 2}
+  soulbinder: {fileID: 0}
+  swornBrother: 0
+  projectileSpeed: 8
+  splashRadius: 0.8
+  projectileFrames: []
+  projectileScale: 1
+  impactFrames:
+  - {fileID: 21300000, guid: 1cf8a2720511df74888fd3be772cf91a, type: 3}
+  - {fileID: 21300000, guid: 31cf1262aebdaf445a362ce1c7a574d5, type: 3}
+  - {fileID: 21300000, guid: c30f73d61803a77499f294da805e80f2, type: 3}
+  - {fileID: 21300000, guid: a31c455457224d647bb52a4380aa4cf4, type: 3}
+  impactScale: 1
+  knockbackOnHit: 0
+  fireSfx: 
+  impactSfx: 
+  skillSfx: 
+  skillKind: 21
+  skillTier: 0
+  skillCooldown: 0
+  manaMax: 6
+  manaPerSecond: 0.35
+  manaPerHit: 0.25
+  skillRadius: 1.6
+  skillDuration: 3
+  skillPower: 1
+  skillFrames: []
+  skillIntroFrames: []
+  skillOutroFrames: []
+  stunFrames: []
+  summoner: {fileID: 0}
+  healsAllies: 0
+  healFrames:
+  - {fileID: 21300000, guid: 1b1c9f502fc0bdc468fe5fc49ea28fda, type: 3}
+  - {fileID: 21300000, guid: 9b48695f0796b45468689f9913709e19, type: 3}
+  - {fileID: 21300000, guid: 3aaf36c65888e5447864e0e191e94671, type: 3}
+  - {fileID: 21300000, guid: 2906a464b5d11f642b6e8d8bf333404d, type: 3}
+  buffFrames: []
+  shieldAmount: 0
+  shieldFrames: []
+  shieldBreakFrames: []
+  passiveStar: 1
+  minorStar: 3
+  secondMinorStar: 3
+  passiveKind: 0
+  passivePower: 0
+  passiveThreshold: 0
+  passiveRadius: 0
+  passiveEvery: 1
+  passiveDuration: 0
+  passiveFrames: []
+  ultimateText: "To\xE1i Ki\u1EBFm Quy Huy\u1EBFt: ti\xEAu 20% m\xE1u hi\u1EC7n t\u1EA1i,
+    g\u0103m t\u1ED1i \u0111a 3 \u0111\u1ECBch 2\xD7; sau 0,8s thu m\u1EA3nh 3\xD7
+    v\xE0 h\u1ED3i 8% m\xE1u m\u1ED7i m\u1EE5c ti\xEAu."
+  passiveText: "Huy\u1EBFt \xDD: m\u1ED7i 10% m\xE1u m\u1EA5t +5% s\xE1t th\u01B0\u01A1ng
+    (t\u1ED1i \u0111a 35%); t\u1EF1 h\u1EA1 \u0111\u1ECBch h\u1ED3i 6% m\xE1u, h\u1ED3i
+    chi\xEAu 2s."
+  minorText: "Hi\u1EBFn Huy\u1EBFt: ti\xEAu 15% m\xE1u hi\u1EC7n t\u1EA1i; 6s +40%
+    c\xF4ng, ch\xE9m t\u1ED1i \u0111a 2 \u0111\u1ECBch v\xE0 h\u1ED3i 4% m\xE1u m\u1ED7i
+    \u0111\xF2n tr\xFAng. H\u1ED3i 10s."
+  secondMinorText: "Ph\u1EA3n Huy\u1EBFt: d\u01B0\u1EDBi 40% m\xE1u, \u0111\u1EE1
+    50% \u0111\xF2n tr\u1EF1c ti\u1EBFp \u0111\u1EA7u ti\xEAn trong 1,5s r\u1ED3i
+    ph\u1EA3n ch\xE9m 2\xD7, h\u1ED3i 8% m\xE1u. H\u1ED3i 8s."
+  ultimateIcon: {fileID: 0}
+  minorIcon: {fileID: 0}
+  passiveIcon: {fileID: 0}
+  secondMinorIcon: {fileID: 0}
+  animations: {fileID: 11400000, guid: 3203b2eb6199b1042baac22f0deb996e, type: 2}
+  artFacesRight: 0
+  avatar: {fileID: 21300000, guid: 7977f99d69374e6418bac1e2dcc3b603, type: 3}

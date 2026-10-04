@@ -49,6 +49,17 @@ namespace BuildBuild.Core
         public static bool Fighting { get; private set; }
         public bool IsFighting { get => Fighting; private set => Fighting = value; }
 
+        /// <summary>
+        /// Dang o tran Chinh Phat (chuan bi hoac dang danh) chu khong phai wave: cac bang nghe `WaveStarted` doc co nay de
+        /// dung phe NPC (`ConquestMatch`). Tat TRUOC khi ban WaveCleared/Defeated.
+        /// </summary>
+        public static bool InConquest { get; private set; }
+
+        /// <summary>Tran vua ket thuc (WaveCleared/Defeated) la Chinh Phat — BattleHud doc de viet loi ket.</summary>
+        public bool LastWasConquest { get; private set; }
+        /// <summary>Manh nhan duoc o tran Chinh Phat vua thang (BattleHud viet vao loi ket).</summary>
+        public int LastShards { get; private set; }
+
         public event Action<int> WaveStarted;
         /// <summary>Tham so: wave vua thang, vang thuong.</summary>
         public event Action<int, int> WaveCleared;
@@ -64,11 +75,17 @@ namespace BuildBuild.Core
         {
             if (castle != null) castle.Destroyed -= OnCastleDestroyed;
             Fighting = false;   // roi scene giua wave: co tinh khong duoc treo sang lan vao sau
+            EndConquest();
         }
 
         public void StartWave()
         {
             if (IsFighting) return;
+            if (InConquest)
+            {
+                StartConquest();
+                return;
+            }
             if (tuning == null || enemyPrefab == null || spawnPoint == null)
             {
                 Debug.LogError("[WaveManager] Thieu tuning / enemyPrefab / spawnPoint — khong chay duoc.");
@@ -77,11 +94,69 @@ namespace BuildBuild.Core
 
             ClearAlive();
             IsFighting = true;
+            LastWasConquest = false;
             _loop = StartCoroutine(RunWave(NextWave));
+        }
+
+        /// <summary>
+        /// Vao tran Chinh Phat (GAME_DESIGN.md muc 8) — CHUA danh: dung thanh NPC doi xung ben phai, nguoi choi xep doi
+        /// hinh nhu giua hai wave roi bam nut bat dau (`StartWave`). Khong ra quai; hero/phao/linh NPC do cac bang dung
+        /// khi nghe `WaveStarted`. Ha thanh NPC = thang, thanh minh sap = thua (`OnCastleDestroyed`). Khong doi `NextWave`.
+        /// </summary>
+        public void EnterConquest(ConquestTarget target = null)
+        {
+            if (IsFighting || InConquest || castle == null) return;
+            ConquestMatch.Begin(castle, target).Rival.Destroyed += OnRivalDestroyed;
+            InConquest = true;
+        }
+
+        /// <summary>Bo tran Chinh Phat dang chuan bi (chua bam bat dau).</summary>
+        public void LeaveConquest()
+        {
+            if (!IsFighting) EndConquest();
+        }
+
+        void StartConquest()
+        {
+            var target = ConquestMatch.Current?.Target;
+            if (target != null)
+            {
+                if (!ConquestMap.CanAttack(target)) return;
+                ConquestMap.ConsumeAttack(target);
+            }
+            ClearAlive();
+            IsFighting = true;
+            LastWasConquest = true;
+            Sfx.Play("wave-start");
+            WaveStarted?.Invoke(NextWave);
+        }
+
+        void OnRivalDestroyed()
+        {
+            if (!InConquest || !IsFighting) return;
+
+            // TAM (chua can): thuong theo thanh tren ban do (`ConquestMap.Gold`), Admin vao thang thi = vang thang wave;
+            // do roi theo luat thang wave (BattleHud).
+            var target = ConquestMatch.Current?.Target;
+            int gold = target != null ? ConquestMap.Gold(target, tuning) : tuning != null ? tuning.WaveGold(NextWave) : 0;
+            LastShards = target != null ? ConquestMap.Finish(target, true) : 0;
+            if (economy != null) economy.Add(gold);
+            IsFighting = false;
+            if (castle != null) castle.Repair();
+            EndConquest();
+            WaveCleared?.Invoke(NextWave, gold);
+        }
+
+        void EndConquest()
+        {
+            if (!InConquest) return;
+            InConquest = false;
+            ConquestMatch.End();
         }
 
         IEnumerator RunWave(int wave)
         {
+            Sfx.Play("wave-start");
             WaveStarted?.Invoke(wave);
 
             yield return SpawnWave(wave);
@@ -148,26 +223,53 @@ namespace BuildBuild.Core
                     });
             }
 
-            if (tuning.elite != null && band.eliteCount > 0)
+            var elite = band.elite != null ? band.elite : tuning.elite;
+            if (elite != null && band.eliteCount > 0)
                 for (int i = 0; i < band.eliteCount; i++)
                 {
                     int at = (queue.Count + 1) * (i + 1) / (band.eliteCount + 1);
-                    queue.Insert(Mathf.Clamp(at, 0, queue.Count), new SpawnEntry { definition = tuning.elite, health = hp, damage = dmg });
+                    queue.Insert(Mathf.Clamp(at, 0, queue.Count), new SpawnEntry { definition = elite, health = hp, damage = dmg });
                 }
 
-            if (band.hasBoss && tuning.boss != null)
+            var mainBoss = band.boss != null ? band.boss : tuning.boss;
+            if (band.hasBoss && mainBoss != null)
             {
                 float boss = tuning.BossMultiplier(wave, band);
-                queue.Insert(Mathf.Min(2, queue.Count), new SpawnEntry { definition = tuning.boss, health = boss, damage = boss });
+                int at = Mathf.Min(2, queue.Count);
+                queue.Insert(at, new SpawnEntry { definition = mainBoss, health = boss, damage = boss });
+                // Boss di kem ra ngay sau boss chinh (Minotaur danh gan dan truoc, phap su dung sau ban).
+                if (band.extraBosses != null)
+                    foreach (var extra in band.extraBosses)
+                        if (extra != null) queue.Insert(++at, new SpawnEntry { definition = extra, health = boss, damage = boss });
             }
 
             return queue;
         }
 
-        void Spawn(EnemyDefinition definition, float healthMultiplier, float damageMultiplier)
+        /// <summary>WaveManager cua scene dang chay (boss goi quai them giua wave qua day).</summary>
+        public static WaveManager Current { get; private set; }
+
+        void Awake() => Current = this;
+
+        void OnDestroy()
         {
-            var position = spawnPoint.position;
-            if (battlefield != null) position.y = battlefield.RandomLaneY();
+            if (Current == this) Current = null;
+        }
+
+        /// <summary>
+        /// Quai sinh GIUA wave tai <paramref name="position"/> (Dreadwyrm goi Ma Hoa): tinh vao wave — phai diet ca no moi
+        /// thang. Ngoai luc danh thi bo qua.
+        /// </summary>
+        public Enemy SpawnExtra(EnemyDefinition definition, Vector3 position, float healthMultiplier, float damageMultiplier)
+        {
+            if (!IsFighting || definition == null || enemyPrefab == null) return null;
+            return Spawn(definition, healthMultiplier, damageMultiplier, position);
+        }
+
+        Enemy Spawn(EnemyDefinition definition, float healthMultiplier, float damageMultiplier, Vector3? at = null)
+        {
+            var position = at ?? spawnPoint.position;
+            if (at == null && battlefield != null) position.y = battlefield.RandomLaneY();
             var enemy = Instantiate(enemyPrefab, position, Quaternion.identity, transform);
             enemy.Initialise(definition, healthMultiplier, damageMultiplier);
             if (castle != null) enemy.SetTarget(castle.Health);
@@ -175,6 +277,7 @@ namespace BuildBuild.Core
 
             enemy.Died += OnEnemyDied;
             _alive.Add(enemy);
+            return enemy;
         }
 
         void OnEnemyDied(Enemy enemy)
@@ -190,6 +293,8 @@ namespace BuildBuild.Core
             if (_loop != null) StopCoroutine(_loop);
             ClearAlive();
             if (castle != null) castle.Repair();   // day mau ngay khi het tran, khong doi den luc bam danh tiep
+            if (InConquest && ConquestMatch.Current?.Target != null) ConquestMap.Finish(ConquestMatch.Current.Target, false);
+            EndConquest();
             Defeated?.Invoke(NextWave);
         }
 

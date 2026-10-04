@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
+  m_Name: Hero_SilkFae
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
+  displayName: "Ti\xEAn d\u1EC7t t\u01A1"
+  unitId: silkfae
+  maxHealth: 230
+  damage: 16
+  attackRate: 0.8
+  range: 4.5
+  moveSpeed: 1.1
+  leashRange: 3
+  maxHeld: 3
+  heldDamageBonus: 0
+  warden: {fileID: 0}
+  dragonRider: {fileID: 0}
+  banner: {fileID: 0}
+  wukong: {fileID: 0}
+  stormcaller: {fileID: 0}
+  galemonk: {fileID: 0}
+  daoVien: {fileID: 0}
+  swornBrother: 0
+  projectileSpeed: 9
+  splashRadius: 0.1
+  projectileFrames:
+  - {fileID: 21300000, guid: 9ae75755607d1dc469bcd5045f5838b8, type: 3}
+  - {fileID: 21300000, guid: 355efd95176a1d544a24ce954f1ac4fd, type: 3}
+  - {fileID: 21300000, guid: ebd8ca0b2c8aed345b001d52953b0ca5, type: 3}
+  - {fileID: 21300000, guid: 3b9f5b49a0291a544aa50e74dff04d68, type: 3}
+  projectileScale: 1
+  impactFrames: []
+  impactScale: 1
+  knockbackOnHit: 0
+  fireSfx: 
+  impactSfx: 
+  skillSfx: 
+  skillKind: 20
+  skillTier: 0
+  skillCooldown: 0
+  manaMax: 6
+  manaPerSecond: 0.35
+  manaPerHit: 0.25
+  skillRadius: 1.6
+  skillDuration: 4
+  skillPower: 1
+  skillFrames:
+  - {fileID: 21300000, guid: 9aa69afd9b2eda94885c2b1c44470a6c, type: 3}
+  - {fileID: 21300000, guid: af20bc30383333a4a89e56d66e3d2008, type: 3}
+  - {fileID: 21300000, guid: 885f1ff8b45b0af44a4803fd9974cd1a, type: 3}
+  - {fileID: 21300000, guid: 1ac3e063c8de78641888187a268fe6c5, type: 3}
+  skillIntroFrames: []
+  skillOutroFrames:
+  - {fileID: 21300000, guid: c79e379488e9d8543952b8493630a085, type: 3}
+  - {fileID: 21300000, guid: c86fd70d732fb1f44984582ec17bd895, type: 3}
+  - {fileID: 21300000, guid: ef29be761d2cd204aadbf6ef2cff2d3e, type: 3}
+  stunFrames: []
+  summoner: {fileID: 0}
+  healsAllies: 0
+  healFrames: []
+  buffFrames: []
+  shieldAmount: 0
+  shieldFrames: []
+  shieldBreakFrames: []
+  passiveStar: 1
+  minorStar: 3
+  secondMinorStar: 3
+  passiveKind: 12
+  passivePower: 0.25
+  passiveThreshold: 0
+  passiveRadius: 0
+  passiveEvery: 1
+  passiveDuration: 2
+  passiveFrames: []
+  ultimateText: "M\xFAa R\u1ED1i: gi\u1EADt t\u01A1 l\xEAn qu\xE1i nhi\u1EC1u m\xE1u
+    nh\u1EA5t trong t\u1EA7m (tr\u1EEB boss) \u2014 4s n\xF3 quay sang \u0111\xE1nh
+    qu\xE1i phe m\xECnh (tinh anh 2s)."
+  passiveText: "D\xE2y R\u1ED1i: qu\xE1i tr\xFAng s\u1EE3i t\u01A1 b\u1ECB 25% \u0111\xF2n
+    tr\u01B0\u1EE3t trong 2s."
+  minorText: 
+  secondMinorText: 
+  ultimateIcon: {fileID: 0}
+  minorIcon: {fileID: 0}
+  passiveIcon: {fileID: 0}
+  secondMinorIcon: {fileID: 0}
+  animations: {fileID: 11400000, guid: 2b0a9f36985b9c74aa50e751e5efd55d, type: 2}
+  artFacesRight: 0
+  avatar: {fileID: 21300000, guid: df3d6ff2b8994c7489e006946e974d83, type: 3}

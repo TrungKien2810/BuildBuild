@@ -21,6 +21,8 @@ MonoBehaviour:
   aoeRadius: 2
   slowPercent: 0
   slowDuration: 0
+  slowIconFrames: []
+  pierceCount: 0
   damagePerLevel: 0.08
   upgradeCostBase: 50
   upgradeCostExponent: 1.5
@@ -37,6 +39,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f1c254d6d0fd37643abf50eaba8c349c, type: 3}
   - {fileID: 21300000, guid: 3683f1d5874e0a342b834dc36b5083cc, type: 3}
   impactScale: 2.5
+  fireSfx: cannon-fire
+  impactSfx: explode
   animations: {fileID: 11400000, guid: 0fc9f6aad13c9ed4382e3450ca9aa1eb, type: 2}
   displayScale: 1.4
+  muzzle: {x: -0.3, y: 0.3}
   tint: {r: 1, g: 1, b: 1, a: 1}

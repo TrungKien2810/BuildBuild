@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e4f8603645d20d4ebc0b269c53a8816, type: 3}
   m_Name: DragonRider_Wyrmspear
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.DragonRiderDefinition
-  reverseScalePercent: 0.02
+  reverseScalePercent: 0.01
   pierceCooldown: 7
   piercePower: 2.5
   pierceLength: 5
@@ -44,21 +44,21 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7fe21f8306fc1554dac9b3294b8edddb, type: 3}
   armorHealthBonus: 0.6
   armorReduction: 0.35
-  aweDamageBonus: 0.6
+  aweDamageBonus: 0.3
   aweRadius: 2.5
   aweWeaken: 0.2
   aweVulnerability: 0.15
   rageMaxStacks: 7
-  rageReductionPerStack: 0.05
-  rageDamagePerStack: 0.08
+  rageReductionPerStack: 0.03
+  rageDamagePerStack: 0.04
   rageLifestealPerStack: 0.03
   rageStackInterval: 0.5
   rageDecayDelay: 4
   rageDecayInterval: 1
   pactShare: 0.5
   lanceCooldown: 6
-  lancePower: 0.8
-  lanceFinalPower: 1.5
+  lancePower: 0.5
+  lanceFinalPower: 1
   lanceBody:
     name: skill
     frames:
@@ -110,12 +110,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5f10dad14feb11e48ab8189f300fd865, type: 3}
   - {fileID: 21300000, guid: 7213f6b7419d25048959c0318ee69916, type: 3}
   - {fileID: 21300000, guid: b54ff30fbe8e230408ef3ea33a794952, type: 3}
-  descentPower: 5
-  descentMaxHealthPercent: 0.08
+  descentPower: 4
+  descentMaxHealthPercent: 0.03
   descentRadius: 1.8
   descentRange: 7
   executeThreshold: 0.2
-  bossMultiplier: 2
+  bossMultiplier: 1.5
   killManaRefund: 2
   descentDragon:
     name: skill

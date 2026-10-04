@@ -48,6 +48,10 @@ namespace BuildBuild.Meta
         /// <summary>Kho trang bi (ca do dang mac lan do trong tui) + bo dem cap uid cho mon moi.</summary>
         public List<OwnedEquipment> equipment = new List<OwnedEquipment>();
         public int nextEquipmentUid;
+        /// <summary>Moc bat dau tich ruong AFK (giay Unix, UTC); 0 = chua co, `AfkChest` dat khi doc lan dau.</summary>
+        public long afkSince;
+        /// <summary>Ban do Chinh Phat: 3 thanh da do tham, chuoi thang, luot trong ngay (`ConquestMap`).</summary>
+        public ConquestSave conquest = new ConquestSave();
 
         /// <summary>
         /// Unit da so huu, null neu chua. Acc `ownsAll` tu tao ban ghi khi hoi lan dau — level/sao/manh van luu nhu

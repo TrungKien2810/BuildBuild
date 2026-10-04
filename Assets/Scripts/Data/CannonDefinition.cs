@@ -9,6 +9,7 @@ namespace BuildBuild.Data
     ///   Lien Thanh  12 / 2,0/s / tam 8   don muc tieu
     ///   No          30 / 0,5/s / tam 7   AOE ban kinh 2 (moi quai trong vung no an don — chot 2026-09-24)
     ///   Bang         8 / 1,0/s / tam 7   lam cham 40% trong 3s
+    ///   No Xuyen    22 / 0,6/s / tam 9   lao xuyen toi da 3 quai (so Claude de xuat 2026-10-01, CHUA can)
     ///
     /// Phao khong co mau, khong bi danh. Level lay tu save (`OwnedUnit.level` cua `unitId`); nang level theo
     /// GDD muc 7: gia floor(50 x n^1,5), +8% sat thuong goc moi level (cong tuyen tinh), toi da level 20.
@@ -36,6 +37,11 @@ namespace BuildBuild.Data
         [Range(0f, 1f)] public float slowPercent;
         [Tooltip("Giay lam cham moi lan trung.")]
         public float slowDuration;
+        [Tooltip("Icon LAP tren dau quai dang bi lam cham (bong tuyet). Trong = chi phu mau xanh.")]
+        public Sprite[] slowIconFrames;
+        [Tooltip("0 = dan dung lai o muc tieu. > 0 = lao XUYEN: bay thang qua muc tieu, moi quai tren duong an don mot lan, " +
+            "toi da chung nay con roi tan (No Xuyen).")]
+        public int pierceCount;
 
         [Header("Nang level (GAME_DESIGN.md muc 7)")]
         [Tooltip("Sat thuong cong them moi level, tinh tren sat thuong goc (0,08 = +8%).")]
@@ -53,13 +59,19 @@ namespace BuildBuild.Data
         [Tooltip("Scale frame NO (nhan them UnitScale). Phao No to hon de doc ra vung AOE.")]
         public float impactScale = 1f;
 
+        [Header("Am thanh (ten file trong Resources/Audio/SFX, rong = im)")]
+        public string fireSfx = "cannon-fire";
+        public string impactSfx;
+
         [Header("Hien thi")]
         public SpriteAnimationSet animations;
         [Tooltip("Scale sprite phao tren be. Art 128 px, be phao dai ~80 px sau khi thu nho phao dai.")]
         public float displayScale = 1.4f;
+        [Tooltip("Cho dan xuat hien, tinh tu chan (pivot) o co art 1x (art-px / 100), phia nong (ben trai art). " +
+            "Nhan displayScale khi dung.")]
+        public Vector2 muzzle = new Vector2(-0.3f, 0.3f);
         [Tooltip(
-            "Mau phu len than phao + dan + no. Trang = art that. Phao No / Bang CHUA co art rieng: tam dung " +
-            "sprite Lien Thanh to cam / xanh (plan 2 thanh vien, muc B1).")]
+            "Mau phu len than phao + dan + no. Trang = art that (ca 3 phao da co art rieng).")]
         public Color tint = Color.white;
 
         /// <summary>Tran tren theo sao nam o `Progression.MaxLevel`; o day chi chan duoi.</summary>

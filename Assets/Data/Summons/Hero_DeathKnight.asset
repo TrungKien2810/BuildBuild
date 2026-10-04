@@ -25,6 +25,11 @@ MonoBehaviour:
   warden: {fileID: 0}
   dragonRider: {fileID: 0}
   banner: {fileID: 0}
+  wukong: {fileID: 0}
+  stormcaller: {fileID: 0}
+  galemonk: {fileID: 0}
+  daoVien: {fileID: 0}
+  swornBrother: 0
   projectileSpeed: 20
   splashRadius: 1.2
   projectileFrames: []
@@ -32,6 +37,9 @@ MonoBehaviour:
   impactFrames: []
   impactScale: 1
   knockbackOnHit: 1
+  fireSfx: 
+  impactSfx: 
+  skillSfx: 
   skillKind: 6
   skillTier: 0
   skillCooldown: 0
@@ -43,6 +51,7 @@ MonoBehaviour:
   skillPower: 150
   skillFrames: []
   skillIntroFrames: []
+  skillOutroFrames: []
   stunFrames:
   - {fileID: 21300000, guid: 1a1fae456d75bfb42a8ffae427a8e2f3, type: 3}
   - {fileID: 21300000, guid: 5f10dad14feb11e48ab8189f300fd865, type: 3}
@@ -63,10 +72,16 @@ MonoBehaviour:
   passiveThreshold: 0
   passiveRadius: 0
   passiveEvery: 1
+  passiveDuration: 0
+  passiveFrames: []
   ultimateText: 
   passiveText: 
   minorText: 
   secondMinorText: 
+  ultimateIcon: {fileID: 0}
+  minorIcon: {fileID: 0}
+  passiveIcon: {fileID: 0}
+  secondMinorIcon: {fileID: 0}
   animations: {fileID: 11400000, guid: 707b410f960a90c47a33b0490fe9ac6c, type: 2}
   artFacesRight: 0
   avatar: {fileID: 0}
