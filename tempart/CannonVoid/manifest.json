@@ -1,0 +1,331 @@
+{
+  "asset": "CannonVoid",
+  "displayName": "Pháo Hắc Tinh",
+  "rarity": "SSR",
+  "approvedForm": "B",
+  "identity": "identity/identity-1.png",
+  "facing": "left",
+  "bodyBaselineY": 96,
+  "fixedBaseFromY": 71,
+  "sourceTool": "built-in image_gen",
+  "rawPrompts": "production-prompts.md",
+  "individualFramesExcludingIdentity": 57,
+  "chargeLevels": [
+    {
+      "level": 0,
+      "stacks": [
+        0,
+        0
+      ],
+      "vortex": "vortex-loop-0",
+      "impact": "bullet-impact"
+    },
+    {
+      "level": 1,
+      "stacks": [
+        1,
+        2
+      ],
+      "vortex": "vortex-loop-1",
+      "impact": "bullet-impact-1"
+    },
+    {
+      "level": 2,
+      "stacks": [
+        3,
+        5
+      ],
+      "vortex": "vortex-loop-2",
+      "impact": "bullet-impact-2"
+    }
+  ],
+  "vortexUnionBounds": [
+    58,
+    32
+  ],
+  "impactUnionBounds": [
+    64,
+    48
+  ],
+  "cooldownAssets": false,
+  "groups": [
+    {
+      "name": "idle",
+      "canvas": [
+        144,
+        128
+      ],
+      "columns": 2,
+      "rows": 2,
+      "frames": [
+        "idle/idle-1.png",
+        "idle/idle-2.png",
+        "idle/idle-3.png",
+        "idle/idle-4.png"
+      ],
+      "sheet": "idle/sheet-transparent.png",
+      "loop": true,
+      "anchor": [
+        43,
+        49
+      ]
+    },
+    {
+      "name": "attack",
+      "canvas": [
+        144,
+        128
+      ],
+      "columns": 3,
+      "rows": 2,
+      "frames": [
+        "attack/attack-1.png",
+        "attack/attack-2.png",
+        "attack/attack-3.png",
+        "attack/attack-4.png",
+        "attack/attack-5.png",
+        "attack/attack-6.png"
+      ],
+      "sheet": "attack/sheet-transparent.png",
+      "loop": false,
+      "anchor": [
+        43,
+        49
+      ]
+    },
+    {
+      "name": "bullet",
+      "canvas": [
+        128,
+        128
+      ],
+      "columns": 2,
+      "rows": 2,
+      "frames": [
+        "bullet/projectile-1.png",
+        "bullet/projectile-2.png",
+        "bullet/projectile-3.png",
+        "bullet/projectile-4.png"
+      ],
+      "sheet": "bullet/sheet-transparent.png",
+      "loop": true,
+      "anchor": [
+        64,
+        64
+      ]
+    },
+    {
+      "name": "vortex-open",
+      "canvas": [
+        128,
+        128
+      ],
+      "columns": 2,
+      "rows": 2,
+      "frames": [
+        "vortex-open/vortex-open-1.png",
+        "vortex-open/vortex-open-2.png",
+        "vortex-open/vortex-open-3.png",
+        "vortex-open/vortex-open-4.png"
+      ],
+      "sheet": "vortex-open/sheet-transparent.png",
+      "loop": false,
+      "anchor": [
+        64,
+        64
+      ]
+    },
+    {
+      "name": "vortex-loop-0",
+      "canvas": [
+        128,
+        128
+      ],
+      "columns": 2,
+      "rows": 2,
+      "frames": [
+        "vortex-loop-0/vortex-1.png",
+        "vortex-loop-0/vortex-2.png",
+        "vortex-loop-0/vortex-3.png",
+        "vortex-loop-0/vortex-4.png"
+      ],
+      "sheet": "vortex-loop-0/sheet-transparent.png",
+      "loop": true,
+      "anchor": [
+        64,
+        64
+      ]
+    },
+    {
+      "name": "vortex-loop-1",
+      "canvas": [
+        128,
+        128
+      ],
+      "columns": 2,
+      "rows": 2,
+      "frames": [
+        "vortex-loop-1/vortex-1.png",
+        "vortex-loop-1/vortex-2.png",
+        "vortex-loop-1/vortex-3.png",
+        "vortex-loop-1/vortex-4.png"
+      ],
+      "sheet": "vortex-loop-1/sheet-transparent.png",
+      "loop": true,
+      "anchor": [
+        64,
+        64
+      ]
+    },
+    {
+      "name": "vortex-loop-2",
+      "canvas": [
+        128,
+        128
+      ],
+      "columns": 2,
+      "rows": 2,
+      "frames": [
+        "vortex-loop-2/vortex-1.png",
+        "vortex-loop-2/vortex-2.png",
+        "vortex-loop-2/vortex-3.png",
+        "vortex-loop-2/vortex-4.png"
+      ],
+      "sheet": "vortex-loop-2/sheet-transparent.png",
+      "loop": true,
+      "anchor": [
+        64,
+        64
+      ]
+    },
+    {
+      "name": "absorb",
+      "canvas": [
+        128,
+        128
+      ],
+      "columns": 2,
+      "rows": 2,
+      "frames": [
+        "absorb/absorb-1.png",
+        "absorb/absorb-2.png",
+        "absorb/absorb-3.png",
+        "absorb/absorb-4.png"
+      ],
+      "sheet": "absorb/sheet-transparent.png",
+      "loop": false,
+      "anchor": [
+        64,
+        64
+      ]
+    },
+    {
+      "name": "collapse",
+      "canvas": [
+        128,
+        128
+      ],
+      "columns": 2,
+      "rows": 2,
+      "frames": [
+        "collapse/collapse-1.png",
+        "collapse/collapse-2.png",
+        "collapse/collapse-3.png",
+        "collapse/collapse-4.png"
+      ],
+      "sheet": "collapse/sheet-transparent.png",
+      "loop": false,
+      "anchor": [
+        64,
+        64
+      ]
+    },
+    {
+      "name": "bullet-impact",
+      "canvas": [
+        128,
+        128
+      ],
+      "columns": 3,
+      "rows": 2,
+      "frames": [
+        "bullet-impact/impact-1.png",
+        "bullet-impact/impact-2.png",
+        "bullet-impact/impact-3.png",
+        "bullet-impact/impact-4.png",
+        "bullet-impact/impact-5.png",
+        "bullet-impact/impact-6.png"
+      ],
+      "sheet": "bullet-impact/sheet-transparent.png",
+      "loop": false,
+      "anchor": [
+        64,
+        64
+      ]
+    },
+    {
+      "name": "bullet-impact-1",
+      "canvas": [
+        128,
+        128
+      ],
+      "columns": 3,
+      "rows": 2,
+      "frames": [
+        "bullet-impact-1/impact-1.png",
+        "bullet-impact-1/impact-2.png",
+        "bullet-impact-1/impact-3.png",
+        "bullet-impact-1/impact-4.png",
+        "bullet-impact-1/impact-5.png",
+        "bullet-impact-1/impact-6.png"
+      ],
+      "sheet": "bullet-impact-1/sheet-transparent.png",
+      "loop": false,
+      "anchor": [
+        64,
+        64
+      ]
+    },
+    {
+      "name": "bullet-impact-2",
+      "canvas": [
+        128,
+        128
+      ],
+      "columns": 3,
+      "rows": 2,
+      "frames": [
+        "bullet-impact-2/impact-1.png",
+        "bullet-impact-2/impact-2.png",
+        "bullet-impact-2/impact-3.png",
+        "bullet-impact-2/impact-4.png",
+        "bullet-impact-2/impact-5.png",
+        "bullet-impact-2/impact-6.png"
+      ],
+      "sheet": "bullet-impact-2/sheet-transparent.png",
+      "loop": false,
+      "anchor": [
+        64,
+        64
+      ]
+    },
+    {
+      "name": "icon",
+      "canvas": [
+        48,
+        48
+      ],
+      "columns": 1,
+      "rows": 1,
+      "frames": [
+        "icon/icon-cannon-void.png"
+      ],
+      "sheet": "icon/sheet-transparent.png",
+      "loop": false,
+      "anchor": [
+        24,
+        24
+      ]
+    }
+  ]
+}

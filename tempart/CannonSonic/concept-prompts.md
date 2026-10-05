@@ -1,0 +1,12 @@
+# Refinement and VFX concepts
+
+## identity-b-off
+
+Use case: precise-object-edit. Edit ONLY the THREE amber indicator lamps on the visible wooden SIDE panel of this exact turret. They must be completely OFF: their inner lenses dark chestnut brown with subtle muted brown glass reflection, NO luminous yellow/orange fill, NO bright white highlight, NO glow. Keep allTHREE separate metallic sockets. Preserve the exact twohorn silhouette, brass lips/rivets (leave all other gold hardware unchanged), materials, perspective, LEFT direction, steel neck, stone base, scale and transparentalpha. Do not add effects, text, lamp counters, characters, backdrop orshadow. Exactly one unchanged turret with only itsthreeindicatorlenses made dark. Crispflatpixelart, navyoutline.
+## wave-normal
+
+Use case: stylized-concept. Reference1 is a mechanical twin horn cannon STYLE reference only; DO NOT draw the cannon or any solid projectile. Generate ONE standalone transparent pixel-art SOUND CONE effect fired toward LEFT. Single common invisible EMISSION ORIGIN on the RIGHT at (112,64) in a logical128x128frame; expanding cone extends toward LEFT to x24, y40..88. Draw FOUR separated thin curved sound wave fronts, increasingly tall toward theLEFT, like parenthesis arcs, not circles, magicrings, lasers, lightning, wind tornado or ice. Muted PALE BLUE SILVER and near-white flat2-3color ramps; crisp 1-2logicalpx curves, small navy edge accents if needed. NO cyan crystal, icicle, frost, flake, smoke, particles, floor, blaststar or aura. No blur, AA, gradient, background matte, text or grid. One still illustrating the ordinary low-amplitude pulse. Maximum88x48logicalpx; transparent empty gaps between each curve.
+
+## wave-shock
+
+Use case: stylized-concept. Reference1 is a twin horn cannon STYLE reference only. Draw ONLY one standalone transparent pixel-art strong SONIC SHOCK CONE travelingLEFT. Same invisible origin RIGHT(112,64) and extent x24..112, y40..88 onlogical128x128frame as a normal pulse. Exactly FOUR broad separated curved wavefronts whose heights increase towardLEFT, jagged stepped sideedges subtly show stronger vibration. Warm GOLD-IVORY/WHITE flat3color shading, eachcurve3-4logicalpx thick and clearly strongerthanthinpaleblueordinarysound. Retain SAME cone range and angle, no larger actual cone. NOT a fireball, explosionstar, lightningbolt, particleorb, portalring orroundradialwave. No cannon, monsters, UI, numbers, dust, ground, blur, smooth glow, gradients, AA orblackbackdrop. Empty transparent gaps between curves; crispgamepixelart.

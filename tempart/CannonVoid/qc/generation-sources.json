@@ -1,0 +1,114 @@
+[
+  {
+    "name": "idle",
+    "source": "C:\\Users\\gamel\\.codex\\generated_images\\01a10724-ebfe-7800-94b2-06047a42429d\\exec-a02f8bb1-2882-400d-ae5e-d1c84d3ed8cd.png",
+    "raw": "idle-sheet.png",
+    "requestedColumns": 2,
+    "requestedRows": 2,
+    "actualLayout": "regular-grid"
+  },
+  {
+    "name": "attack",
+    "source": "C:\\Users\\gamel\\.codex\\generated_images\\01a10724-ebfe-7800-94b2-06047a42429d\\exec-c76bf21a-a4a4-475a-a98a-a6f4141985a0.png",
+    "raw": "attack-sheet.png",
+    "requestedColumns": 3,
+    "requestedRows": 2,
+    "actualLayout": "regular-grid"
+  },
+  {
+    "name": "bullet",
+    "source": "C:\\Users\\gamel\\.codex\\generated_images\\01a10724-ebfe-7800-94b2-06047a42429d\\exec-c266fb3c-94bd-4d9c-bc90-f2720dc7241e.png",
+    "raw": "bullet-sheet.png",
+    "requestedColumns": 2,
+    "requestedRows": 2,
+    "actualLayout": "regular-grid"
+  },
+  {
+    "name": "vortex-open",
+    "source": "C:\\Users\\gamel\\.codex\\generated_images\\01a10724-ebfe-7800-94b2-06047a42429d\\exec-3dcf78ce-2161-4b7b-8e9f-00d5ff841b59.png",
+    "raw": "vortex-open-sheet.png",
+    "requestedColumns": 2,
+    "requestedRows": 2,
+    "actualLayout": "regular-grid"
+  },
+  {
+    "name": "vortex-loop-0",
+    "source": "C:\\Users\\gamel\\.codex\\generated_images\\01a10724-ebfe-7800-94b2-06047a42429d\\exec-29b619aa-1d96-4695-815c-e74bd4056ac4.png",
+    "raw": "vortex-loop-0-sheet.png",
+    "requestedColumns": 2,
+    "requestedRows": 2,
+    "actualLayout": "regular-grid"
+  },
+  {
+    "name": "vortex-loop-1",
+    "source": "C:\\Users\\gamel\\.codex\\generated_images\\01a10724-ebfe-7800-94b2-06047a42429d\\exec-9f8bb884-cba3-48f5-bb06-e8cb487bf80d.png",
+    "raw": "vortex-loop-1-sheet.png",
+    "requestedColumns": 2,
+    "requestedRows": 2,
+    "actualLayout": "regular-grid"
+  },
+  {
+    "name": "vortex-loop-2",
+    "source": "C:\\Users\\gamel\\.codex\\generated_images\\01a10724-ebfe-7800-94b2-06047a42429d\\exec-a858ab6c-3c23-4e9a-bdc9-4825a43dc9d7.png",
+    "raw": "vortex-loop-2-sheet.png",
+    "requestedColumns": 2,
+    "requestedRows": 2,
+    "actualLayout": "regular-grid"
+  },
+  {
+    "name": "absorb",
+    "source": "C:\\Users\\gamel\\.codex\\generated_images\\01a10724-ebfe-7800-94b2-06047a42429d\\exec-8d2de05f-78b6-49cd-a9fa-0f164240b93f.png",
+    "raw": "absorb-sheet.png",
+    "requestedColumns": 2,
+    "requestedRows": 2,
+    "actualLayout": "regular-grid"
+  },
+  {
+    "name": "collapse",
+    "source": "C:\\Users\\gamel\\.codex\\generated_images\\01a10724-ebfe-7800-94b2-06047a42429d\\exec-18c4d013-ff8b-4a74-a6bb-d6e9713ea6f8.png",
+    "raw": "collapse-sheet.png",
+    "requestedColumns": 2,
+    "requestedRows": 2,
+    "actualLayout": "horizontal-four"
+  },
+  {
+    "name": "bullet-impact",
+    "source": "C:\\Users\\gamel\\.codex\\generated_images\\01a10724-ebfe-7800-94b2-06047a42429d\\exec-f2202c5a-4870-4876-b1d4-0ae70bdb621a.png",
+    "raw": "bullet-impact-first.png",
+    "requestedColumns": 3,
+    "requestedRows": 2,
+    "actualLayout": "irregular-three-by-two"
+  },
+  {
+    "name": "bullet-impact-1",
+    "source": "C:\\Users\\gamel\\.codex\\generated_images\\01a10724-ebfe-7800-94b2-06047a42429d\\exec-67eeaa9b-2cb4-4bfb-a064-75a0ac59d41c.png",
+    "raw": "bullet-impact-1-sheet.png",
+    "requestedColumns": 3,
+    "requestedRows": 2,
+    "actualLayout": "irregular-three-by-two"
+  },
+  {
+    "name": "bullet-impact-2",
+    "source": "C:\\Users\\gamel\\.codex\\generated_images\\01a10724-ebfe-7800-94b2-06047a42429d\\exec-ee73865a-ecc3-4edc-8b6f-48ac7ec5dc09.png",
+    "raw": "bullet-impact-2-sheet.png",
+    "requestedColumns": 3,
+    "requestedRows": 2,
+    "actualLayout": "irregular-three-by-two"
+  },
+  {
+    "name": "icon",
+    "source": "C:\\Users\\gamel\\.codex\\generated_images\\01a10724-ebfe-7800-94b2-06047a42429d\\exec-0ff78af3-c252-4ea5-bce6-09698a16cf95.png",
+    "raw": "icon.png",
+    "requestedColumns": 1,
+    "requestedRows": 1,
+    "actualLayout": "regular-grid"
+  },
+  {
+    "name": "bullet-impact-refined",
+    "source": "C:\\Users\\gamel\\.codex\\generated_images\\01a10724-ebfe-7800-94b2-06047a42429d\\exec-f64582f2-b870-4631-a8f3-ec79f066231a.png",
+    "raw": "bullet-impact-sheet.png",
+    "requestedColumns": 3,
+    "requestedRows": 2,
+    "actualLayout": "irregular-three-by-two"
+  }
+]
