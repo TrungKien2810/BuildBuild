@@ -1,0 +1,157 @@
+{
+    "cols":  4,
+    "output_origin":  [
+                          64,
+                          100
+                      ],
+    "qc_summary":  {
+                       "empty_frames":  [
+
+                                        ],
+                       "frame_count":  8,
+                       "edge_touch_frames":  [
+
+                                             ]
+                   },
+    "align":  "chest",
+    "cell_height":  128,
+    "frame_labels":  [
+                         "skill-1",
+                         "skill-2",
+                         "skill-3",
+                         "skill-4",
+                         "skill-5",
+                         "skill-6",
+                         "skill-7",
+                         "skill-8"
+                     ],
+    "source":  "Temp/tempart/Weakening Ghost",
+    "status":  "generated; visually checked; gameplay not wired",
+    "target":  "creature",
+    "ground_row":  99,
+    "mode":  "skill",
+    "frames":  [
+                   {
+                       "aligned_bbox":  [
+                                            49,
+                                            52,
+                                            88,
+                                            100
+                                        ],
+                       "is_empty":  false,
+                       "edge_touch":  false,
+                       "output_size":  [
+                                           128,
+                                           128
+                                       ],
+                       "frame":  "skill-1"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            48,
+                                            50,
+                                            88,
+                                            98
+                                        ],
+                       "is_empty":  false,
+                       "edge_touch":  false,
+                       "output_size":  [
+                                           128,
+                                           128
+                                       ],
+                       "frame":  "skill-2"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            42,
+                                            52,
+                                            88,
+                                            100
+                                        ],
+                       "is_empty":  false,
+                       "edge_touch":  false,
+                       "output_size":  [
+                                           128,
+                                           128
+                                       ],
+                       "frame":  "skill-3"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            41,
+                                            41,
+                                            89,
+                                            98
+                                        ],
+                       "is_empty":  false,
+                       "edge_touch":  false,
+                       "output_size":  [
+                                           128,
+                                           128
+                                       ],
+                       "frame":  "skill-4"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            35,
+                                            43,
+                                            91,
+                                            99
+                                        ],
+                       "is_empty":  false,
+                       "edge_touch":  false,
+                       "output_size":  [
+                                           128,
+                                           128
+                                       ],
+                       "frame":  "skill-5"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            31,
+                                            51,
+                                            90,
+                                            98
+                                        ],
+                       "is_empty":  false,
+                       "edge_touch":  false,
+                       "output_size":  [
+                                           128,
+                                           128
+                                       ],
+                       "frame":  "skill-6"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            35,
+                                            51,
+                                            90,
+                                            98
+                                        ],
+                       "is_empty":  false,
+                       "edge_touch":  false,
+                       "output_size":  [
+                                           128,
+                                           128
+                                       ],
+                       "frame":  "skill-7"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            50,
+                                            52,
+                                            89,
+                                            100
+                                        ],
+                       "is_empty":  false,
+                       "edge_touch":  false,
+                       "output_size":  [
+                                           128,
+                                           128
+                                       ],
+                       "frame":  "skill-8"
+                   }
+               ],
+    "rows":  2,
+    "cell_size":  128
+}

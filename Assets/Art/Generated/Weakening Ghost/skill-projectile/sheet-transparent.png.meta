@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: fa5249410c594481a25c44e7d237cdbc
+TextureImporter:
+  serializedVersion: 13
+  mipmaps:
+    enableMipMap: 0
+  textureSettings:
+    filterMode: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  textureType: 0
+  spriteMode: 0
+  maxTextureSize: 2048
+  alphaIsTransparency: 1
+  userData: contact sheet preview

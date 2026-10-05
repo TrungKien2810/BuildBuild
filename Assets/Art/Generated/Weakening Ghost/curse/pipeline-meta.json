@@ -1,0 +1,93 @@
+{
+    "cols":  2,
+    "output_origin":  [
+                          64,
+                          64
+                      ],
+    "qc_summary":  {
+                       "empty_frames":  [
+
+                                        ],
+                       "frame_count":  4,
+                       "edge_touch_frames":  [
+
+                                             ]
+                   },
+    "align":  "center",
+    "cell_height":  128,
+    "frame_labels":  [
+                         "projectile-1",
+                         "projectile-2",
+                         "projectile-3",
+                         "projectile-4"
+                     ],
+    "source":  "Temp/tempart/Weakening Ghost",
+    "status":  "generated; visually checked; gameplay not wired",
+    "target":  "creature",
+    "ground_row":  99,
+    "mode":  "curse",
+    "frames":  [
+                   {
+                       "aligned_bbox":  [
+                                            55,
+                                            59,
+                                            74,
+                                            69
+                                        ],
+                       "is_empty":  false,
+                       "edge_touch":  false,
+                       "output_size":  [
+                                           128,
+                                           128
+                                       ],
+                       "frame":  "projectile-1"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            54,
+                                            59,
+                                            73,
+                                            70
+                                        ],
+                       "is_empty":  false,
+                       "edge_touch":  false,
+                       "output_size":  [
+                                           128,
+                                           128
+                                       ],
+                       "frame":  "projectile-2"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            54,
+                                            59,
+                                            75,
+                                            70
+                                        ],
+                       "is_empty":  false,
+                       "edge_touch":  false,
+                       "output_size":  [
+                                           128,
+                                           128
+                                       ],
+                       "frame":  "projectile-3"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            54,
+                                            59,
+                                            74,
+                                            70
+                                        ],
+                       "is_empty":  false,
+                       "edge_touch":  false,
+                       "output_size":  [
+                                           128,
+                                           128
+                                       ],
+                       "frame":  "projectile-4"
+                   }
+               ],
+    "rows":  2,
+    "cell_size":  128
+}

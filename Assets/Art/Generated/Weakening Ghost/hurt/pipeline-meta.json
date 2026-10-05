@@ -1,0 +1,93 @@
+{
+    "cols":  2,
+    "output_origin":  [
+                          64,
+                          100
+                      ],
+    "qc_summary":  {
+                       "empty_frames":  [
+
+                                        ],
+                       "frame_count":  4,
+                       "edge_touch_frames":  [
+
+                                             ]
+                   },
+    "align":  "chest",
+    "cell_height":  128,
+    "frame_labels":  [
+                         "hurt-1",
+                         "hurt-2",
+                         "hurt-3",
+                         "hurt-4"
+                     ],
+    "source":  "Temp/tempart/Weakening Ghost",
+    "status":  "generated; visually checked; gameplay not wired",
+    "target":  "creature",
+    "ground_row":  99,
+    "mode":  "hurt",
+    "frames":  [
+                   {
+                       "aligned_bbox":  [
+                                            48,
+                                            52,
+                                            93,
+                                            100
+                                        ],
+                       "is_empty":  false,
+                       "edge_touch":  false,
+                       "output_size":  [
+                                           128,
+                                           128
+                                       ],
+                       "frame":  "hurt-1"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            43,
+                                            55,
+                                            89,
+                                            103
+                                        ],
+                       "is_empty":  false,
+                       "edge_touch":  false,
+                       "output_size":  [
+                                           128,
+                                           128
+                                       ],
+                       "frame":  "hurt-2"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            48,
+                                            53,
+                                            92,
+                                            102
+                                        ],
+                       "is_empty":  false,
+                       "edge_touch":  false,
+                       "output_size":  [
+                                           128,
+                                           128
+                                       ],
+                       "frame":  "hurt-3"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            48,
+                                            52,
+                                            94,
+                                            102
+                                        ],
+                       "is_empty":  false,
+                       "edge_touch":  false,
+                       "output_size":  [
+                                           128,
+                                           128
+                                       ],
+                       "frame":  "hurt-4"
+                   }
+               ],
+    "rows":  2,
+    "cell_size":  128
+}

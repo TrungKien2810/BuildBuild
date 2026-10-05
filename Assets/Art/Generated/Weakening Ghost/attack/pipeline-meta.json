@@ -1,0 +1,157 @@
+{
+    "cols":  4,
+    "output_origin":  [
+                          64,
+                          100
+                      ],
+    "qc_summary":  {
+                       "empty_frames":  [
+
+                                        ],
+                       "frame_count":  8,
+                       "edge_touch_frames":  [
+
+                                             ]
+                   },
+    "align":  "chest",
+    "cell_height":  128,
+    "frame_labels":  [
+                         "attack-1",
+                         "attack-2",
+                         "attack-3",
+                         "attack-4",
+                         "attack-5",
+                         "attack-6",
+                         "attack-7",
+                         "attack-8"
+                     ],
+    "source":  "Temp/tempart/Weakening Ghost",
+    "status":  "generated; visually checked; gameplay not wired",
+    "target":  "creature",
+    "ground_row":  99,
+    "mode":  "attack",
+    "frames":  [
+                   {
+                       "aligned_bbox":  [
+                                            50,
+                                            52,
+                                            87,
+                                            100
+                                        ],
+                       "is_empty":  false,
+                       "edge_touch":  false,
+                       "output_size":  [
+                                           128,
+                                           128
+                                       ],
+                       "frame":  "attack-1"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            52,
+                                            55,
+                                            90,
+                                            101
+                                        ],
+                       "is_empty":  false,
+                       "edge_touch":  false,
+                       "output_size":  [
+                                           128,
+                                           128
+                                       ],
+                       "frame":  "attack-2"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            43,
+                                            52,
+                                            87,
+                                            99
+                                        ],
+                       "is_empty":  false,
+                       "edge_touch":  false,
+                       "output_size":  [
+                                           128,
+                                           128
+                                       ],
+                       "frame":  "attack-3"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            37,
+                                            53,
+                                            87,
+                                            99
+                                        ],
+                       "is_empty":  false,
+                       "edge_touch":  false,
+                       "output_size":  [
+                                           128,
+                                           128
+                                       ],
+                       "frame":  "attack-4"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            36,
+                                            54,
+                                            87,
+                                            100
+                                        ],
+                       "is_empty":  false,
+                       "edge_touch":  false,
+                       "output_size":  [
+                                           128,
+                                           128
+                                       ],
+                       "frame":  "attack-5"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            36,
+                                            54,
+                                            87,
+                                            100
+                                        ],
+                       "is_empty":  false,
+                       "edge_touch":  false,
+                       "output_size":  [
+                                           128,
+                                           128
+                                       ],
+                       "frame":  "attack-6"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            42,
+                                            52,
+                                            87,
+                                            99
+                                        ],
+                       "is_empty":  false,
+                       "edge_touch":  false,
+                       "output_size":  [
+                                           128,
+                                           128
+                                       ],
+                       "frame":  "attack-7"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            49,
+                                            53,
+                                            87,
+                                            99
+                                        ],
+                       "is_empty":  false,
+                       "edge_touch":  false,
+                       "output_size":  [
+                                           128,
+                                           128
+                                       ],
+                       "frame":  "attack-8"
+                   }
+               ],
+    "rows":  2,
+    "cell_size":  128
+}

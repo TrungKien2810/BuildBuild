@@ -1,0 +1,30 @@
+{
+    "qc":  {
+               "empty_frames":  0,
+               "edge_touch_frames":  0
+           },
+    "version":  1,
+    "reference":  {
+                      "template":  "folder structure and import settings",
+                      "body_height":  48,
+                      "unit":  "AcidLizard",
+                      "identity":  "idle/idle-1.png"
+                  },
+    "processing":  {
+                       "shared_scale":  true,
+                       "alpha_threshold":  180,
+                       "scale_strategy":  "fixed-per-clip",
+                       "resample":  "nearest-neighbor",
+                       "align":  "chest",
+                       "cell_size":  128
+                   },
+    "output_origin":  [
+                          64,
+                          100
+                      ],
+    "name":  "Weakening Ghost",
+    "chest_anchor":  [
+                         64,
+                         82
+                     ]
+}
