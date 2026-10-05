@@ -71,7 +71,7 @@ xanh lá = hồi máu · tím = nguyền/triệu hồi · vàng = buff/nâng c�
 | Thư mục | Số frame | Kích thước frame | Ghi chú |
 |---|---|---|---|
 | `identity/` | 1 | 128×128 (hoặc 144×128) | Hình chuẩn để duyệt dáng |
-| `idle/` | 4 | như identity | Chờ bắn: nhấp nháy nhẹ/lắc nhẹ 1–2 px, **bệ không xê dịch** |
+| `idle/` | 4 | như identity | Chờ bắn: nhấp nháy nhẹ/lắc nhẹ 1–2 px, **bệ không xê dịch** |  
 | `attack/` | 4–6 | như identity | Nạp → bắn (giật nòng, chớp nòng) → hồi về đúng tư thế idle-1 |
 | `bullet/` | 4 | 128×128, vật thể ở giữa | Đạn/vật bắn ra: vẽ **mũi hướng TRÁI** giống thân pháo (game tự lật và nghiêng theo hướng bay); cỡ 12–30 px (đạn dài như lao thì dài hơn) |
 | `bullet-impact/` | 4 | 128×128, ở giữa | Nổ/chạm, cỡ 20–50 px; vùng AOE thì to theo vùng |
