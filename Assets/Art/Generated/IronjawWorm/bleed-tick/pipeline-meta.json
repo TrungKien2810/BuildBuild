@@ -1,0 +1,50 @@
+{
+    "mode":  "bleed-tick",
+    "source":  "tempart/IronjawWorm/bleed-tick",
+    "align":  "center",
+    "cols":  2,
+    "ground_row":  null,
+    "fps":  10,
+    "frames":  [
+                   {
+                       "aligned_bbox":  [
+                                            25,
+                                            19,
+                                            39,
+                                            35
+                                        ],
+                       "frame":  "bleed-tick-1"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            21,
+                                            14,
+                                            44,
+                                            40
+                                        ],
+                       "frame":  "bleed-tick-2"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            21,
+                                            17,
+                                            41,
+                                            45
+                                        ],
+                       "frame":  "bleed-tick-3"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            21,
+                                            35,
+                                            43,
+                                            46
+                                        ],
+                       "frame":  "bleed-tick-4"
+                   }
+               ],
+    "status":  "draft",
+    "target":  "vfx",
+    "rows":  2,
+    "cell_size":  64
+}

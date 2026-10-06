@@ -1,0 +1,86 @@
+{
+    "mode":  "walk",
+    "source":  "tempart/IronjawWorm/walk",
+    "align":  "feet",
+    "cols":  4,
+    "ground_row":  90,
+    "fps":  10,
+    "frames":  [
+                   {
+                       "aligned_bbox":  [
+                                            8,
+                                            60,
+                                            114,
+                                            91
+                                        ],
+                       "frame":  "walk-1"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            8,
+                                            52,
+                                            99,
+                                            91
+                                        ],
+                       "frame":  "walk-2"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            8,
+                                            46,
+                                            92,
+                                            91
+                                        ],
+                       "frame":  "walk-3"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            8,
+                                            43,
+                                            88,
+                                            91
+                                        ],
+                       "frame":  "walk-4"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            8,
+                                            50,
+                                            103,
+                                            91
+                                        ],
+                       "frame":  "walk-5"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            8,
+                                            50,
+                                            97,
+                                            91
+                                        ],
+                       "frame":  "walk-6"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            8,
+                                            52,
+                                            93,
+                                            91
+                                        ],
+                       "frame":  "walk-7"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            8,
+                                            60,
+                                            109,
+                                            91
+                                        ],
+                       "frame":  "walk-8"
+                   }
+               ],
+    "status":  "draft",
+    "target":  "creature",
+    "rows":  2,
+    "cell_size":  128
+}

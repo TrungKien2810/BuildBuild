@@ -1,0 +1,68 @@
+{
+    "mode":  "death",
+    "source":  "tempart/IronjawWorm/death",
+    "align":  "feet",
+    "cols":  2,
+    "ground_row":  90,
+    "fps":  10,
+    "frames":  [
+                   {
+                       "aligned_bbox":  [
+                                            16,
+                                            28,
+                                            102,
+                                            91
+                                        ],
+                       "frame":  "death-1"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            16,
+                                            38,
+                                            107,
+                                            91
+                                        ],
+                       "frame":  "death-2"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            16,
+                                            50,
+                                            113,
+                                            91
+                                        ],
+                       "frame":  "death-3"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            16,
+                                            60,
+                                            111,
+                                            91
+                                        ],
+                       "frame":  "death-4"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            16,
+                                            66,
+                                            113,
+                                            91
+                                        ],
+                       "frame":  "death-5"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            16,
+                                            67,
+                                            113,
+                                            91
+                                        ],
+                       "frame":  "death-6"
+                   }
+               ],
+    "status":  "draft",
+    "target":  "creature",
+    "rows":  3,
+    "cell_size":  128
+}

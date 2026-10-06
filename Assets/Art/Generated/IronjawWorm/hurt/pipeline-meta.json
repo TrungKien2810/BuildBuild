@@ -1,0 +1,50 @@
+{
+    "mode":  "hurt",
+    "source":  "tempart/IronjawWorm/hurt",
+    "align":  "feet",
+    "cols":  2,
+    "ground_row":  90,
+    "fps":  10,
+    "frames":  [
+                   {
+                       "aligned_bbox":  [
+                                            16,
+                                            44,
+                                            105,
+                                            91
+                                        ],
+                       "frame":  "hurt-1"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            16,
+                                            53,
+                                            111,
+                                            91
+                                        ],
+                       "frame":  "hurt-2"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            16,
+                                            44,
+                                            117,
+                                            91
+                                        ],
+                       "frame":  "hurt-3"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            16,
+                                            46,
+                                            115,
+                                            91
+                                        ],
+                       "frame":  "hurt-4"
+                   }
+               ],
+    "status":  "draft",
+    "target":  "creature",
+    "rows":  2,
+    "cell_size":  128
+}

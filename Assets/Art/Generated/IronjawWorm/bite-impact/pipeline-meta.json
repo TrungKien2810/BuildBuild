@@ -1,0 +1,50 @@
+{
+    "mode":  "bite-impact",
+    "source":  "tempart/IronjawWorm/bite-impact",
+    "align":  "center",
+    "cols":  2,
+    "ground_row":  null,
+    "fps":  10,
+    "frames":  [
+                   {
+                       "aligned_bbox":  [
+                                            25,
+                                            25,
+                                            41,
+                                            43
+                                        ],
+                       "frame":  "bite-impact-1"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            21,
+                                            21,
+                                            47,
+                                            47
+                                        ],
+                       "frame":  "bite-impact-2"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            17,
+                                            20,
+                                            45,
+                                            47
+                                        ],
+                       "frame":  "bite-impact-3"
+                   },
+                   {
+                       "aligned_bbox":  [
+                                            21,
+                                            25,
+                                            43,
+                                            44
+                                        ],
+                       "frame":  "bite-impact-4"
+                   }
+               ],
+    "status":  "draft",
+    "target":  "vfx",
+    "rows":  2,
+    "cell_size":  64
+}

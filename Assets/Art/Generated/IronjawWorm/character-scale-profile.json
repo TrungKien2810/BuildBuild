@@ -1,0 +1,25 @@
+{
+    "qc":  {
+               "max_body_scale_drift":  0.1
+           },
+    "version":  1,
+    "reference":  {
+                      "cols":  2,
+                      "rows":  2,
+                      "target":  "creature",
+                      "mode":  "idle"
+                  },
+    "processing":  {
+                       "shared_scale":  true,
+                       "component_mode":  "all",
+                       "scale_strategy":  "uniform-resample",
+                       "align":  "feet",
+                       "cell_size":  128,
+                       "fit_scale":  0.66666666666666663
+                   },
+    "output_origin":  [
+                          64,
+                          90
+                      ],
+    "name":  "creature-idle"
+}

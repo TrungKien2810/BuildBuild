@@ -1,0 +1,23 @@
+{
+    "mode":  "identity",
+    "source":  "tempart/IronjawWorm/identity",
+    "align":  "feet",
+    "cols":  1,
+    "ground_row":  90,
+    "fps":  10,
+    "frames":  [
+                   {
+                       "aligned_bbox":  [
+                                            14,
+                                            50,
+                                            115,
+                                            91
+                                        ],
+                       "frame":  "identity-1"
+                   }
+               ],
+    "status":  "draft",
+    "target":  "creature",
+    "rows":  1,
+    "cell_size":  128
+}
