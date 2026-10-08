@@ -145,7 +145,8 @@ namespace BuildBuild.UI
                 if (!show) continue;
                 var target = targets[i];
                 var rect = (RectTransform)tokens[i].transform;
-                rect.anchoredPosition = new Vector2((target.mapPosition.x - 0.5f) * map.rect.width, (target.mapPosition.y - 0.5f) * map.rect.height);
+                var spot = ConquestMap.SpotFor(target, i);
+                rect.anchoredPosition = new Vector2((spot.x - 0.5f) * map.rect.width, (spot.y - 0.5f) * map.rect.height);
                 var image = tokens[i].GetComponent<Image>();
                 image.sprite = tierTokens[target.tier];
                 image.color = target.done ? new Color(0.45f, 0.45f, 0.45f) : Color.white;

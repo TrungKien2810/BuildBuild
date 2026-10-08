@@ -1,33 +1,33 @@
 {
   "panel-hero.png": {
-    "left": 13,
-    "right": 13,
-    "top": 13,
-    "bottom": 14
-  },
-  "title-ribbon.png": {
-    "left": 12,
-    "right": 12,
-    "top": 3,
-    "bottom": 7
-  },
-  "portrait-frame-big.png": {
-    "left": 14,
-    "right": 14,
-    "top": 14,
+    "left": 17,
+    "right": 17,
+    "top": 15,
     "bottom": 16
   },
+  "title-ribbon.png": {
+    "left": 20,
+    "right": 19,
+    "top": 10,
+    "bottom": 11
+  },
+  "portrait-frame-big.png": {
+    "left": 20,
+    "right": 20,
+    "top": 23,
+    "bottom": 20
+  },
   "stat-strip.png": {
-    "left": 4,
-    "right": 3,
+    "left": 12,
+    "right": 12,
     "top": 7,
-    "bottom": 4
+    "bottom": 7
   },
   "slot-skill.png": {
     "left": 14,
-    "right": 14,
-    "top": 14,
-    "bottom": 14
+    "right": 15,
+    "top": 15,
+    "bottom": 16
   },
   "slot-skill-locked.png": {
     "left": 14,
@@ -36,32 +36,32 @@
     "bottom": 14
   },
   "slot-skill-selected.png": {
-    "left": 16,
-    "right": 16,
-    "top": 16,
-    "bottom": 15
+    "left": 14,
+    "right": 15,
+    "top": 15,
+    "bottom": 16
   },
   "panel-result.png": {
-    "left": 9,
-    "right": 9,
+    "left": 12,
+    "right": 12,
     "top": 11,
-    "bottom": 10
+    "bottom": 12
   },
   "ribbon-victory.png": {
-    "left": 23,
-    "right": 23,
-    "top": 4,
+    "left": 20,
+    "right": 19,
+    "top": 10,
     "bottom": 11
   },
   "ribbon-defeat.png": {
-    "left": 13,
-    "right": 13,
-    "top": 3,
-    "bottom": 12
+    "left": 20,
+    "right": 19,
+    "top": 10,
+    "bottom": 11
   },
   "reward-row.png": {
-    "left": 17,
-    "right": 19,
+    "left": 20,
+    "right": 20,
     "top": 4,
     "bottom": 4
   }
