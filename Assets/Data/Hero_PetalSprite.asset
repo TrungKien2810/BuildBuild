@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
   displayName: "Hoa y\xEAu b\u1EAFn h\u1EA1t"
   unitId: petalsprite
+  role: 3
   maxHealth: 220
   damage: 24
   attackRate: 1

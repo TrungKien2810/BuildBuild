@@ -37,6 +37,7 @@ namespace BuildBuild.Combat
             Unit.Killed -= OnEnemyKilled;
             if (HasPassive(PassiveKind.Shatter)) Unit.Killed += OnEnemyKilled;
             _sporeReadyAt = 0f;
+            InitialiseLowTrio();
             Health.AnyDamaged -= OnAnyDamaged;
             if (HasPassive(PassiveKind.Spores)) Health.AnyDamaged += OnAnyDamaged;
         }
@@ -53,12 +54,13 @@ namespace BuildBuild.Combat
             if (primary && HasPassive(PassiveKind.Pierce)) PierceBehind(enemy, damage * _definition.passivePower);
             if (_definition.passiveKind == PassiveKind.Ignite) AddBurn(enemy);
             if (HasPassive(PassiveKind.Tangle)) enemy.ApplyTangle(_definition.passivePower, _definition.passiveDuration);
+            if (primary) OnLowTrioHit(enemy);    // Chan Dong / Lien Hoan / Vung Bao Tu / Kep Pha Giap — Hero.LowTrio.cs
         }
 
         /// <summary>Chay theo so cua noi tai Ignite — don thuong va Mua Tan Lua luon dot, noi tai mo moi lan lua khi quai chet.</summary>
         void AddBurn(Unit enemy) =>
-            Burn.Apply(enemy, _definition.passivePower, _definition.passiveDuration, _health, _definition.passiveFrames, Side,
-                HasPassive(PassiveKind.Ignite) ? _definition.passiveRadius : 0f);
+            enemy.Status.Apply(StatusId.Burn, _definition.passivePower, _definition.passiveDuration, _health, Side,
+                spread: HasPassive(PassiveKind.Ignite) ? _definition.passiveRadius : 0f, fx: _definition.passiveFrames);
 
         /// <summary>Chan Dan: dan quai cham hero nay tai <paramref name="at"/> — vo (FX) va tra true thi bo sat thuong.</summary>
         public bool BreaksShot(Vector3 at)
@@ -70,8 +72,8 @@ namespace BuildBuild.Combat
 
         /// <summary>Cong tang Doc theo so cua noi tai Venom — chieu Vac Suong Doc dung chung, ke ca khi noi tai chua mo.</summary>
         void AddVenom(Unit enemy, int stacks) =>
-            Venom.Apply(enemy, stacks, _definition.passiveEvery, _definition.passivePower, _definition.passiveDuration,
-                _health, _definition.passiveFrames);
+            enemy.Status.Apply(StatusId.Poison, _definition.passivePower, _definition.passiveDuration, _health, Side,
+                stacks, _definition.passiveEvery, fx: _definition.passiveFrames);
 
         /// <summary>Thoc Hang: quai gan nhat dung SAU <paramref name="target"/> theo huong dang nhin, trong `passiveRadius`.</summary>
         void PierceBehind(Unit target, float damage)
@@ -118,6 +120,7 @@ namespace BuildBuild.Combat
                 return target.Health.Fraction < _definition.passiveThreshold ? 1f + _definition.passivePower : 1f;
             if (HasPassive(PassiveKind.Crit))
                 return ++_shotCount % _definition.passiveEvery == 0 ? _definition.passivePower : 1f;
+            if (HasPassive(PassiveKind.Combo)) return ComboMultiplier(target);
             return BaneMultiplier(target);
         }
 

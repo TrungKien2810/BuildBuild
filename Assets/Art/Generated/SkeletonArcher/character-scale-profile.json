@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "name": "creature-idle",
+  "processing": {
+    "cell_size": 128,
+    "fit_scale": 0.328125,
+    "trim_border": 4,
+    "edge_clean_depth": 3,
+    "align": "feet",
+    "shared_scale": true,
+    "scale_strategy": "fit",
+    "component_mode": "all",
+    "component_padding": 0,
+    "min_component_area": 1,
+    "edge_touch_margin": 0
+  },
+  "output_origin": [
+    64,
+    116
+  ],
+  "reference": {
+    "target": "creature",
+    "mode": "idle",
+    "rows": 2,
+    "cols": 2,
+    "body_scale_mean": 0.37259499230894616,
+    "body_scale_cv": 0.0034876146266615326,
+    "anchor_y_mean": 0.8336025848142165
+  },
+  "qc": {
+    "max_body_scale_drift": 0.1
+  }
+}

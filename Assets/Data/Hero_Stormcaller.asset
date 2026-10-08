@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
   displayName: "Ph\xE1p s\u01B0 s\u1EA5m s\xE9t"
   unitId: stormcaller
+  role: 4
   maxHealth: 520
   damage: 40
   attackRate: 0.8
@@ -29,6 +30,8 @@ MonoBehaviour:
   stormcaller: {fileID: 11400000, guid: ce78a7671e4f9f24aa61d2c048dd6171, type: 2}
   galemonk: {fileID: 0}
   daoVien: {fileID: 0}
+  bloodswordsman: {fileID: 0}
+  soulbinder: {fileID: 0}
   swornBrother: 0
   projectileSpeed: 8
   splashRadius: 0.8

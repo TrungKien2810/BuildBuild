@@ -1,0 +1,47 @@
+{
+  "target": "asset",
+  "mode": "hit-normal",
+  "source": "tempart/CannonSonic/hit-normal",
+  "align": "center",
+  "status": "giao 2026-10-05 (cannon-deliver)",
+  "frames": [
+    {
+      "frame": "hit-1",
+      "aligned_bbox": [
+        62,
+        58,
+        67,
+        70
+      ]
+    },
+    {
+      "frame": "hit-2",
+      "aligned_bbox": [
+        58,
+        57,
+        70,
+        71
+      ]
+    },
+    {
+      "frame": "hit-3",
+      "aligned_bbox": [
+        56,
+        58,
+        72,
+        71
+      ]
+    },
+    {
+      "frame": "hit-4",
+      "aligned_bbox": [
+        61,
+        61,
+        68,
+        68
+      ]
+    }
+  ],
+  "cell_size": 128,
+  "cell_height": 128
+}

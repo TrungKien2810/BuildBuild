@@ -1,0 +1,40 @@
+{
+  "unit": "QuanVu",
+  "action": "skill-duel-cleave-cast",
+  "status": "ready for art review; gameplay not connected",
+  "frame_files": [
+    "cast-1.png",
+    "cast-2.png",
+    "cast-3.png",
+    "cast-4.png",
+    "cast-5.png",
+    "cast-6.png"
+  ],
+  "origin_px": [
+    62.0,
+    115
+  ],
+  "cell_px": [
+    128,
+    128
+  ],
+  "phases": {
+    "anticipate": [
+      "cast-1.png",
+      "cast-2.png",
+      "cast-3.png"
+    ],
+    "release": [
+      "cast-4.png"
+    ],
+    "recover": [
+      "cast-5.png",
+      "cast-6.png"
+    ]
+  },
+  "preview_ms": 125,
+  "gameplay_timing": "unset",
+  "mirror_allowed": true,
+  "source_raw": "tempart\\SkillExpansion-20261006\\QuanVu\\skill-duel-cleave-cast\\raw-input.png",
+  "source_prompt": "tempart\\SkillExpansion-20261006\\QuanVu\\skill-duel-cleave-cast\\prompt-used.txt"
+}

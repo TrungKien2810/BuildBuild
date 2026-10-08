@@ -1,0 +1,65 @@
+{
+  "target": "asset",
+  "mode": "attack",
+  "source": "tempart/CannonLonggun/attack",
+  "align": "feet",
+  "status": "giao 2026-10-05 (cannon-deliver)",
+  "frames": [
+    {
+      "frame": "attack-1",
+      "aligned_bbox": [
+        10,
+        37,
+        134,
+        97
+      ]
+    },
+    {
+      "frame": "attack-2",
+      "aligned_bbox": [
+        10,
+        37,
+        134,
+        97
+      ]
+    },
+    {
+      "frame": "attack-3",
+      "aligned_bbox": [
+        3,
+        37,
+        134,
+        97
+      ]
+    },
+    {
+      "frame": "attack-4",
+      "aligned_bbox": [
+        11,
+        37,
+        134,
+        97
+      ]
+    },
+    {
+      "frame": "attack-5",
+      "aligned_bbox": [
+        11,
+        37,
+        134,
+        97
+      ]
+    },
+    {
+      "frame": "attack-6",
+      "aligned_bbox": [
+        10,
+        37,
+        134,
+        97
+      ]
+    }
+  ],
+  "cell_size": 144,
+  "cell_height": 128
+}

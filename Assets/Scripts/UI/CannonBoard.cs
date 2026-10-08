@@ -1,3 +1,4 @@
+using System.Collections;
 using BuildBuild.Combat;
 using BuildBuild.Core;
 using BuildBuild.Data;
@@ -16,14 +17,20 @@ namespace BuildBuild.UI
     /// phao dang o be khac thi dong do khoa, nhu hero dang dung tren san.
     ///
     /// Doi hinh phao nam trong save (`SaveData.cannons`): sang man gacha roi quay lai van con nguyen.
+    ///
+    /// So be theo cap thanh tri (3/4/5): scene dung san du be cho cap cao nhat, cap thap thi tat be thua
+    /// (`Castle.TierChanged`). Be bi tat ma dang co phao thi phao duoc go, save giu ten de nang cap lai van con.
     /// </summary>
     public class CannonBoard : MonoBehaviour
     {
         [SerializeField] WaveManager waves;
+        [SerializeField] Castle castle;
         [SerializeField] CannonMount[] mounts;
 
+        int _activeMounts;
+
         /// <summary>So be phao dang co — luc chien Chinh Phat dem phao theo so nay.</summary>
-        public int MountCount => mounts.Length;
+        public int MountCount => _activeMounts;
 
         [Header("Bang chon phao")]
         [SerializeField] GameObject pickerPanel;
@@ -49,8 +56,49 @@ namespace BuildBuild.UI
             waves.WaveStarted += OnWaveStarted;
             waves.WaveCleared += OnWaveEnded;
             waves.Defeated += OnDefeated;
+            if (castle != null) castle.TierChanged += OnTierChanged;
             ClosePicker();
+            LayoutMounts();
             RestoreLoadout();
+        }
+
+        void OnTierChanged()
+        {
+            int before = _activeMounts;
+            LayoutMounts();
+            RestoreLoadout();
+            if (_activeMounts > before) StartCoroutine(BlinkNewMounts(before));
+        }
+
+        /// <summary>Nhap nhay khung vet cac be vua mo (chi so tu <paramref name="from"/>) de nguoi choi biet cho lap phao moi.</summary>
+        IEnumerator BlinkNewMounts(int from)
+        {
+            for (int blink = 0; blink < 8; blink++)
+            {
+                bool show = blink % 2 == 1;
+                for (int i = from; i < _activeMounts; i++) mounts[i].ShowFrame(show && !WaveManager.Fighting);
+                yield return new WaitForSeconds(0.2f);
+            }
+            for (int i = from; i < _activeMounts; i++) mounts[i].ShowFrame(!WaveManager.Fighting);
+        }
+
+        /// <summary>Dat + bat/tat be theo cap thanh hien tai. Scene cu khong co bang cap: giu nguyen moi be.</summary>
+        void LayoutMounts()
+        {
+            var tier = castle != null ? castle.CurrentTier : null;
+            _activeMounts = tier != null ? Mathf.Min(tier.mounts.Length, mounts.Length) : mounts.Length;
+            for (int i = 0; i < mounts.Length; i++)
+            {
+                bool active = i < _activeMounts;
+                if (!active && mounts[i].Occupant != null) mounts[i].Assign(null, 1);
+                if (tier != null && active)
+                {
+                    mounts[i].transform.localPosition = tier.mounts[i];
+                    float scale = tier.mountScales != null && i < tier.mountScales.Length ? tier.mountScales[i] : 1f;
+                    mounts[i].transform.localScale = Vector3.one * scale;
+                }
+                mounts[i].gameObject.SetActive(active);
+            }
         }
 
         void OnDestroy()
@@ -61,6 +109,7 @@ namespace BuildBuild.UI
                 waves.WaveCleared -= OnWaveEnded;
                 waves.Defeated -= OnDefeated;
             }
+            if (castle != null) castle.TierChanged -= OnTierChanged;
         }
 
         public void OnMountClicked(CannonMount mount)
@@ -167,7 +216,7 @@ namespace BuildBuild.UI
             var match = ConquestMatch.Current;
             var pool = System.Array.FindAll(roster, c => c != null);
             if (match == null || pool.Length == 0) return;
-            for (int i = 0; i < mounts.Length; i++)
+            for (int i = 0; i < _activeMounts; i++)
             {
                 var mount = mounts[i];
                 var target = match.Target;
@@ -180,6 +229,7 @@ namespace BuildBuild.UI
                 go.AddComponent<SpriteAnimator>();
                 var cannon = go.AddComponent<Cannon>();
                 cannon.Initialise(definition, target != null ? target.cannonLevel : LevelOf(definition), Faction.Npc);
+                go.transform.localScale *= mount.transform.localScale.x;   // cung co voi be ben thanh minh
                 _rivals.Add(cannon);
             }
         }
@@ -192,7 +242,7 @@ namespace BuildBuild.UI
         void RestoreLoadout()
         {
             var loadout = SaveSystem.Data.cannons;
-            for (int i = 0; i < mounts.Length; i++)
+            for (int i = 0; i < _activeMounts; i++)
             {
                 CannonDefinition definition = null;
                 if (i < loadout.Count)
@@ -206,8 +256,12 @@ namespace BuildBuild.UI
         void SaveLoadout()
         {
             var loadout = SaveSystem.Data.cannons;
-            loadout.Clear();
-            foreach (var mount in mounts) loadout.Add(mount.Definition != null ? mount.Definition.name : "");
+            for (int i = 0; i < _activeMounts; i++)
+            {
+                string name = mounts[i].Definition != null ? mounts[i].Definition.name : "";
+                if (i < loadout.Count) loadout[i] = name;
+                else loadout.Add(name);
+            }
             SaveSystem.Save();
         }
 

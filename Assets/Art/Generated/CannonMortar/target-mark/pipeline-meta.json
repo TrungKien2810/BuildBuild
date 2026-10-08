@@ -1,0 +1,29 @@
+{
+  "target": "asset",
+  "mode": "target-mark",
+  "source": "tempart/CannonMortar/target-mark",
+  "align": "center",
+  "status": "giao 2026-10-05 (cannon-deliver)",
+  "frames": [
+    {
+      "frame": "target-mark-1",
+      "aligned_bbox": [
+        44,
+        54,
+        83,
+        74
+      ]
+    },
+    {
+      "frame": "target-mark-2",
+      "aligned_bbox": [
+        42,
+        54,
+        86,
+        74
+      ]
+    }
+  ],
+  "cell_size": 128,
+  "cell_height": 128
+}

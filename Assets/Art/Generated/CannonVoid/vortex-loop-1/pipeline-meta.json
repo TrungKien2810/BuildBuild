@@ -1,0 +1,47 @@
+{
+  "target": "asset",
+  "mode": "vortex-loop-1",
+  "source": "tempart/CannonVoid/vortex-loop-1",
+  "align": "center",
+  "status": "giao 2026-10-05 (cannon-deliver)",
+  "frames": [
+    {
+      "frame": "vortex-1",
+      "aligned_bbox": [
+        37,
+        53,
+        93,
+        80
+      ]
+    },
+    {
+      "frame": "vortex-2",
+      "aligned_bbox": [
+        36,
+        54,
+        93,
+        80
+      ]
+    },
+    {
+      "frame": "vortex-3",
+      "aligned_bbox": [
+        36,
+        48,
+        91,
+        75
+      ]
+    },
+    {
+      "frame": "vortex-4",
+      "aligned_bbox": [
+        35,
+        48,
+        91,
+        75
+      ]
+    }
+  ],
+  "cell_size": 128,
+  "cell_height": 128
+}

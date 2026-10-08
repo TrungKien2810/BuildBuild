@@ -1,0 +1,47 @@
+{
+  "target": "asset",
+  "mode": "bullet-impact",
+  "source": "tempart/CannonTesla/bullet-impact",
+  "align": "center",
+  "status": "giao 2026-10-05 (cannon-deliver)",
+  "frames": [
+    {
+      "frame": "impact-1",
+      "aligned_bbox": [
+        54,
+        54,
+        74,
+        74
+      ]
+    },
+    {
+      "frame": "impact-2",
+      "aligned_bbox": [
+        42,
+        42,
+        86,
+        86
+      ]
+    },
+    {
+      "frame": "impact-3",
+      "aligned_bbox": [
+        46,
+        46,
+        82,
+        82
+      ]
+    },
+    {
+      "frame": "impact-4",
+      "aligned_bbox": [
+        54,
+        54,
+        74,
+        72
+      ]
+    }
+  ],
+  "cell_size": 128,
+  "cell_height": 128
+}

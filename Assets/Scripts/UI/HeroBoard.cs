@@ -49,7 +49,16 @@ namespace BuildBuild.UI
         [SerializeField] Sprite starOn;
         [SerializeField] Sprite starOff;
 
+        [Header("Bo loc vai")]
+        [SerializeField] HeroRoleCatalog roles;
+        [Tooltip("Nut dau = Tat ca, sau do cung thu tu `roles.entries`. Nut dang chon dung sprite `roundActive`. "
+            + "Dong khong khop vai bi an; Content co VerticalLayoutGroup nen cac dong con lai tu don len.")]
+        [SerializeField] Button[] roleButtons;
+        [SerializeField] Sprite roundNormal;
+        [SerializeField] Sprite roundActive;
+
         HeroSlot _pending;
+        HeroRole? _roleFilter;    // null = Tat ca; giu qua cac lan mo bang
         /// <summary>Hero phe NPC cua tran Chinh Phat dang danh.</summary>
         readonly System.Collections.Generic.List<Hero> _rivals = new System.Collections.Generic.List<Hero>();
 
@@ -86,6 +95,11 @@ namespace BuildBuild.UI
                 rosterButtons[i].onClick.AddListener(() => Choose(index));
             }
             cancelButton.onClick.AddListener(ClosePicker);
+            for (int i = 0; i < roleButtons.Length; i++)
+            {
+                HeroRole? role = i == 0 ? (HeroRole?)null : roles.entries[i - 1].role;
+                roleButtons[i].onClick.AddListener(() => { _roleFilter = role; ApplyRoleFilter(); });
+            }
             waves.WaveStarted += OnWaveStarted;
             waves.WaveCleared += OnWaveCleared;
             waves.Defeated += OnDefeated;
@@ -122,8 +136,17 @@ namespace BuildBuild.UI
                 MarkSkillSlot(i, onBoard);
                 UnitCardView.ShowLevelAndStars(rosterLevels[i], rosterStars, i, Progression.Owned(roster[i].unitId), starOn, starOff);
             }
+            ApplyRoleFilter();
             pickerPanel.SetActive(true);
             Sfx.Play("ui-open");
+        }
+
+        void ApplyRoleFilter()
+        {
+            for (int i = 0; i < roleButtons.Length; i++)
+                roleButtons[i].image.sprite = (i == 0 ? _roleFilter == null : _roleFilter == roles.entries[i - 1].role) ? roundActive : roundNormal;
+            for (int i = 0; i < rosterButtons.Length; i++)
+                rosterButtons[i].gameObject.SetActive(_roleFilter == null || roster[i].role == _roleFilter);
         }
 
         /// <summary>O skill cua dong `index`: vien vang khi hero da dung tren san, vien da khi con chon duoc.</summary>
@@ -299,6 +322,7 @@ namespace BuildBuild.UI
                 MarkSkillSlot(i, inBattle);
                 UnitCardView.ShowLevelAndStars(rosterLevels[i], rosterStars, i, Progression.Owned(roster[i].unitId), starOn, starOff);
             }
+            ApplyRoleFilter();
             pickerPanel.SetActive(true);
             Sfx.Play("ui-open");
         }

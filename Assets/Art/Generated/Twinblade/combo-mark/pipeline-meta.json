@@ -1,0 +1,411 @@
+{
+  "target": "asset",
+  "mode": "combo-mark",
+  "prompt": "Create one gameplay VFX sprite sheet, exactly 2 rows by 3 columns equal square cells, row-major order, solid flat opaque #FF00FF background, no lines/labels/text. Five discrete target STACK status levels, NOT animation: cell1 one short red tally notch, cell2 two, cell3 three, cell4 four, cell5 five; cell6 repeats five. Notches form a small orderly overhead fan above the same center. Brick-red with pale steel edge and navy outline; no text, numeric digits, swords, actor, ground or halo. Clearly increasing one to five, no sixth level. Hero reference supplies limited palette and art language ONLY, do NOT include hero. Low-detail chibi pixel-art clusters, navy/dark colored crisp outline, 2-3 tones/material; NO blur, smooth gradient, bloom or detailed texture. Entire effect safely within central 70% of every cell, generous padding, same camera and magnification throughout; varying size is the designed effect phase, never scale each frame to fill the cell.\n",
+  "role": "",
+  "input": "tempart\\Twinblade\\combo-mark\\raw-sheet.png",
+  "threshold": 100,
+  "edge_threshold": 150,
+  "duration": 200,
+  "rows": 2,
+  "cols": 3,
+  "cell_size": 24,
+  "fit_scale": 0.78,
+  "trim_border": 4,
+  "edge_clean_depth": 3,
+  "align": "center",
+  "shared_scale": true,
+  "scale_strategy": "fit",
+  "component_mode": "all",
+  "component_padding": 0,
+  "min_component_area": 1,
+  "edge_touch_margin": 0,
+  "frame_labels": [
+    "combo-mark-1",
+    "combo-mark-2",
+    "combo-mark-3",
+    "combo-mark-4",
+    "combo-mark-5"
+  ],
+  "frames": [
+    {
+      "grid": [
+        0,
+        0
+      ],
+      "source_box": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "component_mode": "all",
+      "component_count": 1,
+      "selected_component_area": null,
+      "selected_component_bbox": null,
+      "crop_bbox": [
+        223,
+        200,
+        283,
+        300
+      ],
+      "source_frame_size": [
+        504,
+        504
+      ],
+      "is_empty": false,
+      "subject_area": 4730,
+      "body_core_area": 4730,
+      "body_area_fraction": 0.01862087427563618,
+      "anchor_source": [
+        253.0,
+        250.0
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        3,
+        5
+      ],
+      "paste_position": [
+        10,
+        9
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        10,
+        9,
+        13,
+        14
+      ],
+      "source_to_output_scale": 0.05724770642201835,
+      "bbox_scale_applied": true,
+      "scale_strategy": "fit",
+      "scale_changed": true
+    },
+    {
+      "grid": [
+        0,
+        1
+      ],
+      "source_box": [
+        512,
+        0,
+        1024,
+        512
+      ],
+      "component_mode": "all",
+      "component_count": 2,
+      "selected_component_area": null,
+      "selected_component_bbox": null,
+      "crop_bbox": [
+        171,
+        201,
+        335,
+        306
+      ],
+      "source_frame_size": [
+        504,
+        504
+      ],
+      "is_empty": false,
+      "subject_area": 9464,
+      "body_core_area": 9464,
+      "body_area_fraction": 0.03725749559082892,
+      "anchor_source": [
+        253.0,
+        253.5
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        9,
+        6
+      ],
+      "paste_position": [
+        7,
+        9
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        7,
+        9,
+        16,
+        15
+      ],
+      "source_to_output_scale": 0.05724770642201835,
+      "bbox_scale_applied": true,
+      "scale_strategy": "fit",
+      "scale_changed": true
+    },
+    {
+      "grid": [
+        0,
+        2
+      ],
+      "source_box": [
+        1024,
+        0,
+        1536,
+        512
+      ],
+      "component_mode": "all",
+      "component_count": 3,
+      "selected_component_area": null,
+      "selected_component_bbox": null,
+      "crop_bbox": [
+        128,
+        179,
+        379,
+        313
+      ],
+      "source_frame_size": [
+        504,
+        504
+      ],
+      "is_empty": false,
+      "subject_area": 14894,
+      "body_core_area": 14879,
+      "body_area_fraction": 0.05857505039052658,
+      "anchor_source": [
+        253.5,
+        246.0
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        14,
+        7
+      ],
+      "paste_position": [
+        5,
+        8
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        5,
+        8,
+        19,
+        15
+      ],
+      "source_to_output_scale": 0.05724770642201835,
+      "bbox_scale_applied": true,
+      "scale_strategy": "fit",
+      "scale_changed": true
+    },
+    {
+      "grid": [
+        1,
+        0
+      ],
+      "source_box": [
+        0,
+        512,
+        512,
+        1024
+      ],
+      "component_mode": "all",
+      "component_count": 4,
+      "selected_component_area": null,
+      "selected_component_bbox": null,
+      "crop_bbox": [
+        99,
+        170,
+        408,
+        309
+      ],
+      "source_frame_size": [
+        504,
+        504
+      ],
+      "is_empty": false,
+      "subject_area": 18787,
+      "body_core_area": 16729,
+      "body_area_fraction": 0.06585805618543714,
+      "anchor_source": [
+        253.5,
+        239.5
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        17,
+        7
+      ],
+      "paste_position": [
+        3,
+        8
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        3,
+        8,
+        20,
+        15
+      ],
+      "source_to_output_scale": 0.05724770642201835,
+      "bbox_scale_applied": true,
+      "scale_strategy": "fit",
+      "scale_changed": true
+    },
+    {
+      "grid": [
+        1,
+        1
+      ],
+      "source_box": [
+        512,
+        512,
+        1024,
+        1024
+      ],
+      "component_mode": "all",
+      "component_count": 5,
+      "selected_component_area": null,
+      "selected_component_bbox": null,
+      "crop_bbox": [
+        89,
+        162,
+        416,
+        313
+      ],
+      "source_frame_size": [
+        504,
+        504
+      ],
+      "is_empty": false,
+      "subject_area": 23986,
+      "body_core_area": 20869,
+      "body_area_fraction": 0.08215624212648022,
+      "anchor_source": [
+        252.5,
+        237.5
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        18,
+        8
+      ],
+      "paste_position": [
+        3,
+        8
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        3,
+        8,
+        21,
+        16
+      ],
+      "source_to_output_scale": 0.05724770642201835,
+      "bbox_scale_applied": true,
+      "scale_strategy": "fit",
+      "scale_changed": true
+    }
+  ],
+  "edge_touch_frames": [],
+  "source_edge_touch_frames": [],
+  "output_edge_touch_frames": [],
+  "empty_frames": [],
+  "paste_clamped_frames": [],
+  "qc_summary": {
+    "frame_count": 5,
+    "valid_frame_count": 5,
+    "empty_count": 0,
+    "edge_touch_count": 0,
+    "paste_clamped_count": 0,
+    "body_scale_mean": 0.2335030891963675,
+    "output_subject_height_mean": 6.833333333333333,
+    "body_scale_cv": 0.2297566557956788,
+    "anchor_x_std": 0.0006817304275161451,
+    "anchor_y_std": 0.012417317034073146,
+    "anchor_y_mean": 0.48412698412698413
+  },
+  "qc_config": {
+    "strict_qc": true,
+    "reject_edge_touch": true,
+    "allow_source_edge_touch": false,
+    "max_body_scale_cv": null,
+    "max_anchor_y_std": null,
+    "max_profile_scale_drift": null
+  },
+  "frame_count": 5,
+  "review_qc": [
+    {
+      "frame": 1,
+      "bbox": [
+        10,
+        9,
+        13,
+        14
+      ],
+      "height": 5,
+      "bottom": 14,
+      "residue": 0
+    },
+    {
+      "frame": 2,
+      "bbox": [
+        7,
+        9,
+        16,
+        15
+      ],
+      "height": 6,
+      "bottom": 15,
+      "residue": 0
+    },
+    {
+      "frame": 3,
+      "bbox": [
+        5,
+        8,
+        19,
+        15
+      ],
+      "height": 7,
+      "bottom": 15,
+      "residue": 0
+    },
+    {
+      "frame": 4,
+      "bbox": [
+        3,
+        8,
+        20,
+        15
+      ],
+      "height": 7,
+      "bottom": 15,
+      "residue": 0
+    },
+    {
+      "frame": 5,
+      "bbox": [
+        3,
+        8,
+        21,
+        16
+      ],
+      "height": 8,
+      "bottom": 16,
+      "residue": 0
+    }
+  ],
+  "content_qc": "Agent inspected final frame strips, walk boots and effect phases; user animation approval pending.",
+  "output_origin": [
+    12.0,
+    12.0
+  ],
+  "user_review": {
+    "date": "2026-10-04",
+    "status": "approved",
+    "note": "User approved except three walk clips; unspecified animation-axis issues still need identification."
+  }
+}

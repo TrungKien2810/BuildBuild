@@ -1,0 +1,40 @@
+{
+  "unit": "Bonecaller",
+  "action": "skill-bone-armor-fx",
+  "status": "ready for art review; gameplay not connected",
+  "frame_files": [
+    "armor-1.png",
+    "armor-2.png",
+    "armor-3.png",
+    "armor-4.png",
+    "armor-5.png",
+    "armor-6.png"
+  ],
+  "origin_px": [
+    64,
+    64
+  ],
+  "cell_px": [
+    128,
+    128
+  ],
+  "phases": {
+    "activate": [
+      "armor-1.png",
+      "armor-2.png"
+    ],
+    "hold": [
+      "armor-3.png",
+      "armor-4.png"
+    ],
+    "expire": [
+      "armor-5.png",
+      "armor-6.png"
+    ]
+  },
+  "preview_ms": 125,
+  "gameplay_timing": "unset",
+  "mirror_allowed": true,
+  "source_raw": "tempart\\SkillExpansion-20261006\\Bonecaller\\skill-bone-armor-fx\\raw-input.png",
+  "source_prompt": "tempart\\SkillExpansion-20261006\\Bonecaller\\skill-bone-armor-fx\\prompt-used.txt"
+}

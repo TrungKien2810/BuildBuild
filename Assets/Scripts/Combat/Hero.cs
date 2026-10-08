@@ -445,6 +445,7 @@ namespace BuildBuild.Combat
             UpdateShield();     // khien ao Den Canh het han — Hero.Support.cs
             UpdateGuard();      // vung Cam Co cua Banneret — Hero.Support.cs
             UpdateHeroN();      // bay Kobold, an Yeu — Hero.HeroN.cs
+            UpdatePurify();     // Thanh Tay cua Chuong Bac — Hero.LowTrio.cs
 
             // Hoa Da: bat dong la cai GIA cua mien sat thuong — khong di, khong danh (GDD muc 3).
             if (_petrified)
@@ -472,6 +473,7 @@ namespace BuildBuild.Combat
             if (UpdateStunned()) return;
             if (_blood != null && _blood.Busy) return;
             if (Time.time < _seedRainUntil) return;
+            if (_bladeStorming) return;     // Bao Dao (Song Dao) — Hero.LowTrio.cs
 
             bool rapid = RapidFire;
             AuraMultipliers(out float auraDamage, out _, buffs: false);
@@ -683,8 +685,10 @@ namespace BuildBuild.Combat
                 _mana = 0f;
                 _skillCooldown = _definition.skillCooldown;
             }
+            // Cham (Coc Suong) cham ca toc danh, khong chi buoc chay.
             else _cooldown = 1f / Mathf.Max(0.01f,
-                _definition.attackRate * _rateMultiplier * (RapidFire ? _definition.skillPower : 1f) * rateMultiplier);
+                _definition.attackRate * _rateMultiplier * (RapidFire ? _definition.skillPower : 1f) * rateMultiplier
+                * (IsSlowed ? 1f - Status.Power(StatusId.Slow) : 1f));
 
             if (skill && _definition.skillKind == SkillKind.Petrify)
             {
@@ -752,8 +756,16 @@ namespace BuildBuild.Combat
             _chargeDirection = direction.sqrMagnitude < 0.0001f ? facing : direction.normalized;
             Face(transform.position.x + _chargeDirection.x);
             _chargeHits.Clear();
-            // Bui tung o chan (Warhorn) — art ve theo huong art goc nen lat theo renderer.
-            OneShotFx.Spawn(transform.position, _definition.skillFrames, _renderer.flipX, SortOrder.ForUnit(this) + 1,
+            // Bui tung o chan (Warhorn) — art ve theo huong art goc nen lat theo renderer. Bui ve chung khung 128px voi than
+            // (day bui sat chan) nhung pivot tam o: nang len bang khoang tam o -> pivot chan cua than, khong thi lot duoi dat.
+            // Lay pivot tu clip skill (charge) chu khong phai sprite dang hien: walk Warhorn la canvas 256, pivot khac.
+            var dust = _definition.skillFrames;
+            var body = _definition.animations != null && _definition.animations.skill.IsValid
+                ? _definition.animations.skill.frames[0] : _renderer.sprite;
+            float dustLift = dust != null && dust.Length > 0 && body != null
+                ? (dust[0].rect.height * 0.5f - body.pivot.y) / body.pixelsPerUnit * Battlefield.UnitScale
+                : 0f;
+            OneShotFx.Spawn(transform.position + new Vector3(0f, dustLift, 0f), dust, _renderer.flipX, SortOrder.ForUnit(this) + 1,
                 Battlefield.UnitScale);
             if (animator != null) animator.Play("skill", restart: true);
         }
@@ -922,6 +934,9 @@ namespace BuildBuild.Combat
                     case SkillKind.SeedRain: CastSeedRain(); break;           // Hero.HeroN.cs
                     case SkillKind.TrapDetonation: CastTrapDetonation(); break;
                     case SkillKind.SigilBombs: CastSigilBombs(); break;
+                    case SkillKind.HornSlam: CastHornSlam(); break;         // Hero.LowTrio.cs
+                    case SkillKind.BladeStorm: CastBladeStorm(); break;
+                    case SkillKind.BellToll: CastBellToll(); break;
                 }
                 return;
             }
@@ -1113,6 +1128,7 @@ namespace BuildBuild.Combat
             if (_dying || _petrified || _charging) return;
             if (_blood != null && _blood.Busy) return;
             if (Time.time < _seedRainUntil) return;
+            if (_bladeStorming) return;
             // Tuong Rune: het clip cast thi giu frame cuoi (khien cam dat) toi khi tuong tan.
             if (Braced && clipName == "skill")
             {

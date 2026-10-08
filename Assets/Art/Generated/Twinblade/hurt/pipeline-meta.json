@@ -1,0 +1,436 @@
+{
+  "target": "player",
+  "mode": "hurt",
+  "prompt": "Animate the exact approved brick red/charcoal tunic swordsman, tied dark topknot, TWO short steel blades, one in each hand. IMAGE 1 is the repeated character anchor: locks grid positions, scale, identity, feet and camera; change only action poses. IMAGE 2 is approved identity, locks costume/palette/props. ONE hurt action family raw sprite sheet exactly 2 rows by 2 columns, row-major chronological order, equal SQUARE cells, flat opaque pure #FF00FF background, no drawn grid lines, labels or text. 1 hit flinch, 2 small backward upper torso recoil, 3 stagger with knees bent, 4 regain ready. Preserve props and both hands, no blood, no effects, no horizontal root travel. Preserve elevated asymmetric LEFT-facing three-quarter front camera and same standing-equivalent anatomical size as anchor in every cell. Match minimalist navy outline chibi pixel art with large low-detail clusters, limited 2-3 tones, no new facial detail. Entire body, hair, weapons inside central safe area with generous padding. Body ONLY, no detached projectile, impact, slash trail, dust, ground plate, shadow, glow, aura or scenery. Feet anchored consistently, no whole-body lateral translation; weapon length and hand ownership immutable.\n",
+  "role": "",
+  "input": "tempart\\Twinblade\\hurt\\raw-sheet.png",
+  "threshold": 100,
+  "edge_threshold": 150,
+  "duration": 200,
+  "rows": 2,
+  "cols": 2,
+  "cell_size": 128,
+  "fit_scale": 0.6725475993377483,
+  "trim_border": 4,
+  "edge_clean_depth": 3,
+  "align": "feet",
+  "shared_scale": true,
+  "scale_strategy": "preserve",
+  "component_mode": "largest",
+  "component_padding": 0,
+  "min_component_area": 1,
+  "edge_touch_margin": 0,
+  "frame_labels": [
+    "hurt-1",
+    "hurt-2",
+    "hurt-3",
+    "hurt-4"
+  ],
+  "frames": [
+    {
+      "grid": [
+        0,
+        0
+      ],
+      "source_box": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "component_mode": "largest",
+      "component_count": 1,
+      "selected_component_area": 35136,
+      "selected_component_bbox": [
+        218,
+        207,
+        419,
+        514
+      ],
+      "crop_bbox": [
+        218,
+        207,
+        419,
+        514
+      ],
+      "source_frame_size": [
+        619,
+        619
+      ],
+      "is_empty": false,
+      "subject_area": 35136,
+      "body_core_area": 35136,
+      "body_area_fraction": 0.09170035572513904,
+      "anchor_source": [
+        318.5,
+        360.5
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        28,
+        43
+      ],
+      "preserved_subject_size": [
+        28,
+        43
+      ],
+      "paste_position": [
+        48,
+        73
+      ],
+      "unclamped_paste_position": [
+        50,
+        43
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        48,
+        73,
+        76,
+        116
+      ],
+      "scale_adjustment": 1.0,
+      "source_to_output_scale": 0.13907284768211922,
+      "bbox_scale_applied": false,
+      "scale_changed": false,
+      "anchor_target": [
+        64.0,
+        64.0
+      ],
+      "scale_strategy": "preserve",
+      "shared_center_x": 64.0,
+      "shared_feet_y": 64.0,
+      "frame": "hurt-1"
+    },
+    {
+      "grid": [
+        0,
+        1
+      ],
+      "source_box": [
+        627,
+        0,
+        1254,
+        627
+      ],
+      "component_mode": "largest",
+      "component_count": 1,
+      "selected_component_area": 36648,
+      "selected_component_bbox": [
+        157,
+        207,
+        414,
+        514
+      ],
+      "crop_bbox": [
+        157,
+        207,
+        414,
+        514
+      ],
+      "source_frame_size": [
+        619,
+        619
+      ],
+      "is_empty": false,
+      "subject_area": 36648,
+      "body_core_area": 36648,
+      "body_area_fraction": 0.09564647759036018,
+      "anchor_source": [
+        285.5,
+        360.5
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        36,
+        43
+      ],
+      "preserved_subject_size": [
+        36,
+        43
+      ],
+      "paste_position": [
+        44,
+        73
+      ],
+      "unclamped_paste_position": [
+        46,
+        43
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        44,
+        73,
+        80,
+        116
+      ],
+      "scale_adjustment": 1.0,
+      "source_to_output_scale": 0.13907284768211922,
+      "bbox_scale_applied": false,
+      "scale_changed": false,
+      "anchor_target": [
+        64.0,
+        64.0
+      ],
+      "scale_strategy": "preserve",
+      "shared_center_x": 64.0,
+      "shared_feet_y": 64.0,
+      "frame": "hurt-2"
+    },
+    {
+      "grid": [
+        1,
+        0
+      ],
+      "source_box": [
+        0,
+        627,
+        627,
+        1254
+      ],
+      "component_mode": "largest",
+      "component_count": 1,
+      "selected_component_area": 35901,
+      "selected_component_bbox": [
+        209,
+        196,
+        430,
+        504
+      ],
+      "crop_bbox": [
+        209,
+        196,
+        430,
+        504
+      ],
+      "source_frame_size": [
+        619,
+        619
+      ],
+      "is_empty": false,
+      "subject_area": 35901,
+      "body_core_area": 35901,
+      "body_area_fraction": 0.09369690547837593,
+      "anchor_source": [
+        319.5,
+        350.0
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        31,
+        43
+      ],
+      "preserved_subject_size": [
+        31,
+        43
+      ],
+      "paste_position": [
+        46,
+        73
+      ],
+      "unclamped_paste_position": [
+        49,
+        43
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        46,
+        73,
+        77,
+        116
+      ],
+      "scale_adjustment": 1.0,
+      "source_to_output_scale": 0.13907284768211922,
+      "bbox_scale_applied": false,
+      "scale_changed": false,
+      "anchor_target": [
+        64.0,
+        64.0
+      ],
+      "scale_strategy": "preserve",
+      "shared_center_x": 64.0,
+      "shared_feet_y": 64.0,
+      "frame": "hurt-3"
+    },
+    {
+      "grid": [
+        1,
+        1
+      ],
+      "source_box": [
+        627,
+        627,
+        1254,
+        1254
+      ],
+      "component_mode": "largest",
+      "component_count": 1,
+      "selected_component_area": 34429,
+      "selected_component_bbox": [
+        197,
+        197,
+        419,
+        504
+      ],
+      "crop_bbox": [
+        197,
+        197,
+        419,
+        504
+      ],
+      "source_frame_size": [
+        619,
+        619
+      ],
+      "is_empty": false,
+      "subject_area": 34429,
+      "body_core_area": 34429,
+      "body_area_fraction": 0.08985517837149397,
+      "anchor_source": [
+        308.0,
+        350.5
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        31,
+        43
+      ],
+      "preserved_subject_size": [
+        31,
+        43
+      ],
+      "paste_position": [
+        45,
+        73
+      ],
+      "unclamped_paste_position": [
+        49,
+        43
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        45,
+        73,
+        76,
+        116
+      ],
+      "scale_adjustment": 1.0,
+      "source_to_output_scale": 0.13907284768211922,
+      "bbox_scale_applied": false,
+      "scale_changed": false,
+      "anchor_target": [
+        64.0,
+        64.0
+      ],
+      "scale_strategy": "preserve",
+      "shared_center_x": 64.0,
+      "shared_feet_y": 64.0,
+      "frame": "hurt-4"
+    }
+  ],
+  "edge_touch_frames": [],
+  "source_edge_touch_frames": [],
+  "output_edge_touch_frames": [],
+  "empty_frames": [],
+  "paste_clamped_frames": [],
+  "qc_summary": {
+    "frame_count": 4,
+    "valid_frame_count": 4,
+    "empty_count": 0,
+    "edge_touch_count": 0,
+    "paste_clamped_count": 0,
+    "body_scale_mean": 0.304486587286245,
+    "output_subject_height_mean": 43.0,
+    "body_scale_cv": 0.011679745769370005,
+    "anchor_x_std": 0.02210190187433928,
+    "anchor_y_std": 0.008284406904994372,
+    "anchor_y_mean": 0.5741114701130856,
+    "profile_body_scale_drift": 0.0005522231533221511
+  },
+  "output_origin": [
+    64,
+    116
+  ],
+  "scale_profile": {
+    "path": "tempart\\Twinblade\\character-scale-profile.json",
+    "version": 1,
+    "name": "Twinblade",
+    "reference_mode": "idle",
+    "processing_contract_applied": true
+  },
+  "qc_config": {
+    "strict_qc": false,
+    "reject_edge_touch": true,
+    "allow_source_edge_touch": false,
+    "max_body_scale_cv": null,
+    "max_anchor_y_std": null,
+    "max_profile_scale_drift": 0.1
+  },
+  "project_baseline_restored": true,
+  "ground_baseline_exclusive": 116,
+  "frame_count": 4,
+  "review_qc": [
+    {
+      "frame": 1,
+      "bbox": [
+        48,
+        73,
+        76,
+        116
+      ],
+      "height": 43,
+      "bottom": 116,
+      "residue": 0
+    },
+    {
+      "frame": 2,
+      "bbox": [
+        44,
+        73,
+        80,
+        116
+      ],
+      "height": 43,
+      "bottom": 116,
+      "residue": 0
+    },
+    {
+      "frame": 3,
+      "bbox": [
+        46,
+        73,
+        77,
+        116
+      ],
+      "height": 43,
+      "bottom": 116,
+      "residue": 0
+    },
+    {
+      "frame": 4,
+      "bbox": [
+        45,
+        73,
+        76,
+        116
+      ],
+      "height": 43,
+      "bottom": 116,
+      "residue": 0
+    }
+  ],
+  "content_qc": "Agent inspected final frame strips, walk boots and effect phases; user animation approval pending.",
+  "user_review": {
+    "date": "2026-10-04",
+    "status": "approved",
+    "note": "User approved except three walk clips; unspecified animation-axis issues still need identification."
+  }
+}

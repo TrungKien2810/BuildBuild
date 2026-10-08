@@ -135,7 +135,7 @@ namespace BuildBuild.Combat
         {
             if (amount <= 0f || _hero.IsDying) return;
             _hero.Health.Heal(amount, _hero.Health);
-            if (fx) OneShotFx.Spawn(transform.position, _definition.healFrames, false, SortOrder.Air, Battlefield.UnitScale);
+            if (fx) OneShotFx.Spawn(_hero.BodyCenter, _definition.healFrames, false, SortOrder.Air, Battlefield.UnitScale);
         }
 
         /// <summary>
@@ -150,10 +150,11 @@ namespace BuildBuild.Combat
             _substituteUsed = true;
             var clone = _clones[0];
             _clones.RemoveAt(0);
-            OneShotFx.Spawn(transform.position, _definition.poofFrames, false, SortOrder.Air, Battlefield.UnitScale);
+            // Khoi pivot tam o: dat o tam than, dat o chan thi nua duoi lot xuong dat.
+            OneShotFx.Spawn(_hero.BodyCenter, _definition.poofFrames, false, SortOrder.Air, Battlefield.UnitScale);
             transform.position = clone.transform.position;
             Destroy(clone.gameObject);
-            OneShotFx.Spawn(transform.position, _definition.poofFrames, false, SortOrder.Air, Battlefield.UnitScale);
+            OneShotFx.Spawn(_hero.BodyCenter, _definition.poofFrames, false, SortOrder.Air, Battlefield.UnitScale);
             _hero.Health.ResetTo(_hero.MaxHealth * _definition.substituteHealth);
             return true;
         }
@@ -178,7 +179,7 @@ namespace BuildBuild.Combat
                 clone.Health.Died += OnCloneGone;
                 _clones.Add(clone);
                 AllClones.Add(clone);
-                OneShotFx.Spawn(clone.transform.position, _definition.poofFrames, false, SortOrder.Air, Battlefield.UnitScale);
+                OneShotFx.Spawn(clone.transform.position + (_hero.BodyCenter - transform.position), _definition.poofFrames, false, SortOrder.Air, Battlefield.UnitScale);
             }
         }
 

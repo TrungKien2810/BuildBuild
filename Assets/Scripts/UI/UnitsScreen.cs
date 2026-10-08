@@ -44,6 +44,7 @@ namespace BuildBuild.UI
         [SerializeField] HeroDefinition[] heroes;
         [SerializeField] CannonDefinition[] cannons;
         [SerializeField] EquipmentConfig equipment;
+        [SerializeField] HeroRoleCatalog roles;
 
         [Header("Widget")]
         [SerializeField] Text goldText;
@@ -54,6 +55,11 @@ namespace BuildBuild.UI
         [SerializeField] Button backButton;
         [SerializeField] Transform grid;
         [SerializeField] UnitCardView cardTemplate;
+
+        [Header("Bo loc vai (chi tab Hero)")]
+        [SerializeField] GameObject roleFilter;
+        [Tooltip("Nut dau = Tat ca, sau do cung thu tu `roles.entries`. Nut dang chon dung sprite `roundActive`.")]
+        [SerializeField] Button[] roleButtons;
 
         [Header("Chi tiet")]
         [SerializeField] Image detailIcon;
@@ -116,6 +122,8 @@ namespace BuildBuild.UI
 
         readonly List<(UnitDefinition unit, UnitCardView card)> _cards = new List<(UnitDefinition, UnitCardView)>();
         UnitDefinition _selected;
+        int _tab;
+        HeroRole? _roleFilter;    // null = Tat ca
         bool _showGear;
         EquipmentSlot _slot;
         const int BagShown = 8;
@@ -130,6 +138,11 @@ namespace BuildBuild.UI
                 tabButtons[i].onClick.AddListener(() => SelectTab(tab));
             }
             backButton.onClick.AddListener(() => SceneManager.LoadScene(SceneNames.Battle));
+            for (int i = 0; i < roleButtons.Length; i++)
+            {
+                HeroRole? role = i == 0 ? (HeroRole?)null : roles.entries[i - 1].role;
+                roleButtons[i].onClick.AddListener(() => { _roleFilter = role; SelectTab(_tab); });
+            }
             levelButton.onClick.AddListener(LevelUp);
             starButton.onClick.AddListener(StarUp);
             cellTemplate.gameObject.SetActive(false);
@@ -152,14 +165,20 @@ namespace BuildBuild.UI
 
         void SelectTab(int tab)
         {
+            _tab = tab;
             for (int i = 0; i < tabButtons.Length; i++)
                 tabButtons[i].image.sprite = i == tab ? tabActive : tabNormal;
+            bool heroTab = Tabs[tab].category == UnitCategory.Hero;
+            roleFilter.SetActive(heroTab);
+            for (int i = 0; i < roleButtons.Length; i++)
+                roleButtons[i].image.sprite = (i == 0 ? _roleFilter == null : _roleFilter == roles.entries[i - 1].role) ? roundActive : roundNormal;
 
             foreach (var entry in _cards) Destroy(entry.card.gameObject);
             _cards.Clear();
 
             // Da so huu len dau, roi do hiem cao truoc.
             var list = units.Where(u => u != null && u.category == Tabs[tab].category)
+                .Where(u => !heroTab || _roleFilter == null || RoleOf(u) == _roleFilter)
                 .OrderBy(u => Owned(u) == null)
                 .ThenByDescending(u => u.rarity)
                 .ThenBy(u => u.displayName);
@@ -183,12 +202,13 @@ namespace BuildBuild.UI
 
         HeroDefinition HeroOf(UnitDefinition unit) => heroes.FirstOrDefault(h => h != null && h.unitId == unit.id);
         CannonDefinition CannonOf(UnitDefinition unit) => cannons.FirstOrDefault(c => c != null && c.unitId == unit.id);
+        HeroRole RoleOf(UnitDefinition unit) => HeroOf(unit)?.role ?? HeroRole.None;
 
         void Refresh()
         {
             goldText.text = economy.Gold.ToString("N0");
             foreach (var (unit, card) in _cards)
-                card.Show(unit, Owned(unit), config.shardsPerStar, unit == _selected);
+                card.Show(unit, Owned(unit), config.shardsPerStar, unit == _selected, roles.IconOf(RoleOf(unit)));
             RefreshDetail();
         }
 
@@ -231,9 +251,11 @@ namespace BuildBuild.UI
 
             int level = owned != null ? Mathf.Max(1, owned.level) : 1;
             int stars = owned?.stars ?? 0;
+            var role = RoleOf(unit);
+            string kind = role == HeroRole.None ? Tabs[TabOf(unit)].name : roles.NameOf(role);
             detailSub.text = owned == null
-                ? $"{unit.rarity}   ·   Chưa sở hữu — quay gacha để có"
-                : $"{unit.rarity}   ·   {Tabs[TabOf(unit)].name}";
+                ? $"{unit.rarity}   ·   {kind}   ·   Chưa sở hữu — quay gacha để có"
+                : $"{unit.rarity}   ·   {kind}";
             detailLevelBadge.SetActive(owned != null);
             detailShardBar.SetActive(owned != null);
             foreach (var star in detailStars) star.gameObject.SetActive(owned != null);

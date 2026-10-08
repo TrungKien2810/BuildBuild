@@ -30,7 +30,6 @@ namespace BuildBuild.Combat
 
         public override void CollectEffects(List<UnitEffect> into)
         {
-            if (IsStunned) into.Add(new UnitEffect(EffectKind.Stun, "Choáng", _stunnedUntil));
             base.CollectEffects(into);
 
             string ultimate = SkillName(_definition.ultimateText);
@@ -48,7 +47,6 @@ namespace BuildBuild.Combat
             if (_health.Shield > 0f)
                 into.Add(new UnitEffect(EffectKind.Shield, $"Khiên {Mathf.RoundToInt(_health.Shield)}", _shieldUntil));
             if (_health.Guard > 0f) into.Add(new UnitEffect(EffectKind.Guard, $"Giảm ST {Percent(_health.Guard)}", _guardUntil));
-            if (_health.HealBlocked) into.Add(new UnitEffect(EffectKind.NoHeal, "Thiêu Hồn", _health.NoHealUntil));
 
             // Noi tai tich tang.
             string passive = SkillName(_definition.passiveText);

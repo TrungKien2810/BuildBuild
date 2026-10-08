@@ -1,0 +1,65 @@
+{
+  "target": "asset",
+  "mode": "bullet-impact",
+  "source": "tempart/CannonVoid/bullet-impact",
+  "align": "center",
+  "status": "giao 2026-10-05 (cannon-deliver)",
+  "frames": [
+    {
+      "frame": "impact-1",
+      "aligned_bbox": [
+        49,
+        52,
+        79,
+        76
+      ]
+    },
+    {
+      "frame": "impact-2",
+      "aligned_bbox": [
+        49,
+        50,
+        79,
+        79
+      ]
+    },
+    {
+      "frame": "impact-3",
+      "aligned_bbox": [
+        32,
+        40,
+        96,
+        86
+      ]
+    },
+    {
+      "frame": "impact-4",
+      "aligned_bbox": [
+        42,
+        47,
+        87,
+        81
+      ]
+    },
+    {
+      "frame": "impact-5",
+      "aligned_bbox": [
+        46,
+        50,
+        84,
+        79
+      ]
+    },
+    {
+      "frame": "impact-6",
+      "aligned_bbox": [
+        50,
+        56,
+        75,
+        75
+      ]
+    }
+  ],
+  "cell_size": 128,
+  "cell_height": 128
+}

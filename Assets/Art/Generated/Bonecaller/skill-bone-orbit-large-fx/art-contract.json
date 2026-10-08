@@ -1,0 +1,58 @@
+{
+  "unit": "Bonecaller",
+  "action": "skill-bone-orbit-large-fx",
+  "status": "new replacement art; awaiting user review; gameplay not connected",
+  "cell_px": [
+    128,
+    128
+  ],
+  "origin_px": [
+    64,
+    116
+  ],
+  "anchor": "recipient_ground_root",
+  "imported_sprite_pivot_px": [
+    64,
+    64
+  ],
+  "attachment_offset_from_center_px": [
+    0,
+    52
+  ],
+  "attachment_note": "FX importer retains center pivot; bind virtual origin (64,116), not bbox bottom or unadjusted center pivot",
+  "sorting": "behind recipient body; ground ring below body, never in front of chest",
+  "frame_files": [
+    "armor-1.png",
+    "armor-2.png",
+    "armor-3.png",
+    "armor-4.png",
+    "armor-5.png",
+    "armor-6.png",
+    "armor-7.png",
+    "armor-8.png"
+  ],
+  "phases": {
+    "activate": [
+      1,
+      2
+    ],
+    "hold": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "expire": [
+      7,
+      8
+    ]
+  },
+  "preview_ms": 160,
+  "gameplay_timing": "unset",
+  "mirror_allowed": true,
+  "source_raw": "tempart\\SkillExpansion-20261006\\revision-v3\\bone\\raw.png",
+  "source_prompt": "tempart\\SkillExpansion-20261006\\revision-v3\\bone\\prompt.txt",
+  "scale_policy": "one uniform scale per clip, nearest-neighbour; no per-frame fit",
+  "intended_max_width_px": 88,
+  "supersedes": "skill-bone-armor-fx"
+}

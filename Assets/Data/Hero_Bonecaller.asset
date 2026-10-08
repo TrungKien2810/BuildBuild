@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
   displayName: Bonecaller
   unitId: mage_summoner
+  role: 5
   maxHealth: 300
   damage: 15
   attackRate: 0.7
@@ -29,6 +30,8 @@ MonoBehaviour:
   stormcaller: {fileID: 0}
   galemonk: {fileID: 0}
   daoVien: {fileID: 0}
+  bloodswordsman: {fileID: 0}
+  soulbinder: {fileID: 0}
   swornBrother: 0
   projectileSpeed: 8
   splashRadius: 0.3

@@ -251,6 +251,7 @@ namespace BuildBuild.Combat
         IEnumerator SigilBomb(Unit target, float damage)
         {
             var position = target.transform.position;
+            var lift = target.BodyCenter - position;    // no pivot tam o: dat o tam than, khong lot nua duoi xuong dat
             OneShotFx.SpawnLoop(target.transform, new Vector3(0, target.BodyHeight / Battlefield.UnitScale),
                 _definition.skillIntroFrames, 2f, SortOrder.Air);
             yield return new WaitForSeconds(2f);
@@ -258,7 +259,7 @@ namespace BuildBuild.Combat
             foreach (var enemy in Unit.Hostiles(Side).ToArray())
                 if (enemy != null && !enemy.IsDying && Battlefield.GroundDistance(enemy.transform.position, position) <= 0.6f + enemy.BodyRadius)
                     enemy.Health.TakeDamage(damage, _health);
-            OneShotFx.Spawn(position, _definition.skillFrames, false, SortOrder.Air, Battlefield.UnitScale);
+            OneShotFx.Spawn(position + lift, _definition.skillFrames, false, SortOrder.Air, Battlefield.UnitScale);
         }
     }
 }

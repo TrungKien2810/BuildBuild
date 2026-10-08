@@ -28,7 +28,9 @@ namespace BuildBuild.Data
         [Header("Dat chay sau Hoi Tho")]
         public float burnDuration = 4f;
         public float burnDamagePerSecond = 15f;
-        [Tooltip("Hero dung trong dat chay bi Thieu Hon (khong hoi mau/mana) chung nay giay sau moi tick.")]
+        [Tooltip("Chay bam theo hero bao nhieu giay sau khi buoc ra khoi dat chay.")]
+        public float burnLingerSeconds = 2f;
+        [Tooltip("Hero dung trong dat chay bi Cam hoi mau (khong hoi mau/mana) chung nay giay sau moi tick.")]
         public float scorchSeconds = 1f;
         [Tooltip("So vung dat chay rai deu doc dai lua.")]
         public int burnPatches = 3;

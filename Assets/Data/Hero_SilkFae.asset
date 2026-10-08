@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
   displayName: "Ti\xEAn d\u1EC7t t\u01A1"
   unitId: silkfae
+  role: 4
   maxHealth: 230
   damage: 16
   attackRate: 0.8
@@ -29,6 +30,8 @@ MonoBehaviour:
   stormcaller: {fileID: 0}
   galemonk: {fileID: 0}
   daoVien: {fileID: 0}
+  bloodswordsman: {fileID: 0}
+  soulbinder: {fileID: 0}
   swornBrother: 0
   projectileSpeed: 9
   splashRadius: 0.1

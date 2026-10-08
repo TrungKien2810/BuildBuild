@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
   displayName: Cragfist
   unitId: cragfist
+  role: 1
   maxHealth: 1400
   damage: 10
   attackRate: 0.5
@@ -29,6 +30,8 @@ MonoBehaviour:
   stormcaller: {fileID: 0}
   galemonk: {fileID: 0}
   daoVien: {fileID: 0}
+  bloodswordsman: {fileID: 0}
+  soulbinder: {fileID: 0}
   swornBrother: 0
   projectileSpeed: 20
   splashRadius: 0.3

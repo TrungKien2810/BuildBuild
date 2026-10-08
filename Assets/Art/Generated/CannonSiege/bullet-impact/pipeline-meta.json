@@ -1,0 +1,47 @@
+{
+  "target": "asset",
+  "mode": "bullet-impact",
+  "source": "tempart/CannonSiege/bullet-impact",
+  "align": "center",
+  "status": "giao 2026-10-05 (cannon-deliver)",
+  "frames": [
+    {
+      "frame": "impact-1",
+      "aligned_bbox": [
+        53,
+        54,
+        76,
+        75
+      ]
+    },
+    {
+      "frame": "impact-2",
+      "aligned_bbox": [
+        45,
+        50,
+        83,
+        79
+      ]
+    },
+    {
+      "frame": "impact-3",
+      "aligned_bbox": [
+        39,
+        43,
+        89,
+        85
+      ]
+    },
+    {
+      "frame": "impact-4",
+      "aligned_bbox": [
+        46,
+        52,
+        82,
+        76
+      ]
+    }
+  ],
+  "cell_size": 128,
+  "cell_height": 128
+}

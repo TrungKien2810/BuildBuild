@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
   displayName: "Ph\xF9 thu\u1EF7 \u0111\u1EA7m l\u1EA7y"
   unitId: bogwitch
+  role: 4
   maxHealth: 250
   damage: 14
   attackRate: 0.9
@@ -29,6 +30,8 @@ MonoBehaviour:
   stormcaller: {fileID: 0}
   galemonk: {fileID: 0}
   daoVien: {fileID: 0}
+  bloodswordsman: {fileID: 0}
+  soulbinder: {fileID: 0}
   swornBrother: 0
   projectileSpeed: 7
   splashRadius: 0.3

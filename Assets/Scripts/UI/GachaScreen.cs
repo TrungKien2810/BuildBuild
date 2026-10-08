@@ -29,6 +29,9 @@ namespace BuildBuild.UI
 
         [SerializeField] GachaConfig config;
         [SerializeField] Economy economy;
+        [Tooltip("Hero co `unitId` — tra vai cua the ket qua qua `unitId`.")]
+        [SerializeField] HeroDefinition[] heroes;
+        [SerializeField] HeroRoleCatalog roles;
 
         [Header("Widget")]
         [SerializeField] Text titleText;
@@ -83,6 +86,9 @@ namespace BuildBuild.UI
             Refresh();
         }
 
+        HeroRole RoleOf(UnitDefinition unit) =>
+            System.Array.Find(heroes, h => h != null && h.unitId == unit.id)?.role ?? HeroRole.None;
+
         void Roll(int count, int cost)
         {
             if (_revealing || !economy.TrySpend(cost)) return;
@@ -95,7 +101,7 @@ namespace BuildBuild.UI
             {
                 var card = Instantiate(cardTemplate, resultGrid);
                 card.gameObject.SetActive(true);
-                card.Show(result);
+                card.Show(result, roles.IconOf(RoleOf(result.unit)));
                 card.FaceDown();
                 _shown.Add(card);
             }

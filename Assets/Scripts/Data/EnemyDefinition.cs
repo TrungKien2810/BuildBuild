@@ -5,6 +5,9 @@ namespace BuildBuild.Data
     // Them vao CUOI: kind luu trong asset bang so, chen giua la doi loai cua asset cu.
     public enum EnemyKind { Thuong, Nhanh, Tank, Boss, TinhAnh, BanXa }
 
+    /// <summary>Trang thai don cua quai gan len hero / linh trung don (Bo Cap Doc, Coc Suong). Them vao CUOI.</summary>
+    public enum HitStatus { None, Poison, Slow, Burn }
+
     /// <summary>
     /// Chi so goc cua mot loai quai. So lay tu GAME_DESIGN.md muc 5 — day la gia tri KHOI DIEM de
     /// can bang, nen de o asset chu khong hard-code trong script.
@@ -74,6 +77,50 @@ namespace BuildBuild.Data
         public float poolRadius = 0.6f;
         [Tooltip("Sat thuong moi giay len moi hero / linh dung trong vung (nhan he so sat thuong wave).")]
         public float poolDamagePerSecond;
+        [Tooltip("Doc bam theo hero / linh bao nhieu giay sau khi buoc ra khoi vung.")]
+        public float poolPoisonSeconds = 2f;
+
+        [Header("Trang thai len muc tieu (Bo Cap Doc, Coc Suong; so Claude de xuat, CHUA can)")]
+        [Tooltip("Trang thai gan len hero / linh trung don. None = khong.")]
+        public HitStatus hitStatus;
+        [Tooltip("Doc / Chay: sat thuong moi giay (moi tang Doc, nhan he so sat thuong wave). Cham: ti le 0..1 (cham ca di lan toc danh).")]
+        public float hitStatusPower;
+        public float hitStatusSeconds = 3f;
+        [Tooltip("Tran tang Doc.")]
+        [Min(1)] public int hitStatusMaxStacks = 1;
+        [Tooltip("1 = moi don. N > 1 = cu don thu N la don dac biet chay clip `animations.skill` (Bo Cap giuong duoi chich).")]
+        [Min(1)] public int hitStatusEvery = 1;
+        [Tooltip("FX mot lan tren nguoi trung don dac biet (poison-impact).")]
+        public Sprite[] hitStatusFrames;
+
+        [Header("Phun lua (Ky Nhong Than Hong; 0 = khong)")]
+        [Tooltip("Giay giua hai lan phun. Clip than = `animations.skill`.")]
+        public float breathCooldown;
+        [Tooltip("Phun khi hero / linh dich gan nhat trong khoang nay (theo x, phia truoc).")]
+        public float breathRange = 3f;
+        [Tooltip("Ban kinh vung chay (tren mat dat) quanh tam dai lua.")]
+        public float breathRadius = 0.75f;
+        public float breathActiveSeconds = 2.5f;
+        [Tooltip("Chay moi giay (nhan he so sat thuong wave), ap moi giay khi dung trong vung.")]
+        public float breathBurnPerSecond = 8f;
+        [Tooltip("Chay con bam bao lau sau khi roi vung.")]
+        public float breathBurnSeconds = 3f;
+        public Sprite[] breathTelegraphFrames;
+        public Sprite[] breathActiveFrames;
+        public Sprite[] breathFadeFrames;
+        [Tooltip("Luong lua tu mieng (luc phun).")]
+        public Sprite[] breathMouthFrames;
+
+        [Header("Rung chuong tang toc (Goblin Rung Chuong; 0 = khong)")]
+        [Tooltip("Giay giua hai lan rung. Clip than = `animations.skill`.")]
+        public float ringCooldown;
+        public float ringRadius = 2.5f;
+        [Tooltip("Tang toc chay + toc danh (0,3 = +30%).")]
+        public float ringHaste = 0.3f;
+        public float ringSeconds = 4f;
+        public Sprite[] ringWaveFrames;
+        [Tooltip("Icon tang toc lap tren dau quai duoc buff.")]
+        public Sprite[] hasteFrames;
 
         [Header("Boss (bo trong = khong co co che boss)")]
         public BossDefinition boss;

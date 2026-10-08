@@ -1,0 +1,47 @@
+{
+  "target": "asset",
+  "mode": "wave-normal",
+  "source": "tempart/CannonSonic/wave-normal",
+  "align": "center",
+  "status": "giao 2026-10-05 (cannon-deliver)",
+  "frames": [
+    {
+      "frame": "wave-1",
+      "aligned_bbox": [
+        92,
+        55,
+        112,
+        73
+      ]
+    },
+    {
+      "frame": "wave-2",
+      "aligned_bbox": [
+        63,
+        46,
+        112,
+        83
+      ]
+    },
+    {
+      "frame": "wave-3",
+      "aligned_bbox": [
+        24,
+        40,
+        112,
+        88
+      ]
+    },
+    {
+      "frame": "wave-4",
+      "aligned_bbox": [
+        28,
+        40,
+        112,
+        88
+      ]
+    }
+  ],
+  "cell_size": 128,
+  "cell_height": 128
+}

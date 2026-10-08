@@ -1,0 +1,47 @@
+{
+  "target": "asset",
+  "mode": "hit-shock",
+  "source": "tempart/CannonSonic/hit-shock",
+  "align": "center",
+  "status": "giao 2026-10-05 (cannon-deliver)",
+  "frames": [
+    {
+      "frame": "hit-1",
+      "aligned_bbox": [
+        57,
+        60,
+        71,
+        69
+      ]
+    },
+    {
+      "frame": "hit-2",
+      "aligned_bbox": [
+        56,
+        55,
+        73,
+        73
+      ]
+    },
+    {
+      "frame": "hit-3",
+      "aligned_bbox": [
+        54,
+        56,
+        75,
+        72
+      ]
+    },
+    {
+      "frame": "hit-4",
+      "aligned_bbox": [
+        56,
+        60,
+        68,
+        70
+      ]
+    }
+  ],
+  "cell_size": 128,
+  "cell_height": 128
+}

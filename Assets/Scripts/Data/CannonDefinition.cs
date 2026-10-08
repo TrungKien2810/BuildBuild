@@ -2,6 +2,8 @@ using UnityEngine;
 
 namespace BuildBuild.Data
 {
+    public enum CannonFire { Projectile, Chain, Cone, Vortex }
+
     /// <summary>
     /// Chi so mot loai phao lap tren be phao dai (GAME_DESIGN.md muc 4). So la gia tri KHOI DIEM de can bang,
     /// de o asset chu khong hard-code trong script.
@@ -42,6 +44,55 @@ namespace BuildBuild.Data
         [Tooltip("0 = dan dung lai o muc tieu. > 0 = lao XUYEN: bay thang qua muc tieu, moi quai tren duong an don mot lan, " +
             "toi da chung nay con roi tan (No Xuyen).")]
         public int pierceCount;
+
+        [Header("Co che rieng (bo phao 2026-10-05, so TAM — Claude de xuat, chua can)")]
+        [Tooltip("Cach ra don: Projectile = dan bay (mac dinh) · Chain = set nay tuc thi qua nhieu quai · " +
+            "Cone = song hinh non truoc nong · Vortex = loi bay toi cho dong quai, mo ho den hut roi no.")]
+        public CannonFire fire = CannonFire.Projectile;
+        [Tooltip("> 0: dan bay vong cau cao chung nay (world) toi CHO muc tieu dung luc ban, khong bam theo (Coi).")]
+        public float arcHeight;
+        [Tooltip("Vong bao cho dan sap roi tren dat, hien suot luc dan bay (Coi).")]
+        public Sprite[] targetMarkFrames;
+        [Tooltip("Giay troi chan moi quai trung (Luoi). Boss mien (Unit.ApplyRoot).")]
+        public float rootDuration;
+        public Sprite[] rootFrames;
+        [Tooltip("Nhan sat thuong len boss/elite (Dai Bac Cong Thanh). 1 = nhu quai thuong.")]
+        public float bigTargetMultiplier = 1f;
+        [Tooltip("Nham quai con NHIEU MAU NHAT trong tam thay vi quai gan thanh nhat (Hoa Mai Thanh).")]
+        public bool targetHighestHealth;
+        [Tooltip("Tam do tren dau muc tieu suot luc ngam (tu luc bat dau attack toi luc ban).")]
+        public Sprite[] aimMarkFrames;
+        [Tooltip("Khoi nong luc ban, dat o nong (Hoa Mai Thanh).")]
+        public Sprite[] muzzleFrames;
+        [Tooltip("> 0: toc ban tang dan toi `spinUpMultiplier` x fireRate sau chung nay giay ban lien (Gatling).")]
+        public float spinUpSeconds;
+        public float spinUpMultiplier = 3f;
+        [Tooltip("Chain: so quai toi da set nay qua (tinh ca muc tieu dau).")]
+        public int chainCount;
+        [Tooltip("Chain: tam nay tu quai vua trung sang quai ke.")]
+        public float chainRange = 2.5f;
+        [Tooltip("Chain: frame tia set NGANG, keo dan giua hai diem (OneShotFx.SpawnBeam).")]
+        public Sprite[] beamFrames;
+        [Tooltip("Cone: goc mo hinh non (do).")]
+        public float coneAngle = 60f;
+        [Tooltip("Cone: cu chung nay phat thi phat cuoi la XUNG KICH (clip skill, frame song rieng, day lui).")]
+        public int burstEvery;
+        public float burstDamageMultiplier = 1.75f;
+        public Sprite[] waveFrames;
+        public Sprite[] burstWaveFrames;
+        public Sprite[] burstImpactFrames;
+        [Tooltip("Vortex: giay hut truoc khi no.")]
+        public float vortexSeconds = 1.5f;
+        [Tooltip("Vortex: moi quai chet trong ho +chung nay x sat thuong no, toi da `vortexMaxStacks`.")]
+        public float vortexStackBonus = 0.15f;
+        public int vortexMaxStacks = 5;
+        public Sprite[] vortexOpenFrames;
+        [Tooltip("Vortex: 3 vong lap theo so cong don (0-1 / 2-3 / 4-5).")]
+        public Sprite[] vortexLoop0, vortexLoop1, vortexLoop2;
+        [Tooltip("Vortex: vet hut hon tren quai chet trong ho.")]
+        public Sprite[] absorbFrames;
+        [Tooltip("Vortex: vu no theo so cong don 2-3 / 4-5 (0-1 dung impactFrames).")]
+        public Sprite[] impactFrames1, impactFrames2;
 
         [Header("Nang level (GAME_DESIGN.md muc 7)")]
         [Tooltip("Sat thuong cong them moi level, tinh tren sat thuong goc (0,08 = +8%).")]

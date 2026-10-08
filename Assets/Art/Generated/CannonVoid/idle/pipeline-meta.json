@@ -1,0 +1,47 @@
+{
+  "target": "asset",
+  "mode": "idle",
+  "source": "tempart/CannonVoid/idle",
+  "align": "feet",
+  "status": "giao 2026-10-05 (cannon-deliver)",
+  "frames": [
+    {
+      "frame": "idle-1",
+      "aligned_bbox": [
+        28,
+        27,
+        115,
+        97
+      ]
+    },
+    {
+      "frame": "idle-2",
+      "aligned_bbox": [
+        28,
+        27,
+        115,
+        97
+      ]
+    },
+    {
+      "frame": "idle-3",
+      "aligned_bbox": [
+        28,
+        27,
+        115,
+        97
+      ]
+    },
+    {
+      "frame": "idle-4",
+      "aligned_bbox": [
+        28,
+        27,
+        115,
+        97
+      ]
+    }
+  ],
+  "cell_size": 144,
+  "cell_height": 128
+}

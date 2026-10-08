@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21934289f9624743841fea630ce87914, type: 3}
+  m_Name: Soldier_MushroomSoldier
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.SoldierDefinition
+  displayName: "L\xEDnh n\u1EA5m"
+  unitId: soldier_mushroomsoldier
+  role: 0
+  maxHealth: 160
+  damage: 10
+  attackRate: 0.8
+  range: 3.5
+  moveSpeed: 1
+  leashRange: 3
+  maxHeld: 3
+  heldDamageBonus: 0
+  warden: {fileID: 0}
+  dragonRider: {fileID: 0}
+  banner: {fileID: 0}
+  wukong: {fileID: 0}
+  stormcaller: {fileID: 0}
+  galemonk: {fileID: 0}
+  daoVien: {fileID: 0}
+  bloodswordsman: {fileID: 0}
+  soulbinder: {fileID: 0}
+  swornBrother: 0
+  projectileSpeed: 6
+  splashRadius: 0.1
+  projectileFrames:
+  - {fileID: 21300000, guid: 78963e064ba31544f81e521a1fbb35af, type: 3}
+  - {fileID: 21300000, guid: 1efb2c20f5af8f247b08351728b99273, type: 3}
+  - {fileID: 21300000, guid: 60bfae7fb3db5fe4886287bd9e2c2b6c, type: 3}
+  - {fileID: 21300000, guid: bbd7d7237e20cef45ac08fe85fd17410, type: 3}
+  projectileScale: 1
+  impactFrames:
+  - {fileID: 21300000, guid: 2f4fca5558bb2d244a10b718aa606caa, type: 3}
+  - {fileID: 21300000, guid: a66f9e7a1a53ddc429aef53e6c3f299f, type: 3}
+  - {fileID: 21300000, guid: eaa7cd3c7dc102b47ae072f32ca097a0, type: 3}
+  - {fileID: 21300000, guid: 96824e46cb8e7ab4c8b7ddc30aa945c8, type: 3}
+  impactScale: 1
+  knockbackOnHit: 0
+  fireSfx: 
+  impactSfx: 
+  skillSfx: 
+  skillKind: 0
+  skillTier: 0
+  skillCooldown: 0
+  manaMax: 0
+  manaPerSecond: 0.35
+  manaPerHit: 0.25
+  skillRadius: 1.6
+  skillDuration: 3
+  skillPower: 1
+  skillFrames: []
+  skillIntroFrames: []
+  skillOutroFrames:
+  - {fileID: 21300000, guid: 5856c8df47a8916429755eb22206dfd4, type: 3}
+  - {fileID: 21300000, guid: b2ae44ce77175944f904c24f0c0701cf, type: 3}
+  - {fileID: 21300000, guid: 70b19ae82a75f8a49a414b55c8efff28, type: 3}
+  - {fileID: 21300000, guid: 24b8d65e3bfd3f641884516b299a5746, type: 3}
+  stunFrames: []
+  summoner: {fileID: 0}
+  healsAllies: 0
+  healFrames: []
+  buffFrames: []
+  shieldAmount: 0
+  shieldFrames: []
+  shieldBreakFrames: []
+  passiveStar: 0
+  minorStar: 3
+  secondMinorStar: 3
+  passiveKind: 19
+  passivePower: 0.25
+  passiveThreshold: 0
+  passiveRadius: 0.9
+  passiveEvery: 1
+  passiveDuration: 2.5
+  passiveFrames:
+  - {fileID: 21300000, guid: 089d0a4f8cf084048a9c1b4420523c69, type: 3}
+  - {fileID: 21300000, guid: d189ac30745b4684f837b7ff4f059343, type: 3}
+  - {fileID: 21300000, guid: 3988b9217918d5343b0ac0c3a9cc2d49, type: 3}
+  - {fileID: 21300000, guid: c7537b1eb669e964aa9f15f4b07aafe6, type: 3}
+  ultimateText: 
+  passiveText: "B\xE0o T\u1EED: \u0111\xF2n tr\xFAng \u0111\u1EC3 v\xF9ng b\xE0o
+    t\u1EED 2,5s, qu\xE1i trong v\xF9ng ch\u1EADm 25%."
+  minorText: 
+  secondMinorText: 
+  ultimateIcon: {fileID: 0}
+  minorIcon: {fileID: 0}
+  passiveIcon: {fileID: 0}
+  secondMinorIcon: {fileID: 0}
+  animations: {fileID: 11400000, guid: f300603444946f247bf046033145a0e8, type: 2}
+  artFacesRight: 0
+  avatar: {fileID: 21300000, guid: 9bfd58925eb01e54ea0c646224599423, type: 3}
+  squadSize: 3
+  summonCooldown: 15

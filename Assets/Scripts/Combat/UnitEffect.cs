@@ -3,7 +3,7 @@ using UnityEngine;
 namespace BuildBuild.Combat
 {
     /// <summary>Loai hieu ung dang dinh tren unit — `HeroInfoPanel` tra icon theo chi so enum nay.</summary>
-    public enum EffectKind { Stun, Slow, Haste, Root, Mark, ArmorBreak, Awe, Chain, Shield, Guard, NoHeal, DamageBuff, RateBuff, Skill, Passive }
+    public enum EffectKind { Stun, Slow, Haste, Root, Mark, ArmorBreak, Awe, Chain, Shield, Guard, NoHeal, DamageBuff, RateBuff, Skill, Passive, Burn, Poison, Freeze }
 
     /// <summary>
     /// Mot dong hieu ung de hien len bang thong tin. <see cref="icon"/> != null thi dung icon do (icon chieu / noi tai

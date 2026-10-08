@@ -1,0 +1,107 @@
+{
+ "note": "toa do px trong sprite castle-tN.png, goc tren-trai; pad = tam mat be (giua bbox mat san da), platform_w = be ngang mat be; 3 trang thai cung canvas nen dung chung",
+ "tiers": [
+  {
+   "tier": 1,
+   "sprite": "castle-t1.png",
+   "size": [
+    677,
+    1315
+   ],
+   "mounts": [
+    {
+     "x": 504,
+     "y": 151,
+     "platform_w": 136,
+     "platform_h": 72
+    },
+    {
+     "x": 522,
+     "y": 506,
+     "platform_w": 175,
+     "platform_h": 111
+    },
+    {
+     "x": 534,
+     "y": 947,
+     "platform_w": 202,
+     "platform_h": 147
+    }
+   ]
+  },
+  {
+   "tier": 2,
+   "sprite": "castle-t2.png",
+   "size": [
+    733,
+    1457
+   ],
+   "mounts": [
+    {
+     "x": 522,
+     "y": 187,
+     "platform_w": 167,
+     "platform_h": 94
+    },
+    {
+     "x": 552,
+     "y": 485,
+     "platform_w": 177,
+     "platform_h": 109
+    },
+    {
+     "x": 573,
+     "y": 820,
+     "platform_w": 187,
+     "platform_h": 123
+    },
+    {
+     "x": 588,
+     "y": 1167,
+     "platform_w": 191,
+     "platform_h": 110
+    }
+   ]
+  },
+  {
+   "tier": 3,
+   "sprite": "castle-t3.png",
+   "size": [
+    693,
+    1447
+   ],
+   "mounts": [
+    {
+     "x": 499,
+     "y": 158,
+     "platform_w": 150,
+     "platform_h": 80
+    },
+    {
+     "x": 511,
+     "y": 390,
+     "platform_w": 161,
+     "platform_h": 95
+    },
+    {
+     "x": 526,
+     "y": 639,
+     "platform_w": 176,
+     "platform_h": 98
+    },
+    {
+     "x": 549,
+     "y": 904,
+     "platform_w": 179,
+     "platform_h": 112
+    },
+    {
+     "x": 552,
+     "y": 1169,
+     "platform_w": 187,
+     "platform_h": 113
+    }
+   ]
+  }
+ ]
+}

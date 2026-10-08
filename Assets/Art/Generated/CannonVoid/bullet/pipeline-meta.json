@@ -1,0 +1,47 @@
+{
+  "target": "asset",
+  "mode": "bullet",
+  "source": "tempart/CannonVoid/bullet",
+  "align": "center",
+  "status": "giao 2026-10-05 (cannon-deliver)",
+  "frames": [
+    {
+      "frame": "projectile-1",
+      "aligned_bbox": [
+        55,
+        59,
+        71,
+        69
+      ]
+    },
+    {
+      "frame": "projectile-2",
+      "aligned_bbox": [
+        52,
+        59,
+        69,
+        69
+      ]
+    },
+    {
+      "frame": "projectile-3",
+      "aligned_bbox": [
+        55,
+        55,
+        72,
+        64
+      ]
+    },
+    {
+      "frame": "projectile-4",
+      "aligned_bbox": [
+        52,
+        55,
+        72,
+        64
+      ]
+    }
+  ],
+  "cell_size": 128,
+  "cell_height": 128
+}

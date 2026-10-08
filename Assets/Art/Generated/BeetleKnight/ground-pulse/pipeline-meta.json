@@ -1,0 +1,342 @@
+{
+  "target": "asset",
+  "mode": "ground-pulse",
+  "prompt": "Create a separate gameplay VFX raw animation sheet. Exactly 2 rows x 2 columns, 4 chronological frames, row-major reading; each cell square, equal size, all art safely inside central 65% of its cell. Solid opaque #FF00FF background, no separators/labels. An instantaneous scarab horn ground impact releases a radial shock pulse around feet. No actor. Elevated three-quarter ground plane; origin fixed center at 65% cell height. Frame1 tiny bronze cracked contact diamond and tight elliptical dusty rim; frame2 rapidly expanding low ellipse with jagged amber/chestnut earth fragments; frame3 outer elliptical pressure front radius doubled with center clearing; frame4 broken fading outer fragments. Clearly one outward traveling burst, NOT persistent ground zone or icon. No black ground plate; magenta shows through center. Stable ground origin and same scale. Match reference low-detail chibi game pixel-art clusters and limited palette, not painterly or smooth gradients. Sharp pixel clusters with dark colored outline, 2-3 tones; no baked shadow, blur, bloom or scenery. The reference knight supplies palette/style only; do not draw the knight.\n",
+  "role": "",
+  "input": "tempart\\BeetleKnight\\ground-pulse\\raw-sheet.png",
+  "threshold": 100,
+  "edge_threshold": 150,
+  "duration": 200,
+  "rows": 2,
+  "cols": 2,
+  "cell_size": 96,
+  "fit_scale": 0.78,
+  "trim_border": 4,
+  "edge_clean_depth": 3,
+  "align": "center",
+  "shared_scale": true,
+  "scale_strategy": "fit",
+  "component_mode": "all",
+  "component_padding": 0,
+  "min_component_area": 1,
+  "edge_touch_margin": 0,
+  "frame_labels": [
+    "ground-pulse-1",
+    "ground-pulse-2",
+    "ground-pulse-3",
+    "ground-pulse-4"
+  ],
+  "frames": [
+    {
+      "grid": [
+        0,
+        0
+      ],
+      "source_box": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "component_mode": "all",
+      "component_count": 4,
+      "selected_component_area": null,
+      "selected_component_bbox": null,
+      "crop_bbox": [
+        213,
+        278,
+        406,
+        394
+      ],
+      "source_frame_size": [
+        619,
+        619
+      ],
+      "is_empty": false,
+      "subject_area": 11148,
+      "body_core_area": 11148,
+      "body_area_fraction": 0.02909481914913052,
+      "anchor_source": [
+        309.5,
+        336.0
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        24,
+        13
+      ],
+      "paste_position": [
+        36,
+        41
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        36,
+        41,
+        60,
+        54
+      ],
+      "source_to_output_scale": 0.12606060606060607,
+      "bbox_scale_applied": true,
+      "scale_strategy": "fit",
+      "scale_changed": true
+    },
+    {
+      "grid": [
+        0,
+        1
+      ],
+      "source_box": [
+        627,
+        0,
+        1254,
+        627
+      ],
+      "component_mode": "all",
+      "component_count": 33,
+      "selected_component_area": null,
+      "selected_component_bbox": null,
+      "crop_bbox": [
+        68,
+        213,
+        537,
+        459
+      ],
+      "source_frame_size": [
+        619,
+        619
+      ],
+      "is_empty": false,
+      "subject_area": 38057,
+      "body_core_area": 30886,
+      "body_area_fraction": 0.08060841265160076,
+      "anchor_source": [
+        302.5,
+        336.0
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        59,
+        31
+      ],
+      "paste_position": [
+        18,
+        32
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        18,
+        32,
+        77,
+        63
+      ],
+      "source_to_output_scale": 0.12606060606060607,
+      "bbox_scale_applied": true,
+      "scale_strategy": "fit",
+      "scale_changed": true
+    },
+    {
+      "grid": [
+        1,
+        0
+      ],
+      "source_box": [
+        0,
+        627,
+        627,
+        1254
+      ],
+      "component_mode": "all",
+      "component_count": 54,
+      "selected_component_area": null,
+      "selected_component_bbox": null,
+      "crop_bbox": [
+        7,
+        144,
+        601,
+        477
+      ],
+      "source_frame_size": [
+        619,
+        619
+      ],
+      "is_empty": false,
+      "subject_area": 54361,
+      "body_core_area": 25328,
+      "body_area_fraction": 0.06610276098037117,
+      "anchor_source": [
+        304.0,
+        310.5
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        73,
+        41
+      ],
+      "paste_position": [
+        12,
+        27
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        12,
+        27,
+        85,
+        68
+      ],
+      "source_to_output_scale": 0.12606060606060607,
+      "bbox_scale_applied": true,
+      "scale_strategy": "fit",
+      "scale_changed": true
+    },
+    {
+      "grid": [
+        1,
+        1
+      ],
+      "source_box": [
+        627,
+        627,
+        1254,
+        1254
+      ],
+      "component_mode": "all",
+      "component_count": 93,
+      "selected_component_area": null,
+      "selected_component_bbox": null,
+      "crop_bbox": [
+        39,
+        162,
+        601,
+        461
+      ],
+      "source_frame_size": [
+        619,
+        619
+      ],
+      "is_empty": false,
+      "subject_area": 17247,
+      "body_core_area": 7055,
+      "body_area_fraction": 0.01841262550207354,
+      "anchor_source": [
+        320.0,
+        311.5
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        70,
+        37
+      ],
+      "paste_position": [
+        13,
+        29
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        13,
+        29,
+        83,
+        66
+      ],
+      "source_to_output_scale": 0.12606060606060607,
+      "bbox_scale_applied": true,
+      "scale_strategy": "fit",
+      "scale_changed": true
+    }
+  ],
+  "edge_touch_frames": [],
+  "source_edge_touch_frames": [],
+  "output_edge_touch_frames": [],
+  "empty_frames": [],
+  "paste_clamped_frames": [],
+  "qc_summary": {
+    "frame_count": 4,
+    "valid_frame_count": 4,
+    "empty_count": 0,
+    "edge_touch_count": 0,
+    "paste_clamped_count": 0,
+    "body_scale_mean": 0.21182148603534368,
+    "output_subject_height_mean": 30.75,
+    "body_scale_cv": 0.28663292219385844,
+    "anchor_x_std": 0.01109008902887398,
+    "anchor_y_std": 0.020201936995799377,
+    "anchor_y_mean": 0.5226171243941842
+  },
+  "qc_config": {
+    "strict_qc": true,
+    "reject_edge_touch": true,
+    "allow_source_edge_touch": false,
+    "max_body_scale_cv": null,
+    "max_anchor_y_std": null,
+    "max_profile_scale_drift": null
+  },
+  "frame_count": 4,
+  "review_qc": [
+    {
+      "frame": 1,
+      "bbox": [
+        36,
+        41,
+        60,
+        54
+      ],
+      "height": 13,
+      "bottom": 54,
+      "residue": 0
+    },
+    {
+      "frame": 2,
+      "bbox": [
+        18,
+        32,
+        77,
+        63
+      ],
+      "height": 31,
+      "bottom": 63,
+      "residue": 0
+    },
+    {
+      "frame": 3,
+      "bbox": [
+        12,
+        27,
+        85,
+        68
+      ],
+      "height": 41,
+      "bottom": 68,
+      "residue": 0
+    },
+    {
+      "frame": 4,
+      "bbox": [
+        13,
+        29,
+        83,
+        66
+      ],
+      "height": 37,
+      "bottom": 66,
+      "residue": 0
+    }
+  ],
+  "content_qc": "Agent inspected final frame strips, walk boots and effect phases; user animation approval pending.",
+  "output_origin": [
+    48.0,
+    48.0
+  ],
+  "user_review": {
+    "date": "2026-10-04",
+    "status": "approved",
+    "note": "User approved except three walk clips; unspecified animation-axis issues still need identification."
+  }
+}

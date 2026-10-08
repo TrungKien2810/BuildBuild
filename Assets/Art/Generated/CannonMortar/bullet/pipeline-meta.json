@@ -1,0 +1,47 @@
+{
+  "target": "asset",
+  "mode": "bullet",
+  "source": "tempart/CannonMortar/bullet",
+  "align": "center",
+  "status": "giao 2026-10-05 (cannon-deliver)",
+  "frames": [
+    {
+      "frame": "projectile-1",
+      "aligned_bbox": [
+        49,
+        57,
+        79,
+        70
+      ]
+    },
+    {
+      "frame": "projectile-2",
+      "aligned_bbox": [
+        49,
+        58,
+        79,
+        70
+      ]
+    },
+    {
+      "frame": "projectile-3",
+      "aligned_bbox": [
+        49,
+        57,
+        79,
+        70
+      ]
+    },
+    {
+      "frame": "projectile-4",
+      "aligned_bbox": [
+        49,
+        57,
+        79,
+        70
+      ]
+    }
+  ],
+  "cell_size": 128,
+  "cell_height": 128
+}

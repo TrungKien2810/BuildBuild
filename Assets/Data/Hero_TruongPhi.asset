@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
   displayName: "Tr\u01B0\u01A1ng Phi"
   unitId: truongphi
+  role: 1
   maxHealth: 1700
   damage: 28
   attackRate: 0.7
@@ -29,6 +30,8 @@ MonoBehaviour:
   stormcaller: {fileID: 0}
   galemonk: {fileID: 0}
   daoVien: {fileID: 11400000, guid: 9d7ee7b11c5af4644b803631fe7a9f86, type: 2}
+  bloodswordsman: {fileID: 0}
+  soulbinder: {fileID: 0}
   swornBrother: 3
   projectileSpeed: 8
   splashRadius: 0.8

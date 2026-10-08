@@ -1,0 +1,47 @@
+{
+  "target": "asset",
+  "mode": "beam",
+  "source": "tempart/CannonTesla/beam",
+  "align": "center",
+  "status": "giao 2026-10-05 (cannon-deliver)",
+  "frames": [
+    {
+      "frame": "beam-1",
+      "aligned_bbox": [
+        16,
+        56,
+        112,
+        72
+      ]
+    },
+    {
+      "frame": "beam-2",
+      "aligned_bbox": [
+        16,
+        56,
+        112,
+        72
+      ]
+    },
+    {
+      "frame": "beam-3",
+      "aligned_bbox": [
+        16,
+        56,
+        112,
+        72
+      ]
+    },
+    {
+      "frame": "beam-4",
+      "aligned_bbox": [
+        16,
+        56,
+        112,
+        72
+      ]
+    }
+  ],
+  "cell_size": 128,
+  "cell_height": 128
+}
