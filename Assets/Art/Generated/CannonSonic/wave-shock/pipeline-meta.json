@@ -1,0 +1,65 @@
+{
+  "target": "asset",
+  "mode": "wave-shock",
+  "source": "tempart/CannonSonic/wave-shock",
+  "align": "center",
+  "status": "giao 2026-10-05 (cannon-deliver)",
+  "frames": [
+    {
+      "frame": "wave-1",
+      "aligned_bbox": [
+        97,
+        56,
+        112,
+        73
+      ]
+    },
+    {
+      "frame": "wave-2",
+      "aligned_bbox": [
+        70,
+        49,
+        112,
+        80
+      ]
+    },
+    {
+      "frame": "wave-3",
+      "aligned_bbox": [
+        26,
+        40,
+        112,
+        88
+      ]
+    },
+    {
+      "frame": "wave-4",
+      "aligned_bbox": [
+        24,
+        40,
+        112,
+        88
+      ]
+    },
+    {
+      "frame": "wave-5",
+      "aligned_bbox": [
+        26,
+        41,
+        112,
+        87
+      ]
+    },
+    {
+      "frame": "wave-6",
+      "aligned_bbox": [
+        28,
+        45,
+        112,
+        83
+      ]
+    }
+  ],
+  "cell_size": 128,
+  "cell_height": 128
+}

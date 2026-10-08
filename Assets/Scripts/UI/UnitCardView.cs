@@ -21,6 +21,8 @@ namespace BuildBuild.UI
         [SerializeField] Image icon;
         [SerializeField] Text nameText;
         [SerializeField] Outline selectedOutline;
+        [Tooltip("Icon vai tro goc tren trai (GDD 10.2); an khi unit khong co vai (linh, phao).")]
+        [SerializeField] Image roleIcon;
 
         [Header("Vien theo do hiem")]
         [SerializeField] Sprite frameN;
@@ -45,9 +47,11 @@ namespace BuildBuild.UI
         public void Bind(UnitDefinition unit, Action<UnitDefinition> onClick) =>
             button.onClick.AddListener(() => onClick(unit));
 
-        public void Show(UnitDefinition unit, OwnedUnit owned, int shardsPerStar, bool selected)
+        public void Show(UnitDefinition unit, OwnedUnit owned, int shardsPerStar, bool selected, Sprite role)
         {
             bool has = owned != null;
+            roleIcon.sprite = role;
+            roleIcon.enabled = role != null;
             frame.sprite = !has ? frameLocked : unit.rarity switch
             {
                 Rarity.SSR => frameSSR,

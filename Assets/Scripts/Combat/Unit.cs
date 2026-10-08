@@ -142,6 +142,25 @@ namespace BuildBuild.Combat
         public bool IsMarkedBy(UnityEngine.Object marker) =>
             marker != null && _markedBy == marker && Time.time < _markedUntil;
 
+        // ---------------------------------------------------------------- kho hieu ung chung
+
+        StatusEffects _status;
+
+        /// <summary>Kho hieu ung trang thai dung chung (chay, doc, cham, dong bang, choang, pha giap, cam hoi mau) — xem `StatusEffects`.</summary>
+        public StatusEffects Status
+        {
+            get
+            {
+                if (_status == null)
+                {
+                    _status = GetComponent<StatusEffects>();
+                    if (_status == null) _status = gameObject.AddComponent<StatusEffects>();
+                    _status.Bind(this);
+                }
+                return _status;
+            }
+        }
+
         // ---------------------------------------------------------------- troi
 
         float _rootedUntil;
@@ -177,6 +196,16 @@ namespace BuildBuild.Combat
             _disarmedUntil = Mathf.Max(_disarmedUntil, Time.time + seconds);
         }
 
+        /// <summary>Go Troi + Khoa Don (Hoi Chuong cua Chuong Bac). Choang / Doc / Chay / Cham nam o `Status`.</summary>
+        public void ClearControl()
+        {
+            _rootedUntil = 0f;
+            if (_rootFx != null) Destroy(_rootFx);
+            _rootFx = null;
+            _rootRenderer = null;
+            _disarmedUntil = 0f;
+        }
+
         float _tangleUntil;
         float _tangleMiss;
 
@@ -193,13 +222,11 @@ namespace BuildBuild.Combat
 
         // ---------------------------------------------------------------- he so toc (nhanh Tru, plan muc B1.4)
 
-        float _slowUntil;
-        float _slowPercent;
         float _hasteUntil;
         float _hastePercent;
 
         /// <summary>Dang bi lam cham (va khong mien).</summary>
-        public bool IsSlowed => Time.time < _slowUntil && !SlowImmune;
+        public bool IsSlowed => !SlowImmune && Status.Has(StatusId.Slow);
 
         /// <summary>Mien moi lam cham (boss Noi Gian). Bat len thi slow dang chay cung mat tac dung.</summary>
         public bool SlowImmune { get; set; }
@@ -210,7 +237,7 @@ namespace BuildBuild.Combat
             get
             {
                 float factor = 1f;
-                if (IsSlowed) factor *= 1f - _slowPercent;
+                if (IsSlowed) factor *= 1f - Status.Power(StatusId.Slow);
                 if (Time.time < _hasteUntil) factor *= 1f + _hastePercent;
                 return factor;
             }
@@ -222,11 +249,12 @@ namespace BuildBuild.Combat
         /// </summary>
         public void ApplySlow(float percent, float seconds)
         {
-            if (IsDying || SlowImmune || percent <= 0f || seconds <= 0f) return;
-            bool active = Time.time < _slowUntil;
-            _slowPercent = active ? Mathf.Max(_slowPercent, Mathf.Clamp01(percent)) : Mathf.Clamp01(percent);
-            _slowUntil = Mathf.Max(_slowUntil, Time.time + seconds);
+            if (IsDying || SlowImmune || percent <= 0f) return;
+            Status.Apply(StatusId.Slow, Mathf.Clamp01(percent), seconds);
         }
+
+        /// <summary>Phan tang toc dang chay (0 = khong) — quai nhan ca vao toc danh (Goblin Rung Chuong).</summary>
+        protected float HastePercent => Time.time < _hasteUntil ? _hastePercent : 0f;
 
         /// <summary>Tang toc chay <paramref name="percent"/> trong <paramref name="seconds"/> giay (boss Tieng Thet). Khong cong don.</summary>
         public void ApplyHaste(float percent, float seconds)
@@ -239,7 +267,6 @@ namespace BuildBuild.Combat
         // ---------------------------------------------------------------- nhan them sat thuong
 
         float _aweWeaken, _aweVulnerability, _aweUntil;
-        float _armorBreak, _armorBrokenUntil;
         float _chainedUntil;
         float _chainBonus;
 
@@ -251,7 +278,7 @@ namespace BuildBuild.Combat
 
         /// <summary>Tong phan nhan them sat thuong tu pha giap + Long Uy (Xich do lop con cong them).</summary>
         protected float StatusVulnerability =>
-            (Time.time < _armorBrokenUntil ? _armorBreak : 0f) + (Time.time < _aweUntil ? _aweVulnerability : 0f);
+            Status.Power(StatusId.ArmorBreak) + (Time.time < _aweUntil ? _aweVulnerability : 0f);
 
         /// <summary>
         /// Long Uy (Wyrmspear): dang trong tam thi giam cong <paramref name="weaken"/> va nhan them <paramref name="vulnerability"/>
@@ -269,9 +296,8 @@ namespace BuildBuild.Combat
         /// <summary>Pha giap (Dia Long Chan): nhan them <paramref name="bonus"/> sat thuong tu moi nguon. Khong cong don.</summary>
         public void ApplyArmorBreak(float bonus, float seconds)
         {
-            if (IsDying || bonus <= 0f || seconds <= 0f) return;
-            _armorBreak = Time.time < _armorBrokenUntil ? Mathf.Max(_armorBreak, bonus) : bonus;
-            _armorBrokenUntil = Mathf.Max(_armorBrokenUntil, Time.time + seconds);
+            if (IsDying || bonus <= 0f) return;
+            Status.Apply(StatusId.ArmorBreak, bonus, seconds);
         }
 
         /// <summary>Xich co thoi han (Nem Moc): nhan them <paramref name="bonus"/> sat thuong ke ca khi khong bi giu.</summary>
@@ -289,11 +315,10 @@ namespace BuildBuild.Combat
             float now = Time.time;
             if (_markedBy != null && now < _markedUntil) into.Add(new UnitEffect(EffectKind.Mark, "Ấn ký", _markedUntil));
             if (IsRooted) into.Add(new UnitEffect(EffectKind.Root, "Trói", _rootedUntil));
-            if (IsSlowed) into.Add(new UnitEffect(EffectKind.Slow, $"Chậm {Percent(_slowPercent)}", _slowUntil));
             if (now < _hasteUntil) into.Add(new UnitEffect(EffectKind.Haste, $"Tăng tốc {Percent(_hastePercent)}", _hasteUntil));
-            if (now < _armorBrokenUntil) into.Add(new UnitEffect(EffectKind.ArmorBreak, $"Phá giáp +{Percent(_armorBreak)}", _armorBrokenUntil));
             if (now < _aweUntil) into.Add(new UnitEffect(EffectKind.Awe, $"Long Uy -{Percent(_aweWeaken)} công"));
             if (now < _chainedUntil) into.Add(new UnitEffect(EffectKind.Chain, $"Xích +{Percent(_chainBonus)}", _chainedUntil));
+            Status.Collect(into);
         }
 
         protected static string Percent(float fraction) => Mathf.RoundToInt(fraction * 100f) + "%";
@@ -380,20 +405,19 @@ namespace BuildBuild.Combat
             _rootedUntil = 0f;
             _chainedUntil = 0f;
             _aweUntil = 0f;
-            _armorBrokenUntil = 0f;
             _pullUntil = 0f;
             _launchUntil = 0f;
             _disarmedUntil = 0f;
+            Status.Clear();
         }
 
-        /// <summary>An Duc (Luu Bi): go troi / cham / pha giap / Xich co han / Long Uy.</summary>
+        /// <summary>An Duc (Luu Bi): go moi hieu ung trong `Status` (choang, chay, doc, cham, pha giap, cam hoi mau...) + troi / Xich co han / Long Uy.</summary>
         protected void ClearDebuffs()
         {
+            Status.Cleanse();
             _rootedUntil = 0f;
-            _slowUntil = 0f;
             _chainedUntil = 0f;
             _aweUntil = 0f;
-            _armorBrokenUntil = 0f;
             if (_rootFx != null) Destroy(_rootFx);
         }
 

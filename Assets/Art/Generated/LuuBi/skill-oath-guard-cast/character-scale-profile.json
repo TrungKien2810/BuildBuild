@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "name": "LuuBi-skill-20261006",
+  "processing": {
+    "cell_size": 128,
+    "fit_scale": 0.9,
+    "trim_border": 4,
+    "edge_clean_depth": 3,
+    "align": "feet",
+    "shared_scale": true,
+    "scale_strategy": "preserve",
+    "component_mode": "largest",
+    "component_padding": 0,
+    "min_component_area": 1,
+    "edge_touch_margin": 0
+  },
+  "output_origin": [
+    67.0,
+    115
+  ],
+  "reference": {
+    "target": "player",
+    "mode": "cast",
+    "rows": 3,
+    "cols": 2,
+    "body_scale_mean": 0.32569539284373467,
+    "body_scale_cv": 0.019853261134841323,
+    "anchor_y_mean": 0.8653174603174595
+  },
+  "qc": {
+    "max_body_scale_drift": 0.08
+  },
+  "processor_output_origin": [
+    64.0,
+    122
+  ],
+  "postprocess": {
+    "feet_bbox_bottom_exclusive": 116,
+    "origin": [
+      67.0,
+      115
+    ],
+    "rule": "Translate complete frames after processor; never resize per frame."
+  }
+}

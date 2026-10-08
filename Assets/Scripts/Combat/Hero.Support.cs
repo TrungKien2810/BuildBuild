@@ -31,7 +31,6 @@ namespace BuildBuild.Combat
         const float ShieldArtHeight = 0.74f;
         const float ShieldPerBody = 1.35f;
 
-        float _stunnedUntil;
         bool _stunVisual;
         GameObject _buffFx;
         float _shieldUntil;
@@ -51,7 +50,7 @@ namespace BuildBuild.Combat
             public float damage, rate, until;
         }
 
-        public override bool IsStunned => Time.time < _stunnedUntil;
+        public override bool IsStunned => Status.Has(StatusId.Stun);
 
         bool HasBuffFx => _definition != null && _definition.buffFrames != null && _definition.buffFrames.Length > 0;
 
@@ -61,7 +60,7 @@ namespace BuildBuild.Combat
             if (_dying || seconds <= 0f || _health.Invulnerable) return;
             if (_dragonLink != null && _dragonLink.Unshakable(this)) return;   // Long Giap mien choang
             if (_brother != null && _brother.StunImmune) return;               // Tuy Tuu (Truong Phi)
-            _stunnedUntil = Mathf.Max(_stunnedUntil, Time.time + seconds);
+            Status.Apply(StatusId.Stun, 0f, seconds);
         }
 
         /// <summary>Hero chua co trang thai dong bang rieng: khoa nhu choang.</summary>
@@ -85,11 +84,11 @@ namespace BuildBuild.Combat
             _shoveUntil = Time.time + seconds;
         }
 
-        /// <summary>Thieu Hon: khong hoi mau, khong tich mana trong <paramref name="seconds"/> giay.</summary>
+        /// <summary>Cam hoi mau (Thieu Hon): khong hoi mau, khong tich mana trong <paramref name="seconds"/> giay.</summary>
         public void ApplyScorch(float seconds)
         {
-            if (_dying || seconds <= 0f) return;
-            _health.NoHealUntil = Mathf.Max(_health.NoHealUntil, Time.time + seconds);
+            if (_dying) return;
+            Status.Apply(StatusId.NoHeal, 0f, seconds);
         }
 
         bool UpdateShove()
@@ -104,9 +103,7 @@ namespace BuildBuild.Combat
 
         void ClearSupport()
         {
-            _stunnedUntil = 0f;
             _shoveUntil = 0f;
-            _health.NoHealUntil = 0f;
             _stunVisual = false;
             if (animator != null) animator.Paused = false;
             if (_buffFx != null) Destroy(_buffFx);
@@ -232,9 +229,25 @@ namespace BuildBuild.Combat
             var ally = WoundedAlly(inRangeOnly: true);
             if (ally == null) return;
             AuraMultipliers(out float multiplier, out _);
-            ally.Health.Heal(BaseDamage * multiplier * RescueMultiplier(ally), _health);
+            float amount = BaseDamage * multiplier * RescueMultiplier(ally);
             var at = ally.transform.position + new Vector3(0f, ally.BodyHeight * 0.5f, 0f);
-            OneShotFx.Spawn(at, _definition.healFrames, false, SortOrder.Air);
+            // Oc Sen Duoc Thao: giot thuoc roi xuong nguoi duoc hoi roi moi hoi (`projectileFrames` = giot roi).
+            if (_definition.projectileFrames != null && _definition.projectileFrames.Length > 0)
+            {
+                var health = _health;
+                var healFrames = _definition.healFrames;
+                FallingFx.Spawn(at + new Vector3(0f, 1f, 0f), at, 0f, 0.3f, _definition.projectileFrames, Battlefield.UnitScale, () =>
+                {
+                    if (ally == null || ally.IsDying) return;
+                    ally.Health.Heal(amount, health);
+                    OneShotFx.Spawn(at, healFrames, false, SortOrder.Air, Battlefield.UnitScale);
+                });
+            }
+            else
+            {
+                ally.Health.Heal(amount, _health);
+                OneShotFx.Spawn(at, _definition.healFrames, false, SortOrder.Air);
+            }
             OnHitsLanded(1);    // healer khong danh trung quai: moi lan hoi tinh nhu mot don trung de nap mana
         }
 

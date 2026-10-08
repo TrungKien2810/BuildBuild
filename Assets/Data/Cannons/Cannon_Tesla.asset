@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f28d9e270dec892bd61fa3960bb4436, type: 3}
+  m_Name: Cannon_Tesla
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.CannonDefinition
+  displayName: "Th\xE1p S\xE9t"
+  unitId: cannon_tesla
+  icon: {fileID: 21300000, guid: 8901e5ea92450d348a12cf764e5cf8b6, type: 3}
+  damage: 14
+  fireRate: 0.8
+  range: 6.5
+  aoeRadius: 0
+  slowPercent: 0
+  slowDuration: 0
+  slowIconFrames: []
+  pierceCount: 0
+  fire: 1
+  arcHeight: 0
+  targetMarkFrames: []
+  rootDuration: 0
+  rootFrames: []
+  bigTargetMultiplier: 1
+  targetHighestHealth: 0
+  aimMarkFrames: []
+  muzzleFrames: []
+  spinUpSeconds: 0
+  spinUpMultiplier: 3
+  chainCount: 3
+  chainRange: 2.5
+  beamFrames:
+  - {fileID: 21300000, guid: 13dec0e023d55c14e9e61cbbb866c65b, type: 3}
+  - {fileID: 21300000, guid: 6fb4338e089c70f4594a4faac4562b03, type: 3}
+  - {fileID: 21300000, guid: 44ed2c12d7a96f14da3370b1610eb0f2, type: 3}
+  - {fileID: 21300000, guid: 365d598780752324aa5a7307c0cb3594, type: 3}
+  coneAngle: 60
+  burstEvery: 0
+  burstDamageMultiplier: 1.75
+  waveFrames: []
+  burstWaveFrames: []
+  burstImpactFrames: []
+  vortexSeconds: 1.5
+  vortexStackBonus: 0.15
+  vortexMaxStacks: 5
+  vortexOpenFrames: []
+  vortexLoop0: []
+  vortexLoop1: []
+  vortexLoop2: []
+  absorbFrames: []
+  impactFrames1: []
+  impactFrames2: []
+  damagePerLevel: 0.08
+  upgradeCostBase: 50
+  upgradeCostExponent: 1.5
+  projectileSpeed: 14
+  projectileFrames: []
+  projectileScale: 0.5
+  impactFrames:
+  - {fileID: 21300000, guid: aea15c60a299df14aa062b4a08ac4691, type: 3}
+  - {fileID: 21300000, guid: 039669596603282479a2027ceec86d7f, type: 3}
+  - {fileID: 21300000, guid: 17cd14e59eb86544cbe649e64cf98722, type: 3}
+  - {fileID: 21300000, guid: 3958c5848d668f44ba95bc036b04fd46, type: 3}
+  impactScale: 0.8
+  fireSfx: cannon-fire
+  impactSfx: 
+  animations: {fileID: 11400000, guid: 265de62842d8fcc4ba130364e24118cc, type: 2}
+  displayScale: 1.4
+  muzzle: {x: 0, y: 0.62}
+  tint: {r: 1, g: 1, b: 1, a: 1}

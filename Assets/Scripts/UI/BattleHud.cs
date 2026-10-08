@@ -33,6 +33,11 @@ namespace BuildBuild.UI
         [Tooltip("Pho ban: mo ban do Chinh Phat; dang chuan bi Chinh Phat thi thanh nut Roi Chinh Phat.")]
         [SerializeField] Button conquestButton;
         [SerializeField] Text conquestLabel;
+        [Tooltip("Nang thanh tri len cap ke (GDD muc 2) — chi o sanh giua wave.")]
+        [SerializeField] Button castleUpgradeButton;
+        [SerializeField] Text castleUpgradeLabel;
+        [Tooltip("Bang so sanh cap truoc/sau. Khong gan thi nut nang thang nhu cu.")]
+        [SerializeField] CastleUpgradePanel castleUpgradePanel;
         [SerializeField] ConquestMapScreen conquestMap;
         [Tooltip("Bang ket qua sau moi wave (thang/thua + vang). Khong gan thi HUD chi hien dong chu nhu cu.")]
         [SerializeField] ResultPopup resultPopup;
@@ -60,6 +65,7 @@ namespace BuildBuild.UI
             {
                 ShowMessage("");
                 if (resultPopup != null) resultPopup.Hide();
+                if (castleUpgradePanel != null) castleUpgradePanel.Close();
                 Refresh();
             };
             waves.WaveCleared += (wave, gold) =>
@@ -98,13 +104,16 @@ namespace BuildBuild.UI
                     if (conquestMap != null) conquestMap.Open();
                 };
             castle.Health.Damaged += _ => RefreshCastle();
-            economy.Changed += _ => RefreshGold();
+            economy.Changed += _ => { RefreshGold(); RefreshCastleUpgrade(); };
 
             startButton.onClick.AddListener(waves.StartWave);
             gachaButton.onClick.AddListener(() => SceneManager.LoadScene(SceneNames.Gacha));
             unitsButton.onClick.AddListener(() => SceneManager.LoadScene(SceneNames.Units));
             if (chestButton != null) chestButton.onClick.AddListener(ClaimChest);
             if (conquestButton != null) conquestButton.onClick.AddListener(OnConquestButton);
+            if (castleUpgradeButton != null) castleUpgradeButton.onClick.AddListener(OnCastleUpgradeButton);
+            if (castleUpgradePanel != null) castleUpgradePanel.UpgradePressed += UpgradeCastle;
+            castle.TierChanged += Refresh;
 
             ShowMessage("");
             Refresh();
@@ -127,9 +136,52 @@ namespace BuildBuild.UI
             RefreshGold();
             RefreshChest();
             if (conquestLabel != null) conquestLabel.text = WaveManager.InConquest ? "Rời Chinh Phạt" : "Chinh Phạt";
+            RefreshCastleUpgrade();
         }
 
-        Button[] HiddenWhileFighting => new[] { gachaButton, unitsButton, chestButton, conquestButton };
+        Button[] HiddenWhileFighting => new[] { gachaButton, unitsButton, chestButton, conquestButton, castleUpgradeButton };
+
+        void RefreshCastleUpgrade()
+        {
+            if (castleUpgradeButton == null) return;
+            var next = castle.NextTier;
+            // Da toi da / scene cu khong co bang cap / dang chuan bi Chinh Phat: an nut.
+            if (next == null || WaveManager.InConquest)
+            {
+                castleUpgradeButton.gameObject.SetActive(false);
+                return;
+            }
+            string blocker = castle.UpgradeBlocker();
+            castleUpgradeLabel.text = blocker ?? $"Nâng {next.name} · {next.cost}";
+            // Co bang thi nut chi MO bang (luon bam duoc de xem dieu kien); bang tu xam nut Nang.
+            castleUpgradeButton.interactable = castleUpgradePanel != null || blocker == null && economy.Gold >= next.cost;
+            if (castleUpgradePanel != null && castleUpgradePanel.IsOpen) castleUpgradePanel.Refresh(castle, economy.Gold);
+        }
+
+        void OnCastleUpgradeButton()
+        {
+            if (castleUpgradePanel == null) UpgradeCastle();
+            else if (!waves.IsFighting && castle.NextTier != null && !castle.IsUpgrading)
+            {
+                castleUpgradePanel.Open(castle, economy.Gold);
+                Sfx.Play("ui-open");
+            }
+        }
+
+        void UpgradeCastle()
+        {
+            var next = castle.NextTier;
+            if (waves.IsFighting || next == null || castle.UpgradeBlocker() != null) return;
+            if (!economy.TrySpend(next.cost))
+            {
+                ShowMessage("Không đủ vàng nâng thành");
+                return;
+            }
+            if (castleUpgradePanel != null) castleUpgradePanel.Close();
+            castle.Upgrade();
+            Sfx.Play("upgrade");
+            ShowMessage($"Thành lên cấp {castle.TierLevel}: {next.name}");
+        }
 
         void OnConquestButton()
         {

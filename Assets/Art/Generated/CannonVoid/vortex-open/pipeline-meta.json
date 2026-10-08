@@ -1,0 +1,47 @@
+{
+  "target": "asset",
+  "mode": "vortex-open",
+  "source": "tempart/CannonVoid/vortex-open",
+  "align": "center",
+  "status": "giao 2026-10-05 (cannon-deliver)",
+  "frames": [
+    {
+      "frame": "vortex-open-1",
+      "aligned_bbox": [
+        57,
+        65,
+        71,
+        75
+      ]
+    },
+    {
+      "frame": "vortex-open-2",
+      "aligned_bbox": [
+        46,
+        60,
+        75,
+        78
+      ]
+    },
+    {
+      "frame": "vortex-open-3",
+      "aligned_bbox": [
+        37,
+        48,
+        92,
+        79
+      ]
+    },
+    {
+      "frame": "vortex-open-4",
+      "aligned_bbox": [
+        36,
+        48,
+        93,
+        80
+      ]
+    }
+  ],
+  "cell_size": 128,
+  "cell_height": 128
+}

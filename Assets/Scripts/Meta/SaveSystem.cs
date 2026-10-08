@@ -39,7 +39,9 @@ namespace BuildBuild.Meta
         public int nextWave = 1;
         /// <summary>Doi hinh 9 o, theo thu tu o; moi phan tu la ten asset HeroDefinition, "" = o trong.</summary>
         public List<string> lineup = new List<string>();
-        /// <summary>Phao tren 3 be phao dai, tu tren xuong; moi phan tu la ten asset CannonDefinition, "" = be trong.</summary>
+        /// <summary>Cap thanh tri 1..3 (GAME_DESIGN.md muc 2): doi sprite, mau thanh va so be phao.</summary>
+        public int castleTier = 1;
+        /// <summary>Phao tren cac be phao dai, tu tren xuong; moi phan tu la ten asset CannonDefinition, "" = be trong.</summary>
         public List<string> cannons = new List<string>();
         /// <summary>Linh o cac cho dung bai sau thanh, tu tren xuong; ten asset SoldierDefinition, "" = cho trong.</summary>
         public List<string> soldiers = new List<string>();

@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21934289f9624743841fea630ce87914, type: 3}
+  m_Name: Soldier_IronClawCrab
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.SoldierDefinition
+  displayName: "Cua k\xECm s\u1EAFt"
+  unitId: soldier_ironclawcrab
+  role: 0
+  maxHealth: 450
+  damage: 14
+  attackRate: 0.8
+  range: 0.6
+  moveSpeed: 0.8
+  leashRange: 3
+  maxHeld: 3
+  heldDamageBonus: 0
+  warden: {fileID: 0}
+  dragonRider: {fileID: 0}
+  banner: {fileID: 0}
+  wukong: {fileID: 0}
+  stormcaller: {fileID: 0}
+  galemonk: {fileID: 0}
+  daoVien: {fileID: 0}
+  bloodswordsman: {fileID: 0}
+  soulbinder: {fileID: 0}
+  swornBrother: 0
+  projectileSpeed: 20
+  splashRadius: 0.3
+  projectileFrames: []
+  projectileScale: 1
+  impactFrames:
+  - {fileID: 21300000, guid: 41515f159d8bc114c80bbf0d8e997e9d, type: 3}
+  - {fileID: 21300000, guid: 426eb0576ad5c3b489d8cabfb8d33c98, type: 3}
+  - {fileID: 21300000, guid: 56b7255c01bf93040bc0d456fb5b0a70, type: 3}
+  - {fileID: 21300000, guid: f3332a1668c87b144babc8681c6e07b5, type: 3}
+  impactScale: 1
+  knockbackOnHit: 0
+  fireSfx: 
+  impactSfx: 
+  skillSfx: 
+  skillKind: 0
+  skillTier: 0
+  skillCooldown: 0
+  manaMax: 0
+  manaPerSecond: 0.35
+  manaPerHit: 0.25
+  skillRadius: 1.6
+  skillDuration: 3
+  skillPower: 1
+  skillFrames: []
+  skillIntroFrames: []
+  skillOutroFrames: []
+  stunFrames: []
+  summoner: {fileID: 0}
+  healsAllies: 0
+  healFrames: []
+  buffFrames: []
+  shieldAmount: 0
+  shieldFrames: []
+  shieldBreakFrames: []
+  passiveStar: 0
+  minorStar: 3
+  secondMinorStar: 3
+  passiveKind: 20
+  passivePower: 0.2
+  passiveThreshold: 0
+  passiveRadius: 0
+  passiveEvery: 3
+  passiveDuration: 4
+  passiveFrames:
+  - {fileID: 21300000, guid: 1b9873472ae1e8e47848357888987e93, type: 3}
+  - {fileID: 21300000, guid: b39576e6d80a3df4582d07edd3006e30, type: 3}
+  - {fileID: 21300000, guid: f7f6ca7f007a732439d4dff819e0f99e, type: 3}
+  - {fileID: 21300000, guid: a8eaa74a2b8aacb4b9316a36f92b6e0c, type: 3}
+  ultimateText: 
+  passiveText: "K\u1EB9p Ph\xE1 Gi\xE1p: m\u1ED7i \u0111\xF2n th\u1EE9 3 l\xE0m m\u1EE5c
+    ti\xEAu nh\u1EADn th\xEAm 20% s\xE1t th\u01B0\u01A1ng trong 4s (ch\u1EC9 l\xE0m
+    m\u1EDBi)."
+  minorText: 
+  secondMinorText: 
+  ultimateIcon: {fileID: 0}
+  minorIcon: {fileID: 0}
+  passiveIcon: {fileID: 0}
+  secondMinorIcon: {fileID: 0}
+  animations: {fileID: 11400000, guid: ce38700b8f24a764baf2c2da4bf24599, type: 2}
+  artFacesRight: 0
+  avatar: {fileID: 21300000, guid: e94ec3817d95f5e41831780330069dc0, type: 3}
+  squadSize: 2
+  summonCooldown: 18

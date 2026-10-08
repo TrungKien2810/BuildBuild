@@ -170,7 +170,7 @@ namespace BuildBuild.Combat
                 bool tough = enemy.IsBoss || enemy.IsElite;
                 enemy.ApplyStun(tough ? _definition.yankStun * 0.5f : _definition.yankStun, _definition.stunFrames);
                 enemy.Health.TakeDamage(damage, _hero.Health);
-                OneShotFx.Spawn(enemy.transform.position, _definition.yankFrames, false, SortOrder.Air,
+                OneShotFx.Spawn(enemy.BodyCenter, _definition.yankFrames, false, SortOrder.Air,
                     Battlefield.UnitScale);
             }
         }

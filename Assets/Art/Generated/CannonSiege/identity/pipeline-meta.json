@@ -1,0 +1,20 @@
+{
+  "target": "asset",
+  "mode": "identity",
+  "source": "tempart/CannonSiege/identity",
+  "align": "feet",
+  "status": "giao 2026-10-05 (cannon-deliver)",
+  "frames": [
+    {
+      "frame": "identity-1",
+      "aligned_bbox": [
+        18,
+        18,
+        126,
+        96
+      ]
+    }
+  ],
+  "cell_size": 144,
+  "cell_height": 128
+}

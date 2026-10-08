@@ -1,0 +1,342 @@
+{
+  "target": "asset",
+  "mode": "blade-trails",
+  "prompt": "Create one gameplay VFX sprite sheet, exactly 2 rows by 2 columns equal square cells, row-major order, solid flat opaque #FF00FF background, no lines/labels/text. Four chronological close-range dual short-blade trails aimed at one LEFT target. Frame1 very short upper silver/red curved streak moving left; frame2 second lower streak moving left; frame3 two compact crossing streaks on LEFT half; frame4 tiny fading fragments. Blade motion occupies compact one-target space, not circle, tornado, AoE, projectile or clone. No actor or actual swords. Hero reference supplies limited palette and art language ONLY, do NOT include hero. Low-detail chibi pixel-art clusters, navy/dark colored crisp outline, 2-3 tones/material; NO blur, smooth gradient, bloom or detailed texture. Entire effect safely within central 70% of every cell, generous padding, same camera and magnification throughout; varying size is the designed effect phase, never scale each frame to fill the cell.\n",
+  "role": "",
+  "input": "tempart\\Twinblade\\blade-trails\\raw-sheet.png",
+  "threshold": 100,
+  "edge_threshold": 150,
+  "duration": 200,
+  "rows": 2,
+  "cols": 2,
+  "cell_size": 48,
+  "fit_scale": 0.78,
+  "trim_border": 4,
+  "edge_clean_depth": 3,
+  "align": "center",
+  "shared_scale": true,
+  "scale_strategy": "fit",
+  "component_mode": "all",
+  "component_padding": 0,
+  "min_component_area": 1,
+  "edge_touch_margin": 0,
+  "frame_labels": [
+    "blade-trails-1",
+    "blade-trails-2",
+    "blade-trails-3",
+    "blade-trails-4"
+  ],
+  "frames": [
+    {
+      "grid": [
+        0,
+        0
+      ],
+      "source_box": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "component_mode": "all",
+      "component_count": 3,
+      "selected_component_area": null,
+      "selected_component_bbox": null,
+      "crop_bbox": [
+        171,
+        218,
+        499,
+        337
+      ],
+      "source_frame_size": [
+        619,
+        619
+      ],
+      "is_empty": false,
+      "subject_area": 11896,
+      "body_core_area": 11666,
+      "body_area_fraction": 0.030446731269622954,
+      "anchor_source": [
+        335.0,
+        277.5
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        34,
+        12
+      ],
+      "paste_position": [
+        7,
+        18
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        7,
+        18,
+        41,
+        30
+      ],
+      "source_to_output_scale": 0.10516853932584269,
+      "bbox_scale_applied": true,
+      "scale_strategy": "fit",
+      "scale_changed": true
+    },
+    {
+      "grid": [
+        0,
+        1
+      ],
+      "source_box": [
+        627,
+        0,
+        1254,
+        627
+      ],
+      "component_mode": "all",
+      "component_count": 6,
+      "selected_component_area": null,
+      "selected_component_bbox": null,
+      "crop_bbox": [
+        143,
+        344,
+        499,
+        457
+      ],
+      "source_frame_size": [
+        619,
+        619
+      ],
+      "is_empty": false,
+      "subject_area": 14643,
+      "body_core_area": 14117,
+      "body_area_fraction": 0.036843520086856436,
+      "anchor_source": [
+        321.0,
+        400.5
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        37,
+        10
+      ],
+      "paste_position": [
+        5,
+        19
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        5,
+        19,
+        42,
+        29
+      ],
+      "source_to_output_scale": 0.10516853932584269,
+      "bbox_scale_applied": true,
+      "scale_strategy": "fit",
+      "scale_changed": true
+    },
+    {
+      "grid": [
+        1,
+        0
+      ],
+      "source_box": [
+        0,
+        627,
+        627,
+        1254
+      ],
+      "component_mode": "all",
+      "component_count": 11,
+      "selected_component_area": null,
+      "selected_component_bbox": null,
+      "crop_bbox": [
+        156,
+        185,
+        465,
+        388
+      ],
+      "source_frame_size": [
+        619,
+        619
+      ],
+      "is_empty": false,
+      "subject_area": 20017,
+      "body_core_area": 20006,
+      "body_area_fraction": 0.05221303838334277,
+      "anchor_source": [
+        310.5,
+        286.5
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        32,
+        21
+      ],
+      "paste_position": [
+        8,
+        13
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        8,
+        13,
+        40,
+        34
+      ],
+      "source_to_output_scale": 0.10516853932584269,
+      "bbox_scale_applied": true,
+      "scale_strategy": "fit",
+      "scale_changed": true
+    },
+    {
+      "grid": [
+        1,
+        1
+      ],
+      "source_box": [
+        627,
+        627,
+        1254,
+        1254
+      ],
+      "component_mode": "all",
+      "component_count": 10,
+      "selected_component_area": null,
+      "selected_component_bbox": null,
+      "crop_bbox": [
+        225,
+        226,
+        424,
+        372
+      ],
+      "source_frame_size": [
+        619,
+        619
+      ],
+      "is_empty": false,
+      "subject_area": 3624,
+      "body_core_area": 3624,
+      "body_area_fraction": 0.009458165105530051,
+      "anchor_source": [
+        324.5,
+        299.0
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        20,
+        15
+      ],
+      "paste_position": [
+        14,
+        16
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        14,
+        16,
+        34,
+        31
+      ],
+      "source_to_output_scale": 0.10516853932584269,
+      "bbox_scale_applied": true,
+      "scale_strategy": "fit",
+      "scale_changed": true
+    }
+  ],
+  "edge_touch_frames": [],
+  "source_edge_touch_frames": [],
+  "output_edge_touch_frames": [],
+  "empty_frames": [],
+  "paste_clamped_frames": [],
+  "qc_summary": {
+    "frame_count": 4,
+    "valid_frame_count": 4,
+    "empty_count": 0,
+    "edge_touch_count": 0,
+    "paste_clamped_count": 0,
+    "body_scale_mean": 0.17304785004272916,
+    "output_subject_height_mean": 14.75,
+    "body_scale_cv": 0.27682589634926147,
+    "anchor_x_std": 0.014135702746365109,
+    "anchor_y_std": 0.07988886431755975,
+    "anchor_y_mean": 0.5102988691437803
+  },
+  "qc_config": {
+    "strict_qc": true,
+    "reject_edge_touch": true,
+    "allow_source_edge_touch": false,
+    "max_body_scale_cv": null,
+    "max_anchor_y_std": null,
+    "max_profile_scale_drift": null
+  },
+  "frame_count": 4,
+  "review_qc": [
+    {
+      "frame": 1,
+      "bbox": [
+        7,
+        18,
+        41,
+        30
+      ],
+      "height": 12,
+      "bottom": 30,
+      "residue": 0
+    },
+    {
+      "frame": 2,
+      "bbox": [
+        5,
+        19,
+        42,
+        29
+      ],
+      "height": 10,
+      "bottom": 29,
+      "residue": 0
+    },
+    {
+      "frame": 3,
+      "bbox": [
+        8,
+        13,
+        40,
+        34
+      ],
+      "height": 21,
+      "bottom": 34,
+      "residue": 0
+    },
+    {
+      "frame": 4,
+      "bbox": [
+        14,
+        16,
+        34,
+        31
+      ],
+      "height": 15,
+      "bottom": 31,
+      "residue": 0
+    }
+  ],
+  "content_qc": "Agent inspected final frame strips, walk boots and effect phases; user animation approval pending.",
+  "output_origin": [
+    24.0,
+    24.0
+  ],
+  "user_review": {
+    "date": "2026-10-04",
+    "status": "approved",
+    "note": "User approved except three walk clips; unspecified animation-axis issues still need identification."
+  }
+}

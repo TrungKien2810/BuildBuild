@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "name": "BellNun",
+  "processing": {
+    "cell_size": 128,
+    "fit_scale": 0.6268807870370371,
+    "trim_border": 4,
+    "edge_clean_depth": 3,
+    "align": "center",
+    "shared_scale": true,
+    "scale_strategy": "preserve",
+    "component_mode": "largest",
+    "component_padding": 0,
+    "min_component_area": 1,
+    "edge_touch_margin": 0
+  },
+  "output_origin": [
+    64,
+    116
+  ],
+  "reference": {
+    "target": "player",
+    "mode": "idle",
+    "rows": 2,
+    "cols": 2,
+    "body_scale_mean": 0.3279325962411886,
+    "body_scale_cv": 0.007302653226031894,
+    "anchor_y_mean": 0.6225767366720517
+  },
+  "qc": {
+    "max_body_scale_drift": 0.1
+  }
+}

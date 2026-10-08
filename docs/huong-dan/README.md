@@ -29,6 +29,8 @@ giải thích lại khái niệm của bài trước.
    - golem / áo choàng / không tách được chân → [nghiem-thu-locomotion-khong-co-chan.md](nghiem-thu-locomotion-khong-co-chan.md);
    - unit 4 chân (ngựa) → [rig-chan-unit-4-chan-bang-code.md](rig-chan-unit-4-chan-bang-code.md), dựng walk
      từ idle bằng script, không cần vẽ từng frame.
+   - **dựng guide khung xương trước khi vẽ** (hai chân, đúng góc nhìn 3/4) →
+     [guide-walk-3-4-bang-code.md](guide-walk-3-4-bang-code.md).
 8. [nghiem-thu-clip-giu-the.md](nghiem-thu-clip-giu-the.md): clip chiêu đứng yên (hoá đá, khiên).
 9. [sua-scale-va-troi-frame.md](sua-scale-va-troi-frame.md): nhân vật phồng xẹp hoặc trôi ngang giữa các frame.
 10. [asset-cong-trinh-vao-khung-toa-do.md](asset-cong-trinh-vao-khung-toa-do.md): lâu đài/nền — crop vào

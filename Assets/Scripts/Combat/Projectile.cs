@@ -42,6 +42,11 @@ namespace BuildBuild.Combat
         readonly System.Collections.Generic.HashSet<Unit> _pierced = new System.Collections.Generic.HashSet<Unit>();
         float _timer;
         int _frame;
+        // Vong cau (Coi): bay tu `_arcFrom` toi diem dat CHOT luc ban, cao `_arcHeight` o giua, khong bam muc tieu.
+        float _arcHeight;
+        Vector3 _arcFrom;
+        float _arcTime, _arcDuration;
+        GameObject _arcMark;
 
         /// <summary>
         /// Dan phao (`Cannon`): khong co hero chu. `aoeRadius` 0 = DON muc tieu (chi con bi nham, ke ca khi quai khac
@@ -57,6 +62,16 @@ namespace BuildBuild.Combat
             _slowDuration = cannon.slowDuration;
             _cannon = cannon;
             _impactSfx = cannon.impactSfx;
+            if (cannon.arcHeight > 0f)
+            {
+                _arcHeight = cannon.arcHeight;
+                _arcFrom = transform.position;
+                _arcTime = 0f;
+                _arcDuration = Mathf.Max(0.2f, (_groundPoint - _arcFrom).magnitude / Mathf.Max(0.1f, cannon.projectileSpeed));
+                if (cannon.targetMarkFrames != null && cannon.targetMarkFrames.Length > 0)
+                    _arcMark = OneShotFx.SpawnLoop(null, _groundPoint, cannon.targetMarkFrames, _arcDuration + 0.1f,
+                        SortOrder.GroundDecal, scale: Battlefield.UnitScale);
+            }
             if (cannon.pierceCount > 0)
             {
                 _pierceLeft = cannon.pierceCount;
@@ -98,6 +113,11 @@ namespace BuildBuild.Combat
                 Pierce();
                 return;
             }
+            if (_arcHeight > 0f)
+            {
+                Arc();
+                return;
+            }
 
             if (_target != null && !_target.IsDying)
             {
@@ -126,6 +146,13 @@ namespace BuildBuild.Combat
 
         void Impact()
         {
+            if (_cannon != null && _cannon.fire == BuildBuild.Data.CannonFire.Vortex)
+            {
+                // Hac Tinh: loi khong no ngay — mo ho den tai dat, ho tu hut + no (VoidVortex).
+                VoidVortex.Open(_groundPoint, _damage, _cannon, _side);
+                Destroy(gameObject);
+                return;
+            }
             _impacting = true;
             Sfx.Play(_impactSfx);
             transform.rotation = Quaternion.identity;
@@ -141,8 +168,10 @@ namespace BuildBuild.Combat
                 if (_singleTarget ? enemy != _target
                     : Battlefield.GroundDistance(enemy.AimPoint(_groundPoint), _groundPoint) > _splashRadius + enemy.BodyRadius) continue;
                 float before = enemy.Health.Current;
-                enemy.Health.TakeDamage(_damage, _owner != null ? _owner.Health : null, side: _side);
+                float damage = _cannon != null ? _damage * Cannon.BigTargetFactor(_cannon, enemy) : _damage;
+                enemy.Health.TakeDamage(damage, _owner != null ? _owner.Health : null, side: _side);
                 if (_cannon != null) WaveStats.RecordCannonDamage(_cannon, _side, before - enemy.Health.Current);
+                if (_cannon != null && _cannon.rootDuration > 0f) enemy.ApplyRoot(_cannon.rootDuration, _cannon.rootFrames);
                 if (_pushDirection != 0f) enemy.PushBack(_pushDirection);
                 if (_slowPercent > 0f) enemy.ApplySlow(_slowPercent, _slowDuration);
                 if (_owner != null) _owner.OnProjectileHit(enemy, enemy == _target, _damage);   // Ngam Doc / Thoc Hang
@@ -186,6 +215,26 @@ namespace BuildBuild.Combat
                 if (--_pierceLeft <= 0) break;
             }
             if (_pierceLeft <= 0 || _flightLeft <= 0f) Destroy(gameObject);
+        }
+
+        /// <summary>Vong cau: noi suy thang tu diem ban toi diem dat + parabol cao `_arcHeight`, nghieng theo tiep tuyen.</summary>
+        void Arc()
+        {
+            _arcTime += Time.deltaTime;
+            float t = Mathf.Clamp01(_arcTime / _arcDuration);
+            var previous = transform.position;
+            transform.position = Vector3.Lerp(_arcFrom, _groundPoint, t) + Vector3.up * (4f * _arcHeight * t * (1f - t));
+            var direction = transform.position - previous;
+            if (direction.sqrMagnitude > 0f)
+            {
+                bool right = direction.x > 0f;
+                _renderer.flipX = right;
+                float angle = Mathf.Atan2(direction.y, Mathf.Abs(direction.x)) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Euler(0f, 0f, right ? angle : -angle);
+            }
+            if (t < 1f) return;
+            if (_arcMark != null) Destroy(_arcMark);
+            Impact();
         }
 
         void SetFrames(Sprite[] frames)

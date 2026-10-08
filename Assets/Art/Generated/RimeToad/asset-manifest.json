@@ -1,0 +1,160 @@
+[
+  {
+    "unit": "RimeToad",
+    "action": "identity",
+    "frame_count": 1,
+    "frame_paths": [
+      "RimeToad/identity/identity-1.png"
+    ],
+    "sheet": "RimeToad/identity/sheet-transparent.png",
+    "pivot": "feet from action aligned_bbox median",
+    "durations_ms": [
+      200
+    ]
+  },
+  {
+    "unit": "RimeToad",
+    "action": "idle",
+    "frame_count": 4,
+    "frame_paths": [
+      "RimeToad/idle/idle-1.png",
+      "RimeToad/idle/idle-2.png",
+      "RimeToad/idle/idle-3.png",
+      "RimeToad/idle/idle-4.png"
+    ],
+    "sheet": "RimeToad/idle/sheet-transparent.png",
+    "pivot": "feet from action aligned_bbox median",
+    "durations_ms": [
+      140,
+      140,
+      140,
+      140
+    ]
+  },
+  {
+    "unit": "RimeToad",
+    "action": "walk",
+    "frame_count": 6,
+    "frame_paths": [
+      "RimeToad/walk/walk-1.png",
+      "RimeToad/walk/walk-2.png",
+      "RimeToad/walk/walk-3.png",
+      "RimeToad/walk/walk-4.png",
+      "RimeToad/walk/walk-5.png",
+      "RimeToad/walk/walk-6.png"
+    ],
+    "sheet": "RimeToad/walk/sheet-transparent.png",
+    "pivot": "feet from action aligned_bbox median",
+    "durations_ms": [
+      160,
+      90,
+      90,
+      110,
+      90,
+      140
+    ]
+  },
+  {
+    "unit": "RimeToad",
+    "action": "attack",
+    "frame_count": 6,
+    "frame_paths": [
+      "RimeToad/attack/attack-1.png",
+      "RimeToad/attack/attack-2.png",
+      "RimeToad/attack/attack-3.png",
+      "RimeToad/attack/attack-4.png",
+      "RimeToad/attack/attack-5.png",
+      "RimeToad/attack/attack-6.png"
+    ],
+    "sheet": "RimeToad/attack/sheet-transparent.png",
+    "pivot": "feet from action aligned_bbox median",
+    "durations_ms": [
+      140,
+      140,
+      140,
+      140,
+      140,
+      140
+    ]
+  },
+  {
+    "unit": "RimeToad",
+    "action": "hurt",
+    "frame_count": 4,
+    "frame_paths": [
+      "RimeToad/hurt/hurt-1.png",
+      "RimeToad/hurt/hurt-2.png",
+      "RimeToad/hurt/hurt-3.png",
+      "RimeToad/hurt/hurt-4.png"
+    ],
+    "sheet": "RimeToad/hurt/sheet-transparent.png",
+    "pivot": "feet from action aligned_bbox median",
+    "durations_ms": [
+      140,
+      140,
+      140,
+      140
+    ]
+  },
+  {
+    "unit": "RimeToad",
+    "action": "death",
+    "frame_count": 6,
+    "frame_paths": [
+      "RimeToad/death/death-1.png",
+      "RimeToad/death/death-2.png",
+      "RimeToad/death/death-3.png",
+      "RimeToad/death/death-4.png",
+      "RimeToad/death/death-5.png",
+      "RimeToad/death/death-6.png"
+    ],
+    "sheet": "RimeToad/death/sheet-transparent.png",
+    "pivot": "feet from action aligned_bbox median",
+    "durations_ms": [
+      140,
+      140,
+      140,
+      140,
+      140,
+      600
+    ]
+  },
+  {
+    "unit": "RimeToad",
+    "action": "frost-projectile",
+    "frame_count": 4,
+    "frame_paths": [
+      "RimeToad/frost-projectile/frost-projectile-1.png",
+      "RimeToad/frost-projectile/frost-projectile-2.png",
+      "RimeToad/frost-projectile/frost-projectile-3.png",
+      "RimeToad/frost-projectile/frost-projectile-4.png"
+    ],
+    "sheet": "RimeToad/frost-projectile/sheet-transparent.png",
+    "pivot": "center",
+    "durations_ms": [
+      140,
+      140,
+      140,
+      140
+    ]
+  },
+  {
+    "unit": "RimeToad",
+    "action": "frost-impact",
+    "frame_count": 4,
+    "frame_paths": [
+      "RimeToad/frost-impact/frost-impact-1.png",
+      "RimeToad/frost-impact/frost-impact-2.png",
+      "RimeToad/frost-impact/frost-impact-3.png",
+      "RimeToad/frost-impact/frost-impact-4.png"
+    ],
+    "sheet": "RimeToad/frost-impact/sheet-transparent.png",
+    "pivot": "center",
+    "durations_ms": [
+      140,
+      140,
+      140,
+      140
+    ]
+  }
+]

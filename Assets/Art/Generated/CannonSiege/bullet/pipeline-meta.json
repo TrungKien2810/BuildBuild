@@ -1,0 +1,47 @@
+{
+  "target": "asset",
+  "mode": "bullet",
+  "source": "tempart/CannonSiege/bullet",
+  "align": "center",
+  "status": "giao 2026-10-05 (cannon-deliver)",
+  "frames": [
+    {
+      "frame": "projectile-1",
+      "aligned_bbox": [
+        51,
+        54,
+        77,
+        75
+      ]
+    },
+    {
+      "frame": "projectile-2",
+      "aligned_bbox": [
+        51,
+        54,
+        77,
+        74
+      ]
+    },
+    {
+      "frame": "projectile-3",
+      "aligned_bbox": [
+        51,
+        54,
+        77,
+        75
+      ]
+    },
+    {
+      "frame": "projectile-4",
+      "aligned_bbox": [
+        51,
+        54,
+        77,
+        75
+      ]
+    }
+  ],
+  "cell_size": 128,
+  "cell_height": 128
+}

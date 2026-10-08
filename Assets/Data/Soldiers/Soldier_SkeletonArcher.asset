@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21934289f9624743841fea630ce87914, type: 3}
+  m_Name: Soldier_SkeletonArcher
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.SoldierDefinition
+  displayName: "Cung th\u1EE7 x\u01B0\u01A1ng"
+  unitId: soldier_skeletonarcher
+  role: 0
+  maxHealth: 120
+  damage: 16
+  attackRate: 0.9
+  range: 4.5
+  moveSpeed: 1.1
+  leashRange: 3
+  maxHeld: 3
+  heldDamageBonus: 0
+  warden: {fileID: 0}
+  dragonRider: {fileID: 0}
+  banner: {fileID: 0}
+  wukong: {fileID: 0}
+  stormcaller: {fileID: 0}
+  galemonk: {fileID: 0}
+  daoVien: {fileID: 0}
+  bloodswordsman: {fileID: 0}
+  soulbinder: {fileID: 0}
+  swornBrother: 0
+  projectileSpeed: 9
+  splashRadius: 0.1
+  projectileFrames:
+  - {fileID: 21300000, guid: e6d724d8615e2a342b819e02ef2b962a, type: 3}
+  - {fileID: 21300000, guid: 28e16228e595a0c42aea388d82cb4ae2, type: 3}
+  - {fileID: 21300000, guid: 952dfda6136c3d945bbfba41ffe89d98, type: 3}
+  - {fileID: 21300000, guid: bc1c5e97946a7724c8b92698bfb7f5fe, type: 3}
+  projectileScale: 1
+  impactFrames:
+  - {fileID: 21300000, guid: 614815ba53b28a74d9c27847edc73f98, type: 3}
+  - {fileID: 21300000, guid: 5eda7ac06c328d841a008a81061da88c, type: 3}
+  - {fileID: 21300000, guid: 1c35342f26eb8d046a228aee1e84eeee, type: 3}
+  - {fileID: 21300000, guid: 44fb3f078b75d064fa80ee05e3851f05, type: 3}
+  impactScale: 1
+  knockbackOnHit: 0
+  fireSfx: 
+  impactSfx: 
+  skillSfx: 
+  skillKind: 0
+  skillTier: 0
+  skillCooldown: 0
+  manaMax: 0
+  manaPerSecond: 0.35
+  manaPerHit: 0.25
+  skillRadius: 1.6
+  skillDuration: 3
+  skillPower: 1
+  skillFrames: []
+  skillIntroFrames: []
+  skillOutroFrames: []
+  stunFrames: []
+  summoner: {fileID: 0}
+  healsAllies: 0
+  healFrames: []
+  buffFrames: []
+  shieldAmount: 0
+  shieldFrames: []
+  shieldBreakFrames: []
+  passiveStar: 1
+  minorStar: 3
+  secondMinorStar: 3
+  passiveKind: 0
+  passivePower: 0
+  passiveThreshold: 0
+  passiveRadius: 0
+  passiveEvery: 1
+  passiveDuration: 0
+  passiveFrames: []
+  ultimateText: 
+  passiveText: 
+  minorText: 
+  secondMinorText: 
+  ultimateIcon: {fileID: 0}
+  minorIcon: {fileID: 0}
+  passiveIcon: {fileID: 0}
+  secondMinorIcon: {fileID: 0}
+  animations: {fileID: 11400000, guid: 2209d5358f6d5724aa21ff18074148e3, type: 2}
+  artFacesRight: 0
+  avatar: {fileID: 21300000, guid: 43f05f6ab9252c1448dbbccc4f8a6bcc, type: 3}
+  squadSize: 3
+  summonCooldown: 14

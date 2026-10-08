@@ -1,0 +1,38 @@
+{
+  "target": "asset",
+  "mode": "net-status",
+  "source": "tempart/CannonNet/net-status",
+  "align": "center",
+  "status": "giao 2026-10-05 (cannon-deliver)",
+  "frames": [
+    {
+      "frame": "status-1",
+      "aligned_bbox": [
+        44,
+        44,
+        84,
+        84
+      ]
+    },
+    {
+      "frame": "status-2",
+      "aligned_bbox": [
+        47,
+        44,
+        81,
+        84
+      ]
+    },
+    {
+      "frame": "status-3",
+      "aligned_bbox": [
+        44,
+        44,
+        84,
+        84
+      ]
+    }
+  ],
+  "cell_size": 128,
+  "cell_height": 128
+}

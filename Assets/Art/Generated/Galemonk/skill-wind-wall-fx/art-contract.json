@@ -1,0 +1,43 @@
+{
+  "unit": "Galemonk",
+  "action": "skill-wind-wall-fx",
+  "status": "ready for art review; gameplay not connected",
+  "frame_files": [
+    "fx-1.png",
+    "fx-2.png",
+    "fx-3.png",
+    "fx-4.png",
+    "fx-5.png",
+    "fx-6.png"
+  ],
+  "origin_px": [
+    64,
+    115
+  ],
+  "cell_px": [
+    128,
+    128
+  ],
+  "phases": {
+    "deploy": [
+      "fx-1.png",
+      "fx-2.png"
+    ],
+    "hold": [
+      "fx-3.png"
+    ],
+    "deflect": [
+      "fx-4.png"
+    ],
+    "expire": [
+      "fx-5.png",
+      "fx-6.png"
+    ]
+  },
+  "preview_ms": 125,
+  "gameplay_timing": "unset",
+  "mirror_allowed": true,
+  "source_raw": "tempart\\SkillExpansion-20261006\\revision-v2\\wind-wall\\raw-input.png",
+  "source_prompt": "tempart\\SkillExpansion-20261006\\revision-v2\\wind-wall\\prompt-used.txt",
+  "revision": "v2 fringe cleanup, user feedback 2026-10-06; asset-only"
+}

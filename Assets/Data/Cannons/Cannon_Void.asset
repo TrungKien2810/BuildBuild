@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f28d9e270dec892bd61fa3960bb4436, type: 3}
+  m_Name: Cannon_Void
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.CannonDefinition
+  displayName: "Ph\xE1o H\u1EAFc Tinh"
+  unitId: cannon_void
+  icon: {fileID: 21300000, guid: d1359b2b1b9ba74428e6f2e63da2f986, type: 3}
+  damage: 100
+  fireRate: 0.1
+  range: 8
+  aoeRadius: 1.6
+  slowPercent: 0
+  slowDuration: 0
+  slowIconFrames: []
+  pierceCount: 0
+  fire: 3
+  arcHeight: 0
+  targetMarkFrames: []
+  rootDuration: 0
+  rootFrames: []
+  bigTargetMultiplier: 1
+  targetHighestHealth: 0
+  aimMarkFrames: []
+  muzzleFrames: []
+  spinUpSeconds: 0
+  spinUpMultiplier: 3
+  chainCount: 0
+  chainRange: 2.5
+  beamFrames: []
+  coneAngle: 60
+  burstEvery: 0
+  burstDamageMultiplier: 1.75
+  waveFrames: []
+  burstWaveFrames: []
+  burstImpactFrames: []
+  vortexSeconds: 1.5
+  vortexStackBonus: 0.15
+  vortexMaxStacks: 5
+  vortexOpenFrames:
+  - {fileID: 21300000, guid: a52209a9956d01c45ba3bb52e27dc194, type: 3}
+  - {fileID: 21300000, guid: 957747fc40e1a8c43ac529d25018727b, type: 3}
+  - {fileID: 21300000, guid: 0164cfff216446541bd6510c66d4754f, type: 3}
+  - {fileID: 21300000, guid: 8734be8fdcf43714484e86981a2fdaba, type: 3}
+  vortexLoop0:
+  - {fileID: 21300000, guid: e05a505c444977b43b35a45dc410f4c5, type: 3}
+  - {fileID: 21300000, guid: decc7d7d665920e42b8854f321ec3dca, type: 3}
+  - {fileID: 21300000, guid: 61b14111f18c85d47926397d7894db65, type: 3}
+  - {fileID: 21300000, guid: fac9b1e932feea9429c21985b7b8af92, type: 3}
+  vortexLoop1:
+  - {fileID: 21300000, guid: 45dc12ea18bb7664092ceec48b82101e, type: 3}
+  - {fileID: 21300000, guid: 6ff7d00d36c5d3048ac12debb151e2e4, type: 3}
+  - {fileID: 21300000, guid: 597f3dcb65d1d8045adb93ee3032b2c0, type: 3}
+  - {fileID: 21300000, guid: 4d66ddc24f18c244780149b916314bcf, type: 3}
+  vortexLoop2:
+  - {fileID: 21300000, guid: a1c75b4291a19a34fb4188961489dcdf, type: 3}
+  - {fileID: 21300000, guid: 4de52c20162879e44989cb59b62dc011, type: 3}
+  - {fileID: 21300000, guid: e6511fbf183ab0b4e91d42e755b39ec8, type: 3}
+  - {fileID: 21300000, guid: 270160aec3aae95418ab1629b375dbef, type: 3}
+  absorbFrames:
+  - {fileID: 21300000, guid: 475ca73b62ed7e14db40039be09d4e19, type: 3}
+  - {fileID: 21300000, guid: 2787157f9fe549d41bc240206e7e54dd, type: 3}
+  - {fileID: 21300000, guid: 9a3bb034377dac049a1f1f1070fa2be2, type: 3}
+  - {fileID: 21300000, guid: 12c863f2c2fbc3643a5a1829200acf87, type: 3}
+  impactFrames1:
+  - {fileID: 21300000, guid: 7ed3c6f1a17a3f548b4586d789198ce1, type: 3}
+  - {fileID: 21300000, guid: 9183648553ca3ec46852fa39127d98a0, type: 3}
+  - {fileID: 21300000, guid: 9258cbe3421a63c47bb279adb9900933, type: 3}
+  - {fileID: 21300000, guid: 7a688d1e64e29de489da93555c8a5fcc, type: 3}
+  - {fileID: 21300000, guid: 1b9bf8ef052122344a5244900486b940, type: 3}
+  - {fileID: 21300000, guid: 2d1626a4b3dfbb74b9efbe33bcad8ed2, type: 3}
+  impactFrames2:
+  - {fileID: 21300000, guid: d5b63638c7ae0524eacb6a6831f25e72, type: 3}
+  - {fileID: 21300000, guid: 4486c0dcbaa160a4cb1cc064e866961b, type: 3}
+  - {fileID: 21300000, guid: 3b5d212e3c0414f42986c99da839582a, type: 3}
+  - {fileID: 21300000, guid: 182102d48f7596143a2d4a4c606edaf2, type: 3}
+  - {fileID: 21300000, guid: c150f81b95e4d934ea64d172b1af841c, type: 3}
+  - {fileID: 21300000, guid: 747d04b6c8fcb3b4b82bd9092d40b494, type: 3}
+  damagePerLevel: 0.08
+  upgradeCostBase: 50
+  upgradeCostExponent: 1.5
+  projectileSpeed: 9
+  projectileFrames:
+  - {fileID: 21300000, guid: 2ac4237c9b28fc346817ee6fa2f58695, type: 3}
+  - {fileID: 21300000, guid: 01efc45576285c742987cfe731fc6608, type: 3}
+  - {fileID: 21300000, guid: 73f8f748576edc74e9981773dc25263f, type: 3}
+  - {fileID: 21300000, guid: 671389a2f2ace53478b74c37d978acfb, type: 3}
+  projectileScale: 0.7
+  impactFrames:
+  - {fileID: 21300000, guid: e1d19f1611f3c174e98289077987169d, type: 3}
+  - {fileID: 21300000, guid: 7341e2da0e744fd49be3fa65a3022ba7, type: 3}
+  - {fileID: 21300000, guid: d98cbfef2dcfa4046b833ec5ca1a366c, type: 3}
+  - {fileID: 21300000, guid: ffdc26bc23dfa944e9497215d7391cd9, type: 3}
+  - {fileID: 21300000, guid: 81c1acc3414ff4b44b62053883077c7a, type: 3}
+  - {fileID: 21300000, guid: dbc97e32dd1cfd843a6414ebbe8f1d58, type: 3}
+  impactScale: 1
+  fireSfx: cannon-fire
+  impactSfx: 
+  animations: {fileID: 11400000, guid: 3fdb5dcc88de27c45aeaa812f72001ca, type: 2}
+  displayScale: 1.4
+  muzzle: {x: -0.44, y: 0.44}
+  tint: {r: 1, g: 1, b: 1, a: 1}

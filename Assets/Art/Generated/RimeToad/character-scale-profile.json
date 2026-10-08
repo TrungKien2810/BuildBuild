@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "name": "RimeToad",
+  "processing": {
+    "cell_size": 128,
+    "fit_scale": 0.6666666666666666,
+    "trim_border": 0,
+    "edge_clean_depth": 3,
+    "align": "center",
+    "shared_scale": true,
+    "scale_strategy": "preserve",
+    "component_mode": "largest",
+    "component_padding": 0,
+    "min_component_area": 1,
+    "edge_touch_margin": 0
+  },
+  "output_origin": [
+    64.0,
+    64.0
+  ],
+  "reference": {
+    "target": "creature",
+    "mode": "identity",
+    "rows": 1,
+    "cols": 1,
+    "body_scale_mean": 0.3769480650567131,
+    "body_scale_cv": 0.0,
+    "anchor_y_mean": 0.634765625
+  },
+  "qc": {
+    "max_body_scale_drift": 0.1
+  }
+}

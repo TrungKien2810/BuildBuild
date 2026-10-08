@@ -93,6 +93,21 @@ namespace BuildBuild.Data
         /// </summary>
         Puppet,
         BloodShatter, SoulPact, SeedRain, TrapDetonation, SigilBombs,
+        /// <summary>
+        /// Hiep Si Bo Hung Huc Sung: xung quanh chan ban kinh `skillRadius`, damage x `skillPower`, choang `skillDuration`
+        /// (tinh anh / boss mot nua). FX: `skillFrames` xung dat, `stunFrames` dau choang.
+        /// </summary>
+        HornSlam,
+        /// <summary>
+        /// Hiep Khach Song Dao Bao Dao: khoa muc tieu dang danh, 6 nhat trong 3s, moi nhat damage x `skillPower` va huong
+        /// tang Lien Hoan luc bat dau; het chieu xoa tang. FX: `skillFrames` vet dao.
+        /// </summary>
+        BladeStorm,
+        /// <summary>
+        /// Nu Tu Chuong Bac Hoi Chuong: go Doc/Chay/Cham/Troi/Khoa Don/Choang khoi moi dong minh; doi thu cham `skillPower`
+        /// trong `skillDuration` (tinh anh mot nua, boss khong). FX: `skillFrames` song chuong.
+        /// </summary>
+        BellToll,
     }
 
     /// <summary>
@@ -136,6 +151,22 @@ namespace BuildBuild.Data
         /// <summary>Tien Det To Day Roi: quai an don thuong bi `passivePower` (0,25 = 25%) don truot trong `passiveDuration` giay.</summary>
         Tangle,
         SeedStacks, Traps, SigilWeakness,
+        /// <summary>Bo Hung Chan Dong: moi don thuong thu `passiveEvery` trung muc tieu hat no lui `passiveRadius` (tinh anh mot nua, boss khong).</summary>
+        Quake,
+        /// <summary>
+        /// Song Dao Lien Hoan: moi don trung CUNG muc tieu +`passivePower` sat thuong don ke tiep, toi da `passiveEvery` tang;
+        /// doi muc tieu hoac `passiveDuration` giay khong trung thi mat tang. `passiveFrames` = dau tang (frame i = i+1 tang).
+        /// </summary>
+        Combo,
+        /// <summary>
+        /// Chuong Bac Thanh Tay: moi `passiveDuration` giay go 1 hieu ung Doc -> Chay -> Cham khoi dong minh gan nhat dang bi
+        /// trong `passiveRadius`; khong ai can thi giu luot. `passiveFrames` = FX thanh tay tren nguoi duoc go.
+        /// </summary>
+        Purify,
+        /// <summary>Linh Nam: don trung de vung bao tu ban kinh `passiveRadius` `passiveDuration` giay, quai trong vung cham `passivePower`.</summary>
+        SporeField,
+        /// <summary>Cua Kim Sat: moi don thu `passiveEvery` pha giap muc tieu `passivePower` trong `passiveDuration` giay (chi lam moi, khong cong).</summary>
+        ClampBreak,
     }
 
     /// <summary>
@@ -150,6 +181,8 @@ namespace BuildBuild.Data
             "Id `UnitDefinition` trong gacha (vd. knight, soldier_warwolf). Chi dat/trieu hoi duoc khi save da so huu id " +
             "nay. Trong = khong bao gio so huu (linh xuong/ky si cua Bonecaller khong can — khong qua bang chon).")]
         public string unitId;
+        [Tooltip("Vai tro hien tren the + bo loc man Doi quan (ten/icon o `HeroRoleCatalog`). Khong doi hanh vi tran.")]
+        public HeroRole role;
 
         [Header("Chi so goc (GAME_DESIGN.md muc 3)")]
         [Tooltip("Mau cua hero. Hero AN DON nhu moi thu khac tren san — het mau la chet, het wave moi song lai.")]
@@ -241,7 +274,7 @@ namespace BuildBuild.Data
         public Sprite[] skillFrames;
         [Tooltip("Petrify: vo da moc len, chay MOT lan truoc khi lap skillFrames. MushroomBloom: nam moc len (giu frame cuoi toi khi no).")]
         public Sprite[] skillIntroFrames;
-        [Tooltip("Whirlpool: xoay tan, chay MOT lan khi het chieu.")]
+        [Tooltip("Whirlpool: xoay tan, chay MOT lan khi het chieu. SporeField (Linh Nam): vung bao tu tan.")]
         public Sprite[] skillOutroFrames;
         [Tooltip("Charge (Ky si tu than): sao choang LAP tren dau quai trong luc bi choang. Trong = khong co FX.")]
         public Sprite[] stunFrames;
@@ -295,7 +328,7 @@ namespace BuildBuild.Data
         [Min(1)] public int passiveEvery = 1;
         [Tooltip("Venom: tang Doc ton tai bao lau (trung lai thi dem lai).")]
         public float passiveDuration;
-        [Tooltip("Venom: bong bong doc LAP o chan quai trung doc. Spores: bui bao tu quanh chan khi nha.")]
+        [Tooltip("Spores: bui bao tu quanh chan khi nha. Venom / Ignite: FX Doc / Chay bam than quai (trong = FX chung Resources/StatusLibrary).")]
         public Sprite[] passiveFrames;
 
         [Header("Mo ta ky nang (man Doi quan)")]

@@ -1,0 +1,65 @@
+{
+  "target": "asset",
+  "mode": "attack",
+  "source": "tempart/CannonSiege/attack",
+  "align": "feet",
+  "status": "giao 2026-10-05 (cannon-deliver)",
+  "frames": [
+    {
+      "frame": "attack-1",
+      "aligned_bbox": [
+        18,
+        18,
+        126,
+        96
+      ]
+    },
+    {
+      "frame": "attack-2",
+      "aligned_bbox": [
+        19,
+        18,
+        127,
+        96
+      ]
+    },
+    {
+      "frame": "attack-3",
+      "aligned_bbox": [
+        2,
+        18,
+        132,
+        96
+      ]
+    },
+    {
+      "frame": "attack-4",
+      "aligned_bbox": [
+        1,
+        8,
+        132,
+        96
+      ]
+    },
+    {
+      "frame": "attack-5",
+      "aligned_bbox": [
+        5,
+        10,
+        129,
+        96
+      ]
+    },
+    {
+      "frame": "attack-6",
+      "aligned_bbox": [
+        18,
+        18,
+        126,
+        96
+      ]
+    }
+  ],
+  "cell_size": 144,
+  "cell_height": 128
+}

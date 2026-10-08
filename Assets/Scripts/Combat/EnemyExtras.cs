@@ -75,6 +75,15 @@ namespace BuildBuild.Combat
                 dragon.Initialise(enemy, definition.dragon, damageMultiplier);
             }
             else if (dragon != null) Destroy(dragon);
+
+            // Phun lua (Ky Nhong) / rung chuong tang toc (Goblin Rung Chuong).
+            var abilities = GetComponent<EnemyAbilities>();
+            if (definition.breathCooldown > 0f || definition.ringCooldown > 0f)
+            {
+                if (abilities == null) abilities = gameObject.AddComponent<EnemyAbilities>();
+                abilities.Initialise(enemy, damageMultiplier);
+            }
+            else if (abilities != null) Destroy(abilities);
         }
 
         // LateUpdate: `Enemy` dat lai mau (dong bang / choang / trang) trong Update — to SAU no.
@@ -133,7 +142,10 @@ namespace BuildBuild.Combat
                 // Chan Dan (Nguoi Lun Khien Rune): dan vo tren khien, khong sat thuong, khong vung doc.
                 if (unit is Hero hero && hero.BreaksShot(at)) return;
                 if (target != null) target.TakeDamage(damage, source);
-                if (pool) PoisonPool.Spawn(at, definition.poolFrames, definition.poolDuration, definition.poolRadius, dps);
+                if (definition.hitStatusEvery <= 1 && _enemy != null) _enemy.ApplyHitStatus(target);   // Coc Suong: cham
+                if (pool)
+                    HazardPool.Spawn(at, definition.poolFrames, definition.poolDuration, definition.poolRadius, StatusId.Poison,
+                        dps, definition.poolPoisonSeconds);
             };
 
             EnemyShot.Launch(from, target.transform, wall ? (float?)null : unit.BodyHeight * 0.5f, definition.projectileSpeed,

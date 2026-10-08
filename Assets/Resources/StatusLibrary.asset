@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 188cbee53be542be9b0d97d72482c2e2, type: 3}
+  m_Name: StatusLibrary
+  m_EditorClassIdentifier: 
+  visuals:
+  - id: 0
+    fxFrames:
+    - {fileID: 21300000, guid: 8228fd751bde5914b90c715ffde182d2, type: 3}
+    - {fileID: 21300000, guid: f1800b32521ea0c4b9e5d1a00027bc98, type: 3}
+    - {fileID: 21300000, guid: 76458bbaee342e649ad3be52aaa719be, type: 3}
+    - {fileID: 21300000, guid: cfd74b3052f429a4aa4cbb252a41534e, type: 3}
+  - id: 1
+    fxFrames:
+    - {fileID: 21300000, guid: d1ef92a75135a4f4fba7eb2339ae9d54, type: 3}
+    - {fileID: 21300000, guid: 9592683d059652149aafc4380d673661, type: 3}
+    - {fileID: 21300000, guid: eef9e002ecf4fc4478006b35dc1e4cd7, type: 3}
+    - {fileID: 21300000, guid: 7dbd537e6f7c6ff45b9d64bcd53ca795, type: 3}

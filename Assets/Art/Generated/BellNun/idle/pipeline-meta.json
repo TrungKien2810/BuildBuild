@@ -1,0 +1,429 @@
+{
+  "target": "player",
+  "mode": "idle",
+  "prompt": "Create an IDLE animation of the EXACT approved hero in image 1, no redesign. Image 2 is Frostweaver style/camera reference only. Exactly 2 rows by 2 columns equal square cells, FOUR row-major chronological frames on flat solid opaque #FF00FF. Identity: ivory habit, silver-gray hood, tiny blue-gray trim, ONE silver handbell; preserve exactly the approved faceless nun. Same elevated LEFT-facing asymmetric three-quarter front view, zoom and simple low-detail chibi pixel clusters with navy outline; no facial detail. Idle phases neutral → slight inhale → settle → neutral. Tiny shoulder breathing and attached hood edge settling; bell hand remains neutral and almost stationary. Feet and pelvis fixed in every frame, root does not translate, no walking or attack. Standing-equivalent body fills about 42% of square cell height, feet at 82%, centered horizontally, generous padding. Full body contained, no shadows, FX, text, borders or separators.\n",
+  "role": "",
+  "input": "tempart\\BellNun\\idle\\raw-sheet.png",
+  "threshold": 100,
+  "edge_threshold": 150,
+  "duration": 200,
+  "rows": 2,
+  "cols": 2,
+  "cell_size": 128,
+  "fit_scale": 0.6268807870370371,
+  "trim_border": 4,
+  "edge_clean_depth": 3,
+  "align": "feet",
+  "shared_scale": true,
+  "scale_strategy": "preserve",
+  "component_mode": "largest",
+  "component_padding": 0,
+  "min_component_area": 1,
+  "edge_touch_margin": 0,
+  "frame_labels": [
+    "idle-1",
+    "idle-2",
+    "idle-3",
+    "idle-4"
+  ],
+  "frames": [
+    {
+      "grid": [
+        0,
+        0
+      ],
+      "source_box": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "component_mode": "largest",
+      "component_count": 1,
+      "selected_component_area": 40466,
+      "selected_component_bbox": [
+        236,
+        252,
+        416,
+        574
+      ],
+      "crop_bbox": [
+        236,
+        252,
+        416,
+        574
+      ],
+      "source_frame_size": [
+        619,
+        619
+      ],
+      "is_empty": false,
+      "subject_area": 40466,
+      "body_core_area": 40466,
+      "body_area_fraction": 0.10561095727383528,
+      "anchor_source": [
+        326.0,
+        413.0
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        23,
+        42
+      ],
+      "preserved_subject_size": [
+        23,
+        42
+      ],
+      "paste_position": [
+        50,
+        74
+      ],
+      "unclamped_paste_position": [
+        52,
+        43
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        50,
+        74,
+        73,
+        116
+      ],
+      "scale_adjustment": 1.0,
+      "source_to_output_scale": 0.12962962962962965,
+      "bbox_scale_applied": false,
+      "scale_changed": false,
+      "anchor_target": [
+        64.0,
+        64.0
+      ],
+      "scale_strategy": "preserve",
+      "shared_center_x": 64.0,
+      "shared_feet_y": 64.0,
+      "frame": "idle-1"
+    },
+    {
+      "grid": [
+        0,
+        1
+      ],
+      "source_box": [
+        627,
+        0,
+        1254,
+        627
+      ],
+      "component_mode": "largest",
+      "component_count": 1,
+      "selected_component_area": 41516,
+      "selected_component_bbox": [
+        189,
+        248,
+        371,
+        574
+      ],
+      "crop_bbox": [
+        189,
+        248,
+        371,
+        574
+      ],
+      "source_frame_size": [
+        619,
+        619
+      ],
+      "is_empty": false,
+      "subject_area": 41516,
+      "body_core_area": 41516,
+      "body_area_fraction": 0.10835131968023885,
+      "anchor_source": [
+        280.0,
+        411.0
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        24,
+        42
+      ],
+      "preserved_subject_size": [
+        24,
+        42
+      ],
+      "paste_position": [
+        50,
+        74
+      ],
+      "unclamped_paste_position": [
+        52,
+        43
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        50,
+        74,
+        74,
+        116
+      ],
+      "scale_adjustment": 1.0,
+      "source_to_output_scale": 0.12962962962962965,
+      "bbox_scale_applied": false,
+      "scale_changed": false,
+      "anchor_target": [
+        64.0,
+        64.0
+      ],
+      "scale_strategy": "preserve",
+      "shared_center_x": 64.0,
+      "shared_feet_y": 64.0,
+      "frame": "idle-2"
+    },
+    {
+      "grid": [
+        1,
+        0
+      ],
+      "source_box": [
+        0,
+        627,
+        627,
+        1254
+      ],
+      "component_mode": "largest",
+      "component_count": 2,
+      "selected_component_area": 42017,
+      "selected_component_bbox": [
+        239,
+        192,
+        422,
+        522
+      ],
+      "crop_bbox": [
+        239,
+        192,
+        422,
+        522
+      ],
+      "source_frame_size": [
+        619,
+        619
+      ],
+      "is_empty": false,
+      "subject_area": 42017,
+      "body_core_area": 42020,
+      "body_area_fraction": 0.10966669363531258,
+      "anchor_source": [
+        330.5,
+        357.0
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        24,
+        43
+      ],
+      "preserved_subject_size": [
+        24,
+        43
+      ],
+      "paste_position": [
+        50,
+        73
+      ],
+      "unclamped_paste_position": [
+        52,
+        43
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        50,
+        73,
+        74,
+        116
+      ],
+      "scale_adjustment": 1.0,
+      "source_to_output_scale": 0.12962962962962965,
+      "bbox_scale_applied": false,
+      "scale_changed": false,
+      "anchor_target": [
+        64.0,
+        64.0
+      ],
+      "scale_strategy": "preserve",
+      "shared_center_x": 64.0,
+      "shared_feet_y": 64.0,
+      "frame": "idle-3"
+    },
+    {
+      "grid": [
+        1,
+        1
+      ],
+      "source_box": [
+        627,
+        627,
+        1254,
+        1254
+      ],
+      "component_mode": "largest",
+      "component_count": 1,
+      "selected_component_area": 40827,
+      "selected_component_bbox": [
+        184,
+        199,
+        364,
+        522
+      ],
+      "crop_bbox": [
+        184,
+        199,
+        364,
+        522
+      ],
+      "source_frame_size": [
+        619,
+        619
+      ],
+      "is_empty": false,
+      "subject_area": 40827,
+      "body_core_area": 40827,
+      "body_area_fraction": 0.10655311996784642,
+      "anchor_source": [
+        274.0,
+        360.5
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        23,
+        42
+      ],
+      "preserved_subject_size": [
+        23,
+        42
+      ],
+      "paste_position": [
+        50,
+        74
+      ],
+      "unclamped_paste_position": [
+        52,
+        43
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        50,
+        74,
+        73,
+        116
+      ],
+      "scale_adjustment": 1.0,
+      "source_to_output_scale": 0.12962962962962965,
+      "bbox_scale_applied": false,
+      "scale_changed": false,
+      "anchor_target": [
+        64.0,
+        64.0
+      ],
+      "scale_strategy": "preserve",
+      "shared_center_x": 64.0,
+      "shared_feet_y": 64.0,
+      "frame": "idle-4"
+    }
+  ],
+  "edge_touch_frames": [],
+  "source_edge_touch_frames": [],
+  "output_edge_touch_frames": [],
+  "empty_frames": [],
+  "paste_clamped_frames": [],
+  "qc_summary": {
+    "frame_count": 4,
+    "valid_frame_count": 4,
+    "empty_count": 0,
+    "edge_touch_count": 0,
+    "paste_clamped_count": 0,
+    "body_scale_mean": 0.3279325962411886,
+    "output_subject_height_mean": 42.25,
+    "body_scale_cv": 0.007302653226031894,
+    "anchor_x_std": 0.0416184649546142,
+    "anchor_y_std": 0.04307450444829991,
+    "anchor_y_mean": 0.6225767366720517
+  },
+  "output_origin": [
+    64,
+    116
+  ],
+  "qc_config": {
+    "strict_qc": true,
+    "reject_edge_touch": true,
+    "allow_source_edge_touch": false,
+    "max_body_scale_cv": null,
+    "max_anchor_y_std": null,
+    "max_profile_scale_drift": null
+  },
+  "scale_profile_output": "tempart\\BellNun\\character-scale-profile.json",
+  "project_baseline_restored": true,
+  "ground_baseline_exclusive": 116,
+  "frame_count": 4,
+  "review_qc": [
+    {
+      "frame": 1,
+      "bbox": [
+        50,
+        74,
+        73,
+        116
+      ],
+      "height": 42,
+      "bottom": 116,
+      "residue": 0
+    },
+    {
+      "frame": 2,
+      "bbox": [
+        50,
+        74,
+        74,
+        116
+      ],
+      "height": 42,
+      "bottom": 116,
+      "residue": 0
+    },
+    {
+      "frame": 3,
+      "bbox": [
+        50,
+        73,
+        74,
+        116
+      ],
+      "height": 43,
+      "bottom": 116,
+      "residue": 0
+    },
+    {
+      "frame": 4,
+      "bbox": [
+        50,
+        74,
+        73,
+        116
+      ],
+      "height": 42,
+      "bottom": 116,
+      "residue": 0
+    }
+  ],
+  "content_qc": "Agent inspected final frame strips, walk boots and effect phases; user animation approval pending.",
+  "user_review": {
+    "date": "2026-10-04",
+    "status": "approved",
+    "note": "User approved except three walk clips; unspecified animation-axis issues still need identification."
+  }
+}

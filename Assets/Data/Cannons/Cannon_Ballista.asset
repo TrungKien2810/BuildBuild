@@ -23,6 +23,36 @@ MonoBehaviour:
   slowDuration: 0
   slowIconFrames: []
   pierceCount: 3
+  fire: 0
+  arcHeight: 0
+  targetMarkFrames: []
+  rootDuration: 0
+  rootFrames: []
+  bigTargetMultiplier: 1
+  targetHighestHealth: 0
+  aimMarkFrames: []
+  muzzleFrames: []
+  spinUpSeconds: 0
+  spinUpMultiplier: 3
+  chainCount: 0
+  chainRange: 2.5
+  beamFrames: []
+  coneAngle: 60
+  burstEvery: 0
+  burstDamageMultiplier: 1.75
+  waveFrames: []
+  burstWaveFrames: []
+  burstImpactFrames: []
+  vortexSeconds: 1.5
+  vortexStackBonus: 0.15
+  vortexMaxStacks: 5
+  vortexOpenFrames: []
+  vortexLoop0: []
+  vortexLoop1: []
+  vortexLoop2: []
+  absorbFrames: []
+  impactFrames1: []
+  impactFrames2: []
   damagePerLevel: 0.08
   upgradeCostBase: 50
   upgradeCostExponent: 1.5

@@ -1,0 +1,47 @@
+{
+  "target": "asset",
+  "mode": "absorb",
+  "source": "tempart/CannonVoid/absorb",
+  "align": "center",
+  "status": "giao 2026-10-05 (cannon-deliver)",
+  "frames": [
+    {
+      "frame": "absorb-1",
+      "aligned_bbox": [
+        62,
+        48,
+        87,
+        68
+      ]
+    },
+    {
+      "frame": "absorb-2",
+      "aligned_bbox": [
+        55,
+        49,
+        81,
+        74
+      ]
+    },
+    {
+      "frame": "absorb-3",
+      "aligned_bbox": [
+        57,
+        49,
+        82,
+        69
+      ]
+    },
+    {
+      "frame": "absorb-4",
+      "aligned_bbox": [
+        55,
+        55,
+        72,
+        73
+      ]
+    }
+  ],
+  "cell_size": 128,
+  "cell_height": 128
+}

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
   displayName: "Huy\u1EBFt ki\u1EBFm kh\xE1ch"
   unitId: bloodswordsman
+  role: 2
   maxHealth: 900
   damage: 32
   attackRate: 0.8

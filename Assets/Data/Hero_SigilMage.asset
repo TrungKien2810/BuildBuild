@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
   displayName: "Th\u1EA7y b\xF9a \u1EA5n sao"
   unitId: sigilmage
+  role: 5
   maxHealth: 240
   damage: 18
   attackRate: 0.8

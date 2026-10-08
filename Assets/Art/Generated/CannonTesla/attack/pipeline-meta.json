@@ -1,0 +1,65 @@
+{
+  "target": "asset",
+  "mode": "attack",
+  "source": "tempart/CannonTesla/attack",
+  "align": "feet",
+  "status": "giao 2026-10-05 (cannon-deliver)",
+  "frames": [
+    {
+      "frame": "attack-1",
+      "aligned_bbox": [
+        32,
+        24,
+        98,
+        97
+      ]
+    },
+    {
+      "frame": "attack-2",
+      "aligned_bbox": [
+        32,
+        24,
+        98,
+        97
+      ]
+    },
+    {
+      "frame": "attack-3",
+      "aligned_bbox": [
+        32,
+        24,
+        98,
+        97
+      ]
+    },
+    {
+      "frame": "attack-4",
+      "aligned_bbox": [
+        32,
+        24,
+        98,
+        97
+      ]
+    },
+    {
+      "frame": "attack-5",
+      "aligned_bbox": [
+        32,
+        24,
+        98,
+        97
+      ]
+    },
+    {
+      "frame": "attack-6",
+      "aligned_bbox": [
+        32,
+        24,
+        98,
+        97
+      ]
+    }
+  ],
+  "cell_size": 128,
+  "cell_height": 128
+}

@@ -1,0 +1,65 @@
+{
+  "target": "asset",
+  "mode": "attack",
+  "source": "tempart/CannonMortar/attack",
+  "align": "feet",
+  "status": "giao 2026-10-05 (cannon-deliver)",
+  "frames": [
+    {
+      "frame": "attack-1",
+      "aligned_bbox": [
+        34,
+        22,
+        94,
+        97
+      ]
+    },
+    {
+      "frame": "attack-2",
+      "aligned_bbox": [
+        34,
+        23,
+        94,
+        97
+      ]
+    },
+    {
+      "frame": "attack-3",
+      "aligned_bbox": [
+        34,
+        14,
+        94,
+        97
+      ]
+    },
+    {
+      "frame": "attack-4",
+      "aligned_bbox": [
+        34,
+        11,
+        94,
+        97
+      ]
+    },
+    {
+      "frame": "attack-5",
+      "aligned_bbox": [
+        34,
+        8,
+        94,
+        97
+      ]
+    },
+    {
+      "frame": "attack-6",
+      "aligned_bbox": [
+        34,
+        22,
+        94,
+        97
+      ]
+    }
+  ],
+  "cell_size": 128,
+  "cell_height": 128
+}

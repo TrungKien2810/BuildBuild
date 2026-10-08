@@ -1,0 +1,36 @@
+{
+  "unit": "Stormcaller",
+  "action": "skill-pursuit-orb-hit-fx",
+  "status": "ready for art review; gameplay not connected",
+  "frame_files": [
+    "fx-1.png",
+    "fx-2.png",
+    "fx-3.png",
+    "fx-4.png"
+  ],
+  "origin_px": [
+    64,
+    64
+  ],
+  "cell_px": [
+    128,
+    128
+  ],
+  "phases": {
+    "arrival": [
+      "fx-1.png"
+    ],
+    "hit": [
+      "fx-2.png"
+    ],
+    "fade": [
+      "fx-3.png",
+      "fx-4.png"
+    ]
+  },
+  "preview_ms": 125,
+  "gameplay_timing": "unset",
+  "mirror_allowed": true,
+  "source_raw": "tempart\\SkillExpansion-20261006\\Stormcaller\\skill-pursuit-orb-hit-fx\\raw-input.png",
+  "source_prompt": "tempart\\SkillExpansion-20261006\\Stormcaller\\skill-pursuit-orb-hit-fx\\prompt-used.txt"
+}

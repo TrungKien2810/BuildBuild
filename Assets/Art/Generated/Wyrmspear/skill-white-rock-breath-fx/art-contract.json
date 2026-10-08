@@ -1,0 +1,42 @@
+{
+  "unit": "Wyrmspear",
+  "action": "skill-white-rock-breath-fx",
+  "status": "ready for art review; gameplay not connected",
+  "frame_files": [
+    "fx-1.png",
+    "fx-2.png",
+    "fx-3.png",
+    "fx-4.png",
+    "fx-5.png",
+    "fx-6.png"
+  ],
+  "origin_px": [
+    96,
+    64
+  ],
+  "cell_px": [
+    128,
+    128
+  ],
+  "phases": {
+    "gather": [
+      "fx-1.png"
+    ],
+    "open": [
+      "fx-2.png"
+    ],
+    "breath-pulses": [
+      "fx-3.png",
+      "fx-4.png",
+      "fx-5.png"
+    ],
+    "fade": [
+      "fx-6.png"
+    ]
+  },
+  "preview_ms": 125,
+  "gameplay_timing": "unset",
+  "mirror_allowed": true,
+  "source_raw": "tempart\\SkillExpansion-20261006\\Wyrmspear\\skill-white-rock-breath-fx\\raw-input.png",
+  "source_prompt": "tempart\\SkillExpansion-20261006\\Wyrmspear\\skill-white-rock-breath-fx\\prompt-used.txt"
+}

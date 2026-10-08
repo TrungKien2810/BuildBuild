@@ -35,8 +35,8 @@ if (_remaining <= 0f) { Destroy(gameObject); return; }
 foreach (var enemy in Enemy.Alive)
     if (trong bán kính) enemy.ApplyFreeze(_remaining);
 
-// Enemy.ApplyFreeze()
-_frozenUntil = Mathf.Max(_frozenUntil, Time.time + seconds);
+// Enemy.ApplyFreeze() — đồng hồ nằm trong kho hiệu ứng chung (mục 7), luật "lấy hạn dài hơn" = Max
+Status.Apply(StatusId.Freeze, 0f, seconds);
 ```
 
 Ba hệ quả **miễn phí**, không viết thêm dòng nào:
@@ -321,3 +321,47 @@ Ba mẹo khiến placeholder này không gây hiểu nhầm về sau:
 - [ ] Chiêu nhỏ KHÔNG được vẽ thanh hay chỉ báo nào lên màn hình.
 - [ ] Chưa có art thì có placeholder tự vẽ, và nhánh placeholder tự tắt khi art về.
 - [ ] Mở Unity: Console không có lỗi compile, vào Play xem kỹ năng chạy đúng.
+
+---
+
+## 7. Kho hiệu ứng chung `StatusEffects` — mọi nguồn gọi cùng một chỗ
+
+Cháy, Độc, Chậm, Đóng băng, Choáng, Phá giáp, Cấm hồi máu không còn nằm rải trong `Unit`/`Enemy`/`Hero`
+hay component riêng (`Burn`, `Venom` đã xoá). Mỗi unit có một kho `unit.Status` (component
+`StatusEffects`, tự gắn lần đầu gọi tới). Pháp Sư Lửa, đất cháy của Rồng hay quái Kỳ Nhông sau này đều gọi:
+
+```csharp
+enemy.Status.Apply(StatusId.Burn, dps, giây, nguồnHealth, Side, spread: bánKínhLan);
+enemy.Status.Apply(StatusId.Poison, dpsMỗiTầng, giây, nguồnHealth, Side, stacks: 1, maxStacks: 5);
+hero.Status.Apply(StatusId.NoHeal, 0f, giây);
+```
+
+Code bên trong làm gì:
+
+- **Luật cộng dồn đặt theo mã, không theo nguồn.** `Poison` cộng tầng tới trần (trần lớn nhất từng gặp),
+  sát thương mỗi tầng lấy mức cao hơn. Mọi mã khác không cộng: giữ mức **mạnh hơn** và hạn **dài hơn**.
+- **DoT tick mỗi 0,5 giây** trong `StatusEffects.Update` (Cháy: `dps × 0,5`; Độc: `dps × tầng × 0,5`),
+  ghi sát thương loại `Periodic`.
+- **Cháy lan:** unit chết lúc đang cháy với `spread > 0` thì lửa nhảy sang đối thủ gần nhất của phe người đốt.
+- **Cấm hồi máu** ghi xuyên sang `Health.NoHealUntil`, vì `Health.Heal` đọc trường đó.
+- **FX bám thân:** nguồn có asset riêng thì truyền `fx: frames` vào `Apply` (Pháp Sư Lửa truyền `passiveFrames`
+  của nó). Không truyền thì dùng hình chung trong `Assets/Resources/StatusLibrary.asset`: chọn asset đó trong
+  Project, mở `Visuals`, kéo frame vào `Fx Frames` của dòng `Burn`/`Poison`. Vẫn là MỘT trạng thái — hình hiện
+  theo lần gắn mạnh nhất, lửa lan sang con khác mang theo hình của nó.
+- **Giải debuff:** `unit.Status.Cleanse()` gỡ toàn bộ. Ấn Đức của Lưu Bị gọi qua `ClearDebuffs()`, hàm này
+  gọi `Cleanse()` rồi gỡ thêm Trói / Xích / Long Uy (ba hiệu ứng này chưa chuyển vào kho).
+- **Bảng thông tin hero** lấy dòng từ `StatusEffects.Collect`.
+- **Vùng trên mặt đất** (`HazardPool`: vũng độc Goblin, đất cháy Rồng) không tự trừ máu. Cứ mỗi 0,5 giây nó
+  `Apply` trạng thái cho hero đứng trong vùng, với hạn `poolPoisonSeconds` / `burnLingerSeconds` (ô trong
+  `EnemyDefinition` / `DreadwyrmDefinition`). Bước ra khỏi vùng thì trạng thái vẫn dính hết hạn đó.
+
+Thêm một hiệu ứng mới bằng tay:
+
+1. Mở `Assets/Scripts/Combat/StatusEffects.cs`, thêm mã vào `enum StatusId`.
+2. Luật mặc định là "mạnh hơn + dài hơn". Cần luật khác (cộng tầng, tick sát thương) thì thêm nhánh trong `Apply`
+   và trong `IsDot`, giống `Poison`.
+3. Thêm một dòng vào `Collect` để bảng thông tin hiện nó. Nếu cần icon riêng, thêm mã vào cuối `EffectKind`
+   (`UnitEffect.cs`) và thêm một dòng tương ứng vào cuối `EffectIconPaths` trong `SceneBuilder.cs`.
+4. Có FX bám thân: mở `StatusLibrary.asset`, thêm một phần tử vào `Visuals`, chọn `Id` rồi kéo frame vào.
+5. Chỗ đọc hiệu ứng (khoá di chuyển, giảm sát thương...) gọi `Status.Has(...)` / `Status.Power(...)`.
+6. Không cần sửa hàm giải debuff: `Cleanse` tự gỡ mọi mã.

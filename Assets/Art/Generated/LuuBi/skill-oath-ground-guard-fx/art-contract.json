@@ -1,0 +1,58 @@
+{
+  "unit": "LuuBi",
+  "action": "skill-oath-ground-guard-fx",
+  "status": "new replacement art; awaiting user review; gameplay not connected",
+  "cell_px": [
+    128,
+    128
+  ],
+  "origin_px": [
+    64,
+    116
+  ],
+  "anchor": "recipient_ground_root",
+  "imported_sprite_pivot_px": [
+    64,
+    64
+  ],
+  "attachment_offset_from_center_px": [
+    0,
+    52
+  ],
+  "attachment_note": "FX importer retains center pivot; bind virtual origin (64,116), not bbox bottom or unadjusted center pivot",
+  "sorting": "behind recipient body; ground ring below body, never in front of chest",
+  "frame_files": [
+    "fx-1.png",
+    "fx-2.png",
+    "fx-3.png",
+    "fx-4.png",
+    "fx-5.png",
+    "fx-6.png",
+    "fx-7.png",
+    "fx-8.png"
+  ],
+  "phases": {
+    "activate": [
+      1,
+      2
+    ],
+    "hold": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "expire": [
+      7,
+      8
+    ]
+  },
+  "preview_ms": 160,
+  "gameplay_timing": "unset",
+  "mirror_allowed": true,
+  "source_raw": "tempart\\SkillExpansion-20261006\\revision-v3\\luu\\raw.png",
+  "source_prompt": "tempart\\SkillExpansion-20261006\\revision-v3\\luu\\prompt.txt",
+  "scale_policy": "one uniform scale per clip, nearest-neighbour; no per-frame fit",
+  "intended_max_width_px": 48,
+  "supersedes": "skill-oath-guard-fx"
+}

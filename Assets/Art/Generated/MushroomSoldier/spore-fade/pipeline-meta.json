@@ -1,0 +1,366 @@
+{
+  "target": "creature",
+  "mode": "spore-fade",
+  "prompt": "",
+  "role": "",
+  "input": "D:\\Edu\\GameDev\\BuildBuild\\tempart\\MushroomSoldier\\spore-fade\\raw-sheet.png",
+  "threshold": 100,
+  "edge_threshold": 150,
+  "duration": 200,
+  "rows": 2,
+  "cols": 2,
+  "cell_size": 128,
+  "fit_scale": 0.8333333333333334,
+  "trim_border": 4,
+  "edge_clean_depth": 3,
+  "align": "center",
+  "shared_scale": true,
+  "scale_strategy": "preserve",
+  "component_mode": "all",
+  "component_padding": 0,
+  "min_component_area": 1,
+  "edge_touch_margin": 0,
+  "frame_labels": [
+    "spore-fade-1",
+    "spore-fade-2",
+    "spore-fade-3",
+    "spore-fade-4"
+  ],
+  "frames": [
+    {
+      "grid": [
+        0,
+        0
+      ],
+      "source_box": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "component_mode": "all",
+      "component_count": 13,
+      "selected_component_area": null,
+      "selected_component_bbox": null,
+      "crop_bbox": [
+        52,
+        262,
+        578,
+        496
+      ],
+      "source_frame_size": [
+        619,
+        619
+      ],
+      "is_empty": false,
+      "subject_area": 57426,
+      "body_core_area": 34491,
+      "body_area_fraction": 0.0900169902469197,
+      "anchor_source": [
+        315.0,
+        379.0
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        91,
+        40
+      ],
+      "preserved_subject_size": [
+        91,
+        40
+      ],
+      "paste_position": [
+        20,
+        36
+      ],
+      "unclamped_paste_position": [
+        19,
+        44
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        20,
+        36,
+        111,
+        76
+      ],
+      "scale_adjustment": 1.0,
+      "source_to_output_scale": 0.17232094776521273,
+      "bbox_scale_applied": false,
+      "scale_changed": false,
+      "anchor_target": [
+        64,
+        76
+      ],
+      "scale_strategy": "preserve",
+      "shared_center_x": 64.0,
+      "shared_feet_y": 64.0,
+      "project_translation": [
+        1,
+        -8
+      ],
+      "project_effect_origin": "ground footprint baseline; fade reuses field layout correction"
+    },
+    {
+      "grid": [
+        0,
+        1
+      ],
+      "source_box": [
+        627,
+        0,
+        1254,
+        627
+      ],
+      "component_mode": "all",
+      "component_count": 18,
+      "selected_component_area": null,
+      "selected_component_bbox": null,
+      "crop_bbox": [
+        51,
+        279,
+        568,
+        485
+      ],
+      "source_frame_size": [
+        619,
+        619
+      ],
+      "is_empty": false,
+      "subject_area": 36441,
+      "body_core_area": 19642,
+      "body_area_fraction": 0.0512630460824562,
+      "anchor_source": [
+        309.5,
+        382.0
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        89,
+        35
+      ],
+      "preserved_subject_size": [
+        89,
+        35
+      ],
+      "paste_position": [
+        19,
+        38
+      ],
+      "unclamped_paste_position": [
+        19,
+        46
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        19,
+        38,
+        108,
+        73
+      ],
+      "scale_adjustment": 1.0,
+      "source_to_output_scale": 0.17232094776521273,
+      "bbox_scale_applied": false,
+      "scale_changed": false,
+      "anchor_target": [
+        64,
+        76
+      ],
+      "scale_strategy": "preserve",
+      "shared_center_x": 64.0,
+      "shared_feet_y": 64.0,
+      "project_translation": [
+        0,
+        -8
+      ],
+      "project_effect_origin": "ground footprint baseline; fade reuses field layout correction"
+    },
+    {
+      "grid": [
+        1,
+        0
+      ],
+      "source_box": [
+        0,
+        627,
+        627,
+        1254
+      ],
+      "component_mode": "all",
+      "component_count": 19,
+      "selected_component_area": null,
+      "selected_component_bbox": null,
+      "crop_bbox": [
+        63,
+        245,
+        564,
+        421
+      ],
+      "source_frame_size": [
+        619,
+        619
+      ],
+      "is_empty": false,
+      "subject_area": 11148,
+      "body_core_area": 5851,
+      "body_area_fraction": 0.01527034327606411,
+      "anchor_source": [
+        313.5,
+        333.0
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        86,
+        30
+      ],
+      "preserved_subject_size": [
+        86,
+        30
+      ],
+      "paste_position": [
+        22,
+        41
+      ],
+      "unclamped_paste_position": [
+        21,
+        49
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        22,
+        41,
+        108,
+        71
+      ],
+      "scale_adjustment": 1.0,
+      "source_to_output_scale": 0.17232094776521273,
+      "bbox_scale_applied": false,
+      "scale_changed": false,
+      "anchor_target": [
+        64,
+        76
+      ],
+      "scale_strategy": "preserve",
+      "shared_center_x": 64.0,
+      "shared_feet_y": 64.0,
+      "project_translation": [
+        1,
+        -8
+      ],
+      "project_effect_origin": "ground footprint baseline; fade reuses field layout correction"
+    },
+    {
+      "grid": [
+        1,
+        1
+      ],
+      "source_box": [
+        627,
+        627,
+        1254,
+        1254
+      ],
+      "component_mode": "all",
+      "component_count": 15,
+      "selected_component_area": null,
+      "selected_component_bbox": null,
+      "crop_bbox": [
+        70,
+        254,
+        550,
+        415
+      ],
+      "source_frame_size": [
+        619,
+        619
+      ],
+      "is_empty": false,
+      "subject_area": 2558,
+      "body_core_area": 1349,
+      "body_area_fraction": 0.003520713224988973,
+      "anchor_source": [
+        310.0,
+        334.5
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        83,
+        28
+      ],
+      "preserved_subject_size": [
+        83,
+        28
+      ],
+      "paste_position": [
+        23,
+        43
+      ],
+      "unclamped_paste_position": [
+        23,
+        50
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        23,
+        43,
+        106,
+        71
+      ],
+      "scale_adjustment": 1.0,
+      "source_to_output_scale": 0.17232094776521273,
+      "bbox_scale_applied": false,
+      "scale_changed": false,
+      "anchor_target": [
+        64,
+        76
+      ],
+      "scale_strategy": "preserve",
+      "shared_center_x": 64.0,
+      "shared_feet_y": 64.0,
+      "project_translation": [
+        0,
+        -7
+      ],
+      "project_effect_origin": "ground footprint baseline; fade reuses field layout correction"
+    }
+  ],
+  "edge_touch_frames": [],
+  "source_edge_touch_frames": [],
+  "output_edge_touch_frames": [],
+  "empty_frames": [],
+  "paste_clamped_frames": [],
+  "qc_summary": {
+    "frame_count": 4,
+    "valid_frame_count": 4,
+    "empty_count": 0,
+    "edge_touch_count": 0,
+    "paste_clamped_count": 0,
+    "body_scale_mean": 0.17733764626273824,
+    "output_subject_height_mean": 33.25,
+    "body_scale_cv": 0.5219963752352041,
+    "anchor_x_std": 0.0037454032695863142,
+    "anchor_y_std": 0.03781108381962393,
+    "anchor_y_mean": 0.5769386106623586
+  },
+  "output_origin": [
+    64.0,
+    64.0
+  ],
+  "qc_config": {
+    "strict_qc": true,
+    "reject_edge_touch": false,
+    "allow_source_edge_touch": false,
+    "max_body_scale_cv": null,
+    "max_anchor_y_std": null,
+    "max_profile_scale_drift": null
+  },
+  "project_baseline_restored": true
+}

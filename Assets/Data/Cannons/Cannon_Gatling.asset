@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f28d9e270dec892bd61fa3960bb4436, type: 3}
+  m_Name: Cannon_Gatling
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.CannonDefinition
+  displayName: "Gatling T\u1EF1 \u0110\u1ED9ng"
+  unitId: cannon_gatling
+  icon: {fileID: 21300000, guid: b1bfbf83e22751b4992cd5ee0c526f2f, type: 3}
+  damage: 5
+  fireRate: 2
+  range: 7
+  aoeRadius: 0
+  slowPercent: 0
+  slowDuration: 0
+  slowIconFrames: []
+  pierceCount: 0
+  fire: 0
+  arcHeight: 0
+  targetMarkFrames: []
+  rootDuration: 0
+  rootFrames: []
+  bigTargetMultiplier: 1
+  targetHighestHealth: 0
+  aimMarkFrames: []
+  muzzleFrames: []
+  spinUpSeconds: 3
+  spinUpMultiplier: 3
+  chainCount: 0
+  chainRange: 2.5
+  beamFrames: []
+  coneAngle: 60
+  burstEvery: 0
+  burstDamageMultiplier: 1.75
+  waveFrames: []
+  burstWaveFrames: []
+  burstImpactFrames: []
+  vortexSeconds: 1.5
+  vortexStackBonus: 0.15
+  vortexMaxStacks: 5
+  vortexOpenFrames: []
+  vortexLoop0: []
+  vortexLoop1: []
+  vortexLoop2: []
+  absorbFrames: []
+  impactFrames1: []
+  impactFrames2: []
+  damagePerLevel: 0.08
+  upgradeCostBase: 50
+  upgradeCostExponent: 1.5
+  projectileSpeed: 18
+  projectileFrames:
+  - {fileID: 21300000, guid: 1ee7abb0b1344ed4e935166ad5230e1b, type: 3}
+  - {fileID: 21300000, guid: 23b869845ac0cbc45a76eee444e29146, type: 3}
+  - {fileID: 21300000, guid: 12b5c67b62607c84a99d282f0ac500d7, type: 3}
+  - {fileID: 21300000, guid: c047ecfc73ea8c946ba550f4a506dea8, type: 3}
+  projectileScale: 0.5
+  impactFrames:
+  - {fileID: 21300000, guid: be5b368e6c6699f4ab0b2781bac13e4b, type: 3}
+  - {fileID: 21300000, guid: e438da2c64f767747a984cba8e5b6ce3, type: 3}
+  - {fileID: 21300000, guid: f03ffbd83d604dc4eaf306d786aa4108, type: 3}
+  - {fileID: 21300000, guid: 5fed6d0443877ac4db2a3ab7d8161ab2, type: 3}
+  impactScale: 0.6
+  fireSfx: cannon-fire
+  impactSfx: 
+  animations: {fileID: 11400000, guid: cd3acc6e7c48c1543b626138511de738, type: 2}
+  displayScale: 1.4
+  muzzle: {x: -0.41, y: 0.37}
+  tint: {r: 1, g: 1, b: 1, a: 1}

@@ -49,12 +49,10 @@ namespace BuildBuild.Combat
             _tauntUntil = Time.time + seconds;
         }
 
-        /// <summary>An Duc: go choang, Thieu Hon, troi, cham, pha giap, Xich co han, Long Uy.</summary>
+        /// <summary>An Duc: go moi debuff (xem `ClearDebuffs`).</summary>
         public void Cleanse()
         {
             if (_dying) return;
-            _stunnedUntil = 0f;
-            _health.NoHealUntil = 0f;
             ClearDebuffs();
         }
 
@@ -72,7 +70,7 @@ namespace BuildBuild.Combat
             _health.Invulnerable = true;
             _casting = false;
             _charging = false;
-            _stunnedUntil = Time.time + delay;     // khong di, khong danh, animation dung hinh
+            Status.Apply(StatusId.Stun, 0f, delay);     // khong di, khong danh, animation dung hinh
             if (animator != null) animator.Play("hurt", restart: true);
             OneShotFx.Spawn(transform.position, silk, false, SortOrder.ForUnit(this) + 1, Battlefield.UnitScale);
             yield return new WaitForSeconds(delay);

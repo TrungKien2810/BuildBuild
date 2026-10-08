@@ -1,0 +1,122 @@
+[
+  {
+    "unit": "IronshieldBeetle",
+    "action": "identity",
+    "frame_count": 1,
+    "frame_paths": [
+      "IronshieldBeetle/identity/identity-1.png"
+    ],
+    "sheet": "IronshieldBeetle/identity/sheet-transparent.png",
+    "pivot": "feet from action aligned_bbox median",
+    "durations_ms": [
+      200
+    ]
+  },
+  {
+    "unit": "IronshieldBeetle",
+    "action": "idle",
+    "frame_count": 4,
+    "frame_paths": [
+      "IronshieldBeetle/idle/idle-1.png",
+      "IronshieldBeetle/idle/idle-2.png",
+      "IronshieldBeetle/idle/idle-3.png",
+      "IronshieldBeetle/idle/idle-4.png"
+    ],
+    "sheet": "IronshieldBeetle/idle/sheet-transparent.png",
+    "pivot": "feet from action aligned_bbox median",
+    "durations_ms": [
+      140,
+      140,
+      140,
+      140
+    ]
+  },
+  {
+    "unit": "IronshieldBeetle",
+    "action": "walk",
+    "frame_count": 6,
+    "frame_paths": [
+      "IronshieldBeetle/walk/walk-1.png",
+      "IronshieldBeetle/walk/walk-2.png",
+      "IronshieldBeetle/walk/walk-3.png",
+      "IronshieldBeetle/walk/walk-4.png",
+      "IronshieldBeetle/walk/walk-5.png",
+      "IronshieldBeetle/walk/walk-6.png"
+    ],
+    "sheet": "IronshieldBeetle/walk/sheet-transparent.png",
+    "pivot": "feet from action aligned_bbox median",
+    "durations_ms": [
+      140,
+      140,
+      140,
+      140,
+      140,
+      140
+    ]
+  },
+  {
+    "unit": "IronshieldBeetle",
+    "action": "attack",
+    "frame_count": 6,
+    "frame_paths": [
+      "IronshieldBeetle/attack/attack-1.png",
+      "IronshieldBeetle/attack/attack-2.png",
+      "IronshieldBeetle/attack/attack-3.png",
+      "IronshieldBeetle/attack/attack-4.png",
+      "IronshieldBeetle/attack/attack-5.png",
+      "IronshieldBeetle/attack/attack-6.png"
+    ],
+    "sheet": "IronshieldBeetle/attack/sheet-transparent.png",
+    "pivot": "feet from action aligned_bbox median",
+    "durations_ms": [
+      140,
+      140,
+      140,
+      140,
+      140,
+      140
+    ]
+  },
+  {
+    "unit": "IronshieldBeetle",
+    "action": "hurt",
+    "frame_count": 4,
+    "frame_paths": [
+      "IronshieldBeetle/hurt/hurt-1.png",
+      "IronshieldBeetle/hurt/hurt-2.png",
+      "IronshieldBeetle/hurt/hurt-3.png",
+      "IronshieldBeetle/hurt/hurt-4.png"
+    ],
+    "sheet": "IronshieldBeetle/hurt/sheet-transparent.png",
+    "pivot": "feet from action aligned_bbox median",
+    "durations_ms": [
+      140,
+      140,
+      140,
+      140
+    ]
+  },
+  {
+    "unit": "IronshieldBeetle",
+    "action": "death",
+    "frame_count": 6,
+    "frame_paths": [
+      "IronshieldBeetle/death/death-1.png",
+      "IronshieldBeetle/death/death-2.png",
+      "IronshieldBeetle/death/death-3.png",
+      "IronshieldBeetle/death/death-4.png",
+      "IronshieldBeetle/death/death-5.png",
+      "IronshieldBeetle/death/death-6.png"
+    ],
+    "sheet": "IronshieldBeetle/death/sheet-transparent.png",
+    "pivot": "feet from action aligned_bbox median",
+    "durations_ms": [
+      140,
+      140,
+      140,
+      140,
+      140,
+      600
+    ]
+  }
+]

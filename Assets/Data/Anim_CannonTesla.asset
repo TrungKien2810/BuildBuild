@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5872530a42e740c4aa90cd38c8fa0e67, type: 3}
+  m_Name: Anim_CannonTesla
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.SpriteAnimationSet
+  framesPerSecond: 9
+  idle:
+    name: idle
+    frames:
+    - {fileID: 21300000, guid: 74988f69c1e6449458f788d3b06563d8, type: 3}
+    - {fileID: 21300000, guid: 236ee22af419c014b9a10debbfeba8ca, type: 3}
+    - {fileID: 21300000, guid: 95b5d28091a0a9545abea6d457bd6d46, type: 3}
+    - {fileID: 21300000, guid: 8dcdb4d7eaea24143b4ef87f3f3ba521, type: 3}
+    loop: 1
+    hitFrame: 0
+  walk:
+    name: walk
+    frames: []
+    loop: 1
+    hitFrame: 0
+  attack:
+    name: attack
+    frames:
+    - {fileID: 21300000, guid: 87890700769635746a3a13bc1ca7adfb, type: 3}
+    - {fileID: 21300000, guid: 78cc16b7aa400b24c8c96e806f518df3, type: 3}
+    - {fileID: 21300000, guid: 40f5fe00da24d2a4cbd44cd8c213d2eb, type: 3}
+    - {fileID: 21300000, guid: d80c21a166d7f82429dad2d8833c5c27, type: 3}
+    - {fileID: 21300000, guid: 5158e2c20d4fcd04d9e5345c983b3730, type: 3}
+    - {fileID: 21300000, guid: 1cfe0d2642ba08044bc45f6d2aee38e3, type: 3}
+    loop: 0
+    hitFrame: 2
+  hurt:
+    name: hurt
+    frames: []
+    loop: 0
+    hitFrame: 0
+  death:
+    name: death
+    frames: []
+    loop: 0
+    hitFrame: 0
+  skill:
+    name: skill
+    frames: []
+    loop: 0
+    hitFrame: 0

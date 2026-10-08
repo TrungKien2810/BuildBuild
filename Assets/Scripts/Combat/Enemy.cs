@@ -50,8 +50,6 @@ namespace BuildBuild.Combat
 
         float _damage;
         float _attackCooldown;
-        float _frozenUntil;
-        float _stunnedUntil;
         bool _frozenVisual;
         bool _dying;
         GameObject _chainIcon;
@@ -61,6 +59,8 @@ namespace BuildBuild.Combat
         public static Sprite[] ChainIconFrames;
         static readonly Vector3 ChainIconOffset = new Vector3(0.2f, 0.65f, 0f);   // lech phai de khong chong sao choang
         Health _pendingHit;
+        int _attackCount;
+        bool _specialHit;
         SpriteAnimationClip _cast;
         GameObject _stunFx;
         SpriteRenderer _stunRenderer;
@@ -98,8 +98,8 @@ namespace BuildBuild.Combat
         public EnemyDefinition Definition => _definition;
         public override Health Health => _health;
         public override bool IsDying => _dying;
-        public bool IsFrozen => Time.time < _frozenUntil;
-        public override bool IsStunned => Time.time < _stunnedUntil;
+        public bool IsFrozen => Status.Has(StatusId.Freeze);
+        public override bool IsStunned => Status.Has(StatusId.Stun);
         public override bool IsBoss => _definition != null && _definition.kind == EnemyKind.Boss;
         public override bool IsElite => _definition != null && _definition.kind == EnemyKind.TinhAnh;
 
@@ -135,7 +135,11 @@ namespace BuildBuild.Combat
         public bool IsCasting => _cast != null && animator != null && animator.CurrentClip == _cast.name && !animator.IsFinished;
 
         /// <summary>Dang vung don thuong hoac dang cast — chieu moi phai doi, cat ngang la nuot mat don.</summary>
-        public bool IsBusy => IsCasting || (animator != null && animator.CurrentClip == "attack" && !animator.IsFinished);
+        public bool IsBusy => IsCasting || Swinging;
+
+        /// <summary>Dang vung don: clip attack, hoac clip skill cua don dac biet (Bo Cap chich) chua het.</summary>
+        bool Swinging => animator != null && !animator.IsFinished
+            && (animator.CurrentClip == "attack" || (_specialHit && animator.CurrentClip == "skill"));
 
         /// <summary>Unit phe ta quai nay dang danh (bi giu, hoac quai ban xa dang nham); null = di ve lau dai.</summary>
         public override Hero EngagedHero => _engaged;
@@ -213,6 +217,8 @@ namespace BuildBuild.Combat
             _health.IgnoresHitFrom = definition.flyHigh ? IgnoresHit : (System.Func<Health, bool>)null;
             _dying = false;
             ResetStatus();
+            _attackCount = 0;
+            _specialHit = false;
             _cast = null;
             Disengage();
             _health.Vulnerability = 0f;
@@ -243,8 +249,8 @@ namespace BuildBuild.Combat
         /// </summary>
         public override void ApplyFreeze(float seconds)
         {
-            if (_dying || seconds <= 0f) return;
-            _frozenUntil = Mathf.Max(_frozenUntil, Time.time + seconds);
+            if (_dying) return;
+            Status.Apply(StatusId.Freeze, 0f, seconds);
         }
 
         /// <summary>Choang: khoa y nhu dong bang (khong di, khong danh, dung animation), phu mau vang + sao choang tren dau.</summary>
@@ -253,7 +259,7 @@ namespace BuildBuild.Combat
             // Moi nguon choang hien co deu la can chien (phi, dap dat, xich) — khong voi toi quai bay cao.
             if (_dying || seconds <= 0f || FliesHigh) return;
             bool alreadyStunned = IsStunned;
-            _stunnedUntil = Mathf.Max(_stunnedUntil, Time.time + seconds);
+            Status.Apply(StatusId.Stun, 0f, seconds);
             if (alreadyStunned || frames == null || frames.Length == 0) return;
             if (_stunFx != null) Destroy(_stunFx);
             _stunFx = OneShotFx.SpawnLoop(transform, MarkOffset, frames, seconds, SortOrder.ForUnit(this) + 1,
@@ -333,7 +339,7 @@ namespace BuildBuild.Combat
 
             // Dang vung don (clip "attack" chua het) thi dung khoa nguyen cho — ke ca luc doi hinh day
             // tach nhau: tach giua chung la nuot mat don, va la nguon lam quai "vua di vua danh" truoc day.
-            bool swinging = animator != null && animator.CurrentClip == "attack" && !animator.IsFinished;
+            bool swinging = Swinging;
 
             // Bi Mua Roi (Tien Det To): quay sang danh phe cu toi het gio.
             if (UpdatePuppet(swinging)) return;
@@ -614,8 +620,8 @@ namespace BuildBuild.Combat
 
         void Thaw()
         {
-            _frozenUntil = 0f;
-            _stunnedUntil = 0f;
+            Status.Remove(StatusId.Freeze);
+            Status.Remove(StatusId.Stun);
             _frozenVisual = false;
             if (animator != null) animator.Paused = false;
             if (_renderer != null) _renderer.color = Color.white;
@@ -669,12 +675,16 @@ namespace BuildBuild.Combat
             if (_definition.attackRate <= 0f) return;
             if (IsDisarmed) return;     // bi cuon trong Xoay Nuoc: dung yen, het cuon thi danh ngay
 
-            _attackCooldown = 1f / (_definition.attackRate * AttackRateMultiplier);
+            _attackCooldown = 1f / (_definition.attackRate * AttackRateMultiplier * (1f + HastePercent));
             // Sat thuong ra o frame cham don cua clip (`hitFrame`), khong phai luc vua gio vu khi. Clip khong
             // khai hitFrame (hoac khong co animator) thi danh ngay nhu cu.
             _pendingHit = target;
-            var clip = animator != null && _definition.animations != null ? _definition.animations.attack : null;
-            if (animator != null) animator.Play("attack", restart: true);
+            // Cu don thu N la don dac biet (Bo Cap giuong duoi chich) — chay clip skill, trung thi gan trang thai.
+            var set = _definition.animations;
+            _specialHit = _definition.hitStatusEvery > 1 && ++_attackCount % _definition.hitStatusEvery == 0
+                && set != null && set.skill.IsValid;
+            var clip = animator != null && set != null ? (_specialHit ? set.skill : set.attack) : null;
+            if (animator != null) animator.Play(_specialHit ? "skill" : "attack", restart: true);
             if (clip == null || !clip.IsValid || clip.hitFrame <= 0) LandHit();
         }
 
@@ -701,14 +711,44 @@ namespace BuildBuild.Combat
             if (_pendingHit != null && !_pendingHit.IsDead && !RollMiss())
             {
                 if (FireShot != null) FireShot(_pendingHit, Damage);
-                else _pendingHit.TakeDamage(Damage, _health);
+                else
+                {
+                    _pendingHit.TakeDamage(Damage, _health);
+                    if (_definition.hitStatusEvery <= 1 || _specialHit) ApplyHitStatus(_pendingHit, special: _specialHit);
+                }
             }
             _pendingHit = null;
         }
 
+        /// <summary>
+        /// Gan `hitStatus` len hero / linh <paramref name="target"/> (tuong khong nhan). Doc / Chay nhan he so sat thuong wave
+        /// nhu don danh. <paramref name="special"/> = don dac biet: kem FX `hitStatusFrames` tren nguoi trung.
+        /// </summary>
+        public void ApplyHitStatus(Health target, bool special = false)
+        {
+            if (_definition.hitStatus == HitStatus.None || target == null || target.IsDead) return;
+            if (!(target.GetComponent<Unit>() is Hero hero) || hero.IsDying) return;
+            float waveScale = _definition.baseDamage > 0f ? _damage / _definition.baseDamage : 1f;
+            float power = _definition.hitStatusPower;
+            switch (_definition.hitStatus)
+            {
+                case HitStatus.Poison:
+                    hero.Status.Apply(StatusId.Poison, power * waveScale, _definition.hitStatusSeconds, _health, Side,
+                        1, _definition.hitStatusMaxStacks);
+                    break;
+                case HitStatus.Burn:
+                    hero.Status.Apply(StatusId.Burn, power * waveScale, _definition.hitStatusSeconds, _health, Side);
+                    break;
+                case HitStatus.Slow:
+                    hero.ApplySlow(power, _definition.hitStatusSeconds);
+                    break;
+            }
+            if (special) OneShotFx.Spawn(hero.BodyCenter, _definition.hitStatusFrames, false, SortOrder.Air, Battlefield.UnitScale);
+        }
+
         void OnHitFrame(string clipName)
         {
-            if (!_dying && clipName == "attack") LandHit();
+            if (!_dying && (clipName == "attack" || (_specialHit && clipName == "skill"))) LandHit();
         }
 
         void OnDamaged(float _)

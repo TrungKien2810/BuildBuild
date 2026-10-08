@@ -17,10 +17,15 @@ namespace BuildBuild.Combat
     [RequireComponent(typeof(Hero))]
     public class Bloodswordsman : MonoBehaviour
     {
+        // Kiem Hien Huyet bay sau lung (art 48px, than ~20px moi ben tam) — dat ngay tam than thi de len nguoi.
+        const float AuraSide = 0.32f, AuraHeight = 0.65f;
+        // Manh kiem tu tan dan qua 4 frame: bay 0,18s thi gan nhu khong kip thay.
+        const float ShardFlight = 0.3f;
         Hero _hero;
         BloodswordsmanKit _kit;
         float _offerUntil, _offerReady, _parryUntil, _parryReady, _killHealReady, _returnAt, _offerHitAt = -1f;
         Health _parrySource;
+        GameObject _aura;
 
         /// <summary>Manh kiem dang cam trong dich: hero dung yen giu frame cuoi clip cast toi khi thu ve.</summary>
         public bool Busy => _returnAt > Time.time;
@@ -52,8 +57,13 @@ namespace BuildBuild.Combat
                 _offerHitAt = -1f;
                 _hero.Health.SpendBlood(_kit.offerCost);
                 _offerUntil = Time.time + _kit.offerDuration;
-                OneShotFx.SpawnLoop(transform, new Vector3(0, _hero.BodyHeight * 0.5f / Battlefield.UnitScale), _kit.aura,
-                    _kit.offerDuration, SortOrder.ForUnit(_hero) + 1);
+                _aura = OneShotFx.SpawnLoop(transform, AuraOffset(), _kit.aura, _kit.offerDuration, SortOrder.ForUnit(_hero) - 1);
+            }
+            if (_aura != null)
+            {
+                // FX con khong lat theo flipX cua hero: tu giu ben lung, mui kiem chia ra ngoai.
+                _aura.transform.localPosition = AuraOffset();
+                _aura.GetComponent<SpriteRenderer>().flipX = !_hero.FacesRight;
             }
             if (_hero.Casting || Busy || _hero.IsStunned || _hero.IsDisarmed || _hero.AttackTargetInRange() == null) return;
             if (_hero.SecondMinorUnlocked && Time.time >= _parryReady && _hero.Health.Fraction < _kit.parryThreshold
@@ -69,6 +79,9 @@ namespace BuildBuild.Combat
                 _offerHitAt = Time.time + _hero.HitDelay(_kit.offer);
             }
         }
+
+        Vector3 AuraOffset() => new Vector3((_hero.FacesRight ? -1f : 1f) * AuraSide,
+            _hero.BodyHeight * AuraHeight / Battlefield.UnitScale);
 
         /// <summary>He so cong: Huyet Y theo mau da mat + Hien Huyet dang chay.</summary>
         public void Multipliers(ref float damage)
@@ -115,7 +128,8 @@ namespace BuildBuild.Combat
             if (_hero.Health.IsDead || _hero.IsDying) return;
             source.TakeDamage(_hero.AttackDamage * 2f, _hero.Health, kind: DamageKind.Reflected);
             _hero.Health.Heal(_hero.Health.Max * 0.08f, _hero.Health);
-            OneShotFx.Spawn(source.transform.position, _kit.parryHit, false, SortOrder.Air, Battlefield.UnitScale);
+            var struck = source.GetComponent<Unit>();
+            OneShotFx.Spawn(struck != null ? struck.BodyCenter : source.transform.position, _kit.parryHit, false, SortOrder.Air, Battlefield.UnitScale);
         }
 
         void OnKilled(Health victim, Health source, DamageKind kind)
@@ -145,7 +159,7 @@ namespace BuildBuild.Combat
             var positions = targets.Select(u => u.BodyCenter).ToArray();
             foreach (var target in targets)
             {
-                TravellingHeroFx.Spawn(_hero.BodyCenter, target.BodyCenter, _kit.shardOut, 0.18f);
+                TravellingHeroFx.Spawn(_hero.BodyCenter, target.BodyCenter, _kit.shardOut, ShardFlight);
                 target.Health.TakeDamage(damage * 2f, _hero.Health);
                 if (!target.IsDying) OneShotFx.SpawnLoop(target.transform,
                     new Vector3(0, target.BodyHeight * 0.5f / Battlefield.UnitScale), _kit.shardStuck, _kit.shardDelay, SortOrder.Air);
@@ -162,7 +176,8 @@ namespace BuildBuild.Combat
             {
                 var target = targets[i];
                 bool alive = target != null && !target.IsDying;
-                TravellingHeroFx.Spawn(alive ? target.BodyCenter : positions[i], _hero.BodyCenter, _kit.shardReturn, 0.18f);
+                TravellingHeroFx.Spawn(alive ? target.BodyCenter : positions[i], _hero.BodyCenter, _kit.shardReturn, ShardFlight,
+                    artFacesRight: true);
                 if (alive && target.IsHostileTo(_hero.Side)) target.Health.TakeDamage(damage * 3f, _hero.Health);
             }
             _hero.Health.Heal(_hero.Health.Max * 0.08f * targets.Length, _hero.Health);

@@ -1,0 +1,858 @@
+{
+  "target": "player",
+  "mode": "walk",
+  "prompt": "POSE 1\nEdit this ONE approved walk pose into a finished pixel-art sprite of exactly the SAME hero. ONE frame on ONE square canvas, not a sheet, no new design. Upper body, identity, camera, head, clothes, weapons and hand ownership unchanged. Only repaint simplified guide legs into finished legs/boots in the same palette, keep the exact joints, heel/toe directions and silhouettes from reference. Contact A: NEAR/light leg is forward to LEFT with heel touching floor; FAR/dark leg trails to RIGHT on its toes. Both contact. Exactly as reference. Both boot toes LEFT. Preserve elevated asymmetric three-quarter camera and character's exact size/location, standing-equivalent anatomy approximately 47-52 percent of canvas height exactly as reference. Match low-detail broad pixel clusters, navy outline and 2-3 tones, no added facial detail. Flat solid opaque #FF00FF background, same generous padding, no shadows, ground, FX, text, grid, gradients or blur. Keep body scale and pelvis axis identical to reference, do not zoom to fill canvas.\n\n\nPOSE 2\nEdit this ONE approved walk pose into a finished pixel-art sprite of exactly the SAME hero. ONE frame on ONE square canvas, not a sheet, no new design. Upper body, identity, camera, head, clothes, weapons and hand ownership unchanged. Only repaint simplified guide legs into finished legs/boots in the same palette, keep the exact joints, heel/toe directions and silhouettes from reference. Support A: NEAR/light leg supports flat on floor at LEFT, FAR/dark leg bends at knee and lifts BEHIND toward RIGHT. The raised FAR boot must be darker. Both boot toes LEFT. Preserve elevated asymmetric three-quarter camera and character's exact size/location, standing-equivalent anatomy approximately 47-52 percent of canvas height exactly as reference. Match low-detail broad pixel clusters, navy outline and 2-3 tones, no added facial detail. Flat solid opaque #FF00FF background, same generous padding, no shadows, ground, FX, text, grid, gradients or blur. Keep body scale and pelvis axis identical to reference, do not zoom to fill canvas.\n\n\nPOSE 3\nEdit this ONE approved walk pose into a finished pixel-art sprite of exactly the SAME hero. ONE frame on ONE square canvas, not a sheet, no new design. Upper body, identity, camera, head, clothes, weapons and hand ownership unchanged. Only repaint simplified guide legs into finished legs/boots in the same palette, keep the exact joints, heel/toe directions and silhouettes from reference. Passing A: NEAR/light support boot is under pelvis near CENTER, not still planted far left. FAR/dark knee bends forward and its lifted boot passes across toward LEFT in front of support. Copy that passing geometry exactly. Both boot toes LEFT. Preserve elevated asymmetric three-quarter camera and character's exact size/location, standing-equivalent anatomy approximately 47-52 percent of canvas height exactly as reference. Match low-detail broad pixel clusters, navy outline and 2-3 tones, no added facial detail. Flat solid opaque #FF00FF background, same generous padding, no shadows, ground, FX, text, grid, gradients or blur. Keep body scale and pelvis axis identical to reference, do not zoom to fill canvas.\n\n\nPOSE 4\nEdit this ONE approved walk pose into a finished pixel-art sprite of exactly the SAME hero. ONE frame on ONE square canvas, not a sheet, no new design. Upper body, identity, camera, head, clothes, weapons and hand ownership unchanged. Only repaint simplified guide legs into finished legs/boots in the same palette, keep the exact joints, heel/toe directions and silhouettes from reference. Reach A: NEAR/light support leg has moved BEHIND to RIGHT, straight on floor; FAR/dark leg reaches forward to LEFT with foot hovering just above ground. Do not keep support foot at LEFT. Both boot toes LEFT. Preserve elevated asymmetric three-quarter camera and character's exact size/location, standing-equivalent anatomy approximately 47-52 percent of canvas height exactly as reference. Match low-detail broad pixel clusters, navy outline and 2-3 tones, no added facial detail. Flat solid opaque #FF00FF background, same generous padding, no shadows, ground, FX, text, grid, gradients or blur. Keep body scale and pelvis axis identical to reference, do not zoom to fill canvas.\n\n\nPOSE 5\nEdit this ONE approved walk pose into a finished pixel-art sprite of exactly the SAME hero. ONE frame on ONE square canvas, not a sheet, no new design. Upper body, identity, camera, head, clothes, weapons and hand ownership unchanged. Only repaint simplified guide legs into finished legs/boots in the same palette, keep the exact joints, heel/toe directions and silhouettes from reference. Contact B: FAR/dark leg is forward to LEFT heel contacting floor; NEAR/light leg trails behind to RIGHT on toes. Opposite leg ownership to Contact A. Both boot toes LEFT. Preserve elevated asymmetric three-quarter camera and character's exact size/location, standing-equivalent anatomy approximately 47-52 percent of canvas height exactly as reference. Match low-detail broad pixel clusters, navy outline and 2-3 tones, no added facial detail. Flat solid opaque #FF00FF background, same generous padding, no shadows, ground, FX, text, grid, gradients or blur. Keep body scale and pelvis axis identical to reference, do not zoom to fill canvas.\n\n\nPOSE 6\nEdit this ONE approved walk pose into a finished pixel-art sprite of exactly the same beetle knight. This is ONE frame, not a sheet or a new design. Preserve the entire upper body, armor, horn, mace, camera, palette, body size and its exact location. Only repaint the simplified legs/boots with matching polished pixel clusters, keeping their exact joint geometry. Crucial pose: FAR/dark leg is straight SUPPORT on the ground, boot at the LEFT; NEAR/lighter leg is bent at knee, lifted BEHIND toward the RIGHT, heel raised, foot clearly off the ground. Do NOT swap the two legs and do not plant the near leg. Copy the two leg silhouettes and their locations from reference precisely. Both toes LEFT, facing-left three-quarter elevated camera identical. Maintain pixel art, navy outline, simple large color clusters, no extra detailing. Same square canvas composition and empty padding, body remains approximately 47 percent of canvas height. Pure solid opaque #FF00FF background. No shadow, FX, text, grids, blur or gradients.\n\n\nPOSE 7\nEdit this ONE approved walk pose into a finished pixel-art sprite of exactly the SAME hero. ONE frame on ONE square canvas, not a sheet, no new design. Upper body, identity, camera, head, clothes, weapons and hand ownership unchanged. Only repaint simplified guide legs into finished legs/boots in the same palette, keep the exact joints, heel/toe directions and silhouettes from reference. Passing B: FAR/dark support boot is under pelvis near CENTER, not still planted far left. NEAR/light knee bends forward and raised boot passes across toward LEFT in front of support. Opposite ownership to Passing A. Both boot toes LEFT. Preserve elevated asymmetric three-quarter camera and character's exact size/location, standing-equivalent anatomy approximately 47-52 percent of canvas height exactly as reference. Match low-detail broad pixel clusters, navy outline and 2-3 tones, no added facial detail. Flat solid opaque #FF00FF background, same generous padding, no shadows, ground, FX, text, grid, gradients or blur. Keep body scale and pelvis axis identical to reference, do not zoom to fill canvas.\n\n\nPOSE 8\nEdit this ONE approved walk pose into a finished pixel-art sprite of exactly the SAME hero. ONE frame on ONE square canvas, not a sheet, no new design. Upper body, identity, camera, head, clothes, weapons and hand ownership unchanged. Only repaint simplified guide legs into finished legs/boots in the same palette, keep the exact joints, heel/toe directions and silhouettes from reference. Reach B: FAR/dark support leg has moved BEHIND to RIGHT, straight on floor; NEAR/light leg reaches forward to LEFT with foot hovering just above ground. Do not keep support foot at LEFT. Both boot toes LEFT. Preserve elevated asymmetric three-quarter camera and character's exact size/location, standing-equivalent anatomy approximately 47-52 percent of canvas height exactly as reference. Match low-detail broad pixel clusters, navy outline and 2-3 tones, no added facial detail. Flat solid opaque #FF00FF background, same generous padding, no shadows, ground, FX, text, grid, gradients or blur. Keep body scale and pelvis axis identical to reference, do not zoom to fill canvas.\n",
+  "role": "",
+  "input": "tempart\\BeetleKnight\\walk-v3\\raw-sheet.png",
+  "threshold": 100,
+  "edge_threshold": 150,
+  "duration": 200,
+  "rows": 4,
+  "cols": 2,
+  "cell_size": 128,
+  "fit_scale": 0.786864406779661,
+  "trim_border": 4,
+  "edge_clean_depth": 3,
+  "align": "feet",
+  "shared_scale": true,
+  "scale_strategy": "preserve",
+  "component_mode": "largest",
+  "component_padding": 0,
+  "min_component_area": 1,
+  "edge_touch_margin": 0,
+  "frame_labels": [
+    "walk-1",
+    "walk-2",
+    "walk-3",
+    "walk-4",
+    "walk-5",
+    "walk-6",
+    "walk-7",
+    "walk-8"
+  ],
+  "frames": [
+    {
+      "grid": [
+        0,
+        0
+      ],
+      "source_box": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "component_mode": "largest",
+      "component_count": 1,
+      "selected_component_area": 22602,
+      "selected_component_bbox": [
+        152,
+        180,
+        327,
+        416
+      ],
+      "crop_bbox": [
+        152,
+        180,
+        327,
+        416
+      ],
+      "source_frame_size": [
+        504,
+        504
+      ],
+      "is_empty": false,
+      "subject_area": 22602,
+      "body_core_area": 22602,
+      "body_area_fraction": 0.0889786470143613,
+      "anchor_source": [
+        239.5,
+        298.0
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        35,
+        47
+      ],
+      "preserved_subject_size": [
+        35,
+        47
+      ],
+      "paste_position": [
+        44,
+        69
+      ],
+      "unclamped_paste_position": [
+        47,
+        40
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        44,
+        69,
+        79,
+        116
+      ],
+      "scale_adjustment": 1.0,
+      "source_to_output_scale": 0.19983857949959644,
+      "bbox_scale_applied": false,
+      "scale_changed": false,
+      "anchor_target": [
+        64.0,
+        64.0
+      ],
+      "scale_strategy": "preserve",
+      "shared_center_x": 64.0,
+      "shared_feet_y": 64.0,
+      "frame": "walk-1"
+    },
+    {
+      "grid": [
+        0,
+        1
+      ],
+      "source_box": [
+        512,
+        0,
+        1024,
+        512
+      ],
+      "component_mode": "largest",
+      "component_count": 1,
+      "selected_component_area": 22874,
+      "selected_component_bbox": [
+        152,
+        175,
+        327,
+        421
+      ],
+      "crop_bbox": [
+        152,
+        175,
+        327,
+        421
+      ],
+      "source_frame_size": [
+        504,
+        504
+      ],
+      "is_empty": false,
+      "subject_area": 22874,
+      "body_core_area": 22874,
+      "body_area_fraction": 0.09004944570420761,
+      "anchor_source": [
+        239.5,
+        298.0
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        35,
+        49
+      ],
+      "preserved_subject_size": [
+        35,
+        49
+      ],
+      "paste_position": [
+        44,
+        67
+      ],
+      "unclamped_paste_position": [
+        47,
+        39
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        44,
+        67,
+        79,
+        116
+      ],
+      "scale_adjustment": 1.0,
+      "source_to_output_scale": 0.19983857949959644,
+      "bbox_scale_applied": false,
+      "scale_changed": false,
+      "anchor_target": [
+        64.0,
+        64.0
+      ],
+      "scale_strategy": "preserve",
+      "shared_center_x": 64.0,
+      "shared_feet_y": 64.0,
+      "frame": "walk-2"
+    },
+    {
+      "grid": [
+        1,
+        0
+      ],
+      "source_box": [
+        0,
+        512,
+        512,
+        1024
+      ],
+      "component_mode": "largest",
+      "component_count": 1,
+      "selected_component_area": 22886,
+      "selected_component_bbox": [
+        152,
+        170,
+        327,
+        421
+      ],
+      "crop_bbox": [
+        152,
+        170,
+        327,
+        421
+      ],
+      "source_frame_size": [
+        504,
+        504
+      ],
+      "is_empty": false,
+      "subject_area": 22886,
+      "body_core_area": 22886,
+      "body_area_fraction": 0.0900966868228773,
+      "anchor_source": [
+        239.5,
+        295.5
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        35,
+        50
+      ],
+      "preserved_subject_size": [
+        35,
+        50
+      ],
+      "paste_position": [
+        44,
+        66
+      ],
+      "unclamped_paste_position": [
+        47,
+        39
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        44,
+        66,
+        79,
+        116
+      ],
+      "scale_adjustment": 1.0,
+      "source_to_output_scale": 0.19983857949959644,
+      "bbox_scale_applied": false,
+      "scale_changed": false,
+      "anchor_target": [
+        64.0,
+        64.0
+      ],
+      "scale_strategy": "preserve",
+      "shared_center_x": 64.0,
+      "shared_feet_y": 64.0,
+      "frame": "walk-3"
+    },
+    {
+      "grid": [
+        1,
+        1
+      ],
+      "source_box": [
+        512,
+        512,
+        1024,
+        1024
+      ],
+      "component_mode": "largest",
+      "component_count": 1,
+      "selected_component_area": 22996,
+      "selected_component_bbox": [
+        152,
+        175,
+        327,
+        419
+      ],
+      "crop_bbox": [
+        152,
+        175,
+        327,
+        419
+      ],
+      "source_frame_size": [
+        504,
+        504
+      ],
+      "is_empty": false,
+      "subject_area": 22996,
+      "body_core_area": 22996,
+      "body_area_fraction": 0.0905297304106828,
+      "anchor_source": [
+        239.5,
+        297.0
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        35,
+        49
+      ],
+      "preserved_subject_size": [
+        35,
+        49
+      ],
+      "paste_position": [
+        44,
+        67
+      ],
+      "unclamped_paste_position": [
+        47,
+        40
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        44,
+        67,
+        79,
+        116
+      ],
+      "scale_adjustment": 1.0,
+      "source_to_output_scale": 0.19983857949959644,
+      "bbox_scale_applied": false,
+      "scale_changed": false,
+      "anchor_target": [
+        64.0,
+        64.0
+      ],
+      "scale_strategy": "preserve",
+      "shared_center_x": 64.0,
+      "shared_feet_y": 64.0,
+      "frame": "walk-4"
+    },
+    {
+      "grid": [
+        2,
+        0
+      ],
+      "source_box": [
+        0,
+        1024,
+        512,
+        1536
+      ],
+      "component_mode": "largest",
+      "component_count": 1,
+      "selected_component_area": 23015,
+      "selected_component_bbox": [
+        152,
+        180,
+        327,
+        420
+      ],
+      "crop_bbox": [
+        152,
+        180,
+        327,
+        420
+      ],
+      "source_frame_size": [
+        504,
+        504
+      ],
+      "is_empty": false,
+      "subject_area": 23015,
+      "body_core_area": 23015,
+      "body_area_fraction": 0.09060452884857646,
+      "anchor_source": [
+        239.5,
+        300.0
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        35,
+        48
+      ],
+      "preserved_subject_size": [
+        35,
+        48
+      ],
+      "paste_position": [
+        44,
+        68
+      ],
+      "unclamped_paste_position": [
+        47,
+        40
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        44,
+        68,
+        79,
+        116
+      ],
+      "scale_adjustment": 1.0,
+      "source_to_output_scale": 0.19983857949959644,
+      "bbox_scale_applied": false,
+      "scale_changed": false,
+      "anchor_target": [
+        64.0,
+        64.0
+      ],
+      "scale_strategy": "preserve",
+      "shared_center_x": 64.0,
+      "shared_feet_y": 64.0,
+      "frame": "walk-5"
+    },
+    {
+      "grid": [
+        2,
+        1
+      ],
+      "source_box": [
+        512,
+        1024,
+        1024,
+        1536
+      ],
+      "component_mode": "largest",
+      "component_count": 1,
+      "selected_component_area": 22658,
+      "selected_component_bbox": [
+        152,
+        175,
+        327,
+        416
+      ],
+      "crop_bbox": [
+        152,
+        175,
+        327,
+        416
+      ],
+      "source_frame_size": [
+        504,
+        504
+      ],
+      "is_empty": false,
+      "subject_area": 22658,
+      "body_core_area": 22658,
+      "body_area_fraction": 0.08919910556815319,
+      "anchor_source": [
+        239.5,
+        295.5
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        35,
+        48
+      ],
+      "preserved_subject_size": [
+        35,
+        48
+      ],
+      "paste_position": [
+        44,
+        67
+      ],
+      "unclamped_paste_position": [
+        47,
+        40
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        44,
+        67,
+        79,
+        116
+      ],
+      "scale_adjustment": 1.0,
+      "source_to_output_scale": 0.19983857949959644,
+      "bbox_scale_applied": false,
+      "scale_changed": false,
+      "anchor_target": [
+        64.0,
+        64.0
+      ],
+      "scale_strategy": "preserve",
+      "shared_center_x": 64.0,
+      "shared_feet_y": 64.0,
+      "frame": "walk-6"
+    },
+    {
+      "grid": [
+        3,
+        0
+      ],
+      "source_box": [
+        0,
+        1536,
+        512,
+        2048
+      ],
+      "component_mode": "largest",
+      "component_count": 1,
+      "selected_component_area": 22623,
+      "selected_component_bbox": [
+        152,
+        170,
+        327,
+        412
+      ],
+      "crop_bbox": [
+        152,
+        170,
+        327,
+        412
+      ],
+      "source_frame_size": [
+        504,
+        504
+      ],
+      "is_empty": false,
+      "subject_area": 22623,
+      "body_core_area": 22623,
+      "body_area_fraction": 0.08906131897203326,
+      "anchor_source": [
+        239.5,
+        291.0
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        35,
+        48
+      ],
+      "preserved_subject_size": [
+        35,
+        48
+      ],
+      "paste_position": [
+        44,
+        67
+      ],
+      "unclamped_paste_position": [
+        47,
+        40
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        44,
+        67,
+        79,
+        116
+      ],
+      "scale_adjustment": 1.0,
+      "source_to_output_scale": 0.19983857949959644,
+      "bbox_scale_applied": false,
+      "scale_changed": false,
+      "anchor_target": [
+        64.0,
+        64.0
+      ],
+      "scale_strategy": "preserve",
+      "shared_center_x": 64.0,
+      "shared_feet_y": 64.0,
+      "frame": "walk-7"
+    },
+    {
+      "grid": [
+        3,
+        1
+      ],
+      "source_box": [
+        512,
+        1536,
+        1024,
+        2048
+      ],
+      "component_mode": "largest",
+      "component_count": 1,
+      "selected_component_area": 22742,
+      "selected_component_bbox": [
+        152,
+        175,
+        327,
+        409
+      ],
+      "crop_bbox": [
+        152,
+        175,
+        327,
+        409
+      ],
+      "source_frame_size": [
+        504,
+        504
+      ],
+      "is_empty": false,
+      "subject_area": 22742,
+      "body_core_area": 22742,
+      "body_area_fraction": 0.08952979339884101,
+      "anchor_source": [
+        239.5,
+        292.0
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        35,
+        47
+      ],
+      "preserved_subject_size": [
+        35,
+        47
+      ],
+      "paste_position": [
+        44,
+        68
+      ],
+      "unclamped_paste_position": [
+        47,
+        41
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        44,
+        68,
+        79,
+        116
+      ],
+      "scale_adjustment": 1.0,
+      "source_to_output_scale": 0.19983857949959644,
+      "bbox_scale_applied": false,
+      "scale_changed": false,
+      "anchor_target": [
+        64.0,
+        64.0
+      ],
+      "scale_strategy": "preserve",
+      "shared_center_x": 64.0,
+      "shared_feet_y": 64.0,
+      "frame": "walk-8"
+    }
+  ],
+  "edge_touch_frames": [],
+  "source_edge_touch_frames": [],
+  "output_edge_touch_frames": [],
+  "empty_frames": [],
+  "paste_clamped_frames": [],
+  "qc_summary": {
+    "frame_count": 8,
+    "valid_frame_count": 8,
+    "empty_count": 0,
+    "edge_touch_count": 0,
+    "paste_clamped_count": 0,
+    "body_scale_mean": 0.29959159477332353,
+    "output_subject_height_mean": 48.25,
+    "body_scale_cv": 0.0033932173045759196,
+    "anchor_x_std": 0.0,
+    "anchor_y_std": 0.005715138205259385,
+    "anchor_y_mean": 0.5870535714285714,
+    "profile_body_scale_drift": 0.04935762238240293
+  },
+  "output_origin": [
+    64,
+    116
+  ],
+  "scale_profile": {
+    "path": "tempart\\BeetleKnight\\character-scale-profile.json",
+    "version": 1,
+    "name": "BeetleKnight",
+    "reference_mode": "idle",
+    "processing_contract_applied": true
+  },
+  "qc_config": {
+    "strict_qc": true,
+    "reject_edge_touch": true,
+    "allow_source_edge_touch": false,
+    "max_body_scale_cv": 0.06,
+    "max_anchor_y_std": null,
+    "max_profile_scale_drift": 0.08
+  },
+  "review_qc": [
+    {
+      "frame": 1,
+      "bbox": [
+        44,
+        69,
+        79,
+        116
+      ],
+      "height": 47,
+      "head_x": 59.818652849740936,
+      "head_y": 69,
+      "translation": [
+        -3,
+        29
+      ],
+      "guide_bottom": 116,
+      "guide_bob": 1
+    },
+    {
+      "frame": 2,
+      "bbox": [
+        44,
+        67,
+        79,
+        116
+      ],
+      "height": 49,
+      "head_x": 60.10377358490566,
+      "head_y": 67,
+      "translation": [
+        -3,
+        28
+      ],
+      "guide_bottom": 116,
+      "guide_bob": 0
+    },
+    {
+      "frame": 3,
+      "bbox": [
+        44,
+        66,
+        79,
+        116
+      ],
+      "height": 50,
+      "head_x": 60.10377358490566,
+      "head_y": 66,
+      "translation": [
+        -3,
+        27
+      ],
+      "guide_bottom": 116,
+      "guide_bob": -1
+    },
+    {
+      "frame": 4,
+      "bbox": [
+        44,
+        67,
+        79,
+        116
+      ],
+      "height": 49,
+      "head_x": 60.10377358490566,
+      "head_y": 67,
+      "translation": [
+        -3,
+        27
+      ],
+      "guide_bottom": 116,
+      "guide_bob": 0
+    },
+    {
+      "frame": 5,
+      "bbox": [
+        44,
+        68,
+        79,
+        116
+      ],
+      "height": 48,
+      "head_x": 59.818652849740936,
+      "head_y": 68,
+      "translation": [
+        -3,
+        28
+      ],
+      "guide_bottom": 116,
+      "guide_bob": 1
+    },
+    {
+      "frame": 6,
+      "bbox": [
+        44,
+        67,
+        79,
+        115
+      ],
+      "height": 48,
+      "head_x": 59.818652849740936,
+      "head_y": 67,
+      "translation": [
+        -3,
+        27
+      ],
+      "guide_bottom": 115,
+      "guide_bob": 0
+    },
+    {
+      "frame": 7,
+      "bbox": [
+        44,
+        67,
+        79,
+        115
+      ],
+      "height": 48,
+      "head_x": 59.818652849740936,
+      "head_y": 67,
+      "translation": [
+        -3,
+        27
+      ],
+      "guide_bottom": 115,
+      "guide_bob": -1
+    },
+    {
+      "frame": 8,
+      "bbox": [
+        44,
+        68,
+        79,
+        115
+      ],
+      "height": 47,
+      "head_x": 59.818652849740936,
+      "head_y": 68,
+      "translation": [
+        -3,
+        27
+      ],
+      "guide_bottom": 115,
+      "guide_bob": 0
+    }
+  ],
+  "ground_baseline_exclusive": 116,
+  "axis_alignment": "Head horizontal centroid locked to accepted idle; vertical ground contact follows approved near/far support line; no foot-span horizontal centering.",
+  "guide_outline_ground_offset": -1,
+  "source_poses": [
+    "tempart\\BeetleKnight\\walk-v3\\cell-1\\raw-sheet.png",
+    "tempart\\BeetleKnight\\walk-v3\\cell-2\\raw-sheet.png",
+    "tempart\\BeetleKnight\\walk-v3\\cell-3\\raw-sheet.png",
+    "tempart\\BeetleKnight\\walk-v3\\cell-4\\raw-sheet.png",
+    "tempart\\BeetleKnight\\walk-v3\\cell-5\\raw-sheet.png",
+    "tempart\\BeetleKnight\\walk-v3\\cell-6\\raw-sheet.png",
+    "tempart\\BeetleKnight\\walk-v3\\cell-7\\raw-sheet.png",
+    "tempart\\BeetleKnight\\walk-v3\\cell-8\\raw-sheet.png"
+  ],
+  "guide_approval": {
+    "date": "2026-10-04",
+    "status": "approved",
+    "source": "tempart\\BeetleKnight\\walk\\guide-v2"
+  },
+  "user_review": {
+    "status": "approved",
+    "date": "2026-10-04",
+    "note": "User selected walk v3 for all three heroes and rejected v4."
+  }
+}

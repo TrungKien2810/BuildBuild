@@ -196,8 +196,8 @@ namespace BuildBuild.Combat
             {
                 var at = ground + new Vector3(Front * length * (i + 0.5f) / patches, 0f, 0f);
                 at = Battlefield.Clamp(at, 0f, clampRight: false);
-                PoisonPool.Spawn(at, _definition.burnFrames, _definition.burnDuration, _definition.burnRadius,
-                    _definition.burnDamagePerSecond * _damageScale, _definition.scorchSeconds);
+                HazardPool.Spawn(at, _definition.burnFrames, _definition.burnDuration, _definition.burnRadius, StatusId.Burn,
+                    _definition.burnDamagePerSecond * _damageScale, _definition.burnLingerSeconds, _definition.scorchSeconds);
             }
         }
 

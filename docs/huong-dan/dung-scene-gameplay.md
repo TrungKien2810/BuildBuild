@@ -98,6 +98,35 @@ chỉ để nhìn trong Scene view. Builder lấy kích thước ảnh từ `spr
 Làm tay: tạo empty `Castle`, gắn `Health` (Max Health 2000) và `Castle`; tạo con `Body` với
 sprite, rồi kéo `Body` vào ô **Body** của `Castle`, kéo 3 sprite vào 3 ô Intact/Damaged1/Damaged2.
 
+### 3b. Thành trì 3 cấp (thay fortress khi chạy)
+
+Fortress ở trên giờ chỉ là hình dự phòng trong Scene view. Lúc chạy, `Castle.Awake` đọc cấp trong save
+(`SaveData.castleTier`, mặc định 1) và gọi `ApplyTier`: thay 3 sprite, dời + scale `Body`, đặt lại máu tối đa.
+Gốc `Castle` giờ nằm ở **px 560** (`CastleWallPx`), không còn là vách fortress px 536.
+
+Bảng cấp nằm trong ô **Tiers** của component `Castle`, do builder điền (`BuildCastleTiers`), mỗi cấp:
+
+1. Đọc `Assets/Art/Generated/Castle/mounts-tiers.json` → tên sprite + toạ độ tâm mặt bệ (px trong sprite, gốc trên-trái).
+2. Scale = **720 / chiều cao sprite** (cùng phép QC đã duyệt), đáy sprite đặt ở **px 830** (`CastleBasePx`).
+3. Đo **vách phải**: mỗi hàng 20–97% chiều cao lấy pixel alpha ngoài cùng bên phải, lấy trung vị → đặt đúng px 560,
+   nên quái dừng cùng một chỗ dù thành cấp mấy.
+4. Đổi toạ độ bệ trong sprite ra world (`trái + x × scale`, `đỉnh + y × scale`) → `mounts` (local theo `Castle`).
+5. Scale từng bệ = bề rộng mặt bệ trên màn (`platform_w × scale`) / 100 px, kẹp 0,6–1 → `mountScales`; `CannonBoard`
+   gán vào `localScale` của bệ nên pháo (con của bệ) nhỏ theo, điểm ra đạn tính theo `lossyScale`.
+6. HP / giá / điều kiện lấy từ `CastleTierStats` trong `SceneBuilder` (2000/3000/4500 · 0/3000/8000 vàng · thắng wave 0/10/20).
+
+`CannonBoard` có sẵn 5 bệ (đủ cho cấp 3); khi đổi cấp nó bật đúng 3/4/5 bệ đầu và dời chúng về `mounts` của cấp đó
+(`LayoutMounts`). Nút **Nâng thành** (góc trên-trái, dưới thanh máu) do `BattleHud` bật/tắt; bấm nút mở bảng
+**`CastleUpgradePanel`** (builder dựng ở `BuildCastleUpgradePanel`): ảnh sprite lành của cấp này → cấp sau, dòng Máu
+thành và Bệ pháo trước → sau, dòng điều kiện (xanh khi đạt, đỏ khi chưa), nút **Nâng · giá** chỉ bấm được khi đạt điều
+kiện `Castle.UpgradeBlocker()` (wave cao nhất đã thắng = `nextWave − 1`) và đủ vàng. Bấm Nâng: `BattleHud` trừ vàng,
+đóng bảng, gọi `Castle.Upgrade()` — save được ghi ngay, rồi `UpgradeRoutine` chạy hiệu ứng ~0,9 s (thành cũ rung và
+ngả vàng → đổi sang cấp mới → thành mới nảy từ 1,06 về 1 và nhạt dần về màu gốc). Lúc đổi cấp, `CannonBoard` cho
+khung các bệ vừa mở nháy 8 lần để người chơi thấy chỗ lắp pháo mới.
+
+Đổi số: sửa `CastleTierStats` rồi chạy lại builder (bảng cấp được ghi đè mỗi lần build). Đổi vị trí thành: sửa
+`CastleWallPx` / `CastleBasePx` / `CastleHeightPx`.
+
 > **Vì sao `Castle` đọc máu trong `Start`, không trong `Awake`:** Unity **không đảm bảo** thứ tự `Awake`
 > giữa hai component trên cùng một object. Nếu `Castle.Awake` chạy trước `Health.Awake` thì máu đang là 0
 > và lâu đài hiện sprite **sắp sụp** ngay khi mở scene. Mọi `Awake` luôn chạy xong trước mọi `Start`, nên

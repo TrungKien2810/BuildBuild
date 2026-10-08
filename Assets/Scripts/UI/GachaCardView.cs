@@ -20,6 +20,8 @@ namespace BuildBuild.UI
 
         [SerializeField] Image frame;
         [SerializeField] Image icon;
+        [Tooltip("Icon vai o goc tren trai (chi hero); an khi the up.")]
+        [SerializeField] Image roleIcon;
         [SerializeField] Text nameText;
         [SerializeField] Text noteText;
 
@@ -35,8 +37,9 @@ namespace BuildBuild.UI
 
         public Rarity Rarity => _rarity;
 
-        public void Show(GachaResult result)
+        public void Show(GachaResult result, Sprite role)
         {
+            roleIcon.sprite = role;
             var unit = result.unit;
             _rarity = unit.rarity;
             frame.sprite = unit.rarity switch
@@ -165,6 +168,7 @@ namespace BuildBuild.UI
         {
             frame.enabled = up;
             icon.gameObject.SetActive(up);
+            roleIcon.gameObject.SetActive(up && roleIcon.sprite != null);
             nameText.gameObject.SetActive(up);
             noteText.gameObject.SetActive(up);
             GetComponent<Image>().color = up ? Color.white : BackTint;

@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using BuildBuild.Combat;
+using BuildBuild.Meta;
 using UnityEngine;
 
 namespace BuildBuild.Core
@@ -12,6 +14,10 @@ namespace BuildBuild.Core
     /// No ky thuat da biet (ghi trong HANDOFF): `castle-damaged1` chi khac ban lanh 1,1% pixel nen
     /// o kich thuoc game gan nhu khong doc ra la da mat mau — dung tin vao rieng sprite de bao mau,
     /// van can thanh mau tren HUD.
+    ///
+    /// Thanh tri 3 cap (GAME_DESIGN.md muc 2, code 2026-10-05): moi cap mot bo 3 sprite + mau + vi tri cac be phao, do
+    /// SceneBuilder dien tu `Castle/mounts-tiers.json`. Cap doc tu save (`SaveData.castleTier`); nang o sanh giua wave.
+    /// Ba cap dat cung VACH PHAI (goc GameObject) + cung DAY nen quai va 9 o hero khong phai doi.
     /// </summary>
     [RequireComponent(typeof(Health))]
     public class Castle : Unit
@@ -22,6 +28,30 @@ namespace BuildBuild.Core
         [SerializeField] Sprite intact;
         [SerializeField] Sprite damaged1;   // ~60% HP
         [SerializeField] Sprite damaged2;   // ~25% HP
+
+        [Serializable]
+        public class Tier
+        {
+            public string name;
+            public float maxHealth = 2000f;
+            [Tooltip("Gia vang nang TU cap truoc len cap nay (cap 1 = 0).")]
+            public int cost;
+            [Tooltip("Phai da thang wave nay moi nang len cap nay (0 = khong dieu kien).")]
+            public int unlockWave;
+            public Sprite intact;
+            public Sprite damaged1;
+            public Sprite damaged2;
+            [Tooltip("Vi tri + scale cua Body (local theo goc Castle o vach phai).")]
+            public Vector3 bodyPosition;
+            public float bodyScale = 1f;
+            [Tooltip("Vi tri local cac be phao, tu tren xuong — so phan tu = so be cua cap.")]
+            public Vector3[] mounts;
+            [Tooltip("Scale tung be (cung thu tu `mounts`) — phao co theo be rong mat be cua cap nay.")]
+            public float[] mountScales;
+        }
+
+        [Header("Cap thanh tri (rong = giu sprite + mau dat san)")]
+        [SerializeField] Tier[] tiers;
 
         [Header("Nguong doi sprite")]
         [SerializeField, Range(0f, 1f)] float damaged1Below = 0.6f;
@@ -49,12 +79,97 @@ namespace BuildBuild.Core
         /// <summary>Dan nham vao mat tuong cao chung nay x2 (giua than) tinh tu hang cua ke ban.</summary>
         const float WallAimHeight = 1.5f;
         public event Action Destroyed;
+        public event Action TierChanged;
+
+        /// <summary>Cap hien tai, 1..TierCount (0 neu scene cu chua co bang cap).</summary>
+        public int TierLevel { get; private set; }
+        public int TierCount => tiers != null ? tiers.Length : 0;
+        public Tier CurrentTier => TierLevel > 0 ? tiers[TierLevel - 1] : null;
+        /// <summary>Cap ke tiep, null neu da toi da.</summary>
+        public Tier NextTier => TierLevel > 0 && TierLevel < TierCount ? tiers[TierLevel] : null;
 
         void Awake()
         {
             _health = GetComponent<Health>();
             _health.Damaged += _ => RefreshSprite();
             _health.Died += OnDied;
+            ApplyTier(SaveSystem.Data.castleTier);
+        }
+
+        /// <summary>Doi sang cap <paramref name="level"/>: sprite, vi tri Body, mau day. Be phao do `CannonBoard` dat theo.</summary>
+        public void ApplyTier(int level)
+        {
+            if (TierCount == 0) return;
+            TierLevel = Mathf.Clamp(level, 1, TierCount);
+            var tier = CurrentTier;
+            intact = tier.intact;
+            damaged1 = tier.damaged1;
+            damaged2 = tier.damaged2;
+            if (body != null)
+            {
+                body.transform.localPosition = tier.bodyPosition;
+                body.transform.localScale = Vector3.one * tier.bodyScale;
+            }
+            _health.ResetTo(tier.maxHealth);
+            RefreshSprite();
+            TierChanged?.Invoke();
+        }
+
+        /// <summary>Ly do chua nang duoc (null = nang duoc). Kiem tien o nguoi goi.</summary>
+        public string UpgradeBlocker()
+        {
+            var next = NextTier;
+            if (next == null) return "Thành đã tối đa";
+            int best = SaveSystem.Data.nextWave - 1;
+            if (best < next.unlockWave) return $"Cần thắng wave {next.unlockWave}";
+            return null;
+        }
+
+        /// <summary>Dang chay hieu ung nang cap (rung -> doi sprite -> nay ve).</summary>
+        public bool IsUpgrading { get; private set; }
+
+        /// <summary>Len cap ke tiep va luu save ngay; doi hinh qua hieu ung ~0,9 s. Nguoi goi da kiem `UpgradeBlocker` + tru vang.</summary>
+        public void Upgrade()
+        {
+            if (NextTier == null || IsUpgrading) return;
+            SaveSystem.Data.castleTier = TierLevel + 1;
+            SaveSystem.Save();
+            if (body == null) ApplyTier(SaveSystem.Data.castleTier);
+            else StartCoroutine(UpgradeRoutine(SaveSystem.Data.castleTier));
+        }
+
+        static readonly Color UpgradeGlow = new Color(1f, 0.92f, 0.62f);
+
+        /// <summary>Thanh cu rung manh dan + nga vang, doi sang cap moi o dinh, thanh moi nay 1,06 -> 1 va nhat vang ve trang.</summary>
+        IEnumerator UpgradeRoutine(int level)
+        {
+            IsUpgrading = true;
+            var t = body.transform;
+            Vector3 basePos = t.localPosition;
+            const float shake = 0.45f;
+            for (float e = 0f; e < shake; e += Time.deltaTime)
+            {
+                float k = e / shake;
+                t.localPosition = basePos + (Vector3)UnityEngine.Random.insideUnitCircle * (0.08f * k);
+                body.color = Color.Lerp(Color.white, UpgradeGlow, k);
+                yield return null;
+            }
+
+            ApplyTier(level);
+            basePos = t.localPosition;
+            float baseScale = t.localScale.x;
+            const float settle = 0.45f;
+            for (float e = 0f; e < settle; e += Time.deltaTime)
+            {
+                float k = e / settle;
+                t.localScale = Vector3.one * (baseScale * Mathf.Lerp(1.06f, 1f, k * (2f - k)));
+                body.color = Color.Lerp(UpgradeGlow, Color.white, k);
+                yield return null;
+            }
+            t.localPosition = basePos;
+            t.localScale = Vector3.one * baseScale;
+            body.color = Color.white;
+            IsUpgrading = false;
         }
 
         // Start, khong phai Awake: Health.Awake moi dat mau day, ma thu tu Awake giua hai component

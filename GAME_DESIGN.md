@@ -369,7 +369,7 @@ Cùng khung N/R: đòn thường + 1 nội tại mở ở 1★ + 1 chiêu mana d
   Art identity: áo tu trắng ngà/bạc xám, khăn trùm, chuông cầm tay; viền xanh xám nhỏ, khác đèn/áo tím của Vespera.
   FX cần: đạn sóng âm nhỏ 4 frame; thanh tẩy trên người đồng minh 4 frame; sóng hồi chuông lan + tan 6 frame. Không vẽ vòng hồi máu.
 
-Lộ trình asset theo kit đã duyệt: mỗi hero identity trước; sau đó idle/walk/attack/hurt/death + cast riêng, FX tách body. Ba bộ có 9 sheet FX (Bọ Hung 3, Song Đao 3, Chuông Bạc 3). Neo art/camera/scale vào Frostweaver theo `art-style.md`. Người dùng duyệt cả ba identity và yêu cầu full animation ngày 2026-10-04. Đã xuất đủ 18 clip thân + 9 sheet FX qua image_gen/sprite-forge, PNG/GIF/meta ở `tempart/{BeetleKnight,Twinblade,BellNun}/<action>/final/`; người dùng duyệt các clip/FX trừ walk cả ba ngày 2026-10-04, đồng thời báo một số animation sai trục; guide walk v2 8 pose CHỜ DUYỆT theo yêu cầu người dùng trước khi sinh walk mới, ở mục `low-trio-walk-guide-v2-20261004` đầu `tempart/REVIEW.html`; đã sửa neo trục đứng cho Bọ Hung attack/cast và Song Đao attack, bản `<action>/axis-v2/` chờ xem lại; chưa giao Unity/code.
+Lộ trình asset theo kit đã duyệt: mỗi hero identity trước; sau đó idle/walk/attack/hurt/death + cast riêng, FX tách body. Ba bộ có 9 sheet FX (Bọ Hung 3, Song Đao 3, Chuông Bạc 3). Neo art/camera/scale vào Frostweaver theo `art-style.md`. Người dùng duyệt cả ba identity và yêu cầu full animation ngày 2026-10-04. Đã xuất đủ 18 clip thân + 9 sheet FX qua image_gen/sprite-forge, PNG/GIF/meta ở `tempart/{BeetleKnight,Twinblade,BellNun}/<action>/final/`; người dùng duyệt các clip/FX trừ walk cả ba ngày 2026-10-04, đồng thời báo một số animation sai trục; guide walk v2 8 pose ĐÃ DUYỆT ngày 2026-10-04; đã sinh walk mới v3 8 frame/hero theo từng pose, ở `tempart/<Unit>/walk-v3/final/`, ĐÃ DUYỆT ở mục `low-trio-walk-v3-20261004` đầu `tempart/REVIEW.html`; đã sửa neo trục đứng cho Bọ Hung attack/cast và Song Đao attack, bản `<action>/axis-v2/` chờ xem lại; chưa giao Unity/code. Người dùng CHỐT DUYỆT walk v3 cho cả ba ngày 2026-10-04 sau khi xem bản sửa; v4 bị loại. Bộ được chọn: `tempart/{BeetleKnight,Twinblade,BellNun}/walk-v3/final/`; chưa import Unity.
 
 ## 4. Pháo (3 loại MVP)
 
@@ -379,6 +379,19 @@ Lộ trình asset theo kit đã duyệt: mỗi hero identity trước; sau đó 
 | Nổ | 30 | 0.5/s | 7 | AOE bán kính 2 ô |
 | Băng | 8 | 1.0/s | 7 | Làm chậm 40% trong 3s |
 | *Nỏ Xuyên* | *22* | *0.6/s* | *9* | *Lao bay thẳng xuyên tối đa 3 quái (số Claude đề xuất 2026-10-01, chưa cân)* |
+
+**Bộ pháo 2026-10-05 (asset của 2 bạn, đã vào game) — số TẠM Claude đề xuất, CHƯA cân:**
+
+| Pháo | Hiếm | Sát thương | Tốc bắn | Tầm | Đặc điểm |
+|---|---|---|---|---|---|
+| Lưới | R | 6 | 0.5/s | 7 | Lưới chụp vùng 0,8, trói chân 1,5s |
+| Cối | N | 26 | 0.4/s | 11 | Bắn vòng cầu tới chỗ quái đứng lúc bắn, vòng đỏ báo, nổ vùng 1,6 |
+| Tháp Sét | R | 14 | 0.8/s | 6.5 | Sét nảy tức thì qua 3 quái (cách nhau ≤ 2,5) |
+| Đại Bác Công Thành | SR | 90 | 0.2/s | 9 | Nổ vùng nhỏ 0,6, ×2 với boss/elite |
+| Gatling Tự Động | R | 5 | 2→6/s | 7 | Bắn liên tục 3s thì đạt tốc tối đa; nghỉ 0,35s thì giảm đà |
+| Hoả Mai Thành | SR | 100 | 0.25/s | 10 | Nhắm quái còn nhiều máu nhất, tâm đỏ trên đầu lúc ngắm |
+| Pháo Âm Thanh | SR | 20 | 1.0/s | 4.5 | Sóng hình nón 60°; phát thứ 4 xung kích ×1,75 + đẩy lùi |
+| Pháo Hắc Tinh | SSR | 100 | 0.1/s | 8 | Lõi bay tới chỗ đông quái, hố đen hút 1,5s rồi nổ vùng 1,6; mỗi quái chết trong hố +15% (tối đa 5) |
 
 ## 5. Quái
 

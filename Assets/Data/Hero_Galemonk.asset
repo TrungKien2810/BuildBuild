@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
   displayName: "V\xF5 t\u0103ng gi\xF3"
   unitId: galemonk
+  role: 2
   maxHealth: 700
   damage: 22
   attackRate: 0.9
@@ -29,6 +30,8 @@ MonoBehaviour:
   stormcaller: {fileID: 0}
   galemonk: {fileID: 11400000, guid: c086babeb78da124bb83f5f04bbb7438, type: 2}
   daoVien: {fileID: 0}
+  bloodswordsman: {fileID: 0}
+  soulbinder: {fileID: 0}
   swornBrother: 0
   projectileSpeed: 8
   splashRadius: 0.8

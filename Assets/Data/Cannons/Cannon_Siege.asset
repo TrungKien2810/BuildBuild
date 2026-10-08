@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f28d9e270dec892bd61fa3960bb4436, type: 3}
+  m_Name: Cannon_Siege
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.CannonDefinition
+  displayName: "\u0110\u1EA1i B\xE1c C\xF4ng Th\xE0nh"
+  unitId: cannon_siege
+  icon: {fileID: 21300000, guid: 8f61ba6bba451fc4db19d1c33debc941, type: 3}
+  damage: 90
+  fireRate: 0.2
+  range: 9
+  aoeRadius: 0.6
+  slowPercent: 0
+  slowDuration: 0
+  slowIconFrames: []
+  pierceCount: 0
+  fire: 0
+  arcHeight: 0
+  targetMarkFrames: []
+  rootDuration: 0
+  rootFrames: []
+  bigTargetMultiplier: 2
+  targetHighestHealth: 0
+  aimMarkFrames: []
+  muzzleFrames: []
+  spinUpSeconds: 0
+  spinUpMultiplier: 3
+  chainCount: 0
+  chainRange: 2.5
+  beamFrames: []
+  coneAngle: 60
+  burstEvery: 0
+  burstDamageMultiplier: 1.75
+  waveFrames: []
+  burstWaveFrames: []
+  burstImpactFrames: []
+  vortexSeconds: 1.5
+  vortexStackBonus: 0.15
+  vortexMaxStacks: 5
+  vortexOpenFrames: []
+  vortexLoop0: []
+  vortexLoop1: []
+  vortexLoop2: []
+  absorbFrames: []
+  impactFrames1: []
+  impactFrames2: []
+  damagePerLevel: 0.08
+  upgradeCostBase: 50
+  upgradeCostExponent: 1.5
+  projectileSpeed: 11
+  projectileFrames:
+  - {fileID: 21300000, guid: 8d52c03750337b74680c955b09f29c3d, type: 3}
+  - {fileID: 21300000, guid: a42b7b60a29018746b7caeb18ee116b9, type: 3}
+  - {fileID: 21300000, guid: 8dde79b17a48e954baac5ee6862f281c, type: 3}
+  - {fileID: 21300000, guid: 452be1b2d2130a7488df630227a712b3, type: 3}
+  projectileScale: 0.8
+  impactFrames:
+  - {fileID: 21300000, guid: f1c87a6e986df224eb225616a867f19c, type: 3}
+  - {fileID: 21300000, guid: fbe8e6f30a441484ab00ac062bfe753c, type: 3}
+  - {fileID: 21300000, guid: 87a0b359bc5876e4689a48f91dceeb7e, type: 3}
+  - {fileID: 21300000, guid: daf7f885aa5f67649b4ad8713ad14a02, type: 3}
+  impactScale: 1.4
+  fireSfx: cannon-fire
+  impactSfx: 
+  animations: {fileID: 11400000, guid: a9202a2c69b6c9140a06d3ac5b78b868, type: 2}
+  displayScale: 1.4
+  muzzle: {x: -0.54, y: 0.6}
+  tint: {r: 1, g: 1, b: 1, a: 1}

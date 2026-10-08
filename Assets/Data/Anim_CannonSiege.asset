@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5872530a42e740c4aa90cd38c8fa0e67, type: 3}
+  m_Name: Anim_CannonSiege
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.SpriteAnimationSet
+  framesPerSecond: 9
+  idle:
+    name: idle
+    frames:
+    - {fileID: 21300000, guid: 9ce824a73e6d6b649b56fb41cb35a13c, type: 3}
+    - {fileID: 21300000, guid: 17083599f913f394d938ec45f07aaa06, type: 3}
+    - {fileID: 21300000, guid: a905959a63bd2824f83ffe272c435c6c, type: 3}
+    - {fileID: 21300000, guid: 31ae00e867a2c3046b512070e36d6fcb, type: 3}
+    loop: 1
+    hitFrame: 0
+  walk:
+    name: walk
+    frames: []
+    loop: 1
+    hitFrame: 0
+  attack:
+    name: attack
+    frames:
+    - {fileID: 21300000, guid: c133cd2b2831926438697e792259e1b4, type: 3}
+    - {fileID: 21300000, guid: a9cd5399d2bf3424e94f7c250fcdc99a, type: 3}
+    - {fileID: 21300000, guid: 60007e857a9884449b35cc4ac9800927, type: 3}
+    - {fileID: 21300000, guid: 4ab349b8263dfed42a17d98cbec97548, type: 3}
+    - {fileID: 21300000, guid: 6b3ddcc55f3577246a2459e2c43cfca5, type: 3}
+    - {fileID: 21300000, guid: 51aa9127f6b7054448a67a5a431823cb, type: 3}
+    loop: 0
+    hitFrame: 2
+  hurt:
+    name: hurt
+    frames: []
+    loop: 0
+    hitFrame: 0
+  death:
+    name: death
+    frames: []
+    loop: 0
+    hitFrame: 0
+  skill:
+    name: skill
+    frames: []
+    loop: 0
+    hitFrame: 0
