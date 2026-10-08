@@ -1,0 +1,26 @@
+{
+  "hud-gold-pill.png": {
+    "left": 40,
+    "right": 40,
+    "top": 12,
+    "bottom": 12
+  },
+  "hud-hp-frame.png": {
+    "left": 80,
+    "right": 80,
+    "top": 10,
+    "bottom": 10
+  },
+  "hud-mana-frame.png": {
+    "left": 65,
+    "right": 65,
+    "top": 8,
+    "bottom": 8
+  },
+  "hud-wave-badge.png": {
+    "left": 24,
+    "right": 24,
+    "top": 24,
+    "bottom": 24
+  }
+}

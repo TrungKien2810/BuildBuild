@@ -1,0 +1,26 @@
+{
+  "card-frame-n.png": {
+    "left": 24,
+    "right": 24,
+    "top": 32,
+    "bottom": 32
+  },
+  "card-frame-r.png": {
+    "left": 24,
+    "right": 24,
+    "top": 32,
+    "bottom": 32
+  },
+  "card-frame-sr.png": {
+    "left": 24,
+    "right": 24,
+    "top": 32,
+    "bottom": 32
+  },
+  "card-frame-ssr.png": {
+    "left": 24,
+    "right": 24,
+    "top": 32,
+    "bottom": 32
+  }
+}

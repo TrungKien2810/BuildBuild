@@ -13,8 +13,8 @@ namespace BuildBuild.Meta
         /// <summary>0 = De, 1 = Ngang, 2 = Kho.</summary>
         public int tier;
         public int lord;
-        /// <summary>Vi tri token tren ban do, chuan hoa 0..1 (goc duoi-trai).</summary>
-        public Vector2 mapPosition;
+        /// <summary>O dat tren ban do — chi so vao `ConquestMap.Spots`; -1 = save cu (khong co o), xem `SpotFor`.</summary>
+        public int spot = -1;
         /// <summary>9 o doi hinh, ten asset HeroDefinition, "" = o trong (cung thu tu o cua minh, dat doi xung).</summary>
         public List<string> heroes = new List<string>();
         public List<string> cannons = new List<string>();
@@ -73,13 +73,22 @@ namespace BuildBuild.Meta
         public static readonly float[] RarityPower = { 1f, 1.15f, 1.3f, 1.5f };
         public static readonly string[] LordNames = { "Nam tước Grimhold", "Nữ bá tước Velmora", "Lãnh chúa trẻ Aldric" };
 
-        // Tam cac bai dat trong tren `UI/raid/world-map.png` (do bang mau dat), bai giua = thanh minh; moi lan quet boc 3
-        // bai khong trung.
+        // Tam cac bai dat trong tren `UI/raid/world-map.png`, chuan hoa 0..1 goc duoi-trai. Ban do (bo ui-v3) ve dung 3
+        // bai dat cho thanh NPC — trai-tren / phai-tren / phai-duoi — nen moi lan quet dung ca ba, chi doi do kho <-> bai.
+        // Do bang mask mau dat roi lay TAM VUNG PHU KIN: quet moi tam dat vao khung token 64x62 px, lay trung binh cac tam
+        // ma khung phu kin >= 99% dat — bai thu 4 (thanh minh) cung the, do ra (0,502 · 0,525) = token thanh minh trong
+        // scene (Center + y 29 px * UiScale 2 tren ban do 1920x1080).
         static readonly Vector2[] Spots =
         {
-            new Vector2(0.668f, 0.237f), new Vector2(0.372f, 0.237f), new Vector2(0.206f, 0.480f), new Vector2(0.270f, 0.751f),
-            new Vector2(0.738f, 0.741f), new Vector2(0.792f, 0.480f), new Vector2(0.498f, 0.842f),
+            new Vector2(0.187f, 0.766f), new Vector2(0.804f, 0.806f), new Vector2(0.836f, 0.259f),
         };
+
+        /// <summary>
+        /// Tam o dat cua token thanh NPC tren ban do. Uu tien `spot` da luu luc quet; save cu (truoc khi ban do doi bo
+        /// cuc, `spot` = -1) roi ve thu tu o nen ba thanh khong chong nhau — KHONG can quet lai.
+        /// </summary>
+        public static Vector2 SpotFor(ConquestTarget target, int rank) =>
+            Spots[target.spot >= 0 && target.spot < Spots.Length ? target.spot : rank % Spots.Length];
 
         static ConquestSave Data => SaveSystem.Data.conquest ?? (SaveSystem.Data.conquest = new ConquestSave());
 
@@ -197,7 +206,8 @@ namespace BuildBuild.Meta
             foreach (var cannon in myCannons) cannonLevelSum += CannonLevel(cannon);
             float myCannonLevel = myCannons.Count > 0 ? cannonLevelSum / myCannons.Count : 1f;
 
-            var spots = new List<Vector2>(Spots);
+            var spots = new List<int>();
+            for (int i = 0; i < Spots.Length; i++) spots.Add(i);
             var lords = new List<int> { 0, 1, 2 };
             data.targets.Clear();
             for (int tier = 0; tier < 3; tier++)
@@ -205,7 +215,7 @@ namespace BuildBuild.Meta
                 float scale = TierPower[tier] * (1f + StreakBonus * data.streak);
                 var target = new ConquestTarget { tier = tier, stars = stars, castleScale = scale };
                 int spot = Random.Range(0, spots.Count);
-                target.mapPosition = spots[spot];
+                target.spot = spots[spot];
                 spots.RemoveAt(spot);
                 int lord = Random.Range(0, lords.Count);
                 target.lord = lords[lord];
