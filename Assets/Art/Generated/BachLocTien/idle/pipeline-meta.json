@@ -1,0 +1,45 @@
+{
+  "target": "player",
+  "mode": "idle",
+  "cell_size": 128,
+  "align": "feet",
+  "ground_row": 116,
+  "frames": [
+    {
+      "frame": "idle-1",
+      "aligned_bbox": [
+        47,
+        57,
+        79,
+        116
+      ]
+    },
+    {
+      "frame": "idle-2",
+      "aligned_bbox": [
+        47,
+        57,
+        81,
+        116
+      ]
+    },
+    {
+      "frame": "idle-3",
+      "aligned_bbox": [
+        47,
+        57,
+        80,
+        116
+      ]
+    },
+    {
+      "frame": "idle-4",
+      "aligned_bbox": [
+        47,
+        57,
+        79,
+        116
+      ]
+    }
+  ]
+}

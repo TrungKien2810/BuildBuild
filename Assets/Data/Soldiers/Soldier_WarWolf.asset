@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21934289f9624743841fea630ce87914, type: 3}
   m_Name: Soldier_WarWolf
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.SoldierDefinition
-  displayName: "S\xF3i chi\u1EBFn"
+  displayName: War Wolf
   unitId: soldier_warwolf
   role: 0
   maxHealth: 200
@@ -32,6 +32,14 @@ MonoBehaviour:
   daoVien: {fileID: 0}
   bloodswordsman: {fileID: 0}
   soulbinder: {fileID: 0}
+  gourdTaoist: {fileID: 0}
+  inkScribe: {fileID: 0}
+  hongLien: {fileID: 0}
+  saVe: {fileID: 0}
+  khoiLoiSu: {fileID: 0}
+  werewolf: {fileID: 0}
+  hauNghe: {fileID: 0}
+  bachLocTien: {fileID: 0}
   swornBrother: 0
   projectileSpeed: 20
   splashRadius: 0.3
@@ -66,6 +74,7 @@ MonoBehaviour:
   passiveStar: 1
   minorStar: 3
   secondMinorStar: 3
+  thirdMinorStar: 3
   passiveKind: 0
   passivePower: 0
   passiveThreshold: 0
@@ -77,10 +86,12 @@ MonoBehaviour:
   passiveText: 
   minorText: 
   secondMinorText: 
+  thirdMinorText: 
   ultimateIcon: {fileID: 0}
   minorIcon: {fileID: 0}
   passiveIcon: {fileID: 0}
   secondMinorIcon: {fileID: 0}
+  thirdMinorIcon: {fileID: 0}
   animations: {fileID: 11400000, guid: dd690c803b9d8d941ab2a8a872bf6ec4, type: 2}
   artFacesRight: 1
   avatar: {fileID: 21300000, guid: 03e3c1790fd7b584db648bab1993b9db, type: 3}

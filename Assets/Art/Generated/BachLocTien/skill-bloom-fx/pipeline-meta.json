@@ -1,0 +1,63 @@
+{
+  "target": "player",
+  "mode": "skill-bloom-fx",
+  "cell_size": 128,
+  "align": "feet",
+  "ground_row": 96,
+  "frames": [
+    {
+      "frame": "heal-cleanse-bloom-1",
+      "aligned_bbox": [
+        55,
+        86,
+        70,
+        96
+      ]
+    },
+    {
+      "frame": "heal-cleanse-bloom-2",
+      "aligned_bbox": [
+        42,
+        86,
+        85,
+        96
+      ]
+    },
+    {
+      "frame": "heal-cleanse-bloom-3",
+      "aligned_bbox": [
+        42,
+        79,
+        86,
+        96
+      ]
+    },
+    {
+      "frame": "heal-cleanse-bloom-4",
+      "aligned_bbox": [
+        37,
+        65,
+        88,
+        96
+      ]
+    },
+    {
+      "frame": "heal-cleanse-bloom-5",
+      "aligned_bbox": [
+        41,
+        65,
+        86,
+        96
+      ]
+    },
+    {
+      "frame": "heal-cleanse-bloom-6",
+      "aligned_bbox": [
+        47,
+        78,
+        80,
+        96
+      ]
+    }
+  ]
+}

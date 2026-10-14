@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 505e5ef04f70452448a64507e11a0c68, type: 3}
   m_Name: Enemy_OrcShaman
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.EnemyDefinition
-  displayName: "Ph\xE1p s\u01B0 Orc"
+  displayName: "Orc Shaman"
   kind: 3
   baseHealth: 2500
   baseDamage: 60

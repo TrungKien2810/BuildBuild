@@ -108,6 +108,52 @@ namespace BuildBuild.Data
         /// trong `skillDuration` (tinh anh mot nua, boss khong). FX: `skillFrames` song chuong.
         /// </summary>
         BellToll,
+        /// <summary>
+        /// Nguyet Tho Luan Ngoc Luan Hoi: nem luan lon xuyen duong dai `skillRadius` theo huong khoa luc phong roi thu ve
+        /// cung duong; luot di damage x `skillPower`, luot ve = 75% luot di. Moi dich toi da 1 hit moi luot.
+        /// </summary>
+        RingReturn,
+        /// <summary>
+        /// Tho San Hac An Phan Quyet Hac An: dung 3 coc an trong vung `skillRadius` quanh muc tieu, sau `skillDuration`
+        /// giay no moi coc damage x `skillPower` (muc tieu Xe Giap +50%); gan Khoa Hoi Mau.
+        /// </summary>
+        SigilJudgment,
+        /// <summary>
+        /// Dao Si Ho Lo Can Khon Khai Ho: hut sach Doc/Chay/Cham quanh dong minh roi tieu toan bo Khi phun non
+        /// `skillDuration` giay, moi nhip damage x (0,5 + 0,1 x Khi). So nam o `gourdTaoist`.
+        /// </summary>
+        GourdUnleash,
+        /// <summary>
+        /// Ngu But Su Hoa Long Diem Tinh: mac long quet dai `skillRadius` roi no cuoi duong. So nam o `inkScribe`.
+        /// </summary>
+        InkDragon,
+        /// <summary>
+        /// Vu Nu Hong Lien Hong Lien Dai Vu: tung nu sen lon roi no toan bo nu. So nam o `hongLien`.
+        /// </summary>
+        LotusBloom,
+        /// <summary>
+        /// Sa Ve Sa Thanh Tran Tuyen: sat thuong quanh minh + vung cat giam toc/dan xa. So nam o `saVe`.
+        /// </summary>
+        SandFort,
+        /// <summary>
+        /// Khoi Loi Su Khoi Vuong Giang Tran: roi bung khop thanh dai khoi, nen song chan dong + chien dau. So nam o `khoiLoiSu`.
+        /// </summary>
+        GrandPuppet,
+        /// <summary>
+        /// Nguoi Soi Nguyet Bien: MOT LAN moi tran, hoa soi VINH VIEN trong tran. So nam o `werewolf`.
+        /// </summary>
+        MoonTransform,
+        /// <summary>
+        /// Hau Nghe Xa Nhat: giuong cung bao truoc `aimSeconds` giay roi ban ten lon xuyen doan lane `shotLength`,
+        /// moi dich an `shotPower` ATK mot lan, muc tieu da nham an them `sealBonus` ATK moi Nhat An roi xoa an.
+        /// So nam o `hauNghe`.
+        /// </summary>
+        SolarShot,
+        /// <summary>
+        /// Bach Loc Tien Bach Loc Hoi Xuan: bao truoc roi bong loc buoc doc lane, de lai dai hoa hoi `laneHealPerSecond`
+        /// ATK moi giay cho hero/linh dang song trong dai. So nam o `bachLocTien`.
+        /// </summary>
+        DeerRevival,
     }
 
     /// <summary>
@@ -167,6 +213,16 @@ namespace BuildBuild.Data
         SporeField,
         /// <summary>Cua Kim Sat: moi don thu `passiveEvery` pha giap muc tieu `passivePower` trong `passiveDuration` giay (chi lam moi, khong cong).</summary>
         ClampBreak,
+        /// <summary>
+        /// Nguyet Tho Luan Hoi Luan: moi don thu 3 TRUNG dich, vong quay ve gay them `passivePower` x damage len toi da
+        /// 3 dich tren duong ve (moi dich 1 lan).
+        /// </summary>
+        ReturnStrike,
+        /// <summary>
+        /// Tho San Hac An Pha An: don truc tiep cua chinh Tho San len muc tieu dang co khien +`passivePower` sat thuong
+        /// (chi xet khien luc trung, khong tang phan vao mau).
+        /// </summary>
+        ShieldBane,
     }
 
     /// <summary>
@@ -176,7 +232,12 @@ namespace BuildBuild.Data
     [CreateAssetMenu(menuName = "BuildBuild/Hero Definition", fileName = "Hero_")]
     public class HeroDefinition : ScriptableObject
     {
-        public string displayName = "Frostweaver";
+        /// <summary>
+        /// Ten hien thi. De TRONG chu khong lay ten mot hero lam mac dinh: `SceneBuilder` bake ten nay vao bang chon
+        /// hero luc build scene, nen mot asset tao ma quen dat ten se hien sai ten cua hero khac (dot 2026-10-09:
+        /// dong "Hau Nghe" hien chu "Frostweaver" — ten mac dinh cu cua lop).
+        /// </summary>
+        public string displayName = "";
         [Tooltip(
             "Id `UnitDefinition` trong gacha (vd. knight, soldier_warwolf). Chi dat/trieu hoi duoc khi save da so huu id " +
             "nay. Trong = khong bao gio so huu (linh xuong/ky si cua Bonecaller khong can — khong qua bang chon).")]
@@ -224,6 +285,22 @@ namespace BuildBuild.Data
         public DaoVienDefinition daoVien;
         public BloodswordsmanKit bloodswordsman;
         public SoulbinderKit soulbinder;
+        [Tooltip("Chi Dao Si Ho Lo: tich Khi, Thu Ta, Luyen Khi Pha, Can Khon Khai Ho. Trong = khong co.")]
+        public GourdTaoistKit gourdTaoist;
+        [Tooltip("Chi Ngu But Su: Tam But, Hoanh But, Tran Son An, Hoa Long Diem Tinh. Trong = khong co.")]
+        public InkScribeKit inkScribe;
+        [Tooltip("Chi Vu Nu Hong Lien: Gieo Sen, Song Phien Vu, Lien Tam Dan, Hong Lien Dai Vu. Trong = khong co.")]
+        public HongLienKit hongLien;
+        [Tooltip("Chi Sa Ve: Tu Sa, Tram Sa Quyen, Boi Thach, Sa Thanh Tran Tuyen. Trong = khong co.")]
+        public SaVeKit saVe;
+        [Tooltip("Chi Khoi Loi Su: roi MocKhoi, Ho Chu, Khoi Vuong Giang Tran. Trong = khong co.")]
+        public KhoiLoiSuKit khoiLoiSu;
+        [Tooltip("Chi Nguoi Soi: Huyet Thuc, Tru Nguyet, Ngoam Ha, Nguyet Bien hoa soi. Trong = khong co.")]
+        public WerewolfKit werewolf;
+        [Tooltip("Chi Hau Nghe: Nhat An, Nhat Luan Tran Tuyen, Cuu Tien Quy Nhat, Nhat Boc Lien Hoan, Xa Nhat. Trong = khong co.")]
+        public HauNgheKit hauNghe;
+        [Tooltip("Chi Bach Loc Tien: Sinh Khi, Tam Mam Hoi Xuan, Hoan Diep Tuc Sinh, Loc Anh Tuan Lam, Bach Loc Hoi Xuan. Trong = khong co.")]
+        public BachLocTienKit bachLocTien;
         [Tooltip("Hero nao trong bo Dao Vien — quyet dinh phan nao cua `daoVien` chay.")]
         public SwornBrother swornBrother;
 
@@ -314,6 +391,10 @@ namespace BuildBuild.Data
         [Min(0)] public int minorStar = 3;
         [Tooltip("Chieu phu thu hai: Wyrmspear Dia Long Chan (cua rong), Chainwarden Giat Xich.")]
         [Min(0)] public int secondMinorStar = 3;
+        [Tooltip(
+            "Chieu phu thu BA (bo SSR 3 chieu phu: Hau Nghe, Bach Loc Tien). Hero chi co hai chieu phu bo qua o nay. " +
+            "Mo cung luc voi hai chieu phu kia theo khung sao hien hanh.")]
+        [Min(0)] public int thirdMinorStar = 3;
 
         [Header("Noi tai hero khong co bo chieu rieng (mo theo passiveStar, chot 2026-09-29; so CHUA can)")]
         [Tooltip("Loai noi tai — y nghia tung o ben duoi doi theo loai, xem `PassiveKind`.")]
@@ -339,12 +420,16 @@ namespace BuildBuild.Data
         [TextArea(2, 4)] public string minorText;
         [Tooltip("Chieu phu thu hai (Wyrmspear, Chainwarden).")]
         [TextArea(2, 4)] public string secondMinorText;
+        [Tooltip("Chieu phu thu ba — chi bo SSR 3 chieu phu (Hau Nghe, Bach Loc Tien).")]
+        [TextArea(2, 4)] public string thirdMinorText;
         [Tooltip("Icon canh dong ky nang (UI/icons/icon-skill-*). Trong = de trong o icon.")]
         public Sprite ultimateIcon;
         public Sprite minorIcon;
         [Tooltip("Icon dong noi tai (UI/icons/icon-passive-*).")]
         public Sprite passiveIcon;
         public Sprite secondMinorIcon;
+        [Tooltip("Icon chieu phu thu ba (bo SSR 3 chieu phu).")]
+        public Sprite thirdMinorIcon;
 
         [Header("Animation")]
         public SpriteAnimationSet animations;
@@ -354,7 +439,7 @@ namespace BuildBuild.Data
         [Header("Chan dung")]
         [Tooltip(
             "Avatar 128x128 o Assets/Art/Generated/UI/avatars/ — dung cho nut chon hero va cho moi " +
-            "cho UI can chi ra ĐAY LA AI. Khong dung sprite idle cua tran dau: idle ve 3/4 quay trai " +
+            "UI that needs to identify WHO THIS IS. Do not use battle idle sprites: idle faces left in 3/4 view " +
             "va can theo chan, thu nho vao o vuong thi mat quay di cho khac va chan bi cat.")]
         public Sprite avatar;
     }

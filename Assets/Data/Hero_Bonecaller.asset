@@ -32,6 +32,14 @@ MonoBehaviour:
   daoVien: {fileID: 0}
   bloodswordsman: {fileID: 0}
   soulbinder: {fileID: 0}
+  gourdTaoist: {fileID: 0}
+  inkScribe: {fileID: 0}
+  hongLien: {fileID: 0}
+  saVe: {fileID: 0}
+  khoiLoiSu: {fileID: 0}
+  werewolf: {fileID: 0}
+  hauNghe: {fileID: 0}
+  bachLocTien: {fileID: 0}
   swornBrother: 0
   projectileSpeed: 8
   splashRadius: 0.3
@@ -74,6 +82,7 @@ MonoBehaviour:
   passiveStar: 1
   minorStar: 3
   secondMinorStar: 3
+  thirdMinorStar: 3
   passiveKind: 0
   passivePower: 0
   passiveThreshold: 0
@@ -81,19 +90,19 @@ MonoBehaviour:
   passiveEvery: 1
   passiveDuration: 0
   passiveFrames: []
-  ultimateText: "G\u1ECDi K\u1EF5 S\u0129 T\u1EED Th\u1EA7n; k\u1EF5 s\u0129 c\xF2n
-    s\u1ED1ng th\xEC h\u1ED3i \u0111\u1EA7y m\xE1u cho n\xF3. L\xEDnh x\u01B0\u01A1ng
-    g\u1EA7n k\u1EF5 s\u0129 \u0111\u01B0\u1EE3c t\u0103ng c\xF4ng + t\u1ED1c \u0111\xE1nh."
-  passiveText: "D\u1EF1ng X\xE1c: qu\xE1i ch\u1EBFt g\u1EA7n ph\xE1p s\u01B0 c\xF3
-    t\u1EC9 l\u1EC7 \u0111\u1EE9ng d\u1EADy th\xE0nh l\xEDnh x\u01B0\u01A1ng."
-  minorText: "V\xF2ng \u1EA4n K\xFD: v\xF2ng tr\xEAn \u0111\u1EA5t t\u1EA1i c\u1EE5m
-    qu\xE1i, s\xE1t th\u01B0\u01A1ng th\u1EA5p + \u1EA5n k\xFD; qu\xE1i ch\u1EBFt
-    khi c\xF2n \u1EA5n k\xFD ch\u1EAFc ch\u1EAFn th\xE0nh l\xEDnh x\u01B0\u01A1ng."
+  ultimateText: Summon Death Knight; while the knight lives he is healed to full.
+    Skeleton soldiers near the knight gain attack + attack speed.
+  passiveText: 'Raise Dead: enemies that die near the necromancer have a chance to
+    rise as skeleton soldiers.'
+  minorText: 'Sigil Ring: a ring at the enemy cluster, low damage + a sigil mark;
+    enemies that die marked rise as skeletons.'
   secondMinorText: 
+  thirdMinorText: 
   ultimateIcon: {fileID: 21300000, guid: 627e5415a2d97d14ebfafde534ac284b, type: 3}
   minorIcon: {fileID: 21300000, guid: 6273e6b984cf69545b6c07abcba58b45, type: 3}
   passiveIcon: {fileID: 21300000, guid: 38a500e3f616958409014262d7af0b1e, type: 3}
   secondMinorIcon: {fileID: 0}
+  thirdMinorIcon: {fileID: 0}
   animations: {fileID: 11400000, guid: ed18e66d09b85894fa270c5cf011fd0b, type: 2}
   artFacesRight: 0
   avatar: {fileID: 21300000, guid: 5437067a70cfbb346b6643aaa2f92803, type: 3}

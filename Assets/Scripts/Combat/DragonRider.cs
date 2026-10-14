@@ -292,10 +292,10 @@ namespace BuildBuild.Combat
                 var go = new GameObject("RageStacks");
                 go.transform.SetParent(transform, false);
                 _rageLabel = go.AddComponent<TextMesh>();
-                var font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+                var font = PixelFont.Asset;
                 _rageLabel.font = font;
-                _rageLabel.fontSize = 48;
-                _rageLabel.characterSize = FloatingNumber.LineHeight * 10f / 48f / Battlefield.UnitScale;
+                _rageLabel.fontSize = 50;   // boi so cua PixelFont.DesignPx (10)
+                _rageLabel.characterSize = FloatingNumber.LineHeight * 10f / 50f / Battlefield.UnitScale;
                 _rageLabel.fontStyle = FontStyle.Bold;
                 _rageLabel.anchor = TextAnchor.LowerCenter;
                 _rageLabel.color = RageLabelColor;
@@ -306,7 +306,7 @@ namespace BuildBuild.Combat
             // Tren thanh mau/mana (StatBar dat o dinh dau).
             _rageLabel.transform.localPosition = new Vector3(0f, _hero.BodyHeight / Battlefield.UnitScale + 0.2f, 0f);
             int stacks = RageStacks;
-            _rageLabel.text = stacks > 0 ? $"Nộ {stacks}/{_definition.rageMaxStacks}" : "";
+            _rageLabel.text = stacks > 0 ? $"Rage {stacks}/{_definition.rageMaxStacks}" : "";
         }
 
         // ------------------------------------------------------------------ GD1: Xuyen Long

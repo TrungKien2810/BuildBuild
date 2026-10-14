@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Unit_wukong
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.UnitDefinition
   id: wukong
-  displayName: "T\xF4n Ng\u1ED9 Kh\xF4ng"
+  displayName: Ton Ngo Khong
   category: 0
   rarity: 3
   icon: {fileID: 21300000, guid: 4457471c097082a48819de22c66cfde0, type: 3}

@@ -1,0 +1,63 @@
+{
+  "target": "player",
+  "mode": "skill-sun-arrow-fx",
+  "cell_size": 256,
+  "align": "center",
+  "ground_row": null,
+  "frames": [
+    {
+      "frame": "xa-nhat-arrow-1",
+      "aligned_bbox": [
+        88,
+        109,
+        169,
+        147
+      ]
+    },
+    {
+      "frame": "xa-nhat-arrow-2",
+      "aligned_bbox": [
+        86,
+        109,
+        173,
+        146
+      ]
+    },
+    {
+      "frame": "xa-nhat-arrow-3",
+      "aligned_bbox": [
+        88,
+        109,
+        176,
+        146
+      ]
+    },
+    {
+      "frame": "xa-nhat-arrow-4",
+      "aligned_bbox": [
+        86,
+        109,
+        173,
+        146
+      ]
+    },
+    {
+      "frame": "xa-nhat-arrow-5",
+      "aligned_bbox": [
+        88,
+        109,
+        175,
+        147
+      ]
+    },
+    {
+      "frame": "xa-nhat-arrow-6",
+      "aligned_bbox": [
+        86,
+        109,
+        168,
+        147
+      ]
+    }
+  ]
+}

@@ -70,9 +70,9 @@ namespace BuildBuild.UI
             };
             waves.WaveCleared += (wave, gold) =>
             {
-                string hint = !waves.LastWasConquest ? $"Xong wave {wave} — nâng cấp rồi đánh tiếp"
-                    : waves.LastShards > 0 ? $"Hạ thành địch — Chinh Phạt thắng · +{waves.LastShards} mảnh"
-                    : "Hạ thành địch — Chinh Phạt thắng";
+                string hint = !waves.LastWasConquest ? $"Wave {wave} Complete — upgrade, then keep fighting"
+                    : waves.LastShards > 0 ? $"Enemy Castle Defeated — Conquest Victory · +{waves.LastShards} Shards"
+                    : "Enemy Castle Defeated — Conquest Victory";
                 _backToConquestMap = waves.LastWasConquest;
                 _newBiome = !waves.LastWasConquest;
                 var drop = Armory.RollDrop(equipment, wave);
@@ -82,14 +82,14 @@ namespace BuildBuild.UI
                     resultPopup.Show(true, gold, hint, drop != null ? equipment.Icon(drop.slot) : null, dropName);
                 else
                 {
-                    ShowMessage(drop != null ? $"{hint}\nNhận trang bị: {dropName}" : hint);
+                    ShowMessage(drop != null ? $"{hint}\nEquipment Received: {dropName}" : hint);
                     AdvanceBiome();
                 }
                 Refresh();
             };
             waves.Defeated += wave =>
             {
-                string hint = waves.LastWasConquest ? "Thành mình thất thủ — Chinh Phạt thua" : $"Thua wave {wave} — phát triển thêm rồi đánh lại";
+                string hint = waves.LastWasConquest ? "Your Castle Fell — Conquest Defeat" : $"Wave {wave} Lost — grow stronger, then retry";
                 _backToConquestMap = waves.LastWasConquest;
                 if (resultPopup != null) resultPopup.Show(false, 0, hint);
                 else ShowMessage(hint);
@@ -128,14 +128,14 @@ namespace BuildBuild.UI
 
         public void Refresh()
         {
-            waveText.text = WaveManager.InConquest ? "Chinh Phạt" : $"Wave {waves.NextWave}";
-            startLabel.text = WaveManager.InConquest ? "Tấn công thành" : $"Đánh wave {waves.NextWave}";
+            waveText.text = WaveManager.InConquest ? "Conquest" : $"Wave {waves.NextWave}";
+            startLabel.text = WaveManager.InConquest ? "Attack Castle" : $"Fight Wave {waves.NextWave}";
             startButton.gameObject.SetActive(!waves.IsFighting);
             foreach (var button in HiddenWhileFighting) button.gameObject.SetActive(!waves.IsFighting);
             RefreshCastle();
             RefreshGold();
             RefreshChest();
-            if (conquestLabel != null) conquestLabel.text = WaveManager.InConquest ? "Rời Chinh Phạt" : "Chinh Phạt";
+            if (conquestLabel != null) conquestLabel.text = WaveManager.InConquest ? "Leave Conquest" : "Conquest";
             RefreshCastleUpgrade();
         }
 
@@ -152,7 +152,7 @@ namespace BuildBuild.UI
                 return;
             }
             string blocker = castle.UpgradeBlocker();
-            castleUpgradeLabel.text = blocker ?? $"Nâng {next.name} · {next.cost}";
+            castleUpgradeLabel.text = blocker ?? $"Upgrade {next.name} · {next.cost}";
             // Co bang thi nut chi MO bang (luon bam duoc de xem dieu kien); bang tu xam nut Nang.
             castleUpgradeButton.interactable = castleUpgradePanel != null || blocker == null && economy.Gold >= next.cost;
             if (castleUpgradePanel != null && castleUpgradePanel.IsOpen) castleUpgradePanel.Refresh(castle, economy.Gold);
@@ -174,13 +174,13 @@ namespace BuildBuild.UI
             if (waves.IsFighting || next == null || castle.UpgradeBlocker() != null) return;
             if (!economy.TrySpend(next.cost))
             {
-                ShowMessage("Không đủ vàng nâng thành");
+                ShowMessage("Not enough Gold to upgrade Castle");
                 return;
             }
             if (castleUpgradePanel != null) castleUpgradePanel.Close();
             castle.Upgrade();
             Sfx.Play("upgrade");
-            ShowMessage($"Thành lên cấp {castle.TierLevel}: {next.name}");
+            ShowMessage($"Castle reached level {castle.TierLevel}: {next.name}");
         }
 
         void OnConquestButton()
@@ -209,7 +209,7 @@ namespace BuildBuild.UI
             var stage = AfkChest.Current;
             chestImage.sprite = stage == AfkChest.Stage.Full ? chestFull : stage == AfkChest.Stage.Glowing ? chestGlowing : chestClosed;
             int minutes = Mathf.FloorToInt(hours * 60f);
-            chestTimer.text = hours >= AfkChest.CapHours ? "ĐẦY" : $"{minutes / 60}g {minutes % 60:00}p";
+            chestTimer.text = hours >= AfkChest.CapHours ? "Full" : $"{minutes / 60}g {minutes % 60:00}p";
             chestButton.interactable = AfkChest.PendingGold(tuning) > 0;
         }
 
@@ -219,11 +219,11 @@ namespace BuildBuild.UI
             Sfx.Play("coin");
             economy.Add(reward.gold);
             string dropName = reward.drop != null ? $"{EquipmentConfig.SlotName(reward.drop.slot)} {reward.drop.rarity}" : "";
-            string hint = reward.shards > 0 ? $"+{reward.shards} mảnh cho unit ngẫu nhiên" : "Rương tích tối đa 12 giờ";
+            string hint = reward.shards > 0 ? $"+{reward.shards} Shards for a random unit" : "Chest stores up to 12 hours";
             if (resultPopup != null)
-                resultPopup.ShowReward("RƯƠNG AFK", reward.gold, hint, reward.drop != null ? equipment.Icon(reward.drop.slot) : null, dropName);
+                resultPopup.ShowReward("AFK Chest", reward.gold, hint, reward.drop != null ? equipment.Icon(reward.drop.slot) : null, dropName);
             else
-                ShowMessage($"Rương AFK: +{reward.gold} vàng" + (dropName != "" ? $", {dropName}" : ""));
+                ShowMessage($"AFK Chest: +{reward.gold} Gold" + (dropName != "" ? $", {dropName}" : ""));
             RefreshChest();
         }
 

@@ -1,0 +1,81 @@
+{
+  "target": "player",
+  "mode": "walk",
+  "cell_size": 128,
+  "align": "feet",
+  "ground_row": 116,
+  "frames": [
+    {
+      "frame": "walk-1",
+      "aligned_bbox": [
+        46,
+        59,
+        82,
+        116
+      ]
+    },
+    {
+      "frame": "walk-2",
+      "aligned_bbox": [
+        46,
+        60,
+        82,
+        116
+      ]
+    },
+    {
+      "frame": "walk-3",
+      "aligned_bbox": [
+        46,
+        58,
+        82,
+        116
+      ]
+    },
+    {
+      "frame": "walk-4",
+      "aligned_bbox": [
+        46,
+        59,
+        82,
+        116
+      ]
+    },
+    {
+      "frame": "walk-5",
+      "aligned_bbox": [
+        46,
+        59,
+        82,
+        116
+      ]
+    },
+    {
+      "frame": "walk-6",
+      "aligned_bbox": [
+        46,
+        60,
+        82,
+        116
+      ]
+    },
+    {
+      "frame": "walk-7",
+      "aligned_bbox": [
+        46,
+        58,
+        82,
+        116
+      ]
+    },
+    {
+      "frame": "walk-8",
+      "aligned_bbox": [
+        46,
+        59,
+        82,
+        116
+      ]
+    }
+  ]
+}

@@ -292,7 +292,7 @@ namespace BuildBuild.UI
 
             reinforceButton.interactable = false;   // chi la dong ho, chon quan o bang pause
             int wait = Mathf.CeilToInt(Mathf.Max(0f, _nextReinforce - Time.time));
-            reinforceLabel.text = rivalHasReserves || allyHasReserves ? $"Dự bị +1 sau {wait}s" : "Hết quân dự bị";
+            reinforceLabel.text = rivalHasReserves || allyHasReserves ? $"Reserves +1 in {wait}s" : "No Reserves Left";
         }
 
         void SendRivalReinforcements(Castle rival)
@@ -305,7 +305,7 @@ namespace BuildBuild.UI
                 hero.Aggressive = true;
                 _rivals.Add(hero);
             }
-            FloatingNumber.Spawn(new Vector3(body.center.x, body.max.y, 0f), "Quân tiếp viện!", ReinforceColor);
+            FloatingNumber.Spawn(new Vector3(body.center.x, body.max.y, 0f), "Reinforcements!", ReinforceColor);
         }
 
         /// <summary>+1 o du bi: pause tran, mo bang chon voi be tuong chi vien.</summary>
@@ -339,7 +339,7 @@ namespace BuildBuild.UI
             hero.Initialise(definition, equipment);
             hero.Aggressive = true;
             _allies.Add(hero);
-            FloatingNumber.Spawn(new Vector3(body.center.x, body.max.y, 0f), "Chi viện!", AllyReinforceColor);
+            FloatingNumber.Spawn(new Vector3(body.center.x, body.max.y, 0f), "Support!", AllyReinforceColor);
         }
 
         /// <summary>Than thanh + x cong ra (mep than quay ve phia dich: thanh NPC mep trai, thanh minh mep phai).</summary>

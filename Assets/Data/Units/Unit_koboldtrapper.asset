@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Unit_koboldtrapper
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.UnitDefinition
   id: koboldtrapper
-  displayName: "Kobold g\xE0i b\u1EABy"
+  displayName: Kobold Trapper
   category: 0
   rarity: 0
-  icon: {fileID: 21300000, guid: dbd4d1c322095a74c8d01fb81fb345a0, type: 3}
+  icon: {fileID: 21300000, guid: 28ff6035755e9e5458a37b56a98207c7, type: 3}

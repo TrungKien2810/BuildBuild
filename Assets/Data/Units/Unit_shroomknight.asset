@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Unit_shroomknight
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.UnitDefinition
   id: shroomknight
-  displayName: "Hi\u1EC7p s\u0129 n\u1EA5m"
+  displayName: Shroom Knight
   category: 0
   rarity: 0
-  icon: {fileID: 21300000, guid: 2a0522dc83d891246a0f7e995551823a, type: 3}
+  icon: {fileID: 21300000, guid: 7e09e0fdc22770b40bd29b083c7b7d34, type: 3}

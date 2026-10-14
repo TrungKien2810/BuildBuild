@@ -1,0 +1,90 @@
+{
+  "target": "player",
+  "mode": "skill-mam-fx",
+  "cell_size": 128,
+  "align": "feet",
+  "ground_row": 96,
+  "frames": [
+    {
+      "frame": "tam-mam-ground-1",
+      "aligned_bbox": [
+        58,
+        80,
+        71,
+        96
+      ]
+    },
+    {
+      "frame": "tam-mam-ground-2",
+      "aligned_bbox": [
+        58,
+        74,
+        71,
+        96
+      ]
+    },
+    {
+      "frame": "tam-mam-ground-3",
+      "aligned_bbox": [
+        47,
+        74,
+        82,
+        96
+      ]
+    },
+    {
+      "frame": "tam-mam-ground-4",
+      "aligned_bbox": [
+        43,
+        67,
+        84,
+        96
+      ]
+    },
+    {
+      "frame": "tam-mam-ground-5",
+      "aligned_bbox": [
+        38,
+        61,
+        90,
+        96
+      ]
+    },
+    {
+      "frame": "tam-mam-ground-6",
+      "aligned_bbox": [
+        41,
+        57,
+        88,
+        96
+      ]
+    },
+    {
+      "frame": "tam-mam-ground-7",
+      "aligned_bbox": [
+        46,
+        59,
+        82,
+        96
+      ]
+    },
+    {
+      "frame": "tam-mam-ground-8",
+      "aligned_bbox": [
+        53,
+        60,
+        76,
+        96
+      ]
+    },
+    {
+      "frame": "tam-mam-ground-9",
+      "aligned_bbox": [
+        58,
+        79,
+        70,
+        96
+      ]
+    }
+  ]
+}

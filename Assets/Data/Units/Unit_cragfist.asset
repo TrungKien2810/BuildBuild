@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Unit_cragfist
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.UnitDefinition
   id: cragfist
-  displayName: "Ng\u01B0\u1EDDi \u0111\xE1"
+  displayName: Cragfist
   category: 0
   rarity: 1
   icon: {fileID: 21300000, guid: 76182530b5ac89a4e932ec5b5ed71bda, type: 3}

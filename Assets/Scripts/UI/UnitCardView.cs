@@ -64,7 +64,7 @@ namespace BuildBuild.UI
 
             var tint = has ? Color.white : Locked;
             background.color = icon.color = tint;
-            nameText.text = has ? unit.displayName : $"{unit.displayName}\nChưa sở hữu";
+            nameText.text = has ? unit.displayName : $"{unit.displayName}\nNot Owned";
             lockIcon.SetActive(!has);
             levelBadge.SetActive(has);
             shardBar.SetActive(has);
@@ -84,7 +84,7 @@ namespace BuildBuild.UI
         /// </summary>
         public static void ShowLevelAndStars(Text level, Image[] stars, int row, OwnedUnit owned, Sprite on, Sprite off)
         {
-            level.text = owned == null ? "Chưa sở hữu" : $"Lv {Mathf.Max(1, owned.level)}";
+            level.text = owned == null ? "Not Owned" : $"Lv {Mathf.Max(1, owned.level)}";
             for (int k = 0; k < 5; k++)
             {
                 var star = stars[row * 5 + k];

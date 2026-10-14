@@ -74,7 +74,7 @@ namespace BuildBuild.UI
             var goldRect = (RectTransform)rewardRow.transform;
             goldRect.anchoredPosition = new Vector2(hasDrop ? -80f : 0f, goldRect.anchoredPosition.y);
             ribbon.sprite = victory ? victoryRibbon : defeatRibbon;
-            titleText.text = victory ? "CHIẾN THẮNG" : "THẤT BẠI";
+            titleText.text = victory ? "Victory" : "Defeat";
             // Chu thang mau navy toi tren long ruy bang thang dac.
             titleText.color = victory ? new Color(0.08f, 0.12f, 0.27f) : new Color(0.86f, 0.86f, 0.90f);
             if (crest != null) crest.sprite = victory ? victoryCrest : defeatCrest;

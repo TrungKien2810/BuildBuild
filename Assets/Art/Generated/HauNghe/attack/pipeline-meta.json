@@ -1,0 +1,45 @@
+{
+  "target": "player",
+  "mode": "attack",
+  "cell_size": 128,
+  "align": "feet",
+  "ground_row": 116,
+  "frames": [
+    {
+      "frame": "attack-1",
+      "aligned_bbox": [
+        45,
+        50,
+        84,
+        116
+      ]
+    },
+    {
+      "frame": "attack-2",
+      "aligned_bbox": [
+        41,
+        56,
+        84,
+        116
+      ]
+    },
+    {
+      "frame": "attack-3",
+      "aligned_bbox": [
+        44,
+        52,
+        84,
+        116
+      ]
+    },
+    {
+      "frame": "attack-4",
+      "aligned_bbox": [
+        45,
+        58,
+        81,
+        116
+      ]
+    }
+  ]
+}

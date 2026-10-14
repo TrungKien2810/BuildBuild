@@ -58,6 +58,7 @@ namespace BuildBuild.Core
         [SerializeField, Range(0f, 1f)] float damaged2Below = 0.25f;
 
         Health _health;
+        SpriteRenderer _baseShadow;
 
         public override Health Health => _health;
         public override bool IsDying => _health == null || _health.IsDead;
@@ -65,6 +66,9 @@ namespace BuildBuild.Core
         // Lau dai la `Unit` de hero chu dong tien danh (Chinh Phat) nham duoc thanh dich. Tuong la mot duong thang dung
         // tai x cua lau dai (cung quy uoc quai dang dung): khong be ngang, khong bi khong che, khong bi day / keo.
         public override float BodyRadius => 0f;
+
+        // Bong chan thanh do dai rieng o duoi ve (rong bang ca sprite, khong theo ban kinh than).
+        public override bool GroundShadow => false;
         public override float BodyHeight => WallAimHeight;
         public override Vector3 AimPoint(Vector3 from) => new Vector3(transform.position.x, from.y, from.z);
         public override bool IsStunned => false;
@@ -93,6 +97,7 @@ namespace BuildBuild.Core
             _health = GetComponent<Health>();
             _health.Damaged += _ => RefreshSprite();
             _health.Died += OnDied;
+            _baseShadow = UnitShadow.SpawnBaseBand(transform, "BaseShadow");
             ApplyTier(SaveSystem.Data.castleTier);
         }
 
@@ -112,16 +117,45 @@ namespace BuildBuild.Core
             }
             _health.ResetTo(tier.maxHealth);
             RefreshSprite();
+            RefreshBaseShadow();
             TierChanged?.Invoke();
+        }
+
+        /// <summary>
+        /// Dai bong o chan thanh: chi trai dung doan CHAM DAT cua sprite (dinh luoi tight mesh nam sat day), khong
+        /// trai het be ngang sprite — khoi dung cao hon hay le trong suot ma co bong thi doc ra mot net ke lo ra ngoai.
+        /// Nam ngay duoi day, lech ve duoi-phai (sang tu tren-trai, art-style.md §7–8). Goi lai moi khi doi cap
+        /// hoac lat thanh (ban sao thanh NPC o Chinh Phat).
+        /// </summary>
+        public void RefreshBaseShadow()
+        {
+            if (_baseShadow == null || body == null || body.sprite == null) return;
+            var band = _baseShadow.sprite.bounds.size;
+            if (band.x <= 0f) return;
+            const float texel = 0.02f;                   // 1 texel bong = 2 px man hinh
+            var t = body.transform;
+            float bottom = float.MaxValue, left = float.MaxValue, right = float.MinValue;
+            float flip = body.flipX ? -1f : 1f;                // flipX lat quanh pivot, dinh mesh thi khong
+            foreach (var v in body.sprite.vertices) bottom = Mathf.Min(bottom, t.TransformPoint(new Vector3(v.x * flip, v.y)).y);
+            foreach (var v in body.sprite.vertices)
+            {
+                var w = t.TransformPoint(new Vector3(v.x * flip, v.y));
+                if (w.y > bottom + 4f * texel) continue;  // chi dinh cua doan cham dat
+                left = Mathf.Min(left, w.x);
+                right = Mathf.Max(right, w.x);
+            }
+            if (right <= left) return;
+            _baseShadow.transform.position = new Vector3((left + right) / 2f + 2f * texel, bottom - band.y / 2f + texel, 0f);
+            _baseShadow.transform.localScale = new Vector3((right - left) / band.x, 1f, 1f);
         }
 
         /// <summary>Ly do chua nang duoc (null = nang duoc). Kiem tien o nguoi goi.</summary>
         public string UpgradeBlocker()
         {
             var next = NextTier;
-            if (next == null) return "Thành đã tối đa";
+            if (next == null) return "Castle Maxed";
             int best = SaveSystem.Data.nextWave - 1;
-            if (best < next.unlockWave) return $"Cần thắng wave {next.unlockWave}";
+            if (best < next.unlockWave) return $"Win Wave {next.unlockWave} Required";
             return null;
         }
 

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f28d9e270dec892bd61fa3960bb4436, type: 3}
   m_Name: Cannon_Longgun
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.CannonDefinition
-  displayName: "Ho\u1EA3 Mai Th\xE0nh"
+  displayName: Fireblossom Keep
   unitId: cannon_longgun
   icon: {fileID: 21300000, guid: c6c74e44f317b874ebebb28b81f43c05, type: 3}
   damage: 100

@@ -9,6 +9,7 @@ namespace BuildBuild.Combat
     /// ma linh trieu hoi dung chung:
     ///   - Choang (`ApplyStun`) — boss Chan Dia choang hero / linh 2s;
     ///   - Hero HOI MAU (`HeroDefinition.healsAllies`, Vespera): nham dong minh thap mau nhat, khong ban quai;
+    ///     hero co kit rieng (Bach Loc Tien) thi `HealAlly` goi `BachLocTien.DeliverBasicHeal` de tu lo FX + he so hoi;
     ///   - Den Canh (`SkillKind.Lantern`, Vespera): vong hoi mau + khien ao quanh dong minh thap mau nhat;
     ///   - FX buff Ban Nhanh Lien Hoan tren dau Hawkfletch thay cho to cam;
     ///   - Buff tu Banneret (`ApplyBuff`, `ApplyGuard`, dau co `ShowRally`) + di theo dong minh chung luat voi hero hoi mau.
@@ -229,7 +230,17 @@ namespace BuildBuild.Combat
             var ally = WoundedAlly(inRangeOnly: true);
             if (ally == null) return;
             AuraMultipliers(out float multiplier, out _);
-            float amount = BaseDamage * multiplier * RescueMultiplier(ally);
+            // Hero hoi mau co he so hoi rieng cho don thuong (Bach Loc Tien: 70% ATK) thi lay so cua kit.
+            float amount = BaseDamage * multiplier * RescueMultiplier(ally)
+                * (_bachLoc != null ? _bachLoc.BasicHealPower : 1f);
+            // Hero co cach giao luong hoi rieng (Bach Loc Tien: hat sang bay tu truong toi nguoi nhan) thi de
+            // component lo phan FX; mac dinh giu duong cu (giot thuoc roi tu tren xuong / hoi + FX tai cho).
+            if (_bachLoc != null)
+            {
+                _bachLoc.DeliverBasicHeal(ally, amount);
+                OnHitsLanded(1);
+                return;
+            }
             var at = ally.transform.position + new Vector3(0f, ally.BodyHeight * 0.5f, 0f);
             // Oc Sen Duoc Thao: giot thuoc roi xuong nguoi duoc hoi roi moi hoi (`projectileFrames` = giot roi).
             if (_definition.projectileFrames != null && _definition.projectileFrames.Length > 0)

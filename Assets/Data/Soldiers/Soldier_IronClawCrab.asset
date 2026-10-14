@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21934289f9624743841fea630ce87914, type: 3}
   m_Name: Soldier_IronClawCrab
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.SoldierDefinition
-  displayName: "Cua k\xECm s\u1EAFt"
+  displayName: Iron Claw Crab
   unitId: soldier_ironclawcrab
   role: 0
   maxHealth: 450
@@ -32,6 +32,14 @@ MonoBehaviour:
   daoVien: {fileID: 0}
   bloodswordsman: {fileID: 0}
   soulbinder: {fileID: 0}
+  gourdTaoist: {fileID: 0}
+  inkScribe: {fileID: 0}
+  hongLien: {fileID: 0}
+  saVe: {fileID: 0}
+  khoiLoiSu: {fileID: 0}
+  werewolf: {fileID: 0}
+  hauNghe: {fileID: 0}
+  bachLocTien: {fileID: 0}
   swornBrother: 0
   projectileSpeed: 20
   splashRadius: 0.3
@@ -70,6 +78,7 @@ MonoBehaviour:
   passiveStar: 0
   minorStar: 3
   secondMinorStar: 3
+  thirdMinorStar: 3
   passiveKind: 20
   passivePower: 0.2
   passiveThreshold: 0
@@ -82,17 +91,18 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f7f6ca7f007a732439d4dff819e0f99e, type: 3}
   - {fileID: 21300000, guid: a8eaa74a2b8aacb4b9316a36f92b6e0c, type: 3}
   ultimateText: 
-  passiveText: "K\u1EB9p Ph\xE1 Gi\xE1p: m\u1ED7i \u0111\xF2n th\u1EE9 3 l\xE0m m\u1EE5c
-    ti\xEAu nh\u1EADn th\xEAm 20% s\xE1t th\u01B0\u01A1ng trong 4s (ch\u1EC9 l\xE0m
-    m\u1EDBi)."
+  passiveText: 'Armor Crush: every 3rd hit makes the target take 20% more damage
+    for 4s (only refreshes).'
   minorText: 
   secondMinorText: 
+  thirdMinorText: 
   ultimateIcon: {fileID: 0}
   minorIcon: {fileID: 0}
   passiveIcon: {fileID: 0}
   secondMinorIcon: {fileID: 0}
+  thirdMinorIcon: {fileID: 0}
   animations: {fileID: 11400000, guid: ce38700b8f24a764baf2c2da4bf24599, type: 2}
   artFacesRight: 0
-  avatar: {fileID: 21300000, guid: e94ec3817d95f5e41831780330069dc0, type: 3}
+  avatar: {fileID: 21300000, guid: 083ca8ca3afcf7c4ea5111a29cdd269b, type: 3}
   squadSize: 2
   summonCooldown: 18

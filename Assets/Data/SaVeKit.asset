@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f70f1d880cd154048aa92b1e972f954e, type: 3}
+  m_Name: SaVeKit
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.SaVeKit
+  sandMax: 5
+  sandResistPerStack: 0.04
+  sandMinInterval: 0.5
+  slamCooldown: 8
+  slamPower: 1.5
+  slamSlow: 0.3
+  slamSlowSeconds: 3
+  healCost: 2
+  healPct: 0.15
+  healCooldown: 10
+  fortPower: 1
+  fortRadius: 1.5
+  fortDuration: 6
+  fortSelfResist: 0.15
+  fortAllyRangedResist: 0.25
+  slamCast:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: b14246d0f111cc94ba65890d5aec7062, type: 3}
+    - {fileID: 21300000, guid: 0aa7910f7e98312458f592e32b3c751a, type: 3}
+    - {fileID: 21300000, guid: 343791c72b8bda64a96bfaa707b86fff, type: 3}
+    - {fileID: 21300000, guid: 71b410189c776ec40a7d7e960aee7241, type: 3}
+    - {fileID: 21300000, guid: d1ef9e3894a61d04d8cf8a9011e9622e, type: 3}
+    - {fileID: 21300000, guid: 1d71ccf49334a6840bb4c6ed4f7031be, type: 3}
+    loop: 0
+    hitFrame: 4
+  healCast:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: 511bf595bb9df7c48b24cd44cd8d9256, type: 3}
+    - {fileID: 21300000, guid: 01d39567af36ff0429b239f73803ca04, type: 3}
+    - {fileID: 21300000, guid: 899382fb42acde946a1253ae28e7b2ca, type: 3}
+    - {fileID: 21300000, guid: 15fce1092bdc2814f902ce4cf71b6cc5, type: 3}
+    - {fileID: 21300000, guid: b20fe1f32c1bd044495f07856d509da9, type: 3}
+    - {fileID: 21300000, guid: 1e97bfe49ead84841a1df80928c7e347, type: 3}
+    loop: 0
+    hitFrame: 4
+  fortCast:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: 2aff62ad4a8fe624b9e543dd2941e8a2, type: 3}
+    - {fileID: 21300000, guid: 21be8173dd60d1043962a18b041febc4, type: 3}
+    - {fileID: 21300000, guid: b0026f700926e55408839e4c33e5120e, type: 3}
+    - {fileID: 21300000, guid: df8a8f979521c454dae5a35c5b0b7265, type: 3}
+    - {fileID: 21300000, guid: d20de08e24c00de4d8f27ea6330ffe07, type: 3}
+    - {fileID: 21300000, guid: 71bf7c6b4039e8e47b43c5dca7a9ee43, type: 3}
+    loop: 0
+    hitFrame: 4
+  quake:
+  - {fileID: 21300000, guid: 764c220679c276b4cb81ffa09f655e71, type: 3}
+  - {fileID: 21300000, guid: 42decb12e61d2464991efa82f9f98de3, type: 3}
+  - {fileID: 21300000, guid: c5216130781cf1f41a0668e50829effe, type: 3}
+  - {fileID: 21300000, guid: a100a6bed98d3ca469417a1cb920a58a, type: 3}
+  - {fileID: 21300000, guid: 284bd0b3a1b677e4b82b04e515f73dc7, type: 3}
+  - {fileID: 21300000, guid: c7b3299b2c902d94f88c6e6731b0c388, type: 3}
+  sandCore:
+  - {fileID: 21300000, guid: b59ed3fdbc5bb4f44830f0e16b35516a, type: 3}
+  - {fileID: 21300000, guid: 9bc3c0dac948665489a455bd977f9581, type: 3}
+  - {fileID: 21300000, guid: 00b220f102b330b4faca138be9981e44, type: 3}
+  - {fileID: 21300000, guid: d90533af96a4cd246adc9a3e0921c108, type: 3}
+  heal:
+  - {fileID: 21300000, guid: bc3944d541230f84ea2545dde750e0c9, type: 3}
+  - {fileID: 21300000, guid: 0a7dd6f444308c04ebdda738711cb0b0, type: 3}
+  - {fileID: 21300000, guid: 8bfd1e3b6e97980499b795d047e7f568, type: 3}
+  - {fileID: 21300000, guid: cc4f084dad61ac74ca4f6e8ab62ff693, type: 3}
+  - {fileID: 21300000, guid: 0103dde5ba5c7ed40be806778321c05d, type: 3}
+  - {fileID: 21300000, guid: dafa5a7b336c0a24eb5aad19358c40fc, type: 3}
+  fortTelegraph:
+  - {fileID: 21300000, guid: 87423395fb816b840a3d34f174953c9b, type: 3}
+  - {fileID: 21300000, guid: 0f20b23faceedda4cbce25156a39e2fb, type: 3}
+  - {fileID: 21300000, guid: b66ee6f5858e2ff46a52a8d88f99f664, type: 3}
+  - {fileID: 21300000, guid: ec1d1677eda16244ba9481ad7b589933, type: 3}
+  fortLoop:
+  - {fileID: 21300000, guid: d9ac4caf99c19ac4f90ccd5ac43ff173, type: 3}
+  - {fileID: 21300000, guid: 8f3032e31f8af4545ab427f4522123bd, type: 3}
+  - {fileID: 21300000, guid: 8c3b2a3c5ba3a394c8042ca841d6cc8d, type: 3}
+  - {fileID: 21300000, guid: 948872385c8dfd4408a5809a491d7569, type: 3}
+  fortFade:
+  - {fileID: 21300000, guid: 0965b051cbe28c2478a0b77289f910a2, type: 3}
+  - {fileID: 21300000, guid: 73b5b55e46ff0824da52786e029fbbc5, type: 3}
+  - {fileID: 21300000, guid: 76c2fa47d8e595e428a1523d826538e8, type: 3}
+  - {fileID: 21300000, guid: 95dc1a4623fa38b48b0fc6ef12315be8, type: 3}

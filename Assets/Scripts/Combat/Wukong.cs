@@ -15,8 +15,8 @@ namespace BuildBuild.Combat
     ///   - Toan Phong Con (secondMinorStar): xoay 3s — nhip 0,5s danh quanh minh, hoi 3% mau / quai trung (tran 25%);
     ///     dan cua quai ban xa bi chan va bat nguoc vao quai ban (`Health.Deflects`). Phan than dang song xoay cung luc
     ///     (danh quanh chinh no bang cong cua no, khong hoi mau, khong bat dan).
-    ///   - Nhu Y Thien Tru (chieu xin, mana): gay khong lo dap nam ngang xuong cum quai dong nhat — sat thuong theo vet dai,
-    ///     choang, vet nut lam cham; moi phan than dap gay nho 30%.
+    ///   - Nhu Y Thien Tru (chieu xin, mana): gay khong lo dap nam ngang xuong cum quai dong nhat — sat thuong theo vet dai
+    ///     phu HET be sau san, choang, vet nut lam cham; moi phan than dap gay nho 30%.
     /// </summary>
     [RequireComponent(typeof(Hero))]
     public class Wukong : MonoBehaviour
@@ -308,10 +308,12 @@ namespace BuildBuild.Combat
             fx.transform.position = at + new Vector3(0f, StaffGroundBelowCentre * Battlefield.UnitScale, 0f);
             var frames = _definition.giantStaffFrames;
             if (frames != null && frames.Length > 0)
+                // MOT cay gay o co goc: vung trung trai moi hang (xem `Smash`), nhung hinh khong keo gian theo Y —
+                // o FX vuong, keo cho phu 11 don vi be sau la 8,6x, nguoi dung thay mot vet nhoe doc (2026-10-10).
                 OneShotFx.SpawnLoop(fx.transform, Vector3.zero, new[] { frames[frames.Length - 1] }, _definition.crackDuration,
                     SortOrder.GroundDecal + 1, frames, Battlefield.UnitScale);
             Destroy(fx, _definition.crackDuration + (frames != null ? frames.Length : 0) / FramesPerSecond);
-            StartCoroutine(Smash(at, definition.skillRadius * 0.5f, _definition.staffHalfWidth, damage,
+            StartCoroutine(Smash(at, definition.skillRadius * 0.5f, damage,
                 definition.skillDuration, (StaffImpactFrame - 1) / FramesPerSecond, crack: true));
 
             // Moi phan than dap gay nho truoc mat no.
@@ -323,22 +325,24 @@ namespace BuildBuild.Combat
                 if (frames != null && frames.Length > 0)
                     OneShotFx.Spawn(point + new Vector3(0f, StaffGroundBelowCentre * Battlefield.UnitScale * 0.3f, 0f), frames,
                         !clone.FacesRight, SortOrder.Air, Battlefield.UnitScale * 0.3f);
-                StartCoroutine(Smash(point, 0.8f, _definition.staffHalfWidth, damage * _definition.cloneSmashPower,
+                StartCoroutine(Smash(point, 0.8f, damage * _definition.cloneSmashPower,
                     definition.skillDuration, (StaffImpactFrame - 1) / FramesPerSecond, crack: false));
             }
         }
 
-        System.Collections.IEnumerator Smash(Vector3 at, float halfLength, float halfWidth, float damage, float stun,
+        System.Collections.IEnumerator Smash(Vector3 at, float halfLength, float damage, float stun,
             float delay, bool crack)
         {
             yield return new WaitForSeconds(delay);
             var stunFrames = _hero != null ? _hero.Definition.stunFrames : null;
+            // Vet gay la vung NAM NGANG dat tren lan: do X trong `halfLength` quanh diem dap, chieu sau phu HET san
+            // (quai spawn o do cao bat ky). Do be day cu (1 don vi) thi chi 1/11 so quai di qua la trung.
+            var from = at - new Vector3(halfLength, 0f, 0f);
+            var to = at + new Vector3(halfLength, 0f, 0f);
             foreach (var enemy in Unit.Hostiles(_hero.Side).ToArray())
             {
                 if (enemy == null || enemy.IsDying) continue;
-                var offset = enemy.AimPoint(at) - at;
-                if (Mathf.Abs(offset.x) > halfLength + enemy.BodyRadius) continue;
-                if (Mathf.Abs(offset.y) / Battlefield.DepthSquash > halfWidth) continue;
+                if (!Battlefield.InLaneBand(enemy, from, to)) continue;
                 enemy.ApplyStun(enemy.IsBoss ? stun * 0.5f : stun, stunFrames);
                 if (crack) enemy.ApplySlow(_definition.crackSlow, _definition.crackDuration);
                 enemy.Health.TakeDamage(damage, _hero != null ? _hero.Health : null);

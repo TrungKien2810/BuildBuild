@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Unit_cannon_siege
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.UnitDefinition
   id: cannon_siege
-  displayName: "\u0110\u1EA1i B\xE1c C\xF4ng Th\xE0nh"
+  displayName: Siege Cannon
   category: 1
   rarity: 2
   icon: {fileID: 21300000, guid: 8f61ba6bba451fc4db19d1c33debc941, type: 3}

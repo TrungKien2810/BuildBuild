@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21934289f9624743841fea630ce87914, type: 3}
   m_Name: Soldier_MushroomSoldier
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.SoldierDefinition
-  displayName: "L\xEDnh n\u1EA5m"
+  displayName: Mushroom Soldier
   unitId: soldier_mushroomsoldier
   role: 0
   maxHealth: 160
@@ -32,6 +32,14 @@ MonoBehaviour:
   daoVien: {fileID: 0}
   bloodswordsman: {fileID: 0}
   soulbinder: {fileID: 0}
+  gourdTaoist: {fileID: 0}
+  inkScribe: {fileID: 0}
+  hongLien: {fileID: 0}
+  saVe: {fileID: 0}
+  khoiLoiSu: {fileID: 0}
+  werewolf: {fileID: 0}
+  hauNghe: {fileID: 0}
+  bachLocTien: {fileID: 0}
   swornBrother: 0
   projectileSpeed: 6
   splashRadius: 0.1
@@ -78,6 +86,7 @@ MonoBehaviour:
   passiveStar: 0
   minorStar: 3
   secondMinorStar: 3
+  thirdMinorStar: 3
   passiveKind: 19
   passivePower: 0.25
   passiveThreshold: 0
@@ -90,16 +99,18 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3988b9217918d5343b0ac0c3a9cc2d49, type: 3}
   - {fileID: 21300000, guid: c7537b1eb669e964aa9f15f4b07aafe6, type: 3}
   ultimateText: 
-  passiveText: "B\xE0o T\u1EED: \u0111\xF2n tr\xFAng \u0111\u1EC3 v\xF9ng b\xE0o
-    t\u1EED 2,5s, qu\xE1i trong v\xF9ng ch\u1EADm 25%."
+  passiveText: 'Spore Burst: hits leave a spore zone for 2.5s, enemies inside are
+    slowed 25%.'
   minorText: 
   secondMinorText: 
+  thirdMinorText: 
   ultimateIcon: {fileID: 0}
   minorIcon: {fileID: 0}
   passiveIcon: {fileID: 0}
   secondMinorIcon: {fileID: 0}
+  thirdMinorIcon: {fileID: 0}
   animations: {fileID: 11400000, guid: f300603444946f247bf046033145a0e8, type: 2}
   artFacesRight: 0
-  avatar: {fileID: 21300000, guid: 9bfd58925eb01e54ea0c646224599423, type: 3}
+  avatar: {fileID: 21300000, guid: ce68978fe21ac2d439e0ab920aaa166f, type: 3}
   squadSize: 3
   summonCooldown: 15

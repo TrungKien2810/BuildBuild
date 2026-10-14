@@ -17,46 +17,46 @@ namespace BuildBuild.Editor
 
         static void BuildLowTrioHeroes()
         {
-            HeroN("BeetleKnight", "beetleknight", "Hiệp sĩ bọ hung", d =>
+            HeroN("BeetleKnight", "beetleknight", "Beetle Knight", d =>
             {
                 d.maxHealth = 1050; d.damage = 20; d.attackRate = 0.8f; d.range = 0.65f; d.moveSpeed = 1f;
                 d.projectileSpeed = 20f; d.splashRadius = 0.1f;
                 d.passiveKind = PassiveKind.Quake; d.passiveEvery = 3; d.passiveRadius = 0.5f;
                 d.passiveFrames = ApprovedFrames("BeetleKnight", "mace-trail");
-                d.passiveText = "Chấn Động: mỗi đòn thường thứ 3 trúng hất mục tiêu lùi 0,5 (tinh anh 0,25, boss không bị đẩy).";
+                d.passiveText = "Ground Tremor: every 3rd basic Hit knocks the Target back 0,5 (elites 0,25, Bosses immune to Knockback).";
             }, SkillKind.HornSlam, d =>
             {
                 d.manaMax = 6; d.skillRadius = 1f; d.skillPower = 3f; d.skillDuration = 1f;
                 d.skillFrames = ApprovedFrames("BeetleKnight", "ground-pulse");
                 d.stunFrames = ApprovedFrames("BeetleKnight", "stun-loop");
-                d.ultimateText = "Húc Sừng: húc đất tại chỗ, quanh chân bán kính 1 gây 3× đòn thường và choáng 1s (tinh anh/boss 0,5s).";
+                d.ultimateText = "Horn Slam: slam the ground in place, dealing 3× basic Hit Damage within radius 1 around the feet and Stun for 1s (elites/Bosses 0,5s).";
             });
-            HeroN("Twinblade", "twinblade", "Hiệp khách song đao", d =>
+            HeroN("Twinblade", "twinblade", "Twinblade", d =>
             {
                 d.maxHealth = 800; d.damage = 32; d.attackRate = 1.2f; d.range = 0.65f; d.moveSpeed = 1.2f;
                 d.projectileSpeed = 20f; d.splashRadius = 0.1f;
                 d.impactFrames = ApprovedFrames("Twinblade", "blade-impact");
                 d.passiveKind = PassiveKind.Combo; d.passivePower = 0.12f; d.passiveEvery = 5; d.passiveDuration = 2f;
                 d.passiveFrames = ApprovedFrames("Twinblade", "combo-mark");
-                d.passiveText = "Liên Hoàn: mỗi đòn trúng cùng mục tiêu +12% sát thương đòn kế tiếp, tối đa 5 tầng; đổi mục tiêu hoặc 2s không trúng thì mất tầng.";
+                d.passiveText = "Hit Chain: each Hit on the same Target grants +12% Damage to the next Hit, up to 5 Stacks; changing Target or going 2s without a Hit removes Stacks.";
             }, SkillKind.BladeStorm, d =>
             {
                 d.manaMax = 6; d.skillPower = 0.65f;
                 d.skillFrames = ApprovedFrames("Twinblade", "blade-trails");
-                d.ultimateText = "Bão Đao: khoá mục tiêu, chém 6 nhát trong 3s, mỗi nhát 65% đòn thường hưởng tầng Liên Hoàn lúc bắt đầu; xong xoá tầng.";
+                d.ultimateText = "Blade Storm: lock onto a Target, slash 6 times over 3s, each slash deals 65% basic Hit Damage using Hit Chain Stacks at the start; clear Stacks afterward.";
             }, Rarity.R);
-            HeroN("BellNun", "bellnun", "Nữ tu chuông bạc", d =>
+            HeroN("BellNun", "bellnun", "Bell Nun", d =>
             {
                 d.maxHealth = 360; d.damage = 14; d.attackRate = 0.7f; d.range = 4f; d.splashRadius = 0.1f;
                 d.projectileFrames = ApprovedFrames("BellNun", "sound-bolt");
                 d.passiveKind = PassiveKind.Purify; d.passiveDuration = 10f; d.passiveRadius = 4f;
                 d.passiveFrames = ApprovedFrames("BellNun", "cleanse");
-                d.passiveText = "Thanh Tẩy: mỗi 10s gỡ 1 hiệu ứng Độc → Cháy → Chậm khỏi đồng minh gần nhất đang bị trong tầm 4.";
+                d.passiveText = "Purifying Light: every 10s, remove 1 effect in order Poison → Burn → Slow from the nearest affected ally within Range 4.";
             }, SkillKind.BellToll, d =>
             {
                 d.manaMax = 7; d.skillPower = 0.3f; d.skillDuration = 3f;
                 d.skillFrames = ApprovedFrames("BellNun", "bell-wave");
-                d.ultimateText = "Hồi Chuông: gỡ Độc, Cháy, Chậm, Trói, Khoá Đòn, Choáng khỏi cả đội; đối thủ chậm 30% trong 3s (tinh anh 15%, boss không).";
+                d.ultimateText = "Bell Toll: remove Poison, Burn, Slow, Root, Attack Lock and Stun from the whole team; Slow opponents by 30% for 3s (elites 15%, Bosses immune).";
             }, Rarity.R);
             foreach (string id in new[] { "BeetleKnight", "Twinblade", "BellNun" })
             {
@@ -72,14 +72,14 @@ namespace BuildBuild.Editor
         {
             var scorpion = ApprovedEnemy("VenomScorpion", ("sting", "sting"), e =>
             {
-                e.displayName = "Bọ Cạp Độc"; e.kind = EnemyKind.Thuong;
+                e.displayName = "Venom Scorpion"; e.kind = EnemyKind.Thuong;
                 e.baseHealth = 140f; e.baseDamage = 14f; e.moveSpeed = 1.3f; e.attackRange = 0.6f; e.attackRate = 0.9f;
                 e.hitStatus = HitStatus.Poison; e.hitStatusPower = 5f; e.hitStatusSeconds = 4f; e.hitStatusMaxStacks = 3;
                 e.hitStatusEvery = 3; e.hitStatusFrames = ApprovedFrames("VenomScorpion", "poison-impact");
             });
             var salamander = ApprovedEnemy("EmberSalamander", ("cast", "cast"), e =>
             {
-                e.displayName = "Kỳ Nhông Than Hồng"; e.kind = EnemyKind.Thuong;
+                e.displayName = "Ember Salamander"; e.kind = EnemyKind.Thuong;
                 e.baseHealth = 160f; e.baseDamage = 12f; e.moveSpeed = 1.1f; e.attackRange = 0.6f; e.attackRate = 0.8f;
                 e.breathCooldown = 7f; e.breathRange = 3f; e.breathRadius = 0.75f; e.breathActiveSeconds = 2.5f;
                 e.breathBurnPerSecond = 8f; e.breathBurnSeconds = 3f;
@@ -90,7 +90,7 @@ namespace BuildBuild.Editor
             });
             var toad = ApprovedEnemy("RimeToad", null, e =>
             {
-                e.displayName = "Cóc Sương"; e.kind = EnemyKind.BanXa;
+                e.displayName = "Rime Toad"; e.kind = EnemyKind.BanXa;
                 e.baseHealth = 110f; e.baseDamage = 10f; e.moveSpeed = 1.2f; e.attackRange = 4f; e.heroAggroRange = 4.5f;
                 e.attackRate = 0.6f;
                 e.projectileFrames = ApprovedFrames("RimeToad", "frost-projectile");
@@ -100,13 +100,13 @@ namespace BuildBuild.Editor
             });
             var beetle = ApprovedEnemy("IronshieldBeetle", null, e =>
             {
-                e.displayName = "Bọ Khiên Sắt"; e.kind = EnemyKind.Tank;
+                e.displayName = "Iron Shield Beetle"; e.kind = EnemyKind.Tank;
                 e.baseHealth = 450f; e.baseDamage = 18f; e.moveSpeed = 0.7f; e.attackRange = 0.6f; e.attackRate = 0.7f;
                 e.damageReduction = 0.4f;
             });
             var ringer = ApprovedEnemy("GoblinBellringer", ("ring", "ring"), e =>
             {
-                e.displayName = "Goblin Rung Chuông"; e.kind = EnemyKind.Thuong;
+                e.displayName = "Bell Goblin"; e.kind = EnemyKind.Thuong;
                 e.baseHealth = 80f; e.baseDamage = 8f; e.moveSpeed = 1.4f; e.attackRange = 0.6f; e.attackRate = 0.8f;
                 e.ringCooldown = 8f; e.ringRadius = 2.5f; e.ringHaste = 0.3f; e.ringSeconds = 4f;
                 e.ringWaveFrames = Frames(ArtRoot + "GoblinBellringer/ring-wave", "impact");
@@ -153,7 +153,7 @@ namespace BuildBuild.Editor
 
         static void BuildApprovedSoldiers()
         {
-            var mushroom = SoldierDef("MushroomSoldier", "Lính nấm",
+            var mushroom = SoldierDef("MushroomSoldier", "Mushroom Soldier",
                 ApprovedSoldierAnim("MushroomSoldier", ("attack", "attack")),
                 d =>
                 {
@@ -165,10 +165,10 @@ namespace BuildBuild.Editor
                     d.passivePower = 0.25f; d.passiveRadius = 0.9f; d.passiveDuration = 2.5f;
                     d.passiveFrames = ApprovedFrames("MushroomSoldier", "spore-field");
                     d.skillOutroFrames = ApprovedFrames("MushroomSoldier", "spore-fade");
-                    d.passiveText = "Bào Tử: đòn trúng để vùng bào tử 2,5s, quái trong vùng chậm 25%.";
+                    d.passiveText = "Spore Field: Hits leave a spore zone for 2,5s; Enemies in the zone suffer 25% Slow.";
                     d.squadSize = 3; d.summonCooldown = 15f;
                 }, facesRight: false);
-            var archer = SoldierDef("SkeletonArcher", "Cung thủ xương",
+            var archer = SoldierDef("SkeletonArcher", "Skeleton Archer",
                 ApprovedSoldierAnim("SkeletonArcher", ("shoot", "shoot")),
                 d =>
                 {
@@ -178,7 +178,7 @@ namespace BuildBuild.Editor
                     d.projectileSpeed = 9f; d.splashRadius = 0.1f;
                     d.squadSize = 3; d.summonCooldown = 14f;
                 }, facesRight: false);
-            var crab = SoldierDef("IronClawCrab", "Cua kìm sắt",
+            var crab = SoldierDef("IronClawCrab", "Iron Claw Crab",
                 ApprovedSoldierAnim("IronClawCrab", ("attack", "attack")),
                 d =>
                 {
@@ -188,10 +188,10 @@ namespace BuildBuild.Editor
                     d.passiveKind = PassiveKind.ClampBreak; d.passiveStar = 0;
                     d.passiveEvery = 3; d.passivePower = 0.2f; d.passiveDuration = 4f;
                     d.passiveFrames = ApprovedFrames("IronClawCrab", "armor-break");
-                    d.passiveText = "Kẹp Phá Giáp: mỗi đòn thứ 3 làm mục tiêu nhận thêm 20% sát thương trong 4s (chỉ làm mới).";
+                    d.passiveText = "Armorbreak Clamp: every 3rd Hit makes the Target take 20% more Damage for 4s (refresh only).";
                     d.squadSize = 2; d.summonCooldown = 18f;
                 }, facesRight: false);
-            var snail = SoldierDef("HerbalSnail", "Ốc sên dược thảo",
+            var snail = SoldierDef("HerbalSnail", "Herbal Snail",
                 ApprovedSoldierAnim("HerbalSnail", ("heal", "heal")),
                 d =>
                 {

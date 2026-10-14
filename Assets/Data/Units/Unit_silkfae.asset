@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Unit_silkfae
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.UnitDefinition
   id: silkfae
-  displayName: "Ti\xEAn d\u1EC7t t\u01A1"
+  displayName: Silk Fae
   category: 0
   rarity: 0
-  icon: {fileID: 21300000, guid: df3d6ff2b8994c7489e006946e974d83, type: 3}
+  icon: {fileID: 21300000, guid: ab7891d4945e2734586a2e6c0ba9dc23, type: 3}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Unit_bogwitch
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.UnitDefinition
   id: bogwitch
-  displayName: "Ph\xF9 thu\u1EF7 \u0111\u1EA7m l\u1EA7y"
+  displayName: Bog Witch
   category: 0
   rarity: 0
-  icon: {fileID: 21300000, guid: 7092e011b1bd7df449c402b59992da52, type: 3}
+  icon: {fileID: 21300000, guid: 3abb2efd35d7e5c4592972e574d5d618, type: 3}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
   m_Name: Hero_PetalSprite
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
-  displayName: "Hoa y\xEAu b\u1EAFn h\u1EA1t"
+  displayName: Petal Sprite
   unitId: petalsprite
   role: 3
   maxHealth: 220
@@ -32,6 +32,14 @@ MonoBehaviour:
   daoVien: {fileID: 0}
   bloodswordsman: {fileID: 0}
   soulbinder: {fileID: 0}
+  gourdTaoist: {fileID: 0}
+  inkScribe: {fileID: 0}
+  hongLien: {fileID: 0}
+  saVe: {fileID: 0}
+  khoiLoiSu: {fileID: 0}
+  werewolf: {fileID: 0}
+  hauNghe: {fileID: 0}
+  bachLocTien: {fileID: 0}
   swornBrother: 0
   projectileSpeed: 8
   splashRadius: 0.1
@@ -74,6 +82,7 @@ MonoBehaviour:
   passiveStar: 1
   minorStar: 3
   secondMinorStar: 3
+  thirdMinorStar: 3
   passiveKind: 13
   passivePower: 0
   passiveThreshold: 0
@@ -82,17 +91,18 @@ MonoBehaviour:
   passiveDuration: 0
   passiveFrames:
   - {fileID: 21300000, guid: 53ab2f605631c74489600ac74d9fdca3, type: 3}
-  ultimateText: "M\u01B0a H\u1EA1t: b\u1EAFn 8 h\u1EA1t trong 1,6s v\xE0o c\u1EE5m
-    \u0111\xF4ng nh\u1EA5t; \xE1p d\u1EE5ng H\u1EA1t B\xE1m."
-  passiveText: "H\u1EA1t B\xE1m: m\u1ED7i \u0111\xF2n c\u1EAFm 1 h\u1EA1t trong 4s;
-    \u0111\u1EE7 3 h\u1EA1t n\u1ED5 2\xD7 \u0111\xF2n th\u01B0\u1EDDng l\xEAn m\u1EE5c
-    ti\xEAu."
+  ultimateText: 'Seed Rain: fires 8 seeds in 1.6s into the densest cluster; applies
+    Seed Mark.'
+  passiveText: 'Seed Mark: every hit plants 1 seed for 4s; at 3 seeds they blast
+    for 2x a basic hit on the target.'
   minorText: 
   secondMinorText: 
+  thirdMinorText: 
   ultimateIcon: {fileID: 0}
   minorIcon: {fileID: 0}
   passiveIcon: {fileID: 0}
   secondMinorIcon: {fileID: 0}
+  thirdMinorIcon: {fileID: 0}
   animations: {fileID: 11400000, guid: 5ad84ae6385d314418f5307596eeecaa, type: 2}
   artFacesRight: 0
-  avatar: {fileID: 21300000, guid: 655834c8fc5bbc148ada004d475e002a, type: 3}
+  avatar: {fileID: 21300000, guid: 2e659889554e81c479d7d1c0ad6cc3bb, type: 3}

@@ -15,6 +15,9 @@ namespace BuildBuild.Combat
     ///   - Mua Tan Lua (Phap Su Lua Tap Su): 3 cau lua roi vao cum quai, no + Chay + vung lua;
     ///   - Tuong Rune (Nguoi Lun Khien Rune): tuong chan quai + dan truoc mat, ong dung yen sau khien;
     ///   - Mua Roi (Tien Det To): quai nhieu mau nhat quay sang danh phe minh.
+    ///
+    /// Cac vung dat xuong san o day (suong doc, nam, xoay nuoc, vung lua) deu `fullLane: true`: quai spawn o do
+    /// cao BAT KY trong dai nen vung chi do X, chieu sau phu het san (GDD muc 2; do 2026-10-10).
     /// </summary>
     public partial class Hero
     {
@@ -49,13 +52,15 @@ namespace BuildBuild.Combat
             var centre = DensestCluster(_definition.range, _definition.skillRadius);
             if (centre == null) return;
             float armorBreak = _definition.skillPower;
+            // Vung dat tren lan: phu het be sau san (quai spawn o do cao bat ky trong dai) — chi do X trong ban kinh.
             SkillZone.Spawn(centre.Value, _definition.skillRadius, _definition.skillDuration, Side, _definition.skillFrames,
                 ZoneFxScale(_definition.skillFrames, _definition.skillRadius),
                 everySecond: enemy =>
                 {
                     AddVenom(enemy, 1);
                     enemy.ApplyArmorBreak(armorBreak, 1.1f);   // ra khoi suong thi het pha giap sau ~1 giay
-                });
+                },
+                fullLane: true);
         }
 
         void CastMushroomBloom()
@@ -79,11 +84,13 @@ namespace BuildBuild.Combat
                         foreach (var enemy in Unit.Hostiles(side).ToArray())
                         {
                             if (enemy == null || enemy.IsDying) continue;
-                            if (Battlefield.GroundDistance(enemy.AimPoint(at), at) > MushroomBurstRadius + enemy.BodyRadius) continue;
+                            // Cung do X, phu het be sau: vu no nay la vung dat tren lan (xem `fullLane` ben duoi).
+                            if (!Battlefield.InLaneColumn(enemy, at.x, MushroomBurstRadius)) continue;
                             enemy.Health.TakeDamage(damage, source != null ? source : null);
                         }
                         OneShotFx.Spawn(at, burst, false, SortOrder.Air, Battlefield.UnitScale);
-                    });
+                    },
+                    fullLane: true);
             }
         }
 
@@ -101,7 +108,7 @@ namespace BuildBuild.Combat
                     else enemy.ApplyDisarm(0.1f);
                 },
                 everySecond: enemy => enemy.Health.TakeDamage(damage, source != null ? source : null, kind: DamageKind.Periodic),
-                outro: _definition.skillOutroFrames);
+                outro: _definition.skillOutroFrames, fullLane: true);
         }
 
         void CastEmberRain()
@@ -133,7 +140,7 @@ namespace BuildBuild.Combat
                         }
                         OneShotFx.Spawn(at, blast, false, SortOrder.Air, Battlefield.UnitScale);
                         SkillZone.Spawn(at, radius, _definition.skillDuration, side, pool, poolScale,
-                            everySecond: enemy => { if (this != null) AddBurn(enemy); });
+                            everySecond: enemy => { if (this != null) AddBurn(enemy); }, fullLane: true);
                     });
             }
         }

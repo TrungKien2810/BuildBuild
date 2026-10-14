@@ -36,8 +36,8 @@
     "bottom": 0
   },
   "btn-green.png": {
-    "left": 8,
-    "right": 9,
+    "left": 18,
+    "right": 18,
     "top": 9,
     "bottom": 9
   },
@@ -102,8 +102,8 @@
     "bottom": 9
   },
   "btn-disabled.png": {
-    "left": 8,
-    "right": 9,
+    "left": 18,
+    "right": 18,
     "top": 9,
     "bottom": 9
   },
@@ -172,5 +172,11 @@
     "right": 16,
     "top": 16,
     "bottom": 16
+  },
+  "btn-green-pressed.png": {
+    "left": 18,
+    "right": 18,
+    "top": 9,
+    "bottom": 9
   }
 }

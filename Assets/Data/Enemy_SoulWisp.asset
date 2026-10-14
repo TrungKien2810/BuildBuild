@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 505e5ef04f70452448a64507e11a0c68, type: 3}
   m_Name: Enemy_SoulWisp
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.EnemyDefinition
-  displayName: "Ma H\u1ECFa"
+  displayName: "Soul Wisp"
   kind: 1
   baseHealth: 60
   baseDamage: 12

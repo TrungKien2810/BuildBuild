@@ -64,6 +64,7 @@ namespace BuildBuild.Core
             body.color = RivalTint;
 
             Rival = go.GetComponent<Castle>();
+            Rival.RefreshBaseShadow();   // body vua lat: dai bong chan theo lai
             Rival.Side = Faction.Npc;
             Rival.Health.Invulnerable = false;   // ban sao mang theo cong tac "Lau dai bat tu" cua Admin
             Rival.Health.ResetTo(_homeMax * HealthScale * (target != null ? target.castleScale : 1f));

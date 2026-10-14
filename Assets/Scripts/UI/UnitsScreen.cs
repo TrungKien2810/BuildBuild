@@ -25,8 +25,8 @@ namespace BuildBuild.UI
         static readonly (string name, UnitCategory category)[] Tabs =
         {
             ("Hero", UnitCategory.Hero),
-            ("Lính", UnitCategory.Soldier),
-            ("Trụ", UnitCategory.Cannon),
+            ("Soldiers", UnitCategory.Soldier),
+            ("Towers", UnitCategory.Cannon),
         };
 
         static readonly Color TabIdle = new Color(0.6f, 0.6f, 0.6f);
@@ -254,7 +254,7 @@ namespace BuildBuild.UI
             var role = RoleOf(unit);
             string kind = role == HeroRole.None ? Tabs[TabOf(unit)].name : roles.NameOf(role);
             detailSub.text = owned == null
-                ? $"{unit.rarity}   ·   {kind}   ·   Chưa sở hữu — quay gacha để có"
+                ? $"{unit.rarity}   ·   {kind}   ·   Not Owned — roll gacha to obtain"
                 : $"{unit.rarity}   ·   {kind}";
             detailLevelBadge.SetActive(owned != null);
             detailShardBar.SetActive(owned != null);
@@ -264,7 +264,7 @@ namespace BuildBuild.UI
                 detailLevel.text = $"Lv {level}";
                 UnitCardView.SetStars(detailStars, stars, starOn, starOff);
                 UnitCardView.SetShards(detailShardFill, detailShardFillImage, owned, config.shardsPerStar, shardFillSprite, shardFullSprite);
-                detailShardText.text = stars >= Progression.MaxStars ? "Tối đa" : $"{owned.shards}/{config.shardsPerStar}";
+                detailShardText.text = stars >= Progression.MaxStars ? "Max" : $"{owned.shards}/{config.shardsPerStar}";
             }
 
             bool maxed = level >= Progression.MaxLevel(stars);
@@ -278,13 +278,13 @@ namespace BuildBuild.UI
 
             int cost = cannon != null ? cannon.UpgradeCost(level) : Progression.LevelUpCost(level);
             levelButton.interactable = owned != null && !maxed && economy.Gold >= cost;
-            levelLabel.text = owned == null ? "Nâng level"
-                : maxed ? $"Tối đa Lv {level}\nNâng sao để mở thêm"
-                : $"Nâng level\n{cost:N0} vàng{(economy.Gold >= cost ? "" : " · thiếu")}";
+            levelLabel.text = owned == null ? "Level Up"
+                : maxed ? $"Max Lv {level}\nStar Up to Unlock More"
+                : $"Level Up\n{cost:N0} Gold{(economy.Gold >= cost ? "" : " · missing")}";
 
             starButton.interactable = Progression.CanStarUp(owned, config.shardsPerStar);
-            starLabel.text = owned != null && owned.stars >= Progression.MaxStars ? "Sao tối đa"
-                : $"Nâng sao\nMảnh {owned?.shards ?? 0}/{config.shardsPerStar}";
+            starLabel.text = owned != null && owned.stars >= Progression.MaxStars ? "Max Stars"
+                : $"Star Up\nShards {owned?.shards ?? 0}/{config.shardsPerStar}";
         }
 
         /// <summary>Pivot chan builder da do cho unit; icon du phong (khong co frame idle) thi dung giua day anh.</summary>
@@ -334,18 +334,18 @@ namespace BuildBuild.UI
             Progression.Multipliers(hero.unitId, equipment, out float health, out float damage, out float rate);
             var rows = new List<(Sprite, string, string)>
             {
-                (iconHp, "Máu", Value(hero.maxHealth * health, hero.maxHealth * (health + Progression.LevelBonus), !maxed, "0")),
-                (hero.healsAllies ? iconHp : iconDamage, hero.healsAllies ? "Hồi máu" : "Sát thương",
+                (iconHp, "HP", Value(hero.maxHealth * health, hero.maxHealth * (health + Progression.LevelBonus), !maxed, "0")),
+                (hero.healsAllies ? iconHp : iconDamage, hero.healsAllies ? "Heal" : "Damage",
                     Value(hero.damage * damage, hero.damage * (damage + Progression.LevelBonus), !maxed)),
-                (iconAttackSpeed, "Tốc đánh", $"{hero.attackRate * rate:0.##}/s"),
-                (iconRange, "Tầm", $"{hero.range:0.#}"),
+                (iconAttackSpeed, "Attack Speed", $"{hero.attackRate * rate:0.##}/s"),
+                (iconRange, "Range", $"{hero.range:0.#}"),
             };
             if (hero is SoldierDefinition soldier)
             {
-                rows.Add((iconSquad, "Mỗi lần gọi", $"{soldier.squadSize} con"));
-                rows.Add((iconCooldown, "Hồi chiêu", $"{soldier.summonCooldown:0.#}s"));
+                rows.Add((iconSquad, "Per Summon", $"{soldier.squadSize} con"));
+                rows.Add((iconCooldown, "Cooldown", $"{soldier.summonCooldown:0.#}s"));
             }
-            note = $"Level +{Progression.LevelBonus * 100f:0}% · Sao +{Progression.StarBonus * 100f:0}% máu, sát thương gốc";
+            note = $"Level +{Progression.LevelBonus * 100f:0}% · Stars +{Progression.StarBonus * 100f:0}% base HP, Damage";
             return rows;
         }
 
@@ -353,13 +353,13 @@ namespace BuildBuild.UI
         {
             var rows = new List<(Sprite, string, string)>
             {
-                (iconDamage, "Sát thương", Value(Progression.CannonDamage(cannon, level), Progression.CannonDamage(cannon, level + 1), !maxed)),
-                (iconAttackSpeed, "Tốc bắn", $"{cannon.fireRate:0.##}/s"),
-                (iconRange, "Tầm", $"{cannon.range:0.#}"),
+                (iconDamage, "Damage", Value(Progression.CannonDamage(cannon, level), Progression.CannonDamage(cannon, level + 1), !maxed)),
+                (iconAttackSpeed, "Attack Speed", $"{cannon.fireRate:0.##}/s"),
+                (iconRange, "Range", $"{cannon.range:0.#}"),
             };
-            if (cannon.aoeRadius > 0f) rows.Add((iconSplash, "Nổ lan", $"bán kính {cannon.aoeRadius:0.#}"));
-            if (cannon.slowPercent > 0f) rows.Add((iconSlow, "Làm chậm", $"{cannon.slowPercent * 100f:0}% · {cannon.slowDuration:0.#}s"));
-            note = $"Level +{cannon.damagePerLevel * 100f:0}% · Sao +{Progression.StarBonus * 100f:0}% sát thương gốc";
+            if (cannon.aoeRadius > 0f) rows.Add((iconSplash, "Splash Damage", $"radius {cannon.aoeRadius:0.#}"));
+            if (cannon.slowPercent > 0f) rows.Add((iconSlow, "Slow", $"{cannon.slowPercent * 100f:0}% · {cannon.slowDuration:0.#}s"));
+            note = $"Level +{cannon.damagePerLevel * 100f:0}% · Stars +{Progression.StarBonus * 100f:0}% base Damage";
             return rows;
         }
 
@@ -376,16 +376,17 @@ namespace BuildBuild.UI
                 skillIcons[row].color = open ? Color.white : TabIdle;
                 skillTexts[row].text = open
                     ? $"<b>{tag}</b> — {text}"
-                    : $"<color={Locked}><b>{tag}</b> · Mở ở {needStars}★ — {text}</color>";
+                    : $"<color={Locked}><b>{tag}</b> · Unlock at {needStars}★ — {text}</color>";
                 skillTexts[row].transform.parent.gameObject.SetActive(true);
                 row++;
             }
             if (hero != null)
             {
-                Add(hero.ultimateIcon, "Chiêu cuối", hero.ultimateText, 0);
-                Add(hero.passiveIcon, "Nội tại", hero.passiveText, hero.passiveStar);
-                Add(hero.minorIcon, "Chiêu phụ", hero.minorText, hero.minorStar);
-                Add(hero.secondMinorIcon, "Chiêu phụ", hero.secondMinorText, hero.secondMinorStar);
+                Add(hero.ultimateIcon, "Ultimate", hero.ultimateText, 0);
+                Add(hero.passiveIcon, "Passive", hero.passiveText, hero.passiveStar);
+                Add(hero.minorIcon, "Secondary", hero.minorText, hero.minorStar);
+                Add(hero.secondMinorIcon, "Secondary", hero.secondMinorText, hero.secondMinorStar);
+                Add(hero.thirdMinorIcon, "Secondary", hero.thirdMinorText, hero.thirdMinorStar);
             }
             for (int i = row; i < skillTexts.Length; i++) skillTexts[i].transform.parent.gameObject.SetActive(false);
         }
@@ -411,9 +412,9 @@ namespace BuildBuild.UI
 
         static string StatName(EquipmentSlot slot) => slot switch
         {
-            EquipmentSlot.Weapon => "sát thương",
-            EquipmentSlot.Ring => "tốc đánh",
-            _ => "máu",
+            EquipmentSlot.Weapon => "Damage",
+            EquipmentSlot.Ring => "Attack Speed",
+            _ => "HP",
         };
 
         string Describe(OwnedEquipment item) =>
@@ -430,7 +431,7 @@ namespace BuildBuild.UI
                 var item = Armory.Equipped(unit.id, slot);
                 string text = item != null
                     ? $"{EquipmentConfig.SlotName(slot)} Lv{item.level}\n{Describe(item)}"
-                    : $"{EquipmentConfig.SlotName(slot)}\nTrống";
+                    : $"{EquipmentConfig.SlotName(slot)}\nEmpty";
                 Cell(slotRow).Show(rarityFrames[item != null ? (int)item.rarity : 0], equipment.Icon(slot), text,
                     item != null, slot == _slot, () => { _slot = slot; Refresh(); });
             }
@@ -447,19 +448,19 @@ namespace BuildBuild.UI
                 }
 
             string slotName = EquipmentConfig.SlotName(_slot);
-            gearInfo.text = owned == null ? "Chưa sở hữu hero — chưa mặc được đồ."
+            gearInfo.text = owned == null ? "Hero not owned — cannot equip gear yet."
                 : (selected != null ? $"{slotName} {selected.rarity} Lv {selected.level}: {Describe(selected)}"
-                    : $"{slotName}: trống")
-                + $"\nTúi: {bag.Count} món {slotName.ToLower()}"
-                + (bag.Count > BagShown ? $" (hiện {BagShown} món tốt nhất)" : "")
-                + (bag.Count > 0 ? " — bấm để mặc" : " — thắng wave để nhận đồ");
+                    : $"{slotName}: empty")
+                + $"\nBag: {bag.Count} {slotName.ToLower()} items"
+                + (bag.Count > BagShown ? $" (showing the best {BagShown} items)" : "")
+                + (bag.Count > 0 ? " — press to equip" : " — win Waves to obtain gear");
 
             bool maxed = selected != null && selected.level >= equipment.maxLevel;
             int cost = selected != null ? equipment.UpgradeCost(selected.rarity, selected.level) : 0;
             upgradeButton.interactable = selected != null && !maxed && economy.Gold >= cost;
-            upgradeLabel.text = selected == null ? "Nâng cấp"
-                : maxed ? "Đồ tối đa"
-                : $"Nâng cấp\n{cost:N0} vàng";
+            upgradeLabel.text = selected == null ? "Upgrade"
+                : maxed ? "Gear Maxed"
+                : $"Upgrade\n{cost:N0} Gold";
             unequipButton.interactable = selected != null;
         }
 

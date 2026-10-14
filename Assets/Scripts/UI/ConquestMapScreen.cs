@@ -151,7 +151,7 @@ namespace BuildBuild.UI
                 image.sprite = tierTokens[target.tier];
                 image.color = target.done ? new Color(0.45f, 0.45f, 0.45f) : Color.white;
                 tokenLabels[i].text = target.done
-                    ? $"{ConquestMap.TierNames[target.tier]} · đã đánh"
+                    ? $"{ConquestMap.TierNames[target.tier]} · attacked"
                     : $"{ConquestMap.TierNames[target.tier]} · LC {target.power:N0}";
                 tokenLabels[i].color = TierColor(target);
             }
@@ -162,11 +162,11 @@ namespace BuildBuild.UI
         {
             int cost = ConquestMap.ScanCost(tuning);
             float wait = ConquestMap.SecondsToFreeScan;
-            scanLabel.text = cost <= 0 ? "Do Thám" : $"Quét ngay · {cost:N0} vàng";
+            scanLabel.text = cost <= 0 ? "Scout" : $"Scan Now · {cost:N0} Gold";
             scanButton.interactable = _scanStarted < 0f && (cost <= 0 || economy.Gold >= cost);
-            string free = cost > 0 ? $" · quét miễn phí sau {Mathf.CeilToInt(wait / 60f)} phút" : "";
-            infoText.text = $"Lượt: {ConquestMap.AttacksLeft}/{ConquestMap.AttacksPerDay} · Chuỗi thắng: {ConquestMap.Streak} · " +
-                            $"Lực chiến: {Mathf.RoundToInt(MyPower):N0}{free}";
+            string free = cost > 0 ? $" · free scan in {Mathf.CeilToInt(wait / 60f)} minutes" : "";
+            infoText.text = $"Attempts: {ConquestMap.AttacksLeft}/{ConquestMap.AttacksPerDay} · Win Streak: {ConquestMap.Streak} · " +
+                            $"Power: {Mathf.RoundToInt(MyPower):N0}{free}";
         }
 
         float MyPower => ConquestMap.PlayerPower(heroes, cannons, cannonBoard.MountCount, soldiers, equipment, gacha);
@@ -192,7 +192,7 @@ namespace BuildBuild.UI
             lordPortrait.sprite = lordPortraits[target.lord % lordPortraits.Length];
             lordName.text = $"{ConquestMap.LordNames[target.lord % ConquestMap.LordNames.Length]} · {ConquestMap.TierNames[target.tier]}";
             float mine = Mathf.Max(1f, MyPower);
-            powerText.text = $"Lực chiến {target.power:N0}  (mình {Mathf.RoundToInt(mine):N0})";
+            powerText.text = $"Power {target.power:N0}  (yours {Mathf.RoundToInt(mine):N0})";
             powerText.color = TierColor(target);
 
             for (int i = 0; i < heroCells.Length; i++)
@@ -207,14 +207,14 @@ namespace BuildBuild.UI
                 var cannon = i < target.cannons.Count ? ConquestMap.Find(cannons, target.cannons[i]) : null;
                 SetIcon(cannonIcons[i], cannon != null ? cannon.icon : null);
             }
-            string reserves = target.reserves.Count > 0 ? $" · Tiếp viện {target.reserves.Count} hero" : "";
-            castleText.text = $"Máu thành ×{target.castleScale:0.00} · Pháo lv {target.cannonLevel} · Hero {target.stars}★{reserves}";
-            string shards = target.shards > 0 ? $" · {target.shards} mảnh" : "";
-            rewardText.text = $"Thưởng: {ConquestMap.Gold(target, tuning):N0} vàng · cơ hội trang bị{shards}";
+            string reserves = target.reserves.Count > 0 ? $" · Reinforcements: {target.reserves.Count} heroes" : "";
+            castleText.text = $"Castle HP ×{target.castleScale:0.00} · Cannon Lv {target.cannonLevel} · Hero {target.stars}★{reserves}";
+            string shards = target.shards > 0 ? $" · {target.shards} Shards" : "";
+            rewardText.text = $"Rewards: {ConquestMap.Gold(target, tuning):N0} Gold · equipment chance{shards}";
 
             bool can = ConquestMap.CanAttack(target);
             attackButton.interactable = can;
-            attackLabel.text = target.done ? "Đã đánh" : ConquestMap.AttacksLeft <= 0 ? "Hết lượt hôm nay" : "Tấn công";
+            attackLabel.text = target.done ? "Already Attacked" : ConquestMap.AttacksLeft <= 0 ? "No Attempts Left Today" : "Attack";
         }
 
         void Attack()

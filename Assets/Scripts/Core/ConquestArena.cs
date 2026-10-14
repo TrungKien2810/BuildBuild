@@ -83,6 +83,7 @@ namespace BuildBuild.Core
             _camera.transform.position = on ? new Vector3(cameraCentre.x, cameraCentre.y, _homePosition.z) : _homePosition;
             _camera.orthographicSize = on ? cameraSize : _homeSize;
             Battlefield.OverrideLane(on ? new Vector2(laneBottom, laneTop) : (Vector2?)null);
+            WaveBiome.UseConquestLight(on);
 
             foreach (var crow in _crows) Destroy(crow.gameObject);
             _crows.Clear();

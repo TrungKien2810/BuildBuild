@@ -1,0 +1,110 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3463ed124e024c45b2e18c64764145d, type: 3}
+  m_Name: HongLienKit
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HongLienKit
+  seedEvery: 3
+  budMax: 3
+  budSeconds: 6
+  fanCooldown: 8
+  fanPower: 1.5
+  fanLength: 3
+  detonateCooldown: 6
+  detonatePower: 2
+  detonateRadius: 0.8
+  grandPower: 3
+  grandRadius: 1
+  fanCast:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: 04f3e9e220dc1e743a0c9cdc7bd41b0e, type: 3}
+    - {fileID: 21300000, guid: aaa9b2a5ab68e1849857f63525b792cf, type: 3}
+    - {fileID: 21300000, guid: 3ce9b052c9cabcd439e52f5c4512a87d, type: 3}
+    - {fileID: 21300000, guid: dac1679386f78ef419426e7428a9da01, type: 3}
+    - {fileID: 21300000, guid: f96ed372d3950564ba25ceea70713f3e, type: 3}
+    - {fileID: 21300000, guid: fce90f47f11adc14c9948d4bc1815b9f, type: 3}
+    loop: 0
+    hitFrame: 4
+  detonateCast:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: 62ef1ddb7031da24194e29efdd6b4129, type: 3}
+    - {fileID: 21300000, guid: b6488b117f76ede4b94deb97401f5e68, type: 3}
+    - {fileID: 21300000, guid: 0746eb78b6d7fb141a92c0f639a4aac5, type: 3}
+    - {fileID: 21300000, guid: 4d3b2d15fdad0be4bbce70866f261b7e, type: 3}
+    - {fileID: 21300000, guid: 94ea3b35156930b44a748e16676ff8c0, type: 3}
+    - {fileID: 21300000, guid: 7351246f407891b439fb509b12950841, type: 3}
+    loop: 0
+    hitFrame: 4
+  grandCast:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: c8d8a63f1c7f0eb479e59a8d8ac7600a, type: 3}
+    - {fileID: 21300000, guid: 0595b4d26bd5fba4abc082631181ed97, type: 3}
+    - {fileID: 21300000, guid: d91938333437a1c4d82e93cee0b32bac, type: 3}
+    - {fileID: 21300000, guid: 95d05ed319add124c9f7a888ec2dc5bf, type: 3}
+    - {fileID: 21300000, guid: 62f145c130ef109418adcd22f6b105ee, type: 3}
+    - {fileID: 21300000, guid: bba8f4ab5cfef8b48b4ad8f1942bc12c, type: 3}
+    - {fileID: 21300000, guid: d45985ea84f24b942b48eb6515647dad, type: 3}
+    - {fileID: 21300000, guid: fc7fcdf338d7d19448c9a46e684cff7f, type: 3}
+    loop: 0
+    hitFrame: 4
+  fanFlame:
+  - {fileID: 21300000, guid: 76a66990b33ec544fb714d5b1a8e17e9, type: 3}
+  - {fileID: 21300000, guid: 396f535775659f442817d416aa49df11, type: 3}
+  - {fileID: 21300000, guid: 29ef755515ffbb040a6675915418662b, type: 3}
+  - {fileID: 21300000, guid: 5b20ecf0332935547b12698136645315, type: 3}
+  - {fileID: 21300000, guid: 87bb94ec3c0ad244db5526c970c50e22, type: 3}
+  - {fileID: 21300000, guid: 035c6513349a31241aed4f503038489d, type: 3}
+  lotusBud:
+  - {fileID: 21300000, guid: b2390776b8d90d140bfd5595948cce9c, type: 3}
+  - {fileID: 21300000, guid: c86b4d64260026d44bb3882a6ece26cb, type: 3}
+  - {fileID: 21300000, guid: 4e55115fe11f328498a6510038c584fe, type: 3}
+  - {fileID: 21300000, guid: b95678e60dc1c7c43a6104d2f0a64276, type: 3}
+  - {fileID: 21300000, guid: b4fc80e4d254f5b4eb71f4bc0a498709, type: 3}
+  - {fileID: 21300000, guid: b89579ea9c33d5640bdd247edad1e2f8, type: 3}
+  - {fileID: 21300000, guid: 32e18609496e2cf4081c7c0f50b3b69c, type: 3}
+  - {fileID: 21300000, guid: a608aa0fadca6b342be27259976d1ea6, type: 3}
+  lotusBloom:
+  - {fileID: 21300000, guid: f55e3d79eb72bcf4e9ee8da40350907d, type: 3}
+  - {fileID: 21300000, guid: 41a36fd5124b7204ca70a6e36cfdfaa1, type: 3}
+  - {fileID: 21300000, guid: 4b19ed5039272b3499f0a03e5fc60670, type: 3}
+  - {fileID: 21300000, guid: eab3d20adf9f65d4499c711cdf1c5e34, type: 3}
+  - {fileID: 21300000, guid: f3db908ba504ed54995d26828ccf52b5, type: 3}
+  - {fileID: 21300000, guid: 074dba22900a57149abe9fc66da8594a, type: 3}
+  lotusFade:
+  - {fileID: 21300000, guid: 053d68521ffec1d4f974dbe707d902f7, type: 3}
+  - {fileID: 21300000, guid: 9b488c1eae13fb542846f8452fe14b76, type: 3}
+  - {fileID: 21300000, guid: 8781605df8c29774b9581b6b765a62de, type: 3}
+  - {fileID: 21300000, guid: 448ad9121ad1e2e44b4f48230b3a99cc, type: 3}
+  - {fileID: 21300000, guid: 199e0cb17bb08684cb6a0ddf738d8b15, type: 3}
+  - {fileID: 21300000, guid: e88ced99f53f29c49a1fb8159fada489, type: 3}
+  - {fileID: 21300000, guid: cc0d76f7d88e80640b2fdf7b4525a55c, type: 3}
+  - {fileID: 21300000, guid: 1f5c3edaa75a9ec4fa7beedb090341ef, type: 3}
+  greatBud:
+  - {fileID: 21300000, guid: eb2f426771a134341817b1693be57b40, type: 3}
+  - {fileID: 21300000, guid: cc3e944786e12f144be2b4cf02e32d9c, type: 3}
+  - {fileID: 21300000, guid: 9e7f9c7fbeaad6b428cd90bf469133ba, type: 3}
+  - {fileID: 21300000, guid: 2f3b666487faef24ea11adb34d9ec18b, type: 3}
+  - {fileID: 21300000, guid: 0378bde9a17f8554ca4536d85a34c70d, type: 3}
+  - {fileID: 21300000, guid: 4a2b184b76fd1b349bb10fd2d9f14310, type: 3}
+  - {fileID: 21300000, guid: 5c0577a440a3154418d971d014a43ba5, type: 3}
+  - {fileID: 21300000, guid: 614db3276065fff4f9b20e9bd3c74380, type: 3}
+  greatBloom:
+  - {fileID: 21300000, guid: 323ea75056a3af74598c64123ab36554, type: 3}
+  - {fileID: 21300000, guid: e09e2b7d047fdf7409bbd69cb60b66ca, type: 3}
+  - {fileID: 21300000, guid: 979dcd88b3f0b584cb8b2988a4e2b862, type: 3}
+  - {fileID: 21300000, guid: ea07b105923dfb94f8ae4915bf3537aa, type: 3}
+  - {fileID: 21300000, guid: 7ee90454910592b438c92167b0b91fc5, type: 3}
+  - {fileID: 21300000, guid: 882f4ff4e4bb06140b1568822a059587, type: 3}
+  - {fileID: 21300000, guid: cab6e6338892247459eda23493ec4e76, type: 3}
+  - {fileID: 21300000, guid: f52c6fc2fad8a144293ec38072aef576, type: 3}

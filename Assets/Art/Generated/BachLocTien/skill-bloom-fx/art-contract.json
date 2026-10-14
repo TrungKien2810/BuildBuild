@@ -1,0 +1,32 @@
+{
+  "unit": "BachLocTien",
+  "action": "heal-cleanse-bloom",
+  "kind": "fx",
+  "approval": "pending visual review",
+  "cell": [
+    128,
+    128
+  ],
+  "origin": [
+    64,
+    96
+  ],
+  "anchor": "ground",
+  "phases": {
+    "arrival": [
+      1,
+      2
+    ],
+    "heal_cleanse": [
+      3,
+      4
+    ],
+    "fade": [
+      5,
+      6
+    ]
+  },
+  "raw_root_y": 0.72,
+  "scale_policy": "one shared scale for complete effect cycle",
+  "gameplay_timing": "not wired; preview durations only"
+}

@@ -1,0 +1,31 @@
+{
+  "unit": "BachLocTien",
+  "action": "linh-loc-walk",
+  "kind": "fx",
+  "approval": "pending visual review",
+  "cell": [
+    128,
+    128
+  ],
+  "origin": [
+    64,
+    96
+  ],
+  "anchor": "ground",
+  "phases": {
+    "loop": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
+  },
+  "raw_root_x": 0.6591796875,
+  "raw_root_y": 0.72,
+  "scale_policy": "preserve source cell aspect, one shared clip scale, preserve raw-root placement",
+  "gameplay_timing": "not wired; preview timing only"
+}

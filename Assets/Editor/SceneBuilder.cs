@@ -72,7 +72,7 @@ namespace BuildBuild.Editor
         {
             if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) return;
 
-            _font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            _font = PixelFont.Asset;
             ReimportArt();
             EnsureFolder(DataDir + "/Units");
             EnsureFolder(PrefabDir);
@@ -101,6 +101,8 @@ namespace BuildBuild.Editor
             BuildHeroN();
             BuildApprovedHeroes();
             BuildLowTrioHeroes();
+            BuildNewSRHeroes();
+            BuildNewSSRHeroes();
             FillSkillTexts();
             AssignHeroRoles();
             BuildEquipmentConfig();
@@ -286,7 +288,7 @@ namespace BuildBuild.Editor
                 AnimSet("Skeleton", "Bonecaller-Skeleton/", attack: ("attack", "attack"), hit: 4),
                 d =>
                 {
-                    d.displayName = "Lính xương";
+                    d.displayName = "Skeleton Soldier";
                     d.maxHealth = 150f; d.damage = 12f; d.attackRate = 1f; d.range = 0.5f; d.moveSpeed = 1f;
                     d.projectileSpeed = 20f; d.splashRadius = 0.3f;
                 },
@@ -295,7 +297,7 @@ namespace BuildBuild.Editor
                 AnimSet("BigSkeleton", "Bonecaller-BigSkeleton/", attack: ("attack", "attack"), hit: 4),
                 d =>
                 {
-                    d.displayName = "Xương lớn";
+                    d.displayName = "Big Skeleton";
                     d.maxHealth = 700f; d.damage = 40f; d.attackRate = 0.7f; d.range = 0.9f; d.moveSpeed = 0.7f;
                     d.projectileSpeed = 20f; d.splashRadius = 0.3f;
                 },
@@ -305,7 +307,7 @@ namespace BuildBuild.Editor
                 AnimSet("DeathKnight", "Bonecaller-DeathKnight/", attack: ("attack", "attack"), skill: ("charge", "charge"), hit: 4),
                 d =>
                 {
-                    d.displayName = "Kỵ sĩ tử thần";
+                    d.displayName = "Death Knight";
                     d.maxHealth = 1800f; d.damage = 55f; d.attackRate = 1f; d.range = 1f; d.moveSpeed = 1.2f;
                     d.projectileSpeed = 20f; d.splashRadius = 1.2f;   // don thuong quet dien rong quanh muc tieu
                     d.knockbackOnHit = true;
@@ -354,27 +356,27 @@ namespace BuildBuild.Editor
                 // Hero dung CHAN DUNG (avatars/), phao dung EMBLEM do nghe (icons/) — luat chot
                 // 2026-09-12: nhan vat = mat, do vat = emblem. `mage_summoner` con emblem cu vi
                 // hero nay chua co art nhan vat, doi co roi doi sang avatar cho dong bo.
-                Unit("knight", "Hiệp sĩ", UnitCategory.Hero, Rarity.N, "avatars/avatar-ironblade"),
-                Unit("archer", "Cung thủ", UnitCategory.Hero, Rarity.N, "avatars/avatar-hawkfletch"),
-                Unit("mage_elemental", "Pháp sư nguyên tố", UnitCategory.Hero, Rarity.N, "avatars/avatar-frostweaver"),
-                Unit("mage_summoner", "Pháp sư triệu hồi", UnitCategory.Hero, Rarity.SR, "icons/icon-mage-summoner"),
+                Unit("knight", "Knight", UnitCategory.Hero, Rarity.N, "avatars/avatar-ironblade"),
+                Unit("archer", "Archer", UnitCategory.Hero, Rarity.N, "avatars/avatar-hawkfletch"),
+                Unit("mage_elemental", "Elemental Mage", UnitCategory.Hero, Rarity.N, "avatars/avatar-frostweaver"),
+                Unit("mage_summoner", "Summoner Mage", UnitCategory.Hero, Rarity.SR, "icons/icon-mage-summoner"),
                 // Do hiem theo suc manh (nguoi dung giao Claude 2026-09-26): Cragfist 1400 mau + Hoa Da mien sat thuong -> R.
-                Unit("cragfist", "Người đá", UnitCategory.Hero, Rarity.R, "avatars/avatar-cragfist"),
-                Unit("cannon_rapid", "Pháo Liên Thanh", UnitCategory.Cannon, Rarity.N, "icons/icon-cannon-rapid"),
-                Unit("cannon_blast", "Pháo Nổ", UnitCategory.Cannon, Rarity.N, "icons/icon-cannon-blast"),
-                Unit("cannon_frost", "Pháo Băng", UnitCategory.Cannon, Rarity.N, "icons/icon-cannon-frost"),
+                Unit("cragfist", "Cragfist", UnitCategory.Hero, Rarity.R, "avatars/avatar-cragfist"),
+                Unit("cannon_rapid", "Rapid Fire Cannon", UnitCategory.Cannon, Rarity.N, "icons/icon-cannon-rapid"),
+                Unit("cannon_blast", "Explosive Cannon", UnitCategory.Cannon, Rarity.N, "icons/icon-cannon-blast"),
+                Unit("cannon_frost", "Ice Cannon", UnitCategory.Cannon, Rarity.N, "icons/icon-cannon-frost"),
                 // Phao #4 (2026-10-01): R vi xuyen hang quai — do hiem Claude de xuat. Chua co icon UI rieng.
-                Unit("cannon_ballista", "Nỏ Xuyên", UnitCategory.Cannon, Rarity.R, "icons/icon-cannon-ballista"),
+                Unit("cannon_ballista", "Piercing Crossbow", UnitCategory.Cannon, Rarity.R, "icons/icon-cannon-ballista"),
                 // Bo phao 2026-10-05 (asset nhanh asset/phao-tru + asset/phao-thaituan05). Do hiem theo the giao viec /
                 // mechanics.md cua ban art; Gatling + Hoa Mai Claude chon.
-                Unit("cannon_net", "Pháo Lưới", UnitCategory.Cannon, Rarity.R, "icons/icon-cannon-net"),
-                Unit("cannon_mortar", "Pháo Cối", UnitCategory.Cannon, Rarity.N, "icons/icon-cannon-mortar"),
-                Unit("cannon_tesla", "Tháp Sét", UnitCategory.Cannon, Rarity.R, "icons/icon-cannon-tesla"),
-                Unit("cannon_siege", "Đại Bác Công Thành", UnitCategory.Cannon, Rarity.SR, "icons/icon-cannon-siege"),
-                Unit("cannon_gatling", "Gatling Tự Động", UnitCategory.Cannon, Rarity.R, "icons/icon-cannon-gatling"),
-                Unit("cannon_longgun", "Hoả Mai Thành", UnitCategory.Cannon, Rarity.SR, "icons/icon-cannon-longgun"),
-                Unit("cannon_sonic", "Pháo Âm Thanh", UnitCategory.Cannon, Rarity.SR, "icons/icon-cannon-sonic"),
-                Unit("cannon_void", "Pháo Hắc Tinh", UnitCategory.Cannon, Rarity.SSR, "icons/icon-cannon-void"),
+                Unit("cannon_net", "Net Cannon", UnitCategory.Cannon, Rarity.R, "icons/icon-cannon-net"),
+                Unit("cannon_mortar", "Mortar Cannon", UnitCategory.Cannon, Rarity.N, "icons/icon-cannon-mortar"),
+                Unit("cannon_tesla", "Lightning Tower", UnitCategory.Cannon, Rarity.R, "icons/icon-cannon-tesla"),
+                Unit("cannon_siege", "Siege Cannon", UnitCategory.Cannon, Rarity.SR, "icons/icon-cannon-siege"),
+                Unit("cannon_gatling", "Automatic Gatling", UnitCategory.Cannon, Rarity.R, "icons/icon-cannon-gatling"),
+                Unit("cannon_longgun", "Castle Musket", UnitCategory.Cannon, Rarity.SR, "icons/icon-cannon-longgun"),
+                Unit("cannon_sonic", "Sonic Cannon", UnitCategory.Cannon, Rarity.SR, "icons/icon-cannon-sonic"),
+                Unit("cannon_void", "Dark Star Cannon", UnitCategory.Cannon, Rarity.SSR, "icons/icon-cannon-void"),
             };
 
             // Chi NOI THEM unit con thieu vao pool da co (nhu linh) — khong xoa unit chinh tay trong Inspector.
@@ -401,7 +403,7 @@ namespace BuildBuild.Editor
         {
             EnsureFolder(SoldierDir);
 
-            var wolf = SoldierDef("WarWolf", "Sói chiến",
+            var wolf = SoldierDef("WarWolf", "War Wolf",
                 AnimSet("WarWolf", "WarWolf/", attack: ("attack", "attack"), hit: 3),
                 d =>
                 {
@@ -410,7 +412,7 @@ namespace BuildBuild.Editor
                     d.squadSize = 3; d.summonCooldown = 12f;
                 });
 
-            var tortoise = SoldierDef("StoneTortoise", "Rùa đá khiên",
+            var tortoise = SoldierDef("StoneTortoise", "Stone Shield Turtle",
                 AnimSet("StoneTortoise", "StoneTortoise/", attack: ("attack", "attack"), hit: 2),
                 d =>
                 {
@@ -419,7 +421,7 @@ namespace BuildBuild.Editor
                     d.squadSize = 2; d.summonCooldown = 18f;
                 });
 
-            var lizard = SoldierDef("AcidLizard", "Kỳ nhông axit",
+            var lizard = SoldierDef("AcidLizard", "Acid Lizard",
                 AnimSet("AcidLizard", "AcidLizard/", attack: ("attack", "attack"), hit: 2),
                 d =>
                 {
@@ -434,7 +436,7 @@ namespace BuildBuild.Editor
 
             // Linh #4 SSR, top 1 con, khac che tinh anh/boss (IDEAS #1; so Claude de xuat, CHUA can). Huc = Charge chieu
             // nho: phi xuyen hang quai, choang + day lui; Khac Che mo tu 0 sao vi la vai tro chinh cua con nay.
-            var warhorn = SoldierDef("Warhorn", "Tê giác chiến",
+            var warhorn = SoldierDef("Warhorn", "War Rhino",
                 AnimSet("Warhorn", "Warhorn/", attack: ("attack", "attack"), skill: ("charge", "charge"), hit: 4),
                 d =>
                 {
@@ -557,7 +559,7 @@ namespace BuildBuild.Editor
             EditorUtility.SetDirty(warden);
 
             // Vao pool gacha khi du bo (GDD muc 9). Chi NOI THEM vao pool da co.
-            var unit = Unit("chainwarden", "Cai ngục móc xích", UnitCategory.Hero, Rarity.SR, "");
+            var unit = Unit("chainwarden", "Chainwarden", UnitCategory.Hero, Rarity.SR, "");
             if (hero.avatar != null && (unit.icon == null || IsIdentityPlaceholder(unit.icon)))
             {
                 unit.icon = hero.avatar;
@@ -600,7 +602,7 @@ namespace BuildBuild.Editor
             }
             var dragon = HeroDef("BachDiaLong", null, dragonAnim, d =>
                 {
-                    d.displayName = "Bạch Địa Long";
+                    d.displayName = "Bach Dia Long";
                     d.maxHealth = 1400f; d.damage = 30f; d.attackRate = 0.7f; d.range = 0.7f; d.moveSpeed = 0.9f;
                     d.projectileSpeed = 20f; d.splashRadius = 0.3f; d.maxHeld = 4;
                 },
@@ -663,7 +665,7 @@ namespace BuildBuild.Editor
                     ?? LoadSprite(dir + "identity/identity-1.png");
             EditorUtility.SetDirty(hero);
 
-            var unit = Unit("wyrmspear", "Long kỵ binh", UnitCategory.Hero, Rarity.SSR, "");
+            var unit = Unit("wyrmspear", "Dragon Rider", UnitCategory.Hero, Rarity.SSR, "");
             if (hero.avatar != null && (unit.icon == null || IsIdentityPlaceholder(unit.icon)))
             {
                 unit.icon = hero.avatar;
@@ -733,7 +735,7 @@ namespace BuildBuild.Editor
             var slinger = LoadOrCreate<EnemyDefinition>(DataDir + "/Enemy_GoblinSlinger.asset", out bool newSlinger);
             if (newSlinger)
             {
-                slinger.displayName = "Goblin Ná";
+                slinger.displayName = "Sling Goblin";
                 slinger.kind = EnemyKind.BanXa;
                 slinger.baseHealth = 80f;
                 slinger.baseDamage = 12f;
@@ -840,7 +842,7 @@ namespace BuildBuild.Editor
             var orc = LoadOrCreate<EnemyDefinition>(DataDir + "/Enemy_OrcBrute.asset", out bool newOrc);
             if (newOrc)
             {
-                orc.displayName = "Orc Búa Tạ";
+                orc.displayName = "Orc Brute";
                 orc.kind = EnemyKind.Tank;
                 orc.baseHealth = 400f;
                 orc.baseDamage = 40f;
@@ -853,7 +855,7 @@ namespace BuildBuild.Editor
             var rat = LoadOrCreate<EnemyDefinition>(DataDir + "/Enemy_RatRunner.asset", out bool newRat);
             if (newRat)
             {
-                rat.displayName = "Chuột Cống";
+                rat.displayName = "Sewer Rat";
                 rat.kind = EnemyKind.Nhanh;
                 rat.baseHealth = 45f;
                 rat.baseDamage = 8f;
@@ -946,7 +948,7 @@ namespace BuildBuild.Editor
             var bat = LoadOrCreate<EnemyDefinition>(DataDir + "/Enemy_Gloomwing.asset", out bool created);
             if (created)
             {
-                bat.displayName = "Dơi Quỷ";
+                bat.displayName = "Demon Bat";
                 bat.kind = EnemyKind.Nhanh;
                 bat.flyHigh = true;
                 bat.baseHealth = 45f;
@@ -975,7 +977,7 @@ namespace BuildBuild.Editor
             var alchemist = LoadOrCreate<EnemyDefinition>(DataDir + "/Enemy_GoblinAlchemist.asset", out bool newAlch);
             if (newAlch)
             {
-                alchemist.displayName = "Goblin Ném Bình";
+                alchemist.displayName = "Alchemist Goblin";
                 alchemist.kind = EnemyKind.BanXa;
                 alchemist.baseHealth = 90f;
                 alchemist.baseDamage = 10f;
@@ -1012,7 +1014,7 @@ namespace BuildBuild.Editor
             var shaman = LoadOrCreate<EnemyDefinition>(DataDir + "/Enemy_OrcShaman.asset", out bool newShaman);
             if (newShaman)
             {
-                shaman.displayName = "Pháp sư Orc";
+                shaman.displayName = "Orc Shaman";
                 shaman.kind = EnemyKind.Boss;
                 shaman.baseHealth = 2500f;
                 shaman.baseDamage = 60f;
@@ -1076,7 +1078,7 @@ namespace BuildBuild.Editor
             var wisp = LoadOrCreate<EnemyDefinition>(DataDir + "/Enemy_SoulWisp.asset", out bool newWisp);
             if (newWisp)
             {
-                wisp.displayName = "Ma Hỏa";
+                wisp.displayName = "Soul Wisp";
                 wisp.kind = EnemyKind.Nhanh;
                 wisp.baseHealth = 60f;
                 wisp.baseDamage = 12f;
@@ -1122,7 +1124,7 @@ namespace BuildBuild.Editor
             var dragon = LoadOrCreate<EnemyDefinition>(DataDir + "/Enemy_Dreadwyrm.asset", out bool newDragon);
             if (newDragon)
             {
-                dragon.displayName = "Rồng Ma Hỏa";
+                dragon.displayName = "Hellfire Dragon";
                 dragon.kind = EnemyKind.Boss;
                 dragon.baseHealth = 5000f;
                 dragon.baseDamage = 100f;
@@ -1185,7 +1187,7 @@ namespace BuildBuild.Editor
                     ?? LoadSprite(dir + "identity/identity-1.png");
             EditorUtility.SetDirty(hero);
 
-            var unit = Unit("banneret", "Kỳ thủ", UnitCategory.Hero, Rarity.SR, "");
+            var unit = Unit("banneret", "Banneret", UnitCategory.Hero, Rarity.SR, "");
             if (hero.avatar != null && (unit.icon == null || IsIdentityPlaceholder(unit.icon)))
             {
                 unit.icon = hero.avatar;
@@ -1215,7 +1217,7 @@ namespace BuildBuild.Editor
             var clone = HeroDef("WukongClone", null, anim,
                 d =>
                 {
-                    d.displayName = "Phân thân";
+                    d.displayName = "Clone";
                     d.maxHealth = 520f; d.damage = 16f; d.attackRate = 1f; d.range = 0.6f; d.moveSpeed = 1.3f;
                     d.projectileSpeed = 20f; d.splashRadius = 0.3f;
                 },
@@ -1240,7 +1242,7 @@ namespace BuildBuild.Editor
             var hero = HeroDef("Wukong", null, anim,
                 d =>
                 {
-                    d.displayName = "Tôn Ngộ Không";
+                    d.displayName = "Ton Ngo Khong";
                     d.maxHealth = 1300f; d.damage = 40f; d.attackRate = 1f; d.range = 0.6f; d.moveSpeed = 1.3f;
                     d.projectileSpeed = 20f; d.splashRadius = 0.3f;
                     d.stunFrames = Frames(ArtRoot + "Enemy/stunned-status", "stun");
@@ -1251,7 +1253,7 @@ namespace BuildBuild.Editor
                 hero.avatar = LoadSprite(ArtRoot + "UI/avatars/avatar-wukong.png") ?? LoadSprite(dir + "identity/identity-1.png");
             EditorUtility.SetDirty(hero);
 
-            var unit = Unit("wukong", "Tôn Ngộ Không", UnitCategory.Hero, Rarity.SSR, "");
+            var unit = Unit("wukong", "Ton Ngo Khong", UnitCategory.Hero, Rarity.SSR, "");
             if (hero.avatar != null && (unit.icon == null || IsIdentityPlaceholder(unit.icon)))
             {
                 unit.icon = hero.avatar;
@@ -1294,7 +1296,7 @@ namespace BuildBuild.Editor
             var hero = HeroDef("Stormcaller", null, anim,
                 d =>
                 {
-                    d.displayName = "Pháp sư sấm sét";
+                    d.displayName = "Stormcaller";
                     d.maxHealth = 520f; d.damage = 40f; d.attackRate = 0.8f; d.range = 5.5f; d.moveSpeed = 1.1f;
                     d.stunFrames = Frames(ArtRoot + "Enemy/stunned-status", "stun");
                 },
@@ -1304,7 +1306,7 @@ namespace BuildBuild.Editor
                 hero.avatar = LoadSprite(ArtRoot + "UI/avatars/avatar-stormcaller.png") ?? LoadSprite(dir + "identity/identity-1.png");
             EditorUtility.SetDirty(hero);
 
-            var unit = Unit("stormcaller", "Pháp sư sấm sét", UnitCategory.Hero, Rarity.SSR, "");
+            var unit = Unit("stormcaller", "Stormcaller", UnitCategory.Hero, Rarity.SSR, "");
             if (hero.avatar != null && (unit.icon == null || IsIdentityPlaceholder(unit.icon)))
             {
                 unit.icon = hero.avatar;
@@ -1344,7 +1346,7 @@ namespace BuildBuild.Editor
             var hero = HeroDef("Galemonk", null, anim,
                 d =>
                 {
-                    d.displayName = "Võ tăng gió";
+                    d.displayName = "Wind Monk";
                     d.maxHealth = 700f; d.damage = 22f; d.attackRate = 0.9f; d.range = 2.5f; d.moveSpeed = 1.1f;
                 },
                 SkillKind.Whirlwind, d => { d.manaMax = 6f; d.skillPower = 30f / 22f; d.skillRadius = 2.5f; d.skillDuration = 3f; });
@@ -1353,7 +1355,7 @@ namespace BuildBuild.Editor
                 hero.avatar = LoadSprite(ArtRoot + "UI/avatars/avatar-galemonk.png") ?? LoadSprite(dir + "identity/identity-1.png");
             EditorUtility.SetDirty(hero);
 
-            var unit = Unit("galemonk", "Võ tăng gió", UnitCategory.Hero, Rarity.SR, "");
+            var unit = Unit("galemonk", "Wind Monk", UnitCategory.Hero, Rarity.SR, "");
             if (hero.avatar != null && (unit.icon == null || IsIdentityPlaceholder(unit.icon)))
             {
                 unit.icon = hero.avatar;
@@ -1384,7 +1386,7 @@ namespace BuildBuild.Editor
         static void BuildHeroN()
         {
             string bog = ArtRoot + "BogWitch/", shroom = ArtRoot + "ShroomKnight/", triton = ArtRoot + "TritonGuard/";
-            HeroN("BogWitch", "bogwitch", "Phù thuỷ đầm lầy",
+            HeroN("BogWitch", "bogwitch", "Bog Witch",
                 d =>
                 {
                     d.maxHealth = 250f; d.damage = 14f; d.attackRate = 0.9f; d.range = 4.5f; d.moveSpeed = 1.1f;
@@ -1399,7 +1401,7 @@ namespace BuildBuild.Editor
                     d.manaMax = 5f; d.skillRadius = 1.3f; d.skillDuration = 5f; d.skillPower = 0.2f;
                     d.skillFrames = Frames(bog + "skill-toxic-mist-fx", "toxic-mist-fx");
                 });
-            HeroN("ShroomKnight", "shroomknight", "Hiệp sĩ nấm",
+            HeroN("ShroomKnight", "shroomknight", "Shroom Knight",
                 d =>
                 {
                     d.maxHealth = 1000f; d.damage = 12f; d.attackRate = 0.7f; d.range = 0.55f; d.moveSpeed = 1f;
@@ -1414,7 +1416,7 @@ namespace BuildBuild.Editor
                     d.skillIntroFrames = Frames(shroom + "skill-mushroom-grow-fx", "mushroom-grow-fx");
                     d.skillFrames = Frames(shroom + "skill-spore-burst-fx", "spore-burst-fx");
                 });
-            HeroN("TritonGuard", "tritonguard", "Ngư nhân đinh ba",
+            HeroN("TritonGuard", "tritonguard", "Triton Guard",
                 d =>
                 {
                     d.maxHealth = 800f; d.damage = 22f; d.attackRate = 0.8f; d.range = 0.9f; d.moveSpeed = 1.1f;
@@ -1431,7 +1433,7 @@ namespace BuildBuild.Editor
                 });
 
             string ember = ArtRoot + "EmberApprentice/", rune = ArtRoot + "RuneShield/", silk = ArtRoot + "SilkFae/";
-            HeroN("EmberApprentice", "emberapprentice", "Pháp sư lửa tập sự",
+            HeroN("EmberApprentice", "emberapprentice", "Ember Apprentice",
                 d =>
                 {
                     d.maxHealth = 240f; d.damage = 22f; d.attackRate = 0.8f; d.range = 5f; d.moveSpeed = 1.1f;
@@ -1448,7 +1450,7 @@ namespace BuildBuild.Editor
                     d.skillOutroFrames = Frames(ember + "skill-fireball-blast-fx", "fireball-blast-fx");
                     d.skillFrames = Frames(ember + "skill-fire-pool-fx", "fire-pool-fx");
                 });
-            HeroN("RuneShield", "runeshield", "Người lùn khiên rune",
+            HeroN("RuneShield", "runeshield", "Rune Shield",
                 d =>
                 {
                     d.maxHealth = 1100f; d.damage = 14f; d.attackRate = 0.7f; d.range = 0.55f; d.moveSpeed = 1f;
@@ -1465,7 +1467,7 @@ namespace BuildBuild.Editor
                     d.skillFrames = wall.Skip(3).Take(3).ToArray();
                     d.skillOutroFrames = wall.Skip(6).ToArray();
                 });
-            HeroN("SilkFae", "silkfae", "Tiên dệt tơ",
+            HeroN("SilkFae", "silkfae", "Tien Det To",
                 d =>
                 {
                     d.maxHealth = 230f; d.damage = 16f; d.attackRate = 0.8f; d.range = 4.5f; d.moveSpeed = 1.1f;
@@ -1487,7 +1489,7 @@ namespace BuildBuild.Editor
         {
             string dir = ArtRoot + id + "/";
             var anim = AnimSet(id, id + "/", attack: ("attack", "attack"), skill: ("skill-cast", "cast"), hit: 4, skillHit: 4);
-            var hero = HeroDef(id, null, anim, d => { stats(d); d.displayName = name; }, kind, skill);
+            var hero = NamedHero(HeroDef(id, null, anim, stats, kind, skill), name);
             if (hero.avatar == null || IsIdentityPlaceholder(hero.avatar))
                 hero.avatar = LoadSprite($"{UiDir}avatars/avatar-{unitId}.png") ?? LoadSprite(dir + "identity/identity-1.png");
             EditorUtility.SetDirty(hero);
@@ -1533,7 +1535,7 @@ namespace BuildBuild.Editor
             }
             EditorUtility.SetDirty(kit);
 
-            BuildBrother("LuuBi", "luubi", "Lưu Bị", SwornBrother.LuuBi, kit, ("skill-cast", "cast"),
+            BuildBrother("LuuBi", "luubi", "Luu Bi", SwornBrother.LuuBi, kit, ("skill-cast", "cast"),
                 d =>
                 {
                     // Danh xa (nguoi dung 2026-10-03: ho tro khong dung tuyen dau): don thuong ban kiem khi don muc tieu.
@@ -1543,10 +1545,10 @@ namespace BuildBuild.Editor
                     d.impactFrames = Frames(lb + "skill-sword-qi-hit-fx", "sword-qi-hit-fx");
                 },
                 d => { d.manaMax = 6f; d.skillPower = 0.25f; d.skillDuration = 6f; });
-            BuildBrother("QuanVu", "quanvu", "Quan Vũ", SwornBrother.QuanVu, kit, ("skill-slash-cast", "slash-cast"),
+            BuildBrother("QuanVu", "quanvu", "Quan Vu", SwornBrother.QuanVu, kit, ("skill-slash-cast", "slash-cast"),
                 d => { d.maxHealth = 1100f; d.damage = 42f; d.attackRate = 0.75f; d.range = 0.9f; d.moveSpeed = 1.1f; },
                 d => { d.manaMax = 6f; d.skillPower = 5f; });
-            BuildBrother("TruongPhi", "truongphi", "Trương Phi", SwornBrother.TruongPhi, kit, ("skill-roar", "roar"),
+            BuildBrother("TruongPhi", "truongphi", "Truong Phi", SwornBrother.TruongPhi, kit, ("skill-roar", "roar"),
                 d =>
                 {
                     d.maxHealth = 1700f; d.damage = 28f; d.attackRate = 0.7f; d.range = 1f; d.moveSpeed = 1f;
@@ -1559,7 +1561,7 @@ namespace BuildBuild.Editor
             (string folder, string action) skill, Action<HeroDefinition> stats, Action<HeroDefinition> ultimate)
         {
             var anim = AnimSet(id, id + "/", attack: ("attack", "attack"), skill: skill, hit: 4, skillHit: 4);
-            var hero = HeroDef(id, null, anim, d => { d.displayName = name; stats(d); }, SkillKind.DaoVien, ultimate);
+            var hero = NamedHero(HeroDef(id, null, anim, stats, SkillKind.DaoVien, ultimate), name);
             if (hero.daoVien == null) hero.daoVien = kit;
             hero.swornBrother = brother;
             if (hero.avatar == null || IsIdentityPlaceholder(hero.avatar))
@@ -1625,17 +1627,17 @@ namespace BuildBuild.Editor
             EnsureFolder(CannonDir);
             return new[]
             {
-                CannonDef("Rapid", "cannon_rapid", "Pháo Liên Thanh", "icon-cannon-rapid", "CannonRapid", c =>
+                CannonDef("Rapid", "cannon_rapid", "Rapid Fire Cannon", "icon-cannon-rapid", "CannonRapid", c =>
                 {
                     c.damage = 12f; c.fireRate = 2f; c.range = 8f;
                     c.projectileScale = 0.5f; c.impactScale = 0.6f;
                 }),
-                CannonDef("Blast", "cannon_blast", "Pháo Nổ", "icon-cannon-blast", "CannonBlast", c =>
+                CannonDef("Blast", "cannon_blast", "Explosive Cannon", "icon-cannon-blast", "CannonBlast", c =>
                 {
                     c.damage = 30f; c.fireRate = 0.5f; c.range = 7f; c.aoeRadius = 2f;
                     c.projectileSpeed = 10f; c.projectileScale = 0.8f; c.impactScale = 2.5f;
                 }),
-                CannonDef("Frost", "cannon_frost", "Pháo Băng", "icon-cannon-frost", "CannonFrost", c =>
+                CannonDef("Frost", "cannon_frost", "Ice Cannon", "icon-cannon-frost", "CannonFrost", c =>
                 {
                     c.damage = 8f; c.fireRate = 1f; c.range = 7f; c.slowPercent = 0.4f; c.slowDuration = 3f;
                     // Tinh the 19x9 ~ dan Lien Thanh 18x5 -> cung scale; vu no bang 42x40 to hon no Lien Thanh -> 0,6.
@@ -1644,7 +1646,7 @@ namespace BuildBuild.Editor
                 // So Claude de xuat 2026-10-01, CHUA can. Lao 105 px ve cung co nong no tren o 144 -> projectileScale =
                 // displayScale / UnitScale de lao bay dung co lao tren no; muzzle = tam lao tren no o attack-1
                 // (mui x10, duoi ~x115, y47; pivot x72 / dat 96).
-                CannonDef("Ballista", "cannon_ballista", "Nỏ Xuyên", "icon-cannon-ballista", "CannonBallista", c =>
+                CannonDef("Ballista", "cannon_ballista", "Piercing Crossbow", "icon-cannon-ballista", "CannonBallista", c =>
                 {
                     c.damage = 22f; c.fireRate = 0.6f; c.range = 9f; c.pierceCount = 3;
                     c.projectileSpeed = 16f; c.projectileScale = 0.7f; c.impactScale = 0.6f;
@@ -1653,21 +1655,21 @@ namespace BuildBuild.Editor
 
                 // ---- Bo phao 2026-10-05: so TAM Claude de xuat theo the giao viec (docs/giao-viec/asset-phao.md muc 4)
                 // va mechanics.md cua ban art, CHUA can. muzzle do tu idle-1 (mep nong trai / dinh), art-px / 100.
-                CannonDef("Net", "cannon_net", "Pháo Lưới", "icon-cannon-net", "CannonNet", c =>
+                CannonDef("Net", "cannon_net", "Net Cannon", "icon-cannon-net", "CannonNet", c =>
                 {
                     c.damage = 6f; c.fireRate = 0.5f; c.range = 7f; c.aoeRadius = 0.8f;
                     c.rootDuration = 1.5f; c.rootFrames = Frames(ArtRoot + "CannonNet/net-status", "status");
                     c.projectileSpeed = 10f; c.projectileScale = 0.8f; c.impactScale = 1f;
                     c.muzzle = new Vector2(-0.33f, 0.46f);
                 }),
-                CannonDef("Mortar", "cannon_mortar", "Pháo Cối", "icon-cannon-mortar", "CannonMortar", c =>
+                CannonDef("Mortar", "cannon_mortar", "Mortar Cannon", "icon-cannon-mortar", "CannonMortar", c =>
                 {
                     c.damage = 26f; c.fireRate = 0.4f; c.range = 11f; c.aoeRadius = 1.6f;
                     c.arcHeight = 2.5f; c.targetMarkFrames = Frames(ArtRoot + "CannonMortar/target-mark", "target-mark");
                     c.projectileSpeed = 8f; c.projectileScale = 0.6f; c.impactScale = 1.4f;
                     c.muzzle = new Vector2(-0.08f, 0.7f);
                 }),
-                CannonDef("Tesla", "cannon_tesla", "Tháp Sét", "icon-cannon-tesla", "CannonTesla", c =>
+                CannonDef("Tesla", "cannon_tesla", "Lightning Tower", "icon-cannon-tesla", "CannonTesla", c =>
                 {
                     c.damage = 14f; c.fireRate = 0.8f; c.range = 6.5f;
                     c.fire = CannonFire.Chain; c.chainCount = 3; c.chainRange = 2.5f;
@@ -1675,19 +1677,19 @@ namespace BuildBuild.Editor
                     c.impactScale = 0.8f;
                     c.muzzle = new Vector2(0f, 0.62f);
                 }),
-                CannonDef("Siege", "cannon_siege", "Đại Bác Công Thành", "icon-cannon-siege", "CannonSiege", c =>
+                CannonDef("Siege", "cannon_siege", "Siege Cannon", "icon-cannon-siege", "CannonSiege", c =>
                 {
                     c.damage = 90f; c.fireRate = 0.2f; c.range = 9f; c.aoeRadius = 0.6f; c.bigTargetMultiplier = 2f;
                     c.projectileSpeed = 11f; c.projectileScale = 0.8f; c.impactScale = 1.4f;
                     c.muzzle = new Vector2(-0.54f, 0.6f);
                 }),
-                CannonDef("Gatling", "cannon_gatling", "Gatling Tự Động", "icon-cannon-gatling", "CannonGatling", c =>
+                CannonDef("Gatling", "cannon_gatling", "Automatic Gatling", "icon-cannon-gatling", "CannonGatling", c =>
                 {
                     c.damage = 5f; c.fireRate = 2f; c.range = 7f; c.spinUpSeconds = 3f; c.spinUpMultiplier = 3f;
                     c.projectileSpeed = 18f; c.projectileScale = 0.5f; c.impactScale = 0.6f;
                     c.muzzle = new Vector2(-0.41f, 0.37f);
                 }),
-                CannonDef("Longgun", "cannon_longgun", "Hoả Mai Thành", "icon-cannon-longgun", "CannonLonggun", c =>
+                CannonDef("Longgun", "cannon_longgun", "Castle Musket", "icon-cannon-longgun", "CannonLonggun", c =>
                 {
                     c.damage = 100f; c.fireRate = 0.25f; c.range = 10f; c.targetHighestHealth = true;
                     c.aimMarkFrames = Frames(ArtRoot + "CannonLonggun/target-mark", "target-mark");
@@ -1695,7 +1697,7 @@ namespace BuildBuild.Editor
                     c.projectileSpeed = 30f; c.projectileScale = 0.6f; c.impactScale = 0.8f;
                     c.muzzle = new Vector2(-0.61f, 0.42f);
                 }),
-                CannonDef("Sonic", "cannon_sonic", "Pháo Âm Thanh", "icon-cannon-sonic", "CannonSonic", c =>
+                CannonDef("Sonic", "cannon_sonic", "Sonic Cannon", "icon-cannon-sonic", "CannonSonic", c =>
                 {
                     c.damage = 20f; c.fireRate = 1f; c.range = 4.5f;
                     c.fire = CannonFire.Cone; c.coneAngle = 60f; c.burstEvery = 4; c.burstDamageMultiplier = 1.75f;
@@ -1704,7 +1706,7 @@ namespace BuildBuild.Editor
                     c.burstImpactFrames = Frames(ArtRoot + "CannonSonic/hit-shock", "hit");
                     c.muzzle = new Vector2(-0.34f, 0.58f);
                 }, impact: "hit-normal", impactPrefix: "hit", skill: "attack-shock"),
-                CannonDef("Void", "cannon_void", "Pháo Hắc Tinh", "icon-cannon-void", "CannonVoid", c =>
+                CannonDef("Void", "cannon_void", "Dark Star Cannon", "icon-cannon-void", "CannonVoid", c =>
                 {
                     c.damage = 100f; c.fireRate = 0.1f; c.range = 8f; c.aoeRadius = 1.6f;
                     c.fire = CannonFire.Vortex; c.vortexSeconds = 1.5f; c.vortexStackBonus = 0.15f; c.vortexMaxStacks = 5;
@@ -1922,22 +1924,24 @@ namespace BuildBuild.Editor
             SetRef(hud, "goldText", GoldPill(canvas));
             // Cot nut dieu huong duoi o vang: Trieu hoi / Doi quan / Chinh Phat, cung co 280 (du cho "Roi Chinh Phat" canh icon), cach deu 16 px.
             // Ruong AFK la vat pham nhan thuong chu khong phai nut man hinh -> dat DUOI ca cot, khong chen giua.
-            var gachaButton = MakeButton("GachaButton", canvas, "Triệu hồi", TopRight, new Vector2(-24, -92), new Vector2(280, 72), out var gachaLabel);
+            var gachaButton = MakeButton("GachaButton", canvas, "Summon", TopRight, new Vector2(-24, -92), new Vector2(280, 72), out var gachaLabel);
             DecorateButton(gachaButton, gachaLabel, "icons/icon-shard");
             SetRef(hud, "gachaButton", gachaButton);
-            var unitsButton = MakeButton("UnitsButton", canvas, "Đội quân", TopRight, new Vector2(-24, -180), new Vector2(280, 72), out var unitsLabel);
+            var unitsButton = MakeButton("UnitsButton", canvas, "Roster", TopRight, new Vector2(-24, -180), new Vector2(280, 72), out var unitsLabel);
             DecorateButton(unitsButton, unitsLabel, "icons/icon-tab-hero");
             SetRef(hud, "unitsButton", unitsButton);
             // Chinh Phat: BattleHud doi chu thanh "Roi Chinh Phat" luc dang chuan bi.
-            var conquestButton = MakeButton("ConquestButton", canvas, "Chinh Phạt", TopRight, new Vector2(-24, -268), new Vector2(280, 72), out var conquestLabel);
+            var conquestButton = MakeButton("ConquestButton", canvas, "Conquest", TopRight, new Vector2(-24, -268), new Vector2(280, 72), out var conquestLabel);
             DecorateButton(conquestButton, conquestLabel, "icons/icon-raid");
             SetRef(hud, "conquestButton", conquestButton);
             SetRef(hud, "conquestLabel", conquestLabel);
 
-            // Ruong AFK (GDD muc 8, asset dot 10 `UI/raid/`): sprite 96x72 o x2, duoi cot nut; dong ho tich luy o duoi.
+            // Ruong AFK (GDD muc 8, asset dot 10 `UI/raid/`): sprite 96x72 ve 2 file-px cho 1 art-px, nen hien 1:1
+            // (Native 48x36 = 96x72 px man) moi dung luoi 2 px cua game; o x2 thi 1 art-px = 4 px, to va choi hon
+            // moi icon quanh no (audit 2026-10-12, T4). Duoi cot nut; dong ho tich luy o duoi.
             // Ba hinh (dong / he sang / day tran) do BattleHud doi theo gio da tich. Nut KHONG nen: chi sprite ruong.
             var chestClosed = UiSprite("raid/afk-chest-closed");
-            var chest = Img("AfkChest", canvas, chestClosed, TopRight, new Vector2(-68, -372), Native(96, 72));
+            var chest = Img("AfkChest", canvas, chestClosed, TopRight, new Vector2(-68, -372), Native(48, 36));
             chest.raycastTarget = true;
             var chestButton = chest.gameObject.AddComponent<Button>();
             var chestColors = ColorBlock.defaultColorBlock;
@@ -1955,8 +1959,10 @@ namespace BuildBuild.Editor
             // Dong ho du bi Chinh Phat: cung cho nut Bat dau (nut do an khi dang danh); HeroBoard bat/tat + ghi dem nguoc.
             var reinforce = MakeButton("ReinforceButton", canvas, "", Bottom, new Vector2(0, 48), new Vector2(360, 96), out var reinforceLabel);
             reinforce.transition = Selectable.Transition.SpriteSwap;
-            reinforce.spriteState = new SpriteState { disabledSprite = UiSprite("chrome/btn-disabled") };
-            reinforceLabel.fontSize = 26;
+            var reinforceState = reinforce.spriteState;   // giu sprite nhan cua MakeButton
+            reinforceState.disabledSprite = UiSprite("chrome/btn-disabled");
+            reinforce.spriteState = reinforceState;
+            reinforceLabel.fontSize = PixelFont.Snap(26);
             SetRef(board, "reinforceButton", reinforce);
             SetRef(board, "reinforceLabel", reinforceLabel);
             SetRef(hud, "startLabel", startLabel);
@@ -1998,16 +2004,16 @@ namespace BuildBuild.Editor
             scroll.movementType = ScrollRect.MovementType.Clamped;
             scroll.scrollSensitivity = 30f;
             var titleBar = Img("Title", picker.transform, UiSprite("panels/title-ribbon"), Top, new Vector2(0, 26), new Vector2(360, 64), sliced: true);
-            Label("Value", titleBar.transform, "Chọn hero", 34, Center, Vector2.zero, new Vector2(340, 64));
+            Label("Value", titleBar.transform, "Select Hero", 34, Center, Vector2.zero, new Vector2(340, 64));
 
             var roles = AssetDatabase.LoadAssetAtPath<HeroRoleCatalog>(HeroRoleCatalogPath);
             var roleButtons = new Object[roles.entries.Length + 1];
             float filterLeft = -(roleButtons.Length - 1) * filterStep / 2f;
             for (int i = 0; i < roleButtons.Length; i++)
             {
-                var roleButton = MakeButton(i == 0 ? "RoleAll" : $"Role{roles.entries[i - 1].role}", picker.transform, i == 0 ? "Tất cả" : "",
+                var roleButton = MakeButton(i == 0 ? "RoleAll" : $"Role{roles.entries[i - 1].role}", picker.transform, i == 0 ? "All" : "",
                     Top, new Vector2(filterLeft + i * filterStep, -filterTop), new Vector2(filterSize, filterSize), out var roleLabel, UiSprite("chrome/btn-round"));
-                roleLabel.fontSize = 16;
+                roleLabel.fontSize = PixelFont.Snap(16);
                 if (i > 0) Img("Icon", roleButton.transform, roles.entries[i - 1].icon, Center, Vector2.zero, new Vector2(46, 46));
                 roleButtons[i] = roleButton;
             }
@@ -2051,7 +2057,7 @@ namespace BuildBuild.Editor
                 heroButtons[i] = row;
                 skillSlots[i] = hasSkill ? slot : null;
             }
-            var cancel = MakeButton("Cancel", picker.transform, "Huỷ", Bottom, new Vector2(0, 24), new Vector2(200, 72), out _);
+            var cancel = MakeButton("Cancel", picker.transform, "Cancel", Bottom, new Vector2(0, 24), new Vector2(200, 72), out _);
             SetRef(board, "pickerPanel", picker.gameObject);
             SetRefs(board, "roster", roster);
             SetRefs(board, "rosterButtons", heroButtons);
@@ -2144,7 +2150,7 @@ namespace BuildBuild.Editor
             grid.cellSize = new Vector2(92, 110);
             grid.spacing = new Vector2(4, 0);
             grid.childAlignment = TextAnchor.MiddleLeft;
-            var empty = Label("Empty", body.transform, "Không có hiệu ứng", 22, MidLeft, new Vector2(760, 0), new Vector2(680, 40));
+            var empty = Label("Empty", body.transform, "No Effects", 22, MidLeft, new Vector2(760, 0), new Vector2(680, 40));
             empty.alignment = TextAnchor.MiddleLeft;
             empty.color = new Color(0.75f, 0.75f, 0.75f);
 
@@ -2224,11 +2230,11 @@ namespace BuildBuild.Editor
             var dropText = Label("Value", drop.transform, "", 22, Bottom, new Vector2(0, 2), new Vector2(128, 44));
 
             var hint = Label("Hint", panel.transform, "", 26, Center, new Vector2(0, -70), new Vector2(660, 40));
-            var stats = MakeButton("Stats", panel.transform, "Thống kê", Bottom, new Vector2(-150, 26), new Vector2(260, 76), out var statsLabel);
+            var stats = MakeButton("Stats", panel.transform, "Stats", Bottom, new Vector2(-150, 26), new Vector2(260, 76), out var statsLabel);
             var statsIcon = Img("Icon", stats.transform, UiSprite("icons/icon-stats"), MidLeft, new Vector2(30, 0), new Vector2(30, 30));
             statsIcon.gameObject.SetActive(statsIcon.sprite != null);
             statsLabel.rectTransform.anchoredPosition += new Vector2(16, 0);
-            var close = MakeButton("Close", panel.transform, "Tiếp tục", Bottom, new Vector2(150, 26), new Vector2(260, 76), out _);
+            var close = MakeButton("Close", panel.transform, "Continue", Bottom, new Vector2(150, 26), new Vector2(260, 76), out _);
 
             SetRef(popup, "root", body.gameObject);
             SetRef(popup, "dim", dim.gameObject);
@@ -2263,14 +2269,14 @@ namespace BuildBuild.Editor
             dim.raycastTarget = true;
             var body = Img("Body", rootRect, UiSprite("panels/panel-result"), Center, Vector2.zero, new Vector2(1100, 700), sliced: true);
             body.raycastTarget = true;   // ScrollRect nam tren Body: can raycast moi keo cuon duoc
-            var title = Label("Title", body.transform, "Đóng góp", 40, Top, new Vector2(0, -46), new Vector2(800, 56));
+            var title = Label("Title", body.transform, "Contribution", 40, Top, new Vector2(0, -46), new Vector2(800, 56));
             var closeImage = Img("Close", body.transform, UiSprite("chrome/btn-close"), TopRight, new Vector2(-24, -24), new Vector2(64, 64));
             closeImage.raycastTarget = true;
             var close = closeImage.gameObject.AddComponent<Button>();
             // Tab phe: chi hien o tran Chinh Phat (ContributionPanel bat / tat).
-            var allyTab = MakeButton("AllyTab", body.transform, "Phe ta", TopLeft, new Vector2(24, -24), new Vector2(150, 56), out var allyLabel);
-            var enemyTab = MakeButton("EnemyTab", body.transform, "Phe địch", TopLeft, new Vector2(184, -24), new Vector2(150, 56), out var enemyLabel);
-            allyLabel.fontSize = enemyLabel.fontSize = 26;
+            var allyTab = MakeButton("AllyTab", body.transform, "Allies", TopLeft, new Vector2(24, -24), new Vector2(150, 56), out var allyLabel);
+            var enemyTab = MakeButton("EnemyTab", body.transform, "Enemies", TopLeft, new Vector2(184, -24), new Vector2(150, 56), out var enemyLabel);
+            allyLabel.fontSize = enemyLabel.fontSize = PixelFont.Snap(26);
             var viewport = Rect("Viewport", body.transform, Center, new Vector2(0, -42), new Vector2(1030, 540));
             viewport.gameObject.AddComponent<RectMask2D>();
             var content = Rect("Content", viewport, Top, Vector2.zero, new Vector2(1030, 76));
@@ -2440,7 +2446,7 @@ namespace BuildBuild.Editor
             var picker = Img("SoldierPicker", canvas, UiSprite("panels/panel-hero"), Center, new Vector2(0, 60), new Vector2(680, height), sliced: true);
             picker.raycastTarget = true;
             var titleBar = Img("Title", picker.transform, UiSprite("panels/title-ribbon"), Top, new Vector2(0, 26), new Vector2(360, 64), sliced: true);
-            Label("Value", titleBar.transform, "Chọn lính", 34, Center, Vector2.zero, new Vector2(340, 64));
+            Label("Value", titleBar.transform, "Select Soldier", 34, Center, Vector2.zero, new Vector2(340, 64));
 
             var buttons = new Object[roster.Length];
             var levels = new Object[roster.Length];
@@ -2461,7 +2467,7 @@ namespace BuildBuild.Editor
                 levels[i] = PickerProgress(row.transform, stars, i);
                 buttons[i] = row;
             }
-            var cancel = MakeButton("Cancel", picker.transform, "Huỷ", Bottom, new Vector2(0, 24), new Vector2(200, 72), out _);
+            var cancel = MakeButton("Cancel", picker.transform, "Cancel", Bottom, new Vector2(0, 24), new Vector2(200, 72), out _);
 
             SetRef(board, "pickerPanel", picker.gameObject);
             SetRefs(board, "rosterButtons", buttons);
@@ -2513,7 +2519,9 @@ namespace BuildBuild.Editor
 
         static HeroSlot[] BuildHeroSlots(HeroBoard board)
         {
-            var sprite = UiSprite("hud/hud-dropzone-edge");
+            // Mang dat chu khong phai khung net dut vang: o hero la CHO DAT tren san, khong phai gizmo
+            // (audit 2026-10-12, T4). O SUNG (BuildSoldierPosts) va be phao van dung khung cu.
+            var sprite = UiSprite("hud/hud-slot-ground");
             var root = new GameObject("HeroSlots").transform;
             var slots = new HeroSlot[SlotRowsPx.Length * SlotColumnsPx.Length];
             int i = 0;
@@ -2593,12 +2601,15 @@ namespace BuildBuild.Editor
         const float CastleWallPx = 560f;
         const float CastleBasePx = 830f;
         const float CastleHeightPx = 720f;
-        // Phao displayScale 1,4 (chinh cho fortress cu) to hon mat thap cua thanh moi (74-111 px tren man, cap 3 hai be
-        // cach nhau chi 115 px -> phao 144 px de len nhau, Play 2026-10-05). Scale tung be = be rong mat be / 100, kep 0,6-1.
+        // Phao displayScale 1,4 (chinh cho fortress cu) to hon mat thap cua thanh moi. Scale tung be nay la HANG SO
+        // `CannonMountScale` (0,55) o `BuildCastleTiers` — KHONG con tinh theo be rong gò tung cai: gò do lai theo
+        // luat "mat di duoc o nua PHAI thanh" rong 55-151 px o co game, tinh rieng tung gò thi phao ra 0,35-1,16
+        // (nguoi dung bao "scale khong deu" 2026-10-10).
         const float CannonPadRefPx = 100f;
+        const float CannonMinMountScale = 0.35f;
         static readonly (string name, float hp, int cost, int unlock)[] CastleTierStats =
         {
-            ("Đồn Đá Biên", 2000f, 0, 0), ("Thành Đá Lam", 3000f, 3000, 10), ("Thành Ấn Rune", 4500f, 8000, 20),
+            ("Border Outpost", 2000f, 0, 0), ("Bluestone Fortress", 3000f, 3000, 10), ("Rune Citadel", 4500f, 8000, 20),
         };
 
         [Serializable] class MountPad { public float x, y, platform_w, platform_h; }
@@ -2611,6 +2622,12 @@ namespace BuildBuild.Editor
             string json = File.ReadAllText(ArtRoot + "Castle/mounts-tiers.json");
             var data = JsonUtility.FromJson<MountTiers>(json);
             var tiers = new Castle.Tier[data.tiers.Length];
+            // MOT scale cho MOI be o MOI cap (nguoi dung 2026-10-10: "phao gio scale khong deu"). Truoc day
+            // scale tinh theo be rong tung gò nen ra 0,35-1,16 tuy gò: be rong gò cua bo art nay lech 55-151 px
+            // o co game (xem qc-uniform-22.json). Art phao rong 128-144 px, `displayScale` 1,4 -> o scale 1
+            // phao rong ~179 px, nen 0,55 cho phao ~98 px: vua tren gò cap 1 (124-151 px), choem nhe tren gò
+            // cap 3 (55-85 px) — chap nhan duoc, va muon to hon nua thi phai SINH LAI art (brief castle-pad-g5.md).
+            const float CannonMountScale = 0.55f;
             int maxMounts = 0;
             for (int t = 0; t < tiers.Length; t++)
             {
@@ -2634,7 +2651,7 @@ namespace BuildBuild.Editor
                     // Body sprite import PPU 100 nhu fortress; FortressScale cu la scale tren chinh sprite do.
                     bodyScale = scale * (intact.pixelsPerUnit / Ppu),
                     mounts = src.mounts.Select(m => PxToWorld(leftPx + m.x * scale, topPx + m.y * scale) - castle.position).ToArray(),
-                    mountScales = src.mounts.Select(m => Mathf.Clamp(m.platform_w * scale / CannonPadRefPx, 0.6f, 1f)).ToArray(),
+                    mountScales = src.mounts.Select(_ => CannonMountScale).ToArray(),
                 };
                 maxMounts = Mathf.Max(maxMounts, src.mounts.Length);
             }
@@ -2691,8 +2708,10 @@ namespace BuildBuild.Editor
         {
             var button = MakeButton("CastleUpgradeButton", canvas, "", TopLeft, new Vector2(24, -110), new Vector2(380, 72), out label);
             button.transition = Selectable.Transition.SpriteSwap;
-            button.spriteState = new SpriteState { disabledSprite = UiSprite("chrome/btn-disabled") };
-            label.fontSize = 26;
+            var buttonState = button.spriteState;   // giu sprite nhan cua MakeButton
+            buttonState.disabledSprite = UiSprite("chrome/btn-disabled");
+            button.spriteState = buttonState;
+            label.fontSize = PixelFont.Snap(26);
             // Ve ngay tren thanh mau lau dai, duoi moi bang/popup dung truoc do (bang ket qua, ban do Chinh Phat...).
             var hp = canvas.Find("CastleHp");
             if (hp != null) button.transform.SetSiblingIndex(hp.GetSiblingIndex() + 1);
@@ -2716,7 +2735,7 @@ namespace BuildBuild.Editor
             var body = Img("Body", root, UiSprite("panels/panel-hero"), Center, new Vector2(0, 20), new Vector2(960, 640), sliced: true);
             body.raycastTarget = true;
             var titleBar = Img("Title", body.transform, UiSprite("panels/title-ribbon"), Top, new Vector2(0, 26), new Vector2(420, 64), sliced: true);
-            Label("Value", titleBar.transform, "Nâng cấp thành", 34, Center, Vector2.zero, new Vector2(400, 64));
+            Label("Value", titleBar.transform, "Upgrade Castle", 34, Center, Vector2.zero, new Vector2(400, 64));
             var closeImage = Img("Close", body.transform, UiSprite("chrome/btn-close"), TopRight, new Vector2(-14, -14), new Vector2(52, 52));
             closeImage.raycastTarget = true;
             var close = closeImage.gameObject.AddComponent<Button>();
@@ -2747,8 +2766,8 @@ namespace BuildBuild.Editor
                 value.color = new Color(1f, 0.94f, 0.7f);
                 return value;
             }
-            var health = StatRow("Health", "icons/icon-hp", "Máu thành", -404);
-            var mountCount = StatRow("Mounts", "icons/icon-cannon-blast", "Bệ pháo", -458);
+            var health = StatRow("Health", "icons/icon-hp", "Castle HP", -404);
+            var mountCount = StatRow("Mounts", "icons/icon-cannon-blast", "Cannon Mounts", -458);
             var condition = Label("Condition", body.transform, "", 24, Top, new Vector2(0, -518), new Vector2(640, 36));
 
             var upgrade = MakeButton("Upgrade", body.transform, "", Bottom, new Vector2(0, -38), new Vector2(340, 80), out var upgradeLabel);
@@ -2790,7 +2809,7 @@ namespace BuildBuild.Editor
             var picker = Img("CannonPicker", canvas, UiSprite("panels/panel-hero"), Center, new Vector2(0, 40), new Vector2(1300, height), sliced: true);
             picker.raycastTarget = true;
             var titleBar = Img("Title", picker.transform, UiSprite("panels/title-ribbon"), Top, new Vector2(0, 26), new Vector2(360, 64), sliced: true);
-            Label("Value", titleBar.transform, "Chọn pháo", 34, Center, Vector2.zero, new Vector2(340, 64));
+            Label("Value", titleBar.transform, "Select Cannon", 34, Center, Vector2.zero, new Vector2(340, 64));
 
             var buttons = new Object[roster.Length];
             var infos = new Object[roster.Length];
@@ -2818,7 +2837,7 @@ namespace BuildBuild.Editor
                 buttons[i] = row;
                 infos[i] = info;
             }
-            var cancel = MakeButton("Cancel", picker.transform, "Huỷ", Bottom, new Vector2(0, 24), new Vector2(200, 72), out _);
+            var cancel = MakeButton("Cancel", picker.transform, "Cancel", Bottom, new Vector2(0, 24), new Vector2(200, 72), out _);
 
             SetRef(board, "pickerPanel", picker.gameObject);
             SetRefs(board, "roster", roster);
@@ -2837,7 +2856,7 @@ namespace BuildBuild.Editor
             var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
             config = AssetDatabase.LoadAssetAtPath<GachaConfig>(DataDir + "/GachaConfig.asset");   // ly do: xem BuildBattleScene
             // Font built-in cung thanh fake null sau NewScene thu hai -> moi Text cua Gacha luu `m_Font: {fileID: 0}`, khong hien chu.
-            _font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            _font = PixelFont.Asset;
             CreateCamera(new Color(0.10f, 0.07f, 0.16f));
             var economy = new GameObject("Game").AddComponent<Economy>();
             CreateEventSystem();
@@ -2857,12 +2876,12 @@ namespace BuildBuild.Editor
                 Stretch(bg.rectTransform, 0, 0, 0, 0);
             }
 
-            SetRef(screen, "titleText", Label("Title", canvas, "Triệu hồi", 56, Center, new Vector2(0, -24), new Vector2(800, 80), Top));
-            SetRef(screen, "backButton", MakeButton("BackButton", canvas, "Quay lại", TopLeft, new Vector2(24, -24), new Vector2(200, 72), out _));
+            SetRef(screen, "titleText", Label("Title", canvas, "Summon", 56, Center, new Vector2(0, -24), new Vector2(800, 80), Top));
+            SetRef(screen, "backButton", MakeButton("BackButton", canvas, "Back", TopLeft, new Vector2(24, -24), new Vector2(200, 72), out _));
             SetRef(screen, "goldText", GoldPill(canvas));
 
             var info = Img("Info", canvas, UiSprite("chrome/panel-wood"), Top, new Vector2(0, -120), new Vector2(1100, 120), sliced: true);
-            SetRef(screen, "ratesText", Label("Rates", info.transform, "", 30, Center, new Vector2(0, -14), new Vector2(1060, 44), Top));
+            SetRef(screen, "ratesText", Label("Rates", info.transform, "", 20, Center, new Vector2(0, -14), new Vector2(1060, 44), Top));
             SetRef(screen, "pityText", Label("Pity", info.transform, "", 26, Center, new Vector2(0, 14), new Vector2(1060, 44), Bottom));
 
             // 4 tab banner giua bang ti le va luoi ket qua; nhan tab do GachaScreen ghi.
@@ -2914,6 +2933,11 @@ namespace BuildBuild.Editor
             { "Bonecaller", HeroRole.Support }, { "Banneret", HeroRole.Support }, { "LuuBi", HeroRole.Support },
             { "SigilMage", HeroRole.Support }, { "KoboldTrapper", HeroRole.Support }, { "Soulbinder", HeroRole.Support },
             { "BellNun", HeroRole.Support },
+            { "GourdTaoist", HeroRole.Support }, { "KhoiLoiSu", HeroRole.Support },
+            { "BlackSigilHunter", HeroRole.Archer }, { "MoonHare", HeroRole.Archer },
+            { "InkScribe", HeroRole.Mage }, { "HongLien", HeroRole.Mage },
+            { "SaVe", HeroRole.Tank }, { "Werewolf", HeroRole.Melee },
+            { "HauNghe", HeroRole.Archer }, { "BachLocTien", HeroRole.Healer },
             { "Vespera", HeroRole.Healer },
         };
 
@@ -2937,12 +2961,12 @@ namespace BuildBuild.Editor
                 new HeroRoleCatalog.Entry { role = role, displayName = name, icon = UiSprite($"icons/icon-role-{icon}") };
             catalog.entries = new[]
             {
-                Role(HeroRole.Tank, "Đỡ đòn", "tank"),
-                Role(HeroRole.Melee, "Cận chiến", "melee"),
-                Role(HeroRole.Archer, "Xạ thủ", "archer"),
-                Role(HeroRole.Mage, "Pháp sư", "mage"),
-                Role(HeroRole.Support, "Hỗ trợ", "support"),
-                Role(HeroRole.Healer, "Hồi máu", "healer"),
+                Role(HeroRole.Tank, "Tank", "tank"),
+                Role(HeroRole.Melee, "Melee", "melee"),
+                Role(HeroRole.Archer, "Ranged", "archer"),
+                Role(HeroRole.Mage, "Mage", "mage"),
+                Role(HeroRole.Support, "Support", "support"),
+                Role(HeroRole.Healer, "Heal", "healer"),
             };
             EditorUtility.SetDirty(catalog);
         }
@@ -2951,87 +2975,87 @@ namespace BuildBuild.Editor
         {
             var texts = new Dictionary<string, (string ult, string passive, string minor, string minor2)>
             {
-                ["mage_elemental"] = ("Vùng Băng: đặt vùng băng tại cụm quái đông nhất, tồn tại vài giây.",
-                    "Vỡ Băng: quái đang bị làm chậm chết trong tầm thì nổ mảnh băng — quái quanh xác ăn 50% sát thương đòn thường.", null, null),
-                ["cragfist"] = ("Hoá Đá: bất động + miễn sát thương vài giây, phản lại một phần sát thương nhận.",
-                    "Khiêu Khích: quái đứng gần Người đá bỏ hero khác, quay sang đánh ông (khi ông còn chỗ giữ).", null, null),
-                ["knight"] = ("Chém Quạt: một nhát chém quạt dài trước mặt, sát thương gấp nhiều lần đòn thường.",
-                    "Truy Kích: đòn thường vào quái dưới 30% máu +50% sát thương.", null, null),
-                ["archer"] = ("Bắn Nhanh Liên Hoàn: tăng mạnh tốc đánh trong vài giây.",
-                    "Nhắm Yếu Điểm: cứ phát thứ 4 là chí mạng, gấp đôi sát thương.", null, null),
-                ["vespera"] = ("Đèn Canh: đặt vòng sáng quanh đồng minh thấp máu nhất — hero trong vòng được hồi máu và nhận một khiên nhỏ vài giây.",
-                    "Cứu Nguy: đồng minh dưới 30% máu được hồi thêm 50%.", null, null),
+                ["mage_elemental"] = ("Frost Zone: place an ice zone at the largest Enemy group, lasting a few seconds.",
+                    "Ice Shatter: when an Enemy suffering Slow dies in Range, ice Shards explode — Enemies around the corpse take 50% basic Hit Damage.", null, null),
+                ["cragfist"] = ("Stone Form: become immobile + Invulnerable for a few seconds, reflecting part of the Damage taken.",
+                    "Enemy Taunt: Enemies near Nguoi Da abandon other heroes and Attack him (while he has room to block).", null, null),
+                ["knight"] = ("Fan Slash: a long fan-shaped slash in front, dealing several times basic Hit Damage.",
+                    "Enemy Pursuit: basic Hits against Enemies below 30% HP deal +50% Damage.", null, null),
+                ["archer"] = ("Rapid Fire: greatly increase Attack Speed for a few seconds.",
+                    "Weakpoint Aim: every 4th shot is a Crit, dealing double Damage.", null, null),
+                ["vespera"] = ("Watch Lantern: place a light ring around the ally with the lowest HP — heroes inside Heal and gain a small Shield for a few seconds.",
+                    "Emergency Rescue: allies below 30% HP receive 50% more Heal.", null, null),
                 ["mage_summoner"] = (
-                    "Gọi Kỵ Sĩ Tử Thần; kỵ sĩ còn sống thì hồi đầy máu cho nó. Lính xương gần kỵ sĩ được tăng công + tốc đánh.",
-                    "Dựng Xác: quái chết gần pháp sư có tỉ lệ đứng dậy thành lính xương.",
-                    "Vòng Ấn Ký: vòng trên đất tại cụm quái, sát thương thấp + ấn ký; quái chết khi còn ấn ký chắc chắn thành lính xương.",
+                    "Summon Ky Si Tu Than; if the knight is alive, Heal it to full HP. Linh Xuong near the knight gain Attack + Attack Speed.",
+                    "Corpse Raising: Enemies dying near the mage have a chance to rise as Linh Xuong.",
+                    "Seal Ring: a ground ring at an Enemy group deals low Damage + a seal; Enemies dying while sealed always become Linh Xuong.",
                     null),
                 ["chainwarden"] = (
-                    "Ném Móc: kéo quái bắn xa về sát mình + choáng, rồi Cuồng Nộ VĨNH VIỄN tới khi gục — hai xích dài, tăng công/tốc đánh, giảm sát thương nhận, hút máu.",
-                    "Cái Ngục: giữ tối đa 4 quái; quái đang bị giữ nhận +20% sát thương từ mọi nguồn.",
-                    "Quét Xích: quay xích quanh mình, sát thương thấp + trói (Cuồng Nộ: Lốc Xích 360°).",
-                    "Giật Xích: đang giữ từ 2 quái thì giật mạnh — mỗi quái bị giữ ăn sát thương tăng theo số quái bị giật + choáng 1s (Cuồng Nộ: kéo thêm mọi quái trong tầm xích)."),
+                    "Hook Throw: pull a ranged Enemy close + Stun, then enter PERMANENT Berserk until death — two long chains, increased Attack/Attack Speed, reduced Damage taken, lifesteal.",
+                    "Enemy Prison: hold up to 4 Enemies; held Enemies take +20% Damage from all sources.",
+                    "Chain Sweep: spin chains around self, dealing low Damage + Root (Berserk: Chain Cyclone 360°).",
+                    "Chain Yank: while holding at least 2 Enemies, yank hard — each held Enemy takes Damage scaling with the number yanked + Stun for 1s (Berserk: also pull all Enemies within chain Range)."),
                 ["banneret"] = (
-                    "Hiệu Lệnh Xung Phong: cả đội trên sân +30% sát thương trong 6s.",
-                    "Quân Kỳ: đồng minh quanh Kỳ Thủ +15% tốc đánh.",
-                    "Cắm Cờ: có đồng minh đang đánh gần thì cắm cờ tại chỗ — đồng minh trong vùng nhận ít hơn 25% sát thương trong 5s.",
+                    "Charge Command: the whole team on the field gains +30% Damage for 6s.",
+                    "War Banner: allies around Ky Thu gain +15% Attack Speed.",
+                    "Banner Planting: if an ally is fighting nearby, plant a banner in place — allies in the zone take 25% less Damage for 5s.",
                     null),
                 ["wukong"] = (
-                    "Như Ý Thiên Trụ: gậy khổng lồ dập nằm ngang xuống cụm quái đông nhất — sát thương lớn theo vệt dài, choáng 1,5s, vết nứt làm chậm 3s; mỗi phân thân dập gậy nhỏ 30%.",
-                    "Thế Thân · Lông Về Thân: lần đầu hết máu mỗi wave, một phân thân thành bản thể (40% máu); mỗi phân thân tan hồi 8% máu; hút máu 10%.",
-                    "Nhổ Lông Phân Thân: thổi ra 2 phân thân sống 8s (40% công/máu), tự đánh, mỗi con chặn 3 quái.",
-                    "Toàn Phong Côn: xoay gậy 3s — đánh quanh mình, chặn và bật ngược đạn; mỗi quái trúng hồi 3% máu (trần 25%)."),
+                    "Heavenly Staff Pillar: a giant staff slams horizontally onto the largest Enemy group — high Damage along a long strip, Stun for 1,5s, the crack applies Slow for 3s; each clone slams a small staff for 30%.",
+                    "Body Substitute · Returning Hairs: the first time HP runs out each Wave, a clone becomes the real body (40% HP); each fading clone Heals 8% HP; lifesteal 10%.",
+                    "Hair Clone Summon: blow out 2 clones lasting 8s (40% Attack/HP), attacking independently, each blocking 3 Enemies.",
+                    "Whirlwind Staff: spin the staff for 3s — Hit around self, block and reflect projectiles; each Enemy Hit Heals 3% HP (cap 25%)."),
                 ["stormcaller"] = (
-                    "Lôi Bạo: 5 cột sét giáng xuống chỗ quái đứng trong tầm — mỗi cột sát thương lớn + choáng 0,5s.",
-                    "Quá Tải: mỗi tia sét trúng quái +1 tầng điện, đủ 3 thì nổ (+60% sát thương, choáng 0,3s). Quái đang choáng ăn +35% sét; sét vào khiên ×2.",
-                    "Cột Thu Lôi: cắm cột đồng giữa đám quái 6s, mỗi giây giật quái kề cột; Xích Lôi nảy qua cột +2 lần nảy, không giảm sát thương.",
-                    "Lôi Bộ: quái áp sát thì hoá tia sét lùi 2 ô, chỗ cũ nổ choáng 0,5s."),
+                    "Thunder Burst: 5 lightning pillars strike Enemy positions in Range — each deals high Damage + Stun for 0,5s.",
+                    "Electric Overload: each lightning Hit on an Enemy adds +1 electric Stack; 3 Stacks explode (+60% Damage, Stun for 0,3s). Stunned Enemies take +35% lightning Damage; lightning on Shields deals ×2.",
+                    "Lightning Rod: plant a copper rod among Enemies for 6s, shocking nearby Enemies each second; Chain Lightning bouncing through the rod gains +2 bounces with no Damage reduction.",
+                    "Lightning Step: when an Enemy closes in, turn into lightning and retreat 2 slots; the old position explodes with Stun for 0,5s."),
                 ["galemonk"] = (
-                    "Long Quyển: lốc xoáy ở cụm quái đông nhất — hút quái bán kính 2,5 về tâm, giữ 3s, sát thương mỗi giây (boss không bị hút).",
-                    "Thuận Phong: quái bị gió đẩy/hút chậm 20% trong 2s.",
-                    "Phong Tảo: chưởng thẳng dọc lane, xuyên cả hàng, đẩy lùi 1,5 ô (tinh anh/boss không bị đẩy).",
+                    "Wind Cyclone: a tornado at the largest Enemy group — pull Enemies within radius 2,5 to the center, hold for 3s, deal Damage each second (Bosses immune to pull).",
+                    "Following Wind: Enemies pushed/pulled by wind suffer 20% Slow for 2s.",
+                    "Wind Sweep: strike straight along the lane, piercing the entire line, Knockback 1,5 slots (elites/Bosses immune to Knockback).",
                     null),
                 ["luubi"] = (
-                    "Đào Viên Kết Nghĩa: hoa đào rơi khắp sân — mọi đồng minh hồi 25% máu + 30% công 6s; anh em kết nghĩa +2 mana.",
-                    "Kết Nghĩa: 2/3 anh em trên sân → +10% công và máu, đủ 3/3 → thêm +25% tốc hồi mana. Nhân Đức: hero quanh Lưu Bị hồi mana +15% (anh em ×2).",
-                    "Ân Đức: đồng minh mất máu nhiều nhất hồi 15% máu tối đa + giải choáng, trói, chậm.",
-                    "Đồng Sinh Cộng Tử: anh em kết nghĩa ngã xuống lần đầu mỗi wave được dải lụa đào kéo dậy sau 1s với 30% máu + 2s bất tử."),
+                    "Peach Garden Oath: peach blossoms fall across the field — all allies Heal 25% HP + gain 30% Attack for 6s; sworn brothers gain +2 Mana.",
+                    "Brotherhood Oath: 2/3 brothers on the field → +10% Attack and HP; all 3/3 → an extra +25% Mana regeneration. Benevolent Heart: heroes around Luu Bi gain +15% Mana regeneration (brothers ×2).",
+                    "Benevolent Grace: the ally missing the most HP Heals 15% max HP + removes Stun, Root and Slow.",
+                    "Shared Life: the first sworn brother to fall each Wave is raised by peach silk after 1s with 30% HP + Invulnerable for 2s."),
                 ["quanvu"] = (
-                    "Thanh Long Hiện: hồn rồng lục lao dọc lane xuyên mọi quái, sát thương ×5 + thêm theo máu đã mất; mỗi quái bị hạ hoàn 10% mana.",
-                    "Kết Nghĩa (như Lưu Bị). Võ Thánh: đòn thường chém quạt trúng tới 3 quái; mỗi quái bị hạ +1 tầng Uy (+5% công, +2% hút máu, tối đa 6, mất khi hết wave).",
-                    "Thanh Long Yển Nguyệt: sóng đao trăng khuyết bay dọc lane, xuyên quái, ×2 sát thương.",
-                    "Thác Đao Kế: máu dưới 40% → lùi 1 ô giả thua rồi quay lại chém ×3 vào quái đuổi theo (1 lần mỗi wave)."),
+                    "Azure Dragon Manifest: a green dragon spirit charges along the lane through all Enemies, dealing ×5 Damage + extra based on missing HP; each Enemy killed refunds 10% Mana.",
+                    "Brotherhood Oath (as Luu Bi). Martial Saint: basic fan slashes Hit up to 3 Enemies; each Enemy killed grants +1 Might Stack (+5% Attack, +2% lifesteal, up to 6, lost at Wave end).",
+                    "Azure Crescent Blade: a crescent blade wave flies along the lane, piercing Enemies for ×2 Damage.",
+                    "Feigning Retreat: below 40% HP → retreat 1 slot, feign defeat, then return to slash pursuing Enemies for ×3 Damage (1 time per Wave)."),
                 ["truongphi"] = (
-                    "Đương Dương Kiều Hống: dậm chân gầm — quái bán kính 4 ăn ×3, hất lùi + choáng 3s + phá giáp 30%; ông khiêu khích cả vùng, −50% sát thương nhận 6s. Boss chỉ bị chậm + phá giáp.",
-                    "Kết Nghĩa (như Lưu Bị). Vạn Nhân Địch: mỗi quái quanh ông −6% sát thương nhận (tối đa 30%).",
-                    "Bát Xà Mâu: xoay xà mâu nạp lực rồi đâm xuyên 2 ô, quái trúng bị phá giáp 15% trong 4s.",
-                    "Túy Tửu: máu dưới 60% thì tu bầu rượu — hồi 20% máu, miễn choáng, −30% sát thương nhận 5s."),
+                    "Dangyang Bridge Roar: stomp and roar — Enemies within radius 4 take ×3 Damage, Knockback + Stun for 3s + 30% Armor Break; taunt the whole area, take -50% Damage for 6s. Bosses only suffer Slow + Armor Break.",
+                    "Brotherhood Oath (as Luu Bi). Thousand Foe Defiance: each Enemy nearby grants -6% Damage taken (up to 30%).",
+                    "Serpent Spear: spin the serpent spear to charge, then thrust through 2 slots; Enemies Hit suffer 15% Armor Break for 4s.",
+                    "Drunken Wine: below 60% HP, drink from the wine gourd — Heal 20% HP, Stun immunity, -30% Damage taken for 5s."),
                 ["bogwitch"] = (
-                    "Vạc Sương Độc: màn sương độc bán kính 1,3 ở cụm quái đông nhất trong 5s — quái trong sương +1 tầng Độc mỗi giây và nhận thêm 20% sát thương.",
-                    "Ngấm Độc: mỗi giọt độc trúng +1 tầng Độc (tối đa 5), mỗi tầng 2 sát thương/giây, trúng lại làm mới 4s.", null, null),
+                    "Poison Mist Cauldron: a Poison mist of radius 1,3 at the largest Enemy group for 5s — Enemies inside gain +1 Poison Stack each second and take 20% more Damage.",
+                    "Venom Seep: each Poison drop Hit adds +1 Poison Stack (up to 5), each Stack deals 2 Damage/second; another Hit refreshes 4s.", null, null),
                 ["shroomknight"] = (
-                    "Nở Nấm: 3 cây nấm mọc quanh chân, 2s sau nổ bào tử — mỗi cây gây gấp 3 đòn thường cho quái quanh nó.",
-                    "Bào Tử: bị đánh cận chiến thì nhả bào tử, quái quanh mình ăn 4 sát thương (tối đa 2 lần/giây).", null, null),
+                    "Mushroom Bloom: 3 mushrooms grow around the feet, exploding into spores after 2s — each deals 3 times basic Hit Damage to nearby Enemies.",
+                    "Spore Field: melee Hits release spores, dealing 4 Damage to Enemies around self (up to 2 times/second).", null, null),
                 ["tritonguard"] = (
-                    "Xoáy Nước: xoáy nước quanh chân 4s — quái trong xoáy không đánh được và mất máu mỗi giây (tinh anh chỉ −50% sát thương, boss không bị khoá).",
-                    "Thọc Hàng: đòn thường xuyên qua, quái đứng ngay sau mục tiêu ăn 50% sát thương.", null, null),
+                    "Water Whirlpool: a whirlpool around the feet for 4s — Enemies inside cannot Attack and lose HP each second (elites only deal -50% Damage, Bosses immune to Attack Lock).",
+                    "Line Thrust: basic Hits pierce through, dealing 50% Damage to the Enemy directly behind the Target.", null, null),
                 ["emberapprentice"] = (
-                    "Mưa Tàn Lửa: 3 quả cầu lửa rơi quanh cụm quái đông nhất — mỗi quả nổ gây gấp đôi đòn thường + Cháy, để lại vũng lửa 4s.",
-                    "Bén Lửa: đòn thường gây Cháy 3s (5 sát thương/giây); quái đang Cháy mà chết thì lửa nhảy sang quái gần nhất.", null, null),
+                    "Ember Rain: 3 fireballs fall around the largest Enemy group — each explodes for double basic Hit Damage + Burn, leaving a fire pool for 4s.",
+                    "Flame Catch: basic Hits apply Burn for 3s (5 Damage/second); if a Burning Enemy dies, the fire jumps to the nearest Enemy.", null, null),
                 ["runeshield"] = (
-                    "Tường Rune: cắm khiên dựng tường rune 5s trước mặt, phủ hàng của ông và hai hàng kề — chặn đứng quái và đạn quái; ông đứng yên sau khiên.",
-                    "Chắn Đạn: đạn của quái bắn xa trúng ông thì vỡ, không gây sát thương.", null, null),
+                    "Rune Wall: plant a Shield to raise a rune wall in front for 5s, covering his row and two adjacent rows — block Enemies and Enemy projectiles; stand still behind the Shield.",
+                    "Projectile Block: ranged Enemy projectiles shatter on contact, dealing no Damage.", null, null),
                 ["silkfae"] = (
-                    "Múa Rối: giật tơ lên quái nhiều máu nhất trong tầm (trừ boss) — 4s nó quay sang đánh quái phe mình (tinh anh 2s).",
-                    "Dây Rối: quái trúng sợi tơ bị 25% đòn trượt trong 2s.", null, null),
+                    "Puppet Dance: attach silk to the Enemy with the most HP in Range (except Bosses) — it Attacks its own faction for 4s (elites 2s).",
+                    "Puppet Strings: Enemies Hit by silk have a 25% miss chance for 2s.", null, null),
                 ["soldier_warhorn"] = (null,
-                    "Khắc Chế: đòn thường và cú húc vào tinh anh/boss +50% sát thương.",
-                    "Húc: phi xuyên hàng quái, choáng + đẩy lùi mọi quái trên đường.", null),
+                    "Boss Bane: basic Hits and charges against elites/Bosses deal +50% Damage.",
+                    "Horn Charge: charge through the Enemy line, applying Stun + Knockback to all Enemies along the path.", null),
                 ["wyrmspear"] = (
-                    "Long Hoá: biến hình Long Nhân + gọi Bạch Địa Long (Long Giáp, Long Uy, Long Nộ, Long Khế); lần sau: Thiên Địa Long Giáng.",
-                    "Nghịch Lân: đòn vào boss/tinh anh cộng thêm % máu tối đa mục tiêu.",
-                    "Xuyên Long / Thiên Long Liên Thương: đâm xuyên một đường, bỏ qua giáp.",
-                    "Địa Long Chấn (rồng): gai đá quanh rồng — sát thương vùng, choáng, phá giáp."),
+                    "Dragon Transformation: transform into a Dragonkin + Summon Bach Dia Long (Dragon Armor, Dragon Awe, Dragon Rage, Dragon Pact); next cast: Twin Dragon Descent.",
+                    "Reverse Scale: Hits against Bosses/elites add a % of the Target's max HP.",
+                    "Dragon Pierce / Heavenly Dragon Flurry: thrust through a line, ignoring Armor.",
+                    "Earth Dragon Quake (dragon): stone spikes around the dragon — area Damage, Stun, Armor Break."),
             };
             foreach (var hero in LoadAll<HeroDefinition>(DataDir))
             {
@@ -3129,7 +3153,7 @@ namespace BuildBuild.Editor
         {
             var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
             var config = AssetDatabase.LoadAssetAtPath<GachaConfig>(DataDir + "/GachaConfig.asset");
-            _font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");    // ly do: xem BuildGachaScene
+            _font = PixelFont.Asset;    // ly do: xem BuildGachaScene
             CreateCamera(new Color(0.08f, 0.09f, 0.14f));
             var economy = new GameObject("Game").AddComponent<Economy>();
             CreateEventSystem();
@@ -3149,8 +3173,8 @@ namespace BuildBuild.Editor
             var roles = AssetDatabase.LoadAssetAtPath<HeroRoleCatalog>(HeroRoleCatalogPath);
             SetRef(screen, "roles", roles);
 
-            Label("Title", canvas, "Đội quân", 56, Center, new Vector2(0, -24), new Vector2(800, 80), Top);
-            SetRef(screen, "backButton", MakeButton("BackButton", canvas, "Quay lại", TopLeft, new Vector2(24, -24), new Vector2(200, 72), out _));
+            Label("Title", canvas, "Roster", 56, Center, new Vector2(0, -24), new Vector2(800, 80), Top);
+            SetRef(screen, "backButton", MakeButton("BackButton", canvas, "Back", TopLeft, new Vector2(24, -24), new Vector2(200, 72), out _));
             SetRef(screen, "goldText", GoldPill(canvas));
 
             // Tab: UnitsScreen doi sprite tab-normal/tab-active khi chon; icon ben trai chu.
@@ -3177,7 +3201,7 @@ namespace BuildBuild.Editor
             var roleButtons = new Button[roles.entries.Length + 1];
             for (int i = 0; i < roleButtons.Length; i++)
             {
-                roleButtons[i] = MakeButton(i == 0 ? "All" : $"Role{roles.entries[i - 1].role}", roleFilter, i == 0 ? "Tất cả" : "",
+                roleButtons[i] = MakeButton(i == 0 ? "All" : $"Role{roles.entries[i - 1].role}", roleFilter, i == 0 ? "All" : "",
                     TopLeft, new Vector2(i * 104, 0), Native(44, 44), out var roleLabel, UiSprite("chrome/btn-round"));
                 roleLabel.fontSize = 20;
                 if (i > 0) Img("Icon", roleButtons[i].transform, roles.entries[i - 1].icon, Center, Vector2.zero, new Vector2(56, 56));
@@ -3221,8 +3245,8 @@ namespace BuildBuild.Editor
             BuildStatChips(screen, detail.transform);
 
             // Ky nang / Trang bi: nut tron (sprite btn-round / btn-round-active), chu ben phai nut.
-            SetRef(screen, "skillsTab", RoundTab("SkillsTab", detail.transform, "Kỹ năng", new Vector2(40, -436)));
-            SetRef(screen, "gearTab", RoundTab("GearTab", detail.transform, "Trang bị", new Vector2(300, -436)));
+            SetRef(screen, "skillsTab", RoundTab("SkillsTab", detail.transform, "Skills", new Vector2(40, -436)));
+            SetRef(screen, "gearTab", RoundTab("GearTab", detail.transform, "Equipment", new Vector2(300, -436)));
             // Vach ngan (chrome/divider 80x8, 9-slice ngang) giua hai nut tron va noi dung ben duoi, nhu mock dot 5.
             var divider = Img("TabDivider", detail.transform, UiSprite("chrome/divider"), TopLeft, new Vector2(40, -524), new Vector2(920, 16), sliced: true);
             divider.raycastTarget = false;
@@ -3323,7 +3347,7 @@ namespace BuildBuild.Editor
         static void BuildStatChips(UnitsScreen screen, Transform detail)
         {
             var header = Img("StatsHeader", detail, UiSprite("chrome/section-header"), TopLeft, new Vector2(40, -280), new Vector2(920, 40), sliced: true);
-            var title = Label("Title", header.transform, "CHỈ SỐ", 26, MidLeft, new Vector2(20, 0), new Vector2(200, 40));
+            var title = Label("Title", header.transform, "Stats", 26, MidLeft, new Vector2(20, 0), new Vector2(200, 40));
             title.alignment = TextAnchor.MiddleLeft;
             title.color = new Color(1f, 0.94f, 0.7f);
             var note = Label("Note", header.transform, "", 20, MidRight, new Vector2(-16, 0), new Vector2(660, 40));
@@ -3370,7 +3394,7 @@ namespace BuildBuild.Editor
             text.rectTransform.sizeDelta = new Vector2(160, 88);
             text.rectTransform.anchoredPosition = new Vector2(136, 0);
             text.alignment = TextAnchor.MiddleLeft;
-            text.fontSize = 28;
+            text.fontSize = PixelFont.Snap(28);
             return button;
         }
 
@@ -3380,7 +3404,9 @@ namespace BuildBuild.Editor
             Img("Icon", button.transform, UiSprite(icon), MidLeft, new Vector2(28, 0), new Vector2(56, 56));
             label.rectTransform.anchoredPosition = new Vector2(30, 0);
             button.transition = Selectable.Transition.SpriteSwap;
-            button.spriteState = new SpriteState { disabledSprite = UiSprite("chrome/btn-disabled") };
+            var buttonState = button.spriteState;   // giu sprite nhan cua MakeButton
+            buttonState.disabledSprite = UiSprite("chrome/btn-disabled");
+            button.spriteState = buttonState;
         }
 
         /// <summary>
@@ -3402,9 +3428,9 @@ namespace BuildBuild.Editor
             SetRef(screen, "gearInfo", info);
             float buttonsX = 4 * cell.x + 3 * 12 + 24;
             SetRef(screen, "upgradeButton", MakeButton("Upgrade", view, "", TopLeft, new Vector2(buttonsX, -70), new Vector2(230, 64), out var upgradeLabel));
-            upgradeLabel.fontSize = 22;
+            upgradeLabel.fontSize = PixelFont.Snap(22);
             SetRef(screen, "upgradeLabel", upgradeLabel);
-            SetRef(screen, "unequipButton", MakeButton("Unequip", view, "Tháo", TopLeft, new Vector2(buttonsX + 246, -70), new Vector2(200, 64), out _));
+            SetRef(screen, "unequipButton", MakeButton("Unequip", view, "Unequip", TopLeft, new Vector2(buttonsX + 246, -70), new Vector2(200, 64), out _));
 
             // Mau o: vien do hiem + icon + chu, outline vang khi dang chon. Nam trong tui cho co san, UnitsScreen an di.
             var root = Img("CellTemplate", view, UiSprite("hud/hud-hero-card"), TopLeft, Vector2.zero, cell);
@@ -3455,36 +3481,53 @@ namespace BuildBuild.Editor
         }
 
         /// <summary>
-        /// Khoi ky nang o cot chi tiet: 4 dong (icon 48 ben trai, chu tu xuong dong ben phai), xep doc bang layout group
-        /// vi chieu cao moi dong theo do dai chu; khoi cao theo noi dung, moc tu tren xuong. Khong co tieu de rieng (nut tab
-        /// "Ky nang" da ghi) va chu 22 / gian dong 1,0: Wukong, Chainwarden 4 dong dai day xuong -786, nut Nang level o -802.
+        /// So dong ky nang o cot chi tiet: 5 = chieu cuoi + noi tai + 3 chieu phu (bo SSR 3 phu nhu Hau Nghe, Bach Loc
+        /// Tien). Hero chi co 2 chieu phu thi dong thua bi an (`UnitsScreen.RefreshSkills`).
+        /// </summary>
+        const int SkillRowCount = 5;
+
+        /// <summary>Chieu cao mot dong ky nang (ca o icon) — xem phep tinh vua 5 dong o `BuildSkillRows`.</summary>
+        const float SkillRowHeight = 50;
+
+        /// <summary>
+        /// Khoi ky nang o cot chi tiet: <see cref="SkillRowCount"/> dong (icon ben trai, chu tu xuong dong ben phai),
+        /// xep doc bang layout group vi chieu cao moi dong theo do dai chu; khoi cao theo noi dung, moc tu tren xuong.
+        /// Khong co tieu de rieng (nut tab "Ky nang" da ghi), chu 20 / gian dong 0,7.
+        ///
+        /// Chieu cao phai vua 5 dong: nut Nang level / Nang sao neo DAY bang (y 30, cao 104) nen mep tren cua nut o
+        /// 802 tinh tu dinh bang; khoi bat dau o -548 nen vung trong la 802 - 548 = 254 px. Nam dong cao
+        /// <see cref="SkillRowHeight"/> = 48 voi gian 2 chiem 5x48 + 4x2 = 248 -> vua, va mot dong chu 2 hang o co 20
+        /// / gian dong 0,7 can 48 px -> khong bi cat. Dong chu 3 hang (~72 px) thi khoi 5 dong = 368 -> tran xuong
+        /// duoi nut, nen MO TA KY NANG phai giu trong 2 hang (kho 860 px, co 20): do bang
+        /// `tempart/art-sync-20261012/t2-english/fit-check.py` tren chinh file font, roi doan lai bang Play.
+        /// Doi co chu / gian dong / chieu cao dong o day thi phai chay lai phep do do.
         /// </summary>
         static void BuildSkillRows(Object screen, Transform detail)
         {
-            var root = Rect("Skills", detail, TopLeft, new Vector2(40, -548), new Vector2(920, 240));
+            var root = Rect("Skills", detail, TopLeft, new Vector2(40, -546), new Vector2(920, 254));
             var column = root.gameObject.AddComponent<VerticalLayoutGroup>();
-            column.spacing = 4;
+            column.spacing = 1;
             column.childControlWidth = column.childControlHeight = true;
             column.childForceExpandWidth = true;
             column.childForceExpandHeight = false;
             root.gameObject.AddComponent<ContentSizeFitter>().verticalFit = ContentSizeFitter.FitMode.PreferredSize;
 
-            var icons = new Image[4];
-            var texts = new Text[4];
-            for (int i = 0; i < 4; i++)
+            var icons = new Image[SkillRowCount];
+            var texts = new Text[SkillRowCount];
+            for (int i = 0; i < SkillRowCount; i++)
             {
-                var row = Rect($"Row{i}", root, TopLeft, Vector2.zero, new Vector2(920, 48));
+                var row = Rect($"Row{i}", root, TopLeft, Vector2.zero, new Vector2(920, SkillRowHeight));
                 var line = row.gameObject.AddComponent<HorizontalLayoutGroup>();
                 line.spacing = 12;
                 line.childAlignment = TextAnchor.UpperLeft;
                 line.childControlWidth = line.childControlHeight = true;
                 line.childForceExpandWidth = line.childForceExpandHeight = false;
-                icons[i] = Img("Icon", row, null, TopLeft, Vector2.zero, new Vector2(48, 48));
+                icons[i] = Img("Icon", row, null, TopLeft, Vector2.zero, new Vector2(SkillRowHeight, SkillRowHeight));
                 icons[i].raycastTarget = false;
                 var iconSize = icons[i].gameObject.AddComponent<LayoutElement>();
-                iconSize.minWidth = iconSize.preferredWidth = iconSize.minHeight = iconSize.preferredHeight = 48;
-                texts[i] = Block("Text", row, 22, Vector2.zero, new Vector2(860, 48));
-                texts[i].lineSpacing = 1f;
+                iconSize.minWidth = iconSize.preferredWidth = iconSize.minHeight = iconSize.preferredHeight = SkillRowHeight;
+                texts[i] = Block("Text", row, 20, Vector2.zero, new Vector2(860, SkillRowHeight));
+                texts[i].lineSpacing = 0.6f;
                 texts[i].gameObject.AddComponent<LayoutElement>().flexibleWidth = 1;
             }
             SetRef(screen, "detailSkills", root.gameObject);
@@ -3595,14 +3638,27 @@ namespace BuildBuild.Editor
         static Button MakeButton(string name, Transform parent, string label, Vector2 anchor, Vector2 pos, Vector2 size, out Text text,
             Sprite background = null)
         {
-            // Chrome chi co MOT sprite nut xanh -> trang thai bang tint mau, khong swap sprite.
+            // Nut go/dong V3 mac dinh (`btn-green`, ten giu tu ban xanh la cu) co du state: nhan = dao bevel + toi,
+            // tat = khu bao hoa + phang (audit 2026-10-12, T4). Nut nen rieng (tron, tim...) chi co MOT sprite -> tint.
             var img = Img(name, parent, background != null ? background : UiSprite("chrome/btn-green"), anchor, pos, size, sliced: true);
             img.raycastTarget = true;
             var button = img.gameObject.AddComponent<Button>();
-            button.transition = Selectable.Transition.ColorTint;
-            var colors = ColorBlock.defaultColorBlock;
-            colors.disabledColor = new Color(0.55f, 0.55f, 0.55f, 1f);
-            button.colors = colors;
+            if (background == null)
+            {
+                button.transition = Selectable.Transition.SpriteSwap;
+                button.spriteState = new SpriteState
+                {
+                    pressedSprite = UiSprite("chrome/btn-green-pressed"),
+                    disabledSprite = UiSprite("chrome/btn-disabled"),
+                };
+            }
+            else
+            {
+                button.transition = Selectable.Transition.ColorTint;
+                var colors = ColorBlock.defaultColorBlock;
+                colors.disabledColor = new Color(0.55f, 0.55f, 0.55f, 1f);
+                button.colors = colors;
+            }
             text = Label("Label", img.transform, label, 30, Center, Vector2.zero, size);
             return button;
         }
@@ -3626,7 +3682,7 @@ namespace BuildBuild.Editor
             var rect = Rect(name, parent, pivotAnchor ?? anchor, pos, size);
             var text = rect.gameObject.AddComponent<Text>();
             text.font = _font;
-            text.fontSize = fontSize;
+            text.fontSize = PixelFont.Snap(fontSize);
             text.alignment = TextAnchor.MiddleCenter;
             text.color = Color.white;
             text.text = value;
@@ -3689,14 +3745,14 @@ namespace BuildBuild.Editor
             var fog = Img("Fog", map, UiSprite("chrome/dim-tile"), Center, Vector2.zero, Vector2.zero);
             Stretch(fog.rectTransform, 0, 0, 0, 0);
             fog.color = new Color(0.75f, 0.8f, 0.9f, 0.55f);
-            Label("Hint", fog.transform, "Sương mù phủ kín vùng biên — bấm Do Thám để tìm thành địch", 32, Center, new Vector2(0, -170), new Vector2(1400, 60));
+            Label("Hint", fog.transform, "Fog covers the border — press Scout to find Enemy Castles", 32, Center, new Vector2(0, -170), new Vector2(1400, 60));
 
             var ring = Img("ScanRing", map, null, Center, Vector2.zero, Vector2.zero);
 
             // Thanh minh ve SAU suong de luon ro.
             var playerToken = Img("PlayerCastle", map, UiSprite("raid/map-castle-player"), Center, new Vector2(0, 29), Native(64, 62));   // bai dat giua y 0,527
             var playerPill = Img("Label", playerToken.transform, UiSprite("chrome/currency-pill"), Bottom, new Vector2(0, -40), Native(70, 18), sliced: true);
-            Label("Value", playerPill.transform, "Thành mình", 24, Center, Vector2.zero, Native(70, 18));
+            Label("Value", playerPill.transform, "Your Castle", 24, Center, Vector2.zero, Native(70, 18));
 
             var tokens = new Object[3];
             var tokenLabels = new Object[3];
@@ -3712,11 +3768,11 @@ namespace BuildBuild.Editor
             }
 
             var title = Img("Title", rootRect, UiSprite("panels/title-ribbon"), Top, new Vector2(0, -12), new Vector2(420, 72), sliced: true);
-            Label("Value", title.transform, "Chinh Phạt", 38, Center, Vector2.zero, new Vector2(400, 72));
-            var close = MakeButton("Close", rootRect, "Đóng", TopRight, new Vector2(-24, -24), new Vector2(180, 72), out _);
+            Label("Value", title.transform, "Conquest", 38, Center, Vector2.zero, new Vector2(400, 72));
+            var close = MakeButton("Close", rootRect, "Close", TopRight, new Vector2(-24, -24), new Vector2(180, 72), out _);
             var infoPill = Img("Info", rootRect, UiSprite("chrome/currency-pill"), Top, new Vector2(0, -96), new Vector2(1240, 56), sliced: true);
             var info = Label("Value", infoPill.transform, "", 26, Center, Vector2.zero, new Vector2(1220, 56));
-            var scan = MakeButton("Scan", rootRect, "Do Thám", Bottom, new Vector2(0, 32), new Vector2(380, 92), out var scanLabel);
+            var scan = MakeButton("Scan", rootRect, "Scout", Bottom, new Vector2(0, 32), new Vector2(380, 92), out var scanLabel);
             DecorateButton(scan, scanLabel, "icons/icon-scout");
 
             // Bang xem thanh: chan dung + ten lanh chua, luc chien, doi hinh 3x3 (cot gan thanh NPC o ben PHAI — doi xung
@@ -3736,7 +3792,7 @@ namespace BuildBuild.Editor
             var castleInfo = Label("Castle", panel.transform, "", 24, TopLeft, new Vector2(240, -172), new Vector2(600, 40));
             castleInfo.alignment = TextAnchor.MiddleLeft;
 
-            Label("LineupTitle", panel.transform, "Đội hình", 26, TopLeft, new Vector2(56, -236), new Vector2(300, 40)).alignment = TextAnchor.MiddleLeft;
+            Label("LineupTitle", panel.transform, "Formation", 26, TopLeft, new Vector2(56, -236), new Vector2(300, 40)).alignment = TextAnchor.MiddleLeft;
             var cells = new Object[9];
             for (int i = 0; i < 9; i++)
             {
@@ -3757,11 +3813,11 @@ namespace BuildBuild.Editor
                 }
                 return icons;
             }
-            var soldierIcons = IconRow("Soldier", "Lính", -236);
-            var cannonIcons = IconRow("Cannon", "Pháo", -392);
+            var soldierIcons = IconRow("Soldier", "Soldiers", -236);
+            var cannonIcons = IconRow("Cannon", "Cannon", -392);
             var reward = Label("Reward", panel.transform, "", 26, Bottom, new Vector2(0, 128), new Vector2(800, 44));
-            var attack = MakeButton("Attack", panel.transform, "Tấn công", Bottom, new Vector2(140, 28), new Vector2(260, 84), out var attackLabel);
-            var previewClose = MakeButton("Back", panel.transform, "Quay lại", Bottom, new Vector2(-140, 28), new Vector2(260, 84), out _);
+            var attack = MakeButton("Attack", panel.transform, "Attack", Bottom, new Vector2(140, 28), new Vector2(260, 84), out var attackLabel);
+            var previewClose = MakeButton("Back", panel.transform, "Back", Bottom, new Vector2(-140, 28), new Vector2(260, 84), out _);
 
             var soldiers = AssetDatabase.FindAssets("t:SoldierDefinition", new[] { SoldierDir })
                 .Select(AssetDatabase.GUIDToAssetPath).OrderBy(p => p).Select(AssetDatabase.LoadAssetAtPath<SoldierDefinition>).ToArray();
@@ -4013,8 +4069,25 @@ namespace BuildBuild.Editor
             if (def.avatar == null && avatar != null)
                 def.avatar = LoadSprite($"{UiDir}avatars/{avatar}.png");
             if (string.IsNullOrEmpty(def.unitId) && HeroUnitIds.TryGetValue(id, out string unitId)) def.unitId = unitId;
+            // Ten trong khong bao gio duoc song sot qua mot lan build: asset tao tay trong Inspector (hoac o luot build
+            // loi) mang ten mac dinh cua lop, ma bang chon hero lai bake ten do luc build scene — loi chi lo ra o lan
+            // build sau. Ten that do `NamedHero` ghi; day chi la luoi an toan.
+            if (string.IsNullOrEmpty(def.displayName)) def.displayName = id;
             EditorUtility.SetDirty(def);
             return def;
+        }
+
+        /// <summary>
+        /// Ghi TEN HIEN THI moi lan build. `HeroDef` chi chay `stats` (nơi cac helper khac dat ten) khi **tao** asset,
+        /// nen asset co san se giu ten cu/mac dinh. Dot 2026-10-09: dong "Hau Nghe" tren bang chon hero hien chu
+        /// "Frostweaver" (ten mac dinh cua lop) vi asset tao o luot build loi truoc do, scene chi duoc dung lai sau.
+        /// </summary>
+        static HeroDefinition NamedHero(HeroDefinition hero, string name)
+        {
+            if (hero.displayName == name) return hero;
+            hero.displayName = name;
+            EditorUtility.SetDirty(hero);
+            return hero;
         }
 
         /// <summary>
@@ -4033,6 +4106,11 @@ namespace BuildBuild.Editor
             { "PetalSprite", "petalsprite" }, { "KoboldTrapper", "koboldtrapper" }, { "SigilMage", "sigilmage" },
             { "Bloodswordsman", "bloodswordsman" }, { "Soulbinder", "soulbinder" },
             { "BeetleKnight", "beetleknight" }, { "Twinblade", "twinblade" }, { "BellNun", "bellnun" },
+            { "MoonHare", "moonhare" }, { "BlackSigilHunter", "blacksigilhunter" },
+            { "GourdTaoist", "gourdtaoist" }, { "InkScribe", "inkscribe" },
+            { "HongLien", "honglien" }, { "SaVe", "save" }, { "KhoiLoiSu", "khoiloisu" },
+            { "Werewolf", "werewolf" },
+            { "HauNghe", "haunghe" }, { "BachLocTien", "bachloctien" },
         };
 
         /// <summary>Frame `action-N.png` trong thu muc, xep theo N (khong lay sheet-transparent.png).</summary>

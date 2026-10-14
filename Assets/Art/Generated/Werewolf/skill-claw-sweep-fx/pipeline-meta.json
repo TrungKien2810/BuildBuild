@@ -1,0 +1,51 @@
+{
+  "target": "player",
+  "mode": "skill-claw-sweep-fx",
+  "source": "tempart\\Werewolf\\fx-claw-sweep\\final",
+  "cell_size": 128,
+  "frame_size": [
+    128,
+    128
+  ],
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet, giao 2026-10-08",
+  "frames": [
+    {
+      "frame": "claw-sweep-1",
+      "aligned_bbox": [
+        70,
+        53,
+        120,
+        81
+      ]
+    },
+    {
+      "frame": "claw-sweep-2",
+      "aligned_bbox": [
+        11,
+        53,
+        119,
+        83
+      ]
+    },
+    {
+      "frame": "claw-sweep-3",
+      "aligned_bbox": [
+        8,
+        46,
+        120,
+        78
+      ]
+    },
+    {
+      "frame": "claw-sweep-4",
+      "aligned_bbox": [
+        8,
+        45,
+        120,
+        79
+      ]
+    }
+  ]
+}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Unit_soldier_warhorn
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.UnitDefinition
   id: soldier_warhorn
-  displayName: "T\xEA gi\xE1c chi\u1EBFn"
+  displayName: War Rhino
   category: 2
   rarity: 3
   icon: {fileID: 21300000, guid: 27214b698023a9641832304b2e49281a, type: 3}

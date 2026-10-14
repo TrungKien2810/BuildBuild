@@ -1,4 +1,5 @@
 using System.Collections;
+using BuildBuild.Combat;
 using UnityEngine;
 
 namespace BuildBuild.Core
@@ -27,6 +28,48 @@ namespace BuildBuild.Core
 
         int _current;
         bool _running;
+
+        /// <summary>
+        /// Anh sang chung cua tung biome — mau than moi unit NHAN voi so nay (`Unit.BodyColor`). Cung thu tu voi
+        /// `fields`: 0 = nen goc trong scene (thu am, audit 2026-10-12 do o day) · 1 dam lay · 2 dat chay · 3 tuyet.
+        /// So cua dam lay/dat chay la TAM, chinh lai theo anh trong game.
+        /// </summary>
+        static readonly Color[] UnitLights =
+        {
+            new Color(1f, 0.95f, 0.88f),      // thu am (nen goc)
+            new Color(0.94f, 1f, 0.92f),      // dam lay (tam)
+            new Color(1f, 0.92f, 0.85f),      // dat chay
+            new Color(0.92f, 0.96f, 1f),      // tuyet
+        };
+
+        /// <summary>Anh sang chung cua biome dang dung; unit nhan vao mau than. Mac dinh trang = khong doi mau.</summary>
+        public static Color UnitLight { get; private set; } = Color.white;
+
+        static WaveBiome _scene;
+
+        // Bien static song qua doi scene: dat lai ngay khi vao tran (biome dau cung co anh sang), tra ve trang khi roi tran.
+        void Awake()
+        {
+            _scene = this;
+            SetLight(_current);
+        }
+
+        void OnDestroy()
+        {
+            if (_scene != this) return;
+            _scene = null;
+            SetLight(-1);
+        }
+
+        /// <summary>Chinh Phat co nen rieng (thu am) nen dung anh sang thu; tat Chinh Phat thi tra lai biome dang dung.</summary>
+        public static void UseConquestLight(bool on) => SetLight(on ? 0 : _scene != null ? _scene._current : -1);
+
+        /// <summary>Doi anh sang chung, than dang tren san phai ve lai. `biome` ngoai bang (-1) = trang, khong doi mau.</summary>
+        static void SetLight(int biome)
+        {
+            UnitLight = biome >= 0 && biome < UnitLights.Length ? UnitLights[biome] : Color.white;
+            foreach (var unit in Unit.All) unit.RepaintBody();
+        }
 
         /// <summary>Chuyen canh sang biome ngau nhien khac biome dang dung.</summary>
         public void Advance()
@@ -68,6 +111,7 @@ namespace BuildBuild.Core
             trees.sprite = treeLayers[biome];
             for (int i = 0; i < ambience.Length; i++)
                 if (ambience[i] != null) ambience[i].SetActive(i == biome);
+            SetLight(biome);
         }
     }
 }

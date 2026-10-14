@@ -1,0 +1,69 @@
+{
+  "target": "player",
+  "mode": "skill-transform-burst-fx",
+  "source": "tempart\\Werewolf\\fx-transform-burst\\final",
+  "cell_size": 128,
+  "frame_size": [
+    128,
+    128
+  ],
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet, giao 2026-10-08",
+  "frames": [
+    {
+      "frame": "transform-burst-1",
+      "aligned_bbox": [
+        53,
+        54,
+        75,
+        75
+      ]
+    },
+    {
+      "frame": "transform-burst-2",
+      "aligned_bbox": [
+        40,
+        42,
+        88,
+        89
+      ]
+    },
+    {
+      "frame": "transform-burst-3",
+      "aligned_bbox": [
+        22,
+        26,
+        106,
+        105
+      ]
+    },
+    {
+      "frame": "transform-burst-4",
+      "aligned_bbox": [
+        25,
+        26,
+        104,
+        101
+      ]
+    },
+    {
+      "frame": "transform-burst-5",
+      "aligned_bbox": [
+        31,
+        37,
+        98,
+        99
+      ]
+    },
+    {
+      "frame": "transform-burst-6",
+      "aligned_bbox": [
+        32,
+        70,
+        96,
+        99
+      ]
+    }
+  ]
+}

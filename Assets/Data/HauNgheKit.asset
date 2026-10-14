@@ -1,0 +1,169 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2d50d5def91db1418d772f899f2aed9, type: 3}
+  m_Name: HauNgheKit
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HauNgheKit
+  sealMax: 3
+  sealDamagePerStack: 0.12
+  sealSeconds: 5
+  luanCooldown: 10
+  luanRadius: 1.3
+  luanTelegraph: 0.6
+  luanDuration: 3
+  luanSlow: 0.35
+  luanRoot: 0.9
+  luanLineLength: 3.4
+  cuuTienCooldown: 12
+  cuuTienVolleys: 3
+  cuuTienArrowsPerVolley: 3
+  cuuTienVolleyGap: 0.35
+  cuuTienVolleyPower: 0.6
+  cuuTienEmpoweredPower: 1.6
+  cuuTienPiercePower: 0.8
+  bocCooldown: 9
+  bocRadius: 1.6
+  bocTines: 3
+  bocImpactPower: 1
+  bocTinePower: 0.6
+  bocEchoPower: 0.5
+  bocEchoRadius: 1
+  aimHoldSeconds: 0.5
+  shotLength: 6
+  shotPower: 3
+  sealBonus: 1
+  shotHalfWidth: 0.6
+  luanCast:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: eff185aea6bd75844849c517a2bb7c2a, type: 3}
+    - {fileID: 21300000, guid: 719ef3cc8bc53a94f94909e02b9e5f80, type: 3}
+    - {fileID: 21300000, guid: 9776eb7b4e9a39b40a2910564bf39ef8, type: 3}
+    - {fileID: 21300000, guid: 01b8622e35f284c499fdbf1cf4b1a553, type: 3}
+    - {fileID: 21300000, guid: 338ba4dd3114ba14f84d663e717b1945, type: 3}
+    - {fileID: 21300000, guid: 8a5917abee95f8f49810a62ac23a7140, type: 3}
+    loop: 0
+    hitFrame: 3
+  cuuTienCast:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: ff34007dd6d0a9c43a9efe58ae084589, type: 3}
+    - {fileID: 21300000, guid: e5f147fdd1f7099488c924ffe236eb8b, type: 3}
+    - {fileID: 21300000, guid: a153e43c9ff33474db48ade72d61c8fa, type: 3}
+    - {fileID: 21300000, guid: 38ba8abce1bb8334bb039c76d4fad88d, type: 3}
+    - {fileID: 21300000, guid: c40aa0ac0cd65b04dbd8e1f84c0c82e1, type: 3}
+    - {fileID: 21300000, guid: 4e4bc92422d10f04daf31ee3c040bdeb, type: 3}
+    loop: 0
+    hitFrame: 5
+  bocCast:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: 264ab7ce7047c564985a70e55a753dda, type: 3}
+    - {fileID: 21300000, guid: af19b318151d1f441bc10b986363be35, type: 3}
+    - {fileID: 21300000, guid: 0e5fba95f55011c488671b12224636e4, type: 3}
+    - {fileID: 21300000, guid: b71df8e9abe9b9245929c0190d6a39ce, type: 3}
+    - {fileID: 21300000, guid: 1e275fac4bf54a543957af8da339e807, type: 3}
+    - {fileID: 21300000, guid: 1ab504537f0a4b44ebd1374a3acbe877, type: 3}
+    loop: 0
+    hitFrame: 4
+  xaNhatCast:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: 76ff863d7f6c6f64bba9e44f3270938d, type: 3}
+    - {fileID: 21300000, guid: f677fad0280f3b74090873b5c565d19d, type: 3}
+    - {fileID: 21300000, guid: 2ba60a2354783524c8864ecbf5694075, type: 3}
+    - {fileID: 21300000, guid: 9c146397f04403a479a3b963962d5cbc, type: 3}
+    - {fileID: 21300000, guid: 781a0395d889b1649a5621352c2c2bc7, type: 3}
+    - {fileID: 21300000, guid: a7e97ec39323f1941996656b5e1c0f59, type: 3}
+    loop: 0
+    hitFrame: 5
+  arrow:
+  - {fileID: 21300000, guid: 57320f04aa68a4740bedf9f24490b716, type: 3}
+  - {fileID: 21300000, guid: b059245b7284ae74e9a1fa960cb5c8ed, type: 3}
+  - {fileID: 21300000, guid: 845f028d50a077b448f4299c1959544d, type: 3}
+  - {fileID: 21300000, guid: 1cb8e30972704d54683f4e99b1ed5256, type: 3}
+  hit:
+  - {fileID: 21300000, guid: e6dd200d8f88e9d44a606727772558ed, type: 3}
+  - {fileID: 21300000, guid: 0f76d608b93891746a2cc96fd8e7a1b0, type: 3}
+  - {fileID: 21300000, guid: 18718e31e92511c4b9c705bcfdf22139, type: 3}
+  - {fileID: 21300000, guid: 3eb371277e0e32b4d927463e9668c589, type: 3}
+  - {fileID: 21300000, guid: 45b8218bafce8cb43804bd3f0b2cd90a, type: 3}
+  - {fileID: 21300000, guid: cd2f93981888f1246afba3b2621f0890, type: 3}
+  seal:
+  - {fileID: 21300000, guid: 38090e86ebc59d543a293c2dd3824591, type: 3}
+  - {fileID: 21300000, guid: 0c55780e959e29946a7834965697b28e, type: 3}
+  - {fileID: 21300000, guid: dcbd131fb40e3444eb7f1644029cd5a7, type: 3}
+  - {fileID: 21300000, guid: 34b0a9b358f8f3e45837ff7990dccf25, type: 3}
+  - {fileID: 21300000, guid: e396f015fba02954b84ffae23bd12268, type: 3}
+  - {fileID: 21300000, guid: 91e943575469ea7418573237cbd79456, type: 3}
+  skyBow:
+  - {fileID: 21300000, guid: 1159e501845ebe64ca2f1351687e2dd2, type: 3}
+  - {fileID: 21300000, guid: cf10009a02141a74997a4c31c360c0fc, type: 3}
+  - {fileID: 21300000, guid: 867238ffca48ff34d9d8c12452ee31b8, type: 3}
+  - {fileID: 21300000, guid: 72f33e4673819f24aa4f45febf72f530, type: 3}
+  - {fileID: 21300000, guid: de5da205fb2cb0849a5297e686a49428, type: 3}
+  - {fileID: 21300000, guid: c1a9664678d6e8f45b58a40a7efe92c9, type: 3}
+  luanGround:
+  - {fileID: 21300000, guid: c02a7dd06257914489302d7e5d2cd924, type: 3}
+  - {fileID: 21300000, guid: c664f4809adf3b14c95f003894021314, type: 3}
+  - {fileID: 21300000, guid: 310e757aa9e60154aaa5538948725b42, type: 3}
+  - {fileID: 21300000, guid: 170878e4165e23e48bf3d5e51ea230d9, type: 3}
+  - {fileID: 21300000, guid: 25d9c69647bb6934b97f2dcf4a0aefb6, type: 3}
+  - {fileID: 21300000, guid: 78be789296d1d4b4ca79f27fc12b0536, type: 3}
+  - {fileID: 21300000, guid: 7114db9c4e938644b8c515940b02a767, type: 3}
+  - {fileID: 21300000, guid: 076763eae21672a42bb1a9ba95fab64f, type: 3}
+  - {fileID: 21300000, guid: a532cc679e69a564199dc252c0b83e77, type: 3}
+  luanEmpowered:
+  - {fileID: 21300000, guid: f68c6fb5b280d104a8ef3283d677f308, type: 3}
+  - {fileID: 21300000, guid: c37c1d505c0b67b41b404c31e0adbc1f, type: 3}
+  - {fileID: 21300000, guid: eeec801e89e0f79478c70d0d28b0be8f, type: 3}
+  - {fileID: 21300000, guid: f27b3bbbc531b6546a5a99cd02abce7b, type: 3}
+  - {fileID: 21300000, guid: 6b9dbdc837c865242aa9ee9a48a05efc, type: 3}
+  - {fileID: 21300000, guid: e104ff1eb791401439b1f81a8e0a60de, type: 3}
+  - {fileID: 21300000, guid: 97e227f812654c94fbced6b5102a9c3b, type: 3}
+  - {fileID: 21300000, guid: 4b9cd0c5e351253429b2db6090e529cb, type: 3}
+  - {fileID: 21300000, guid: 6677d15cb70cb7147a04b118ddc58083, type: 3}
+  volley:
+  - {fileID: 21300000, guid: 5767473ca083ae24d9f0182039fefc89, type: 3}
+  - {fileID: 21300000, guid: 1bc21fd2696a22643b146a9c65483a5c, type: 3}
+  - {fileID: 21300000, guid: de162ea28e0e8c448829b6326242b613, type: 3}
+  - {fileID: 21300000, guid: 3963fa6edc7f7f2438b0e400c8e301ef, type: 3}
+  volleyEmpowered:
+  - {fileID: 21300000, guid: 625a56a2284b3814bbaa0f951d74c27d, type: 3}
+  - {fileID: 21300000, guid: db8bc31845942114ba45b0c2fbf2e50d, type: 3}
+  - {fileID: 21300000, guid: 10b135f339979f845a2a8ff841fb84ae, type: 3}
+  - {fileID: 21300000, guid: 4e787181103b9874f940c71df9ba35ca, type: 3}
+  chain:
+  - {fileID: 21300000, guid: 3b3de66c9a381e64791a5ec9bde98994, type: 3}
+  - {fileID: 21300000, guid: 5c0d4f56761e0c045a01f42756b50b0d, type: 3}
+  - {fileID: 21300000, guid: eb7deef70f727a44aad62a9e29cd8a80, type: 3}
+  - {fileID: 21300000, guid: c9b7c784e9fffbb46b803f9b1df6b0a2, type: 3}
+  burst:
+  - {fileID: 21300000, guid: 69d3dfecaae7f7c4580fcd16326064d5, type: 3}
+  - {fileID: 21300000, guid: 9dd2d3145f21a7a41a9efe9da429ab6d, type: 3}
+  - {fileID: 21300000, guid: 56200514fc5cfa842af13c7d877df15d, type: 3}
+  - {fileID: 21300000, guid: 00076c14813a0d0419882bbbbec66f52, type: 3}
+  - {fileID: 21300000, guid: d859efd6988c7cc46a394c54dc0266eb, type: 3}
+  - {fileID: 21300000, guid: f2c5b3b0175b0b74d92763562b9d59ac, type: 3}
+  aim:
+  - {fileID: 21300000, guid: 9879f86a0aded1a46bc007d3f43e6993, type: 3}
+  - {fileID: 21300000, guid: d22ff98715366214a980018dea1f593f, type: 3}
+  - {fileID: 21300000, guid: 954ed10a21a0c5c45ad0a0ba5768774e, type: 3}
+  - {fileID: 21300000, guid: 7992fef2c9c6acd4d97ab44cac2dc95e, type: 3}
+  - {fileID: 21300000, guid: 0b41db67eaaf95a41af6446d50acb1a9, type: 3}
+  - {fileID: 21300000, guid: 9d44e7168367c5e4e95697c213af4ffc, type: 3}
+  sunArrow:
+  - {fileID: 21300000, guid: 097d8aa709f358b4ca433e4e187550c9, type: 3}
+  - {fileID: 21300000, guid: 84dbf9af5a57c93488b2e45be7ea37cd, type: 3}
+  - {fileID: 21300000, guid: 10c9e187ffe756046b994a943ea0e7b3, type: 3}
+  - {fileID: 21300000, guid: 1eab593fcf099ad45b8abbd249e8d998, type: 3}
+  - {fileID: 21300000, guid: 1edb3f62e85001b47865f4dff9b60f95, type: 3}
+  - {fileID: 21300000, guid: 0307ce2dcd4989a4395db4cef31d410f, type: 3}

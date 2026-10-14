@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
   m_Name: Hero_Twinblade
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
-  displayName: "Hi\u1EC7p kh\xE1ch song \u0111ao"
+  displayName: Twinblade
   unitId: twinblade
   role: 2
   maxHealth: 800
@@ -32,6 +32,14 @@ MonoBehaviour:
   daoVien: {fileID: 0}
   bloodswordsman: {fileID: 0}
   soulbinder: {fileID: 0}
+  gourdTaoist: {fileID: 0}
+  inkScribe: {fileID: 0}
+  hongLien: {fileID: 0}
+  saVe: {fileID: 0}
+  khoiLoiSu: {fileID: 0}
+  werewolf: {fileID: 0}
+  hauNghe: {fileID: 0}
+  bachLocTien: {fileID: 0}
   swornBrother: 0
   projectileSpeed: 20
   splashRadius: 0.1
@@ -73,6 +81,7 @@ MonoBehaviour:
   passiveStar: 1
   minorStar: 3
   secondMinorStar: 3
+  thirdMinorStar: 3
   passiveKind: 17
   passivePower: 0.12
   passiveThreshold: 0
@@ -85,19 +94,18 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b6b38c8e7a9aad14cb179c7a9f109320, type: 3}
   - {fileID: 21300000, guid: 801aec3bd2efd6543b6b7ef5d6e792c1, type: 3}
   - {fileID: 21300000, guid: 2306cecaef181d4438e469354b17186a, type: 3}
-  ultimateText: "B\xE3o \u0110ao: kho\xE1 m\u1EE5c ti\xEAu, ch\xE9m 6 nh\xE1t trong
-    3s, m\u1ED7i nh\xE1t 65% \u0111\xF2n th\u01B0\u1EDDng h\u01B0\u1EDFng t\u1EA7ng
-    Li\xEAn Ho\xE0n l\xFAc b\u1EAFt \u0111\u1EA7u; xong xo\xE1 t\u1EA7ng."
-  passiveText: "Li\xEAn Ho\xE0n: m\u1ED7i \u0111\xF2n tr\xFAng c\xF9ng m\u1EE5c ti\xEAu
-    +12% s\xE1t th\u01B0\u01A1ng \u0111\xF2n k\u1EBF ti\u1EBFp, t\u1ED1i \u0111a
-    5 t\u1EA7ng; \u0111\u1ED5i m\u1EE5c ti\xEAu ho\u1EB7c 2s kh\xF4ng tr\xFAng th\xEC
-    m\u1EA5t t\u1EA7ng."
+  ultimateText: 'Blade Storm: locks a target, cuts 6 hits in 3s at 65% of a basic
+    hit plus the Combo stacks at the start.'
+  passiveText: 'Combo: each hit on the same target gives +12% damage to the next,
+    up to 5 stacks; changing target clears them.'
   minorText: 
   secondMinorText: 
+  thirdMinorText: 
   ultimateIcon: {fileID: 0}
   minorIcon: {fileID: 0}
   passiveIcon: {fileID: 0}
   secondMinorIcon: {fileID: 0}
+  thirdMinorIcon: {fileID: 0}
   animations: {fileID: 11400000, guid: 5305ca08402ef5b46818318c2173e29a, type: 2}
   artFacesRight: 0
-  avatar: {fileID: 21300000, guid: 5a4597c5f2d0b6b45bce61e99ef59257, type: 3}
+  avatar: {fileID: 21300000, guid: c51a560e1b6f1ee4f91d195d26ed0855, type: 3}

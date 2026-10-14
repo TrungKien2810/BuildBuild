@@ -1,0 +1,63 @@
+{
+  "target": "player",
+  "mode": "skill-sky-bow-fx",
+  "cell_size": 128,
+  "align": "center",
+  "ground_row": null,
+  "frames": [
+    {
+      "frame": "thien-cung-wings-1",
+      "aligned_bbox": [
+        53,
+        51,
+        74,
+        80
+      ]
+    },
+    {
+      "frame": "thien-cung-wings-2",
+      "aligned_bbox": [
+        48,
+        50,
+        79,
+        80
+      ]
+    },
+    {
+      "frame": "thien-cung-wings-3",
+      "aligned_bbox": [
+        40,
+        41,
+        86,
+        84
+      ]
+    },
+    {
+      "frame": "thien-cung-wings-4",
+      "aligned_bbox": [
+        40,
+        41,
+        88,
+        84
+      ]
+    },
+    {
+      "frame": "thien-cung-wings-5",
+      "aligned_bbox": [
+        51,
+        48,
+        76,
+        77
+      ]
+    },
+    {
+      "frame": "thien-cung-wings-6",
+      "aligned_bbox": [
+        53,
+        55,
+        73,
+        67
+      ]
+    }
+  ]
+}

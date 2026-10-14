@@ -1,0 +1,28 @@
+{
+  "unit": "BachLocTien",
+  "action": "sinh-khi",
+  "kind": "fx",
+  "approval": "pending visual review",
+  "cell": [
+    128,
+    128
+  ],
+  "origin": [
+    64,
+    96
+  ],
+  "anchor": "ground",
+  "phases": {
+    "action": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  },
+  "raw_root_y": 0.72,
+  "scale_policy": "one shared scale for complete effect cycle",
+  "gameplay_timing": "not wired; preview durations only"
+}

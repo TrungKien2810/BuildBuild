@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Unit_tritonguard
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.UnitDefinition
   id: tritonguard
-  displayName: "Ng\u01B0 nh\xE2n \u0111inh ba"
+  displayName: Triton Guard
   category: 0
   rarity: 0
-  icon: {fileID: 21300000, guid: 192603a1e5c45734a9ac12b84296601d, type: 3}
+  icon: {fileID: 21300000, guid: 52e2e0762f9848c4fb36a3f9fbed1d58, type: 3}

@@ -140,16 +140,16 @@ namespace BuildBuild.Combat
         public void Collect(List<UnitEffect> into)
         {
             if (!_any) return;
-            if (Has(StatusId.Stun)) into.Add(new UnitEffect(EffectKind.Stun, "Choáng", Until(StatusId.Stun)));
-            if (Has(StatusId.Freeze)) into.Add(new UnitEffect(EffectKind.Freeze, "Đóng băng", Until(StatusId.Freeze)));
+            if (Has(StatusId.Stun)) into.Add(new UnitEffect(EffectKind.Stun, "Stun", Until(StatusId.Stun)));
+            if (Has(StatusId.Freeze)) into.Add(new UnitEffect(EffectKind.Freeze, "Freeze", Until(StatusId.Freeze)));
             if (_unit.IsSlowed)
-                into.Add(new UnitEffect(EffectKind.Slow, $"Chậm {Percent(Power(StatusId.Slow))}", Until(StatusId.Slow)));
+                into.Add(new UnitEffect(EffectKind.Slow, $"Slow {Percent(Power(StatusId.Slow))}", Until(StatusId.Slow)));
             if (Has(StatusId.ArmorBreak))
-                into.Add(new UnitEffect(EffectKind.ArmorBreak, $"Phá giáp +{Percent(Power(StatusId.ArmorBreak))}", Until(StatusId.ArmorBreak)));
-            if (Has(StatusId.Burn)) into.Add(new UnitEffect(EffectKind.Burn, "Cháy", Until(StatusId.Burn)));
+                into.Add(new UnitEffect(EffectKind.ArmorBreak, $"Armor Break +{Percent(Power(StatusId.ArmorBreak))}", Until(StatusId.ArmorBreak)));
+            if (Has(StatusId.Burn)) into.Add(new UnitEffect(EffectKind.Burn, "Burn", Until(StatusId.Burn)));
             if (Has(StatusId.Poison))
-                into.Add(new UnitEffect(EffectKind.Poison, "Độc", Until(StatusId.Poison), stacks: Stacks(StatusId.Poison)));
-            if (Has(StatusId.NoHeal)) into.Add(new UnitEffect(EffectKind.NoHeal, "Cấm hồi máu", Until(StatusId.NoHeal)));
+                into.Add(new UnitEffect(EffectKind.Poison, "Poison", Until(StatusId.Poison), stacks: Stacks(StatusId.Poison)));
+            if (Has(StatusId.NoHeal)) into.Add(new UnitEffect(EffectKind.NoHeal, "Heal Block", Until(StatusId.NoHeal)));
         }
 
         static string Percent(float fraction) => Mathf.RoundToInt(fraction * 100f) + "%";

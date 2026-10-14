@@ -32,6 +32,14 @@ MonoBehaviour:
   daoVien: {fileID: 0}
   bloodswordsman: {fileID: 0}
   soulbinder: {fileID: 0}
+  gourdTaoist: {fileID: 0}
+  inkScribe: {fileID: 0}
+  hongLien: {fileID: 0}
+  saVe: {fileID: 0}
+  khoiLoiSu: {fileID: 0}
+  werewolf: {fileID: 0}
+  hauNghe: {fileID: 0}
+  bachLocTien: {fileID: 0}
   swornBrother: 0
   projectileSpeed: 20
   splashRadius: 0.3
@@ -66,6 +74,7 @@ MonoBehaviour:
   passiveStar: 1
   minorStar: 3
   secondMinorStar: 3
+  thirdMinorStar: 3
   passiveKind: 0
   passivePower: 0
   passiveThreshold: 0
@@ -73,19 +82,19 @@ MonoBehaviour:
   passiveEvery: 1
   passiveDuration: 0
   passiveFrames: []
-  ultimateText: "Long Ho\xE1: bi\u1EBFn h\xECnh Long Nh\xE2n + g\u1ECDi B\u1EA1ch
-    \u0110\u1ECBa Long (Long Gi\xE1p, Long Uy, Long N\u1ED9, Long Kh\u1EBF); l\u1EA7n
-    sau: Thi\xEAn \u0110\u1ECBa Long Gi\xE1ng."
-  passiveText: "Ngh\u1ECBch L\xE2n: \u0111\xF2n v\xE0o boss/tinh anh c\u1ED9ng th\xEAm
-    % m\xE1u t\u1ED1i \u0111a m\u1EE5c ti\xEAu."
-  minorText: "Xuy\xEAn Long / Thi\xEAn Long Li\xEAn Th\u01B0\u01A1ng: \u0111\xE2m
-    xuy\xEAn m\u1ED9t \u0111\u01B0\u1EDDng, b\u1ECF qua gi\xE1p."
-  secondMinorText: "\u0110\u1ECBa Long Ch\u1EA5n (r\u1ED3ng): gai \u0111\xE1 quanh
-    r\u1ED3ng \u2014 s\xE1t th\u01B0\u01A1ng v\xF9ng, cho\xE1ng, ph\xE1 gi\xE1p."
+  ultimateText: 'Dragon Transform: turns into Dragon Man + summons Bach Dia Long
+    (Armor, Might, Wrath, Pact); then heaven-earth descends.'
+  passiveText: 'Defy Heaven: hits on bosses/elites add % of the target''s max health.'
+  minorText: 'Piercing Dragon / Sky Dragon Chain Spear: thrust pierces in a line,
+    ignoring armor.'
+  secondMinorText: "Earth Dragon Shock (dragon): stone spikes around the dragon \u2014
+    area damage, stun, armor break."
+  thirdMinorText: 
   ultimateIcon: {fileID: 21300000, guid: 1eeb45a5d75fbd348900a69f64024fb6, type: 3}
   minorIcon: {fileID: 21300000, guid: 1e04a540d9614764ebdce76caf229461, type: 3}
   passiveIcon: {fileID: 21300000, guid: df8e70892ae66f649bad543c2f5f7213, type: 3}
   secondMinorIcon: {fileID: 21300000, guid: 1c00f03aab1f4144c9cba583eef7147b, type: 3}
+  thirdMinorIcon: {fileID: 0}
   animations: {fileID: 11400000, guid: 5ecbc40a901f5c049ba84f1dad6ff9e1, type: 2}
   artFacesRight: 0
   avatar: {fileID: 21300000, guid: bd16bdcf549ba964dbf3dc63d910b642, type: 3}

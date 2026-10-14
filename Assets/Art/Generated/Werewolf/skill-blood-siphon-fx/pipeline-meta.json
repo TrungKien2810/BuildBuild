@@ -1,0 +1,51 @@
+{
+  "target": "player",
+  "mode": "skill-blood-siphon-fx",
+  "source": "tempart\\Werewolf\\fx-blood-siphon\\final",
+  "cell_size": 256,
+  "frame_size": [
+    256,
+    256
+  ],
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet, giao 2026-10-08",
+  "frames": [
+    {
+      "frame": "blood-siphon-1",
+      "aligned_bbox": [
+        53,
+        105,
+        203,
+        150
+      ]
+    },
+    {
+      "frame": "blood-siphon-2",
+      "aligned_bbox": [
+        53,
+        105,
+        203,
+        151
+      ]
+    },
+    {
+      "frame": "blood-siphon-3",
+      "aligned_bbox": [
+        53,
+        105,
+        203,
+        151
+      ]
+    },
+    {
+      "frame": "blood-siphon-4",
+      "aligned_bbox": [
+        53,
+        105,
+        203,
+        151
+      ]
+    }
+  ]
+}

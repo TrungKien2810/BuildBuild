@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 505e5ef04f70452448a64507e11a0c68, type: 3}
   m_Name: Enemy_RimeToad
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.EnemyDefinition
-  displayName: "C\xF3c S\u01B0\u01A1ng"
+  displayName: "Rime Toad"
   kind: 5
   baseHealth: 110
   baseDamage: 10

@@ -53,20 +53,20 @@ namespace BuildBuild.UI
             }
             currentImage.sprite = current.intact;
             nextImage.sprite = next.intact;
-            currentName.text = $"Cấp {castle.TierLevel} · {current.name}";
-            nextName.text = $"Cấp {castle.TierLevel + 1} · {next.name}";
+            currentName.text = $"Level {castle.TierLevel} · {current.name}";
+            nextName.text = $"Level {castle.TierLevel + 1} · {next.name}";
             healthText.text = $"{current.maxHealth:0}  →  {next.maxHealth:0}";
             mountsText.text = $"{current.mounts.Length}  →  {next.mounts.Length}";
 
             int best = SaveSystem.Data.nextWave - 1;
             bool unlocked = best >= next.unlockWave;
-            conditionText.text = next.unlockWave <= 0 ? "Không cần điều kiện"
-                : unlocked ? $"Đã thắng wave {next.unlockWave}"
-                : $"Cần thắng wave {next.unlockWave} (đang {Mathf.Max(best, 0)})";
+            conditionText.text = next.unlockWave <= 0 ? "No Requirements"
+                : unlocked ? $"Wave {next.unlockWave} Won"
+                : $"Win Wave {next.unlockWave} Required (current {Mathf.Max(best, 0)})";
             conditionText.color = unlocked ? new Color(0.6f, 1f, 0.6f) : new Color(1f, 0.55f, 0.5f);
 
             bool afford = gold >= next.cost;
-            upgradeLabel.text = $"Nâng · {next.cost}";
+            upgradeLabel.text = $"Upgrade · {next.cost}";
             upgradeLabel.color = afford || !unlocked ? Color.white : new Color(1f, 0.55f, 0.5f);
             upgradeButton.interactable = unlocked && afford;
         }

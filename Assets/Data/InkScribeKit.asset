@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc15c088654cad4db2daefa74084912, type: 3}
+  m_Name: InkScribeKit
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.InkScribeKit
+  sealMax: 3
+  sealSeconds: 5
+  sealPopPower: 0.8
+  sealMinInterval: 0.5
+  strokeCooldown: 7
+  strokeLength: 2.4
+  strokeWidth: 0.3
+  strokeAhead: 0.7
+  strokeDuration: 5
+  strokeMax: 2
+  sealCooldown: 10
+  sealRadius: 1.2
+  sealStun: 1.2
+  dragonLength: 4.5
+  dragonWidth: 1.2
+  dragonBlast: 1
+  horizontalCast:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: 367e7a74ef3bb4440a30e138658f9f4e, type: 3}
+    - {fileID: 21300000, guid: cdd1b13f55bb0314497fa498a582c8f5, type: 3}
+    - {fileID: 21300000, guid: c49499a66c15bcd4b8f896650a741c08, type: 3}
+    - {fileID: 21300000, guid: 1f043fe4fe09aa14caa99878977452bb, type: 3}
+    - {fileID: 21300000, guid: fd30531e83d3af144b6a8eb6eb5cd9da, type: 3}
+    - {fileID: 21300000, guid: 2a03df80c5826da428f21f5b199d5a55, type: 3}
+    loop: 0
+    hitFrame: 4
+  sealCast:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: 46436d6728342234ba3759628b6d33ac, type: 3}
+    - {fileID: 21300000, guid: c7bc81ee539eff84592bc5ba8f71e0f8, type: 3}
+    - {fileID: 21300000, guid: fdae653d32f29ab4b97d5ba501213ce6, type: 3}
+    - {fileID: 21300000, guid: 2d1241ffcd59c1e4391b09c178f3eec0, type: 3}
+    - {fileID: 21300000, guid: f841384fc4a943d46a0dfd63025968b7, type: 3}
+    - {fileID: 21300000, guid: 63c7d4ca166d7d946a21707ba7388f4a, type: 3}
+    loop: 0
+    hitFrame: 4
+  dragonCast:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: bc1ec0aab9817074bb64409b87d00ad4, type: 3}
+    - {fileID: 21300000, guid: 0782a53f09ec04a45a66dcecafc6f9ad, type: 3}
+    - {fileID: 21300000, guid: eacb7b16b1b8eaa41aad2e9292a6b381, type: 3}
+    - {fileID: 21300000, guid: d0aeef8e3baa451438ca5a176d204b1c, type: 3}
+    - {fileID: 21300000, guid: bfe3701ce16fc00488adff1679d0f3db, type: 3}
+    - {fileID: 21300000, guid: 75e146c30d324ec42b6bcaee2891729c, type: 3}
+    loop: 0
+    hitFrame: 4
+  brushMarks:
+  - {fileID: 21300000, guid: 09f20963f6520314ba667813557858cb, type: 3}
+  - {fileID: 21300000, guid: e90b11326e29f17438f98f76dd593f0e, type: 3}
+  - {fileID: 21300000, guid: c566643c10fd78c458487aa80488f6df, type: 3}
+  - {fileID: 21300000, guid: acc0d19725702f042ad6c42772e504a4, type: 3}
+  horizontalStroke:
+  - {fileID: 21300000, guid: 558ea6f920fcad94eb82c39f1fe87c8d, type: 3}
+  - {fileID: 21300000, guid: 3af37df32f463bb4394597b7dee19d48, type: 3}
+  - {fileID: 21300000, guid: 080e8034913942f4a86364ca7907afb0, type: 3}
+  - {fileID: 21300000, guid: d5e4732f75eb157439911dc524618201, type: 3}
+  - {fileID: 21300000, guid: d7544a585b04061478dca5897e522d78, type: 3}
+  - {fileID: 21300000, guid: c7ca34e55a7443c428ea945cccbe1aad, type: 3}
+  sealZone:
+  - {fileID: 21300000, guid: aea2663dc439aac429a947b405a7d63d, type: 3}
+  - {fileID: 21300000, guid: 24a2c19e35da75d44a34dfe4f149aaaf, type: 3}
+  - {fileID: 21300000, guid: 99f84b76c44b8cd438100371bc429552, type: 3}
+  - {fileID: 21300000, guid: 8b087b01d18272945848b559a3a09080, type: 3}
+  - {fileID: 21300000, guid: 68bc916f29beb4e4a85d3567179ed0f9, type: 3}
+  - {fileID: 21300000, guid: 3794b99dc135be6479b5a83c9e23f3fd, type: 3}
+  sealBurst:
+  - {fileID: 21300000, guid: da03d2d8bfbbb254599a2ec261626af2, type: 3}
+  - {fileID: 21300000, guid: 6707cf3d9aa89c74183c788d12d3aad2, type: 3}
+  - {fileID: 21300000, guid: 9788b724d6d607547ad0bd2fdc38da7f, type: 3}
+  - {fileID: 21300000, guid: 9ea9e110ccd2baa46829909114758a52, type: 3}
+  dragonPainting:
+  - {fileID: 21300000, guid: 5ac6aeff56e330b4ca3dfb41b1328320, type: 3}
+  - {fileID: 21300000, guid: bb87cce8b9150aa42bfa08a6e2a827d5, type: 3}
+  - {fileID: 21300000, guid: 2459f18ad29981645be8591243a4262b, type: 3}
+  - {fileID: 21300000, guid: 7b3e70e135d83e2479b8dd47c6eb9de0, type: 3}
+  - {fileID: 21300000, guid: aa99308445a083d4a94141cb087bd495, type: 3}
+  - {fileID: 21300000, guid: 8740c0098f0429c4cbe7d3b220fd3d6e, type: 3}
+  dragonPath:
+  - {fileID: 21300000, guid: 16426318d5b1bfd498c570fe659d9321, type: 3}
+  - {fileID: 21300000, guid: f438ee6a81ff552439702e847a6033df, type: 3}
+  - {fileID: 21300000, guid: c7f1cd150d9cc9749b8b41cd360013bd, type: 3}
+  - {fileID: 21300000, guid: 6fcf12f0b38dbf8439b304ce7ae06462, type: 3}
+  - {fileID: 21300000, guid: f23da6dd82d41df478e1446b5f8f6d34, type: 3}
+  - {fileID: 21300000, guid: 3b1405356d7d5f84ba616c608a8b6757, type: 3}
+  dragonImpact:
+  - {fileID: 21300000, guid: 8dee1500e74a7a64793db7f5d9215c31, type: 3}
+  - {fileID: 21300000, guid: 6098736676b21c04ca76370b3f9afb4c, type: 3}
+  - {fileID: 21300000, guid: 6aebf1542f610f74bb9cffd855a75e46, type: 3}
+  - {fileID: 21300000, guid: ff44dcf8f1b3dc04ebe8ca708f4ce0a8, type: 3}
+  - {fileID: 21300000, guid: 33d83bb0302e7ab4e9e39eb7bfd72497, type: 3}
+  - {fileID: 21300000, guid: 477314844589bee49b722e7bcbd08da3, type: 3}
+  inkDragon:
+  - {fileID: 21300000, guid: a8d815e21996604439277449f4380238, type: 3}
+  - {fileID: 21300000, guid: c30cd58e66928944ba102746b9b61940, type: 3}
+  - {fileID: 21300000, guid: f0f6c777c95bf2a43bc81aa36398c432, type: 3}
+  - {fileID: 21300000, guid: b4cc78ce86ded62418444a29ba68224f, type: 3}
+  - {fileID: 21300000, guid: 8abfff7e1d726c74398dc27a7aed925e, type: 3}
+  - {fileID: 21300000, guid: 048cad0ebd08b544e90d585573472eda, type: 3}

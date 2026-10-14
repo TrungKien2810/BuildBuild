@@ -1,0 +1,45 @@
+{
+  "target": "player",
+  "mode": "skill-arrow-fx",
+  "cell_size": 128,
+  "align": "center",
+  "ground_row": null,
+  "frames": [
+    {
+      "frame": "solar-arrow-1",
+      "aligned_bbox": [
+        54,
+        62,
+        72,
+        65
+      ]
+    },
+    {
+      "frame": "solar-arrow-2",
+      "aligned_bbox": [
+        54,
+        61,
+        71,
+        64
+      ]
+    },
+    {
+      "frame": "solar-arrow-3",
+      "aligned_bbox": [
+        54,
+        60,
+        72,
+        65
+      ]
+    },
+    {
+      "frame": "solar-arrow-4",
+      "aligned_bbox": [
+        54,
+        60,
+        71,
+        64
+      ]
+    }
+  ]
+}

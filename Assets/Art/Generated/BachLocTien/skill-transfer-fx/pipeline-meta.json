@@ -1,0 +1,63 @@
+{
+  "target": "player",
+  "mode": "skill-transfer-fx",
+  "cell_size": 128,
+  "align": "center",
+  "ground_row": null,
+  "frames": [
+    {
+      "frame": "hoan-diep-transfer-1",
+      "aligned_bbox": [
+        57,
+        61,
+        93,
+        80
+      ]
+    },
+    {
+      "frame": "hoan-diep-transfer-2",
+      "aligned_bbox": [
+        42,
+        63,
+        94,
+        82
+      ]
+    },
+    {
+      "frame": "hoan-diep-transfer-3",
+      "aligned_bbox": [
+        35,
+        54,
+        93,
+        75
+      ]
+    },
+    {
+      "frame": "hoan-diep-transfer-4",
+      "aligned_bbox": [
+        34,
+        55,
+        93,
+        74
+      ]
+    },
+    {
+      "frame": "hoan-diep-transfer-5",
+      "aligned_bbox": [
+        34,
+        51,
+        95,
+        74
+      ]
+    },
+    {
+      "frame": "hoan-diep-transfer-6",
+      "aligned_bbox": [
+        37,
+        56,
+        93,
+        73
+      ]
+    }
+  ]
+}

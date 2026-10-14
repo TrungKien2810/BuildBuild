@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 505e5ef04f70452448a64507e11a0c68, type: 3}
   m_Name: Enemy_RatRunner
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.EnemyDefinition
-  displayName: "Chu\u1ED9t C\u1ED1ng"
+  displayName: "Sewer Rat"
   kind: 1
   baseHealth: 45
   baseDamage: 8

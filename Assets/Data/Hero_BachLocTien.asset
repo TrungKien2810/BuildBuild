@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
+  m_Name: Hero_BachLocTien
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
+  displayName: Bach Loc Tien
+  unitId: bachloctien
+  role: 6
+  maxHealth: 560
+  damage: 26
+  attackRate: 0.9
+  range: 5
+  moveSpeed: 1.1
+  leashRange: 3
+  maxHeld: 3
+  heldDamageBonus: 0
+  warden: {fileID: 0}
+  dragonRider: {fileID: 0}
+  banner: {fileID: 0}
+  wukong: {fileID: 0}
+  stormcaller: {fileID: 0}
+  galemonk: {fileID: 0}
+  daoVien: {fileID: 0}
+  bloodswordsman: {fileID: 0}
+  soulbinder: {fileID: 0}
+  gourdTaoist: {fileID: 0}
+  inkScribe: {fileID: 0}
+  hongLien: {fileID: 0}
+  saVe: {fileID: 0}
+  khoiLoiSu: {fileID: 0}
+  werewolf: {fileID: 0}
+  hauNghe: {fileID: 0}
+  bachLocTien: {fileID: 11400000, guid: 37a39bbf0da36cc47943c9298539c0b7, type: 2}
+  swornBrother: 0
+  projectileSpeed: 8
+  splashRadius: 0.8
+  projectileFrames: []
+  projectileScale: 1
+  impactFrames: []
+  impactScale: 1
+  knockbackOnHit: 0
+  fireSfx: 
+  impactSfx: 
+  skillSfx: 
+  skillKind: 38
+  skillTier: 0
+  skillCooldown: 0
+  manaMax: 6
+  manaPerSecond: 0.35
+  manaPerHit: 0.25
+  skillRadius: 1.6
+  skillDuration: 3
+  skillPower: 1
+  skillFrames: []
+  skillIntroFrames: []
+  skillOutroFrames: []
+  stunFrames: []
+  summoner: {fileID: 0}
+  healsAllies: 1
+  healFrames:
+  - {fileID: 21300000, guid: b6f2c596c4dd5324e8e9b010ceb9137c, type: 3}
+  - {fileID: 21300000, guid: 823f89a3bb1020d46be18d98b2bb580b, type: 3}
+  - {fileID: 21300000, guid: ea0db2846b5d4174689ea2fe169e4ba0, type: 3}
+  - {fileID: 21300000, guid: 4a8d9b409ba0f054e938fbf054aed67d, type: 3}
+  - {fileID: 21300000, guid: b7ea8f64db3642b439af2d7c5d2e9d69, type: 3}
+  - {fileID: 21300000, guid: ea4d391837125604198050b4d3f654c9, type: 3}
+  buffFrames: []
+  shieldAmount: 0
+  shieldFrames: []
+  shieldBreakFrames: []
+  passiveStar: 1
+  minorStar: 3
+  secondMinorStar: 3
+  thirdMinorStar: 3
+  passiveKind: 0
+  passivePower: 0
+  passiveThreshold: 0
+  passiveRadius: 0
+  passiveEvery: 1
+  passiveDuration: 0
+  passiveFrames: []
+  ultimateText: "White Deer Renewal: 0.7s telegraph, spirit deer walks the lane leaving
+    a 5s blossom trail \u2014 heals 70% ATK/s inside."
+  passiveText: 'Sacred Forest Veins: healed health charges Life Force (capped); a
+    full bar adds one pulse to the next secondary skill.'
+  minorText: 'Triple Spring Sprouts: plants up to 3 sprouts under the lowest-HP allies
+    in Range; grow after 3 pulses. Cooldown 11s.'
+  secondMinorText: "Leaf Renewal: harvest a grown sprout to instantly heal a critical
+    ally \u2014 the source sprout is lost. Cooldown 9s."
+  thirdMinorText: "Spirit Deer Patrol: needs 2+ sprouts \u2014 spirit runs oldest
+    to newest, healing a pulse and clearing a Poison/Burn per ally. 13s CD."
+  ultimateIcon: {fileID: 21300000, guid: a862ac28e6ca6de498d74e68ea85963c, type: 3}
+  minorIcon: {fileID: 21300000, guid: 0d7f34cdfbb004e4c9d7132c5216fe99, type: 3}
+  passiveIcon: {fileID: 21300000, guid: 4d80368025fcde046a57dcfc034dbb36, type: 3}
+  secondMinorIcon: {fileID: 21300000, guid: 01438c4b74563c846b484e0a7661c56c, type: 3}
+  thirdMinorIcon: {fileID: 21300000, guid: af241844baef1cd49938324ad13fb06e, type: 3}
+  animations: {fileID: 11400000, guid: 8b3a6e949b5c3ae42a75f772eaae91ae, type: 2}
+  artFacesRight: 0
+  avatar: {fileID: 21300000, guid: 40b42d966a23bc24ea544a0ae2c3ff56, type: 3}

@@ -1,0 +1,63 @@
+{
+  "target": "player",
+  "mode": "skill-luan-cast",
+  "cell_size": 128,
+  "align": "feet",
+  "ground_row": 116,
+  "frames": [
+    {
+      "frame": "nhat-luan-cast-1",
+      "aligned_bbox": [
+        46,
+        60,
+        81,
+        116
+      ]
+    },
+    {
+      "frame": "nhat-luan-cast-2",
+      "aligned_bbox": [
+        39,
+        68,
+        82,
+        116
+      ]
+    },
+    {
+      "frame": "nhat-luan-cast-3",
+      "aligned_bbox": [
+        41,
+        66,
+        89,
+        116
+      ]
+    },
+    {
+      "frame": "nhat-luan-cast-4",
+      "aligned_bbox": [
+        40,
+        66,
+        89,
+        116
+      ]
+    },
+    {
+      "frame": "nhat-luan-cast-5",
+      "aligned_bbox": [
+        46,
+        58,
+        89,
+        116
+      ]
+    },
+    {
+      "frame": "nhat-luan-cast-6",
+      "aligned_bbox": [
+        45,
+        58,
+        81,
+        116
+      ]
+    }
+  ]
+}

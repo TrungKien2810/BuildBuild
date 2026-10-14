@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Unit_mage_summoner
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.UnitDefinition
   id: mage_summoner
-  displayName: "Ph\xE1p s\u01B0 tri\u1EC7u h\u1ED3i"
+  displayName: Summoner Mage
   category: 0
   rarity: 2
   icon: {fileID: 21300000, guid: 9304634310fbeeb42a5c384b6f00b037, type: 3}

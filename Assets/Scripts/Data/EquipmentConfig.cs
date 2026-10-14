@@ -58,10 +58,10 @@ namespace BuildBuild.Data
 
         public static string SlotName(EquipmentSlot slot) => slot switch
         {
-            EquipmentSlot.Weapon => "Vũ khí",
-            EquipmentSlot.Armor => "Giáp",
-            EquipmentSlot.Helmet => "Mũ",
-            _ => "Nhẫn",
+            EquipmentSlot.Weapon => "Weapon",
+            EquipmentSlot.Armor => "Armor",
+            EquipmentSlot.Helmet => "Helmet",
+            _ => "Ring",
         };
 
         /// <summary>Phan tram chi so cua mot mon (0,06 = +6%).</summary>

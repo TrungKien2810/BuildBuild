@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Unit_beetleknight
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.UnitDefinition
   id: beetleknight
-  displayName: "Hi\u1EC7p s\u0129 b\u1ECD hung"
+  displayName: Beetle Knight
   category: 0
   rarity: 0
-  icon: {fileID: 21300000, guid: 72d6f721956630244ae8b427e4aa42a1, type: 3}
+  icon: {fileID: 21300000, guid: d091f6cc30b5a4f428c0ea3176a6b286, type: 3}

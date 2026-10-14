@@ -34,9 +34,9 @@ namespace BuildBuild.Combat
         public override void CollectEffects(List<UnitEffect> into)
         {
             if (Time.time < _drinkUntil)
-                into.Add(new UnitEffect(EffectKind.Guard, $"Túy Tửu -{Percent(_definition.drinkReduction)} ST, miễn choáng", _drinkUntil));
+                into.Add(new UnitEffect(EffectKind.Guard, $"Drunken Wine -{Percent(_definition.drinkReduction)} Damage, Stun Immunity", _drinkUntil));
             if (Time.time < _roarGuardUntil)
-                into.Add(new UnitEffect(EffectKind.Guard, $"Gầm -{Percent(_definition.roarReduction)} ST", _roarGuardUntil));
+                into.Add(new UnitEffect(EffectKind.Guard, $"Roar -{Percent(_definition.roarReduction)} Damage", _roarGuardUntil));
         }
 
         static string Percent(float fraction) => Mathf.RoundToInt(fraction * 100f) + "%";

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Unit_soldier_skeletonarcher
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.UnitDefinition
   id: soldier_skeletonarcher
-  displayName: "Cung th\u1EE7 x\u01B0\u01A1ng"
+  displayName: Skeleton Archer
   category: 2
   rarity: 0
-  icon: {fileID: 21300000, guid: 43f05f6ab9252c1448dbbccc4f8a6bcc, type: 3}
+  icon: {fileID: 21300000, guid: fe6259f4c98e1db439c32e1336274a8c, type: 3}

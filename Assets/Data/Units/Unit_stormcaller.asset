@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Unit_stormcaller
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.UnitDefinition
   id: stormcaller
-  displayName: "Ph\xE1p s\u01B0 s\u1EA5m s\xE9t"
+  displayName: Stormcaller
   category: 0
   rarity: 3
   icon: {fileID: 21300000, guid: 32689b331e8b6df4fbf4df3816237fe4, type: 3}

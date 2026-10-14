@@ -171,8 +171,8 @@ namespace BuildBuild.UI
 
                 if (i < rosterInfo.Length)
                     rosterInfo[i].text = owned == null
-                        ? "Chưa sở hữu — quay gacha để nhận"
-                        : $"Lv {level}   ST {Progression.CannonDamage(cannon, level):0.#}   {cannon.fireRate:0.#}/s   Tầm {cannon.range:0.#}{OnMountNote(cannon)}";
+                        ? "Not Owned — roll gacha to obtain"
+                        : $"Lv {level}   Damage {Progression.CannonDamage(cannon, level):0.#}   {cannon.fireRate:0.#}/s   Range {cannon.range:0.#}{OnMountNote(cannon)}";
             }
         }
 
@@ -186,7 +186,7 @@ namespace BuildBuild.UI
         string OnMountNote(CannonDefinition cannon)
         {
             for (int i = 0; i < mounts.Length; i++)
-                if (mounts[i].Definition == cannon) return $"   (bệ {i + 1})";
+                if (mounts[i].Definition == cannon) return $"   (mount {i + 1})";
             return "";
         }
 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Unit_soldier_mushroomsoldier
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.UnitDefinition
   id: soldier_mushroomsoldier
-  displayName: "L\xEDnh n\u1EA5m"
+  displayName: Mushroom Soldier
   category: 2
   rarity: 0
-  icon: {fileID: 21300000, guid: 9bfd58925eb01e54ea0c646224599423, type: 3}
+  icon: {fileID: 21300000, guid: ce68978fe21ac2d439e0ab920aaa166f, type: 3}

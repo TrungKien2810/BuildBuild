@@ -1,0 +1,90 @@
+{
+  "target": "player",
+  "mode": "skill-zone-empowered-fx",
+  "cell_size": 256,
+  "align": "feet",
+  "ground_row": 192,
+  "frames": [
+    {
+      "frame": "nhat-luan-empowered-1",
+      "aligned_bbox": [
+        79,
+        163,
+        176,
+        192
+      ]
+    },
+    {
+      "frame": "nhat-luan-empowered-2",
+      "aligned_bbox": [
+        78,
+        160,
+        177,
+        192
+      ]
+    },
+    {
+      "frame": "nhat-luan-empowered-3",
+      "aligned_bbox": [
+        81,
+        155,
+        177,
+        192
+      ]
+    },
+    {
+      "frame": "nhat-luan-empowered-4",
+      "aligned_bbox": [
+        78,
+        162,
+        177,
+        192
+      ]
+    },
+    {
+      "frame": "nhat-luan-empowered-5",
+      "aligned_bbox": [
+        76,
+        158,
+        180,
+        192
+      ]
+    },
+    {
+      "frame": "nhat-luan-empowered-6",
+      "aligned_bbox": [
+        80,
+        161,
+        177,
+        192
+      ]
+    },
+    {
+      "frame": "nhat-luan-empowered-7",
+      "aligned_bbox": [
+        79,
+        165,
+        176,
+        192
+      ]
+    },
+    {
+      "frame": "nhat-luan-empowered-8",
+      "aligned_bbox": [
+        80,
+        169,
+        175,
+        192
+      ]
+    },
+    {
+      "frame": "nhat-luan-empowered-9",
+      "aligned_bbox": [
+        87,
+        178,
+        169,
+        192
+      ]
+    }
+  ]
+}

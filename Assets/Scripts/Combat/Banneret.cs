@@ -144,16 +144,16 @@ namespace BuildBuild.Combat
             {
                 case 0:
                     ally.ApplyBuff("banner-damage", _definition.strikeDamageBonus, 0f, seconds);
-                    label = "+Công";
+                    label = "+Attack";
                     break;
                 case 1:
                     ally.ApplyBuff("banner-rate", 0f, _definition.strikeRateBonus, seconds);
-                    label = "+Tốc đánh";
+                    label = "+Attack Speed";
                     break;
                 default:
                     ally.ApplyShield(_hero.AttackDamage * _definition.strikeShieldPower, seconds,
                         _definition.shieldFrames, _definition.shieldBreakFrames, _hero.Health);
-                    label = "Khiên";
+                    label = "Shield";
                     break;
             }
             ally.ShowRally(_definition.rallyFrames, seconds);

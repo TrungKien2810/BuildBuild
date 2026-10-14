@@ -4,7 +4,7 @@ using UnityEngine;
 namespace BuildBuild.Combat
 {
     /// <summary>
-    /// So bay len roi mo dan. Chu TextMesh + font built-in (cung font UI Legacy cua SceneBuilder), co bong den phia
+    /// So bay len roi mo dan. Chu TextMesh + font pixel cua game (PixelFont), co bong den phia
     /// sau cho doc duoc tren nen sang. Tu huy khi het thoi gian.
     /// </summary>
     public class FloatingNumber : MonoBehaviour
@@ -17,7 +17,7 @@ namespace BuildBuild.Combat
         const float PopScale = 1.35f;
         const float PopSeconds = 0.1f;
         const float JitterX = 0.08f;
-        const int FontSize = 48;
+        const int FontSize = 50;   // boi so cua PixelFont.DesignPx (10)
         // TextMesh: 1 dong cao ~ characterSize * fontSize / 10 unit.
         const float CharacterSize = LineHeight * 10f / FontSize;
         static readonly Vector3 ShadowOffset = new Vector3(0.015f, -0.015f, 0f);
@@ -32,7 +32,7 @@ namespace BuildBuild.Combat
 
         public static void Spawn(Vector3 position, string text, Color color)
         {
-            if (_font == null) _font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            if (_font == null) _font = PixelFont.Asset;
 
             var go = new GameObject("FloatingNumber");
             var number = go.AddComponent<FloatingNumber>();
