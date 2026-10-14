@@ -1,31 +1,32 @@
 {
- "note": "toa do px trong sprite castle-tN.png, goc tren-trai; pad = tam mat be (giua bbox mat san da), platform_w = be ngang mat be; 3 trang thai cung canvas nen dung chung",
+ "note": "toa do px trong sprite DA CAT (goc tren-trai); pad = tam go dat phao, platform_w = be rong go, platform_h = chieu cao lan can go. Bo cuc D: thanh DEU kich thuoc, chong nhe 22%, cung canvas cho ca 3 trang thai. Da dua ve luoi unit: cao 360 art-px, game hien x2 (castle_grid.py, toa do go nhan cung he so).",
+ "source": "style-audit-20261010/castle-grid",
  "tiers": [
   {
    "tier": 1,
    "sprite": "castle-t1.png",
    "size": [
-    677,
-    1315
+    175,
+    360
    ],
    "mounts": [
     {
-     "x": 504,
-     "y": 151,
-     "platform_w": 136,
-     "platform_h": 72
+     "x": 137,
+     "y": 50,
+     "platform_w": 67,
+     "platform_h": 14
     },
     {
-     "x": 522,
-     "y": 506,
-     "platform_w": 175,
-     "platform_h": 111
+     "x": 130,
+     "y": 152,
+     "platform_w": 75,
+     "platform_h": 14
     },
     {
-     "x": 534,
-     "y": 947,
-     "platform_w": 202,
-     "platform_h": 147
+     "x": 136,
+     "y": 259,
+     "platform_w": 62,
+     "platform_h": 14
     }
    ]
   },
@@ -33,33 +34,33 @@
    "tier": 2,
    "sprite": "castle-t2.png",
    "size": [
-    733,
-    1457
+    130,
+    360
    ],
    "mounts": [
     {
-     "x": 522,
-     "y": 187,
-     "platform_w": 167,
-     "platform_h": 94
+     "x": 99,
+     "y": 47,
+     "platform_w": 49,
+     "platform_h": 13
     },
     {
-     "x": 552,
-     "y": 485,
-     "platform_w": 177,
-     "platform_h": 109
+     "x": 102,
+     "y": 130,
+     "platform_w": 44,
+     "platform_h": 13
     },
     {
-     "x": 573,
-     "y": 820,
-     "platform_w": 187,
-     "platform_h": 123
+     "x": 97,
+     "y": 216,
+     "platform_w": 54,
+     "platform_h": 13
     },
     {
-     "x": 588,
-     "y": 1167,
-     "platform_w": 191,
-     "platform_h": 110
+     "x": 102,
+     "y": 296,
+     "platform_w": 47,
+     "platform_h": 13
     }
    ]
   },
@@ -67,39 +68,39 @@
    "tier": 3,
    "sprite": "castle-t3.png",
    "size": [
-    693,
-    1447
+    117,
+    360
    ],
    "mounts": [
     {
-     "x": 499,
-     "y": 158,
-     "platform_w": 150,
-     "platform_h": 80
+     "x": 97,
+     "y": 34,
+     "platform_w": 28,
+     "platform_h": 13
     },
     {
-     "x": 511,
-     "y": 390,
-     "platform_w": 161,
-     "platform_h": 95
+     "x": 95,
+     "y": 103,
+     "platform_w": 33,
+     "platform_h": 13
     },
     {
-     "x": 526,
-     "y": 639,
-     "platform_w": 176,
-     "platform_h": 98
+     "x": 93,
+     "y": 171,
+     "platform_w": 37,
+     "platform_h": 13
     },
     {
-     "x": 549,
-     "y": 904,
-     "platform_w": 179,
-     "platform_h": 112
+     "x": 91,
+     "y": 240,
+     "platform_w": 42,
+     "platform_h": 13
     },
     {
-     "x": 552,
-     "y": 1169,
-     "platform_w": 187,
-     "platform_h": 113
+     "x": 92,
+     "y": 306,
+     "platform_w": 39,
+     "platform_h": 13
     }
    ]
   }

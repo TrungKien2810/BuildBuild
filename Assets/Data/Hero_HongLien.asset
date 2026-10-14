@@ -1,0 +1,116 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
+  m_Name: Hero_HongLien
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
+  displayName: Vu Nu Hong Lien
+  unitId: honglien
+  role: 4
+  maxHealth: 460
+  damage: 26
+  attackRate: 0.85
+  range: 4
+  moveSpeed: 1.1
+  leashRange: 3
+  maxHeld: 3
+  heldDamageBonus: 0
+  warden: {fileID: 0}
+  dragonRider: {fileID: 0}
+  banner: {fileID: 0}
+  wukong: {fileID: 0}
+  stormcaller: {fileID: 0}
+  galemonk: {fileID: 0}
+  daoVien: {fileID: 0}
+  bloodswordsman: {fileID: 0}
+  soulbinder: {fileID: 0}
+  gourdTaoist: {fileID: 0}
+  inkScribe: {fileID: 0}
+  hongLien: {fileID: 11400000, guid: 37c5477c041b8ff408b6d3f62469f8b4, type: 2}
+  saVe: {fileID: 0}
+  khoiLoiSu: {fileID: 0}
+  werewolf: {fileID: 0}
+  hauNghe: {fileID: 0}
+  bachLocTien: {fileID: 0}
+  swornBrother: 0
+  projectileSpeed: 8
+  splashRadius: 0.1
+  projectileFrames:
+  - {fileID: 21300000, guid: e3cb612a51a37714e94da71f5e94512f, type: 3}
+  - {fileID: 21300000, guid: f1c5f13dbe577a746bea84f45c96eb7c, type: 3}
+  - {fileID: 21300000, guid: 61a84cf111168fd4095e48cfc1e6d595, type: 3}
+  - {fileID: 21300000, guid: e8a9e7685a31912438302bec3d506186, type: 3}
+  - {fileID: 21300000, guid: 2e58c08656639b64ebae632032e960cd, type: 3}
+  - {fileID: 21300000, guid: 0e0ac33277a7d1945a2a0e3d85347081, type: 3}
+  - {fileID: 21300000, guid: e7c73469bcedf314d9bead19a89b571d, type: 3}
+  - {fileID: 21300000, guid: 9cd03b84743d7074fb386377c8c12473, type: 3}
+  projectileScale: 1
+  impactFrames:
+  - {fileID: 21300000, guid: 6c4c2725b8466f54f877a7b9c2dda8dd, type: 3}
+  - {fileID: 21300000, guid: 2814688206a4ea24d948f614bca9dadb, type: 3}
+  - {fileID: 21300000, guid: 2b580dca6807b8149acc9b72bf042294, type: 3}
+  - {fileID: 21300000, guid: de51847634365b94d8264b635f319f38, type: 3}
+  - {fileID: 21300000, guid: d4d72a06046ebcb48b7d7bf8cf8b0ac6, type: 3}
+  - {fileID: 21300000, guid: 1a122d0f32a7f284883d8dbe43968228, type: 3}
+  - {fileID: 21300000, guid: 8ce6fdb3b7302554397a90a9187877d5, type: 3}
+  - {fileID: 21300000, guid: ce8cc515cc2b3b14b9cbb3e2eb194f5e, type: 3}
+  impactScale: 1
+  knockbackOnHit: 0
+  fireSfx: 
+  impactSfx: 
+  skillSfx: 
+  skillKind: 33
+  skillTier: 0
+  skillCooldown: 0
+  manaMax: 6
+  manaPerSecond: 0.35
+  manaPerHit: 0.25
+  skillRadius: 1.6
+  skillDuration: 3
+  skillPower: 1
+  skillFrames: []
+  skillIntroFrames: []
+  skillOutroFrames: []
+  stunFrames: []
+  summoner: {fileID: 0}
+  healsAllies: 0
+  healFrames: []
+  buffFrames: []
+  shieldAmount: 0
+  shieldFrames: []
+  shieldBreakFrames: []
+  passiveStar: 1
+  minorStar: 3
+  secondMinorStar: 3
+  thirdMinorStar: 3
+  passiveKind: 0
+  passivePower: 0
+  passiveThreshold: 0
+  passiveRadius: 0
+  passiveEvery: 1
+  passiveDuration: 0
+  passiveFrames: []
+  ultimateText: 'Crimson Lotus Bloom: throws a large bud then blooms every bud at
+    once; enemies take the stacked blooms.'
+  passiveText: 'Sow Crimson Lotus: every 3rd basic hit plants a lotus bud on the
+    ground under the enemy (max 3).'
+  minorText: 'Twin Fan Dance: 2 narrow fans of fire for 1.5x. Cooldown 8s.'
+  secondMinorText: 'Lotus Heart Pull: detonates the bud nearest the target for 2x.
+    Cooldown 6s.'
+  thirdMinorText: 
+  ultimateIcon: {fileID: 21300000, guid: f08d538d755cc0f439c3c4b3ff60002e, type: 3}
+  minorIcon: {fileID: 21300000, guid: 4716ddc0abd50dd4db5c121d7149aa68, type: 3}
+  passiveIcon: {fileID: 21300000, guid: 04c0fd915c96eb548b58326a55467445, type: 3}
+  secondMinorIcon: {fileID: 21300000, guid: 782bc09336243d747bb79af94d127673, type: 3}
+  thirdMinorIcon: {fileID: 0}
+  animations: {fileID: 11400000, guid: 556f5955ee462b840be4df09f0f3c9d0, type: 2}
+  artFacesRight: 0
+  avatar: {fileID: 21300000, guid: 3112375490c93df4097f1d5d43ae994f, type: 3}

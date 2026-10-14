@@ -1,0 +1,122 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
+  m_Name: Hero_BlackSigilHunter
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
+  displayName: Black Sigil Hunter
+  unitId: blacksigilhunter
+  role: 3
+  maxHealth: 420
+  damage: 30
+  attackRate: 0.85
+  range: 4.5
+  moveSpeed: 1.2
+  leashRange: 3
+  maxHeld: 3
+  heldDamageBonus: 0
+  warden: {fileID: 0}
+  dragonRider: {fileID: 0}
+  banner: {fileID: 0}
+  wukong: {fileID: 0}
+  stormcaller: {fileID: 0}
+  galemonk: {fileID: 0}
+  daoVien: {fileID: 0}
+  bloodswordsman: {fileID: 0}
+  soulbinder: {fileID: 0}
+  gourdTaoist: {fileID: 0}
+  inkScribe: {fileID: 0}
+  hongLien: {fileID: 0}
+  saVe: {fileID: 0}
+  khoiLoiSu: {fileID: 0}
+  werewolf: {fileID: 0}
+  hauNghe: {fileID: 0}
+  bachLocTien: {fileID: 0}
+  swornBrother: 0
+  projectileSpeed: 8
+  splashRadius: 0.1
+  projectileFrames:
+  - {fileID: 21300000, guid: a6b669697ae2a9b4b98eae668756d9d8, type: 3}
+  - {fileID: 21300000, guid: 05e70373e08cdf34ab426351846b0aae, type: 3}
+  - {fileID: 21300000, guid: 0a7c11561738cee42bc886898f3055a6, type: 3}
+  - {fileID: 21300000, guid: 8cb28b461f009144382c340a79ab3fbc, type: 3}
+  projectileScale: 1
+  impactFrames:
+  - {fileID: 21300000, guid: 71ec723df44d7d245b517204b292b1ae, type: 3}
+  - {fileID: 21300000, guid: e58d54969107a0d439e2194602073ece, type: 3}
+  - {fileID: 21300000, guid: 401115deb7f53a34e90062cdb8be7c45, type: 3}
+  - {fileID: 21300000, guid: 507a8adc1665bd34eaf0fe7a1cc1a094, type: 3}
+  impactScale: 1
+  knockbackOnHit: 0
+  fireSfx: 
+  impactSfx: 
+  skillSfx: 
+  skillKind: 30
+  skillTier: 0
+  skillCooldown: 0
+  manaMax: 6
+  manaPerSecond: 0.35
+  manaPerHit: 0.25
+  skillRadius: 1.5
+  skillDuration: 2
+  skillPower: 3
+  skillFrames:
+  - {fileID: 21300000, guid: 4665dffbeefd95b4597d14879aa57ca6, type: 3}
+  - {fileID: 21300000, guid: 698531fd08202ba43a04d930745713b2, type: 3}
+  - {fileID: 21300000, guid: acd568a1422627648a8db1d83e4d124a, type: 3}
+  - {fileID: 21300000, guid: ad11c686180790d48a662e5f182720f0, type: 3}
+  - {fileID: 21300000, guid: b49b2ef11c0589d42b477b63530cd463, type: 3}
+  - {fileID: 21300000, guid: 829c50a155bac2642bdd9d87d325fb26, type: 3}
+  skillIntroFrames:
+  - {fileID: 21300000, guid: 71ec723df44d7d245b517204b292b1ae, type: 3}
+  - {fileID: 21300000, guid: e58d54969107a0d439e2194602073ece, type: 3}
+  - {fileID: 21300000, guid: 401115deb7f53a34e90062cdb8be7c45, type: 3}
+  - {fileID: 21300000, guid: 507a8adc1665bd34eaf0fe7a1cc1a094, type: 3}
+  skillOutroFrames: []
+  stunFrames: []
+  summoner: {fileID: 0}
+  healsAllies: 0
+  healFrames: []
+  buffFrames: []
+  shieldAmount: 0
+  shieldFrames: []
+  shieldBreakFrames: []
+  passiveStar: 1
+  minorStar: 3
+  secondMinorStar: 3
+  thirdMinorStar: 3
+  passiveKind: 22
+  passivePower: 0.3
+  passiveThreshold: 0
+  passiveRadius: 0
+  passiveEvery: 1
+  passiveDuration: 0
+  passiveFrames:
+  - {fileID: 21300000, guid: 71ec723df44d7d245b517204b292b1ae, type: 3}
+  - {fileID: 21300000, guid: e58d54969107a0d439e2194602073ece, type: 3}
+  - {fileID: 21300000, guid: 401115deb7f53a34e90062cdb8be7c45, type: 3}
+  - {fileID: 21300000, guid: 507a8adc1665bd34eaf0fe7a1cc1a094, type: 3}
+  ultimateText: 'Black Sigil Verdict: 3 sigil stakes on the 3 healthiest enemies;
+    after 2s they blast for 3x (Armor Break +50%) + Heal Lock 4s.'
+  passiveText: 'Sigil Break: direct hits on a target that still has a shield deal
+    +30% damage.'
+  minorText: 'Black Raven Armor Break: prioritises targets that still have a shield,
+    dealing 2x + heavy armor break + Heal Lock. Cooldown 10s.'
+  secondMinorText: 
+  thirdMinorText: 
+  ultimateIcon: {fileID: 21300000, guid: 790d39ce09bb89240a5d1a796ea9861e, type: 3}
+  minorIcon: {fileID: 21300000, guid: 217ffcb0c285d164b9d604816c1300b1, type: 3}
+  passiveIcon: {fileID: 21300000, guid: e05e18052cc53ce4b80af01d21328bfe, type: 3}
+  secondMinorIcon: {fileID: 0}
+  thirdMinorIcon: {fileID: 0}
+  animations: {fileID: 11400000, guid: 5d35b02f7df16074caa220248d6513a9, type: 2}
+  artFacesRight: 0
+  avatar: {fileID: 21300000, guid: 18d17fa1e0d3f5c4a888ecb20f4db5ba, type: 3}

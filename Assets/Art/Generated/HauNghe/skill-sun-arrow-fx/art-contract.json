@@ -1,0 +1,41 @@
+{
+  "unit": "HauNghe",
+  "action": "xa-nhat-arrow",
+  "kind": "fx",
+  "approval": "pending visual review",
+  "cell": [
+    256,
+    256
+  ],
+  "origin": [
+    128,
+    128
+  ],
+  "anchor": "center",
+  "raw_root": [
+    256,
+    256
+  ],
+  "scale_policy": "one common scale for entire effect cycle; original root geometry preserved",
+  "source_trim_border": 0,
+  "phases": {
+    "loop": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  },
+  "gameplay_timing": "preview only; not wired",
+  "frame_raw_root_y": [
+    291,
+    291,
+    255,
+    255,
+    219,
+    219
+  ],
+  "root_correction": "translation only; source geometric ground line restored to fixed delivery origin"
+}

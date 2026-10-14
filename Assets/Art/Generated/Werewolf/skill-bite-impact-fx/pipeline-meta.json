@@ -1,0 +1,51 @@
+{
+  "target": "player",
+  "mode": "skill-bite-impact-fx",
+  "source": "tempart\\Werewolf\\fx-bite-impact\\final",
+  "cell_size": 128,
+  "frame_size": [
+    128,
+    128
+  ],
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet, giao 2026-10-08",
+  "frames": [
+    {
+      "frame": "bite-impact-1",
+      "aligned_bbox": [
+        45,
+        48,
+        82,
+        82
+      ]
+    },
+    {
+      "frame": "bite-impact-2",
+      "aligned_bbox": [
+        45,
+        53,
+        82,
+        80
+      ]
+    },
+    {
+      "frame": "bite-impact-3",
+      "aligned_bbox": [
+        42,
+        52,
+        86,
+        72
+      ]
+    },
+    {
+      "frame": "bite-impact-4",
+      "aligned_bbox": [
+        44,
+        46,
+        84,
+        78
+      ]
+    }
+  ]
+}

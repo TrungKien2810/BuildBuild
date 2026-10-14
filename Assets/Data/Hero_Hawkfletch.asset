@@ -32,6 +32,14 @@ MonoBehaviour:
   daoVien: {fileID: 0}
   bloodswordsman: {fileID: 0}
   soulbinder: {fileID: 0}
+  gourdTaoist: {fileID: 0}
+  inkScribe: {fileID: 0}
+  hongLien: {fileID: 0}
+  saVe: {fileID: 0}
+  khoiLoiSu: {fileID: 0}
+  werewolf: {fileID: 0}
+  hauNghe: {fileID: 0}
+  bachLocTien: {fileID: 0}
   swornBrother: 0
   projectileSpeed: 12
   splashRadius: 0.3
@@ -78,6 +86,7 @@ MonoBehaviour:
   passiveStar: 1
   minorStar: 3
   secondMinorStar: 3
+  thirdMinorStar: 3
   passiveKind: 3
   passivePower: 2
   passiveThreshold: 0
@@ -85,16 +94,16 @@ MonoBehaviour:
   passiveEvery: 4
   passiveDuration: 0
   passiveFrames: []
-  ultimateText: "B\u1EAFn Nhanh Li\xEAn Ho\xE0n: t\u0103ng m\u1EA1nh t\u1ED1c \u0111\xE1nh
-    trong v\xE0i gi\xE2y."
-  passiveText: "Nh\u1EAFm Y\u1EBFu \u0110i\u1EC3m: c\u1EE9 ph\xE1t th\u1EE9 4 l\xE0
-    ch\xED m\u1EA1ng, g\u1EA5p \u0111\xF4i s\xE1t th\u01B0\u01A1ng."
+  ultimateText: 'Rapid Fire: a heavy boost to attack speed for a few seconds.'
+  passiveText: 'Weak Point Aim: every 4th shot is a crit, doubling damage.'
   minorText: 
   secondMinorText: 
+  thirdMinorText: 
   ultimateIcon: {fileID: 21300000, guid: 9857a967451a8bb4e9fa26496937c20e, type: 3}
   minorIcon: {fileID: 0}
   passiveIcon: {fileID: 21300000, guid: 5d60c477055dd2148838df71e89629bc, type: 3}
   secondMinorIcon: {fileID: 0}
+  thirdMinorIcon: {fileID: 0}
   animations: {fileID: 11400000, guid: aaba1a3b05739ea4581857647bb28840, type: 2}
   artFacesRight: 0
   avatar: {fileID: 21300000, guid: 855dacc74ee61234da969f8eb3b8e02b, type: 3}

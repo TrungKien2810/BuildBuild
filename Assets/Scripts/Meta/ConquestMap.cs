@@ -57,7 +57,7 @@ namespace BuildBuild.Meta
         public const int AttacksPerDay = 5;
         public const float FreeScanSeconds = 30f * 60f;
         public const float StreakBonus = 0.06f;
-        public static readonly string[] TierNames = { "Dễ", "Ngang", "Khó" };
+        public static readonly string[] TierNames = { "Easy", "Ngang", "Hard" };
         public static readonly float[] TierPower = { 0.85f, 1f, 1.2f };
         static readonly float[] TierGold = { 0.8f, 1f, 1.4f };
         static readonly int[] TierShards = { 0, 1, 2 };
@@ -71,7 +71,7 @@ namespace BuildBuild.Meta
         /// nhung gia tri nam o buff / hoi mau; SR / SSR co noi tai + chieu manh hon.
         /// </summary>
         public static readonly float[] RarityPower = { 1f, 1.15f, 1.3f, 1.5f };
-        public static readonly string[] LordNames = { "Nam tước Grimhold", "Nữ bá tước Velmora", "Lãnh chúa trẻ Aldric" };
+        public static readonly string[] LordNames = { "Baron Grimhold", "Countess Velmora", "Young Lord Aldric" };
 
         // Tam cac bai dat trong tren `UI/raid/world-map.png`, chuan hoa 0..1 goc duoi-trai. Ban do (bo ui-v3) ve dung 3
         // bai dat cho thanh NPC — trai-tren / phai-tren / phai-duoi — nen moi lan quet dung ca ba, chi doi do kho <-> bai.

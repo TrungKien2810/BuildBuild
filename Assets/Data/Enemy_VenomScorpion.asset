@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 505e5ef04f70452448a64507e11a0c68, type: 3}
   m_Name: Enemy_VenomScorpion
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.EnemyDefinition
-  displayName: "B\u1ECD C\u1EA1p \u0110\u1ED9c"
+  displayName: "Venom Scorpion"
   kind: 0
   baseHealth: 140
   baseDamage: 14

@@ -32,6 +32,14 @@ MonoBehaviour:
   daoVien: {fileID: 0}
   bloodswordsman: {fileID: 0}
   soulbinder: {fileID: 0}
+  gourdTaoist: {fileID: 0}
+  inkScribe: {fileID: 0}
+  hongLien: {fileID: 0}
+  saVe: {fileID: 0}
+  khoiLoiSu: {fileID: 0}
+  werewolf: {fileID: 0}
+  hauNghe: {fileID: 0}
+  bachLocTien: {fileID: 0}
   swornBrother: 0
   projectileSpeed: 8
   splashRadius: 0.45
@@ -78,6 +86,7 @@ MonoBehaviour:
   passiveStar: 1
   minorStar: 3
   secondMinorStar: 3
+  thirdMinorStar: 3
   passiveKind: 4
   passivePower: 0.5
   passiveThreshold: 0
@@ -85,17 +94,18 @@ MonoBehaviour:
   passiveEvery: 1
   passiveDuration: 0
   passiveFrames: []
-  ultimateText: "V\xF9ng B\u0103ng: \u0111\u1EB7t v\xF9ng b\u0103ng t\u1EA1i c\u1EE5m
-    qu\xE1i \u0111\xF4ng nh\u1EA5t, t\u1ED3n t\u1EA1i v\xE0i gi\xE2y."
-  passiveText: "V\u1EE1 B\u0103ng: qu\xE1i \u0111ang b\u1ECB l\xE0m ch\u1EADm ch\u1EBFt
-    trong t\u1EA7m th\xEC n\u1ED5 m\u1EA3nh b\u0103ng \u2014 qu\xE1i quanh x\xE1c
-    \u0103n 50% s\xE1t th\u01B0\u01A1ng \u0111\xF2n th\u01B0\u1EDDng."
+  ultimateText: 'Ice Field: places an ice field on the densest enemy cluster, lasting
+    a few seconds.'
+  passiveText: "Ice Shatter: an enemy that dies while slowed in range bursts into
+    ice shards \u2014 enemies around the body take 50% of a basic hit."
   minorText: 
   secondMinorText: 
+  thirdMinorText: 
   ultimateIcon: {fileID: 21300000, guid: 4a933aad66e207049815a5d9d4cb9209, type: 3}
   minorIcon: {fileID: 0}
   passiveIcon: {fileID: 21300000, guid: 10b8cd5d14db37e4ea5ac91da2d81b27, type: 3}
   secondMinorIcon: {fileID: 0}
+  thirdMinorIcon: {fileID: 0}
   animations: {fileID: 11400000, guid: db1208e2e599f1a4cb023a8ab90b0028, type: 2}
   artFacesRight: 0
   avatar: {fileID: 21300000, guid: 32fbf95ad7b1d7340ae5627b8119d6cf, type: 3}

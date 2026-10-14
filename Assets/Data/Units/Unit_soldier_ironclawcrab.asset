@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Unit_soldier_ironclawcrab
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.UnitDefinition
   id: soldier_ironclawcrab
-  displayName: "Cua k\xECm s\u1EAFt"
+  displayName: Iron Claw Crab
   category: 2
   rarity: 1
-  icon: {fileID: 21300000, guid: e94ec3817d95f5e41831780330069dc0, type: 3}
+  icon: {fileID: 21300000, guid: 083ca8ca3afcf7c4ea5111a29cdd269b, type: 3}

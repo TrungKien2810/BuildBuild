@@ -1,0 +1,30 @@
+{
+  "unit": "HauNghe",
+  "action": "cuu-tien-empowered-arrow",
+  "kind": "fx",
+  "approval": "pending visual review",
+  "cell": [
+    128,
+    128
+  ],
+  "origin": [
+    64,
+    64
+  ],
+  "anchor": "center",
+  "raw_root": [
+    256,
+    256
+  ],
+  "scale_policy": "one common scale for entire effect cycle; original root geometry preserved",
+  "source_trim_border": 0,
+  "phases": {
+    "loop": [
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  "gameplay_timing": "preview only; not wired"
+}

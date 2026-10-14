@@ -43,7 +43,7 @@ namespace BuildBuild.UI
 
         void Render(Faction side)
         {
-            titleText.text = stats.SnapshotConquest ? "Đóng góp — Chinh Phạt" : $"Đóng góp — Wave {stats.SnapshotWave}";
+            titleText.text = stats.SnapshotConquest ? "Contribution — Conquest" : $"Contribution — Wave {stats.SnapshotWave}";
             allyTab.image.color = side == Faction.Player ? Color.white : UnselectedTab;
             enemyTab.image.color = side == Faction.Npc ? Color.white : UnselectedTab;
             foreach (var row in _rows) Destroy(row);
@@ -69,7 +69,7 @@ namespace BuildBuild.UI
         void AddEmpty()
         {
             var row = NewRow();
-            row.transform.Find("Name").GetComponent<Text>().text = "Chưa có đóng góp nào";
+            row.transform.Find("Name").GetComponent<Text>().text = "No Contribution Yet";
             row.transform.Find("Avatar").gameObject.SetActive(false);
             row.transform.Find("Damage").gameObject.SetActive(false);
             row.transform.Find("Tank").gameObject.SetActive(false);

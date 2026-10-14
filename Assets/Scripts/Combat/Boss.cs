@@ -95,7 +95,7 @@ namespace BuildBuild.Combat
         void LateUpdate()
         {
             if (_enraged && _renderer != null && _enemy != null && !_enemy.IsDying && !_enemy.IsFrozen)
-                _renderer.color = EnrageTint;
+                _renderer.color = Unit.BodyColor(EnrageTint);
         }
 
         void Enrage()

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Unit_cannon_longgun
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.UnitDefinition
   id: cannon_longgun
-  displayName: "Ho\u1EA3 Mai Th\xE0nh"
+  displayName: Fireblossom Keep
   category: 1
   rarity: 2
   icon: {fileID: 21300000, guid: c6c74e44f317b874ebebb28b81f43c05, type: 3}

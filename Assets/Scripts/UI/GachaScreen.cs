@@ -19,10 +19,10 @@ namespace BuildBuild.UI
         /// <summary>Thu tu = thu tu `bannerButtons`. `only` null = banner tong hop.</summary>
         static readonly (string name, UnitCategory? only)[] Banners =
         {
-            ("Tổng hợp", null),
+            ("Mixed", null),
             ("Hero", UnitCategory.Hero),
-            ("Lính", UnitCategory.Soldier),
-            ("Trụ", UnitCategory.Cannon),
+            ("Soldiers", UnitCategory.Soldier),
+            ("Towers", UnitCategory.Cannon),
         };
 
         static readonly Color TabIdle = new Color(0.6f, 0.6f, 0.6f);
@@ -78,11 +78,11 @@ namespace BuildBuild.UI
             _banner = banner;
             for (int i = 0; i < bannerButtons.Length; i++)
                 bannerButtons[i].image.color = i == banner ? Color.white : TabIdle;
-            titleText.text = $"Triệu hồi · {Banners[banner].name}";
+            titleText.text = $"Summon · {Banners[banner].name}";
             string rarities = $"N {config.rateN}%  ·  R {config.rateR}%  ·  SR {config.rateSR}%  ·  SSR {config.rateSSR}%";
             ratesText.text = Banners[banner].only == null
-                ? $"{rarities}   |   Hero {config.heroShare * 100f:0}% · Lính {config.soldierShare * 100f:0}% · Trụ {(1f - config.heroShare - config.soldierShare) * 100f:0}%"
-                : $"{rarities}   |   Chỉ ra {Banners[banner].name}";
+                ? $"{rarities}   |   Hero {config.heroShare * 100f:0}% · Soldiers {config.soldierShare * 100f:0}% · Towers {(1f - config.heroShare - config.soldierShare) * 100f:0}%"
+                : $"{rarities}   |   Only {Banners[banner].name}";
             Refresh();
         }
 
@@ -166,12 +166,12 @@ namespace BuildBuild.UI
             var save = SaveSystem.Data;
             goldText.text = economy.Gold.ToString("N0");
             // +1: luot duoc dam bao cung tinh — bo dem 30 nghia la luot KE TIEP chac chan SR.
-            pityText.text = $"Chắc chắn SR trong {config.softPity + 1 - save.rollsSinceSR} lượt  ·  SSR trong {config.hardPity + 1 - save.rollsSinceSSR} lượt";
+            pityText.text = $"Guaranteed SR within {config.softPity + 1 - save.rollsSinceSR} rolls  ·  SSR within {config.hardPity + 1 - save.rollsSinceSSR} rolls";
             // Nut xam khong du ro: ghi thang "thieu vang" de khong tuong la game do.
             rollOneButton.interactable = !_revealing && economy.Gold >= config.singleCost;
             rollTenButton.interactable = !_revealing && economy.Gold >= config.tenCost;
-            rollOneLabel.text = $"Quay 1\n{config.singleCost:N0} vàng{(_revealing || rollOneButton.interactable ? "" : " · thiếu")}";
-            rollTenLabel.text = $"Quay 10\n{config.tenCost:N0} vàng{(_revealing || rollTenButton.interactable ? "" : " · thiếu")}";
+            rollOneLabel.text = $"Roll 1\n{config.singleCost:N0} Gold{(_revealing || rollOneButton.interactable ? "" : " · missing")}";
+            rollTenLabel.text = $"Roll 10\n{config.tenCost:N0} Gold{(_revealing || rollTenButton.interactable ? "" : " · missing")}";
         }
     }
 }

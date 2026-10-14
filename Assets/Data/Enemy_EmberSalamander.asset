@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 505e5ef04f70452448a64507e11a0c68, type: 3}
   m_Name: Enemy_EmberSalamander
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.EnemyDefinition
-  displayName: "K\u1EF3 Nh\xF4ng Than H\u1ED3ng"
+  displayName: "Ember Salamander"
   kind: 0
   baseHealth: 160
   baseDamage: 12

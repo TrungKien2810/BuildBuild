@@ -32,6 +32,14 @@ MonoBehaviour:
   daoVien: {fileID: 0}
   bloodswordsman: {fileID: 0}
   soulbinder: {fileID: 0}
+  gourdTaoist: {fileID: 0}
+  inkScribe: {fileID: 0}
+  hongLien: {fileID: 0}
+  saVe: {fileID: 0}
+  khoiLoiSu: {fileID: 0}
+  werewolf: {fileID: 0}
+  hauNghe: {fileID: 0}
+  bachLocTien: {fileID: 0}
   swornBrother: 0
   projectileSpeed: 20
   splashRadius: 0.3
@@ -66,6 +74,7 @@ MonoBehaviour:
   passiveStar: 1
   minorStar: 3
   secondMinorStar: 3
+  thirdMinorStar: 3
   passiveKind: 0
   passivePower: 0
   passiveThreshold: 0
@@ -77,10 +86,12 @@ MonoBehaviour:
   passiveText: 
   minorText: 
   secondMinorText: 
+  thirdMinorText: 
   ultimateIcon: {fileID: 0}
   minorIcon: {fileID: 0}
   passiveIcon: {fileID: 0}
   secondMinorIcon: {fileID: 0}
+  thirdMinorIcon: {fileID: 0}
   animations: {fileID: 11400000, guid: d39bec06151549e4aa5add8f00bfc4ae, type: 2}
   artFacesRight: 0
   avatar: {fileID: 0}

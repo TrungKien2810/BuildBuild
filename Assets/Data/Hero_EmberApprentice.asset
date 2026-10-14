@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
   m_Name: Hero_EmberApprentice
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
-  displayName: "Ph\xE1p s\u01B0 l\u1EEDa t\u1EADp s\u1EF1"
+  displayName: Ember Apprentice
   unitId: emberapprentice
   role: 4
   maxHealth: 240
@@ -32,6 +32,14 @@ MonoBehaviour:
   daoVien: {fileID: 0}
   bloodswordsman: {fileID: 0}
   soulbinder: {fileID: 0}
+  gourdTaoist: {fileID: 0}
+  inkScribe: {fileID: 0}
+  hongLien: {fileID: 0}
+  saVe: {fileID: 0}
+  khoiLoiSu: {fileID: 0}
+  werewolf: {fileID: 0}
+  hauNghe: {fileID: 0}
+  bachLocTien: {fileID: 0}
   swornBrother: 0
   projectileSpeed: 8
   splashRadius: 0.3
@@ -84,6 +92,7 @@ MonoBehaviour:
   passiveStar: 1
   minorStar: 3
   secondMinorStar: 3
+  thirdMinorStar: 3
   passiveKind: 10
   passivePower: 5
   passiveThreshold: 0
@@ -95,19 +104,18 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f1800b32521ea0c4b9e5d1a00027bc98, type: 3}
   - {fileID: 21300000, guid: 76458bbaee342e649ad3be52aaa719be, type: 3}
   - {fileID: 21300000, guid: cfd74b3052f429a4aa4cbb252a41534e, type: 3}
-  ultimateText: "M\u01B0a T\xE0n L\u1EEDa: 3 qu\u1EA3 c\u1EA7u l\u1EEDa r\u01A1i
-    quanh c\u1EE5m qu\xE1i \u0111\xF4ng nh\u1EA5t \u2014 m\u1ED7i qu\u1EA3 n\u1ED5
-    g\xE2y g\u1EA5p \u0111\xF4i \u0111\xF2n th\u01B0\u1EDDng + Ch\xE1y, \u0111\u1EC3
-    l\u1EA1i v\u0169ng l\u1EEDa 4s."
-  passiveText: "B\xE9n L\u1EEDa: \u0111\xF2n th\u01B0\u1EDDng g\xE2y Ch\xE1y 3s (5
-    s\xE1t th\u01B0\u01A1ng/gi\xE2y); qu\xE1i \u0111ang Ch\xE1y m\xE0 ch\u1EBFt th\xEC
-    l\u1EEDa nh\u1EA3y sang qu\xE1i g\u1EA7n nh\u1EA5t."
+  ultimateText: "Ember Rain: 3 fireballs fall around the densest enemy cluster \u2014
+    each blasts for double a basic hit + Burn, leaving a fire pool for 4s."
+  passiveText: 'Ember: basic hits apply Burn for 3s (5 damage/second); an enemy that
+    dies while Burning passes the fire to the nearest enemy.'
   minorText: 
   secondMinorText: 
+  thirdMinorText: 
   ultimateIcon: {fileID: 0}
   minorIcon: {fileID: 0}
   passiveIcon: {fileID: 0}
   secondMinorIcon: {fileID: 0}
+  thirdMinorIcon: {fileID: 0}
   animations: {fileID: 11400000, guid: c200f53402d2a064e8e8b9b68e2f62e3, type: 2}
   artFacesRight: 0
-  avatar: {fileID: 21300000, guid: eb0cdccc83f709f4eb355e25db375a1f, type: 3}
+  avatar: {fileID: 21300000, guid: 490bd641e00667e42b4e93f4ecb65b09, type: 3}

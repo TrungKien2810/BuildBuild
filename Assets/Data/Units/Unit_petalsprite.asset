@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Unit_petalsprite
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.UnitDefinition
   id: petalsprite
-  displayName: "Hoa y\xEAu b\u1EAFn h\u1EA1t"
+  displayName: Petal Sprite
   category: 0
   rarity: 0
-  icon: {fileID: 21300000, guid: 655834c8fc5bbc148ada004d475e002a, type: 3}
+  icon: {fileID: 21300000, guid: 2e659889554e81c479d7d1c0ad6cc3bb, type: 3}

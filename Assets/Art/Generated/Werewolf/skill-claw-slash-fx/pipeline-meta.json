@@ -1,0 +1,51 @@
+{
+  "target": "player",
+  "mode": "skill-claw-slash-fx",
+  "source": "tempart\\Werewolf\\fx-claw-slash\\final",
+  "cell_size": 128,
+  "frame_size": [
+    128,
+    128
+  ],
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet, giao 2026-10-08",
+  "frames": [
+    {
+      "frame": "claw-slash-1",
+      "aligned_bbox": [
+        47,
+        40,
+        88,
+        72
+      ]
+    },
+    {
+      "frame": "claw-slash-2",
+      "aligned_bbox": [
+        36,
+        36,
+        92,
+        92
+      ]
+    },
+    {
+      "frame": "claw-slash-3",
+      "aligned_bbox": [
+        39,
+        37,
+        89,
+        87
+      ]
+    },
+    {
+      "frame": "claw-slash-4",
+      "aligned_bbox": [
+        46,
+        44,
+        88,
+        83
+      ]
+    }
+  ]
+}

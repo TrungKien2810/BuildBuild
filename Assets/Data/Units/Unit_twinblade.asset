@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Unit_twinblade
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.UnitDefinition
   id: twinblade
-  displayName: "Hi\u1EC7p kh\xE1ch song \u0111ao"
+  displayName: Twinblade
   category: 0
   rarity: 1
-  icon: {fileID: 21300000, guid: 5a4597c5f2d0b6b45bce61e99ef59257, type: 3}
+  icon: {fileID: 21300000, guid: c51a560e1b6f1ee4f91d195d26ed0855, type: 3}

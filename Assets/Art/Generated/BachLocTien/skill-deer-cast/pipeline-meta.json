@@ -1,0 +1,63 @@
+{
+  "target": "player",
+  "mode": "skill-deer-cast",
+  "cell_size": 128,
+  "align": "feet",
+  "ground_row": 116,
+  "frames": [
+    {
+      "frame": "loc-anh-cast-1",
+      "aligned_bbox": [
+        49,
+        61,
+        79,
+        116
+      ]
+    },
+    {
+      "frame": "loc-anh-cast-2",
+      "aligned_bbox": [
+        44,
+        60,
+        84,
+        116
+      ]
+    },
+    {
+      "frame": "loc-anh-cast-3",
+      "aligned_bbox": [
+        47,
+        58,
+        87,
+        116
+      ]
+    },
+    {
+      "frame": "loc-anh-cast-4",
+      "aligned_bbox": [
+        45,
+        58,
+        78,
+        116
+      ]
+    },
+    {
+      "frame": "loc-anh-cast-5",
+      "aligned_bbox": [
+        47,
+        58,
+        80,
+        116
+      ]
+    },
+    {
+      "frame": "loc-anh-cast-6",
+      "aligned_bbox": [
+        47,
+        58,
+        78,
+        116
+      ]
+    }
+  ]
+}

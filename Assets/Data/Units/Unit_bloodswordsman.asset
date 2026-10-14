@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Unit_bloodswordsman
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.UnitDefinition
   id: bloodswordsman
-  displayName: "Huy\u1EBFt ki\u1EBFm kh\xE1ch"
+  displayName: Blood Swordsman
   category: 0
   rarity: 2
   icon: {fileID: 21300000, guid: 7977f99d69374e6418bac1e2dcc3b603, type: 3}

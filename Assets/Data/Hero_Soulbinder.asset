@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
   m_Name: Hero_Soulbinder
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
-  displayName: "Thu\u1EADt s\u0129 k\u1EBFt h\u1ED3n"
+  displayName: Soulbinder
   unitId: soulbinder
   role: 5
   maxHealth: 320
@@ -32,6 +32,14 @@ MonoBehaviour:
   daoVien: {fileID: 0}
   bloodswordsman: {fileID: 0}
   soulbinder: {fileID: 11400000, guid: 21b33c411c36f054db42ac710c86dd88, type: 2}
+  gourdTaoist: {fileID: 0}
+  inkScribe: {fileID: 0}
+  hongLien: {fileID: 0}
+  saVe: {fileID: 0}
+  khoiLoiSu: {fileID: 0}
+  werewolf: {fileID: 0}
+  hauNghe: {fileID: 0}
+  bachLocTien: {fileID: 0}
   swornBrother: 0
   projectileSpeed: 8
   splashRadius: 0.1
@@ -74,6 +82,7 @@ MonoBehaviour:
   passiveStar: 1
   minorStar: 3
   secondMinorStar: 3
+  thirdMinorStar: 3
   passiveKind: 0
   passivePower: 0
   passiveThreshold: 0
@@ -81,22 +90,20 @@ MonoBehaviour:
   passiveEvery: 1
   passiveDuration: 0
   passiveFrames: []
-  ultimateText: "\u0110\u1EA1i H\u1ED3n Kh\u1EBF: n\u1ED1i t\u1ED1i \u0111a 5 \u0111\u1ECBch
-    trong 8s, lan 40%; H\u1ED3n Ch\u1EA5n 2\xD7 v\xE0o g\u1ED1c. S\xE1t th\u01B0\u01A1ng
-    sao kh\xF4ng lan ti\u1EBFp."
-  passiveText: "Chuy\u1EC3n K\u1EBFt: \u0111\u1ECBch li\xEAn k\u1EBFt ch\u1EBFt th\xEC
-    d\xE2y chuy\u1EC3n sang \u0111\u1ECBch g\u1EA7n nh\u1EA5t trong v\xF9ng ch\u1ECDn,
-    gi\u1EEF th\u1EDDi gian c\xF2n l\u1EA1i."
-  minorText: "Tam H\u1ED3n K\u1EBFt: n\u1ED1i t\u1ED1i \u0111a 3 \u0111\u1ECBch trong
-    6s; s\xE1t th\u01B0\u01A1ng tr\u1EF1c ti\u1EBFp lan 25% HP th\u1EF1c m\u1EA5t
-    l\xEAn m\u1ED7i \u0111\u1ECBch kh\xE1c. H\u1ED3i 10s."
-  secondMinorText: "Gi\u1EADt H\u1ED3n: cho\xE1ng c\xE1c \u0111\u1ECBch \u0111ang
-    n\u1ED1i, m\u1ED7i h\u1ED3n g\xE2y 1,5\xD7 l\xEAn g\u1ED1c; t\u1ED5ng s\xE1t
-    th\u01B0\u01A1ng lan \u0111\xFAng m\u1ED9t l\u1EA7n. H\u1ED3i 10s."
+  ultimateText: 'Great Soul Pact: links up to 5 enemies for 8s, spreading 40%; Soul
+    Shock 2x on the root. Spread damage does not chain further.'
+  passiveText: 'Chain Shift: when a linked enemy dies the chain moves to the nearest
+    enemy in the chosen area, keeping the remaining time.'
+  minorText: 'Triple Soul Link: links up to 3 enemies for 6s; direct damage spreads
+    25% of real health lost to each other enemy. Cooldown 10s.'
+  secondMinorText: 'Soul Yank: stuns the linked enemies, each soul dealing 1.5x to
+    the root; the total damage spreads exactly once. Cooldown 10s.'
+  thirdMinorText: 
   ultimateIcon: {fileID: 0}
   minorIcon: {fileID: 0}
   passiveIcon: {fileID: 0}
   secondMinorIcon: {fileID: 0}
+  thirdMinorIcon: {fileID: 0}
   animations: {fileID: 11400000, guid: 5afb723703d95c240a46784f626bbe24, type: 2}
   artFacesRight: 0
   avatar: {fileID: 21300000, guid: 2633654b5a97f2c419f45f1deebe79d0, type: 3}

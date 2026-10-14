@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
   m_Name: Hero_TruongPhi
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
-  displayName: "Tr\u01B0\u01A1ng Phi"
+  displayName: Truong Phi
   unitId: truongphi
   role: 1
   maxHealth: 1700
@@ -32,6 +32,14 @@ MonoBehaviour:
   daoVien: {fileID: 11400000, guid: 9d7ee7b11c5af4644b803631fe7a9f86, type: 2}
   bloodswordsman: {fileID: 0}
   soulbinder: {fileID: 0}
+  gourdTaoist: {fileID: 0}
+  inkScribe: {fileID: 0}
+  hongLien: {fileID: 0}
+  saVe: {fileID: 0}
+  khoiLoiSu: {fileID: 0}
+  werewolf: {fileID: 0}
+  hauNghe: {fileID: 0}
+  bachLocTien: {fileID: 0}
   swornBrother: 3
   projectileSpeed: 8
   splashRadius: 0.8
@@ -70,6 +78,7 @@ MonoBehaviour:
   passiveStar: 1
   minorStar: 3
   secondMinorStar: 3
+  thirdMinorStar: 3
   passiveKind: 0
   passivePower: 0
   passiveThreshold: 0
@@ -77,23 +86,20 @@ MonoBehaviour:
   passiveEvery: 1
   passiveDuration: 0
   passiveFrames: []
-  ultimateText: "\u0110\u01B0\u01A1ng D\u01B0\u01A1ng Ki\u1EC1u H\u1ED1ng: d\u1EADm
-    ch\xE2n g\u1EA7m \u2014 qu\xE1i b\xE1n k\xEDnh 4 \u0103n \xD73, h\u1EA5t l\xF9i
-    + cho\xE1ng 3s + ph\xE1 gi\xE1p 30%; \xF4ng khi\xEAu kh\xEDch c\u1EA3 v\xF9ng,
-    \u221250% s\xE1t th\u01B0\u01A1ng nh\u1EADn 6s. Boss ch\u1EC9 b\u1ECB ch\u1EADm
-    + ph\xE1 gi\xE1p."
-  passiveText: "K\u1EBFt Ngh\u0129a (nh\u01B0 L\u01B0u B\u1ECB). V\u1EA1n Nh\xE2n
-    \u0110\u1ECBch: m\u1ED7i qu\xE1i quanh \xF4ng \u22126% s\xE1t th\u01B0\u01A1ng
-    nh\u1EADn (t\u1ED1i \u0111a 30%)."
-  minorText: "B\xE1t X\xE0 M\xE2u: xoay x\xE0 m\xE2u n\u1EA1p l\u1EF1c r\u1ED3i \u0111\xE2m
-    xuy\xEAn 2 \xF4, qu\xE1i tr\xFAng b\u1ECB ph\xE1 gi\xE1p 15% trong 4s."
-  secondMinorText: "T\xFAy T\u1EEDu: m\xE1u d\u01B0\u1EDBi 60% th\xEC tu b\u1EA7u
-    r\u01B0\u1EE3u \u2014 h\u1ED3i 20% m\xE1u, mi\u1EC5n cho\xE1ng, \u221230% s\xE1t
-    th\u01B0\u01A1ng nh\u1EADn 5s."
+  ultimateText: "Dangyang Bridge Roar: radius 4 \u2014 3x damage, knockback + stun
+    3s + 30% Armor Break; taunts and takes -50% damage for 6s."
+  passiveText: 'Sworn Brothers (as Luu Bi). Ten Thousand Foes: each enemy around
+    him gives -6% damage taken (max 30%).'
+  minorText: 'Serpent Spear Charge: spins the serpent spear charging power then thrusts
+    piercing 2 units, enemies hit get 15% armor break for 4s.'
+  secondMinorText: "Wine Gourd: below 60% health he drinks from the wine gourd \u2014
+    heals 20% health, immune to stun, -30% damage taken for 5s."
+  thirdMinorText: 
   ultimateIcon: {fileID: 21300000, guid: 32ed772a5c7328e43adf62e5d3b36072, type: 3}
   minorIcon: {fileID: 21300000, guid: 734cd05094700364a83d930b1b35566d, type: 3}
   passiveIcon: {fileID: 21300000, guid: cb105b868ab5df84fad3b156a7534ecb, type: 3}
   secondMinorIcon: {fileID: 21300000, guid: 70bec298a03361348ae88773aaf3cf98, type: 3}
+  thirdMinorIcon: {fileID: 0}
   animations: {fileID: 11400000, guid: 38cddc7ab32d43442ab2d936d102055d, type: 2}
   artFacesRight: 0
   avatar: {fileID: 21300000, guid: bcc7827bcd49da5448b1ba2aca55fe1a, type: 3}

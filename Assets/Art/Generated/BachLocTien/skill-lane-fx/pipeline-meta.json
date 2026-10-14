@@ -1,0 +1,90 @@
+{
+  "target": "player",
+  "mode": "skill-lane-fx",
+  "cell_size": 256,
+  "align": "feet",
+  "ground_row": 192,
+  "frames": [
+    {
+      "frame": "hoi-xuan-flower-zone-1",
+      "aligned_bbox": [
+        51,
+        175,
+        208,
+        192
+      ]
+    },
+    {
+      "frame": "hoi-xuan-flower-zone-2",
+      "aligned_bbox": [
+        44,
+        174,
+        207,
+        192
+      ]
+    },
+    {
+      "frame": "hoi-xuan-flower-zone-3",
+      "aligned_bbox": [
+        45,
+        173,
+        201,
+        192
+      ]
+    },
+    {
+      "frame": "hoi-xuan-flower-zone-4",
+      "aligned_bbox": [
+        48,
+        168,
+        208,
+        192
+      ]
+    },
+    {
+      "frame": "hoi-xuan-flower-zone-5",
+      "aligned_bbox": [
+        44,
+        156,
+        208,
+        192
+      ]
+    },
+    {
+      "frame": "hoi-xuan-flower-zone-6",
+      "aligned_bbox": [
+        43,
+        160,
+        203,
+        192
+      ]
+    },
+    {
+      "frame": "hoi-xuan-flower-zone-7",
+      "aligned_bbox": [
+        48,
+        154,
+        208,
+        192
+      ]
+    },
+    {
+      "frame": "hoi-xuan-flower-zone-8",
+      "aligned_bbox": [
+        44,
+        160,
+        208,
+        192
+      ]
+    },
+    {
+      "frame": "hoi-xuan-flower-zone-9",
+      "aligned_bbox": [
+        45,
+        172,
+        201,
+        192
+      ]
+    }
+  ]
+}

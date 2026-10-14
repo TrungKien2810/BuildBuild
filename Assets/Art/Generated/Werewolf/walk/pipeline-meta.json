@@ -1,0 +1,69 @@
+{
+  "target": "player",
+  "mode": "walk",
+  "source": "tempart\\Werewolf\\walk-last\\final",
+  "cell_size": 128,
+  "frame_size": [
+    128,
+    128
+  ],
+  "align": "feet",
+  "ground_row": 103,
+  "status": "duyet, giao 2026-10-08",
+  "frames": [
+    {
+      "frame": "walk-1",
+      "aligned_bbox": [
+        52,
+        67,
+        76,
+        116
+      ]
+    },
+    {
+      "frame": "walk-2",
+      "aligned_bbox": [
+        52,
+        66,
+        76,
+        116
+      ]
+    },
+    {
+      "frame": "walk-3",
+      "aligned_bbox": [
+        48,
+        65,
+        76,
+        116
+      ]
+    },
+    {
+      "frame": "walk-4",
+      "aligned_bbox": [
+        48,
+        67,
+        77,
+        116
+      ]
+    },
+    {
+      "frame": "walk-5",
+      "aligned_bbox": [
+        51,
+        66,
+        76,
+        114
+      ]
+    },
+    {
+      "frame": "walk-6",
+      "aligned_bbox": [
+        52,
+        65,
+        76,
+        114
+      ]
+    }
+  ]
+}

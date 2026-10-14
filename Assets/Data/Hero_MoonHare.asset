@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
+  m_Name: Hero_MoonHare
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
+  displayName: Moon Hare
+  unitId: moonhare
+  role: 3
+  maxHealth: 260
+  damage: 26
+  attackRate: 0.9
+  range: 4.5
+  moveSpeed: 1.2
+  leashRange: 3
+  maxHeld: 3
+  heldDamageBonus: 0
+  warden: {fileID: 0}
+  dragonRider: {fileID: 0}
+  banner: {fileID: 0}
+  wukong: {fileID: 0}
+  stormcaller: {fileID: 0}
+  galemonk: {fileID: 0}
+  daoVien: {fileID: 0}
+  bloodswordsman: {fileID: 0}
+  soulbinder: {fileID: 0}
+  gourdTaoist: {fileID: 0}
+  inkScribe: {fileID: 0}
+  hongLien: {fileID: 0}
+  saVe: {fileID: 0}
+  khoiLoiSu: {fileID: 0}
+  werewolf: {fileID: 0}
+  hauNghe: {fileID: 0}
+  bachLocTien: {fileID: 0}
+  swornBrother: 0
+  projectileSpeed: 8
+  splashRadius: 0.1
+  projectileFrames:
+  - {fileID: 21300000, guid: 987d90154fc9909438f003710f46133f, type: 3}
+  - {fileID: 21300000, guid: 86c012d353ef3e94486c96c69056f725, type: 3}
+  - {fileID: 21300000, guid: 58acc9a098bae1545921e0bc81501179, type: 3}
+  - {fileID: 21300000, guid: 83431cb5c208a4e4a956c1e5455d8529, type: 3}
+  projectileScale: 1
+  impactFrames:
+  - {fileID: 21300000, guid: 987d90154fc9909438f003710f46133f, type: 3}
+  - {fileID: 21300000, guid: 86c012d353ef3e94486c96c69056f725, type: 3}
+  - {fileID: 21300000, guid: 58acc9a098bae1545921e0bc81501179, type: 3}
+  - {fileID: 21300000, guid: 83431cb5c208a4e4a956c1e5455d8529, type: 3}
+  impactScale: 1
+  knockbackOnHit: 0
+  fireSfx: 
+  impactSfx: 
+  skillSfx: 
+  skillKind: 29
+  skillTier: 0
+  skillCooldown: 0
+  manaMax: 5
+  manaPerSecond: 0.35
+  manaPerHit: 0.25
+  skillRadius: 4.5
+  skillDuration: 3
+  skillPower: 1.1
+  skillFrames:
+  - {fileID: 21300000, guid: 987d90154fc9909438f003710f46133f, type: 3}
+  - {fileID: 21300000, guid: 86c012d353ef3e94486c96c69056f725, type: 3}
+  - {fileID: 21300000, guid: 58acc9a098bae1545921e0bc81501179, type: 3}
+  - {fileID: 21300000, guid: 83431cb5c208a4e4a956c1e5455d8529, type: 3}
+  skillIntroFrames: []
+  skillOutroFrames: []
+  stunFrames: []
+  summoner: {fileID: 0}
+  healsAllies: 0
+  healFrames: []
+  buffFrames: []
+  shieldAmount: 0
+  shieldFrames: []
+  shieldBreakFrames: []
+  passiveStar: 1
+  minorStar: 3
+  secondMinorStar: 3
+  thirdMinorStar: 3
+  passiveKind: 21
+  passivePower: 0.55
+  passiveThreshold: 0
+  passiveRadius: 0
+  passiveEvery: 1
+  passiveDuration: 0
+  passiveFrames: []
+  ultimateText: 'Jade Wheel Return: throws the great wheel through a long line then
+    recalls it; outward 1.1x, return 0.8x, each enemy 1 hit per pass.'
+  passiveText: 'Moon Wheel: every 3rd basic hit lands on an enemy, the wheel returns
+    dealing an extra 0.55x to up to 3 enemies on the way back.'
+  minorText: 
+  secondMinorText: 
+  thirdMinorText: 
+  ultimateIcon: {fileID: 21300000, guid: a306d56d59f1df24b98e554ffeaf822d, type: 3}
+  minorIcon: {fileID: 0}
+  passiveIcon: {fileID: 21300000, guid: 5976419b7f7898346aeee9df5722493b, type: 3}
+  secondMinorIcon: {fileID: 0}
+  thirdMinorIcon: {fileID: 0}
+  animations: {fileID: 11400000, guid: 5dd638f12749daa439eabc11eed51ae5, type: 2}
+  artFacesRight: 0
+  avatar: {fileID: 21300000, guid: 37fd2e296621a604dbd1573a9b26cbb9, type: 3}

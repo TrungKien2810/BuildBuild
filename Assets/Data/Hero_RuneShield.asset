@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
   m_Name: Hero_RuneShield
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
-  displayName: "Ng\u01B0\u1EDDi l\xF9n khi\xEAn rune"
+  displayName: Rune Shield
   unitId: runeshield
   role: 1
   maxHealth: 1100
@@ -32,6 +32,14 @@ MonoBehaviour:
   daoVien: {fileID: 0}
   bloodswordsman: {fileID: 0}
   soulbinder: {fileID: 0}
+  gourdTaoist: {fileID: 0}
+  inkScribe: {fileID: 0}
+  hongLien: {fileID: 0}
+  saVe: {fileID: 0}
+  khoiLoiSu: {fileID: 0}
+  werewolf: {fileID: 0}
+  hauNghe: {fileID: 0}
+  bachLocTien: {fileID: 0}
   swornBrother: 0
   projectileSpeed: 20
   splashRadius: 0.3
@@ -75,6 +83,7 @@ MonoBehaviour:
   passiveStar: 1
   minorStar: 3
   secondMinorStar: 3
+  thirdMinorStar: 3
   passiveKind: 11
   passivePower: 0
   passiveThreshold: 0
@@ -85,18 +94,18 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e08970fb4cb656f448b4abca5c7a6d4a, type: 3}
   - {fileID: 21300000, guid: ca443cac13399344686ea3a0bdd79a2c, type: 3}
   - {fileID: 21300000, guid: 46debe3cf54d2c04eaa1da63be5b8505, type: 3}
-  ultimateText: "T\u01B0\u1EDDng Rune: c\u1EAFm khi\xEAn d\u1EF1ng t\u01B0\u1EDDng
-    rune 5s tr\u01B0\u1EDBc m\u1EB7t, ph\u1EE7 h\xE0ng c\u1EE7a \xF4ng v\xE0 hai
-    h\xE0ng k\u1EC1 \u2014 ch\u1EB7n \u0111\u1EE9ng qu\xE1i v\xE0 \u0111\u1EA1n qu\xE1i;
-    \xF4ng \u0111\u1EE9ng y\xEAn sau khi\xEAn."
-  passiveText: "Ch\u1EAFn \u0110\u1EA1n: \u0111\u1EA1n c\u1EE7a qu\xE1i b\u1EAFn
-    xa tr\xFAng \xF4ng th\xEC v\u1EE1, kh\xF4ng g\xE2y s\xE1t th\u01B0\u01A1ng."
+  ultimateText: "Rune Wall: plants his shield to raise a rune wall for 5s in front,
+    covering 3 rows \u2014 stops enemies and shots."
+  passiveText: 'Bullet Block: ranged enemy shots that hit him shatter and deal no
+    damage.'
   minorText: 
   secondMinorText: 
+  thirdMinorText: 
   ultimateIcon: {fileID: 0}
   minorIcon: {fileID: 0}
   passiveIcon: {fileID: 0}
   secondMinorIcon: {fileID: 0}
+  thirdMinorIcon: {fileID: 0}
   animations: {fileID: 11400000, guid: b0da9612352bf3941aacd84a6a11d7f2, type: 2}
   artFacesRight: 0
-  avatar: {fileID: 21300000, guid: 1fec3a2450ee33c4f9773e0eb557a733, type: 3}
+  avatar: {fileID: 21300000, guid: a8ebdeb0d9a9de340a64e8a0b6fa0c1a, type: 3}

@@ -1,0 +1,63 @@
+{
+  "target": "player",
+  "mode": "skill-burst-fx",
+  "cell_size": 128,
+  "align": "center",
+  "ground_row": null,
+  "frames": [
+    {
+      "frame": "nhat-boc-impact-1",
+      "aligned_bbox": [
+        56,
+        55,
+        72,
+        73
+      ]
+    },
+    {
+      "frame": "nhat-boc-impact-2",
+      "aligned_bbox": [
+        50,
+        46,
+        79,
+        79
+      ]
+    },
+    {
+      "frame": "nhat-boc-impact-3",
+      "aligned_bbox": [
+        46,
+        42,
+        82,
+        83
+      ]
+    },
+    {
+      "frame": "nhat-boc-impact-4",
+      "aligned_bbox": [
+        42,
+        39,
+        85,
+        87
+      ]
+    },
+    {
+      "frame": "nhat-boc-impact-5",
+      "aligned_bbox": [
+        45,
+        40,
+        83,
+        84
+      ]
+    },
+    {
+      "frame": "nhat-boc-impact-6",
+      "aligned_bbox": [
+        45,
+        42,
+        82,
+        82
+      ]
+    }
+  ]
+}

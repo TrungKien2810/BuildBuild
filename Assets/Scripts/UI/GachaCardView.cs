@@ -52,9 +52,9 @@ namespace BuildBuild.UI
             icon.sprite = unit.icon;
             icon.enabled = unit.icon != null;
             nameText.text = $"{unit.displayName}\n{unit.rarity}";
-            noteText.text = result.isNew ? "MỚI"
-                : result.canStarUp ? $"+{result.shardsGained} mảnh · ĐỦ NÂNG SAO"
-                : $"+{result.shardsGained} mảnh";
+            noteText.text = result.isNew ? "New"
+                : result.canStarUp ? $"+{result.shardsGained} Shards · READY FOR STAR UP"
+                : $"+{result.shardsGained} Shards";
         }
 
         /// <summary>The up, chua hien ra (scale 0). Goi sau `Show`.</summary>

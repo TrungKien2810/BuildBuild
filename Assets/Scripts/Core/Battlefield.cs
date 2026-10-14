@@ -132,6 +132,50 @@ namespace BuildBuild.Core
             return Mathf.Sqrt(dx * dx + dy * dy);
         }
 
+        /// <summary>So hang o hero tren san (SceneBuilder xep 3 hang).</summary>
+        public const int LaneRows = 3;
+
+        /// <summary>
+        /// y tam hang hero thu <paramref name="row"/> (chia dai dat lam `LaneRows` phan — trung voi ba hang o
+        /// hero +1,8 / +0,15 / -1,5 world quanh tam dai). Dung de VE FX phu ca lan o tung hang.
+        /// </summary>
+        public static float LaneRowCenter(int row)
+        {
+            if (_current == null) return 0f;
+            float step = (_current.laneTop - _current.laneBottom) / LaneRows;
+            return _current.laneBottom + step * (Mathf.Clamp(row, 0, LaneRows - 1) + 0.5f);
+        }
+
+        /// <summary>
+        /// Vung chieu NAM NGANG dat tren lan (dai hoa, duong loc, luoi quet, bep song): phu theo X trong
+        /// <paramref name="halfLength"/> quanh doan [from..to] VA phu HET be sau cua san.
+        ///
+        /// Vi sao khong dung mot vong tron `GroundDistance`: vong tron du be sau (ban kinh 5,5) thi be ngang
+        /// cung 5,5 — quai hai dau san deu trung. Lop chieu nam ngang phai do X va chieu sau RIENG.
+        ///
+        /// Chieu sau KHONG do: unit luon bi kep trong dai (`Clamp`), nen "phu het be sau" = khong loc theo y.
+        /// Ban truoc do chenh y tu `from` (chan nguoi cast) voi nua be sau dai — hero dung hang tren/duoi thi
+        /// vung chi phu ~2/3 san, trong khi `LaneFx` van ve o ca ba hang (review 2026-10-10).
+        /// </summary>
+        public static bool InLaneBand(IGroundBody unit, Vector3 from, Vector3 to, float halfLength = 0f)
+        {
+            if (_current == null || unit == null) return true;
+            float x = unit.GroundPosition.x;
+            float lo = Mathf.Min(from.x, to.x) - halfLength - unit.BodyRadius;
+            float hi = Mathf.Max(from.x, to.x) + halfLength + unit.BodyRadius;
+            return x >= lo && x <= hi;
+        }
+
+        /// <summary>
+        /// Vung chieu kieu COT (mam hoi, ho doc, bay dat): phu theo X trong <paramref name="halfWidth"/> quanh
+        /// <paramref name="centreX"/> VA phu HET be sau cua san.
+        /// </summary>
+        public static bool InLaneColumn(IGroundBody unit, float centreX, float halfWidth)
+        {
+            if (_current == null || unit == null) return true;
+            return Mathf.Abs(unit.GroundPosition.x - centreX) <= halfWidth + unit.BodyRadius;
+        }
+
         /// <summary>
         /// Do lan chong cua <paramref name="self"/> voi moi unit khac trong danh sach (do tren mat dat), tra ve
         /// huong day ra theo toa do man. Nguoi goi nhan voi toc tach x deltaTime. Trung khit mot diem thi tach

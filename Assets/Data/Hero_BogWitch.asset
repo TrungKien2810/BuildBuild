@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
   m_Name: Hero_BogWitch
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
-  displayName: "Ph\xF9 thu\u1EF7 \u0111\u1EA7m l\u1EA7y"
+  displayName: Bog Witch
   unitId: bogwitch
   role: 4
   maxHealth: 250
@@ -32,6 +32,14 @@ MonoBehaviour:
   daoVien: {fileID: 0}
   bloodswordsman: {fileID: 0}
   soulbinder: {fileID: 0}
+  gourdTaoist: {fileID: 0}
+  inkScribe: {fileID: 0}
+  hongLien: {fileID: 0}
+  saVe: {fileID: 0}
+  khoiLoiSu: {fileID: 0}
+  werewolf: {fileID: 0}
+  hauNghe: {fileID: 0}
+  bachLocTien: {fileID: 0}
   swornBrother: 0
   projectileSpeed: 7
   splashRadius: 0.3
@@ -76,6 +84,7 @@ MonoBehaviour:
   passiveStar: 1
   minorStar: 3
   secondMinorStar: 3
+  thirdMinorStar: 3
   passiveKind: 7
   passivePower: 2
   passiveThreshold: 0
@@ -87,19 +96,18 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9592683d059652149aafc4380d673661, type: 3}
   - {fileID: 21300000, guid: eef9e002ecf4fc4478006b35dc1e4cd7, type: 3}
   - {fileID: 21300000, guid: 7dbd537e6f7c6ff45b9d64bcd53ca795, type: 3}
-  ultimateText: "V\u1EA1c S\u01B0\u01A1ng \u0110\u1ED9c: m\xE0n s\u01B0\u01A1ng \u0111\u1ED9c
-    b\xE1n k\xEDnh 1,3 \u1EDF c\u1EE5m qu\xE1i \u0111\xF4ng nh\u1EA5t trong 5s \u2014
-    qu\xE1i trong s\u01B0\u01A1ng +1 t\u1EA7ng \u0110\u1ED9c m\u1ED7i gi\xE2y v\xE0
-    nh\u1EADn th\xEAm 20% s\xE1t th\u01B0\u01A1ng."
-  passiveText: "Ng\u1EA5m \u0110\u1ED9c: m\u1ED7i gi\u1ECDt \u0111\u1ED9c tr\xFAng
-    +1 t\u1EA7ng \u0110\u1ED9c (t\u1ED1i \u0111a 5), m\u1ED7i t\u1EA7ng 2 s\xE1t
-    th\u01B0\u01A1ng/gi\xE2y, tr\xFAng l\u1EA1i l\xE0m m\u1EDBi 4s."
+  ultimateText: "Poison Mist Cauldron: poison mist (radius 1.3) on the densest cluster
+    for 5s \u2014 +1 Poison stack/s and +20% damage taken."
+  passiveText: 'Steeping Poison: every poison drop lands +1 Poison stack (max 5),
+    2 damage/second each, refreshed for 4s by a new hit.'
   minorText: 
   secondMinorText: 
+  thirdMinorText: 
   ultimateIcon: {fileID: 0}
   minorIcon: {fileID: 0}
   passiveIcon: {fileID: 0}
   secondMinorIcon: {fileID: 0}
+  thirdMinorIcon: {fileID: 0}
   animations: {fileID: 11400000, guid: 7862d138c58f4484a95c43212f527bd8, type: 2}
   artFacesRight: 0
-  avatar: {fileID: 21300000, guid: 7092e011b1bd7df449c402b59992da52, type: 3}
+  avatar: {fileID: 21300000, guid: 3abb2efd35d7e5c4592972e574d5d618, type: 3}

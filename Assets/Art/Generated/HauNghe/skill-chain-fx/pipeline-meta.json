@@ -1,0 +1,45 @@
+{
+  "target": "player",
+  "mode": "skill-chain-fx",
+  "cell_size": 128,
+  "align": "center",
+  "ground_row": null,
+  "frames": [
+    {
+      "frame": "nhat-boc-chain-ray-1",
+      "aligned_bbox": [
+        54,
+        61,
+        76,
+        69
+      ]
+    },
+    {
+      "frame": "nhat-boc-chain-ray-2",
+      "aligned_bbox": [
+        53,
+        60,
+        74,
+        69
+      ]
+    },
+    {
+      "frame": "nhat-boc-chain-ray-3",
+      "aligned_bbox": [
+        54,
+        58,
+        77,
+        66
+      ]
+    },
+    {
+      "frame": "nhat-boc-chain-ray-4",
+      "aligned_bbox": [
+        53,
+        59,
+        76,
+        66
+      ]
+    }
+  ]
+}

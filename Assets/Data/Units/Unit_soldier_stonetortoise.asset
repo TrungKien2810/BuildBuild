@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Unit_soldier_stonetortoise
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.UnitDefinition
   id: soldier_stonetortoise
-  displayName: "R\xF9a \u0111\xE1 khi\xEAn"
+  displayName: Stone Shield Turtle
   category: 2
   rarity: 1
   icon: {fileID: 21300000, guid: 48dfedac396eabb45b448a4130391ee2, type: 3}

@@ -1,0 +1,117 @@
+{
+  "unit": "BachLocTien",
+  "action": "tam-mam-ground",
+  "kind": "fx",
+  "approval": "pending visual review",
+  "cell": [
+    128,
+    128
+  ],
+  "origin": [
+    64,
+    96
+  ],
+  "anchor": "ground",
+  "phases": {
+    "seed": [
+      1,
+      2
+    ],
+    "young": [
+      3,
+      4
+    ],
+    "mature": [
+      5,
+      6
+    ],
+    "harvest": [
+      7,
+      8
+    ],
+    "disappear": [
+      9
+    ]
+  },
+  "raw_root_y": null,
+  "scale_policy": "one shared scale for complete effect cycle",
+  "gameplay_timing": "not wired; preview durations only",
+  "root_placement": "measured stem/seed ground attachment at [64,96] in every phase; whole-frame translation only, growth height preserved; ellipse front rim extends below ground-center",
+  "root_measured_before": [
+    [
+      63,
+      99
+    ],
+    [
+      63,
+      99
+    ],
+    [
+      63,
+      99
+    ],
+    [
+      64,
+      97
+    ],
+    [
+      64,
+      99
+    ],
+    [
+      63,
+      99
+    ],
+    [
+      63,
+      97
+    ],
+    [
+      63,
+      96
+    ],
+    [
+      63,
+      97
+    ]
+  ],
+  "root_alignment_delta": [
+    [
+      1,
+      -3
+    ],
+    [
+      1,
+      -3
+    ],
+    [
+      1,
+      -3
+    ],
+    [
+      0,
+      -1
+    ],
+    [
+      0,
+      -3
+    ],
+    [
+      1,
+      -3
+    ],
+    [
+      1,
+      -1
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      -1
+    ]
+  ],
+  "raw_root_policy": "per-frame authored stem/seed attachment measured from final raster, not an assumed constant raw-cell ratio"
+}

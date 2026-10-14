@@ -32,6 +32,14 @@ MonoBehaviour:
   daoVien: {fileID: 0}
   bloodswordsman: {fileID: 0}
   soulbinder: {fileID: 0}
+  gourdTaoist: {fileID: 0}
+  inkScribe: {fileID: 0}
+  hongLien: {fileID: 0}
+  saVe: {fileID: 0}
+  khoiLoiSu: {fileID: 0}
+  werewolf: {fileID: 0}
+  hauNghe: {fileID: 0}
+  bachLocTien: {fileID: 0}
   swornBrother: 0
   projectileSpeed: 20
   splashRadius: 0.3
@@ -72,6 +80,7 @@ MonoBehaviour:
   passiveStar: 1
   minorStar: 3
   secondMinorStar: 3
+  thirdMinorStar: 3
   passiveKind: 1
   passivePower: 0.5
   passiveThreshold: 0.3
@@ -79,16 +88,17 @@ MonoBehaviour:
   passiveEvery: 1
   passiveDuration: 0
   passiveFrames: []
-  ultimateText: "Ch\xE9m Qu\u1EA1t: m\u1ED9t nh\xE1t ch\xE9m qu\u1EA1t d\xE0i tr\u01B0\u1EDBc
-    m\u1EB7t, s\xE1t th\u01B0\u01A1ng g\u1EA5p nhi\u1EC1u l\u1EA7n \u0111\xF2n th\u01B0\u1EDDng."
-  passiveText: "Truy K\xEDch: \u0111\xF2n th\u01B0\u1EDDng v\xE0o qu\xE1i d\u01B0\u1EDBi
-    30% m\xE1u +50% s\xE1t th\u01B0\u01A1ng."
+  ultimateText: 'Fan Slash: one swing cuts a long fan in front, damage many times
+    a basic hit.'
+  passiveText: 'Pursuit: basic hits on enemies below 30% health deal +50% damage.'
   minorText: 
   secondMinorText: 
+  thirdMinorText: 
   ultimateIcon: {fileID: 21300000, guid: a33aa2ca09e149e4289d3baac45f8e70, type: 3}
   minorIcon: {fileID: 0}
   passiveIcon: {fileID: 21300000, guid: 4da56949a04d7e443b6a951206948153, type: 3}
   secondMinorIcon: {fileID: 0}
+  thirdMinorIcon: {fileID: 0}
   animations: {fileID: 11400000, guid: 13828de805f8ae849bcf7387c2bea269, type: 2}
   artFacesRight: 0
   avatar: {fileID: 21300000, guid: fbf77d7a51c84c1419fdbdd8113dba0f, type: 3}

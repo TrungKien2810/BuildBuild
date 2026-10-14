@@ -16,7 +16,7 @@ namespace BuildBuild.Combat
     /// Hieu ung trang thai giong nhau giua quai va hero (an ky, troi, lam cham, Long Uy, pha giap, Xich co han, keo,
     /// hat tung) nam o day; choang / dong bang / day lui moi lop tu ve theo kieu cua minh.
     /// </summary>
-    public abstract class Unit : MonoBehaviour
+    public abstract class Unit : MonoBehaviour, IGroundBody
     {
         /// <summary>Moi unit dang bat trong scene (ca lau dai). Dung `Hostiles` de lay doi thu.</summary>
         public static readonly List<Unit> All = new List<Unit>();
@@ -35,6 +35,12 @@ namespace BuildBuild.Combat
         /// <summary>Nua be ngang than tren mat dat (world).</summary>
         public abstract float BodyRadius { get; }
 
+        /// <summary>Chan unit tren san — `Battlefield` do vung chieu qua interface nay (xem `IGroundBody`).</summary>
+        public Vector3 GroundPosition => transform.position;
+
+        /// <summary>Diem dat bong chan = chan that su. Bi hat tung thi than roi khoi dat con bong o lai cho cu.</summary>
+        public Vector3 ShadowAnchor => IsLaunched ? _launchGround : transform.position;
+
         /// <summary>Chieu cao than (world), tinh tu chan.</summary>
         public abstract float BodyHeight { get; }
 
@@ -50,6 +56,19 @@ namespace BuildBuild.Combat
         public virtual bool IsBoss => false;
         public virtual bool IsElite => false;
         public virtual bool FliesHigh => false;
+
+        /// <summary>Co ve bong chan bang lop runtime khong (`UnitShadow`). Thanh tri tat: no tu ve dai bong o chan.</summary>
+        public virtual bool GroundShadow => true;
+
+        /// <summary>
+        /// Mau than unit = mau trang thai (dong bang / trung don / buff) NHAN anh sang chung cua biome dang dung
+        /// (`WaveBiome.UnitLight`). Moi cho doi mau than phai di qua day — gan thang `renderer.color` thi unit mat
+        /// anh sang chung, dung canh nen van am con unit thi trung tinh (audit 2026-10-12).
+        /// </summary>
+        public static Color BodyColor(Color state) => state * WaveBiome.UnitLight;
+
+        /// <summary>Ve lai mau than theo anh sang biome dang dung — `WaveBiome.Apply` goi khi doi biome giua tran.</summary>
+        public virtual void RepaintBody() { }
 
         /// <summary>Quai can chien bi unit phe ta giu cho (`Blocker`). Hero khong bi giu.</summary>
         public virtual bool CanBeHeld => false;
@@ -76,7 +95,11 @@ namespace BuildBuild.Combat
         /// <summary>Bi keo / hat tung: bo cho vay, bo day lui dang chay.</summary>
         protected virtual void OnDisplaced() { }
 
-        protected virtual void OnEnable() => All.Add(this);
+        protected virtual void OnEnable()
+        {
+            All.Add(this);
+            UnitShadow.Attach(this);
+        }
         protected virtual void OnDisable() => All.Remove(this);
 
         protected static void RaiseKilled(Unit unit) => Killed?.Invoke(unit);
@@ -313,11 +336,11 @@ namespace BuildBuild.Combat
         public virtual void CollectEffects(List<UnitEffect> into)
         {
             float now = Time.time;
-            if (_markedBy != null && now < _markedUntil) into.Add(new UnitEffect(EffectKind.Mark, "Ấn ký", _markedUntil));
-            if (IsRooted) into.Add(new UnitEffect(EffectKind.Root, "Trói", _rootedUntil));
-            if (now < _hasteUntil) into.Add(new UnitEffect(EffectKind.Haste, $"Tăng tốc {Percent(_hastePercent)}", _hasteUntil));
-            if (now < _aweUntil) into.Add(new UnitEffect(EffectKind.Awe, $"Long Uy -{Percent(_aweWeaken)} công"));
-            if (now < _chainedUntil) into.Add(new UnitEffect(EffectKind.Chain, $"Xích +{Percent(_chainBonus)}", _chainedUntil));
+            if (_markedBy != null && now < _markedUntil) into.Add(new UnitEffect(EffectKind.Mark, "Seal", _markedUntil));
+            if (IsRooted) into.Add(new UnitEffect(EffectKind.Root, "Root", _rootedUntil));
+            if (now < _hasteUntil) into.Add(new UnitEffect(EffectKind.Haste, $"Haste {Percent(_hastePercent)}", _hasteUntil));
+            if (now < _aweUntil) into.Add(new UnitEffect(EffectKind.Awe, $"Dragon Awe -{Percent(_aweWeaken)} Attack"));
+            if (now < _chainedUntil) into.Add(new UnitEffect(EffectKind.Chain, $"Chain +{Percent(_chainBonus)}", _chainedUntil));
             Status.Collect(into);
         }
 

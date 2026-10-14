@@ -168,13 +168,14 @@ namespace BuildBuild.Combat
                 if (_singleTarget ? enemy != _target
                     : Battlefield.GroundDistance(enemy.AimPoint(_groundPoint), _groundPoint) > _splashRadius + enemy.BodyRadius) continue;
                 float before = enemy.Health.Current;
+                bool shielded = enemy.Health.Shield > 0f;   // Pha An (Tho San) xet khien LUC trung, truoc khi dan an khien
                 float damage = _cannon != null ? _damage * Cannon.BigTargetFactor(_cannon, enemy) : _damage;
                 enemy.Health.TakeDamage(damage, _owner != null ? _owner.Health : null, side: _side);
                 if (_cannon != null) WaveStats.RecordCannonDamage(_cannon, _side, before - enemy.Health.Current);
                 if (_cannon != null && _cannon.rootDuration > 0f) enemy.ApplyRoot(_cannon.rootDuration, _cannon.rootFrames);
                 if (_pushDirection != 0f) enemy.PushBack(_pushDirection);
                 if (_slowPercent > 0f) enemy.ApplySlow(_slowPercent, _slowDuration);
-                if (_owner != null) _owner.OnProjectileHit(enemy, enemy == _target, _damage);   // Ngam Doc / Thoc Hang
+                if (_owner != null) _owner.OnProjectileHit(enemy, enemy == _target, _damage, shielded);   // Ngam Doc / Thoc Hang
                 hits++;
             }
 

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 186cb99448708f049ad453912a3a5ce9, type: 3}
+  m_Name: Unit_honglien
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.UnitDefinition
+  id: honglien
+  displayName: Vu Nu Hong Lien
+  category: 0
+  rarity: 2
+  icon: {fileID: 21300000, guid: 3112375490c93df4097f1d5d43ae994f, type: 3}

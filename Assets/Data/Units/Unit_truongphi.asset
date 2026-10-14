@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Unit_truongphi
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.UnitDefinition
   id: truongphi
-  displayName: "Tr\u01B0\u01A1ng Phi"
+  displayName: Truong Phi
   category: 0
   rarity: 3
   icon: {fileID: 21300000, guid: bcc7827bcd49da5448b1ba2aca55fe1a, type: 3}

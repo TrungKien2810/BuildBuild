@@ -1,0 +1,51 @@
+{
+  "unit": "HauNghe",
+  "action": "nhat-luan-empowered",
+  "kind": "fx",
+  "approval": "pending visual review",
+  "cell": [
+    256,
+    256
+  ],
+  "origin": [
+    128,
+    192
+  ],
+  "anchor": "ground",
+  "raw_root": [
+    256,
+    368.64
+  ],
+  "scale_policy": "one common scale for entire effect cycle; original root geometry preserved",
+  "source_trim_border": 0,
+  "phases": {
+    "telegraph": [
+      1,
+      2,
+      3
+    ],
+    "active": [
+      4,
+      5,
+      6
+    ],
+    "fade": [
+      7,
+      8,
+      9
+    ]
+  },
+  "gameplay_timing": "preview only; not wired",
+  "frame_raw_root_y": [
+    419,
+    420,
+    427,
+    382,
+    383,
+    383,
+    348,
+    358,
+    348
+  ],
+  "root_correction": "translation only; source geometric ground line restored to fixed delivery origin"
+}

@@ -1,0 +1,63 @@
+{
+  "target": "player",
+  "mode": "death",
+  "cell_size": 128,
+  "align": "feet",
+  "ground_row": 116,
+  "frames": [
+    {
+      "frame": "death-1",
+      "aligned_bbox": [
+        52,
+        58,
+        82,
+        116
+      ]
+    },
+    {
+      "frame": "death-2",
+      "aligned_bbox": [
+        43,
+        76,
+        78,
+        116
+      ]
+    },
+    {
+      "frame": "death-3",
+      "aligned_bbox": [
+        44,
+        77,
+        83,
+        116
+      ]
+    },
+    {
+      "frame": "death-4",
+      "aligned_bbox": [
+        33,
+        87,
+        89,
+        116
+      ]
+    },
+    {
+      "frame": "death-5",
+      "aligned_bbox": [
+        37,
+        92,
+        92,
+        116
+      ]
+    },
+    {
+      "frame": "death-6",
+      "aligned_bbox": [
+        33,
+        92,
+        88,
+        116
+      ]
+    }
+  ]
+}

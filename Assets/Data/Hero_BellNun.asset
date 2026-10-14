@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
   m_Name: Hero_BellNun
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
-  displayName: "N\u1EEF tu chu\xF4ng b\u1EA1c"
+  displayName: Bell Nun
   unitId: bellnun
   role: 5
   maxHealth: 360
@@ -32,6 +32,14 @@ MonoBehaviour:
   daoVien: {fileID: 0}
   bloodswordsman: {fileID: 0}
   soulbinder: {fileID: 0}
+  gourdTaoist: {fileID: 0}
+  inkScribe: {fileID: 0}
+  hongLien: {fileID: 0}
+  saVe: {fileID: 0}
+  khoiLoiSu: {fileID: 0}
+  werewolf: {fileID: 0}
+  hauNghe: {fileID: 0}
+  bachLocTien: {fileID: 0}
   swornBrother: 0
   projectileSpeed: 8
   splashRadius: 0.1
@@ -76,6 +84,7 @@ MonoBehaviour:
   passiveStar: 1
   minorStar: 3
   secondMinorStar: 3
+  thirdMinorStar: 3
   passiveKind: 18
   passivePower: 0
   passiveThreshold: 0
@@ -87,18 +96,18 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d4a89c3e4b2239642b843281215c4c25, type: 3}
   - {fileID: 21300000, guid: 2b310395b337f584e9d18358665e4706, type: 3}
   - {fileID: 21300000, guid: 6766eb718289cc849bc8a40ef86a4c3a, type: 3}
-  ultimateText: "H\u1ED3i Chu\xF4ng: g\u1EE1 \u0110\u1ED9c, Ch\xE1y, Ch\u1EADm, Tr\xF3i,
-    Kho\xE1 \u0110\xF2n, Cho\xE1ng kh\u1ECFi c\u1EA3 \u0111\u1ED9i; \u0111\u1ED1i
-    th\u1EE7 ch\u1EADm 30% trong 3s (tinh anh 15%, boss kh\xF4ng)."
-  passiveText: "Thanh T\u1EA9y: m\u1ED7i 10s g\u1EE1 1 hi\u1EC7u \u1EE9ng \u0110\u1ED9c
-    \u2192 Ch\xE1y \u2192 Ch\u1EADm kh\u1ECFi \u0111\u1ED3ng minh g\u1EA7n nh\u1EA5t
-    \u0111ang b\u1ECB trong t\u1EA7m 4."
+  ultimateText: 'Bell Toll: clears Poison, Burn, Slow, Root, Disarm, Stun from the
+    whole team; enemies are slowed 30% for 3s (elite 15%, boss none).'
+  passiveText: "Purify: every 10s clears 1 status \u2014 Poison then Burn then Slow
+    \u2014 from the nearest ally suffering it within range 4."
   minorText: 
   secondMinorText: 
+  thirdMinorText: 
   ultimateIcon: {fileID: 0}
   minorIcon: {fileID: 0}
   passiveIcon: {fileID: 0}
   secondMinorIcon: {fileID: 0}
+  thirdMinorIcon: {fileID: 0}
   animations: {fileID: 11400000, guid: 01bb50311e323ee439ea68f613c112b2, type: 2}
   artFacesRight: 0
-  avatar: {fileID: 21300000, guid: 8bf573fc5213de04f9d87bab40f976a1, type: 3}
+  avatar: {fileID: 21300000, guid: 470c602b0fc452e4aa9d3e838157c38b, type: 3}

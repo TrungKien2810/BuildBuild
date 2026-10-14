@@ -1,0 +1,140 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 600a6e7dd98bd6646b9475b8a069d9b5, type: 3}
+  m_Name: KhoiLoiSuKit
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.KhoiLoiSuKit
+  puppet: {fileID: 11400000, guid: 7e954cab4054de348adb2a3c689b2826, type: 2}
+  grandSet: {fileID: 11400000, guid: 60b4999977205cb498935c28ce8cb050, type: 2}
+  unitPrefab: {fileID: 6379297408595509390, guid: 5222ae2c40cd08941985b2adc396e8e1, type: 3}
+  controlRadius: 4
+  repairSeconds: 8
+  sweepCooldown: 8
+  sweepPower: 1.5
+  sweepRadius: 1
+  guardCooldown: 12
+  guardRadius: 1.5
+  guardShove: 0.8
+  grandPower: 3
+  grandRadius: 1.5
+  grandStun: 1
+  grandDuration: 10
+  deployCast:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: 9adff377b86b1394c94ea902423c0120, type: 3}
+    - {fileID: 21300000, guid: 9d931888deb64854898df866e1479108, type: 3}
+    - {fileID: 21300000, guid: 405a67c207ad44146a553c52c480946c, type: 3}
+    - {fileID: 21300000, guid: 1eaefc26697736544abdaf38d81e3a78, type: 3}
+    - {fileID: 21300000, guid: 8f1ecf367ad09c74fa5fcd643a278389, type: 3}
+    - {fileID: 21300000, guid: 72c4d96c5e66b234ca350ca559f81313, type: 3}
+    loop: 0
+    hitFrame: 4
+  sweepCast:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: d90481202dd04644eadd657778e2fbdd, type: 3}
+    - {fileID: 21300000, guid: 85d547bc155b1254a8868fcfb6975f6c, type: 3}
+    - {fileID: 21300000, guid: caff48df886fb3d4a85ab8b7bec5178f, type: 3}
+    - {fileID: 21300000, guid: 38f1d185f4798c1409c77121d95cb9c6, type: 3}
+    - {fileID: 21300000, guid: 9b619e9b7f3cad449ba584ca6f206ecf, type: 3}
+    - {fileID: 21300000, guid: 406792356ba33e448a0652895bc71fc9, type: 3}
+    loop: 0
+    hitFrame: 4
+  guardCast:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: d8a015a488af5e74ca673e108d96f234, type: 3}
+    - {fileID: 21300000, guid: acce76e1e11bbce4d9d12ef93728467a, type: 3}
+    - {fileID: 21300000, guid: 8963b8ab26066194998034583d8702fb, type: 3}
+    - {fileID: 21300000, guid: 24efebbb34043c64ebc4ce6373f586e8, type: 3}
+    - {fileID: 21300000, guid: 77c8a8d2620994b4f9fd3c4f5e66aeba, type: 3}
+    - {fileID: 21300000, guid: 3b225988238912d40a6afa8b76da8e2e, type: 3}
+    loop: 0
+    hitFrame: 4
+  grandCast:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: 2a661c713ae7d6841b8c6c1844562d54, type: 3}
+    - {fileID: 21300000, guid: d34ab73aea4ef7d4cb7d7ea0538585e0, type: 3}
+    - {fileID: 21300000, guid: 1c2f8e576d209fc42a9fc04d8b751cda, type: 3}
+    - {fileID: 21300000, guid: 8d0dd9dd74e53574ea31cc9790927480, type: 3}
+    - {fileID: 21300000, guid: b3bc4586d72bfd24baa9a351f9d7342a, type: 3}
+    - {fileID: 21300000, guid: 8cc0df738a3b9c74a8d456131f1f17d5, type: 3}
+    loop: 0
+    hitFrame: 4
+  puppetDeploy:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: 495adccfdfe8fd84e9ac79db87c61c37, type: 3}
+    - {fileID: 21300000, guid: 055956b59de657045b951ae09dc2558e, type: 3}
+    - {fileID: 21300000, guid: f92cda10aafe1214192031d3e3c4db18, type: 3}
+    - {fileID: 21300000, guid: 6ce3adca3b996ea408c465f89d9e224e, type: 3}
+    - {fileID: 21300000, guid: 67c4a85226d98e347922456abd1294ff, type: 3}
+    - {fileID: 21300000, guid: f7a9824a5f042014b88064b4f575e442, type: 3}
+    loop: 0
+    hitFrame: 4
+  puppetParry:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: fb99c3f769b977642874665eaf3a0d0e, type: 3}
+    - {fileID: 21300000, guid: 0908c68e369dbc743a561dbc9de12c44, type: 3}
+    - {fileID: 21300000, guid: 464564f14705c4c43b09d68eb54bdbcc, type: 3}
+    - {fileID: 21300000, guid: f4a679d638bf9754baa2f925436fe653, type: 3}
+    - {fileID: 21300000, guid: 881875b280a314441b2a9dbee1634530, type: 3}
+    - {fileID: 21300000, guid: f66ccbfba71521d4d840717656d773e3, type: 3}
+    loop: 0
+    hitFrame: 4
+  grandTransform:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: 290f9a7298a94dc429e753261345031c, type: 3}
+    - {fileID: 21300000, guid: 41b21230fb5e0f94d9824862d0e01f69, type: 3}
+    - {fileID: 21300000, guid: 08fc4a3ca56439943899529e755c225f, type: 3}
+    - {fileID: 21300000, guid: af72d694b47de884e9b9e924973afd68, type: 3}
+    - {fileID: 21300000, guid: 571a8560754f1984880d6e6e95a61a4f, type: 3}
+    - {fileID: 21300000, guid: 53d8346291d395046bb964e696f5be88, type: 3}
+    - {fileID: 21300000, guid: ffb440613cd8eb445b9b23f171de0ddb, type: 3}
+    - {fileID: 21300000, guid: d22f7e6b570b4174ba4ee490b22e1732, type: 3}
+    loop: 0
+    hitFrame: 4
+  cable:
+  - {fileID: 21300000, guid: 1249d390d6c7de949b3962e64733cb59, type: 3}
+  - {fileID: 21300000, guid: 0583518c7fc077549a176b89d3a64dc1, type: 3}
+  - {fileID: 21300000, guid: 547b09de9eec0404991e13db11fb3931, type: 3}
+  - {fileID: 21300000, guid: 471c708e01cd55d47921a6f2a291453f, type: 3}
+  - {fileID: 21300000, guid: dcd9beeedbd69fe4d8c199c483cd92e2, type: 3}
+  - {fileID: 21300000, guid: 73b16dcbcdbe00a4888ba5dedb3ee6fa, type: 3}
+  - {fileID: 21300000, guid: 688a42934596b48419f70fec43f84e45, type: 3}
+  - {fileID: 21300000, guid: 04dc98421f9ab8448ac6e75060cfc4a0, type: 3}
+  guardDust:
+  - {fileID: 21300000, guid: 874dcd37a1b291c40a8c6f64e395d08a, type: 3}
+  - {fileID: 21300000, guid: e843113cf820b30448bb74063296fa4d, type: 3}
+  - {fileID: 21300000, guid: 6b8942aba4eba0346b9eab53fa2e18b6, type: 3}
+  - {fileID: 21300000, guid: f60b66fcde5c3084aa7d334fa26e4bd1, type: 3}
+  - {fileID: 21300000, guid: 68bd845ae4cfc2744a7c4611c16394d2, type: 3}
+  - {fileID: 21300000, guid: 1b1b57c18012f174a818e219f92b47f6, type: 3}
+  impact:
+  - {fileID: 21300000, guid: b936a9998b960f649bd02910f9d4b7db, type: 3}
+  - {fileID: 21300000, guid: d6d6468e01194984ab58c877f4f6b743, type: 3}
+  - {fileID: 21300000, guid: a632bdd8ba70d4d4280b554467c6d831, type: 3}
+  - {fileID: 21300000, guid: 26fe97f93cf529247a1916dc18f5bb02, type: 3}
+  - {fileID: 21300000, guid: 095677d4526110344a88490ab3eed3c5, type: 3}
+  - {fileID: 21300000, guid: ed4665db12096b349a6bdfd9abcd2063, type: 3}
+  - {fileID: 21300000, guid: c3ef43f31f41c2c4da6f3ec41eecfa26, type: 3}
+  - {fileID: 21300000, guid: 57ac71c86a6706541bda67cb76d3a33d, type: 3}
+  grandWave:
+  - {fileID: 21300000, guid: 98b914768e756a44eb8abac15881d4c4, type: 3}
+  - {fileID: 21300000, guid: e0c374282bc098a428230befaad8abb5, type: 3}
+  - {fileID: 21300000, guid: cae8cee4d946b934e816f87dc27390ac, type: 3}
+  - {fileID: 21300000, guid: b5f8ac8e59600714781f381c63a282f5, type: 3}
+  - {fileID: 21300000, guid: 02c0bfd4830b4644da3fa2aa636c97c0, type: 3}
+  - {fileID: 21300000, guid: f28b6fb0595c0304e91db3fc2edf2686, type: 3}

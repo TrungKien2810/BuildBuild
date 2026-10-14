@@ -1,0 +1,373 @@
+{
+  "target": "player",
+  "mode": "hurt",
+  "prompt": "",
+  "role": "",
+  "input": "D:\\Edu\\GameDev\\BuildBuild\\tempart\\GourdTaoist\\animation-v4\\hurt\\raw-grid.png",
+  "threshold": 100,
+  "edge_threshold": 150,
+  "duration": 140,
+  "rows": 2,
+  "cols": 2,
+  "cell_size": 128,
+  "fit_scale": 0.7605633802816901,
+  "trim_border": 4,
+  "edge_clean_depth": 3,
+  "align": "feet",
+  "shared_scale": true,
+  "scale_strategy": "preserve",
+  "component_mode": "largest",
+  "component_padding": 0,
+  "min_component_area": 1,
+  "edge_touch_margin": 0,
+  "frame_labels": [
+    "hurt-1",
+    "hurt-2",
+    "hurt-3",
+    "hurt-4"
+  ],
+  "frames": [
+    {
+      "grid": [
+        0,
+        0
+      ],
+      "source_box": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "component_mode": "largest",
+      "component_count": 1,
+      "selected_component_area": 32874,
+      "selected_component_bbox": [
+        170,
+        128,
+        388,
+        422
+      ],
+      "crop_bbox": [
+        170,
+        128,
+        388,
+        422
+      ],
+      "source_frame_size": [
+        504,
+        504
+      ],
+      "is_empty": false,
+      "subject_area": 32874,
+      "body_core_area": 32658,
+      "body_area_fraction": 0.12856670445956161,
+      "anchor_source": [
+        252.0,
+        409.0
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        42,
+        57
+      ],
+      "preserved_subject_size": [
+        42,
+        57
+      ],
+      "paste_position": [
+        48,
+        59
+      ],
+      "unclamped_paste_position": [
+        48,
+        59
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        47,
+        59,
+        89,
+        116
+      ],
+      "scale_adjustment": 1.0,
+      "source_to_output_scale": 0.193158953722334,
+      "bbox_scale_applied": false,
+      "scale_changed": false,
+      "anchor_target": [
+        64.0,
+        113
+      ],
+      "scale_strategy": "preserve",
+      "shared_center_x": 64.0,
+      "shared_feet_y": 113
+    },
+    {
+      "grid": [
+        0,
+        1
+      ],
+      "source_box": [
+        512,
+        0,
+        1024,
+        512
+      ],
+      "component_mode": "largest",
+      "component_count": 1,
+      "selected_component_area": 28878,
+      "selected_component_bbox": [
+        158,
+        153,
+        332,
+        422
+      ],
+      "crop_bbox": [
+        158,
+        153,
+        332,
+        422
+      ],
+      "source_frame_size": [
+        504,
+        504
+      ],
+      "is_empty": false,
+      "subject_area": 28878,
+      "body_core_area": 28878,
+      "body_area_fraction": 0.11368575207860922,
+      "anchor_source": [
+        239.0,
+        410.0
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        34,
+        52
+      ],
+      "preserved_subject_size": [
+        34,
+        52
+      ],
+      "paste_position": [
+        48,
+        63
+      ],
+      "unclamped_paste_position": [
+        48,
+        63
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        45,
+        64,
+        79,
+        116
+      ],
+      "scale_adjustment": 1.0,
+      "source_to_output_scale": 0.193158953722334,
+      "bbox_scale_applied": false,
+      "scale_changed": false,
+      "anchor_target": [
+        64.0,
+        113
+      ],
+      "scale_strategy": "preserve",
+      "shared_center_x": 64.0,
+      "shared_feet_y": 113
+    },
+    {
+      "grid": [
+        1,
+        0
+      ],
+      "source_box": [
+        0,
+        512,
+        512,
+        1024
+      ],
+      "component_mode": "largest",
+      "component_count": 1,
+      "selected_component_area": 30183,
+      "selected_component_bbox": [
+        168,
+        108,
+        361,
+        392
+      ],
+      "crop_bbox": [
+        168,
+        108,
+        361,
+        392
+      ],
+      "source_frame_size": [
+        504,
+        504
+      ],
+      "is_empty": false,
+      "subject_area": 30183,
+      "body_core_area": 30183,
+      "body_area_fraction": 0.11882322373393801,
+      "anchor_source": [
+        249.0,
+        379.0
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        37,
+        55
+      ],
+      "preserved_subject_size": [
+        37,
+        55
+      ],
+      "paste_position": [
+        48,
+        61
+      ],
+      "unclamped_paste_position": [
+        48,
+        61
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        47,
+        61,
+        84,
+        116
+      ],
+      "scale_adjustment": 1.0,
+      "source_to_output_scale": 0.193158953722334,
+      "bbox_scale_applied": false,
+      "scale_changed": false,
+      "anchor_target": [
+        64.0,
+        113
+      ],
+      "scale_strategy": "preserve",
+      "shared_center_x": 64.0,
+      "shared_feet_y": 113
+    },
+    {
+      "grid": [
+        1,
+        1
+      ],
+      "source_box": [
+        512,
+        512,
+        1024,
+        1024
+      ],
+      "component_mode": "largest",
+      "component_count": 1,
+      "selected_component_area": 27214,
+      "selected_component_bbox": [
+        174,
+        107,
+        332,
+        390
+      ],
+      "crop_bbox": [
+        174,
+        107,
+        332,
+        390
+      ],
+      "source_frame_size": [
+        504,
+        504
+      ],
+      "is_empty": false,
+      "subject_area": 27214,
+      "body_core_area": 27214,
+      "body_area_fraction": 0.10713498362307886,
+      "anchor_source": [
+        247.0,
+        378.0
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        31,
+        55
+      ],
+      "preserved_subject_size": [
+        31,
+        55
+      ],
+      "paste_position": [
+        50,
+        61
+      ],
+      "unclamped_paste_position": [
+        50,
+        61
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        48,
+        61,
+        79,
+        116
+      ],
+      "scale_adjustment": 1.0,
+      "source_to_output_scale": 0.193158953722334,
+      "bbox_scale_applied": false,
+      "scale_changed": false,
+      "anchor_target": [
+        64.0,
+        113
+      ],
+      "scale_strategy": "preserve",
+      "shared_center_x": 64.0,
+      "shared_feet_y": 113
+    }
+  ],
+  "edge_touch_frames": [],
+  "source_edge_touch_frames": [],
+  "output_edge_touch_frames": [],
+  "empty_frames": [],
+  "paste_clamped_frames": [],
+  "qc_summary": {
+    "frame_count": 4,
+    "valid_frame_count": 4,
+    "empty_count": 0,
+    "edge_touch_count": 0,
+    "paste_clamped_count": 0,
+    "body_scale_mean": 0.34193935704362205,
+    "output_subject_height_mean": 54.75,
+    "body_scale_cv": 0.033362591536165234,
+    "anchor_x_std": 0.009554246172747144,
+    "anchor_y_std": 0.03076996511760084,
+    "anchor_y_mean": 0.7817460317460317,
+    "profile_body_scale_drift": 0.03191656480633953
+  },
+  "output_origin": [
+    64.0,
+    113
+  ],
+  "scale_profile": {
+    "path": "D:\\Edu\\GameDev\\BuildBuild\\tempart\\GourdTaoist\\animation-v4\\character-scale-profile.json",
+    "version": 1,
+    "name": "GourdTaoist-v4-idle",
+    "reference_mode": "idle",
+    "processing_contract_applied": true
+  },
+  "qc_config": {
+    "strict_qc": false,
+    "reject_edge_touch": true,
+    "allow_source_edge_touch": false,
+    "max_body_scale_cv": null,
+    "max_anchor_y_std": null,
+    "max_profile_scale_drift": 0.1
+  }
+}

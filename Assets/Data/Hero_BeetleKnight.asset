@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
   m_Name: Hero_BeetleKnight
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
-  displayName: "Hi\u1EC7p s\u0129 b\u1ECD hung"
+  displayName: Beetle Knight
   unitId: beetleknight
   role: 1
   maxHealth: 1050
@@ -32,6 +32,14 @@ MonoBehaviour:
   daoVien: {fileID: 0}
   bloodswordsman: {fileID: 0}
   soulbinder: {fileID: 0}
+  gourdTaoist: {fileID: 0}
+  inkScribe: {fileID: 0}
+  hongLien: {fileID: 0}
+  saVe: {fileID: 0}
+  khoiLoiSu: {fileID: 0}
+  werewolf: {fileID: 0}
+  hauNghe: {fileID: 0}
+  bachLocTien: {fileID: 0}
   swornBrother: 0
   projectileSpeed: 20
   splashRadius: 0.1
@@ -74,6 +82,7 @@ MonoBehaviour:
   passiveStar: 1
   minorStar: 3
   secondMinorStar: 3
+  thirdMinorStar: 3
   passiveKind: 16
   passivePower: 0
   passiveThreshold: 0
@@ -84,18 +93,18 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5859c495aff052f48ad8026c41b4a5a5, type: 3}
   - {fileID: 21300000, guid: 23b74ff67af5d8744b02a457fb8be317, type: 3}
   - {fileID: 21300000, guid: 15fbc54c76787cd4fba010bf0daeec7a, type: 3}
-  ultimateText: "H\xFAc S\u1EEBng: h\xFAc \u0111\u1EA5t t\u1EA1i ch\u1ED7, quanh
-    ch\xE2n b\xE1n k\xEDnh 1 g\xE2y 3\xD7 \u0111\xF2n th\u01B0\u1EDDng v\xE0 cho\xE1ng
-    1s (tinh anh/boss 0,5s)."
-  passiveText: "Ch\u1EA5n \u0110\u1ED9ng: m\u1ED7i \u0111\xF2n th\u01B0\u1EDDng th\u1EE9
-    3 tr\xFAng h\u1EA5t m\u1EE5c ti\xEAu l\xF9i 0,5 (tinh anh 0,25, boss kh\xF4ng
-    b\u1ECB \u0111\u1EA9y)."
+  ultimateText: 'Horn Bash: gores the ground in place, around his feet a shock of
+    radius 1 for 3x a basic hit and stuns 1s (elite/boss 0.5s).'
+  passiveText: 'Shockwave: every 3rd basic hit knocks the target back 0.5 (elite
+    0.25, boss is not pushed).'
   minorText: 
   secondMinorText: 
+  thirdMinorText: 
   ultimateIcon: {fileID: 0}
   minorIcon: {fileID: 0}
   passiveIcon: {fileID: 0}
   secondMinorIcon: {fileID: 0}
+  thirdMinorIcon: {fileID: 0}
   animations: {fileID: 11400000, guid: 35202bcb5d8d28f4882015d4b70dd29f, type: 2}
   artFacesRight: 0
-  avatar: {fileID: 21300000, guid: 72d6f721956630244ae8b427e4aa42a1, type: 3}
+  avatar: {fileID: 21300000, guid: d091f6cc30b5a4f428c0ea3176a6b286, type: 3}

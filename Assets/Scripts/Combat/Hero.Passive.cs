@@ -38,6 +38,7 @@ namespace BuildBuild.Combat
             if (HasPassive(PassiveKind.Shatter)) Unit.Killed += OnEnemyKilled;
             _sporeReadyAt = 0f;
             InitialiseLowTrio();
+            InitialiseNewSR();
             Health.AnyDamaged -= OnAnyDamaged;
             if (HasPassive(PassiveKind.Spores)) Health.AnyDamaged += OnAnyDamaged;
         }
@@ -46,7 +47,8 @@ namespace BuildBuild.Combat
         /// `Projectile` bao moi quai vua an don thuong cua hero nay (<paramref name="primary"/> = con bi nham).
         /// Ngam Doc: +1 tang Doc. Thoc Hang: con dung ngay sau muc tieu an them x `passivePower`.
         /// </summary>
-        public void OnProjectileHit(Unit enemy, bool primary, float damage)
+        /// <param name="shielded">Dich con khien NGAY TRUOC phat trung (Pha An cua Tho San).</param>
+        public void OnProjectileHit(Unit enemy, bool primary, float damage, bool shielded = false)
         {
             if (_definition == null || enemy == null) return;
             if (HasPassive(PassiveKind.SeedStacks)) SeedMark.Apply(enemy, this);
@@ -55,6 +57,8 @@ namespace BuildBuild.Combat
             if (_definition.passiveKind == PassiveKind.Ignite) AddBurn(enemy);
             if (HasPassive(PassiveKind.Tangle)) enemy.ApplyTangle(_definition.passivePower, _definition.passiveDuration);
             if (primary) OnLowTrioHit(enemy);    // Chan Dong / Lien Hoan / Vung Bao Tu / Kep Pha Giap — Hero.LowTrio.cs
+            OnNewSRHit(enemy, primary, damage, shielded);   // Hoi Luan / Pha An / Khi / Dau But / Gieo Sen — Hero.NewSR.cs
+            if (_hauNghe != null) _hauNghe.OnBasicHit(enemy, primary);   // Nhat An — HauNghe.cs
         }
 
         /// <summary>Chay theo so cua noi tai Ignite — don thuong va Mua Tan Lua luon dot, noi tai mo moi lan lua khi quai chet.</summary>

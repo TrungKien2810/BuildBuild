@@ -1,0 +1,63 @@
+{
+  "target": "player",
+  "mode": "skill-cuu-tien-cast",
+  "cell_size": 128,
+  "align": "feet",
+  "ground_row": 116,
+  "frames": [
+    {
+      "frame": "cuu-tien-cast-1",
+      "aligned_bbox": [
+        39,
+        59,
+        83,
+        116
+      ]
+    },
+    {
+      "frame": "cuu-tien-cast-2",
+      "aligned_bbox": [
+        39,
+        58,
+        83,
+        116
+      ]
+    },
+    {
+      "frame": "cuu-tien-cast-3",
+      "aligned_bbox": [
+        39,
+        58,
+        87,
+        116
+      ]
+    },
+    {
+      "frame": "cuu-tien-cast-4",
+      "aligned_bbox": [
+        39,
+        58,
+        86,
+        116
+      ]
+    },
+    {
+      "frame": "cuu-tien-cast-5",
+      "aligned_bbox": [
+        39,
+        59,
+        90,
+        116
+      ]
+    },
+    {
+      "frame": "cuu-tien-cast-6",
+      "aligned_bbox": [
+        39,
+        58,
+        81,
+        116
+      ]
+    }
+  ]
+}

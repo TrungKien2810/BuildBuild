@@ -1,0 +1,112 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d8e6364f1a56e44bb1784af5c28a9d4, type: 3}
+  m_Name: WerewolfKit
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.WerewolfKit
+  humanRateMult: 1.4
+  humanPower: 0.6
+  humanManaPerHit: 0.5
+  wolfPower: 1.2
+  sweepEvery: 3
+  sweepPower: 0.6
+  leechHuman: 0.12
+  leechWolf: 0.25
+  shieldCapPct: 0.15
+  shieldFadeSeconds: 4
+  howlCooldown: 12
+  howlRadius: 1.5
+  howlFear: 0.25
+  howlSeconds: 4
+  biteCooldown: 8
+  biteThreshold: 0.3
+  bitePower: 3
+  transformHealPct: 0.3
+  hpBonus: 0.4
+  atkBonus: 0.3
+  wolfSet: {fileID: 11400000, guid: 56c613fe9163a4a418439b7043ac2a52, type: 2}
+  transformClip:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: 4c7e13cf31ebc7b4e9fc2966bb35cfc1, type: 3}
+    - {fileID: 21300000, guid: 15f29f1d30e0c8a438077839e0c8b9b9, type: 3}
+    - {fileID: 21300000, guid: d63e42b4bbbc45a41848fa38be79f16d, type: 3}
+    - {fileID: 21300000, guid: b1ea988c27797a846bd05772ee2e06ab, type: 3}
+    - {fileID: 21300000, guid: d1f245fad4297ad45ab533876c026a54, type: 3}
+    - {fileID: 21300000, guid: edbee8d781be6e3448ba0d0f4f2ff3e9, type: 3}
+    - {fileID: 21300000, guid: cc5526ed1a5d494408fe191fd6977a7a, type: 3}
+    - {fileID: 21300000, guid: cff13b017bac88f499f703805662166b, type: 3}
+    loop: 0
+    hitFrame: 4
+  howlClip:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: 56251420001031741b3e4f5cb2c3bee1, type: 3}
+    - {fileID: 21300000, guid: 57ce6c7c326a63447b936fe13568e089, type: 3}
+    - {fileID: 21300000, guid: 80deb9e301313fe44b3409bdb7fe5ca1, type: 3}
+    - {fileID: 21300000, guid: 8ff52914fca39f74d8def28195cb51d3, type: 3}
+    - {fileID: 21300000, guid: e3c0044b30b71e140aa6a693f64ae89c, type: 3}
+    - {fileID: 21300000, guid: a9350a3288e2d6d49a65e1d59bc6cf9a, type: 3}
+    loop: 0
+    hitFrame: 4
+  biteClip:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: 0342fd0573fb97249880f7ba624edde8, type: 3}
+    - {fileID: 21300000, guid: 8924f8c137432684486c6d245f477fe7, type: 3}
+    - {fileID: 21300000, guid: 11982516171e05d4aaeb261c62085238, type: 3}
+    - {fileID: 21300000, guid: ea7ac8869822ea4428cfb3020fdc73b5, type: 3}
+    - {fileID: 21300000, guid: 38ce9a1e13d233347b3253b9503f29eb, type: 3}
+    - {fileID: 21300000, guid: 2509ded6c623a354387b84150acdc773, type: 3}
+    loop: 0
+    hitFrame: 4
+  punchImpact:
+  - {fileID: 21300000, guid: 48b45ac4eeee6c4468758e811a76fa31, type: 3}
+  - {fileID: 21300000, guid: 196c732a84841414a9b4322dcf05da71, type: 3}
+  - {fileID: 21300000, guid: 1474a21f689fc1d4d868174bbdc6cc1c, type: 3}
+  - {fileID: 21300000, guid: c3aac9d28bb097e43ae2e51177832162, type: 3}
+  clawSlash:
+  - {fileID: 21300000, guid: f384280cc2700804dba74a4828f3257e, type: 3}
+  - {fileID: 21300000, guid: a8ebfde99e9307447be3b98b237cf9eb, type: 3}
+  - {fileID: 21300000, guid: 7651a5e63833e3547a95f58f231842e4, type: 3}
+  - {fileID: 21300000, guid: 8acfe39150b863e469aa875edb992e15, type: 3}
+  clawSweep:
+  - {fileID: 21300000, guid: 8d6c8af954aeaa049992db994021f225, type: 3}
+  - {fileID: 21300000, guid: e87b0f26f39e1114cadb74b31b179c9f, type: 3}
+  - {fileID: 21300000, guid: 65bbbf18b93786e4a802e763be86140e, type: 3}
+  - {fileID: 21300000, guid: ec3c83d1b3fefa244b63c469e7bbf122, type: 3}
+  biteImpact:
+  - {fileID: 21300000, guid: b451271ab7b3fda4c9b72f360124394c, type: 3}
+  - {fileID: 21300000, guid: 937754d309db4f048a8471b320c23815, type: 3}
+  - {fileID: 21300000, guid: 092750154fe60a7499480ef90d16a243, type: 3}
+  - {fileID: 21300000, guid: df7c98018de34af4a8f097d05a964bd4, type: 3}
+  howlWave:
+  - {fileID: 21300000, guid: 526f81acd7bc2fb4da5e5e13e8d1c5d0, type: 3}
+  - {fileID: 21300000, guid: 0b07ede171b66e94eb362bd813e6d639, type: 3}
+  - {fileID: 21300000, guid: 50bb3bade1fb7dd44954a8698d29ce55, type: 3}
+  - {fileID: 21300000, guid: 64591eeace9fed843b073fa332d13504, type: 3}
+  bloodSiphon:
+  - {fileID: 21300000, guid: 75842b5b12bb65849a6ff0beac2ecce2, type: 3}
+  - {fileID: 21300000, guid: 6ba42a01cd2cdcf43a2dc18bdc2a0ef6, type: 3}
+  - {fileID: 21300000, guid: ba2a7aefba1cd474dad4c3c9db293688, type: 3}
+  - {fileID: 21300000, guid: 48b55d5485153484588b7f67346dcfe0, type: 3}
+  bloodShield:
+  - {fileID: 21300000, guid: a4512efdfa17ac241b1e41ff4213193a, type: 3}
+  - {fileID: 21300000, guid: a55b5184e798fcc46acd9cba8ad157cc, type: 3}
+  - {fileID: 21300000, guid: 97d85c9b09fbe6a46a608fb61b5e1af2, type: 3}
+  - {fileID: 21300000, guid: 917092b57c184e14db541fafca51ad06, type: 3}
+  transformBurst:
+  - {fileID: 21300000, guid: ac44ae31b22c12244a3b3aac6afae3cb, type: 3}
+  - {fileID: 21300000, guid: c7931bfec3d8fee4c8e213086a93d466, type: 3}
+  - {fileID: 21300000, guid: 8bfdac175c5821a4ea797ccfeaabfb57, type: 3}
+  - {fileID: 21300000, guid: d89b04310b2e86a42a8e7ce50130247f, type: 3}
+  - {fileID: 21300000, guid: 42da119817751e840b6cbcd6028cb4c6, type: 3}
+  - {fileID: 21300000, guid: 195aa0b9d816dd2438a39fb481dccf10, type: 3}

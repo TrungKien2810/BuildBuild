@@ -1,0 +1,51 @@
+{
+  "target": "player",
+  "mode": "skill-punch-impact-fx",
+  "source": "tempart\\Werewolf\\fx-punch-impact\\final",
+  "cell_size": 128,
+  "frame_size": [
+    128,
+    128
+  ],
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet, giao 2026-10-08",
+  "frames": [
+    {
+      "frame": "punch-impact-1",
+      "aligned_bbox": [
+        55,
+        54,
+        73,
+        72
+      ]
+    },
+    {
+      "frame": "punch-impact-2",
+      "aligned_bbox": [
+        44,
+        44,
+        84,
+        83
+      ]
+    },
+    {
+      "frame": "punch-impact-3",
+      "aligned_bbox": [
+        49,
+        46,
+        80,
+        79
+      ]
+    },
+    {
+      "frame": "punch-impact-4",
+      "aligned_bbox": [
+        49,
+        48,
+        79,
+        76
+      ]
+    }
+  ]
+}

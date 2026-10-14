@@ -91,7 +91,7 @@ namespace BuildBuild.Combat
         {
             UpdateSlowIcon();
             if (_enemy == null || _renderer == null || _enemy.IsDying || _enemy.IsFrozen) return;
-            if (_enemy.IsSlowed) _renderer.color = SlowedTint;
+            if (_enemy.IsSlowed) _renderer.color = Unit.BodyColor(SlowedTint);
         }
 
         /// <summary>Bong tuyet hien/tat theo `IsSlowed` (thoi han slow doi moi lan trung nen soat moi frame).</summary>

@@ -89,8 +89,17 @@ namespace BuildBuild.Combat
         Galemonk _galemonk;
         Bloodswordsman _blood;
         Soulbinder _soulbinder;
+        GourdTaoist _gourd;
+        InkScribe _ink;
+        HongLien _hong;
+        SaVe _save;
+        KhoiLoiSu _khoi;
+        Werewolf _werewolf;
+        HauNghe _hauNghe;
+        BachLocTien _bachLoc;
         /// <summary>Mau nen thay cho trang (phan than Wukong to nhat) — cac mau trang thai van de len.</summary>
         Color _baseTint = Color.white;
+        Color _painted = Color.white;
         /// <summary>Level + sao + trang bi tu save (`Progression.Multipliers`), doc lai moi lan `Initialise`.</summary>
         float _healthMultiplier = 1f, _damageMultiplier = 1f, _rateMultiplier = 1f;
         int _stars;
@@ -188,6 +197,8 @@ namespace BuildBuild.Combat
         public bool PassiveUnlocked => _stars >= _definition.passiveStar;
         public bool MinorUnlocked => _stars >= _definition.minorStar;
         public bool SecondMinorUnlocked => _stars >= _definition.secondMinorStar;
+        /// <summary>Chieu phu thu ba — chi bo SSR 3 chieu phu (Hau Nghe, Bach Loc Tien) co.</summary>
+        public bool ThirdMinorUnlocked => _stars >= _definition.thirdMinorStar;
 
         /// <summary>Sat thuong mot don thuong luc nay (da nhan hao quang / Cuong No).</summary>
         public float AttackDamage
@@ -342,6 +353,70 @@ namespace BuildBuild.Combat
                 _soulbinder.Initialise(this, definition.soulbinder);
             }
 
+            // Dao Si Ho Lo: Khi, Thu Ta, Luyen Khi Pha, Can Khon Khai Ho — xem `GourdTaoist`.
+            if (definition.gourdTaoist != null)
+            {
+                _gourd = GetComponent<GourdTaoist>();
+                if (_gourd == null) _gourd = gameObject.AddComponent<GourdTaoist>();
+                _gourd.Initialise(this, definition.gourdTaoist);
+            }
+
+            // Ngu But Su: Tam But, Hoanh But, Tran Son An, Hoa Long Diem Tinh — xem `InkScribe`.
+            if (definition.inkScribe != null)
+            {
+                _ink = GetComponent<InkScribe>();
+                if (_ink == null) _ink = gameObject.AddComponent<InkScribe>();
+                _ink.Initialise(this, definition.inkScribe);
+            }
+
+            // Vu Nu Hong Lien: Gieo Sen, Song Phien Vu, Lien Tam Dan, Hong Lien Dai Vu — xem `HongLien`.
+            if (definition.hongLien != null)
+            {
+                _hong = GetComponent<HongLien>();
+                if (_hong == null) _hong = gameObject.AddComponent<HongLien>();
+                _hong.Initialise(this, definition.hongLien);
+            }
+
+            // Sa Ve: Tu Sa, Tram Sa Quyen, Boi Thach, Sa Thanh Tran Tuyen — xem `SaVe`.
+            if (definition.saVe != null)
+            {
+                _save = GetComponent<SaVe>();
+                if (_save == null) _save = gameObject.AddComponent<SaVe>();
+                _save.Initialise(this, definition.saVe);
+            }
+
+            // Khoi Loi Su: roi MocKhoi, Ho Chu, Khoi Vuong Giang Tran — xem `KhoiLoiSu`.
+            if (definition.khoiLoiSu != null)
+            {
+                _khoi = GetComponent<KhoiLoiSu>();
+                if (_khoi == null) _khoi = gameObject.AddComponent<KhoiLoiSu>();
+                _khoi.Initialise(this, definition.khoiLoiSu);
+            }
+
+            // Nguoi Soi: Huyet Thuc, Tru Nguyet, Ngoam Ha, Nguyet Bien — xem `Werewolf`.
+            if (definition.werewolf != null)
+            {
+                _werewolf = GetComponent<Werewolf>();
+                if (_werewolf == null) _werewolf = gameObject.AddComponent<Werewolf>();
+                _werewolf.Initialise(this, definition.werewolf);
+            }
+
+            // Hau Nghe: Nhat An, Nhat Luan Tran Tuyen, Cuu Tien Quy Nhat, Nhat Boc Lien Hoan, Xa Nhat — xem `HauNghe`.
+            if (definition.hauNghe != null)
+            {
+                _hauNghe = GetComponent<HauNghe>();
+                if (_hauNghe == null) _hauNghe = gameObject.AddComponent<HauNghe>();
+                _hauNghe.Initialise(this, definition.hauNghe);
+            }
+
+            // Bach Loc Tien: Sinh Khi, Tam Mam, Hoan Diep, Loc Anh, Bach Loc Hoi Xuan — xem `BachLocTien`.
+            if (definition.bachLocTien != null)
+            {
+                _bachLoc = GetComponent<BachLocTien>();
+                if (_bachLoc == null) _bachLoc = gameObject.AddComponent<BachLocTien>();
+                _bachLoc.Initialise(this, definition.bachLocTien);
+            }
+
             // Dao Vien: Ket Nghia + bo chieu Luu Bi / Quan Vu / Truong Phi — Hero.DaoVien.cs.
             InitialiseBrother();
 
@@ -383,7 +458,14 @@ namespace BuildBuild.Combat
         /// </summary>
         static readonly Color NpcTint = new Color(1f, 0.55f, 0.55f);
 
-        void Paint(Color color) => _renderer.color = Side == Faction.Npc ? color * NpcTint : color;
+        void Paint(Color color)
+        {
+            _painted = color;
+            _renderer.color = BodyColor(Side == Faction.Npc ? color * NpcTint : color);
+        }
+
+        /// <summary>Ve lai mau than dang dung voi anh sang moi (xem `Unit.RepaintBody`) — khong doi mau trang thai.</summary>
+        public override void RepaintBody() => Paint(_painted);
 
         /// <summary>Doi mau nen cua unit (phan than Wukong). Goi SAU `Initialise`.</summary>
         public void SetBaseTint(Color tint)
@@ -439,13 +521,16 @@ namespace BuildBuild.Combat
             // Chua bam bat dau wave thi thanh dung yen: mana theo thoi gian chi chay trong luc danh.
             // Dang Ban Nhanh thi khoa thanh: 3x don danh ma van tich mana thi chieu gan nhu lien hoan (2026-09-15).
             // Cuong No van tich: bien hinh vinh vien, khoa thanh la mat chieu lon ca tran (nguoi dung 2026-09-29).
-            if (UsesMana && WaveManager.Fighting && !RapidFire && !_health.HealBlocked)
+            // Nguoi Soi da hoa soi: go thanh mana, khong tich tiep (kit 2026-10-04).
+            if (UsesMana && WaveManager.Fighting && !RapidFire && !_health.HealBlocked
+                && (_werewolf == null || !_werewolf.Transformed))
                 _mana = Mathf.Min(_definition.manaMax, _mana + _definition.manaPerSecond * ManaRate * Time.deltaTime);
 
             UpdateShield();     // khien ao Den Canh het han — Hero.Support.cs
             UpdateGuard();      // vung Cam Co cua Banneret — Hero.Support.cs
             UpdateHeroN();      // bay Kobold, an Yeu — Hero.HeroN.cs
             UpdatePurify();     // Thanh Tay cua Chuong Bac — Hero.LowTrio.cs
+            UpdateNewSR();      // Qua Den Xe Giap cua Tho San — Hero.NewSR.cs
 
             // Hoa Da: bat dong la cai GIA cua mien sat thuong — khong di, khong danh (GDD muc 3).
             if (_petrified)
@@ -538,8 +623,11 @@ namespace BuildBuild.Combat
 
             // Ky nang di truoc don thuong khi ca hai cung san sang: chu ky ky nang dai hon nhieu,
             // nhuong nhip cho mot phat dan le thi phi ca chu ky.
-            if (_definition.HasSkill && SkillReady) BeginCast(skill: true);
-            else if (_cooldown <= 0f) BeginCast(skill: false);
+            // Khoi Loi Su: chieu cuoi can roi song + co dich trong tam roi — chua du thi giu mana, danh thuong tiep.
+            // Roi Go (attackRate 0) khong tu danh: chi dam theo lenh chu (`KhoiLoiSu.Strike`), khong thi moi lan
+            // trien khai roi tu dam them mot hit (dong ho don bat dau o 0).
+            if (_definition.HasSkill && SkillReady && (_khoi == null || _khoi.CanUltimate)) BeginCast(skill: true);
+            else if (_cooldown <= 0f && _definition.attackRate > 0f) BeginCast(skill: false);
             else PlayIdle();
         }
 
@@ -893,6 +981,7 @@ namespace BuildBuild.Combat
             BuffMultipliers(ref damage, ref rate);
             if (_brother != null) _brother.Multipliers(ref damage);
             if (_blood != null) _blood.Multipliers(ref damage);
+            if (_werewolf != null) _werewolf.Multipliers(ref damage, ref rate);
             Banneret.AuraRate(this, ref rate);
         }
 
@@ -937,6 +1026,16 @@ namespace BuildBuild.Combat
                     case SkillKind.HornSlam: CastHornSlam(); break;         // Hero.LowTrio.cs
                     case SkillKind.BladeStorm: CastBladeStorm(); break;
                     case SkillKind.BellToll: CastBellToll(); break;
+                    case SkillKind.RingReturn: CastRingReturn(); break;       // Hero.NewSR.cs
+                    case SkillKind.SigilJudgment: CastSigilJudgment(); break;
+                    case SkillKind.GourdUnleash: if (_gourd != null) _gourd.CastUltimate(); break;
+                    case SkillKind.InkDragon: if (_ink != null) _ink.CastUltimate(); break;
+                    case SkillKind.LotusBloom: if (_hong != null) _hong.CastUltimate(); break;
+                    case SkillKind.SandFort: if (_save != null) _save.CastUltimate(); break;
+                    case SkillKind.GrandPuppet: if (_khoi != null) _khoi.CastUltimate(); break;
+                    case SkillKind.MoonTransform: if (_werewolf != null) _werewolf.CastUltimate(); break;
+                    case SkillKind.SolarShot: if (_hauNghe != null) _hauNghe.CastUltimate(); break;
+                    case SkillKind.DeerRevival: if (_bachLoc != null) _bachLoc.CastUltimate(); break;
                 }
                 return;
             }
@@ -984,6 +1083,24 @@ namespace BuildBuild.Combat
                 _galemonk.Strike(target, BaseDamage * damageMultiplier);
                 return;
             }
+            // Sa Ve: dam truc tiep can chien — xem `SaVe`.
+            if (_save != null)
+            {
+                _save.Strike(target, BaseDamage * damageMultiplier);
+                return;
+            }
+            // Nguoi Soi: Quyen Kich / Vuot Soi — xem `Werewolf`.
+            if (_werewolf != null)
+            {
+                _werewolf.Strike(target, BaseDamage * damageMultiplier);
+                return;
+            }
+            // Khoi Loi Su: chu khong tu danh, lenh roi dam — xem `KhoiLoiSu`.
+            if (_khoi != null)
+            {
+                _khoi.Strike();
+                return;
+            }
             var go = new GameObject("Projectile");
             // Dau gay nam o phia hero dang nhin.
             go.transform.position = transform.position +
@@ -1014,6 +1131,7 @@ namespace BuildBuild.Combat
         public void OnHitsLanded(int count)
         {
             if (_definition == null || !UsesMana || count <= 0 || RapidFire || _health.HealBlocked) return;
+            if (_werewolf != null && _werewolf.Transformed) return;   // hoa soi roi: khong tich mana nua
             _mana = Mathf.Min(_definition.manaMax, _mana + count * _definition.manaPerHit * ManaRate);
         }
 

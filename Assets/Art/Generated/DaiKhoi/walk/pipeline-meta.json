@@ -1,0 +1,67 @@
+{
+  "target": "player",
+  "mode": "walk",
+  "source": "tempart/DaiKhoi/walk/skeleton/walk-posed-anchor-3x2.png",
+  "cell_size": 128,
+  "rows": 3,
+  "cols": 2,
+  "align": "feet",
+  "ground_row": 116,
+  "status": "giao 2026-10-11 — ban guide (nguoi dung chot dung luon, khong sinh lai art)",
+  "frames": [
+    {
+      "frame": "walk-1",
+      "aligned_bbox": [
+        31,
+        48,
+        97,
+        116
+      ]
+    },
+    {
+      "frame": "walk-2",
+      "aligned_bbox": [
+        31,
+        47,
+        97,
+        116
+      ]
+    },
+    {
+      "frame": "walk-3",
+      "aligned_bbox": [
+        31,
+        47,
+        97,
+        116
+      ]
+    },
+    {
+      "frame": "walk-4",
+      "aligned_bbox": [
+        31,
+        48,
+        97,
+        116
+      ]
+    },
+    {
+      "frame": "walk-5",
+      "aligned_bbox": [
+        31,
+        47,
+        97,
+        116
+      ]
+    },
+    {
+      "frame": "walk-6",
+      "aligned_bbox": [
+        31,
+        47,
+        97,
+        116
+      ]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "target": "player",
+  "mode": "skill-blood-shield-fx",
+  "source": "tempart\\Werewolf\\fx-blood-shield\\final",
+  "cell_size": 128,
+  "frame_size": [
+    128,
+    128
+  ],
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet, giao 2026-10-08",
+  "frames": [
+    {
+      "frame": "blood-shield-1",
+      "aligned_bbox": [
+        38,
+        27,
+        88,
+        102
+      ]
+    },
+    {
+      "frame": "blood-shield-2",
+      "aligned_bbox": [
+        38,
+        27,
+        90,
+        100
+      ]
+    },
+    {
+      "frame": "blood-shield-3",
+      "aligned_bbox": [
+        38,
+        27,
+        90,
+        101
+      ]
+    },
+    {
+      "frame": "blood-shield-4",
+      "aligned_bbox": [
+        38,
+        26,
+        88,
+        101
+      ]
+    }
+  ]
+}

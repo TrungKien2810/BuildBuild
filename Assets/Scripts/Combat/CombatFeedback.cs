@@ -118,7 +118,7 @@ namespace BuildBuild.Combat
                 FloatingNumber.Spawn(head + Vector3.up * stack, "+" + Round(_pendingHeal), HealText);
                 stack += FloatingNumber.LineHeight;
             }
-            if (_pendingBlocked) FloatingNumber.Spawn(head + Vector3.up * stack, "Chặn", BlockedText);
+            if (_pendingBlocked) FloatingNumber.Spawn(head + Vector3.up * stack, "Block", BlockedText);
 
             _pendingDamage = 0f;
             _pendingHeal = 0f;

@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
+  m_Name: Hero_GourdTaoist
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
+  displayName: Dao Si Ho Lo
+  unitId: gourdtaoist
+  role: 5
+  maxHealth: 520
+  damage: 24
+  attackRate: 0.8
+  range: 4.5
+  moveSpeed: 1.1
+  leashRange: 3
+  maxHeld: 3
+  heldDamageBonus: 0
+  warden: {fileID: 0}
+  dragonRider: {fileID: 0}
+  banner: {fileID: 0}
+  wukong: {fileID: 0}
+  stormcaller: {fileID: 0}
+  galemonk: {fileID: 0}
+  daoVien: {fileID: 0}
+  bloodswordsman: {fileID: 0}
+  soulbinder: {fileID: 0}
+  gourdTaoist: {fileID: 11400000, guid: e184b0c0a12280e44854a1b27bde55a4, type: 2}
+  inkScribe: {fileID: 0}
+  hongLien: {fileID: 0}
+  saVe: {fileID: 0}
+  khoiLoiSu: {fileID: 0}
+  werewolf: {fileID: 0}
+  hauNghe: {fileID: 0}
+  bachLocTien: {fileID: 0}
+  swornBrother: 0
+  projectileSpeed: 8
+  splashRadius: 0.1
+  projectileFrames:
+  - {fileID: 21300000, guid: be9f22c30c43bcc4e972b469aee12e35, type: 3}
+  - {fileID: 21300000, guid: c5673c85068fb174fabac7381d49e944, type: 3}
+  - {fileID: 21300000, guid: ebff891f513476b46aa8d93b87bf2554, type: 3}
+  - {fileID: 21300000, guid: 90ee2f4204ba7a342b86fef602c76550, type: 3}
+  projectileScale: 1
+  impactFrames:
+  - {fileID: 21300000, guid: b91dd30b7b1fac34583f5673f6b34565, type: 3}
+  - {fileID: 21300000, guid: f2d0a3917c977ec4e9d3c39befbf9bf2, type: 3}
+  - {fileID: 21300000, guid: 038046a8ecbcb37408f2ee0e53bd5cf8, type: 3}
+  - {fileID: 21300000, guid: 55c8da2162432a84a95c5ff1a6cad1c2, type: 3}
+  impactScale: 1
+  knockbackOnHit: 0
+  fireSfx: 
+  impactSfx: 
+  skillSfx: 
+  skillKind: 31
+  skillTier: 0
+  skillCooldown: 0
+  manaMax: 6
+  manaPerSecond: 0.35
+  manaPerHit: 0.25
+  skillRadius: 1.6
+  skillDuration: 3
+  skillPower: 1
+  skillFrames: []
+  skillIntroFrames: []
+  skillOutroFrames: []
+  stunFrames: []
+  summoner: {fileID: 0}
+  healsAllies: 0
+  healFrames: []
+  buffFrames: []
+  shieldAmount: 0
+  shieldFrames: []
+  shieldBreakFrames: []
+  passiveStar: 1
+  minorStar: 3
+  secondMinorStar: 3
+  thirdMinorStar: 3
+  passiveKind: 0
+  passivePower: 0
+  passiveThreshold: 0
+  passiveRadius: 0
+  passiveEvery: 1
+  passiveDuration: 0
+  passiveFrames: []
+  ultimateText: 'Qian-Kun Opens the Gourd: draws all Poison/Burn/Slow off nearby
+    allies then spends every point of Qi in a 2s cone.'
+  passiveText: 'Pure Qi Guard: clearing a status on an ally himself grants a shield
+    of 6% health for 4s.'
+  minorText: 'Gourd Intake: draws Poison/Burn/Slow from up to 2 allies, +1 Qi per
+    type. Cooldown 8s.'
+  secondMinorText: 'Qi Refining: spends 2 Qi to fire a 2x blast + Poison 4s. Cooldown
+    10s.'
+  thirdMinorText: 
+  ultimateIcon: {fileID: 21300000, guid: c656c77e1ed96604cb0f3cbbaf33eed3, type: 3}
+  minorIcon: {fileID: 21300000, guid: aed9b8969f7ae6849b0e1fa112f120c9, type: 3}
+  passiveIcon: {fileID: 21300000, guid: 03fd0b98548d52049a9592e8e04ce1df, type: 3}
+  secondMinorIcon: {fileID: 21300000, guid: dd9492c0eeda2f54cac459846cf6942c, type: 3}
+  thirdMinorIcon: {fileID: 0}
+  animations: {fileID: 11400000, guid: 0d40b4da6a9b7604386109c42deff53e, type: 2}
+  artFacesRight: 0
+  avatar: {fileID: 21300000, guid: 97c4163ae39eb0b46872f64d36e0deeb, type: 3}

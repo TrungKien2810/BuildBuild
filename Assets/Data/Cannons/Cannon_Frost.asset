@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f28d9e270dec892bd61fa3960bb4436, type: 3}
   m_Name: Cannon_Frost
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.CannonDefinition
-  displayName: "Ph\xE1o B\u0103ng"
+  displayName: Frost Cannon
   unitId: cannon_frost
   icon: {fileID: 21300000, guid: a28189cfe3ed05e4790ef314257e9046, type: 3}
   damage: 8

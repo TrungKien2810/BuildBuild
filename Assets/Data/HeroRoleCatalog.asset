@@ -14,20 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroRoleCatalog
   entries:
   - role: 1
-    displayName: "\u0110\u1EE1 \u0111\xF2n"
+    displayName: "Tank"
     icon: {fileID: 21300000, guid: 63d000913954fdc4e87df73bdf67ba06, type: 3}
   - role: 2
-    displayName: "C\u1EADn chi\u1EBFn"
+    displayName: "Melee"
     icon: {fileID: 21300000, guid: 590cca264c9bc9745b5b905d167af159, type: 3}
   - role: 3
-    displayName: "X\u1EA1 th\u1EE7"
+    displayName: "Ranger"
     icon: {fileID: 21300000, guid: 820cd346f314a7c41a9cc42d74f18e9a, type: 3}
   - role: 4
-    displayName: "Ph\xE1p s\u01B0"
+    displayName: "Mage"
     icon: {fileID: 21300000, guid: df158badb743bf146966402dd5f0512c, type: 3}
   - role: 5
-    displayName: "H\u1ED7 tr\u1EE3"
+    displayName: "Support"
     icon: {fileID: 21300000, guid: 9d9d3474a5beb9743bab7bb43b46f5b4, type: 3}
   - role: 6
-    displayName: "H\u1ED3i m\xE1u"
+    displayName: "Healer"
     icon: {fileID: 21300000, guid: f0cac299e109939489e565e5da6ccd51, type: 3}

@@ -1,0 +1,63 @@
+{
+  "target": "player",
+  "mode": "skill-cast",
+  "cell_size": 128,
+  "align": "feet",
+  "ground_row": 116,
+  "frames": [
+    {
+      "frame": "xa-nhat-cast-1",
+      "aligned_bbox": [
+        46,
+        58,
+        83,
+        116
+      ]
+    },
+    {
+      "frame": "xa-nhat-cast-2",
+      "aligned_bbox": [
+        41,
+        59,
+        84,
+        116
+      ]
+    },
+    {
+      "frame": "xa-nhat-cast-3",
+      "aligned_bbox": [
+        45,
+        57,
+        87,
+        116
+      ]
+    },
+    {
+      "frame": "xa-nhat-cast-4",
+      "aligned_bbox": [
+        41,
+        57,
+        84,
+        116
+      ]
+    },
+    {
+      "frame": "xa-nhat-cast-5",
+      "aligned_bbox": [
+        45,
+        56,
+        89,
+        116
+      ]
+    },
+    {
+      "frame": "xa-nhat-cast-6",
+      "aligned_bbox": [
+        45,
+        58,
+        82,
+        116
+      ]
+    }
+  ]
+}

@@ -20,7 +20,7 @@ namespace BuildBuild.Data
     public class CannonDefinition : ScriptableObject
     {
         [Header("Dinh danh")]
-        public string displayName = "Pháo Liên Thanh";
+        public string displayName = "Rapid Fire Cannon";
         [Tooltip("Trung `UnitDefinition.id` trong gacha — so huu va level doc tu save theo id nay.")]
         public string unitId = "cannon_rapid";
         public Sprite icon;

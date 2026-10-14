@@ -1,0 +1,285 @@
+{
+  "target": "asset",
+  "mode": "sa-thanh-telegraph",
+  "prompt": "",
+  "role": "",
+  "input": "D:\\Edu\\GameDev\\BuildBuild\\tempart\\SRChosen-20261006\\full-assets-v1\\SaVe\\sa-thanh-telegraph\\raw-grid.png",
+  "threshold": 100,
+  "edge_threshold": 150,
+  "duration": 200,
+  "rows": 2,
+  "cols": 2,
+  "cell_size": 128,
+  "fit_scale": 0.53125,
+  "trim_border": 4,
+  "edge_clean_depth": 3,
+  "align": "center",
+  "shared_scale": true,
+  "scale_strategy": "fit",
+  "component_mode": "all",
+  "component_padding": 0,
+  "min_component_area": 1,
+  "edge_touch_margin": 0,
+  "frame_labels": [
+    "sa-thanh-telegraph-1",
+    "sa-thanh-telegraph-2",
+    "sa-thanh-telegraph-3",
+    "sa-thanh-telegraph-4"
+  ],
+  "frames": [
+    {
+      "grid": [
+        0,
+        0
+      ],
+      "source_box": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "component_mode": "all",
+      "component_count": 59,
+      "selected_component_area": null,
+      "selected_component_bbox": null,
+      "crop_bbox": [
+        43,
+        194,
+        462,
+        383
+      ],
+      "source_frame_size": [
+        504,
+        504
+      ],
+      "is_empty": false,
+      "subject_area": 7394,
+      "body_core_area": 2142,
+      "body_area_fraction": 0.008432539682539682,
+      "anchor_source": [
+        252.5,
+        288.5
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        62,
+        28
+      ],
+      "paste_position": [
+        33,
+        50
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        33,
+        36,
+        95,
+        64
+      ],
+      "source_to_output_scale": 0.1487964989059081,
+      "bbox_scale_applied": true,
+      "scale_strategy": "fit",
+      "scale_changed": true
+    },
+    {
+      "grid": [
+        0,
+        1
+      ],
+      "source_box": [
+        512,
+        0,
+        1024,
+        512
+      ],
+      "component_mode": "all",
+      "component_count": 67,
+      "selected_component_area": null,
+      "selected_component_bbox": null,
+      "crop_bbox": [
+        25,
+        188,
+        469,
+        390
+      ],
+      "source_frame_size": [
+        504,
+        504
+      ],
+      "is_empty": false,
+      "subject_area": 19427,
+      "body_core_area": 8426,
+      "body_area_fraction": 0.03317113882590073,
+      "anchor_source": [
+        247.0,
+        289.0
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        66,
+        30
+      ],
+      "paste_position": [
+        31,
+        49
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        31,
+        34,
+        97,
+        64
+      ],
+      "source_to_output_scale": 0.1487964989059081,
+      "bbox_scale_applied": true,
+      "scale_strategy": "fit",
+      "scale_changed": true
+    },
+    {
+      "grid": [
+        1,
+        0
+      ],
+      "source_box": [
+        0,
+        512,
+        512,
+        1024
+      ],
+      "component_mode": "all",
+      "component_count": 78,
+      "selected_component_area": null,
+      "selected_component_bbox": null,
+      "crop_bbox": [
+        26,
+        129,
+        483,
+        352
+      ],
+      "source_frame_size": [
+        504,
+        504
+      ],
+      "is_empty": false,
+      "subject_area": 25831,
+      "body_core_area": 12351,
+      "body_area_fraction": 0.048622921390778534,
+      "anchor_source": [
+        254.5,
+        240.5
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        68,
+        33
+      ],
+      "paste_position": [
+        30,
+        47
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        30,
+        31,
+        98,
+        64
+      ],
+      "source_to_output_scale": 0.1487964989059081,
+      "bbox_scale_applied": true,
+      "scale_strategy": "fit",
+      "scale_changed": true
+    },
+    {
+      "grid": [
+        1,
+        1
+      ],
+      "source_box": [
+        512,
+        512,
+        1024,
+        1024
+      ],
+      "component_mode": "all",
+      "component_count": 45,
+      "selected_component_area": null,
+      "selected_component_bbox": null,
+      "crop_bbox": [
+        26,
+        141,
+        475,
+        352
+      ],
+      "source_frame_size": [
+        504,
+        504
+      ],
+      "is_empty": false,
+      "subject_area": 20999,
+      "body_core_area": 9486,
+      "body_area_fraction": 0.037344104308390025,
+      "anchor_source": [
+        250.5,
+        246.5
+      ],
+      "source_edge_touch": false,
+      "output_edge_touch": false,
+      "edge_touch": false,
+      "output_size": [
+        66,
+        31
+      ],
+      "paste_position": [
+        31,
+        48
+      ],
+      "paste_clamped": false,
+      "aligned_bbox": [
+        32,
+        33,
+        97,
+        64
+      ],
+      "source_to_output_scale": 0.1487964989059081,
+      "bbox_scale_applied": true,
+      "scale_strategy": "fit",
+      "scale_changed": true
+    }
+  ],
+  "edge_touch_frames": [],
+  "source_edge_touch_frames": [],
+  "output_edge_touch_frames": [],
+  "empty_frames": [],
+  "paste_clamped_frames": [],
+  "qc_summary": {
+    "frame_count": 4,
+    "valid_frame_count": 4,
+    "empty_count": 0,
+    "edge_touch_count": 0,
+    "paste_clamped_count": 0,
+    "body_scale_mean": 0.17192765042713937,
+    "output_subject_height_mean": 30.5,
+    "body_scale_cv": 0.28097240658591294,
+    "anchor_x_std": 0.005495664634464371,
+    "anchor_y_std": 0.04508912200714163,
+    "anchor_y_mean": 0.5280257936507936
+  },
+  "qc_config": {
+    "strict_qc": false,
+    "reject_edge_touch": true,
+    "allow_source_edge_touch": false,
+    "max_body_scale_cv": null,
+    "max_anchor_y_std": null,
+    "max_profile_scale_drift": null
+  },
+  "delivery_origin": [
+    64,
+    64
+  ]
+}

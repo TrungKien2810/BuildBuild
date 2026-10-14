@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 505e5ef04f70452448a64507e11a0c68, type: 3}
   m_Name: Enemy_IronshieldBeetle
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.EnemyDefinition
-  displayName: "B\u1ECD Khi\xEAn S\u1EAFt"
+  displayName: "Iron Shield Beetle"
   kind: 2
   baseHealth: 450
   baseDamage: 18

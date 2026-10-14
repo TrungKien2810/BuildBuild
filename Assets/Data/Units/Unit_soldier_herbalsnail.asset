@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Unit_soldier_herbalsnail
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.UnitDefinition
   id: soldier_herbalsnail
-  displayName: "\u1ED0c s\xEAn d\u01B0\u1EE3c th\u1EA3o"
+  displayName: Herbal Snail
   category: 2
   rarity: 1
-  icon: {fileID: 21300000, guid: 6c70951ef8ae4fe4aa5353b63655bef5, type: 3}
+  icon: {fileID: 21300000, guid: aadd8da0992dfe444bf2d48dc9c6e0a3, type: 3}

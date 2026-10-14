@@ -1,0 +1,26 @@
+{
+  "unit": "HauNghe",
+  "action": "solar-arrow",
+  "kind": "fx",
+  "approval": "pending visual review",
+  "cell": [
+    128,
+    128
+  ],
+  "origin": [
+    64,
+    64
+  ],
+  "anchor": "center",
+  "phases": {
+    "action": [
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  "raw_root_y": 0.5,
+  "scale_policy": "one shared scale for complete effect cycle",
+  "gameplay_timing": "not wired; preview durations only"
+}

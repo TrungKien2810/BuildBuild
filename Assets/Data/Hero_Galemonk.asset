@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
   m_Name: Hero_Galemonk
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
-  displayName: "V\xF5 t\u0103ng gi\xF3"
+  displayName: Wind Monk
   unitId: galemonk
   role: 2
   maxHealth: 700
@@ -32,6 +32,14 @@ MonoBehaviour:
   daoVien: {fileID: 0}
   bloodswordsman: {fileID: 0}
   soulbinder: {fileID: 0}
+  gourdTaoist: {fileID: 0}
+  inkScribe: {fileID: 0}
+  hongLien: {fileID: 0}
+  saVe: {fileID: 0}
+  khoiLoiSu: {fileID: 0}
+  werewolf: {fileID: 0}
+  hauNghe: {fileID: 0}
+  bachLocTien: {fileID: 0}
   swornBrother: 0
   projectileSpeed: 8
   splashRadius: 0.8
@@ -66,6 +74,7 @@ MonoBehaviour:
   passiveStar: 1
   minorStar: 3
   secondMinorStar: 3
+  thirdMinorStar: 3
   passiveKind: 0
   passivePower: 0
   passiveThreshold: 0
@@ -73,19 +82,18 @@ MonoBehaviour:
   passiveEvery: 1
   passiveDuration: 0
   passiveFrames: []
-  ultimateText: "Long Quy\u1EC3n: l\u1ED1c xo\xE1y \u1EDF c\u1EE5m qu\xE1i \u0111\xF4ng
-    nh\u1EA5t \u2014 h\xFAt qu\xE1i b\xE1n k\xEDnh 2,5 v\u1EC1 t\xE2m, gi\u1EEF 3s,
-    s\xE1t th\u01B0\u01A1ng m\u1ED7i gi\xE2y (boss kh\xF4ng b\u1ECB h\xFAt)."
-  passiveText: "Thu\u1EADn Phong: qu\xE1i b\u1ECB gi\xF3 \u0111\u1EA9y/h\xFAt ch\u1EADm
-    20% trong 2s."
-  minorText: "Phong T\u1EA3o: ch\u01B0\u1EDFng th\u1EB3ng d\u1ECDc lane, xuy\xEAn
-    c\u1EA3 h\xE0ng, \u0111\u1EA9y l\xF9i 1,5 \xF4 (tinh anh/boss kh\xF4ng b\u1ECB
-    \u0111\u1EA9y)."
+  ultimateText: "Wind Spiral: a whirlwind on the densest cluster \u2014 pulls enemies
+    within radius 2.5 to the centre for 3s."
+  passiveText: 'Tailwind: enemies pushed or pulled by wind are slowed 20% for 2s.'
+  minorText: 'Wind Palm: a palm thrust straight down the lane, piercing the whole
+    row, knocking back 1.5 units (elite/boss is not pushed).'
   secondMinorText: 
+  thirdMinorText: 
   ultimateIcon: {fileID: 21300000, guid: dfe1e9fde6575bb4b9bd2ca77bcbec22, type: 3}
   minorIcon: {fileID: 21300000, guid: f4f2f15c756cae143a483f3cf3fd42a4, type: 3}
   passiveIcon: {fileID: 21300000, guid: ddb2cb4187453d64fb2221dda4a9c029, type: 3}
   secondMinorIcon: {fileID: 0}
+  thirdMinorIcon: {fileID: 0}
   animations: {fileID: 11400000, guid: a557b2694f6556d4dabda0c100a5a351, type: 2}
   artFacesRight: 0
   avatar: {fileID: 21300000, guid: 514585c509951ec41bb71cb1a008a923, type: 3}

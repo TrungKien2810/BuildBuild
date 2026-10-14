@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Unit_knight
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.UnitDefinition
   id: knight
-  displayName: "Hi\u1EC7p s\u0129"
+  displayName: Knight
   category: 0
   rarity: 0
   icon: {fileID: 21300000, guid: fbf77d7a51c84c1419fdbdd8113dba0f, type: 3}

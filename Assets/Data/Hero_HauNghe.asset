@@ -1,0 +1,112 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
+  m_Name: Hero_HauNghe
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
+  displayName: Hau Nghe
+  unitId: haunghe
+  role: 3
+  maxHealth: 520
+  damage: 34
+  attackRate: 0.8
+  range: 5.5
+  moveSpeed: 1.1
+  leashRange: 3
+  maxHeld: 3
+  heldDamageBonus: 0
+  warden: {fileID: 0}
+  dragonRider: {fileID: 0}
+  banner: {fileID: 0}
+  wukong: {fileID: 0}
+  stormcaller: {fileID: 0}
+  galemonk: {fileID: 0}
+  daoVien: {fileID: 0}
+  bloodswordsman: {fileID: 0}
+  soulbinder: {fileID: 0}
+  gourdTaoist: {fileID: 0}
+  inkScribe: {fileID: 0}
+  hongLien: {fileID: 0}
+  saVe: {fileID: 0}
+  khoiLoiSu: {fileID: 0}
+  werewolf: {fileID: 0}
+  hauNghe: {fileID: 11400000, guid: b4cfcea46844e50439f0071627900b15, type: 2}
+  bachLocTien: {fileID: 0}
+  swornBrother: 0
+  projectileSpeed: 8
+  splashRadius: 0.1
+  projectileFrames:
+  - {fileID: 21300000, guid: 57320f04aa68a4740bedf9f24490b716, type: 3}
+  - {fileID: 21300000, guid: b059245b7284ae74e9a1fa960cb5c8ed, type: 3}
+  - {fileID: 21300000, guid: 845f028d50a077b448f4299c1959544d, type: 3}
+  - {fileID: 21300000, guid: 1cb8e30972704d54683f4e99b1ed5256, type: 3}
+  projectileScale: 1
+  impactFrames:
+  - {fileID: 21300000, guid: e6dd200d8f88e9d44a606727772558ed, type: 3}
+  - {fileID: 21300000, guid: 0f76d608b93891746a2cc96fd8e7a1b0, type: 3}
+  - {fileID: 21300000, guid: 18718e31e92511c4b9c705bcfdf22139, type: 3}
+  - {fileID: 21300000, guid: 3eb371277e0e32b4d927463e9668c589, type: 3}
+  - {fileID: 21300000, guid: 45b8218bafce8cb43804bd3f0b2cd90a, type: 3}
+  - {fileID: 21300000, guid: cd2f93981888f1246afba3b2621f0890, type: 3}
+  impactScale: 1
+  knockbackOnHit: 0
+  fireSfx: 
+  impactSfx: 
+  skillSfx: 
+  skillKind: 37
+  skillTier: 0
+  skillCooldown: 0
+  manaMax: 6
+  manaPerSecond: 0.35
+  manaPerHit: 0.25
+  skillRadius: 1.6
+  skillDuration: 3
+  skillPower: 1
+  skillFrames: []
+  skillIntroFrames: []
+  skillOutroFrames: []
+  stunFrames: []
+  summoner: {fileID: 0}
+  healsAllies: 0
+  healFrames: []
+  buffFrames: []
+  shieldAmount: 0
+  shieldFrames: []
+  shieldBreakFrames: []
+  passiveStar: 1
+  minorStar: 3
+  secondMinorStar: 3
+  thirdMinorStar: 3
+  passiveKind: 0
+  passivePower: 0
+  passiveThreshold: 0
+  passiveRadius: 0
+  passiveEvery: 1
+  passiveDuration: 0
+  passiveFrames: []
+  ultimateText: "Sun Shot: draws for 1s then fires a huge piercing arrow \u2014 3x
+    ATK per enemy, +1x per Sun Sigil on the aimed target. Interrupted = no damage."
+  passiveText: 'Heavenly Archer Sun Shot: hits on his aimed target stack Sun Sigils
+    (max 3, +12% damage each); at 3 sigils the next secondary spends them.'
+  minorText: 'Sun Wheel Line Hold: plants an arrow to raise a sun wheel zone; enemies
+    inside are slowed, then rooted 0.9s. 10s CD.'
+  secondMinorText: 'Nine Arrows as One: 3 pulses x 3 arrows converge on one target
+    (0.6x ATK each); interruption loses the rest. 12s CD.'
+  thirdMinorText: 'Sunburst Barrage: an arrow blasts for 1x ATK then 3 rays of 0.6x
+    ATK hit up to 3 nearby enemies. Cooldown 9s.'
+  ultimateIcon: {fileID: 21300000, guid: 6a5ad657ed6ec88469ed12adfabd2bcc, type: 3}
+  minorIcon: {fileID: 21300000, guid: 71c23727b369a974184e08440d410b2e, type: 3}
+  passiveIcon: {fileID: 21300000, guid: b826a7b19796fe045905eb3db24557f2, type: 3}
+  secondMinorIcon: {fileID: 21300000, guid: e5004eb24d3f84741b3f0b91657b0655, type: 3}
+  thirdMinorIcon: {fileID: 21300000, guid: 5f06bc579b194b942a008ca47e4dcc38, type: 3}
+  animations: {fileID: 11400000, guid: 9bd8744462376cc4a94912e17a84546e, type: 2}
+  artFacesRight: 0
+  avatar: {fileID: 21300000, guid: 912ed127095b5c149a3e6d09c4483605, type: 3}

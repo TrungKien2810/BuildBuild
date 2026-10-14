@@ -1,0 +1,51 @@
+{
+  "target": "player",
+  "mode": "skill-howl-wave-fx",
+  "source": "tempart\\Werewolf\\fx-howl-wave\\final",
+  "cell_size": 256,
+  "frame_size": [
+    256,
+    256
+  ],
+  "align": "center",
+  "ground_row": null,
+  "status": "duyet, giao 2026-10-08",
+  "frames": [
+    {
+      "frame": "howl-wave-1",
+      "aligned_bbox": [
+        90,
+        119,
+        165,
+        144
+      ]
+    },
+    {
+      "frame": "howl-wave-2",
+      "aligned_bbox": [
+        56,
+        112,
+        200,
+        151
+      ]
+    },
+    {
+      "frame": "howl-wave-3",
+      "aligned_bbox": [
+        28,
+        100,
+        228,
+        156
+      ]
+    },
+    {
+      "frame": "howl-wave-4",
+      "aligned_bbox": [
+        30,
+        102,
+        226,
+        154
+      ]
+    }
+  ]
+}

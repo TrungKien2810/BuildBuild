@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f28d9e270dec892bd61fa3960bb4436, type: 3}
   m_Name: Cannon_Blast
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.CannonDefinition
-  displayName: "Ph\xE1o N\u1ED5"
+  displayName: Blast Cannon
   unitId: cannon_blast
   icon: {fileID: 21300000, guid: c3a8cf119fb3eb349b30d5806ca69426, type: 3}
   damage: 30

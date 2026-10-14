@@ -1,0 +1,45 @@
+{
+  "target": "player",
+  "mode": "skill-volley-fx",
+  "cell_size": 128,
+  "align": "center",
+  "ground_row": null,
+  "frames": [
+    {
+      "frame": "cuu-tien-arrows-1",
+      "aligned_bbox": [
+        44,
+        46,
+        84,
+        82
+      ]
+    },
+    {
+      "frame": "cuu-tien-arrows-2",
+      "aligned_bbox": [
+        45,
+        49,
+        79,
+        81
+      ]
+    },
+    {
+      "frame": "cuu-tien-arrows-3",
+      "aligned_bbox": [
+        45,
+        47,
+        76,
+        75
+      ]
+    },
+    {
+      "frame": "cuu-tien-arrows-4",
+      "aligned_bbox": [
+        45,
+        49,
+        79,
+        76
+      ]
+    }
+  ]
+}

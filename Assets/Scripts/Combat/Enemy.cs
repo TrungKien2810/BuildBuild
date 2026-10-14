@@ -609,11 +609,12 @@ namespace BuildBuild.Combat
         {
             bool locked = IsFrozen || IsStunned;
             var tint = IsFrozen ? FrozenTint : IsStunned ? StunnedTint : IsChained ? ChainedTint : Color.white;
-            if (locked != _frozenVisual || (_renderer != null && _renderer.color != tint))
+            var painted = BodyColor(tint);   // anh sang chung cua biome nhan SAU mau trang thai
+            if (locked != _frozenVisual || (_renderer != null && _renderer.color != painted))
             {
                 _frozenVisual = locked;
                 if (animator != null) animator.Paused = locked;
-                if (_renderer != null) _renderer.color = tint;
+                if (_renderer != null) _renderer.color = painted;
             }
             return locked;
         }
@@ -624,7 +625,7 @@ namespace BuildBuild.Combat
             Status.Remove(StatusId.Stun);
             _frozenVisual = false;
             if (animator != null) animator.Paused = false;
-            if (_renderer != null) _renderer.color = Color.white;
+            if (_renderer != null) _renderer.color = BodyColor(Color.white);
             if (_stunFx != null) Destroy(_stunFx);
             _stunFx = null;
             _stunRenderer = null;

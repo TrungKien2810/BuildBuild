@@ -1,0 +1,45 @@
+{
+  "target": "player",
+  "mode": "skill-bolt-fx",
+  "cell_size": 128,
+  "align": "center",
+  "ground_row": null,
+  "frames": [
+    {
+      "frame": "loc-tuc-bolt-1",
+      "aligned_bbox": [
+        57,
+        61,
+        73,
+        67
+      ]
+    },
+    {
+      "frame": "loc-tuc-bolt-2",
+      "aligned_bbox": [
+        55,
+        59,
+        72,
+        67
+      ]
+    },
+    {
+      "frame": "loc-tuc-bolt-3",
+      "aligned_bbox": [
+        56,
+        58,
+        74,
+        67
+      ]
+    },
+    {
+      "frame": "loc-tuc-bolt-4",
+      "aligned_bbox": [
+        54,
+        59,
+        70,
+        67
+      ]
+    }
+  ]
+}

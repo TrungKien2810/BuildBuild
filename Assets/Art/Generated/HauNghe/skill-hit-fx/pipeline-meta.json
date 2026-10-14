@@ -1,0 +1,63 @@
+{
+  "target": "player",
+  "mode": "skill-hit-fx",
+  "cell_size": 128,
+  "align": "center",
+  "ground_row": null,
+  "frames": [
+    {
+      "frame": "solar-hit-impact-1",
+      "aligned_bbox": [
+        64,
+        62,
+        73,
+        76
+      ]
+    },
+    {
+      "frame": "solar-hit-impact-2",
+      "aligned_bbox": [
+        52,
+        58,
+        67,
+        79
+      ]
+    },
+    {
+      "frame": "solar-hit-impact-3",
+      "aligned_bbox": [
+        58,
+        48,
+        78,
+        78
+      ]
+    },
+    {
+      "frame": "solar-hit-impact-4",
+      "aligned_bbox": [
+        50,
+        50,
+        70,
+        77
+      ]
+    },
+    {
+      "frame": "solar-hit-impact-5",
+      "aligned_bbox": [
+        61,
+        48,
+        75,
+        70
+      ]
+    },
+    {
+      "frame": "solar-hit-impact-6",
+      "aligned_bbox": [
+        55,
+        52,
+        65,
+        66
+      ]
+    }
+  ]
+}

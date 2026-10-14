@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
+  m_Name: Hero_InkScribe
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
+  displayName: Ngu But Su
+  unitId: inkscribe
+  role: 4
+  maxHealth: 480
+  damage: 28
+  attackRate: 0.75
+  range: 4.5
+  moveSpeed: 1.1
+  leashRange: 3
+  maxHeld: 3
+  heldDamageBonus: 0
+  warden: {fileID: 0}
+  dragonRider: {fileID: 0}
+  banner: {fileID: 0}
+  wukong: {fileID: 0}
+  stormcaller: {fileID: 0}
+  galemonk: {fileID: 0}
+  daoVien: {fileID: 0}
+  bloodswordsman: {fileID: 0}
+  soulbinder: {fileID: 0}
+  gourdTaoist: {fileID: 0}
+  inkScribe: {fileID: 11400000, guid: d2f54e95727811f4b8a8c71d629cc68a, type: 2}
+  hongLien: {fileID: 0}
+  saVe: {fileID: 0}
+  khoiLoiSu: {fileID: 0}
+  werewolf: {fileID: 0}
+  hauNghe: {fileID: 0}
+  bachLocTien: {fileID: 0}
+  swornBrother: 0
+  projectileSpeed: 8
+  splashRadius: 0.1
+  projectileFrames:
+  - {fileID: 21300000, guid: 8a4412305775b784fadca277bbf4784e, type: 3}
+  - {fileID: 21300000, guid: 2956a9ae09fd0bb4fb4971057c3d30ad, type: 3}
+  - {fileID: 21300000, guid: 3ecd0aa455d46504795c5b4ac834e693, type: 3}
+  - {fileID: 21300000, guid: 7aa888203e7993b42a66b4f5c7a7b2a8, type: 3}
+  projectileScale: 1
+  impactFrames:
+  - {fileID: 21300000, guid: 84b6e966453b2364fbb69b3b37ef2b3e, type: 3}
+  - {fileID: 21300000, guid: b27b6e31a68224f4899ba19cd6dd9d48, type: 3}
+  - {fileID: 21300000, guid: 1f8adbabb8a8f414aa7915a40487bedf, type: 3}
+  - {fileID: 21300000, guid: ffc9e67b19fa63747a6d102bc8e7be7c, type: 3}
+  impactScale: 1
+  knockbackOnHit: 0
+  fireSfx: 
+  impactSfx: 
+  skillSfx: 
+  skillKind: 32
+  skillTier: 0
+  skillCooldown: 0
+  manaMax: 6
+  manaPerSecond: 0.35
+  manaPerHit: 0.25
+  skillRadius: 1.6
+  skillDuration: 3
+  skillPower: 1
+  skillFrames: []
+  skillIntroFrames: []
+  skillOutroFrames: []
+  stunFrames: []
+  summoner: {fileID: 0}
+  healsAllies: 0
+  healFrames: []
+  buffFrames: []
+  shieldAmount: 0
+  shieldFrames: []
+  shieldBreakFrames: []
+  passiveStar: 1
+  minorStar: 3
+  secondMinorStar: 3
+  thirdMinorStar: 3
+  passiveKind: 0
+  passivePower: 0
+  passiveThreshold: 0
+  passiveRadius: 0
+  passiveEvery: 1
+  passiveDuration: 0
+  passiveFrames: []
+  ultimateText: 'Paint the Dragon''s Eye: a brush dragon sweeps a long strip for
+    3x then blasts at the end of the path for 2x, hitting both ground and flying.'
+  passiveText: 'Three Brush Sigils: direct hits set a Brush mark (max 3); at full
+    marks they blast for an extra 0.8x.'
+  minorText: 'Sweeping Brush: draws an ink stroke that cuts the advance, enemies
+    stepping over take 1.5x. Cooldown 7s.'
+  secondMinorText: 'Mountain Seal: a seal slams down on the enemy cluster, 1.5x +
+    root 1.2s. Cooldown 10s.'
+  thirdMinorText: 
+  ultimateIcon: {fileID: 21300000, guid: 7a6e8d5cf83ec584fa2571a40d2b9920, type: 3}
+  minorIcon: {fileID: 21300000, guid: b6b2cd33e8d63314c86ba2ed54baaf19, type: 3}
+  passiveIcon: {fileID: 21300000, guid: 43c435e0a79dcd74a8d9dd0d5236db2e, type: 3}
+  secondMinorIcon: {fileID: 21300000, guid: e983279f4dcfa1e4cafe62c70d40dd51, type: 3}
+  thirdMinorIcon: {fileID: 0}
+  animations: {fileID: 11400000, guid: 682560c8360e40d4ba8375b4d6daa344, type: 2}
+  artFacesRight: 0
+  avatar: {fileID: 21300000, guid: 991c4865c1decd34597ba9fb2d863ee5, type: 3}

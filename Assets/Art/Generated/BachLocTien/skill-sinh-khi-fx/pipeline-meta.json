@@ -1,0 +1,63 @@
+{
+  "target": "player",
+  "mode": "skill-sinh-khi-fx",
+  "cell_size": 128,
+  "align": "feet",
+  "ground_row": 96,
+  "frames": [
+    {
+      "frame": "sinh-khi-1",
+      "aligned_bbox": [
+        53,
+        73,
+        73,
+        96
+      ]
+    },
+    {
+      "frame": "sinh-khi-2",
+      "aligned_bbox": [
+        51,
+        73,
+        71,
+        96
+      ]
+    },
+    {
+      "frame": "sinh-khi-3",
+      "aligned_bbox": [
+        52,
+        70,
+        74,
+        96
+      ]
+    },
+    {
+      "frame": "sinh-khi-4",
+      "aligned_bbox": [
+        50,
+        70,
+        73,
+        96
+      ]
+    },
+    {
+      "frame": "sinh-khi-5",
+      "aligned_bbox": [
+        52,
+        69,
+        76,
+        96
+      ]
+    },
+    {
+      "frame": "sinh-khi-6",
+      "aligned_bbox": [
+        50,
+        68,
+        76,
+        96
+      ]
+    }
+  ]
+}

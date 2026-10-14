@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21934289f9624743841fea630ce87914, type: 3}
   m_Name: Soldier_Warhorn
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.SoldierDefinition
-  displayName: "T\xEA gi\xE1c chi\u1EBFn"
+  displayName: War Rhino
   unitId: soldier_warhorn
   role: 0
   maxHealth: 1500
@@ -32,6 +32,14 @@ MonoBehaviour:
   daoVien: {fileID: 0}
   bloodswordsman: {fileID: 0}
   soulbinder: {fileID: 0}
+  gourdTaoist: {fileID: 0}
+  inkScribe: {fileID: 0}
+  hongLien: {fileID: 0}
+  saVe: {fileID: 0}
+  khoiLoiSu: {fileID: 0}
+  werewolf: {fileID: 0}
+  hauNghe: {fileID: 0}
+  bachLocTien: {fileID: 0}
   swornBrother: 0
   projectileSpeed: 20
   splashRadius: 0.3
@@ -74,6 +82,7 @@ MonoBehaviour:
   passiveStar: 0
   minorStar: 3
   secondMinorStar: 3
+  thirdMinorStar: 3
   passiveKind: 6
   passivePower: 0.5
   passiveThreshold: 0
@@ -82,15 +91,17 @@ MonoBehaviour:
   passiveDuration: 0
   passiveFrames: []
   ultimateText: 
-  passiveText: "Kh\u1EAFc Ch\u1EBF: \u0111\xF2n th\u01B0\u1EDDng v\xE0 c\xFA h\xFAc
-    v\xE0o tinh anh/boss +50% s\xE1t th\u01B0\u01A1ng."
-  minorText: "H\xFAc: phi xuy\xEAn h\xE0ng qu\xE1i, cho\xE1ng + \u0111\u1EA9y l\xF9i
-    m\u1ECDi qu\xE1i tr\xEAn \u0111\u01B0\u1EDDng."
+  passiveText: 'Counter: basic hits and the horn blast on elites/bosses deal +50%
+    damage.'
+  minorText: 'Warhorn: a horn blast flies through enemy rows, stunning + knocking
+    back every enemy on the way.'
   secondMinorText: 
+  thirdMinorText: 
   ultimateIcon: {fileID: 0}
   minorIcon: {fileID: 21300000, guid: 773ac668711bdca4cb33ef5c93298064, type: 3}
   passiveIcon: {fileID: 21300000, guid: 9d03a6e37749f3c49b5b9d5f53c002e4, type: 3}
   secondMinorIcon: {fileID: 0}
+  thirdMinorIcon: {fileID: 0}
   animations: {fileID: 11400000, guid: 0bfc0dd6bf4329945bc0742ebc33c712, type: 2}
   artFacesRight: 1
   avatar: {fileID: 21300000, guid: 27214b698023a9641832304b2e49281a, type: 3}

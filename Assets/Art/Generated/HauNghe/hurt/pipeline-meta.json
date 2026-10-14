@@ -1,0 +1,45 @@
+{
+  "target": "player",
+  "mode": "hurt",
+  "cell_size": 128,
+  "align": "feet",
+  "ground_row": 116,
+  "frames": [
+    {
+      "frame": "hurt-1",
+      "aligned_bbox": [
+        50,
+        57,
+        91,
+        116
+      ]
+    },
+    {
+      "frame": "hurt-2",
+      "aligned_bbox": [
+        36,
+        62,
+        76,
+        116
+      ]
+    },
+    {
+      "frame": "hurt-3",
+      "aligned_bbox": [
+        50,
+        59,
+        91,
+        116
+      ]
+    },
+    {
+      "frame": "hurt-4",
+      "aligned_bbox": [
+        36,
+        58,
+        76,
+        116
+      ]
+    }
+  ]
+}

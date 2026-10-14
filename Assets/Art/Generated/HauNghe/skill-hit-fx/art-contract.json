@@ -1,0 +1,36 @@
+{
+  "unit": "HauNghe",
+  "action": "solar-hit-impact",
+  "kind": "fx",
+  "approval": "pending visual review",
+  "cell": [
+    128,
+    128
+  ],
+  "origin": [
+    64,
+    64
+  ],
+  "anchor": "center",
+  "raw_root": [
+    256,
+    256
+  ],
+  "scale_policy": "one common scale for entire effect cycle; original root geometry preserved",
+  "source_trim_border": 0,
+  "phases": {
+    "onset": [
+      1,
+      2
+    ],
+    "peak": [
+      3
+    ],
+    "fade": [
+      4,
+      5,
+      6
+    ]
+  },
+  "gameplay_timing": "preview only; not wired"
+}

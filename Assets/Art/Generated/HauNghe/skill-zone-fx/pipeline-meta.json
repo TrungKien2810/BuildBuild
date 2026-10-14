@@ -1,0 +1,90 @@
+{
+  "target": "player",
+  "mode": "skill-zone-fx",
+  "cell_size": 256,
+  "align": "feet",
+  "ground_row": 192,
+  "frames": [
+    {
+      "frame": "nhat-luan-ground-r2-1",
+      "aligned_bbox": [
+        106,
+        180,
+        157,
+        192
+      ]
+    },
+    {
+      "frame": "nhat-luan-ground-r2-2",
+      "aligned_bbox": [
+        102,
+        180,
+        153,
+        192
+      ]
+    },
+    {
+      "frame": "nhat-luan-ground-r2-3",
+      "aligned_bbox": [
+        99,
+        180,
+        151,
+        192
+      ]
+    },
+    {
+      "frame": "nhat-luan-ground-r2-4",
+      "aligned_bbox": [
+        105,
+        174,
+        157,
+        192
+      ]
+    },
+    {
+      "frame": "nhat-luan-ground-r2-5",
+      "aligned_bbox": [
+        102,
+        161,
+        154,
+        192
+      ]
+    },
+    {
+      "frame": "nhat-luan-ground-r2-6",
+      "aligned_bbox": [
+        99,
+        163,
+        151,
+        192
+      ]
+    },
+    {
+      "frame": "nhat-luan-ground-r2-7",
+      "aligned_bbox": [
+        104,
+        164,
+        159,
+        192
+      ]
+    },
+    {
+      "frame": "nhat-luan-ground-r2-8",
+      "aligned_bbox": [
+        113,
+        170,
+        141,
+        192
+      ]
+    },
+    {
+      "frame": "nhat-luan-ground-r2-9",
+      "aligned_bbox": [
+        116,
+        178,
+        135,
+        192
+      ]
+    }
+  ]
+}

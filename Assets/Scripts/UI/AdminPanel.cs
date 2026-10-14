@@ -45,11 +45,11 @@ namespace BuildBuild.UI
 
             const float panelHeight = 760f;
             GUILayout.BeginArea(new Rect(left, bottom - 48f - 12f - panelHeight, 360f, panelHeight), GUI.skin.box);
-            GUILayout.Label($"Wave tiep: {waves.NextWave}   {(waves.IsFighting ? "(dang danh)" : "")}");
+            GUILayout.Label($"Next wave: {waves.NextWave}   {(waves.IsFighting ? "(fighting)" : "")}");
 
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("+1.000 vang")) economy.Add(1000);
-            if (GUILayout.Button("+10.000 vang")) economy.Add(10000);
+            if (GUILayout.Button("+1.000 Gold")) economy.Add(1000);
+            if (GUILayout.Button("+10.000 Gold")) economy.Add(10000);
             GUILayout.EndHorizontal();
 
             GUI.enabled = !waves.IsFighting;
@@ -59,74 +59,74 @@ namespace BuildBuild.UI
             GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();
             _waveInput = GUILayout.TextField(_waveInput, GUILayout.Width(80f));
-            if (GUILayout.Button("Nhay toi wave") && int.TryParse(_waveInput, out int wave)) SetWave(wave);
+            if (GUILayout.Button("Jump to wave") && int.TryParse(_waveInput, out int wave)) SetWave(wave);
             GUILayout.EndHorizontal();
             GUI.enabled = true;
 
             GUI.enabled = waves.IsFighting;
-            if (GUILayout.Button("Giet het quai")) waves.DevKillAll();
-            if (SoldierCamp.Current != null && GUILayout.Button("Linh: day vong hoi chieu")) SoldierCamp.Current.DevFill();
+            if (GUILayout.Button("Kill All Enemies")) waves.DevKillAll();
+            if (SoldierCamp.Current != null && GUILayout.Button("Soldiers: Fill Cooldown Ring")) SoldierCamp.Current.DevFill();
             GUI.enabled = true;
 
             GUI.enabled = !waves.IsFighting;
-            if (GUILayout.Button(WaveManager.InConquest ? "Roi Chinh Phat" : "Chinh Phat (vao chuan bi)"))
+            if (GUILayout.Button(WaveManager.InConquest ? "Leave Conquest" : "Conquest (Enter Preparation)"))
             {
                 if (WaveManager.InConquest) waves.LeaveConquest();
                 else waves.EnterConquest();
                 hud.Refresh();
             }
             GUI.enabled = true;
-            if (GUILayout.Button($"Reset luot Chinh Phat ({ConquestMap.AttacksLeft}/{ConquestMap.AttacksPerDay})"))
+            if (GUILayout.Button($"Reset Conquest Attempts ({ConquestMap.AttacksLeft}/{ConquestMap.AttacksPerDay})"))
                 ConquestMap.DevResetAttacks();
 
-            if (GUILayout.Button("Tha 1 hero NPC (phe do)"))
+            if (GUILayout.Button("Spawn 1 NPC Hero (Red Faction)"))
             {
                 var board = FindAnyObjectByType<HeroBoard>();
                 if (board != null) board.DevSpawnNpc();
             }
 
-            if (GUILayout.Button("Day mana moi hero / linh"))
+            if (GUILayout.Button("Refill mana for all heroes / soldiers"))
                 foreach (var hero in Hero.Alive.ToArray()) hero.DevFillMana();
 
-            if (cannons != null && GUILayout.Button("So huu ca 3 phao (test be phao)")) cannons.DevOwnAll();
-            GUILayout.Label($"Tai khoan: {SaveSystem.Account}");
+            if (cannons != null && GUILayout.Button("Own All 3 Cannons (Test Cannon Mounts)")) cannons.DevOwnAll();
+            GUILayout.Label($"Account: {SaveSystem.Account}");
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("Chinh")) SwitchAccount(SaveSystem.MainAccount);
-            if (GUILayout.Button("Test (du nv)")) SwitchAccount(SaveSystem.TestAccount);
-            if (GUILayout.Button("Moi (tu dau)")) SwitchAccount(SaveSystem.FreshAccount);
+            if (GUILayout.Button("Main")) SwitchAccount(SaveSystem.MainAccount);
+            if (GUILayout.Button("Test (all heroes)")) SwitchAccount(SaveSystem.TestAccount);
+            if (GUILayout.Button("Fresh (new game)")) SwitchAccount(SaveSystem.FreshAccount);
             GUILayout.EndHorizontal();
 
-            if (GUILayout.Button("Ruong AFK: +4 gio"))
+            if (GUILayout.Button("AFK Chest: +4 Hours"))
             {
                 AfkChest.DevAddHours(4f);
                 hud.Refresh();
             }
-            if (GUILayout.Button("Hoi day mau lau dai"))
+            if (GUILayout.Button("Refill castle HP"))
             {
                 castle.Repair();
                 hud.Refresh();
             }
-            castle.Health.Invulnerable = GUILayout.Toggle(castle.Health.Invulnerable, " Lau dai bat tu");
+            castle.Health.Invulnerable = GUILayout.Toggle(castle.Health.Invulnerable, " Invulnerable Castle");
 
             // Dev: cho 1 mon moi o, do hiem ngau nhien — test man Doi quan khi chua thang wave nao.
-            if (GUILayout.Button("+4 trang bi (moi o 1 mon)"))
+            if (GUILayout.Button("+4 Gear Items (1 per Slot)"))
                 for (int slot = 0; slot < 4; slot++)
                     Armory.Add((BuildBuild.Data.EquipmentSlot)slot, (BuildBuild.Data.Rarity)Random.Range(0, 4));
 
-            GUILayout.Label($"Toc do game: x{Time.timeScale:0.#}");
+            GUILayout.Label($"Game Speed: x{Time.timeScale:0.#}");
             GUILayout.BeginHorizontal();
             foreach (float speed in Speeds)
                 if (GUILayout.Button($"x{speed:0.#}")) Time.timeScale = speed;
             GUILayout.EndHorizontal();
 
-            GUILayout.Label("Da so huu (xoa khoi kho — khong hoan vang/thach):");
+            GUILayout.Label("Owned (Remove from Inventory — No Gold/Shard Refund):");
             var owned = SaveSystem.Data.owned;
             _ownedScroll = GUILayout.BeginScrollView(_ownedScroll, GUILayout.Height(160f));
             for (int i = owned.Count - 1; i >= 0; i--)
             {
                 var unit = owned[i];
                 GUILayout.BeginHorizontal();
-                GUILayout.Label($"{unit.id}  Lv{unit.level} {unit.stars}★ {unit.shards}mv", GUILayout.Width(160f));
+                GUILayout.Label($"{unit.id}  Lv{unit.level} {unit.stars}★ {unit.shards}sh", GUILayout.Width(160f));
                 // Dev: nang mien phi de test mo skill theo sao; hero tren san an so moi tu wave sau (HeroBoard dung lai).
                 if (GUILayout.Button("+Lv", GUILayout.Width(40f)) && unit.level < Progression.MaxLevel(unit.stars))
                 {
@@ -138,7 +138,7 @@ namespace BuildBuild.UI
                     unit.stars++;
                     SaveSystem.Save();
                 }
-                if (GUILayout.Button("Xoa", GUILayout.Width(60f)))
+                if (GUILayout.Button("Remove", GUILayout.Width(60f)))
                 {
                     owned.RemoveAt(i);
                     SaveSystem.Save();

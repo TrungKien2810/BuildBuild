@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f28d9e270dec892bd61fa3960bb4436, type: 3}
   m_Name: Cannon_Void
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.CannonDefinition
-  displayName: "Ph\xE1o H\u1EAFc Tinh"
+  displayName: Darkstar Cannon
   unitId: cannon_void
   icon: {fileID: 21300000, guid: d1359b2b1b9ba74428e6f2e63da2f986, type: 3}
   damage: 100

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
   m_Name: Hero_Bloodswordsman
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
-  displayName: "Huy\u1EBFt ki\u1EBFm kh\xE1ch"
+  displayName: Blood Swordsman
   unitId: bloodswordsman
   role: 2
   maxHealth: 900
@@ -32,6 +32,14 @@ MonoBehaviour:
   daoVien: {fileID: 0}
   bloodswordsman: {fileID: 11400000, guid: 5c24de15f188a92488e0b94ad15a3cc2, type: 2}
   soulbinder: {fileID: 0}
+  gourdTaoist: {fileID: 0}
+  inkScribe: {fileID: 0}
+  hongLien: {fileID: 0}
+  saVe: {fileID: 0}
+  khoiLoiSu: {fileID: 0}
+  werewolf: {fileID: 0}
+  hauNghe: {fileID: 0}
+  bachLocTien: {fileID: 0}
   swornBrother: 0
   projectileSpeed: 8
   splashRadius: 0.8
@@ -74,6 +82,7 @@ MonoBehaviour:
   passiveStar: 1
   minorStar: 3
   secondMinorStar: 3
+  thirdMinorStar: 3
   passiveKind: 0
   passivePower: 0
   passiveThreshold: 0
@@ -81,22 +90,20 @@ MonoBehaviour:
   passiveEvery: 1
   passiveDuration: 0
   passiveFrames: []
-  ultimateText: "To\xE1i Ki\u1EBFm Quy Huy\u1EBFt: ti\xEAu 20% m\xE1u hi\u1EC7n t\u1EA1i,
-    g\u0103m t\u1ED1i \u0111a 3 \u0111\u1ECBch 2\xD7; sau 0,8s thu m\u1EA3nh 3\xD7
-    v\xE0 h\u1ED3i 8% m\xE1u m\u1ED7i m\u1EE5c ti\xEAu."
-  passiveText: "Huy\u1EBFt \xDD: m\u1ED7i 10% m\xE1u m\u1EA5t +5% s\xE1t th\u01B0\u01A1ng
-    (t\u1ED1i \u0111a 35%); t\u1EF1 h\u1EA1 \u0111\u1ECBch h\u1ED3i 6% m\xE1u, h\u1ED3i
-    chi\xEAu 2s."
-  minorText: "Hi\u1EBFn Huy\u1EBFt: ti\xEAu 15% m\xE1u hi\u1EC7n t\u1EA1i; 6s +40%
-    c\xF4ng, ch\xE9m t\u1ED1i \u0111a 2 \u0111\u1ECBch v\xE0 h\u1ED3i 4% m\xE1u m\u1ED7i
-    \u0111\xF2n tr\xFAng. H\u1ED3i 10s."
-  secondMinorText: "Ph\u1EA3n Huy\u1EBFt: d\u01B0\u1EDBi 40% m\xE1u, \u0111\u1EE1
-    50% \u0111\xF2n tr\u1EF1c ti\u1EBFp \u0111\u1EA7u ti\xEAn trong 1,5s r\u1ED3i
-    ph\u1EA3n ch\xE9m 2\xD7, h\u1ED3i 8% m\xE1u. H\u1ED3i 8s."
+  ultimateText: 'Blade Blood Return: spends 20% health, sticks into up to 3 enemies
+    for 2x; after 0.8s heals 8% health per target.'
+  passiveText: 'Blood Will: every 10% health lost gives +5% damage (max 35%); a kill
+    heals 6% health and refunds 2s cooldown.'
+  minorText: 'Blood Offering: spends 15% of current health; for 6s +40% attack, cleaves
+    up to 2 enemies and heals 4% health per hit landed. Cooldown 10s.'
+  secondMinorText: 'Blood Riposte: below 40% health, blocks 50% of the first direct
+    hit within 1.5s then ripostes for 2x, healing 8% health. Cooldown 8s.'
+  thirdMinorText: 
   ultimateIcon: {fileID: 0}
   minorIcon: {fileID: 0}
   passiveIcon: {fileID: 0}
   secondMinorIcon: {fileID: 0}
+  thirdMinorIcon: {fileID: 0}
   animations: {fileID: 11400000, guid: 3203b2eb6199b1042baac22f0deb996e, type: 2}
   artFacesRight: 0
   avatar: {fileID: 21300000, guid: 7977f99d69374e6418bac1e2dcc3b603, type: 3}
