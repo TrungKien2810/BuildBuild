@@ -137,11 +137,11 @@ namespace BuildBuild.Editor
         static EnemyDefinition ApprovedEnemy(string id, (string folder, string action)? skill, Action<EnemyDefinition> stats)
         {
             var enemy = LoadOrCreate<EnemyDefinition>(DataDir + "/Enemy_" + id + ".asset", out bool created);
+            // Frame doc lai MOI build (thu muc art bi cat lai -> guid cu chet); xem ghi chu o `Refill` trong SceneBuilder.
+            var anim = AnimSet(id, id + "/", attack: ("attack", "attack"), skill: skill, hit: 4, skillHit: 4);
             if (created)
             {
-                var anim = AnimSet(id, id + "/", attack: ("attack", "attack"), skill: skill, hit: 4, skillHit: 4);
                 anim.framesPerSecond = ApprovedFps;
-                EditorUtility.SetDirty(anim);
                 enemy.animations = anim;
                 stats(enemy);
                 EditorUtility.SetDirty(enemy);

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f28d9e270dec892bd61fa3960bb4436, type: 3}
   m_Name: Cannon_Rapid
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.CannonDefinition
-  displayName: "Ph\xE1o Li\xEAn Thanh"
+  displayName: Rapid Cannon
   unitId: cannon_rapid
   icon: {fileID: 21300000, guid: fa83842b876b6ca468825ec86841b7a2, type: 3}
   damage: 12

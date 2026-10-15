@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 505e5ef04f70452448a64507e11a0c68, type: 3}
   m_Name: Enemy_GoblinSlinger
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.EnemyDefinition
-  displayName: "Goblin N\xE1"
+  displayName: Goblin Slinger
   kind: 5
   baseHealth: 80
   baseDamage: 12

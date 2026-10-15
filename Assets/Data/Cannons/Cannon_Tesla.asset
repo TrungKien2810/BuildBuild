@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f28d9e270dec892bd61fa3960bb4436, type: 3}
   m_Name: Cannon_Tesla
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.CannonDefinition
-  displayName: "Th\xE1p S\xE9t"
+  displayName: Tesla Tower
   unitId: cannon_tesla
   icon: {fileID: 21300000, guid: 8901e5ea92450d348a12cf764e5cf8b6, type: 3}
   damage: 14
