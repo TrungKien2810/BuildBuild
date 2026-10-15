@@ -49,19 +49,28 @@ namespace BuildBuild.Core
 
             var go = Object.Instantiate(home.gameObject, Mirror(home.transform.position), Quaternion.identity);
             go.name = "RivalCastle";
-            // Chi giu than phao dai: be phao cua minh nam trong thanh, ban sao bam vao se mo bang chon phao cua minh.
+            // Chi giu phan CONG TRINH cua minh: cot rao (`Body`) + them da (`Terrace`) + cac be (`Pedestal`).
+            // `mounts` cung la con cua Castle de cham chon phao — giu lai thi bam vao thanh dich se mo bang chon
+            // phao CUA MINH, nen phai bo.
             foreach (Transform child in go.transform)
-                if (child.name != "Body")
+                if (child.name != "Body" && child.name != "Terrace" && child.name != "Pedestal")
                 {
                     child.gameObject.SetActive(false);
                     Object.Destroy(child.gameObject);
                 }
 
+            // Lat CA CUM quanh truc doi xung: con nao cung doi dau local x, lat hinh va nhuom mau phe dich.
+            // Them da co go dong o MOT ben nen BAT BUOC lat hinh — chi doi toa do thi go quay sai phia so voi rao.
             var body = go.transform.Find("Body").GetComponent<SpriteRenderer>();
-            var local = body.transform.localPosition;
-            body.transform.localPosition = new Vector3(-local.x, local.y, local.z);
-            body.flipX = true;
-            body.color = RivalTint;
+            foreach (Transform child in go.transform)
+            {
+                var local = child.localPosition;
+                child.localPosition = new Vector3(-local.x, local.y, local.z);
+                var sr = child.GetComponent<SpriteRenderer>();
+                if (sr == null) continue;
+                sr.flipX = true;
+                sr.color = RivalTint;
+            }
 
             Rival = go.GetComponent<Castle>();
             Rival.RefreshBaseShadow();   // body vua lat: dai bong chan theo lai

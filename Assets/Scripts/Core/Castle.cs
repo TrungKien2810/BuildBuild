@@ -153,7 +153,7 @@ namespace BuildBuild.Core
         public string UpgradeBlocker()
         {
             var next = NextTier;
-            if (next == null) return "Castle Maxed";
+            if (next == null) return "Fence Maxed";
             int best = SaveSystem.Data.nextWave - 1;
             if (best < next.unlockWave) return $"Win Wave {next.unlockWave} Required";
             return null;

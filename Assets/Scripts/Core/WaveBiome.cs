@@ -30,6 +30,12 @@ namespace BuildBuild.Core
         bool _running;
 
         /// <summary>
+        /// Biome da boc, song qua doi scene: vao Gacha/Units roi quay lai Battle thi nen phai la nen dang danh,
+        /// khong phai nen goc (nguoi dung bat 2026-10-14). Cung kieu static voi `UnitLight` o tren.
+        /// </summary>
+        static int _persisted;
+
+        /// <summary>
         /// Anh sang chung cua tung biome — mau than moi unit NHAN voi so nay (`Unit.BodyColor`). Cung thu tu voi
         /// `fields`: 0 = nen goc trong scene (thu am, audit 2026-10-12 do o day) · 1 dam lay · 2 dat chay · 3 tuyet.
         /// So cua dam lay/dat chay la TAM, chinh lai theo anh trong game.
@@ -51,7 +57,8 @@ namespace BuildBuild.Core
         void Awake()
         {
             _scene = this;
-            SetLight(_current);
+            if (_persisted != _current) Apply(_persisted);   // 0 = nen goc trong scene, khong phai ve lai
+            else SetLight(_current);
         }
 
         void OnDestroy()
@@ -107,6 +114,7 @@ namespace BuildBuild.Core
         void Apply(int biome)
         {
             _current = biome;
+            _persisted = biome;
             field.sprite = fields[biome];
             trees.sprite = treeLayers[biome];
             for (int i = 0; i < ambience.Length; i++)
