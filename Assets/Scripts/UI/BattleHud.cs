@@ -174,13 +174,13 @@ namespace BuildBuild.UI
             if (waves.IsFighting || next == null || castle.UpgradeBlocker() != null) return;
             if (!economy.TrySpend(next.cost))
             {
-                ShowMessage("Not enough Gold to upgrade Castle");
+                ShowMessage("Not enough Gold to upgrade Fence");
                 return;
             }
             if (castleUpgradePanel != null) castleUpgradePanel.Close();
             castle.Upgrade();
             Sfx.Play("upgrade");
-            ShowMessage($"Castle reached level {castle.TierLevel}: {next.name}");
+            ShowMessage($"Fence reached level {castle.TierLevel}: {next.name}");
         }
 
         void OnConquestButton()
