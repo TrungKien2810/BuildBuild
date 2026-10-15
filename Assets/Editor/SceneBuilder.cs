@@ -2595,65 +2595,90 @@ namespace BuildBuild.Editor
             return mounts;
         }
 
-        // Thanh tri 3 cap (GDD muc 2): dat theo QC da duyet tempart/castle-tiers/process_v7.py — scale theo chieu cao 720 px,
-        // day sprite o px 830. Ba cap can VACH PHAI (trung vi mep phai cac hang 20-97% chieu cao) ve CastleWallPx = goc
-        // GameObject Castle, nen quai dung o cung mot x du cap nao. Bang so HP/gia/dieu kien la so TAM cua GDD.
-        const float CastleWallPx = 560f;
-        const float CastleBasePx = 830f;
-        const float CastleHeightPx = 720f;
-        // Phao displayScale 1,4 (chinh cho fortress cu) to hon mat thap cua thanh moi. Scale tung be nay la HANG SO
-        // `CannonMountScale` (0,55) o `BuildCastleTiers` — KHONG con tinh theo be rong gò tung cai: gò do lai theo
-        // luat "mat di duoc o nua PHAI thanh" rong 55-151 px o co game, tinh rieng tung gò thi phao ra 0,35-1,16
-        // (nguoi dung bao "scale khong deu" 2026-10-10).
-        const float CannonPadRefPx = 100f;
-        const float CannonMinMountScale = 0.35f;
-        static readonly (string name, float hp, int cost, int unlock)[] CastleTierStats =
+        // Hang rao 3 cap (fence-g1, nguoi dung chot 14/10): thay thanh tri bang THEM DA thap + HANG RAO + BE PHAO.
+        // Linh / phao / o hero GIU NGUYEN toa do game; chi doi dat trong + thanh tri. So lieu o
+        // tempart/fence-g1/refs/layout.json (`make_mock.py`), cach ghep da duyet o `compose.py`,
+        // gate bo cuc `check_layout.py` PASS 4/4. Moi cap mot cot rao cao `FenceHeightPx` + 3/4/5 be phao.
+        const float FenceFarPx = 250f;       // mep xa mat tren them
+        const float FenceNearPx = 840f;      // mep gan mat tren them
+        const float FenceLipPx = 34f;        // go nam (be day mat nam)
+        const float FenceWallPx = 630f;      // goc GameObject Castle = chan rao: quai do khoang cach toi transform
+        // Khung Chinh Phat RONG hon khung wave 128,5 px ve phia TAY, nen them dat ve theo khung wave bi hut mep
+        // trai: vao Chinh Phat thay mot dai co truoc mat linh (nguoi dung bat 2026-10-14: "o truoc linh thi
+        // them chua phu het nen co"). Mep tay = mep trai man Chinh Phat (canvas x 0 = wave -128,5), lui them
+        // 3,5 px cho khoi lo khe do lam tron. `terrace.png` phai cat RONG theo so nay (`deliver_g1.py`).
+        const float FenceTerraceLeftPx = -132f;
+        // Cot rao phai phu DUNG chieu sau mat them (nguoi dung 14/10: "nền đất không phủ hết nền cỏ" —
+        // dau xa cua rao dung tren co vi rao cu 722 px = 128..850 con them chi 250..874).
+        const float FenceBasePx = 882f;      // chan cot rao = day them 874 + 8 px thua
+        const float FenceHeightPx = 640f;    // = chieu sau them 624 + 8 px thua MOI dau
+        const float PadXPx = 505f;           // be phao: MOT cot nhu cot go cu
+        const float PadWidthPx = 124f;       // be rong mat be (px man) — `pedestal.png` scale theo so nay
+        const float PadHalfHeightPx = 35f;   // `pedestal.png` hien 124x70 px man
+        // MAT DA DI DUOC cua them, do tu `terrace.png` (`tempart/fence-g1/measure_ground.py`): hang anh
+        // 4..514 = y man 254..757. Doan 515..615 cuoi anh la GO NAM (mat dung) — dat be len do la thoa ra ngoai.
+        const float FenceSurfaceTopPx = 254f;
+        const float FenceSurfaceBottomPx = 757f;
+        const float PadEdgeMarginPx = 6f;    // giu be khong sat mep mat da
+        // Chan phao = TAM MAT BE, do tu `pedestal.png`: hang rong nhat (tam elip mat be) o art y 163
+        // = tam sprite - 8,4 px man. De +4 nhu ban dau thi phao lun xuong duoi mat be ~12 px.
+        const float PadCannonDropPx = -8f;
+        const int FencePadCount = 5;         // cap cao nhat dung du 5 be; cap thap rai deu trong cung doan
+        // MOT scale cho MOI be (nguoi dung 2026-10-10: "phao gio scale khong deu"). Do lai art phao:
+        // bbox rong 60-124 px, TRUNG VI 73 px (comment cu ghi 128-144 la be rong CA O, khong phai net ve).
+        // `displayScale` 1,4 -> 0,72 cho phao trung vi ~74 px tren be 124 px. Lech giua cac khau con lai
+        // la do ART rong khac nhau (Longgun 124 vs Blast 63), khong phai do hang so nay.
+        const float CannonMountScale = 0.72f;
+        static readonly (string name, string sprite, float hp, int cost, int unlock, int pads)[] FenceTierStats =
         {
-            ("Border Outpost", 2000f, 0, 0), ("Bluestone Fortress", 3000f, 3000, 10), ("Rune Citadel", 4500f, 8000, 20),
+            ("Wooden Palisade", "fence-1.png", 2000f, 0, 0, 3),
+            ("Ironbound Fence", "fence-2.png", 3000f, 3000, 10, 4),
+            ("Stone Rampart", "fence-3.png", 4500f, 8000, 20, FencePadCount),
         };
 
-        [Serializable] class MountPad { public float x, y, platform_w, platform_h; }
-        [Serializable] class MountTier { public int tier; public string sprite; public MountPad[] mounts; }
-        [Serializable] class MountTiers { public MountTier[] tiers; }
+        /// <summary>
+        /// `n` be phao rai deu tren MAT DA DI DUOC cua them — KHONG phai ca anh: ~116 px cuoi anh la go nam,
+        /// dat be len do la be thoa ra ngoai mat (nguoi dung bat 14/10 voi be tren cung va be duoi cung).
+        /// Chua vao trong mep `PadEdgeMarginPx` de be khong cham mep mat da. n luon >= 3 nen khong chia cho 0.
+        /// </summary>
+        static float[] FencePadRows(int n)
+        {
+            float lo = FenceSurfaceTopPx + PadHalfHeightPx + PadEdgeMarginPx;
+            float hi = FenceSurfaceBottomPx - PadHalfHeightPx - PadEdgeMarginPx;
+            var rows = new float[n];
+            for (int i = 0; i < n; i++)
+                rows[i] = Mathf.Lerp(lo, hi, n == 1 ? 0.5f : i / (float)(n - 1));
+            return rows;
+        }
 
-        /// <summary>Dien `Castle.tiers` tu `Castle/mounts-tiers.json`; tra ve so be lon nhat (de dung du CannonMount).</summary>
+        /// <summary>
+        /// Dien `Castle.tiers` cho HANG RAO: doc sprite tung cap, dat cot rao o (FenceWallPx, chan FenceBasePx)
+        /// va cac be phao theo cot `PadXPx`. Tra ve so be lon nhat (de dung du `CannonMount`).
+        /// </summary>
         static int BuildCastleTiers(Transform castle)
         {
-            string json = File.ReadAllText(ArtRoot + "Castle/mounts-tiers.json");
-            var data = JsonUtility.FromJson<MountTiers>(json);
-            var tiers = new Castle.Tier[data.tiers.Length];
-            // MOT scale cho MOI be o MOI cap (nguoi dung 2026-10-10: "phao gio scale khong deu"). Truoc day
-            // scale tinh theo be rong tung gò nen ra 0,35-1,16 tuy gò: be rong gò cua bo art nay lech 55-151 px
-            // o co game (xem qc-uniform-22.json). Art phao rong 128-144 px, `displayScale` 1,4 -> o scale 1
-            // phao rong ~179 px, nen 0,55 cho phao ~98 px: vua tren gò cap 1 (124-151 px), choem nhe tren gò
-            // cap 3 (55-85 px) — chap nhan duoc, va muon to hon nua thi phai SINH LAI art (brief castle-pad-g5.md).
-            const float CannonMountScale = 0.55f;
+            var tiers = new Castle.Tier[FenceTierStats.Length];
             int maxMounts = 0;
             for (int t = 0; t < tiers.Length; t++)
             {
-                var src = data.tiers[t];
-                string stem = ArtRoot + "Castle/" + Path.GetFileNameWithoutExtension(src.sprite);
-                var intact = LoadSprite(stem + ".png");
-                var tex = intact.texture;
-                float scale = CastleHeightPx / intact.rect.height;
-                float wall = MeasureRightWall(tex);
-                float leftPx = CastleWallPx - wall * scale;
-                float topPx = CastleBasePx - intact.rect.height * scale;
-                var stats = CastleTierStats[Mathf.Min(t, CastleTierStats.Length - 1)];
-                var centre = PxToWorld(leftPx + intact.rect.width * scale / 2f, topPx + intact.rect.height * scale / 2f);
+                var stats = FenceTierStats[t];
+                var intact = LoadSprite(ArtRoot + "Fence/" + stats.sprite);
+                float scale = FenceHeightPx / intact.rect.height;
+                // Sprite cot rao khong co pipeline-meta -> pivot giua: tam o (cot x, chan - nua cao).
+                var centre = PxToWorld(FenceWallPx, FenceBasePx - FenceHeightPx / 2f);
+                var mounts = FencePadRows(stats.pads).Select(y => PxToWorld(PadXPx, y + PadCannonDropPx) - castle.position).ToArray();
                 tiers[t] = new Castle.Tier
                 {
                     name = stats.name, maxHealth = stats.hp, cost = stats.cost, unlockWave = stats.unlock,
                     intact = intact,
-                    damaged1 = LoadSprite(stem + "-damaged1.png"),
-                    damaged2 = LoadSprite(stem + "-damaged2.png"),
+                    damaged1 = null,   // hoan hau ki: rao chua co ban hung hai 1
+                    damaged2 = null,   // hoan hau ki: rao chua co ban hung hai 2
                     bodyPosition = centre - castle.position,
-                    // Body sprite import PPU 100 nhu fortress; FortressScale cu la scale tren chinh sprite do.
                     bodyScale = scale * (intact.pixelsPerUnit / Ppu),
-                    mounts = src.mounts.Select(m => PxToWorld(leftPx + m.x * scale, topPx + m.y * scale) - castle.position).ToArray(),
-                    mountScales = src.mounts.Select(_ => CannonMountScale).ToArray(),
+                    mounts = mounts,
+                    mountScales = mounts.Select(_ => CannonMountScale).ToArray(),
                 };
-                maxMounts = Mathf.Max(maxMounts, src.mounts.Length);
+                maxMounts = Mathf.Max(maxMounts, mounts.Length);
             }
             var so = new SerializedObject(castle.GetComponent<Castle>());
             var list = so.FindProperty("tiers");
@@ -2680,6 +2705,36 @@ namespace BuildBuild.Editor
             }
             so.ApplyModifiedPropertiesWithoutUndo();
             return maxMounts;
+        }
+
+        /// <summary>
+        /// Them da thap + 5 be phao (TRANG TRI TINH, khong phai be cham — be cham that van la `CannonMount`).
+        /// Ve DU 5 be moi cap de mat them khong trong nua dau; so be DUNG DUOC van theo cap rao.
+        /// Theo dung cach ghep da duyet `tempart/fence-g1/compose.py`: tham cat mep phai = mep dong,
+        /// goc tren-trai o (FenceTerraceLeftPx, far), cao `near + lip - far`; be la tam o (PadXPx, hang y).
+        /// </summary>
+        static void BuildFenceGround(Transform castle)
+        {
+            var terrace = LoadSprite(ArtRoot + "Fence/terrace.png");
+            if (terrace != null)
+            {
+                float scale = (FenceNearPx + FenceLipPx - FenceFarPx) / terrace.rect.height;
+                var go = NewSprite("Terrace", castle, terrace, SortOrder.Castle - 2);
+                go.transform.localScale = Vector3.one * scale;
+                float width = terrace.rect.width * scale;
+                go.transform.position = PxToWorld(FenceTerraceLeftPx + width / 2f,
+                    FenceFarPx + terrace.rect.height * scale / 2f);
+            }
+
+            var pedestal = LoadSprite(ArtRoot + "Fence/pedestal.png");
+            if (pedestal == null) return;
+            float pedScale = PadWidthPx / pedestal.rect.width;
+            foreach (float y in FencePadRows(FencePadCount))
+            {
+                var go = NewSprite("Pedestal", castle, pedestal, SortOrder.Castle - 1);
+                go.transform.localScale = Vector3.one * pedScale;
+                go.transform.position = PxToWorld(PadXPx, y);
+            }
         }
 
         /// <summary>Trung vi mep alpha phai cua cac hang 20-97% chieu cao (px sprite, tinh tu trai) — mat thap/vach phai.</summary>
