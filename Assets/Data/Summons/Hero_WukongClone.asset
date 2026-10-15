@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fce1636a36b53744a17d42e30ec2b2d, type: 3}
   m_Name: Hero_WukongClone
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.HeroDefinition
-  displayName: "Ph\xE2n th\xE2n"
+  displayName: Clone
   unitId: 
   role: 0
   maxHealth: 520

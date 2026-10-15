@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Unit_cannon_rapid
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.UnitDefinition
   id: cannon_rapid
-  displayName: "Ph\xE1o Li\xEAn Thanh"
+  displayName: Rapid Cannon
   category: 1
   rarity: 0
   icon: {fileID: 21300000, guid: fa83842b876b6ca468825ec86841b7a2, type: 3}

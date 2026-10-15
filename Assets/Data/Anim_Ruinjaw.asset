@@ -25,12 +25,12 @@ MonoBehaviour:
   walk:
     name: walk
     frames:
-    - {fileID: 21300000, guid: 4b6dd323d98e6384a937308ac14705cf, type: 3}
-    - {fileID: 21300000, guid: d6fce2ee692b6ed488dd421c89f3d66c, type: 3}
-    - {fileID: 21300000, guid: 9560817f048c6884f8b4295994ba72dc, type: 3}
-    - {fileID: 21300000, guid: b767f196c41697a4b880ad413a80ecff, type: 3}
-    - {fileID: 21300000, guid: eb81d92a6434d34469e1660ba46e3a79, type: 3}
-    - {fileID: 21300000, guid: c2fb0af2c21686f448cb1280ba7e23b5, type: 3}
+    - {fileID: 21300000, guid: b1e74e45dc9f6d5468e27f400f4b1dd0, type: 3}
+    - {fileID: 21300000, guid: b1e74e45dc9f6d5468e27f400f4b1dd1, type: 3}
+    - {fileID: 21300000, guid: b1e74e45dc9f6d5468e27f400f4b1dd2, type: 3}
+    - {fileID: 21300000, guid: b1e74e45dc9f6d5468e27f400f4b1dd3, type: 3}
+    - {fileID: 21300000, guid: b1e74e45dc9f6d5468e27f400f4b1dd4, type: 3}
+    - {fileID: 21300000, guid: b1e74e45dc9f6d5468e27f400f4b1dd5, type: 3}
     loop: 1
     hitFrame: 0
   attack:

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Unit_cannon_tesla
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.UnitDefinition
   id: cannon_tesla
-  displayName: "Th\xE1p S\xE9t"
+  displayName: Tesla Tower
   category: 1
   rarity: 1
   icon: {fileID: 21300000, guid: 8901e5ea92450d348a12cf764e5cf8b6, type: 3}

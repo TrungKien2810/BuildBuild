@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f28d9e270dec892bd61fa3960bb4436, type: 3}
   m_Name: Cannon_Sonic
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.CannonDefinition
-  displayName: "Ph\xE1o \xC2m Thanh"
+  displayName: Sonic Cannon
   unitId: cannon_sonic
   icon: {fileID: 21300000, guid: 48a65579f0cad6843b3082565eec5736, type: 3}
   damage: 20

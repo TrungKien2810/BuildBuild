@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 505e5ef04f70452448a64507e11a0c68, type: 3}
   m_Name: Enemy_GoblinBellringer
   m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.EnemyDefinition
-  displayName: "Goblin Rung Chu\xF4ng"
+  displayName: Goblin Bellringer
   kind: 0
   baseHealth: 80
   baseDamage: 8

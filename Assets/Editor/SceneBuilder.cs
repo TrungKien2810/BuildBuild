@@ -899,6 +899,10 @@ namespace BuildBuild.Editor
         static void BuildRuinjaw(WaveTuning tuning)
         {
             var ruinjaw = LoadOrCreate<EnemyDefinition>(DataDir + "/Enemy_Ruinjaw.asset", out bool created);
+            // Frame doc lai MOI build, khong chi luc tao asset: walk cat lai 2026-10-12 lam 6 guid chet, ma dong
+            // `AnimSet` nam trong `if (created)` nen build sau do khong bao gio sua — quai chop tat (nguoi dung bat 14/10).
+            // `AnimSet` -> `Refill` giu nguyen bo frame dang khop thu muc (so chinh tay trong Inspector khong bi ghi de).
+            ruinjaw.animations = AnimSet("Ruinjaw", "Ruinjaw/", attack: ("attack", "attack"), hit: 5);
             if (created)
             {
                 ruinjaw.displayName = "Ruinjaw";
@@ -909,7 +913,6 @@ namespace BuildBuild.Editor
                 ruinjaw.attackRange = 0.6f;
                 ruinjaw.attackRate = 0.55f;
                 ruinjaw.damageReduction = 0.2f;
-                ruinjaw.animations = AnimSet("Ruinjaw", "Ruinjaw/", attack: ("attack", "attack"), hit: 5);
                 EditorUtility.SetDirty(ruinjaw);
             }
 
@@ -1807,22 +1810,17 @@ namespace BuildBuild.Editor
             var waveTrees = NewSprite("ForegroundTrees", null, LoadSprite(ArtRoot + "Background/fg-trees.png"), SortOrder.Foreground);
             waveTrees.transform.position = PxToWorld(RefWidth / 2f, RefHeight / 2f);
 
-            // Phao dai: goc Castle o vach phai (giua lan theo y — Enemy chi so x), Body pivot tam sprite.
+            // Duong chan: goc Castle o CHAN HANG RAO (giua lan theo y — Enemy chi so x), Body pivot tam sprite.
             var castleGo = new GameObject("Castle");
-            // Goc o vach phai cua thanh tri 3 cap (CastleWallPx); fortress cu (vach px ~536) chi con la du phong.
-            castleGo.transform.position = PxToWorld(CastleWallPx, (LaneTopPx + LaneBottomPx) / 2f);
+            castleGo.transform.position = PxToWorld(FenceWallPx, (LaneTopPx + LaneBottomPx) / 2f);
             SetValue(castleGo.AddComponent<Health>(), "maxHealth", CastleMaxHealth);
             var castle = castleGo.AddComponent<Castle>();
-            var body = NewSprite("Body", castleGo.transform, LoadSprite(ArtRoot + "Castle/fortress.png"), SortOrder.Castle);
-            body.transform.localScale = Vector3.one * FortressScale;
-            var fortressPx = body.sprite.rect.size * FortressScale;
-            float fortressTopPx = FortressBasePx - FortressBaseInSprite * FortressScale;
-            body.transform.position = PxToWorld(FortressLeftPx + fortressPx.x / 2f, fortressTopPx + fortressPx.y / 2f);
+            var body = NewSprite("Body", castleGo.transform, LoadSprite(ArtRoot + "Fence/fence-1.png"), SortOrder.Castle);
             SetRef(castle, "body", body);
             SetRef(castle, "intact", body.sprite);
-            SetRef(castle, "damaged1", LoadSprite(ArtRoot + "Castle/fortress-damaged1.png"));
-            SetRef(castle, "damaged2", LoadSprite(ArtRoot + "Castle/fortress-damaged2.png"));
+            // Hang rao CHUA co sprite hung hai (hoan hau ki) -> de trong; `Castle.RefreshSprite` giu ban lanh.
             var castleTiers = BuildCastleTiers(castleGo.transform);
+            BuildFenceGround(castleGo.transform);
 
             var field = new GameObject("Battlefield").AddComponent<Battlefield>();
             SetValue(field, "laneTop", PxToWorld(0f, LaneTopPx).y);
@@ -1889,7 +1887,7 @@ namespace BuildBuild.Editor
             SetRef(admin, "economy", economy);
             SetRef(admin, "hud", Object.FindObjectOfType<BattleHud>());
 
-            BuildCannonBoard(game, castle, body, castleTiers);
+            BuildCannonBoard(game, castle, castleTiers);
             SetRef(Object.FindObjectOfType<BattleHud>(), "castleUpgradeButton", BuildCastleUpgradeButton(hudCanvas, out var upgradeLabel));
             SetRef(Object.FindObjectOfType<BattleHud>(), "castleUpgradeLabel", upgradeLabel);
             SetRef(Object.FindObjectOfType<BattleHud>(), "castleUpgradePanel", BuildCastleUpgradePanel(hudCanvas));
@@ -2541,44 +2539,39 @@ namespace BuildBuild.Editor
             return slots;
         }
 
-        // 3 be phao tren fortress.png (735x900, toa do px tinh tu goc tren-trai): tam dia da tron do bang mat tren anh.
-        // Chan phao (pivot feet) dat thap hon tam dia mot chut cho de phao ngoi len mat dia.
-        static readonly Vector2[] MountPadsInSprite = { new Vector2(440f, 152f), new Vector2(440f, 387f), new Vector2(440f, 619f) };
+        // Be phao: MOT cot x `PadXPx` tren mat them, hang y lay tu `FencePadRows` (xem `BuildCastleTiers`).
         // Vung cham phu ca dia lan than phao (world, tinh tu chan).
         static readonly Vector2 MountHitSize = new Vector2(0.9f, 1.1f);
         const float MountFrameHeightPx = 60f;
 
         /// <summary>
-        /// Toan bo phan phao cua scene Battle (nhanh Tru): `CannonBoard` tren `Game`, 3 be tren `Castle`, bang chon phao
-        /// trong HUD, nut admin. Goi MOT dong o cuoi `BuildBattleScene`, sau khi HUD + admin da dung.
+        /// Toan bo phan phao cua scene Battle: `CannonBoard` tren `Game`, be tren `Castle`, bang chon phao trong HUD,
+        /// nut admin. Goi MOT dong o cuoi `BuildBattleScene`, sau khi HUD + admin da dung.
         /// </summary>
-        static void BuildCannonBoard(GameObject game, Castle castle, SpriteRenderer body, int mountCount)
+        static void BuildCannonBoard(GameObject game, Castle castle, int mountCount)
         {
             var board = game.AddComponent<CannonBoard>();
             SetRef(board, "waves", game.GetComponent<WaveManager>());
             SetRef(board, "castle", castle);
-            SetRefs(board, "mounts", BuildCannonMounts(castle.transform, body, board, mountCount));
+            SetRefs(board, "mounts", BuildCannonMounts(castle.transform, board, mountCount));
             BuildCannonPicker((RectTransform)Object.FindObjectOfType<BattleHud>().transform, board);
             SetRef(game.GetComponent<AdminPanel>(), "cannons", board);
         }
 
         /// <summary>
-        /// Du be cho cap thanh cao nhat (<paramref name="mountCount"/>); vi tri tung cap do `CannonBoard` dat luc chay theo
-        /// `Castle.Tier.mounts`. Vi tri dung san o day = be cua fortress cu (3 be dau), du phong khi thanh khong co bang cap.
+        /// Du be cho cap rao cao nhat (<paramref name="mountCount"/>); vi tri tung cap do `CannonBoard` dat luc chay theo
+        /// `Castle.Tier.mounts`. Vi tri dung san o day cung lay tu cot be do, du phong khi rao khong co bang cap.
         /// </summary>
-        static CannonMount[] BuildCannonMounts(Transform castle, SpriteRenderer body, CannonBoard board, int mountCount)
+        static CannonMount[] BuildCannonMounts(Transform castle, CannonBoard board, int mountCount)
         {
             var sprite = UiSprite("hud/hud-dropzone-edge");
-            var size = body.sprite.rect.size;
-            var mounts = new CannonMount[Mathf.Max(mountCount, MountPadsInSprite.Length)];
+            var rows = FencePadRows(mountCount);
+            var mounts = new CannonMount[Mathf.Max(mountCount, 1)];
             for (int i = 0; i < mounts.Length; i++)
             {
-                var pad = MountPadsInSprite[Mathf.Min(i, MountPadsInSprite.Length - 1)];
                 var go = new GameObject($"CannonMount{i + 1}");
                 go.transform.SetParent(castle, false);
-                // Body pivot giua sprite (fortress.png khong co pipeline-meta).
-                go.transform.position = body.transform.position +
-                    new Vector3((pad.x - size.x / 2f) * FortressScale / Ppu, (size.y / 2f - pad.y) * FortressScale / Ppu, 0f);
+                go.transform.position = PxToWorld(PadXPx, rows[Mathf.Min(i, rows.Length - 1)] + PadCannonDropPx);
 
                 var hit = go.AddComponent<BoxCollider2D>();
                 hit.size = MountHitSize;
@@ -2758,7 +2751,7 @@ namespace BuildBuild.Editor
             return edges.Count > 0 ? edges[edges.Count / 2] : w;
         }
 
-        /// <summary>Nut nang thanh tri: goc tren-trai duoi thanh mau lau dai (BattleHud an khi dang danh / da toi da).</summary>
+        /// <summary>Nut nang hang rao: goc tren-trai duoi thanh mau (BattleHud an khi dang danh / da toi da).</summary>
         static Button BuildCastleUpgradeButton(RectTransform canvas, out Text label)
         {
             var button = MakeButton("CastleUpgradeButton", canvas, "", TopLeft, new Vector2(24, -110), new Vector2(380, 72), out label);
@@ -2774,7 +2767,7 @@ namespace BuildBuild.Editor
         }
 
         /// <summary>
-        /// Bang nang thanh tri: anh cap hien tai -> cap sau (sprite lanh cua tung cap, `CastleUpgradePanel` dien luc mo),
+        /// Bang nang hang rao: anh cap hien tai -> cap sau (sprite lanh cua tung cap, `CastleUpgradePanel` dien luc mo),
         /// dong Mau / Be phao truoc -> sau, dieu kien wave, nut Nang + Dong. Lop Dim chan cham xuong san luc bang mo.
         /// </summary>
         static CastleUpgradePanel BuildCastleUpgradePanel(RectTransform canvas)
@@ -2790,13 +2783,13 @@ namespace BuildBuild.Editor
             var body = Img("Body", root, UiSprite("panels/panel-hero"), Center, new Vector2(0, 20), new Vector2(960, 640), sliced: true);
             body.raycastTarget = true;
             var titleBar = Img("Title", body.transform, UiSprite("panels/title-ribbon"), Top, new Vector2(0, 26), new Vector2(420, 64), sliced: true);
-            Label("Value", titleBar.transform, "Upgrade Castle", 34, Center, Vector2.zero, new Vector2(400, 64));
+            Label("Value", titleBar.transform, "Upgrade Fence", 34, Center, Vector2.zero, new Vector2(400, 64));
             var closeImage = Img("Close", body.transform, UiSprite("chrome/btn-close"), TopRight, new Vector2(-14, -14), new Vector2(52, 52));
             closeImage.raycastTarget = true;
             var close = closeImage.gameObject.AddComponent<Button>();
 
-            // Hai o anh thanh hai ben mui ten; anh giu ti le (sprite thanh 2:1 cao).
-            Image CastleSlot(string name, float x, out Text caption)
+            // Hai o anh rao hai ben mui ten; anh giu ti le (sprite cot rao rat cao).
+            Image TierSlot(string name, float x, out Text caption)
             {
                 var slot = Img(name, body.transform, UiSprite("chrome/reward-slot"), Top, new Vector2(x, -70), new Vector2(300, 280), sliced: true);
                 var image = Img("Image", slot.transform, null, Center, new Vector2(0, 6), new Vector2(260, 250));
@@ -2804,8 +2797,8 @@ namespace BuildBuild.Editor
                 caption = Label("Name", body.transform, "", 26, Top, new Vector2(x, -360), new Vector2(380, 40));
                 return image;
             }
-            var current = CastleSlot("Current", -220, out var currentName);
-            var next = CastleSlot("Next", 220, out var nextName);
+            var current = TierSlot("Current", -220, out var currentName);
+            var next = TierSlot("Next", 220, out var nextName);
             nextName.color = new Color(1f, 0.94f, 0.7f);
             Label("Arrow", body.transform, "→", 64, Top, new Vector2(0, -180), new Vector2(100, 80));
 
@@ -2821,7 +2814,7 @@ namespace BuildBuild.Editor
                 value.color = new Color(1f, 0.94f, 0.7f);
                 return value;
             }
-            var health = StatRow("Health", "icons/icon-hp", "Castle HP", -404);
+            var health = StatRow("Health", "icons/icon-hp", "Fence HP", -404);
             var mountCount = StatRow("Mounts", "icons/icon-cannon-blast", "Cannon Mounts", -458);
             var condition = Label("Condition", body.transform, "", 24, Top, new Vector2(0, -518), new Vector2(640, 36));
 
@@ -3743,6 +3736,10 @@ namespace BuildBuild.Editor
             text.text = value;
             text.raycastTarget = false;
             text.horizontalOverflow = HorizontalWrapMode.Overflow;
+            // Phai dat CA hai truc: mac dinh cua Unity la VerticalWrapMode.Truncate, ma o nao thap hon
+            // MOT dong (font pixel = 1,4 x co chu) thi Truncate KHONG VE GI CA — chu bien mat im lang,
+            // khong loi console. Da dinh: `GoldPill` cao 40 < 42 (co 30) va bang wave cao 52 < 56 (co 40).
+            text.verticalOverflow = VerticalWrapMode.Overflow;
             var outline = rect.gameObject.AddComponent<Outline>();
             outline.effectColor = new Color(0f, 0f, 0f, 0.85f);
             outline.effectDistance = new Vector2(2f, -2f);
@@ -4086,15 +4083,12 @@ namespace BuildBuild.Editor
         {
             string dir = ArtRoot + root;
             var anim = LoadOrCreate<SpriteAnimationSet>($"{DataDir}/Anim_{id}.asset", out bool created);
-            if (created)
-            {
-                anim.idle.frames = Frames(dir + idle, "idle");
-                anim.walk.frames = Frames(dir + walk, "walk");
-                anim.attack.frames = Frames(dir + attack.folder, attack.action);
-                anim.hurt.frames = Frames(dir + "hurt", "hurt");
-                anim.death.frames = Frames(dir + "death", "death");
-                anim.attack.hitFrame = hit;
-            }
+            anim.idle.frames = Refill(dir + idle, "idle", anim.idle.frames);
+            anim.walk.frames = Refill(dir + walk, "walk", anim.walk.frames);
+            anim.attack.frames = Refill(dir + attack.folder, attack.action, anim.attack.frames);
+            anim.hurt.frames = Refill(dir + "hurt", "hurt", anim.hurt.frames);
+            anim.death.frames = Refill(dir + "death", "death", anim.death.frames);
+            if (created) anim.attack.hitFrame = hit;
             if (skill != null && !anim.skill.IsValid)
             {
                 anim.skill.frames = Frames(dir + skill.Value.folder, skill.Value.action);
@@ -4167,6 +4161,27 @@ namespace BuildBuild.Editor
             { "Werewolf", "werewolf" },
             { "HauNghe", "haunghe" }, { "BachLocTien", "bachloctien" },
         };
+
+        /// <summary>
+        /// Frame cua clip da co: CHI doc lai tu thu muc khi danh sach sprite cu KHONG con la danh sach cua thu muc
+        /// (thu muc bi cat lai -> guid cu chet, sprite tro vao asset da xoa; hoac so luong doi). Khop y nguyen thi
+        /// giu so chinh tay trong Inspector.
+        /// `AnimSet` cu chi dien frame luc TAO asset, nen mot lan cat lai thu muc la clip ket gia tri chet vinh vien:
+        /// Ruinjaw walk (cat lai 2026-10-12) tro vao 6 sprite da xoa -> SpriteAnimator roi ve idle tung frame mat
+        /// -> quai chop tat trong game, ma buid van bao thanh cong (nguoi dung bat 2026-10-14).
+        /// </summary>
+        static Sprite[] Refill(string folder, string action, Sprite[] stored)
+        {
+            var fresh = Frames(folder, action);
+            if (fresh.Length == 0) return stored;                      // thu muc khong co clip nay
+            if (stored != null && stored.Length == fresh.Length)
+            {
+                bool same = true;
+                for (int i = 0; i < fresh.Length && same; i++) same = stored[i] == fresh[i];
+                if (same) return stored;
+            }
+            return fresh;
+        }
 
         /// <summary>Frame `action-N.png` trong thu muc, xep theo N (khong lay sheet-transparent.png).</summary>
         static Sprite[] Frames(string folder, string action)
