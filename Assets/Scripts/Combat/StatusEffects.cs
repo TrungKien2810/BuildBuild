@@ -104,13 +104,47 @@ namespace BuildBuild.Combat
             _any = true;
 
             if (id == StatusId.NoHeal) _unit.Health.NoHealUntil = e.until;
-            if (e.fx == null)
+            // FX: `StatusLibrary` giu ca art lan be ngang; nguon nao truyen `fx` rieng thi giu art do, van lay co/cho dat
+            // tu cung muc cau hinh (xem `StatusOffset` / `StatusScale`).
+            if (e.fx == null && e.fxFrames != null && e.fxFrames.Length > 0)
             {
-                e.fx = OneShotFx.SpawnLoop(_unit.transform, Vector3.zero, e.fxFrames, float.PositiveInfinity, SortOrder.ForUnit(_unit) + 1);
+                e.fx = OneShotFx.SpawnLoop(_unit.transform, StatusOffset(id), e.fxFrames, float.PositiveInfinity,
+                    SortOrder.ForUnit(_unit) + 1, scale: StatusScale(id, e.fxFrames));
                 e.fxRenderer = e.fx != null ? e.fx.GetComponent<SpriteRenderer>() : null;
             }
             // Bong bong Doc dam dan theo so tang.
             if (id == StatusId.Poison && e.fxRenderer != null) e.fxRenderer.color = new Color(1f, 1f, 1f, 0.4f + 0.12f * e.stacks);
+        }
+
+        /// <summary>
+        /// Hieu ung nao treo NGANG DAU than (dau sao choang, bong tuyet dong bang, khien nut pha giap, trai tim cam hoi mau)
+        /// va hieu ung nao bam MAT DAT (chay, doc, cham — ve o chan nhu vung dat). Truoc day chi Chay/Doc co art nen khong can.
+        /// </summary>
+        static bool FloatsOverHead(StatusId id) =>
+            id == StatusId.Stun || id == StatusId.Freeze || id == StatusId.ArmorBreak || id == StatusId.NoHeal;
+
+        /// <summary>
+        /// Doc theo chieu cao THAT cua tung unit (quai soi thap, Ruinjaw cao) chu khong dat mot moc co dinh — cung luat
+        /// `EnemyExtras.UpdateSlowIcon` dang dung cho bong tuyet Cham, nen cac huy hieu trang thai nam cung mot duong.
+        /// </summary>
+        Vector3 StatusOffset(StatusId id)
+        {
+            if (!FloatsOverHead(id)) return Vector3.zero;
+            float unitScale = Mathf.Max(0.01f, _unit.transform.lossyScale.y);
+            return new Vector3(0f, _unit.BodyHeight / unitScale + 0.16f, 0f);
+        }
+
+        /// <summary>
+        /// Scale LOCAL cho FX: `size` trong `StatusLibrary` la be ngang THAT tren san, ma FX gan vao than unit — than da
+        /// nhan `Battlefield.UnitScale` nen phai chia lai, khong thi FX cung mot muc cau hinh ra hai co khac nhau o unit to/nho.
+        /// </summary>
+        float StatusScale(StatusId id, Sprite[] frames)
+        {
+            float size = StatusLibrary.SizeOf(id);
+            if (size <= 0f || frames == null || frames.Length == 0 || frames[0] == null) return 1f;
+            float artWidth = frames[0].bounds.size.x;
+            float unitScale = Mathf.Max(0.01f, _unit.transform.lossyScale.y);
+            return artWidth > 0f ? size / (artWidth * unitScale) : 1f;
         }
 
         public void Remove(StatusId id)

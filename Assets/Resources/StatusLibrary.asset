@@ -25,3 +25,25 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 9592683d059652149aafc4380d673661, type: 3}
     - {fileID: 21300000, guid: eef9e002ecf4fc4478006b35dc1e4cd7, type: 3}
     - {fileID: 21300000, guid: 7dbd537e6f7c6ff45b9d64bcd53ca795, type: 3}
+  - id: 3
+    fxFrames:
+    - {fileID: 21300000, guid: d747cb62310443b478c3a5ecd31d2830, type: 3}
+    size: 0.4
+  - id: 4
+    fxFrames:
+    - {fileID: 21300000, guid: 1a1fae456d75bfb42a8ffae427a8e2f3, type: 3}
+    - {fileID: 21300000, guid: 5f10dad14feb11e48ab8189f300fd865, type: 3}
+    - {fileID: 21300000, guid: 7213f6b7419d25048959c0318ee69916, type: 3}
+    - {fileID: 21300000, guid: b54ff30fbe8e230408ef3ea33a794952, type: 3}
+    size: 0.4
+  - id: 5
+    fxFrames:
+    - {fileID: 21300000, guid: 1b9873472ae1e8e47848357888987e93, type: 3}
+    - {fileID: 21300000, guid: b39576e6d80a3df4582d07edd3006e30, type: 3}
+    - {fileID: 21300000, guid: f7f6ca7f007a732439d4dff819e0f99e, type: 3}
+    - {fileID: 21300000, guid: a8eaa74a2b8aacb4b9316a36f92b6e0c, type: 3}
+    size: 0.28
+  - id: 6
+    fxFrames:
+    - {fileID: 21300000, guid: fbde6bb5e8269b046a6cb67f540028f6, type: 3}
+    size: 0.4
