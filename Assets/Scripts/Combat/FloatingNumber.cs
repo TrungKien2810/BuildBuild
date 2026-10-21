@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using BuildBuild.Core;
 using UnityEngine;
 
@@ -5,7 +6,7 @@ namespace BuildBuild.Combat
 {
     /// <summary>
     /// So bay len roi mo dan. Chu TextMesh + font pixel cua game (PixelFont), co bong den phia
-    /// sau cho doc duoc tren nen sang. Tu huy khi het thoi gian.
+    /// sau cho doc duoc tren nen sang. Enhanced them vien toi; het han tra ve pool.
     /// </summary>
     public class FloatingNumber : MonoBehaviour
     {
@@ -23,9 +24,11 @@ namespace BuildBuild.Combat
         static readonly Vector3 ShadowOffset = new Vector3(0.015f, -0.015f, 0f);
 
         static Font _font;
+        static readonly Stack<FloatingNumber> Pool = new Stack<FloatingNumber>();
 
         TextMesh _text;
         TextMesh _shadow;
+        readonly TextMesh[] _outline = new TextMesh[3];
         Color _color;
         Vector3 _start;
         float _age;
@@ -34,16 +37,37 @@ namespace BuildBuild.Combat
         {
             if (_font == null) _font = PixelFont.Asset;
 
-            var go = new GameObject("FloatingNumber");
-            var number = go.AddComponent<FloatingNumber>();
+            FloatingNumber number = null;
+            while (Pool.Count > 0 && number == null) number = Pool.Pop();
+            if (number == null)
+            {
+                var created = new GameObject("FloatingNumber");
+                number = created.AddComponent<FloatingNumber>();
+                number._shadow = Label(created.transform, text, ShadowOffset, SortOrder.Overlay + 1);
+                number._text = Label(created.transform, text, Vector3.zero, SortOrder.Overlay + 2);
+                number._outline[0] = Label(created.transform, text, new Vector3(-0.015f, -0.015f), SortOrder.Overlay + 1);
+                number._outline[1] = Label(created.transform, text, new Vector3(-0.015f, 0.015f), SortOrder.Overlay + 1);
+                number._outline[2] = Label(created.transform, text, new Vector3(0.015f, 0.015f), SortOrder.Overlay + 1);
+            }
+            var go = number.gameObject;
+            number._age = 0f;
             number._color = color;
             number._start = position + new Vector3(UnityEngine.Random.Range(-JitterX, JitterX), 0f, 0f);
             go.transform.position = number._start;
 
-            number._shadow = Label(go.transform, text, ShadowOffset, SortOrder.Overlay + 1);
-            number._text = Label(go.transform, text, Vector3.zero, SortOrder.Overlay + 2);
+            go.transform.localScale = Vector3.one * PopScale;
+            number._text.text = number._shadow.text = text;
+            foreach (var edge in number._outline)
+            {
+                edge.text = text;
+                edge.gameObject.SetActive(CombatFeedback.Enhanced);
+            }
+            go.SetActive(true);
             number.Apply(1f);
         }
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        static void ResetPool() => Pool.Clear();
 
         static TextMesh Label(Transform parent, string text, Vector3 offset, int order)
         {
@@ -68,10 +92,16 @@ namespace BuildBuild.Combat
 
         void Update()
         {
-            _age += Time.deltaTime;
+            if (Time.timeScale <= 0f) return;
+            _age += CombatFeedback.Enhanced ? Time.unscaledDeltaTime : Time.deltaTime;
             if (_age >= Lifetime)
             {
-                Destroy(gameObject);
+                if (Pool.Count < 96)
+                {
+                    gameObject.SetActive(false);
+                    Pool.Push(this);
+                }
+                else Destroy(gameObject);
                 return;
             }
 
@@ -87,7 +117,9 @@ namespace BuildBuild.Combat
         void Apply(float alpha)
         {
             _text.color = new Color(_color.r, _color.g, _color.b, alpha);
-            _shadow.color = new Color(0f, 0f, 0f, alpha * 0.8f);
+            var edgeColor = new Color(0.08f, 0.06f, 0.12f, alpha);
+            _shadow.color = edgeColor;
+            foreach (var edge in _outline) edge.color = edgeColor;
         }
     }
 }

@@ -20,6 +20,8 @@ namespace BuildBuild.Core
 
         /// <summary>Sat thuong THUC TE da an vao (sau khi chan tru), goi ca khi don chi lam sut mau.</summary>
         public event Action<float> Damaged;
+        // Presentation for accepted direct hits only; periodic/reflected/linked damage stays quiet.
+        public event Action<Vector2> Impacted;
         public event Action Died;
 
         /// <summary>Mien sat thuong (vd. Cragfist Hoa Da). Don van toi — bao qua `Blocked` — nhung khong tru mau.</summary>
@@ -134,7 +136,8 @@ namespace BuildBuild.Core
 
         /// <param name="source">Health cua ke danh — can cho hieu ung phan don; dan/FX khong ro nguon thi de null.</param>
         /// <param name="ignoreArmor">Bo qua `Armor` (Xuyen Long cua Wyrmspear). Vulnerability van tinh.</param>
-        public void TakeDamage(float amount, Health source = null, bool ignoreArmor = false, DamageKind kind = DamageKind.Direct, Faction? side = null)
+        public void TakeDamage(float amount, Health source = null, bool ignoreArmor = false, DamageKind kind = DamageKind.Direct, Faction? side = null,
+            Vector2? impactDirection = null)
         {
             if (IsDead || amount <= 0f) return;
             if (IgnoresHitFrom != null && IgnoresHitFrom(source)) return;
@@ -177,6 +180,8 @@ namespace BuildBuild.Core
             float before = Current;
             Current = Mathf.Max(0f, Current - amount);
             Damaged?.Invoke(amount);
+            if (kind == DamageKind.Direct && source != this && before > Current)
+                Impacted?.Invoke(impactDirection ?? (source != null ? (Vector2)(transform.position - source.transform.position) : Vector2.zero));
             // Tu tru mau (het han, rong tan) truyen chinh minh lam nguon de thong ke loai ra — khong tinh la hut mau.
             if (source != null && source != this && kind != DamageKind.Linked) source.DamageDealt?.Invoke(before - Current);
             AnyDamaged?.Invoke(this, source, before - Current, shieldAbsorbed, shieldCaster);

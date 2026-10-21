@@ -167,6 +167,7 @@ namespace BuildBuild.Combat
                 bool last = volley == _kit.cuuTienVolleys - 1;
                 float power = last && sky ? _kit.cuuTienEmpoweredPower : _kit.cuuTienVolleyPower;
                 var frames = last && sky ? _kit.volleyEmpowered : _kit.volley;
+                CombatFeedback.Cue("shot-bow");
                 // Ba ten cua mot nhp: mot hit duy nhat cho MOI DICH (mot chieu nhieu ten khong tu lap cường hoá).
                 OneShotFx.Spawn(target.BodyCenter, frames, _hero.FacesRight, SortOrder.Air, Battlefield.UnitScale);
                 target.Health.TakeDamage(_hero.AttackDamage * power, _hero.Health);
@@ -305,16 +306,21 @@ namespace BuildBuild.Combat
             // Hitline do o chan; mui ten bay o tam cao tay cung (= MuzzleOffset.y cua ten thuong), nghieng theo duong bay.
             var flight = new Vector3(0f, ShotFlightHeight, 0f);
             TravellingHeroFx.Spawn(from + flight, to + flight, _kit.sunArrow, ShotFlightSeconds, tiltToPath: true);
+            CombatFeedback.Cue("shot-bow");
             yield return new WaitForSeconds(ShotFlightSeconds);
             if (_hero.IsDying) yield break;
 
+            bool landed = false;
             foreach (var enemy in Unit.Hostiles(_hero.Side).ToArray())
             {
                 if (enemy == null || enemy.IsDying || !OnShotLine(enemy, from, to)) continue;
                 float bonus = enemy == aimed && !aimed.IsDying ? 1f + seals * _kit.sealBonus : 1f;
+                float before = enemy.Health.Current;
                 enemy.Health.TakeDamage(_hero.AttackDamage * _kit.shotPower * bonus, _hero.Health);
+                landed |= enemy.Health.Current < before;
                 OneShotFx.Spawn(enemy.BodyCenter, _kit.hit, !_hero.FacesRight, SortOrder.Air, Battlefield.UnitScale);
             }
+            if (landed) CombatFeedback.HeavyHit(aim, 0.055f, "hit-arrow");
             _hero.OnHitsLanded(1);
         }
 

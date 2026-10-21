@@ -123,19 +123,24 @@ namespace BuildBuild.Combat
             return best;
         }
 
-        void PopBud(Bud bud, Sprite[] bloomFx, float power, float radius)
+        bool PopBud(Bud bud, Sprite[] bloomFx, float power, float radius)
         {
             _buds.Remove(bud);
             if (bud.fx != null) Destroy(bud.fx);
             // Nu no theo COT phu het be sau san (khong phai vong tron): quai di hang nao cung phai an,
             // vong tron ban kinh 0,8-1,0 chi cham ~1/6 so quai (do 2026-10-10). Hinh: mot tam moi hang hero.
             LaneFx.SpawnRowsOnce(bud.at.x, bloomFx, false, SortOrder.Air, Battlefield.UnitScale);
+            bool landed = false;
             foreach (var enemy in Unit.Hostiles(_hero.Side).ToArray())
             {
                 if (enemy == null || enemy.IsDying) continue;
                 if (!Battlefield.InLaneColumn(enemy, bud.at.x, radius)) continue;
+                float before = enemy.Health.Current;
                 enemy.Health.TakeDamage(_hero.AttackDamage * power, _hero.Health);
+                landed |= enemy.Health.Current < before;
             }
+            CombatFeedback.Cue("explode");
+            return landed;
         }
 
         IEnumerator Fan(Unit target)
@@ -165,7 +170,8 @@ namespace BuildBuild.Combat
             if (_hero.IsDying || target == null || target.IsDying) yield break;
             var bud = NearestBud(target);
             if (bud == null) yield break;
-            PopBud(bud, _kit.lotusBloom, _kit.detonatePower, _kit.detonateRadius);
+            if (PopBud(bud, _kit.lotusBloom, _kit.detonatePower, _kit.detonateRadius))
+                CombatFeedback.HeavyHit(Vector2.up, 0.03f);
             _hero.OnHitsLanded(1);
         }
 
@@ -176,10 +182,12 @@ namespace BuildBuild.Combat
             var at = target != null ? target.transform.position : transform.position + new Vector3(_hero.FacesRight ? 2f : -2f, 0f, 0f);
             // No het nu thuong TRUOC roi moi trong nu lon: trong truoc thi luc da du `budMax`, `PlantBud` xoa nu cu
             // nhat ma khong no (mat sat thuong cua nu do).
+            bool landed = false;
             foreach (var bud in _buds.ToArray())
-                PopBud(bud, _kit.lotusBloom, _kit.grandPower, _kit.grandRadius);
+                landed |= PopBud(bud, _kit.lotusBloom, _kit.grandPower, _kit.grandRadius);
             PlantBud(at, _kit.greatBud);
-            PopBud(_buds[_buds.Count - 1], _kit.greatBloom, _kit.grandPower, _kit.grandRadius);
+            landed |= PopBud(_buds[_buds.Count - 1], _kit.greatBloom, _kit.grandPower, _kit.grandRadius);
+            if (landed) CombatFeedback.HeavyHit(Vector2.up, 0.065f);
             _hero.OnHitsLanded(1);
         }
     }
