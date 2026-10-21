@@ -115,6 +115,7 @@ namespace BuildBuild.Combat
         {
             yield return new WaitForSeconds(_hero.HitDelay(_kit.horizontalCast));
             if (_hero.IsDying || target == null) yield break;
+            CombatFeedback.Cue("spell");
             // Huong tien cua dich: quai phe dich di ve lau dai phe ta theo -x (`Enemy`: `Vector3.left`), nen net dat
             // PHIA -x cua muc tieu. Ban cu de +1 -> net nam sau lung quai, nguoi choi thay chieu "di nguoc".
             var dir = new Vector3(_hero.Side == Faction.Player ? -1f : 1f, 0f, 0f);
@@ -185,14 +186,19 @@ namespace BuildBuild.Combat
             if (_hero.IsDying) yield break;
             OneShotFx.Spawn(at + new Vector3(0f, 0.43f * SealFxScale, 0f), _kit.sealBurst, false, SortOrder.Air,
                 Battlefield.UnitScale * SealFxScale);
+            CombatFeedback.Cue("skill-stone");
+            bool landed = false;
             foreach (var enemy in Unit.Hostiles(_hero.Side).ToArray())
             {
                 if (enemy == null || enemy.IsDying || enemy.FliesHigh) continue;
                 if (Battlefield.GroundDistance(enemy.AimPoint(at), at) > _kit.sealRadius + enemy.BodyRadius) continue;
+                float before = enemy.Health.Current;
                 enemy.Health.TakeDamage(_hero.AttackDamage * 1.5f, _hero.Health);
+                landed |= enemy.Health.Current < before;
                 if (!enemy.IsBoss)
                     enemy.ApplyStun(enemy.IsElite ? _kit.sealStun * 0.5f : _kit.sealStun, _hero.Definition.stunFrames);
             }
+            if (landed) CombatFeedback.HeavyHit(Vector2.down, 0.03f);
             _hero.OnHitsLanded(1);
         }
 
@@ -234,27 +240,37 @@ namespace BuildBuild.Combat
             TravellingHeroFx.Spawn(origin + flight, end + flight, _kit.inkDragon, 0.6f);
             OneShotFx.Spawn(origin, _kit.dragonPainting, !_hero.FacesRight, SortOrder.Air, Battlefield.UnitScale);
             var swept = new HashSet<Unit>();
+            bool landed = false;
             foreach (var enemy in Unit.Hostiles(_hero.Side).ToArray())
             {
                 if (enemy == null || enemy.IsDying) continue;
                 if (!Battlefield.InLaneBand(enemy, origin, end)) continue;
                 swept.Add(enemy);
+                float before = enemy.Health.Current;
                 enemy.Health.TakeDamage(_hero.AttackDamage * 3f, _hero.Health);
+                landed |= enemy.Health.Current < before;
             }
             OneShotFx.Spawn(end + new Vector3(0f, 0.86f, 0f), _kit.dragonImpact, false, SortOrder.Air, Battlefield.UnitScale);
             foreach (var enemy in Unit.Hostiles(_hero.Side).ToArray())
             {
                 if (enemy == null || enemy.IsDying || swept.Contains(enemy)) continue;
                 if (Battlefield.GroundDistance(enemy.AimPoint(end), end) > _kit.dragonBlast + enemy.BodyRadius) continue;
+                float before = enemy.Health.Current;
                 enemy.Health.TakeDamage(_hero.AttackDamage * 2f, _hero.Health);
+                landed |= enemy.Health.Current < before;
             }
             // Dich trong ca hai vung an 2 hit (quet + no) theo kit.
             foreach (var enemy in swept)
             {
                 if (enemy == null || enemy.IsDying) continue;
                 if (Battlefield.GroundDistance(enemy.AimPoint(end), end) <= _kit.dragonBlast + enemy.BodyRadius)
+                {
+                    float before = enemy.Health.Current;
                     enemy.Health.TakeDamage(_hero.AttackDamage * 2f, _hero.Health);
+                    landed |= enemy.Health.Current < before;
+                }
             }
+            if (landed) CombatFeedback.HeavyHit(new Vector2(facing, 0f), 0.055f, "explode");
             _hero.OnHitsLanded(1);
         }
     }

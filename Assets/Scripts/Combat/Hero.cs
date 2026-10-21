@@ -953,6 +953,7 @@ namespace BuildBuild.Combat
         /// <summary>Giay tu luc `PlayAction` toi frame cham (`hitFrame`) cua <paramref name="clip"/>.</summary>
         public float HitDelay(SpriteAnimationClip clip)
         {
+            if (clip.frameSeconds > 0f) return Mathf.Max(0, clip.hitFrame - 1) * clip.frameSeconds;
             float fps = _definition.animations != null ? _definition.animations.framesPerSecond : 0f;
             return fps > 0f ? Mathf.Max(0, clip.hitFrame - 1) / fps : 0f;
         }

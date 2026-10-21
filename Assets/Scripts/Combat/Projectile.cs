@@ -38,6 +38,7 @@ namespace BuildBuild.Combat
         // Lao xuyen (No Xuyen): bay thang theo `_flight`, moi quai tren duong an don mot lan, het luot/ra khoi tam thi tan.
         int _pierceLeft;
         Vector3 _flight;
+        Vector2 _impactDirection;
         float _flightLeft;
         readonly System.Collections.Generic.HashSet<Unit> _pierced = new System.Collections.Generic.HashSet<Unit>();
         float _timer;
@@ -127,6 +128,7 @@ namespace BuildBuild.Combat
             }
 
             Vector3 toDestination = _destination - transform.position;
+            if (toDestination.sqrMagnitude > 0.0001f) _impactDirection = toDestination.normalized;
             float step = _speed * Time.deltaTime;
             if (toDestination.magnitude <= step)
             {
@@ -170,7 +172,8 @@ namespace BuildBuild.Combat
                 float before = enemy.Health.Current;
                 bool shielded = enemy.Health.Shield > 0f;   // Pha An (Tho San) xet khien LUC trung, truoc khi dan an khien
                 float damage = _cannon != null ? _damage * Cannon.BigTargetFactor(_cannon, enemy) : _damage;
-                enemy.Health.TakeDamage(damage, _owner != null ? _owner.Health : null, side: _side);
+                enemy.Health.TakeDamage(damage, _owner != null ? _owner.Health : null, side: _side,
+                    impactDirection: _impactDirection);
                 if (_cannon != null) WaveStats.RecordCannonDamage(_cannon, _side, before - enemy.Health.Current);
                 if (_cannon != null && _cannon.rootDuration > 0f) enemy.ApplyRoot(_cannon.rootDuration, _cannon.rootFrames);
                 if (_pushDirection != 0f) enemy.PushBack(_pushDirection);
@@ -209,7 +212,7 @@ namespace BuildBuild.Combat
                 if (at.y < foot.y || at.y > foot.y + enemy.BodyHeight) continue;
                 _pierced.Add(enemy);
                 float before = enemy.Health.Current;
-                enemy.Health.TakeDamage(_damage, side: _side);
+                enemy.Health.TakeDamage(_damage, side: _side, impactDirection: (Vector2)_flight);
                 if (_cannon != null) WaveStats.RecordCannonDamage(_cannon, _side, before - enemy.Health.Current);
                 OneShotFx.Spawn(enemy.BodyCenter, _impactFrames, false, SortOrder.Air, Battlefield.UnitScale * _impactScale);
                 Sfx.Play(_impactSfx);
@@ -226,6 +229,7 @@ namespace BuildBuild.Combat
             var previous = transform.position;
             transform.position = Vector3.Lerp(_arcFrom, _groundPoint, t) + Vector3.up * (4f * _arcHeight * t * (1f - t));
             var direction = transform.position - previous;
+            if (direction.sqrMagnitude > 0.0001f) _impactDirection = direction.normalized;
             if (direction.sqrMagnitude > 0f)
             {
                 bool right = direction.x > 0f;
