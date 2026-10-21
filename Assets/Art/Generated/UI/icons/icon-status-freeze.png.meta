@@ -3,11 +3,8 @@ guid: d747cb62310443b478c3a5ecd31d2830
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8588328574682677297
-    second: icon-status-freeze_0
-  - first:
       213: 980145098933734296
-    second: icon-status-freeze_1
+    second: icon-status-freeze_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -104,28 +101,6 @@ TextureImporter:
     sprites:
     - serializedVersion: 2
       name: icon-status-freeze_0
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 14
-        width: 8
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: fcfb3bb0aa020d880800000000000000
-      internalID: -8588328574682677297
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: icon-status-freeze_1
       rect:
         serializedVersion: 2
         x: 2

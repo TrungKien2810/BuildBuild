@@ -19,6 +19,9 @@ namespace BuildBuild.Combat
         /// <summary>Cung mau vang voi quai bi choang — nguoi choi doc ra cung mot trang thai.</summary>
         static readonly Color StunnedTint = new Color(1f, 0.85f, 0.35f);
 
+        /// <summary>Dong bang: cung mau xanh voi quai bi dong bang, de phan biet voi choang (vang).</summary>
+        static readonly Color FrozenTint = new Color(0.62f, 0.82f, 1f);
+
         /// <summary>Scale LOCAL cua FX buff (art 64 px, than hero da nhan UnitScale 2) -> rong ~ bang dau hero.</summary>
         const float BuffFxScale = 0.5f;
 
@@ -51,21 +54,27 @@ namespace BuildBuild.Combat
             public float damage, rate, until;
         }
 
-        public override bool IsStunned => Status.Has(StatusId.Stun);
+        public override bool IsStunned => Status.Has(StatusId.Stun) || Status.Has(StatusId.Freeze);
 
         bool HasBuffFx => _definition != null && _definition.buffFrames != null && _definition.buffFrames.Length > 0;
 
         /// <summary>Choang <paramref name="seconds"/> giay: khong di, khong danh, animation dung hinh. Hoa Da (mien sat thuong) thi mien luon choang.</summary>
-        public override void ApplyStun(float seconds, Sprite[] frames = null)
+        public override void ApplyStun(float seconds, Sprite[] frames = null) => LockDown(seconds, StatusId.Stun, frames);
+
+        /// <summary>
+        /// Dong bang: khoa y nhu choang nhung mang trang thai `Freeze` de to mau xanh (quai dong bang xanh, choang vang)
+        /// va de FX dau sao / bong tuyet cua `StatusEffects` doc dung loai.
+        /// </summary>
+        public override void ApplyFreeze(float seconds) => LockDown(seconds, StatusId.Freeze);
+
+        void LockDown(float seconds, StatusId id, Sprite[] frames = null)
         {
             if (_dying || seconds <= 0f || _health.Invulnerable) return;
             if (_dragonLink != null && _dragonLink.Unshakable(this)) return;   // Long Giap mien choang
             if (_brother != null && _brother.StunImmune) return;               // Tuy Tuu (Truong Phi)
-            Status.Apply(StatusId.Stun, 0f, seconds);
+            // FX (sao choang / bong tuyet) do `StatusEffects` ve o MOT cho, art rieng truyen qua `fx`.
+            Status.Apply(id, 0f, seconds, fx: frames);
         }
-
-        /// <summary>Hero chua co trang thai dong bang rieng: khoa nhu choang.</summary>
-        public override void ApplyFreeze(float seconds) => ApplyStun(seconds);
 
         /// <summary>Day lui mot nhip (don danh co `knockbackOnHit`).</summary>
         public override void PushBack(float direction)
@@ -127,7 +136,7 @@ namespace BuildBuild.Combat
                 if (animator != null) animator.Paused = stunned;
                 if (!stunned) Paint(_baseTint);
             }
-            if (stunned) Paint(StunnedTint);
+            if (stunned) Paint(Status.Has(StatusId.Freeze) ? FrozenTint : StunnedTint);
             return stunned;
         }
 

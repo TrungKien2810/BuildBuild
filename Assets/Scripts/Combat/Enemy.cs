@@ -62,8 +62,6 @@ namespace BuildBuild.Combat
         int _attackCount;
         bool _specialHit;
         SpriteAnimationClip _cast;
-        GameObject _stunFx;
-        SpriteRenderer _stunRenderer;
         float _bodyRadius;
         float _bodyHeight;
         Hero _engaged;
@@ -75,13 +73,6 @@ namespace BuildBuild.Combat
 
         /// <summary>Toc tach hai quai dang dung chong len nhau (xem `Battlefield.Separation`).</summary>
         const float SeparationRate = 6f;
-
-        /// <summary>
-        /// Scale LOCAL cua FX choang. Art ve tren canvas 128px @100 PPU = 1,28 unit, ma FX gan vao than quai
-        /// (transform da nhan `Battlefield.UnitScale` = 2) nen de 1 thi sao choang rong ~2,1 unit — to hon ca
-        /// con quai. 0,3 cho no rong ~0,64 unit, vua bang be ngang dau.
-        /// </summary>
-        const float StunFxScale = 0.3f;
 
         /// <summary>Tam danh tu muc nay tro len la quai ban xa: khong bi giu, khong chiem cho (cung nguong can chien cua hero).</summary>
         const float RangedReach = 1.5f;
@@ -258,13 +249,8 @@ namespace BuildBuild.Combat
         {
             // Moi nguon choang hien co deu la can chien (phi, dap dat, xich) — khong voi toi quai bay cao.
             if (_dying || seconds <= 0f || FliesHigh) return;
-            bool alreadyStunned = IsStunned;
-            Status.Apply(StatusId.Stun, 0f, seconds);
-            if (alreadyStunned || frames == null || frames.Length == 0) return;
-            if (_stunFx != null) Destroy(_stunFx);
-            _stunFx = OneShotFx.SpawnLoop(transform, MarkOffset, frames, seconds, SortOrder.ForUnit(this) + 1,
-                scale: StunFxScale);
-            _stunRenderer = _stunFx != null ? _stunFx.GetComponent<SpriteRenderer>() : null;
+            // FX do `StatusEffects` ve — cung mot cho voi dong bang / pha giap, art rieng cua quai truyen qua `fx`.
+            Status.Apply(StatusId.Stun, 0f, seconds, fx: frames);
         }
 
         // ---------------------------------------------------------------- he so toc (nhanh Tru, plan muc B1.4)
@@ -384,7 +370,6 @@ namespace BuildBuild.Combat
             if (_renderer == null) return;
             _renderer.sortingOrder = IsLaunched || FliesHigh ? SortOrder.Air : SortOrder.ForUnit(this);
             SortStatusFx(_renderer.sortingOrder);
-            if (_stunRenderer != null) _stunRenderer.sortingOrder = _renderer.sortingOrder + 1;
             if (_chainIconRenderer != null) _chainIconRenderer.sortingOrder = _renderer.sortingOrder + 1;
             if (_puppetRenderer != null) _puppetRenderer.sortingOrder = _renderer.sortingOrder + 1;
         }
@@ -626,9 +611,6 @@ namespace BuildBuild.Combat
             _frozenVisual = false;
             if (animator != null) animator.Paused = false;
             if (_renderer != null) _renderer.color = BodyColor(Color.white);
-            if (_stunFx != null) Destroy(_stunFx);
-            _stunFx = null;
-            _stunRenderer = null;
         }
 
         /// <summary>Di ve lau dai — tru khi dang bi troi: dung idle tai cho.</summary>
