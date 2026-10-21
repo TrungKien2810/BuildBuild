@@ -346,8 +346,16 @@ Code bên trong làm gì:
 - **Cấm hồi máu** ghi xuyên sang `Health.NoHealUntil`, vì `Health.Heal` đọc trường đó.
 - **FX bám thân:** nguồn có asset riêng thì truyền `fx: frames` vào `Apply` (Pháp Sư Lửa truyền `passiveFrames`
   của nó). Không truyền thì dùng hình chung trong `Assets/Resources/StatusLibrary.asset`: chọn asset đó trong
-  Project, mở `Visuals`, kéo frame vào `Fx Frames` của dòng `Burn`/`Poison`. Vẫn là MỘT trạng thái — hình hiện
-  theo lần gắn mạnh nhất, lửa lan sang con khác mang theo hình của nó.
+  Project, mở `Visuals`, kéo frame vào `Fx Frames` của dòng tương ứng (`Burn`, `Poison`, `Freeze`, `Stun`,
+  `ArmorBreak`, `NoHeal`). Vẫn là MỘT trạng thái — hình hiện theo lần gắn mạnh nhất, lửa lan sang con khác mang
+  theo hình của nó. **Chỗ đặt và cỡ do `StatusEffects` quyết, không do unit:** Choáng / Đóng băng / Phá giáp /
+  Cấm hồi máu là **huy hiệu treo ngang đầu**, tính theo `BodyHeight` của chính unit (quái thấp không bị lơ lửng,
+  Ruinjaw cao không bị che); Cháy / Độc / Chậm **bám mặt đất ở chân**. Cỡ lấy từ ô `Size` = **bề ngang world**
+  của hình (0 = giữ cỡ gốc của art) rồi `StatusEffects` tự chia lại cho `Battlefield.UnitScale` — muốn huy hiệu
+  to/nhỏ thì sửa `Size`, đừng sửa `transform.localScale` trong code.
+- **Choáng / Đóng băng KHÔNG tự spawn FX trong `Enemy.ApplyStun` hay `Hero.ApplyStun`:** hai hàm đó chỉ gọi
+  `Status.Apply(id, 0, giây, fx: frames)`. Thêm một chỗ spawn riêng nữa là hình bị đúp (một của unit, một của
+  kho chung) và unit nào quên thì im lặng — đúng lỗi 2026-10-21 (hero bị choáng không có một ngôi sao nào).
 - **Giải debuff:** `unit.Status.Cleanse()` gỡ toàn bộ. Ấn Đức của Lưu Bị gọi qua `ClearDebuffs()`, hàm này
   gọi `Cleanse()` rồi gỡ thêm Trói / Xích / Long Uy (ba hiệu ứng này chưa chuyển vào kho).
 - **Bảng thông tin hero** lấy dòng từ `StatusEffects.Collect`.
@@ -362,6 +370,9 @@ Thêm một hiệu ứng mới bằng tay:
    và trong `IsDot`, giống `Poison`.
 3. Thêm một dòng vào `Collect` để bảng thông tin hiện nó. Nếu cần icon riêng, thêm mã vào cuối `EffectKind`
    (`UnitEffect.cs`) và thêm một dòng tương ứng vào cuối `EffectIconPaths` trong `SceneBuilder.cs`.
-4. Có FX bám thân: mở `StatusLibrary.asset`, thêm một phần tử vào `Visuals`, chọn `Id` rồi kéo frame vào.
+4. Có FX bám thân: mở `StatusLibrary.asset`, thêm một phần tử vào `Visuals`, chọn `Id`, kéo frame vào
+   `Fx Frames` và ghi `Size` = bề ngang world mong muốn (0 = cỡ gốc art). Art cho huy hiệu trên đầu nên chọn
+   hình nhỏ, đọc được ở cỡ game (mẫu: `Enemy/stunned-status`, `IronClawCrab/armor-break`,
+   `UI/icons/icon-status-freeze|noheal`).
 5. Chỗ đọc hiệu ứng (khoá di chuyển, giảm sát thương...) gọi `Status.Has(...)` / `Status.Power(...)`.
 6. Không cần sửa hàm giải debuff: `Cleanse` tự gỡ mọi mã.
