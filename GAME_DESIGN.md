@@ -514,6 +514,54 @@ Nâng level n → n+1: `50 × n^1.5` (làm tròn xuống). Mỗi level **+8% má
 chỉ số gốc (cộng tuyến tính). **Trần level theo sao** (hero, lính, pháo — người dùng chốt 2026-09-29): 0–1★ lv 20,
 mỗi sao sau +20 (2★ 40, 3★ 60, 4★ 80), **5★ không giới hạn** — chỉ bị chặn bởi vàng. `Progression.MaxLevel(stars)`.
 
+## 7.1 Cấp người chơi + XP (người dùng chốt 2026-10-15 — ĐÃ CODE + ĐÃ BAKE, CHƯA Play)
+
+HUD góc trái trên (GDD 10.0) có **chân dung + `Lv N` + thanh XP có số**. Toàn bộ số dưới đây là **TẠM** (Claude), nằm
+trong `Meta/PlayerLevel.cs`:
+
+- **XP chỉ đến từ việc ĐÁNH:** thắng wave = `20 + 4 × wave`, wave boss (chia hết cho 10) **+50**; thắng một trận
+  Chinh Phạt = **60**. Rương AFK **không** cho XP (đúng chốt 2026-10-01: nó là "chờ", không phải "đánh").
+- **Nguỡng lên cấp:** `100 + 50 × (cấp − 1)` — cấp 2 cần 100, cấp 3 cần 150, cấp 5 cần 250…
+- **Thưởng mỗi cấp:** vàng `50 + 20 × cấp`; **mỗi 5 cấp tặng 1 lượt quay miễn phí** (dùng cho Quay 1, không dùng
+  được cho Quay 10 ⇒ một vé không thành mười unit).
+- **Không trừ gì khi thua**, không có trần cấp. Lên nhiều cấp trong một wave thì cộng dồn, ghi 1 dòng vào bảng kết quả.
+- Vàng do `BattleHud` trả (nghe `PlayerLevel.LeveledUp`), **không** do lớp dữ liệu: `Meta` không được biết `Economy`.
+- **Chưa làm:** avatar người chơi chọn từ hero đã sở hữu (đang dùng tạm `avatar-frostweaver`), XP từ nhiệm vụ/event.
+
+## 7.2 Town · Cửa hàng · Bảng kỹ năng · chế độ phụ (2026-10-15 — ĐÃ CODE + BAKE, CHƯA Play)
+
+Toàn bộ số dưới đây là **TẠM** (Claude), chưa cân. Mục đích chung: cuối game vàng chỉ có MỘT đường tiêu (nâng level
+unit + nâng cấp thành) nên nó cứ chạy mãi không có chỗ đổ — ba thứ dưới đây là chỗ đổ thứ hai, cộng thêm mục tiêu
+cho người đã qua wave 30.
+
+**Town** (nút trên HUD sảnh, mở ra hub) — hiện có 2 công trình con:
+- **Cửa hàng** (`Meta/Shop` + `UI/ShopScene.cs`) — **SCENE RIÊNG** từ 2026-10-20 (`SceneNames.Shop`), vào từ
+  công trình Shop trong Town (không còn là bảng phụ trong HUD trận). Bốn loại hàng, mỗi loại một chu kỳ làm mới:
+  **Daily** (4 ô: 3 mảnh + 1 trang bị, mỗi ngày) · **Weekly** (3 ô: 2 gói 15 mảnh + 1 trang bị, thứ Hai) ·
+  **Monthly** (2 ô: 30 mảnh + 1 trang bị SSR, ngày 1) · **Offers** (3 gói 25 mảnh, mua MỘT lần, không xoay).
+  Mảnh **chỉ bán cho unit người chơi ĐÃ sở hữu** (mảnh của unit chưa có thì chưa dùng được vào việc gì); trang bị
+  chỉ bán từ **R** trở lên. Giá (TẠM): 5 mảnh = **150 / 300 / 700 / 1.400** vàng theo N/R/SR/SSR (gói nhiều mảnh
+  tính tuyến tính); trang bị R/SR/SSR = **800 / 1.600 / 3.200**. Mỗi ô mua **một lần trong chu kỳ**; ô đã mua hiện
+  "Sold" tới lần làm mới sau. Luật nằm MỘT chỗ ở `Meta/Shop`; màn hình chỉ vẽ + gọi `TryBuy`.
+- **Bảng kỹ năng** (`Meta/SkillBoard`): 3 nhánh **vĩnh viễn**, mỗi nhánh 10 cấp — Sát thương **+2%/cấp**, Máu
+  **+2%/cấp**, Tốc đánh **+1,5%/cấp**; giá cấp kế tiếp `300 + 500 × cấp`. Cộng **% toàn tài khoản**, áp ở đúng một
+  chỗ (`Progression.Multipliers`) nên mọi hero, lính và pháo đều ăn; cộng CÙNG chỗ với level/sao/trang bị, không nhân chồng.
+
+**Chế độ phụ trong sân trận** (dùng chung một thanh máu, **không đổi `NextWave`** — không phải tiến trình chính):
+- **Boss Rush**: 3 hiệp boss liên tiếp (dùng lại wave 10/20/30), **không sửa thành giữa các hiệp**. Thưởng = vàng 3
+  wave + **500**, XP 3 wave, và một lượt rơi trang bị theo luật wave 30 (chắc ≥ R).
+- **Thử thách ngày** (`Meta/DailyChallenge`): wave `31 + ngày%11`; **ngày chẵn** quái +35% sát thương, **ngày lẻ**
+  thêm 3 quân thường. Thưởng vàng + **2 mảnh**; **thắng mới khoá nút tới hôm sau**, thua thì được thử lại. Seed lấy
+  từ NGÀY (không dùng `string.GetHashCode()` — hash chuỗi đổi theo tiến trình nên cùng ngày mở hai lần sẽ ra hai đề khác nhau).
+- **Mốc sau wave 30** (`Meta/WaveMilestones`): mỗi 5 wave thưởng vàng `200 + 20×wave` + 1–2 mảnh (mốc tròn chục gấp
+  đôi); ghi `highestWave` và báo khi lập kỷ lục mới.
+- **Ưu tiên mục tiêu** (nút thứ 4 trên HUD trận, GDD 10.1 "auto/ưu tiên"): chọn cách hero nhắm đòn **đánh thường** —
+  Gần nhất (mặc định, đúng hành vi cũ) · Xa nhất · Máu thấp nhất · Máu cao nhất. Chỉ áp cho đòn thường; các chiêu
+  vẫn tự chọn mục tiêu theo kịch bản riêng.
+
+**Gợi ý ngữ cảnh** (`Meta/ContextTips`): 5 gợi ý cho 5 phút đầu, mỗi gợi ý hiện **một lần trong đời acc**, điều kiện
+đọc thẳng từ save nên acc cũ chỉ nhận đúng phần còn thiếu.
+
 ## 8. Phạm vi
 
 **MVP — bắt buộc:** 30 wave theo công thức · lâu đài 3 tầng + 3 loại pháo · 4 hero với 4 kỹ năng ·
@@ -549,7 +597,8 @@ mạnh lên sau khi thua một wave.
   bị, mức thưởng/giờ theo wave cao nhất đã thắng.
   **Code 2026-10-01 (số TẠM, Claude):** vàng/giờ = 0,5 × vàng thắng wave cao nhất (`nextWave − 1`, thua không lùi wave);
   mỗi tròn 2 giờ 25% được 1 mảnh cho một unit đang sở hữu (ngẫu nhiên); mỗi tròn 4 giờ một lượt rơi trang bị như thắng
-  wave (tối đa 1 món/lần nhận). **Bỏ XP người chơi** (người dùng 2026-10-01 — chưa có cấp tài khoản). Rương nằm dưới nút
+  wave (tối đa 1 món/lần nhận). **Rương AFK KHÔNG cho XP** (giữ nguyên chốt 2026-10-01), nhưng **XP người chơi nay
+  ĐÃ LÀM THẬT** (người dùng chốt 2026-10-15) — xem mục 7.1. Rương nằm dưới nút
   Đội quân, ẩn khi đang đánh. Số ở hằng trong `AfkChest.cs`.
 - **Code bản đồ 2026-10-01 (số TẠM, Claude):** vào bằng nút "Phó bản" trên HUD sảnh (chưa có Tháp Do Thám trên sân). Lực chiến unit (sửa 2026-10-02) = √(máu × sát thương × tốc đánh), cả ba đã nhân hệ số level/sao/trang bị (lính × số con) — trung bình nhân để hệ số NPC ×k cho lực chiến đúng ×k (công thức cộng cũ: ×1,2 thực tế mạnh ×1,44); pháo = sát thương × tốc bắn × 3; mọi unit × hệ số phẩm N 1 / R 1,15 / SR 1,3 / SSR 1,5 (chỉ số gốc không đo hết bộ chiêu). NPC dùng đúng số pháo / số loại lính của mình lúc Do Thám, mỗi unit NPC **cùng phẩm** với unit tương ứng của mình. **Nhịp trận (2026-10-02):** trong Chinh Phạt mọi unit hai phe + cả hai thành máu ×2,5; thành NPC giữ **quân tiếp viện** 2 / 3 / 4 hero (Dễ / Ngang / Khó, đã tính vào lực chiến), ra từ cổng thành theo đợt 2 hero khi tuyến đầu NPC còn một nửa hoặc mỗi 25 giây. Chi viện (sửa 2026-10-02): **mỗi phe chỉ 1 hero chi viện mỗi trận**. Một đồng hồ chung hai phe điểm mỗi 10 giây: NPC ra hero tiếp viện từ cổng thành; phe ta trận tạm dừng, chọn 1 hero đã sở hữu chưa có trong trận, hero ra từ cổng thành mình (Huỷ = bỏ lượt, lượt sau hỏi lại). Bảng Đóng góp sau trận Chinh Phạt có tab Phe ta / Phe địch. NPC: một hệ số nhân máu + sát thương cho mọi hero/lính NPC, giải cho đúng lực chiến mục tiêu; sao hero NPC = sao trung bình đội mình. Quét ngay = vàng thắng wave hiện tại. Thưởng vàng × 0,8 / 1 / 1,4 theo độ khó × chuỗi thắng; mảnh 0 / 1 / 2. Số ở `Meta/ConquestMap.cs`.
 - **Hero NPC (người dùng chốt 2026-10-01):** hero HAI PHE thật, có chiêu — nội tại / chiêu phụ mở theo **sao của chính
@@ -696,3 +745,29 @@ Art UI giao lane agy: icon + minh hoạ do image model, khung/chrome dựng bằ
 số liệu Lv/XP, đá quý, AFK; có làm Shop, Daily Quests, bản đồ stage, Town thành màn thật hay không —
 hiện GDD chưa có mục nào trong số này (mục 8 chỉ có menu chính, màn chơi, gacha, nâng cấp, kết quả). Mục 8 "UI: menu chính, màn chơi, gacha,
 nâng cấp, kết quả" giờ ánh xạ vào 10.1 (màn chơi), 10.2 + 10.3 (nâng cấp).
+
+## 11. Nhiệm vụ (2026-10-15 — track "Hành trình" ĐÃ CODE, chờ chạy builder + Play)
+
+**Vì sao có hệ này (đo trong code, không phải cảm tính):** acc mới chỉ có **1 hero** (`SaveSystem.StarterUnitId`)
+trong khi sân có **9 ô hero**, và 10 wave đầu chỉ ≈ 2.000 vàng ≈ **4 lượt quay**. Nên "dễ chơi" ở đây là
+**lấp roster sớm + chỉ cho người chơi biết làm gì tiếp**, không phải thêm tiền tệ.
+
+**Track đã làm — *Hành trình* (tân thủ):** 7 mốc × (3 nhiệm vụ + 1 ô thưởng cuối mốc). Mốc N+1 chỉ mở khi đã
+**nhận hết thưởng** mốc N (kể cả ô thưởng cuối mốc). Mốc 2/3/4 tặng **hero cố định** (Archer → Knight →
+Cragfist); mốc 5 tặng **vé chọn SR (1 trong 4)**; mốc 7 tặng **vé chọn SSR (1 trong 8)**.
+Chưa làm: nhiệm vụ **Ngày** (điểm hoạt động + rương mốc), **Tuần**, **Thành tựu** — ý tưởng ở `IDEAS.md`.
+
+**Luật:**
+- Tiến độ đọc thẳng từ save (wave cao nhất · số hero · level hero cao nhất · 3 bộ đếm quay/Chinh Phạt/rương AFK)
+  ⇒ **hồi tố**: làm trước khi nhiệm vụ mở khoá thì lúc mở nó đã xong. Không lưu tiến độ từng nhiệm vụ.
+- Mốc **không hết hạn**, **không cần đăng nhập liên tiếp** (khác login-track của Arknights).
+- Tặng tướng: chưa sở hữu → **nguyên con**; đã sở hữu → **quy ra mảnh** (N/R 20 · SR 60 · SSR 100) — không có
+  phần thưởng vô dụng vì đã có hero.
+- **Vé chọn tướng** nằm trong save tới khi người chơi bấm chọn (nút *Later* để chọn sau) — không mất.
+- Vàng cộng qua `Economy` (để HUD nghe `Changed`); tướng/mảnh/vé ghi thẳng trong `QuestLog.Claim`.
+
+**Code:** `Data/QuestCatalog.cs` (nội dung + bảng vé) · `Meta/QuestLog.cs` (+ `QuestSave` trong `SaveData.quests`:
+`claimed` · `vouchers` · `gachaRolls` · `conquestWins` · `afkClaims` · `lastHero`) · `UI/QuestScreen.cs`
+(panel trong scene Battle, mở từ nút **Quests** trên HUD, có chấm đỏ). Bộ đếm do `GachaSystem.Roll` /
+`ConquestMap.Finish` / `AfkChest.Claim` gọi. UI dựng bằng chrome có sẵn — **không sinh art mới**.
+Số đều là **TẠM** (Claude), chưa cân.

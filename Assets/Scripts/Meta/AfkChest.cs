@@ -80,6 +80,7 @@ namespace BuildBuild.Meta
                 reward.drop = Armory.RollDrop(equipment, BestWave);
 
             data.afkSince = Now;
+            QuestLog.CountAfkClaim();   // nhiem vu "Claim the AFK Chest"
             SaveSystem.Save();
             return reward;
         }

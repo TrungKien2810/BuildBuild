@@ -225,7 +225,9 @@ namespace BuildBuild.Combat
             var end = origin + new Vector3(facing * _kit.dragonLength, 0f, 0f);
             // Vet mac duoi dat chinh la VUNG TRUNG (mac long quet het be sau san), khong con la duong bao:
             // mot tam o MOI hang hero. KHONG keo gian art theo Y (o 2,56 world keo 4,3x = vet nhoe doc).
-            LaneFx.SpawnRowsOnce((origin + end).x * 0.5f, _kit.dragonPath, !_hero.FacesRight,
+            // Art ve MUI TEN + vach gach chi sang TRAI (prompt-used: "directional ground strip facing LEFT"), nen hero
+            // nhin PHAI phai lat; ban cu truyen `!FacesRight` -> vet chi ve nguoc ve lai phia thanh (nguoi dung 2026-10-21).
+            LaneFx.SpawnRowsOnce((origin + end).x * 0.5f, _kit.dragonPath, _hero.FacesRight,
                 SortOrder.GroundDecal + 1, Battlefield.UnitScale);
             // Mac long bay o tam cao than doc dai quet.
             var flight = new Vector3(0f, _hero.BodyHeight * 0.5f, 0f);

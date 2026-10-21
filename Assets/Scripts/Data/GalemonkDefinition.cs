@@ -26,10 +26,10 @@ namespace BuildBuild.Data
 
         [Header("Phong Tao (chieu phu, minorStar)")]
         public float waveCooldown = 10f;
-        [Tooltip("Song chay doc lane theo huong hero nhin, xa toi da quang nay.")]
+        [Tooltip("Song bay ve phia muc tieu dang danh (cheo theo hang cua no), xa toi da quang nay.")]
         public float waveDistance = 6f;
         public float waveSpeed = 7f;
-        [Tooltip("Quai lech toi da nay theo chieu sau (truc y) so voi duong song thi van trung.")]
+        [Tooltip("Quai lech toi da nay so voi DUONG BAY cua song (do ngang duong, khong phai truc y) thi van trung.")]
         public float waveHalfDepth = 0.5f;
         public float wavePush = 1.5f;
         [Tooltip("Sat thuong moi quai = don thuong x he so nay.")]

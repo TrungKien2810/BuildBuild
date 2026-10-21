@@ -33,10 +33,34 @@ namespace BuildBuild.Meta
         public int gold;
         public int rollsSinceSR;
         public int rollsSinceSSR;
+        /// <summary>Cap nguoi choi (GDD muc 10.0) + XP trong cap hien tai — xem `Meta/PlayerLevel`.</summary>
+        public int playerLevel = 1;
+        public int playerXp;
+        /// <summary>Luot quay mien phi duoc tang moi 5 cap; man Gacha tieu truoc khi tru vang.</summary>
+        public int freeRolls;
+        /// <summary>Man Cai dat: am luong nhac 0..1 (mac dinh 0,4 = hang so cu trong `Sfx`) + tat tieng SFX.</summary>
+        public float musicVolume = 0.4f;
+        public bool sfxMuted;
         public List<OwnedUnit> owned = new List<OwnedUnit>();
 
         /// <summary>Wave se danh o lan bam tiep theo — song qua viec doi sang man gacha va tat game.</summary>
         public int nextWave = 1;
+        /// <summary>Ky luc wave cao nhat da thang (`Meta/WaveMilestones`) — hien khi lap ky luc moi sau wave 30.</summary>
+        public int highestWave;
+        /// <summary>Id cac goi y ngu canh da hien (`Meta/ContextTips`) — moi y chi hien MOT lan trong doi acc.</summary>
+        public List<string> seenTips = new List<string>();
+        /// <summary>`yyyy-MM-dd` cua lan THANG thu thach ngay gan nhat (`Meta/DailyChallenge`); "" = chua tung thang.</summary>
+        public string dailyDay = "";
+        public int bossRushBest;
+        public int bossRushClears;
+        /// <summary>Lo hang + cac o da mua cua tung loai cua hang (`Meta/Shop`) — moi loai mot ky lam moi.</summary>
+        public ShopSave shop = new ShopSave();
+        /// <summary>Cap tung nhanh cua bang ky nang toan tai khoan (`Meta/SkillBoard`).</summary>
+        public int boardAttack;
+        public int boardHealth;
+        public int boardHaste;
+        /// <summary>Uu tien muc tieu cua don danh thuong (`Combat/Targeting`): 0 = gan nhat (mac dinh).</summary>
+        public int targetMode;
         /// <summary>Doi hinh 9 o, theo thu tu o; moi phan tu la ten asset HeroDefinition, "" = o trong.</summary>
         public List<string> lineup = new List<string>();
         /// <summary>Cap thanh tri 1..3 (GAME_DESIGN.md muc 2): doi sprite, mau thanh va so be phao.</summary>
@@ -54,6 +78,8 @@ namespace BuildBuild.Meta
         public long afkSince;
         /// <summary>Ban do Chinh Phat: 3 thanh da do tham, chuoi thang, luot trong ngay (`ConquestMap`).</summary>
         public ConquestSave conquest = new ConquestSave();
+        /// <summary>Hanh trinh tan thu (`QuestLog`): id da nhan, ve chon tuong, bo dem quay / Chinh Phat / ruong AFK.</summary>
+        public QuestSave quests = new QuestSave();
 
         /// <summary>
         /// Unit da so huu, null neu chua. Acc `ownsAll` tu tao ban ghi khi hoi lan dau — level/sao/manh van luu nhu
@@ -104,12 +130,21 @@ namespace BuildBuild.Meta
         }
 
         public static void Save()
-        {
-            // Ghi ra file tam roi moi thay: tat game giua luc ghi thi van con ban cu nguyen ven.
+        {            // Ghi ra file tam roi moi thay: tat game giua luc ghi thi van con ban cu nguyen ven.
             string tmp = FilePath + ".tmp";
             File.WriteAllText(tmp, JsonUtility.ToJson(Data, true));
             if (File.Exists(FilePath)) File.Delete(FilePath);
             File.Move(tmp, FilePath);
+        }
+
+        /// <summary>
+        /// Xoa tien trinh cua acc dang choi (man Cai dat). KHONG doi acc — tao lai du lieu goc theo dung luat
+        /// `NewAccount` (acc test van so huu tat ca, acc thuong duoc tang hero khoi dau) roi ghi de.
+        /// </summary>
+        public static void ResetProgress()
+        {
+            _data = NewAccount();
+            Save();
         }
 
         static SaveData Load()

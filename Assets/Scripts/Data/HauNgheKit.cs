@@ -70,7 +70,7 @@ namespace BuildBuild.Data
             "Thoi gian GIU NGAM sau frame cham cua clip cast. Tong thoi gian bao truoc = (hitFrame-1)/fps + so nay " +
             "(kit ghi 1 giay -> clip 4 frame @130 ms = 0,52 + 0,5).")]
         public float aimHoldSeconds = 0.5f;
-        [Tooltip("Chieu dai doan lane ten xuyen qua (world).")]
+        [Tooltip("Chieu dai ten xuyen qua, tinh tu chan hero THEO HUONG BAN (world).")]
         public float shotLength = 6f;
         [Tooltip("He so ATK cho MOI dich tren duong (mot lan).")]
         public float shotPower = 3f;

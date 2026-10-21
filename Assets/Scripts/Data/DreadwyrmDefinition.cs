@@ -76,9 +76,9 @@ namespace BuildBuild.Data
         public SpriteAnimationClip roarBody = new SpriteAnimationClip { name = "roar", loop = false };
 
         [Header("Diem neo tren art (world tu pivot, art quay TRAI)")]
-        [Tooltip("Mom luc phun lua (breath-4) — do tu art: (-2,48; 1,8).")]
-        public Vector2 mouth = new Vector2(-2.48f, 1.8f);
+        [Tooltip("Mom breath-v4 frame 4, PPU100 x scale2, ground377.")]
+        public Vector2 mouth = new Vector2(-2.68f, 2.22f);
         [Tooltip("Mom luc can (attack-3) — vet vuot hien o day.")]
-        public Vector2 bite = new Vector2(-2.28f, 1.46f);
+        public Vector2 bite = new Vector2(-2.74f, 1.98f);
     }
 }

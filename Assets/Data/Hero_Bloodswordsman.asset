@@ -99,11 +99,11 @@ MonoBehaviour:
   secondMinorText: 'Blood Riposte: below 40% health, blocks 50% of the first direct
     hit within 1.5s then ripostes for 2x, healing 8% health. Cooldown 8s.'
   thirdMinorText: 
-  ultimateIcon: {fileID: 0}
-  minorIcon: {fileID: 0}
-  passiveIcon: {fileID: 0}
-  secondMinorIcon: {fileID: 0}
+  ultimateIcon: {fileID: 21300000, guid: 9941f4d062fb9da41bd8fcafb30ede07, type: 3}
+  minorIcon: {fileID: 21300000, guid: eadb01bdbb23a4047913cf23bfa5eb5a, type: 3}
+  passiveIcon: {fileID: 21300000, guid: c6d9ea4e895e4174dad26c6b7c32f5c9, type: 3}
+  secondMinorIcon: {fileID: 21300000, guid: 2f5af6ff164049b46b1fff4260f1ff69, type: 3}
   thirdMinorIcon: {fileID: 0}
   animations: {fileID: 11400000, guid: 3203b2eb6199b1042baac22f0deb996e, type: 2}
   artFacesRight: 0
-  avatar: {fileID: 21300000, guid: 7977f99d69374e6418bac1e2dcc3b603, type: 3}
+  avatar: {fileID: 21300000, guid: dff189591ef896640be770a4b98b6f77, type: 3}

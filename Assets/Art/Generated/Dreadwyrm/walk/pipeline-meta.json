@@ -1,0 +1,65 @@
+{
+  "target": "creature",
+  "mode": "walk",
+  "cell_size": 384,
+  "align": "feet",
+  "frames": [
+    {
+      "frame": "walk-1",
+      "aligned_bbox": [
+        51,
+        121,
+        334,
+        332
+      ]
+    },
+    {
+      "frame": "walk-2",
+      "aligned_bbox": [
+        53,
+        122,
+        334,
+        332
+      ]
+    },
+    {
+      "frame": "walk-3",
+      "aligned_bbox": [
+        53,
+        122,
+        334,
+        332
+      ]
+    },
+    {
+      "frame": "walk-4",
+      "aligned_bbox": [
+        54,
+        122,
+        335,
+        332
+      ]
+    },
+    {
+      "frame": "walk-5",
+      "aligned_bbox": [
+        54,
+        121,
+        335,
+        332
+      ]
+    },
+    {
+      "frame": "walk-6",
+      "aligned_bbox": [
+        54,
+        120,
+        335,
+        332
+      ]
+    }
+  ],
+  "source": "tempart\\Dreadwyrm\\walk-v5\\proc",
+  "status": "approved; applied 2026-10-20",
+  "ground_row": 331
+}

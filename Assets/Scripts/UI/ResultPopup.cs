@@ -47,11 +47,42 @@ namespace BuildBuild.UI
         [SerializeField] Button statsButton;
         [SerializeField] ContributionPanel contributionPanel;
 
+        /// <summary>Le an toan tren/duoi vung chu goi y va le hai ben cua bang.</summary>
+        const float HintMargin = 12f;
+        /// <summary>
+        /// Tran chieu cao cua bang: bang moc mep TREN o +210 (tam man 1080) va chi no xuong duoi, nen 680 van con
+        /// ~70 px tu mep duoi bang toi mep man — hang nut 76 px cuoi cung van nam gon trong man.
+        /// </summary>
+        const float MaxPanelHeight = 680f;
+
+        RectTransform _panel;
+        float _panelBaseHeight;
+        float _panelBaseY;
+        Vector2 _hintBaseSize;
+        /// <summary>Mep duoi o thuong, toa do tinh tu tam panel (o thuong neo Center).</summary>
+        float _rewardBottom;
+        /// <summary>Mep tren cua hang nut, tinh tu mep duoi panel (nut neo Bottom).</summary>
+        float _buttonTop;
+
         /// <summary>Nguoi choi bam dong bang (khong tinh `Hide` tu code luc bat dau wave).</summary>
         public event System.Action Closed;
 
         void Awake()
         {
+            // Bo cuc doc tu chinh scene (SceneBuilder.BuildResultPopup) chu khong chep so: bang doi kich thuoc
+            // thi cac moc nay tu theo.
+            _panel = hintText.rectTransform.parent as RectTransform;
+            if (_panel != null)
+            {
+                _panelBaseHeight = _panel.sizeDelta.y;
+                _panelBaseY = _panel.anchoredPosition.y;
+            }
+            _hintBaseSize = hintText.rectTransform.sizeDelta;
+            var reward = (RectTransform)rewardRow.transform;
+            _rewardBottom = reward.anchoredPosition.y - reward.sizeDelta.y * reward.pivot.y;
+            var button = (RectTransform)closeButton.transform;
+            _buttonTop = button.anchoredPosition.y + button.sizeDelta.y;
+
             closeButton.onClick.AddListener(() =>
             {
                 Hide();
@@ -82,6 +113,7 @@ namespace BuildBuild.UI
             rewardRow.SetActive(gold > 0);
             goldText.text = "+" + gold.ToString("N0");
             hintText.text = hint;
+            LayoutHint();
             if (rays != null) rays.SetActive(victory);
             if (sparkle != null) sparkle.SetActive(victory);
             dim.SetActive(true);
@@ -102,6 +134,40 @@ namespace BuildBuild.UI
         {
             root.SetActive(false);
             dim.SetActive(false);
+        }
+
+        /// <summary>
+        /// Chu goi y dai (loi ket + ghi chu len cap + moc/ky luc = 3-5 dong) truoc day ve tran ra ngoai bang va
+        /// de len hang nut: `Label` cua SceneBuilder de `horizontalOverflow = Overflow` nen khong tu xuong dong.
+        /// O day cho chu xuong dong trong be rong cua o, do chieu cao that roi keo MEP DUOI bang xuong vua du;
+        /// mep tren giu nguyen nen ruy bang / crest khong nhay.
+        /// </summary>
+        void LayoutHint()
+        {
+            if (_panel == null) return;
+            var rect = hintText.rectTransform;
+            hintText.resizeTextForBestFit = false;
+            hintText.horizontalOverflow = HorizontalWrapMode.Wrap;
+            // Tra o ve be rong cua builder TRUOC khi do: preferredHeight cat dong theo be rong hien tai cua o.
+            rect.sizeDelta = _hintBaseSize;
+
+            float needed = Mathf.Max(_hintBaseSize.y, hintText.preferredHeight);
+            float bandTop = _rewardBottom - HintMargin;
+            float height = Mathf.Clamp(2f * (needed + _buttonTop + HintMargin - bandTop), _panelBaseHeight, MaxPanelHeight);
+            float bandBottom = -height * 0.5f + _buttonTop + HintMargin;
+            float band = bandTop - bandBottom;
+
+            // Dai hon ca bang cao toi da: thu chu lai cho vua vung, khong de tran ra ngoai panel.
+            hintText.resizeTextForBestFit = needed > band;
+            if (hintText.resizeTextForBestFit)
+            {
+                hintText.resizeTextMinSize = 14;
+                hintText.resizeTextMaxSize = hintText.fontSize;
+            }
+            rect.sizeDelta = new Vector2(rect.sizeDelta.x, Mathf.Min(needed, band));
+            rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, (bandTop + bandBottom) * 0.5f);
+            _panel.sizeDelta = new Vector2(_panel.sizeDelta.x, height);
+            _panel.anchoredPosition = new Vector2(_panel.anchoredPosition.x, _panelBaseY - (height - _panelBaseHeight) * 0.5f);
         }
 
         void OpenStats()

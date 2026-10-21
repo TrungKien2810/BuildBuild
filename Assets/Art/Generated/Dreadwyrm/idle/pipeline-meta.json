@@ -1,50 +1,47 @@
 {
   "target": "creature",
   "mode": "idle",
-  "source": "tempart/Dreadwyrm/idle/frames",
   "cell_size": 384,
-  "cell_height": 384,
-  "rows": 2,
-  "cols": 2,
   "align": "feet",
-  "status": "duyet 2026-10-01",
   "frames": [
     {
       "frame": "idle-1",
       "aligned_bbox": [
-        75,
-        57,
-        305,
-        301
+        56,
+        121,
+        330,
+        332
       ]
     },
     {
       "frame": "idle-2",
       "aligned_bbox": [
-        75,
-        93,
-        307,
-        301
+        56,
+        114,
+        331,
+        332
       ]
     },
     {
       "frame": "idle-3",
       "aligned_bbox": [
-        75,
-        140,
-        306,
-        301
+        52,
+        107,
+        330,
+        332
       ]
     },
     {
       "frame": "idle-4",
       "aligned_bbox": [
-        75,
-        78,
-        310,
-        301
+        56,
+        120,
+        332,
+        332
       ]
     }
   ],
-  "ground_row": 300
+  "source": "tempart\\Dreadwyrm\\idle-v4\\proc",
+  "status": "approved; applied 2026-10-20",
+  "ground_row": 331
 }

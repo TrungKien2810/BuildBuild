@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BuildBuild.Meta;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -24,7 +25,35 @@ namespace BuildBuild.Core
         const int Voices = 16;
         const float MinGap = 0.06f;
         const float PitchJitter = 0.06f;
-        const float MusicVolume = 0.4f;
+
+        /// <summary>Am luong nhac (man Cai dat). Truoc day la hang so 0,4 — nay doc/ghi tu save va ap dung ngay.</summary>
+        public static float MusicGain
+        {
+            get => Mathf.Clamp01(SaveSystem.Data.musicVolume);
+            set
+            {
+                SaveSystem.Data.musicVolume = Mathf.Clamp01(value);
+                SaveSystem.Save();
+                ApplyVolume();
+            }
+        }
+
+        /// <summary>Tat tieng hieu ung (nhac van theo `MusicGain`) — man Cai dat.</summary>
+        public static bool Muted
+        {
+            get => SaveSystem.Data.sfxMuted;
+            set
+            {
+                SaveSystem.Data.sfxMuted = value;
+                SaveSystem.Save();
+                ApplyVolume();
+            }
+        }
+
+        static void ApplyVolume()
+        {
+            if (_music != null) _music.volume = MusicGain;
+        }
 
         // Tieng nghe nhieu nhat trong tran thi nho lai de khong at nhac / tieng hiem.
         static readonly Dictionary<string, float> Gain = new Dictionary<string, float>
@@ -53,7 +82,7 @@ namespace BuildBuild.Core
         /// <summary>Tieng ngan trong `SFX/` (hoac `Jingles/`). `id` rong / khong co file thi im.</summary>
         public static void Play(string id)
         {
-            if (string.IsNullOrEmpty(id)) return;
+            if (string.IsNullOrEmpty(id) || Muted) return;
             float now = Time.unscaledTime;
             if (LastPlayed.TryGetValue(id, out float last) && now - last < MinGap) return;
             var clip = Load("SFX/" + id) ?? Load("Jingles/" + id);
@@ -106,7 +135,7 @@ namespace BuildBuild.Core
             _music = root.AddComponent<AudioSource>();
             _music.playOnAwake = false;
             _music.loop = true;
-            _music.volume = MusicVolume;
+            _music.volume = MusicGain;
             root.AddComponent<SfxRunner>();
         }
     }

@@ -1,68 +1,65 @@
 {
   "target": "creature",
   "mode": "gale",
-  "source": "tempart/Dreadwyrm/gale/frames",
   "cell_size": 384,
-  "cell_height": 384,
-  "rows": 2,
-  "cols": 3,
   "align": "feet",
-  "status": "duyet 2026-10-01",
   "frames": [
     {
       "frame": "gale-1",
       "aligned_bbox": [
-        62,
-        72,
-        319,
-        301
+        53,
+        166,
+        331,
+        377
       ]
     },
     {
       "frame": "gale-2",
       "aligned_bbox": [
-        95,
-        64,
-        357,
-        301
+        44,
+        96,
+        365,
+        377
       ]
     },
     {
       "frame": "gale-3",
       "aligned_bbox": [
-        65,
-        70,
-        335,
-        301
+        43,
+        95,
+        352,
+        377
       ]
     },
     {
       "frame": "gale-4",
       "aligned_bbox": [
-        34,
-        100,
-        330,
-        301
+        32,
+        168,
+        366,
+        377
       ]
     },
     {
       "frame": "gale-5",
       "aligned_bbox": [
-        49,
-        129,
-        308,
-        301
+        48,
+        166,
+        359,
+        377
       ]
     },
     {
       "frame": "gale-6",
       "aligned_bbox": [
-        58,
-        75,
-        331,
-        301
+        43,
+        153,
+        342,
+        377
       ]
     }
   ],
-  "ground_row": 300
+  "source": "tempart\\Dreadwyrm\\gale-v4\\proc",
+  "status": "approved; applied 2026-10-20",
+  "ground_row": 376
 }

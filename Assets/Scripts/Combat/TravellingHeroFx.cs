@@ -11,7 +11,10 @@ namespace BuildBuild.Combat
         bool _artFacesRight;
         SpriteRenderer _renderer;
         /// <param name="artFacesRight">Art mac dinh ve bay sang TRAI; art ve bay sang phai (manh kiem thu ve) thi truyen true.</param>
-        public static void Spawn(Vector3 from, Vector3 to, Sprite[] frames, float duration, bool artFacesRight = false)
+        /// <param name="tiltToPath">Art phai NGHIENG theo duong bay (mui ten ban cheo): xoay z theo goc cua `from`-&gt;`to`,
+        /// lat theo dau x nhu `Projectile`. Art la vat the dung yen (vong luan, canh hoa) thi de false.</param>
+        public static void Spawn(Vector3 from, Vector3 to, Sprite[] frames, float duration, bool artFacesRight = false,
+            bool tiltToPath = false)
         {
             if (frames == null || frames.Length == 0) return;
             var go = new GameObject("TravellingHeroFx");
@@ -23,6 +26,13 @@ namespace BuildBuild.Combat
             fx._from = from; fx._to = to; fx._duration = duration; fx._started = Time.time;
             go.transform.position = from;
             go.transform.localScale = Vector3.one * Battlefield.UnitScale;
+            if (tiltToPath)
+            {
+                var delta = to - from;
+                bool right = delta.x > 0f;
+                float angle = Mathf.Atan2(delta.y, Mathf.Abs(delta.x)) * Mathf.Rad2Deg;
+                go.transform.rotation = Quaternion.Euler(0f, 0f, right ? angle : -angle);
+            }
             fx._renderer.sprite = frames[0];
         }
         void Update()

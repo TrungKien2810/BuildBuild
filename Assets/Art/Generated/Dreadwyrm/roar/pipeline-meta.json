@@ -1,50 +1,38 @@
 {
   "target": "creature",
   "mode": "roar",
-  "source": "tempart/Dreadwyrm/roar/frames",
   "cell_size": 384,
-  "cell_height": 384,
-  "rows": 2,
-  "cols": 2,
   "align": "feet",
-  "status": "duyet 2026-10-01",
   "frames": [
     {
       "frame": "roar-1",
       "aligned_bbox": [
-        77,
-        60,
-        303,
-        301
+        55,
+        166,
+        331,
+        377
       ]
     },
     {
       "frame": "roar-2",
       "aligned_bbox": [
-        98,
-        64,
-        316,
-        301
+        39,
+        138,
+        347,
+        377
       ]
     },
     {
       "frame": "roar-3",
       "aligned_bbox": [
-        102,
-        73,
-        327,
-        301
-      ]
-    },
-    {
-      "frame": "roar-4",
-      "aligned_bbox": [
-        98,
-        71,
-        316,
-        301
+        32,
+        87,
+        356,
+        377
       ]
     }
   ],
-  "ground_row": 300
+  "source": "tempart\\Dreadwyrm\\roar-v4\\proc",
+  "status": "approved; applied 2026-10-20",
+  "ground_row": 376
 }

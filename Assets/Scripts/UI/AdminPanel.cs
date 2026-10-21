@@ -18,13 +18,11 @@ namespace BuildBuild.UI
         [SerializeField] BattleHud hud;
         [SerializeField] CannonBoard cannons;
 
-        static readonly float[] Speeds = { 0.5f, 1f, 2f, 4f };
-
         bool _open;
         string _waveInput = "1";
         Vector2 _ownedScroll;
 
-        void OnDisable() => Time.timeScale = 1f;   // roi scene luc dang tua nhanh: khong treo sang scene khac
+        void OnDisable() => BuildBuild.Core.GameSpeed.Resume();   // roi scene luc dang tam dung: khong treo sang scene khac
 
         void OnGUI()
         {
@@ -78,6 +76,9 @@ namespace BuildBuild.UI
             GUI.enabled = true;
             if (GUILayout.Button($"Reset Conquest Attempts ({ConquestMap.AttacksLeft}/{ConquestMap.AttacksPerDay})"))
                 ConquestMap.DevResetAttacks();
+            // Dev: xoa tien do Hanh trinh (GDD muc 11) de thu lai tu moc 1 ma khong phai doi acc `fresh`.
+            if (GUILayout.Button($"Reset Quests (chapter {QuestLog.Stage})"))
+                QuestLog.DevReset();
 
             if (GUILayout.Button("Spawn 1 NPC Hero (Red Faction)"))
             {
@@ -113,10 +114,13 @@ namespace BuildBuild.UI
                 for (int slot = 0; slot < 4; slot++)
                     Armory.Add((BuildBuild.Data.EquipmentSlot)slot, (BuildBuild.Data.Rarity)Random.Range(0, 4));
 
-            GUILayout.Label($"Game Speed: x{Time.timeScale:0.#}");
+            // Doi toc do qua `GameSpeed` chu khong ghi thang `Time.timeScale`: ghi thang thi nut tua tren HUD
+            // va trang thai that lech nhau (bam F1 x4 roi x1 thi HUD van bao x1, tran van chay x4).
+            GUILayout.Label($"Game Speed: {BuildBuild.Core.GameSpeed.Label}");
             GUILayout.BeginHorizontal();
-            foreach (float speed in Speeds)
-                if (GUILayout.Button($"x{speed:0.#}")) Time.timeScale = speed;
+            if (GUILayout.Button("Cycle")) BuildBuild.Core.GameSpeed.Cycle();
+            if (GUILayout.Button("Pause")) BuildBuild.Core.GameSpeed.Pause();
+            if (GUILayout.Button("Resume")) BuildBuild.Core.GameSpeed.Resume();
             GUILayout.EndHorizontal();
 
             GUILayout.Label("Owned (Remove from Inventory — No Gold/Shard Refund):");
@@ -154,7 +158,7 @@ namespace BuildBuild.UI
         static void SwitchAccount(string account)
         {
             SaveSystem.SwitchAccount(account);
-            Time.timeScale = 1f;
+            BuildBuild.Core.GameSpeed.Resume();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
