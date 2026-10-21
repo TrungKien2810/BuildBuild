@@ -3,8 +3,8 @@ guid: b1e74e45dc9f6d5468e27f400f4b1dd4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5895240819618427197
-    second: idle-1_0
+      213: -4010318281296921611
+    second: walk-5_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: idle-1_0
+      name: walk-5_0
       rect:
         serializedVersion: 2
-        x: 6
-        y: 6
-        width: 115
-        height: 99
+        x: 7
+        y: 5
+        width: 112
+        height: 98
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3cec24975b5ef2ea0800000000000000
-      internalID: -5895240819618427197
+      spriteID: 5fbba0f45cc7858c0800000000000000
+      internalID: -4010318281296921611
       vertices: []
       indices: 
       edges: []
