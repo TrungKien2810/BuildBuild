@@ -22,10 +22,10 @@ namespace BuildBuild.Combat
     ///     Dang Thien Cung: nhp cuoi hop thanh mot mui nang xuyen muc tieu sang MOT dich phia sau.
     ///   - Nhat Boc Lien Hoan (thirdMinorStar): ten no tai muc tieu thanh `bocTines` tia ngan cham toi da `bocTines` dich
     ///     gan do (khong ban lai cung mot nguoi). Dang Thien Cung: mot dich bi tia ha thi them MOT vu no phu.
-    ///   - Xa Nhat (chieu cuoi, mana): khoa huong luc thao tay, giuong cung bao truoc (frame cham cua clip cast +
-    ///     `aimHoldSeconds`) roi ban ten lon
-    ///     xuyen `shotLength`; moi dich tren duong an `shotPower` ATK mot lan, muc tieu da nham an them `sealBonus` ATK
-    ///     moi Nhat An roi xoa het an. Bi ngat trong luc giuong thi khong co sat thuong.
+    ///   - Xa Nhat (chieu cuoi, mana): khoa huong luc thao tay VE PHIA MUC TIEU dang nham (cheo theo hang cua no, khong
+    ///     phai hang hero dang dung), giuong cung bao truoc (frame cham cua clip cast + `aimHoldSeconds`) roi ban ten lon
+    ///     xuyen `shotLength` theo huong do; moi dich tren duong an `shotPower` ATK mot lan, muc tieu da nham an them
+    ///     `sealBonus` ATK moi Nhat An roi xoa het an. Bi ngat trong luc giuong thi khong co sat thuong.
     /// Ghi chu ky thuat: `CastUltimate` KHONG tu `PlayAction` clip chieu cuoi — `Hero.FinishCast` da goi no o frame cham
     /// cua chinh clip `skill` (goi lai la clip tua ve frame 1 — bai hoc Nguoi Soi 2026-10-08). Chieu phu tu hen gio bang
     /// `HitDelay(clip)` va tu `PlayAction` clip cua minh. So CHUA can.
@@ -249,22 +249,46 @@ namespace BuildBuild.Combat
         {
             int seals = Mathf.Clamp(_seals, 0, _kit.sealMax);
             var aimed = _sealed;
-            float facing = _hero.FacesRight ? 1f : -1f;
+            // Huong ban khoa ngay luc thao tay: ve phia MUC TIEU dang nham (cheo theo hang cua no), khong phai hang
+            // hero dang dung — quai khac hang truoc day bi hut du hero dang ban chieu vao no (nguoi dung 2026-10-21).
+            var aim = AimDirection(aimed);
             ClearSeals();
-            StartCoroutine(CastXaNhat(aimed, facing, seals));
+            StartCoroutine(CastXaNhat(aimed, aim, seals));
         }
 
-        IEnumerator CastXaNhat(Unit aimed, float facing, int seals)
+        /// <summary>Huong ban tren mat dat (z = 0): uu tien Nhat An da nham con song, khong co thi muc tieu dang danh.</summary>
+        Vector3 AimDirection(Unit aimed)
+        {
+            var target = aimed != null && !aimed.IsDying ? aimed : _hero.AttackTargetInRange();
+            if (target != null && !target.IsDying)
+            {
+                var delta = target.transform.position - _hero.transform.position;
+                delta.z = 0f;
+                if (delta.sqrMagnitude > 0.0001f) return delta.normalized;
+            }
+            return new Vector3(_hero.FacesRight ? 1f : -1f, 0f, 0f);
+        }
+
+        /// <summary>Goc nghieng cho art ve NGANG khi ban cheo: lat theo dau x nhu `Projectile` (art mac dinh quay trai).</summary>
+        static float TiltOf(Vector3 aim) =>
+            Mathf.Atan2(aim.y, Mathf.Abs(aim.x)) * Mathf.Rad2Deg * (aim.x >= 0f ? 1f : -1f);
+
+        IEnumerator CastXaNhat(Unit aimed, Vector3 aim, int seals)
         {
             var origin = _hero.transform.position;
             var aimArt = _kit.aim;
             var aimLoop = Head(aimArt, aimArt.Length - 2);          // 4 frame bao truoc (art-contract: telegraph 1-4)
             var aimFade = Tail(aimArt, aimArt.Length - 2);
-            // Vach ngam: art tam o, mui chi TRAI -> dat nua vach ve phia ban, lat theo huong.
-            var aimAt = origin + new Vector3(facing * AimHalfLength, 0f, 0f);
+            // Vach ngam: art tam o, mui chi TRAI -> dat nua vach ve phia ban, lat + xoay theo huong ban cheo.
+            float tilt = TiltOf(aim);
+            var aimAt = origin + aim * AimHalfLength;
             var aimFx = OneShotFx.SpawnLoop(null, aimAt, aimLoop, _kit.aimHoldSeconds, SortOrder.GroundDecal + 1,
                 scale: Battlefield.UnitScale);
-            if (aimFx != null) aimFx.GetComponent<SpriteRenderer>().flipX = _hero.FacesRight;
+            if (aimFx != null)
+            {
+                aimFx.GetComponent<SpriteRenderer>().flipX = aim.x >= 0f;
+                aimFx.transform.rotation = Quaternion.Euler(0f, 0f, tilt);
+            }
             ShowSkyBow(_kit.aimHoldSeconds);
 
             float until = Time.time + _kit.aimHoldSeconds;
@@ -273,14 +297,14 @@ namespace BuildBuild.Combat
                 if (_hero.IsDying || _hero.IsStunned || _hero.IsDisarmed) yield break;   // ngat: khong co sat thuong
                 yield return null;
             }
-            OneShotFx.Spawn(aimAt, aimFade, _hero.FacesRight, SortOrder.GroundDecal + 1, Battlefield.UnitScale);
+            OneShotFx.Spawn(aimAt, aimFade, aim.x >= 0f, SortOrder.GroundDecal + 1, Battlefield.UnitScale, degrees: tilt);
 
             // Mat muc tieu van ban theo huong da khoa, nhung bonus Nhat An chi danh cho dich da nham.
             var from = _hero.transform.position;
-            var to = from + new Vector3(facing * _kit.shotLength, 0f, 0f);
-            // Hitline do o chan; mui ten bay o tam cao tay cung (= MuzzleOffset.y cua ten thuong).
+            var to = from + aim * _kit.shotLength;
+            // Hitline do o chan; mui ten bay o tam cao tay cung (= MuzzleOffset.y cua ten thuong), nghieng theo duong bay.
             var flight = new Vector3(0f, ShotFlightHeight, 0f);
-            TravellingHeroFx.Spawn(from + flight, to + flight, _kit.sunArrow, ShotFlightSeconds);
+            TravellingHeroFx.Spawn(from + flight, to + flight, _kit.sunArrow, ShotFlightSeconds, tiltToPath: true);
             yield return new WaitForSeconds(ShotFlightSeconds);
             if (_hero.IsDying) yield break;
 

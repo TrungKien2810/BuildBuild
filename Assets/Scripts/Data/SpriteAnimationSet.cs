@@ -15,6 +15,8 @@ namespace BuildBuild.Data
         public bool loop = true;
         [Tooltip("Frame (tinh tu 1) vu khi cham / dan roi tay — sat thuong va dan ra dung frame nay. 0 = cuoi clip.")]
         public int hitFrame;
+        [Tooltip("Seconds per frame for an approved clip with its own timing. 0 uses the set FPS.")]
+        public float frameSeconds;
 
         public bool IsValid => frames != null && frames.Length > 0;
     }

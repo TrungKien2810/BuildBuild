@@ -100,10 +100,10 @@ namespace BuildBuild.Core
         void Update()
         {
             if (_clip == null || _finished || Paused || set == null) return;
-            if (set.framesPerSecond <= 0f) return;
+            if (_clip.frameSeconds <= 0f && set.framesPerSecond <= 0f) return;
 
             _timer += Time.deltaTime * Speed;
-            float frameDuration = 1f / set.framesPerSecond;
+            float frameDuration = _clip.frameSeconds > 0f ? _clip.frameSeconds : 1f / set.framesPerSecond;
             while (_timer >= frameDuration)
             {
                 _timer -= frameDuration;

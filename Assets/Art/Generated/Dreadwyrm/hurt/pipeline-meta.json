@@ -1,50 +1,47 @@
 {
   "target": "creature",
   "mode": "hurt",
-  "source": "tempart/Dreadwyrm/hurt/frames",
   "cell_size": 384,
-  "cell_height": 384,
-  "rows": 2,
-  "cols": 2,
   "align": "feet",
-  "status": "duyet 2026-10-01",
   "frames": [
     {
       "frame": "hurt-1",
       "aligned_bbox": [
-        75,
-        63,
-        307,
-        301
+        53,
+        172,
+        334,
+        383
       ]
     },
     {
       "frame": "hurt-2",
       "aligned_bbox": [
-        98,
-        55,
-        308,
-        301
+        65,
+        189,
+        322,
+        383
       ]
     },
     {
       "frame": "hurt-3",
       "aligned_bbox": [
-        92,
-        65,
-        308,
-        301
+        56,
+        185,
+        319,
+        383
       ]
     },
     {
       "frame": "hurt-4",
       "aligned_bbox": [
-        76,
-        63,
-        307,
-        301
+        52,
+        171,
+        333,
+        383
       ]
     }
   ],
-  "ground_row": 300
+  "source": "tempart\\Dreadwyrm\\hurt-v4\\proc",
+  "status": "approved; applied 2026-10-20",
+  "ground_row": 382
 }

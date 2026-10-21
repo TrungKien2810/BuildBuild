@@ -91,7 +91,17 @@ namespace BuildBuild.UI
 
         void Roll(int count, int cost)
         {
-            if (_revealing || !economy.TrySpend(cost)) return;
+            if (_revealing) return;
+
+            // Luot quay mien phi (tang moi 5 cap nguoi choi) chi dung cho quay 1 — quay 10 van tru vang day du
+            // de khong bien mot ve thanh muoi con.
+            bool free = count == 1 && PlayerLevel.FreeRolls > 0;
+            if (free)
+            {
+                SaveSystem.Data.freeRolls--;
+                SaveSystem.Save();
+            }
+            else if (!economy.TrySpend(cost)) return;
 
             Sfx.Play("gacha-roll");
             foreach (var card in _shown) Destroy(card.gameObject);
@@ -167,10 +177,14 @@ namespace BuildBuild.UI
             goldText.text = economy.Gold.ToString("N0");
             // +1: luot duoc dam bao cung tinh — bo dem 30 nghia la luot KE TIEP chac chan SR.
             pityText.text = $"Guaranteed SR within {config.softPity + 1 - save.rollsSinceSR} rolls  ·  SSR within {config.hardPity + 1 - save.rollsSinceSSR} rolls";
+            // Luot mien phi (moi 5 cap nguoi choi) hien ngay tren tieu de + nut quay 1, khong an trong tooltip.
+            int free = PlayerLevel.FreeRolls;
+            titleText.text = $"Summon · {Banners[_banner].name}" + (free > 0 ? $"  ·  {free} free" : "");
             // Nut xam khong du ro: ghi thang "thieu vang" de khong tuong la game do.
-            rollOneButton.interactable = !_revealing && economy.Gold >= config.singleCost;
+            rollOneButton.interactable = !_revealing && (free > 0 || economy.Gold >= config.singleCost);
             rollTenButton.interactable = !_revealing && economy.Gold >= config.tenCost;
-            rollOneLabel.text = $"Roll 1\n{config.singleCost:N0} Gold{(_revealing || rollOneButton.interactable ? "" : " · missing")}";
+            rollOneLabel.text = free > 0 ? $"Roll 1\nFREE ×{free}"
+                : $"Roll 1\n{config.singleCost:N0} Gold{(_revealing || rollOneButton.interactable ? "" : " · missing")}";
             rollTenLabel.text = $"Roll 10\n{config.tenCost:N0} Gold{(_revealing || rollTenButton.interactable ? "" : " · missing")}";
         }
     }

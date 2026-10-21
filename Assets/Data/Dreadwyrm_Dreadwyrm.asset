@@ -30,6 +30,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 34f04e6305837394fb0f8eec00691dfc, type: 3}
   burnDuration: 4
   burnDamagePerSecond: 15
+  burnLingerSeconds: 2
   scorchSeconds: 1
   burnPatches: 3
   burnRadius: 0.8
@@ -79,6 +80,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: e305a19d10708484da1432f659a069dc, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0.18
   galeBody:
     name: gale
     frames:
@@ -90,14 +92,15 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 5465e084f00a3544fb2fcc17683700fe, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0.18
   roarBody:
     name: roar
     frames:
     - {fileID: 21300000, guid: fc5998660b282464fa509226bdbc819c, type: 3}
     - {fileID: 21300000, guid: f9ddcee13f8d03c40a7990411a198253, type: 3}
     - {fileID: 21300000, guid: bf9f008edf01c86449cc88c561b60509, type: 3}
-    - {fileID: 21300000, guid: 4e92406067ba73042ac34846a1b73497, type: 3}
     loop: 0
     hitFrame: 3
-  mouth: {x: -2.48, y: 1.8}
-  bite: {x: -2.28, y: 1.46}
+    frameSeconds: 0.18
+  mouth: {x: -2.68, y: 2.22}
+  bite: {x: -2.74, y: 1.98}

@@ -23,6 +23,8 @@ namespace BuildBuild.Core
     public class Castle : Unit
     {
         [SerializeField] SpriteRenderer body;
+        [SerializeField] SpriteRenderer[] pedestals;
+        [SerializeField] float pedestalDrop;
 
         [Header("Sprite theo muc mau")]
         [SerializeField] Sprite intact;
@@ -115,6 +117,14 @@ namespace BuildBuild.Core
                 body.transform.localPosition = tier.bodyPosition;
                 body.transform.localScale = Vector3.one * tier.bodyScale;
             }
+            // Mat be va chan phao cung lay tu tier.mounts; khong giu nam be tinh khi cap chi co ba/bon phao.
+            if (pedestals != null)
+                for (int i = 0; i < pedestals.Length; i++)
+                {
+                    bool active = i < tier.mounts.Length;
+                    if (active) pedestals[i].transform.localPosition = tier.mounts[i] + Vector3.down * pedestalDrop;
+                    pedestals[i].gameObject.SetActive(active);
+                }
             _health.ResetTo(tier.maxHealth);
             RefreshSprite();
             RefreshBaseShadow();

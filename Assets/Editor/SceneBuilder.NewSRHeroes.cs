@@ -75,7 +75,7 @@ namespace BuildBuild.Editor
             gourd.suction = NF("GourdTaoist", "skill-suction-fx", "suction");
             gourd.shield = NF("GourdTaoist", "skill-cleanse-shield-fx", "cleanse-shield");
             gourd.compressedBolt = NF("GourdTaoist", "skill-compressed-bolt-fx", "compressed-bolt");
-            gourd.compressedBlast = NF("GourdTaoist", "skill-compressed-bolt-fx", "compressed-bolt");
+            gourd.compressedBlast = NF("GourdTaoist", "skill-poison-impact-fx", "poison-impact");
             gourd.cone = NF("GourdTaoist", "skill-ultimate-cone-fx", "ultimate-cone");
             EditorUtility.SetDirty(gourd);
             NewHero("GourdTaoist", "gourdtaoist", "Dao Si Ho Lo", Rarity.SR, SkillKind.GourdUnleash,

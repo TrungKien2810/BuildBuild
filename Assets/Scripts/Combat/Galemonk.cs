@@ -9,8 +9,8 @@ namespace BuildBuild.Combat
     /// Bo chieu Vo Tang Gio (GAME_DESIGN.md muc 3, `GalemonkDefinition`), gan vao `Hero` khi `HeroDefinition.galemonk` co:
     ///   - Chuong Phong (don thuong): dan gio tu long ban tay toi quai, day lui `boltPush`.
     ///   - Thuan Phong (passiveStar): quai bi gio day/hut cham 20% trong 2s (ca boss).
-    ///   - Phong Tao (minorStar): cooldown an, day chuong (dung lai clip attack) — buc tuong gio chay doc lane, xuyen ca hang,
-    ///     day lui `wavePush`.
+    ///   - Phong Tao (minorStar): cooldown an, day chuong (dung lai clip attack) — buc tuong gio bay ve phia muc tieu dang
+    ///     danh (cheo theo hang cua no), moi quai tren duong an mot lan + day lui `wavePush`.
     ///   - Long Quyen (chieu xin, mana): loc xoay o cum quai dong nhat, hut quai trong `skillRadius` ve tam, giu
     ///     `skillDuration` giay, sat thuong moi giay.
     /// Tinh anh bi hut nhung KHONG bi day; boss khong bi day/hut, chi an cham. Day lui di qua `Unit.PullTo` nen quai dang bi
@@ -44,11 +44,11 @@ namespace BuildBuild.Combat
             if (_waveAt > 0f && Time.time >= _waveAt)
             {
                 _waveAt = -1f;
-                StartCoroutine(Wave(_hero.FacesRight ? 1f : -1f));
+                StartCoroutine(Wave());
             }
             if (!_hero.MinorUnlocked) return;
             _waveCooldown -= Time.deltaTime;
-            if (_waveCooldown > 0f || _waveAt > 0f || !EnemyAhead()) return;
+            if (_waveCooldown > 0f || _waveAt > 0f || _hero.AttackTargetInRange() == null) return;
             var clip = _hero.Definition.animations != null ? _hero.Definition.animations.attack : null;
             if (!_hero.PlayAction(clip)) return;   // dang ban clip khac: thu lai frame sau
             _waveCooldown = _definition.waveCooldown;
@@ -94,32 +94,33 @@ namespace BuildBuild.Combat
 
         // ---------------------------------------------------------------- Phong Tao
 
-        bool EnemyAhead()
+        /// <summary>
+        /// Buc tuong gio bay ve phia MUC TIEU dang danh (cheo theo hang cua no), khong con la hang hero dang dung:
+        /// ban truoc quai khac hang khong bao gio bi trung, te hon la song KHONG BAN khi chi co quai khac hang
+        /// (nguoi dung 2026-10-21). Moi quai tren duong an mot lan.
+        /// </summary>
+        IEnumerator Wave()
         {
-            float side = _hero.FacesRight ? 1f : -1f;
-            foreach (var enemy in Unit.Hostiles(_hero.Side))
+            var direction = new Vector3(_hero.FacesRight ? 1f : -1f, 0f, 0f);
+            var target = _hero.AttackTargetInRange();
+            if (target != null && !target.IsDying)
             {
-                if (enemy == null || enemy.IsDying || enemy.FliesHigh) continue;
-                var d = enemy.transform.position - transform.position;
-                if (d.x * side > 0f && d.x * side <= _definition.waveDistance &&
-                    Mathf.Abs(d.y) <= _definition.waveHalfDepth) return true;
+                var delta = target.transform.position - transform.position;
+                delta.z = 0f;
+                if (delta.sqrMagnitude > 0.0001f) direction = delta.normalized;
             }
-            return false;
-        }
-
-        /// <summary>Buc tuong gio chay thang theo <paramref name="side"/>; moi quai tren duong an mot lan.</summary>
-        IEnumerator Wave(float side)
-        {
             var renderer = Sprite("GaleWave", _definition.waveFrames, transform.position);
             if (renderer == null) yield break;
-            renderer.flipX = side > 0f;
+            // Art ve bay sang TRAI: lat + xoay theo huong bay (cheo thi nghien theo goc).
+            renderer.flipX = direction.x >= 0f;
+            renderer.transform.rotation = Quaternion.Euler(0f, 0f, Tilt(direction));
             var hit = new System.Collections.Generic.HashSet<Unit>();
             float damage = _hero.AttackDamage * _definition.wavePower;
             float travelled = 0f, t = 0f;
             while (travelled < _definition.waveDistance && _hero != null)
             {
                 float move = _definition.waveSpeed * Time.deltaTime;
-                renderer.transform.position += new Vector3(side * move, 0f, 0f);
+                renderer.transform.position += direction * move;
                 renderer.sortingOrder = SortOrder.ForUnit(renderer.transform);
                 travelled += move;
                 Animate(renderer, _definition.waveFrames, t += Time.deltaTime);
@@ -128,16 +129,23 @@ namespace BuildBuild.Combat
                 {
                     if (enemy == null || enemy.IsDying || enemy.FliesHigh || hit.Contains(enemy)) continue;
                     var d = enemy.transform.position - at;
-                    if (Mathf.Abs(d.x) > enemy.BodyRadius + 0.2f || Mathf.Abs(d.y) > _definition.waveHalfDepth) continue;
+                    // Do trong he truc cua song: doc duong bay = be day buc tuong, ngang duong bay = chieu rong.
+                    float along = Mathf.Abs(d.x * direction.x + d.y * direction.y);
+                    float across = Mathf.Abs(d.x * direction.y - d.y * direction.x);
+                    if (along > enemy.BodyRadius + 0.2f || across > _definition.waveHalfDepth) continue;
                     hit.Add(enemy);
                     OneShotFx.Spawn(enemy.BodyCenter, _definition.hitFrames, false, SortOrder.Air, Battlefield.UnitScale);
-                    if (!enemy.IsElite) Push(enemy, side, _definition.wavePush);
+                    if (!enemy.IsElite) Push(enemy, direction.x >= 0f ? 1f : -1f, _definition.wavePush);
                     enemy.Health.TakeDamage(damage, _hero.Health);
                 }
                 yield return null;
             }
             Destroy(renderer.gameObject);
         }
+
+        /// <summary>Goc nghieng cua art ve NGANG khi bay cheo: lat theo dau x nhu `Projectile` (art mac dinh quay trai).</summary>
+        static float Tilt(Vector3 direction) =>
+            Mathf.Atan2(direction.y, Mathf.Abs(direction.x)) * Mathf.Rad2Deg * (direction.x >= 0f ? 1f : -1f);
 
         // ---------------------------------------------------------------- Long Quyen
 

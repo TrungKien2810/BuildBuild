@@ -47,7 +47,19 @@ namespace BuildBuild.Core
         }
         /// <summary>Ban tinh cua `IsFighting` cho unit khong giu tham chieu (Hero chi hoi mana khi dang danh).</summary>
         public static bool Fighting { get; private set; }
-        public bool IsFighting { get => Fighting; private set => Fighting = value; }
+        /// <summary>
+        /// Doi co nay la doi ca `GameSpeed`: ngoai tran animation phai chay 1x, chi trong tran moi ap muc tua
+        /// nguoi choi da chon (x2/x3). Moi cho bat/tat tran deu di qua day nen khong the lech.
+        /// </summary>
+        public bool IsFighting
+        {
+            get => Fighting;
+            private set
+            {
+                Fighting = value;
+                GameSpeed.SetBattle(value);
+            }
+        }
 
         /// <summary>
         /// Dang o tran Chinh Phat (chuan bi hoac dang danh) chu khong phai wave: cac bang nghe `WaveStarted` doc co nay de
@@ -57,8 +69,21 @@ namespace BuildBuild.Core
 
         /// <summary>Tran vua ket thuc (WaveCleared/Defeated) la Chinh Phat — BattleHud doc de viet loi ket.</summary>
         public bool LastWasConquest { get; private set; }
+        /// <summary>Dang o Boss Rush: 3 boss lien tiep tren CUNG mot thanh mau, thanh khong duoc sua giua cac hiep.</summary>
+        public static bool InBossRush { get; private set; }
+        /// <summary>Tran vua ket thuc la Boss Rush — BattleHud doi loi ket (khong hien "Wave N Complete").</summary>
+        public bool LastWasBossRush { get; private set; }
+        /// <summary>Dang o thu thach ngay (`Meta/DailyChallenge`) — mot wave duy nhat, khong doi `NextWave`.</summary>
+        public static bool InDaily { get; private set; }
+        /// <summary>Tran vua ket thuc la thu thach ngay.</summary>
+        public bool LastWasDaily { get; private set; }
+
+        /// <summary>Ba hiep cua Boss Rush — dung lai dung 3 wave boss co san (10/20/30) chu khong de ra quai moi.</summary>
+        static readonly int[] BossRushWaves = { 10, 20, 30 };
         /// <summary>Manh nhan duoc o tran Chinh Phat vua thang (BattleHud viet vao loi ket).</summary>
         public int LastShards { get; private set; }
+        /// <summary>Ghi chu thuong them cua wave vua thang (moc sau wave 30 / ky luc moi) — `BattleHud` in vao bang ket qua.</summary>
+        public string LastBonus { get; private set; }
 
         public event Action<int> WaveStarted;
         /// <summary>Tham so: wave vua thang, vang thuong.</summary>
@@ -75,6 +100,7 @@ namespace BuildBuild.Core
         {
             if (castle != null) castle.Destroyed -= OnCastleDestroyed;
             Fighting = false;   // roi scene giua wave: co tinh khong duoc treo sang lan vao sau
+            GameSpeed.SetBattle(false);
             EndConquest();
         }
 
@@ -95,6 +121,9 @@ namespace BuildBuild.Core
             ClearAlive();
             IsFighting = true;
             LastWasConquest = false;
+            LastWasBossRush = false;
+            LastWasDaily = false;
+            LastBonus = null;
             _loop = StartCoroutine(RunWave(NextWave));
         }
 
@@ -127,6 +156,7 @@ namespace BuildBuild.Core
             ClearAlive();
             IsFighting = true;
             LastWasConquest = true;
+            LastBonus = null;
             Sfx.Play("wave-start");
             WaveStarted?.Invoke(NextWave);
         }
@@ -141,6 +171,7 @@ namespace BuildBuild.Core
             int gold = target != null ? ConquestMap.Gold(target, tuning) : tuning != null ? tuning.WaveGold(NextWave) : 0;
             LastShards = target != null ? ConquestMap.Finish(target, true) : 0;
             if (economy != null) economy.Add(gold);
+            PlayerLevel.AddXp(PlayerLevel.ConquestXp);   // GDD 10.0: thang tran la nguon XP thu hai (khong co XP tu ruong AFK)
             IsFighting = false;
             if (castle != null) castle.Repair();
             EndConquest();
@@ -165,18 +196,116 @@ namespace BuildBuild.Core
             while (IsFighting && _alive.Count > 0) yield return null;
             if (!IsFighting) yield break;
 
+            // Tien do phai vao save TRUOC thuong: `economy.Add` / `PlayerLevel.AddXp` / `Armory.Add` deu tu ghi
+            // file, nen de `NextWave` sau chung thi ban ghi cuoi cung da la wave CU — tat game o man ket qua la
+            // danh lai duoc dung wave vua thang (va nhan lai vang + XP + manh moc).
+            NextWave = wave + 1;
             int gold = tuning.WaveGold(wave);
             if (economy != null) economy.Add(gold);
+            // Moc sau wave 30 + ky luc: ghi TRUOC khi cong XP / ban WaveCleared de bang ket qua doc duoc.
+            bool record = WaveMilestones.Record(wave);
+            string milestone = economy != null ? WaveMilestones.MaybeGrant(wave, economy.Add) : null;
+            LastBonus = milestone ?? (record && wave > WaveMilestones.FromWave ? $"New record: wave {wave}" : null);
+            // XP phai cong TRUOC `WaveCleared`: BattleHud nghe `LeveledUp` de cong vang va ghi ghi chu len
+            // chinh bang ket qua cua wave nay.
+            PlayerLevel.AddXp(PlayerLevel.WaveXp(wave));
             IsFighting = false;
-            NextWave = wave + 1;
             if (castle != null) castle.Repair();   // day mau ngay khi het tran, khong doi den luc bam danh tiep
             WaveCleared?.Invoke(wave, gold);
         }
 
-        IEnumerator SpawnWave(int wave)
+        /// <summary>
+        /// Boss Rush: ba hiep boss lien tiep (dung lai 3 wave boss co san 10/20/30) tren CUNG mot thanh mau —
+        /// khong duoc sua thanh giua cac hiep, khong doi `NextWave` (day la che do phu, khong phai tien trinh chinh).
+        /// Thuong: vang ba wave + bonus, XP ba wave, va mot luot roi trang bi theo luat thang wave 30.
+        /// </summary>
+        public void StartBossRush()
+        {
+            if (IsFighting || InConquest || tuning == null || enemyPrefab == null || spawnPoint == null) return;
+            ClearAlive();
+            IsFighting = true;
+            InBossRush = true;
+            LastWasConquest = false;
+            LastWasBossRush = true;
+            LastWasDaily = false;
+            LastBonus = null;
+            Sfx.Play("wave-start");
+            WaveStarted?.Invoke(NextWave);
+            _loop = StartCoroutine(RunBossRush());
+        }
+
+        /// <summary>
+        /// Thu thach ngay (`Meta/DailyChallenge`): MOT wave dung lai bang quai co san, them bien the nhe
+        /// (hom nay: sat thuong quai x1,35 hoac them quai). Khong doi `NextWave`; thua thi duoc thu lai trong ngay.
+        /// </summary>
+        public void StartDailyChallenge()
+        {
+            if (IsFighting || InConquest || tuning == null || enemyPrefab == null || spawnPoint == null) return;
+            if (DailyChallenge.Cleared) return;
+            ClearAlive();
+            IsFighting = true;
+            InDaily = true;
+            LastWasConquest = false;
+            LastWasDaily = true;
+            LastWasBossRush = false;
+            LastBonus = null;
+            Sfx.Play("wave-start");
+            WaveStarted?.Invoke(NextWave);
+            _loop = StartCoroutine(RunDaily());
+        }
+
+        IEnumerator RunDaily()
+        {
+            int wave = DailyChallenge.Wave;
+            yield return SpawnWave(wave, DailyChallenge.DamageScale, DailyChallenge.ExtraEnemies);
+            while (IsFighting && _alive.Count > 0) yield return null;
+            if (!IsFighting) yield break;
+
+            IsFighting = false;
+            InDaily = false;
+            LastBonus = economy != null ? DailyChallenge.Grant(economy.Add) : null;
+            PlayerLevel.AddXp(PlayerLevel.WaveXp(wave));
+            if (castle != null) castle.Repair();
+            WaveCleared?.Invoke(NextWave, DailyChallenge.GoldReward);
+        }
+
+        IEnumerator RunBossRush()
+        {
+            int gold = 0;
+            int xp = 0;
+            int rounds = 0;
+            foreach (int wave in BossRushWaves)
+            {
+                if (!IsFighting) yield break;
+                yield return SpawnWave(wave);
+                while (IsFighting && _alive.Count > 0) yield return null;
+                if (!IsFighting) yield break;
+                rounds++;
+                SaveSystem.Data.bossRushBest = Mathf.Max(SaveSystem.Data.bossRushBest, rounds);
+                SaveSystem.Save();
+                gold += tuning.WaveGold(wave);
+                xp += PlayerLevel.WaveXp(wave);
+            }
+
+            gold += BossRushBonusGold;
+            SaveSystem.Data.bossRushClears++;
+            SaveSystem.Save();
+            IsFighting = false;
+            InBossRush = false;
+            if (economy != null) economy.Add(gold);
+            PlayerLevel.AddXp(xp);
+            if (castle != null) castle.Repair();
+            LastBonus = $"Boss Rush cleared: +{gold} Gold";
+            WaveCleared?.Invoke(NextWave, gold);
+        }
+
+        /// <summary>Thuong them khi pha xong ca ba hiep — bu cho viec khong duoc nghi de nang cap giua chung.</summary>
+        const int BossRushBonusGold = 500;
+
+        IEnumerator SpawnWave(int wave, float damageScale = 1f, int extraEnemies = 0)
         {
             var band = tuning.BandFor(wave);
-            var queue = BuildSpawnQueue(wave, band);
+            var queue = BuildSpawnQueue(wave, band, damageScale, extraEnemies);
             if (queue.Count == 0)
             {
                 Debug.LogWarning($"[WaveManager] Wave {wave} khong co loai quai nao trong bang.");
@@ -203,17 +332,17 @@ namespace BuildBuild.Core
         /// rai deu giua doan, boss ra SAU hai con ho tong dau tien (khong co ho tong thi ra ngay). Boss dung
         /// `WaveTuning.BossMultiplier` thay cho cong thuc len thang theo wave.
         /// </summary>
-        List<SpawnEntry> BuildSpawnQueue(int wave, WaveBand band)
+        List<SpawnEntry> BuildSpawnQueue(int wave, WaveBand band, float damageScale = 1f, int extraEnemies = 0)
         {
             var queue = new List<SpawnEntry>();
             if (band == null) return queue;
 
             float hp = tuning.HealthMultiplier(wave);
-            float dmg = tuning.DamageMultiplier(wave);
+            float dmg = tuning.DamageMultiplier(wave) * damageScale;
 
             if (band.enemies != null && band.enemies.Length > 0)
             {
-                int count = tuning.RegularCount(wave, band);
+                int count = tuning.RegularCount(wave, band) + extraEnemies;
                 for (int i = 0; i < count; i++)
                     queue.Add(new SpawnEntry
                     {
@@ -249,11 +378,30 @@ namespace BuildBuild.Core
         /// <summary>WaveManager cua scene dang chay (boss goi quai them giua wave qua day).</summary>
         public static WaveManager Current { get; private set; }
 
-        void Awake() => Current = this;
+        void Awake()
+        {
+            Current = this;
+            // Static song qua scene (tat Domain Reload): vao lai man Battle thi khong con o che do phu nao nua.
+            InBossRush = false;
+            InDaily = false;
+            PlayerLevel.LeveledUp += PayLevelReward;
+        }
 
         void OnDestroy()
         {
             if (Current == this) Current = null;
+            PlayerLevel.LeveledUp -= PayLevelReward;
+        }
+
+        /// <summary>
+        /// Tra vang khi len cap. Dat o DAY (Core) chu khong o HUD: moi XP trong game deu sinh ra tu lop nay
+        /// (xem 4 cho `PlayerLevel.AddXp`), con "cong vang" la viec cua mien du lieu — de trong `BattleHud` thi
+        /// giao dien dang quyet dinh ket qua tien bac cua mot su kien mien du lieu.
+        /// So vang van do `PlayerLevel.GoldFor` quyet (mot nguon so duy nhat).
+        /// </summary>
+        void PayLevelReward(int level)
+        {
+            if (economy != null) economy.Add(PlayerLevel.GoldFor(level));
         }
 
         /// <summary>
@@ -290,12 +438,25 @@ namespace BuildBuild.Core
         {
             if (!IsFighting) return;
             IsFighting = false;
+            InBossRush = false;
+            InDaily = false;
             if (_loop != null) StopCoroutine(_loop);
             ClearAlive();
             if (castle != null) castle.Repair();   // day mau ngay khi het tran, khong doi den luc bam danh tiep
             if (InConquest && ConquestMatch.Current?.Target != null) ConquestMap.Finish(ConquestMatch.Current.Target, false);
             EndConquest();
             Defeated?.Invoke(NextWave);
+        }
+
+        /// <summary>
+        /// Nguoi choi bam "Surrender" trong bang tam dung: thua wave dang danh. Dung lai y nguyen duong
+        /// "thanh bi pha" — mat mau thanh trong tran, het tran thi thanh day lai, vang/do/level van giu
+        /// (GDD muc 1: thua khong xoa gi).
+        /// </summary>
+        public void Surrender()
+        {
+            if (!IsFighting) return;
+            OnCastleDestroyed();
         }
 
         /// <summary>Admin panel: nhay toi wave bat ky — chi giua hai wave.</summary>

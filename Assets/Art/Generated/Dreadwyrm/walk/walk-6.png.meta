@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9fc42b1bd896d944fba605d9318c607e
+guid: 6db8efe393b425a449bf40e6a26de826
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5955537895503684845
-    second: death-6_0
+      213: -4920198752145209539
+    second: walk-6_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -50,7 +50,7 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 9
-  spritePivot: {x: 0.5, y: 0.21614583}
+  spritePivot: {x: 0.5, y: 0.13541667}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: death-6_0
+      name: walk-6_0
       rect:
         serializedVersion: 2
-        x: 68
-        y: 82
-        width: 272
-        height: 102
+        x: 53
+        y: 47
+        width: 283
+        height: 218
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: de4efd3892256a250800000000000000
-      internalID: 5955537895503684845
+      spriteID: d378012ad41f7bbb0800000000000000
+      internalID: -4920198752145209539
       vertices: []
       indices: 
       edges: []

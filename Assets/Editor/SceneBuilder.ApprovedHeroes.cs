@@ -105,8 +105,13 @@ namespace BuildBuild.Editor
             var anim = AnimSet(id, id + "/", ("attack", "attack"), (cast, cast), hit: 4, skillHit: 2);
             anim.framesPerSecond = 1000f / 140f;
             EditorUtility.SetDirty(anim);
+            // Chan dung 128x128 trong `UI/avatars/` la anh chinh thuc; identity chi la anh TAM khi chua ve
+            // (Bloodswordsman/Soulbinder 2026-10-15: co `avatar-<unitId>.png` ma van hien identity vi dong
+            // duoi day ghim thang identity moi lan build).
             var hero = NamedHero(HeroDef(id, null, anim, stats, kind, d => d.manaMax = 6f), name);
-            hero.avatar = LoadSprite(ArtRoot + id + "/identity/identity-1.png");
+            if (hero.avatar == null || IsIdentityPlaceholder(hero.avatar))
+                hero.avatar = LoadSprite($"{UiDir}avatars/avatar-{unitId}.png")
+                    ?? LoadSprite(ArtRoot + id + "/identity/identity-1.png");
             EditorUtility.SetDirty(hero);
             var unit = Unit(unitId, name, UnitCategory.Hero, Rarity.SR, "");
             unit.icon = hero.avatar;

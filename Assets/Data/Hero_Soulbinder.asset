@@ -99,11 +99,11 @@ MonoBehaviour:
   secondMinorText: 'Soul Yank: stuns the linked enemies, each soul dealing 1.5x to
     the root; the total damage spreads exactly once. Cooldown 10s.'
   thirdMinorText: 
-  ultimateIcon: {fileID: 0}
-  minorIcon: {fileID: 0}
-  passiveIcon: {fileID: 0}
-  secondMinorIcon: {fileID: 0}
+  ultimateIcon: {fileID: 21300000, guid: f45ba427c2b66c444be5b9059891d4a0, type: 3}
+  minorIcon: {fileID: 21300000, guid: 9cf28185ae87ab349a29c8f8925dbb0f, type: 3}
+  passiveIcon: {fileID: 21300000, guid: 3d4a43d51b2dc1d41a9bf049a41bd52a, type: 3}
+  secondMinorIcon: {fileID: 21300000, guid: 49c9ecc56bb65a745b271c800c5f44fb, type: 3}
   thirdMinorIcon: {fileID: 0}
   animations: {fileID: 11400000, guid: 5afb723703d95c240a46784f626bbe24, type: 2}
   artFacesRight: 0
-  avatar: {fileID: 21300000, guid: 2633654b5a97f2c419f45f1deebe79d0, type: 3}
+  avatar: {fileID: 21300000, guid: de23e02c69f511244bcfdd9b8f99c5e4, type: 3}

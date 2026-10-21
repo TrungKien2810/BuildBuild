@@ -41,23 +41,25 @@ namespace BuildBuild.Meta
         }
 
         /// <summary>
-        /// He so cuoi cung tren chi so goc: level + sao + trang bi, CONG voi nhau (khong nhan chong). `equipment` null = bo
-        /// qua trang bi (linh, unit trieu hoi).
+        /// He so cuoi cung tren chi so goc: level + sao + trang bi + bang ky nang, CONG voi nhau (khong nhan chong).
+        /// `equipment` null = bo qua trang bi (linh, unit trieu hoi).
         /// </summary>
         public static void Multipliers(string unitId, EquipmentConfig equipment, out float health, out float damage, out float attackRate)
         {
             float progress = StatMultiplier(unitId);
             Armory.Bonuses(unitId, equipment, out float gearHealth, out float gearDamage, out float gearRate);
-            health = progress + gearHealth;
-            damage = progress + gearDamage;
-            attackRate = 1f + gearRate;
+            // Bang ky nang la % TOAN TAI KHOAN — cong cung cho voi level/sao/trang bi, khong nhan rieng.
+            health = progress + gearHealth + SkillBoard.Bonus(BoardNode.Health);
+            damage = progress + gearDamage + SkillBoard.Bonus(BoardNode.Attack);
+            attackRate = 1f + gearRate + SkillBoard.Bonus(BoardNode.Haste);
         }
 
-        /// <summary>Sat thuong phao: level theo `CannonDefinition`, cong them sao.</summary>
+        /// <summary>Sat thuong phao: level theo `CannonDefinition`, cong them sao va bang ky nang.</summary>
         public static float CannonDamage(CannonDefinition cannon, int level)
         {
             var owned = Owned(cannon.unitId);
-            return cannon.DamageAt(level) + cannon.damage * StarBonus * (owned?.stars ?? 0);
+            float baseDamage = cannon.DamageAt(level) + cannon.damage * StarBonus * (owned?.stars ?? 0);
+            return baseDamage * (1f + SkillBoard.Bonus(BoardNode.Attack));
         }
 
         /// <summary>Gia vang nang hero / linh tu `level` len `level + 1` (GDD muc 7). Phao dung `CannonDefinition.UpgradeCost`.</summary>

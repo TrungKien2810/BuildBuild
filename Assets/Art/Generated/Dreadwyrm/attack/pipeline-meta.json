@@ -1,68 +1,65 @@
 {
   "target": "creature",
   "mode": "attack",
-  "source": "tempart/Dreadwyrm/attack/frames",
   "cell_size": 384,
-  "cell_height": 384,
-  "rows": 2,
-  "cols": 3,
   "align": "feet",
-  "status": "duyet 2026-10-01",
   "frames": [
     {
       "frame": "attack-1",
       "aligned_bbox": [
-        69,
-        72,
-        314,
-        301
+        55,
+        166,
+        332,
+        377
       ]
     },
     {
       "frame": "attack-2",
       "aligned_bbox": [
-        98,
-        71,
-        329,
-        301
+        56,
+        141,
+        341,
+        377
       ]
     },
     {
       "frame": "attack-3",
       "aligned_bbox": [
-        47,
-        103,
-        313,
-        301
+        31,
+        164,
+        363,
+        377
       ]
     },
     {
       "frame": "attack-4",
       "aligned_bbox": [
-        58,
-        103,
-        312,
-        301
+        43,
+        164,
+        364,
+        377
       ]
     },
     {
       "frame": "attack-5",
       "aligned_bbox": [
-        65,
-        73,
-        315,
-        301
+        40,
+        156,
+        340,
+        377
       ]
     },
     {
       "frame": "attack-6",
       "aligned_bbox": [
-        70,
-        71,
-        318,
-        301
+        54,
+        166,
+        332,
+        377
       ]
     }
   ],
-  "ground_row": 300
+  "source": "tempart\\Dreadwyrm\\attack-v4\\proc",
+  "status": "approved; applied 2026-10-20",
+  "ground_row": 376
 }

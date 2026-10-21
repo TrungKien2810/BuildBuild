@@ -333,6 +333,7 @@ namespace BuildBuild.Meta
             if (won)
             {
                 data.streak++;
+                QuestLog.CountConquestWin();   // nhiem vu "Win a Conquest battle"
                 var owned = SaveSystem.Data.owned;
                 for (int i = 0; i < target.shards && owned.Count > 0; i++, shards++)
                     owned[Random.Range(0, owned.Count)].shards++;

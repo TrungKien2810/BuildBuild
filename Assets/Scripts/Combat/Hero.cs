@@ -685,20 +685,44 @@ namespace BuildBuild.Combat
         /// </summary>
         Unit FindAttackTarget()
         {
-            if (!IsRanged) return FindTarget(float.PositiveInfinity);
+            if (!IsRanged) return FindPriorityTarget(float.PositiveInfinity);
             Unit inRange = null, reachable = null;
-            float inRangeSqr = float.PositiveInfinity, reachableSqr = float.PositiveInfinity;
+            float reachableSqr = float.PositiveInfinity;
+            float inRangeScore = float.NegativeInfinity;
             foreach (var enemy in Unit.Hostiles(Side))
             {
                 if (enemy == null || enemy.IsDying || !enemy.TargetableBy(this)) continue;
                 float sqr = (enemy.AimPoint(transform.position) - transform.position).sqrMagnitude;
                 if (InRange(enemy))
                 {
-                    if (sqr < inRangeSqr) { inRangeSqr = sqr; inRange = enemy; }
+                    // Nut "uu tien muc tieu" (GDD 10.1) doi cach CHON trong so da trong tam; mac dinh Nearest
+                    // cho ra dung ket qua cu (diem = -khoang cach, lon hon = gan hon).
+                    float score = Targeting.Score(enemy, sqr);
+                    if (score > inRangeScore) { inRangeScore = score; inRange = enemy; }
                 }
                 else if (sqr < reachableSqr && CanReach(enemy)) { reachableSqr = sqr; reachable = enemy; }
             }
             return inRange != null ? inRange : reachable;
+        }
+
+        /// <summary>
+        /// Chon muc tieu danh thuong cho hero CAN CHIEN theo `Targeting.Current` trong tam `maxRange`
+        /// (truoc day luon la con gan nhat — xem `FindTarget`).
+        /// </summary>
+        Unit FindPriorityTarget(float maxRange)
+        {
+            Unit best = null;
+            float bestSqr = maxRange * maxRange;
+            float bestScore = float.NegativeInfinity;
+            foreach (var enemy in Unit.Hostiles(Side))
+            {
+                if (enemy == null || enemy.IsDying || !enemy.TargetableBy(this)) continue;
+                float sqr = (enemy.AimPoint(transform.position) - transform.position).sqrMagnitude;
+                if (sqr > bestSqr) continue;
+                float score = Targeting.Score(enemy, sqr);
+                if (score > bestScore) { bestScore = score; best = enemy; }
+            }
+            return best;
         }
 
         /// <summary>
@@ -885,21 +909,6 @@ namespace BuildBuild.Combat
             _charging = false;
             // Clip phi giu frame cuoi; ve idle de nhanh danh/duoi ben tren tu chon clip tiep.
             if (animator != null) animator.Play("idle", restart: true);
-        }
-
-        Unit FindTarget(float maxRange)
-        {
-            Unit best = null;
-            float bestSqr = maxRange * maxRange;
-            foreach (var enemy in Unit.Hostiles(Side))
-            {
-                if (enemy == null || enemy.IsDying || !enemy.TargetableBy(this)) continue;
-                float sqr = (enemy.AimPoint(transform.position) - transform.position).sqrMagnitude;
-                if (sqr > bestSqr) continue;
-                bestSqr = sqr;
-                best = enemy;
-            }
-            return best;
         }
 
         /// <summary>

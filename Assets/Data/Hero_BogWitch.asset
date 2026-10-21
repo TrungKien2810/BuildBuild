@@ -103,9 +103,9 @@ MonoBehaviour:
   minorText: 
   secondMinorText: 
   thirdMinorText: 
-  ultimateIcon: {fileID: 0}
+  ultimateIcon: {fileID: 21300000, guid: 36d66bd40a2d5f544ac278143b4846ab, type: 3}
   minorIcon: {fileID: 0}
-  passiveIcon: {fileID: 0}
+  passiveIcon: {fileID: 21300000, guid: a1189a1ff6d733c4199e7e1525f084fe, type: 3}
   secondMinorIcon: {fileID: 0}
   thirdMinorIcon: {fileID: 0}
   animations: {fileID: 11400000, guid: 7862d138c58f4484a95c43212f527bd8, type: 2}

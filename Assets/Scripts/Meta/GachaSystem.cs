@@ -52,6 +52,7 @@ namespace BuildBuild.Meta
                 }
                 results.Add(Grant(unit));
             }
+            QuestLog.CountGacha(results.Count);   // nhiem vu "Summon N times" — quay 10 tinh 10
             SaveSystem.Save();
             return results;
         }
