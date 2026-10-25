@@ -2167,9 +2167,15 @@ namespace BuildBuild.Editor
             // Truoc 2026-10-20 chung nam ngang o x 24..404, de len COT O LINH (x 102..198) va be phao trai (x 295+):
             // nguoi dung bao "town, daily, menu ben trai da che mat cho dat linh". Dai x 16..100 nay nam NGOAI o
             // linh dau tien (102) nen khong che gi bam duoc tren san.
+            // COT TRAI xep mot mach tu tren xuong: thanh mau rao (36..82) -> chan dung + XP (100..160) -> nut Nang rao
+            // (x 24..404, 196..268) -> dai nut nay. Truoc 2026-10-22 dai bat dau o y -196, TRUNG dung dai nut Nang rao
+            // (cung x, rong 380) nen nut Settings ve DE LEN no; nguoi dung bao "nut nang cap thanh bi cac nut daily
+            // de". Nay railY TINH tu rect cua nut Nang rao (`CastleUpgradePos/Size`) chu khong chep so: doi nut do thi
+            // dai nut tu tut theo, khong the lech lai.
             const float railX = 16f;
             const float railStep = 164f;   // 84 nut + 30 khe + 32 o ten + 18 tho
-            const float railY = -196f;
+            const float railGap = 32f;     // khe giua day nut Nang rao va nut Settings
+            float railY = CastleUpgradePos.y - CastleUpgradeSize.y - railGap;
             Text RailPill(Button owner, string caption)
             {
                 var plate = Img("Pill", owner.transform, UiSprite("chrome/currency-pill"), Bottom, new Vector2(0, -30),
@@ -3015,10 +3021,15 @@ namespace BuildBuild.Editor
             return edges.Count > 0 ? edges[edges.Count / 2] : w;
         }
 
+        // Rect cua nut Nang rao: MOT cho. Nut doc cap nay, dai nut sanh ben duoi doc lai de tinh `railY`
+        // (xem `BuildBattleControls`) — dung chep so ra cho khac.
+        static readonly Vector2 CastleUpgradePos = new Vector2(24, -196);
+        static readonly Vector2 CastleUpgradeSize = new Vector2(380, 72);
+
         /// <summary>Nut nang hang rao: goc tren-trai duoi thanh mau (BattleHud an khi dang danh / da toi da).</summary>
         static Button BuildCastleUpgradeButton(RectTransform canvas, out Text label)
         {
-            var button = MakeButton("CastleUpgradeButton", canvas, "", TopLeft, new Vector2(24, -196), new Vector2(380, 72), out label);
+            var button = MakeButton("CastleUpgradeButton", canvas, "", TopLeft, CastleUpgradePos, CastleUpgradeSize, out label);
             button.transition = Selectable.Transition.SpriteSwap;
             var buttonState = button.spriteState;   // giu sprite nhan cua MakeButton
             buttonState.disabledSprite = UiSprite("chrome/btn-disabled");
