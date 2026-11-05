@@ -3,6 +3,8 @@ namespace BuildBuild.Core
     /// <summary>Ten scene phai khop voi file trong Build Settings (do SceneBuilder dang ky).</summary>
     public static class SceneNames
     {
+        /// <summary>Man dang nhap / dang ky — scene DAU TIEN trong Build Settings (xem `SceneBuilder`).</summary>
+        public const string Login = "Login";
         public const string Battle = "Battle";
         public const string Gacha = "Gacha";
         public const string Units = "Units";

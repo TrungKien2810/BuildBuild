@@ -70,8 +70,9 @@ namespace BuildBuild.Combat
 
             if (!_enraged && _enemy.Health.Fraction < _definition.enrageBelow) Enrage();
 
-            // Dang dong bang thi dong ho dung — ra don ngay khi tan bang la bat cong.
-            if (_enemy.IsFrozen) return;
+            // Dang dong bang / choang thi dong ho dung — ra don ngay khi tan bang la bat cong; cast luc choang thi
+            // clip dung o frame 0 (animator bi dung) ma don van bi giu den het choang.
+            if (_enemy.IsFrozen || _enemy.IsStunned) return;
 
             _slamTimer -= Time.deltaTime;
             _roarTimer -= Time.deltaTime;

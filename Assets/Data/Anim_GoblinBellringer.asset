@@ -22,6 +22,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 108ea5d9dea3aa14aa454402cb429ca4, type: 3}
     loop: 1
     hitFrame: 0
+    frameSeconds: 0
   walk:
     name: walk
     frames:
@@ -33,6 +34,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: c3aebfd569c7bfc4c9f57442edbd1208, type: 3}
     loop: 1
     hitFrame: 0
+    frameSeconds: 0
   attack:
     name: attack
     frames:
@@ -44,6 +46,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 4011b6978a0df0640bbff331b51d2883, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   hurt:
     name: hurt
     frames:
@@ -53,6 +56,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 7200b84ad7ae4ec4189d5d224fc25baf, type: 3}
     loop: 0
     hitFrame: 0
+    frameSeconds: 0
   death:
     name: death
     frames:
@@ -64,6 +68,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 31cd007fda8a61940979e3654639c0c7, type: 3}
     loop: 0
     hitFrame: 0
+    frameSeconds: 0
   skill:
     name: skill
     frames:
@@ -75,3 +80,4 @@ MonoBehaviour:
     - {fileID: 21300000, guid: f7c806204a025d44692c70dd68fbcc24, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0

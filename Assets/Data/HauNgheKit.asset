@@ -52,6 +52,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 8a5917abee95f8f49810a62ac23a7140, type: 3}
     loop: 0
     hitFrame: 3
+    frameSeconds: 0
   cuuTienCast:
     name: skill
     frames:
@@ -63,6 +64,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 4e4bc92422d10f04daf31ee3c040bdeb, type: 3}
     loop: 0
     hitFrame: 5
+    frameSeconds: 0
   bocCast:
     name: skill
     frames:
@@ -74,6 +76,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 1ab504537f0a4b44ebd1374a3acbe877, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   xaNhatCast:
     name: skill
     frames:
@@ -85,6 +88,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: a7e97ec39323f1941996656b5e1c0f59, type: 3}
     loop: 0
     hitFrame: 5
+    frameSeconds: 0
   arrow:
   - {fileID: 21300000, guid: 57320f04aa68a4740bedf9f24490b716, type: 3}
   - {fileID: 21300000, guid: b059245b7284ae74e9a1fa960cb5c8ed, type: 3}

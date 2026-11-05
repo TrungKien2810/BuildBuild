@@ -99,6 +99,9 @@ namespace BuildBuild.Core
         void OnDisable()
         {
             if (castle != null) castle.Destroyed -= OnCastleDestroyed;
+            // Roi scene giua tran Chinh Phat = thua (nhu Surrender): luot da tru o `ConsumeAttack`, chuoi thang phai ve 0.
+            // Phai truoc `Fighting = false` — `IsFighting` doc chinh co do.
+            if (IsFighting && InConquest && ConquestMatch.Current?.Target != null) ConquestMap.Finish(ConquestMatch.Current.Target, false);
             Fighting = false;   // roi scene giua wave: co tinh khong duoc treo sang lan vao sau
             GameSpeed.SetBattle(false);
             EndConquest();

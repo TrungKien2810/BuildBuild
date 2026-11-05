@@ -1,0 +1,4 @@
+﻿<Solution>
+  <Project Path="BuildBuild.csproj" />
+  <Project Path="BuildBuild.Editor.csproj" />
+</Solution>

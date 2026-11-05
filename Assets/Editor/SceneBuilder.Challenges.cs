@@ -23,7 +23,7 @@ namespace BuildBuild.Editor
 
         static ChallengeScreen BuildChallengeScreen(RectTransform canvas, WaveManager waves, WaveTuning tuning)
         {
-            var root = Rect("ChallengeScreen", canvas, Center, Vector2.zero, new Vector2(RefWidth, RefHeight));
+            var root = FullScreen("ChallengeScreen", canvas);
             var screen = root.gameObject.AddComponent<ChallengeScreen>();
             var dim = Img("Dim", root, UiSprite("chrome/dim-tile"), Center, Vector2.zero, Vector2.zero);
             Stretch(dim.rectTransform, 0, 0, 0, 0);

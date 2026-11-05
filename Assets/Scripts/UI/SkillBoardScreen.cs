@@ -34,6 +34,7 @@ namespace BuildBuild.UI
         void Awake()
         {
             closeButton.onClick.AddListener(Close);
+            economy.Changed += _ => { if (IsOpen) Refresh(); };   // vang doi luc dang mo (nhu ShopScene)
             for (int i = 0; i < rowButtons.Length; i++)
             {
                 int index = i;

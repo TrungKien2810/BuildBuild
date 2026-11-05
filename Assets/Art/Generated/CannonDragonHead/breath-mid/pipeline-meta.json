@@ -1,0 +1,65 @@
+{
+  "target": "asset",
+  "mode": "breath-mid",
+  "source": "tempart/CannonDragonHead/breath-2",
+  "align": "center",
+  "status": "giao 2026-10-05 (cannon pack, apply 2026-10-30)",
+  "frames": [
+    {
+      "frame": "breath-mid-1",
+      "aligned_bbox": [
+        16,
+        46,
+        128,
+        82
+      ]
+    },
+    {
+      "frame": "breath-mid-2",
+      "aligned_bbox": [
+        16,
+        46,
+        128,
+        82
+      ]
+    },
+    {
+      "frame": "breath-mid-3",
+      "aligned_bbox": [
+        16,
+        46,
+        128,
+        82
+      ]
+    },
+    {
+      "frame": "breath-mid-4",
+      "aligned_bbox": [
+        16,
+        46,
+        128,
+        82
+      ]
+    },
+    {
+      "frame": "breath-mid-5",
+      "aligned_bbox": [
+        16,
+        46,
+        128,
+        82
+      ]
+    },
+    {
+      "frame": "breath-mid-6",
+      "aligned_bbox": [
+        16,
+        46,
+        128,
+        82
+      ]
+    }
+  ],
+  "cell_size": 128,
+  "cell_height": 128
+}

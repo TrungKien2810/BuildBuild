@@ -38,6 +38,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 1d71ccf49334a6840bb4c6ed4f7031be, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   healCast:
     name: skill
     frames:
@@ -49,6 +50,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 1e97bfe49ead84841a1df80928c7e347, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   fortCast:
     name: skill
     frames:
@@ -60,6 +62,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 71bf7c6b4039e8e47b43c5dca7a9ee43, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   quake:
   - {fileID: 21300000, guid: 764c220679c276b4cb81ffa09f655e71, type: 3}
   - {fileID: 21300000, guid: 42decb12e61d2464991efa82f9f98de3, type: 3}

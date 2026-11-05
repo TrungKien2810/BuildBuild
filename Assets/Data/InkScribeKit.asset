@@ -39,6 +39,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 2a03df80c5826da428f21f5b199d5a55, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   sealCast:
     name: skill
     frames:
@@ -50,6 +51,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 63c7d4ca166d7d946a21707ba7388f4a, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   dragonCast:
     name: skill
     frames:
@@ -61,6 +63,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 75e146c30d324ec42b6bcaee2891729c, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   brushMarks:
   - {fileID: 21300000, guid: 09f20963f6520314ba667813557858cb, type: 3}
   - {fileID: 21300000, guid: e90b11326e29f17438f98f76dd593f0e, type: 3}

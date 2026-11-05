@@ -64,6 +64,7 @@ namespace BuildBuild.UI
         void Start()
         {
             scanButton.onClick.AddListener(Scan);
+            economy.Changed += _ => { if (root.activeSelf) RefreshScan(); };   // vang doi luc dang mo: nut quet bam duoc / khong
             closeButton.onClick.AddListener(Close);
             previewClose.onClick.AddListener(() => preview.SetActive(false));
             attackButton.onClick.AddListener(Attack);

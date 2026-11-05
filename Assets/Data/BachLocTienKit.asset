@@ -44,6 +44,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 5f4c7c83fda05de46bd0f1db623029cb, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   diepCast:
     name: skill
     frames:
@@ -55,6 +56,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 9d5be2da2b752914e81cadfdaaa13d00, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   locAnhCast:
     name: skill
     frames:
@@ -66,6 +68,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: c6d480a3951ac434c8a4ba947751d58c, type: 3}
     loop: 0
     hitFrame: 3
+    frameSeconds: 0
   hoiXuanCast:
     name: skill
     frames:
@@ -77,6 +80,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 4a45cc3d998a72b4d9f80b6b12ce52d7, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   bolt:
   - {fileID: 21300000, guid: add8e19dfded7fb42a7948c89ee734d2, type: 3}
   - {fileID: 21300000, guid: a7a26e2fed0e2c044aaaedb48c65fc18, type: 3}

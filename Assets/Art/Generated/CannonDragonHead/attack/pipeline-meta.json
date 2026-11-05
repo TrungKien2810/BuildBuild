@@ -1,0 +1,65 @@
+{
+  "target": "asset",
+  "mode": "attack",
+  "source": "tempart/CannonDragonHead/attack",
+  "align": "feet",
+  "status": "giao 2026-10-05 (cannon pack, apply 2026-10-30)",
+  "frames": [
+    {
+      "frame": "attack-1",
+      "aligned_bbox": [
+        17,
+        24,
+        99,
+        97
+      ]
+    },
+    {
+      "frame": "attack-2",
+      "aligned_bbox": [
+        17,
+        25,
+        98,
+        97
+      ]
+    },
+    {
+      "frame": "attack-3",
+      "aligned_bbox": [
+        16,
+        24,
+        99,
+        97
+      ]
+    },
+    {
+      "frame": "attack-4",
+      "aligned_bbox": [
+        17,
+        25,
+        99,
+        97
+      ]
+    },
+    {
+      "frame": "attack-5",
+      "aligned_bbox": [
+        17,
+        24,
+        99,
+        97
+      ]
+    },
+    {
+      "frame": "attack-6",
+      "aligned_bbox": [
+        16,
+        20,
+        99,
+        97
+      ]
+    }
+  ],
+  "cell_size": 144,
+  "cell_height": 128
+}

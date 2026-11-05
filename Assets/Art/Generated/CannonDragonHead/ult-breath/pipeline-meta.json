@@ -1,0 +1,65 @@
+{
+  "target": "asset",
+  "mode": "ult-breath",
+  "source": "tempart/CannonDragonHead/long-tuc",
+  "align": "center",
+  "status": "giao 2026-10-05 (cannon pack, apply 2026-10-30)",
+  "frames": [
+    {
+      "frame": "ult-breath-1",
+      "aligned_bbox": [
+        0,
+        36,
+        128,
+        92
+      ]
+    },
+    {
+      "frame": "ult-breath-2",
+      "aligned_bbox": [
+        0,
+        36,
+        128,
+        92
+      ]
+    },
+    {
+      "frame": "ult-breath-3",
+      "aligned_bbox": [
+        0,
+        36,
+        128,
+        92
+      ]
+    },
+    {
+      "frame": "ult-breath-4",
+      "aligned_bbox": [
+        0,
+        36,
+        128,
+        92
+      ]
+    },
+    {
+      "frame": "ult-breath-5",
+      "aligned_bbox": [
+        0,
+        36,
+        128,
+        92
+      ]
+    },
+    {
+      "frame": "ult-breath-6",
+      "aligned_bbox": [
+        0,
+        36,
+        128,
+        92
+      ]
+    }
+  ],
+  "cell_size": 128,
+  "cell_height": 128
+}

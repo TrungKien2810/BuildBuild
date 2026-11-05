@@ -8,7 +8,6 @@ config/pricing.json
 
 # Toàn bộ doc-state của governance (HANDOFF/IDEAS/STATUS/ISSUE/ADR/conventions…)
 docs/project-state/
-ISSUE.md
 
 # Hướng dẫn agent (do governance ghi/duy trì)
 CLAUDE.md
@@ -24,7 +23,6 @@ AGENTS.md
 config/agent-bridge/
 
 # Asset Gen — art ĐÃ DUYỆT trong Assets/Art/Generated được commit; raw pipeline nằm ở tempart/raw (ignore bên dưới)
-
 
 # ── Unity ───────────────────────────────────────────────────────────────────
 # Cache/generated — Unity tự sinh lại, KHÔNG commit (đây là phần làm repo nặng)
@@ -97,3 +95,14 @@ tempart/
 # Thử nghiệm so sánh SpriteCook vs PixelLab
 /spritecook-eval/
 __pycache__/
+
+# governance (OptimizedToken) — runtime + generated files
+.codex/hooks.json
+.agents/hooks.json
+.opencode/plugins/governance.js
+.claude/settings.json
+docs/project-state/STATUS.md
+docs/project-state/ISSUE.md
+
+# Lane engine d�ng chung (agent-lane) � runtime, kh�ng commit
+.lane/

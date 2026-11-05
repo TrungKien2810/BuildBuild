@@ -33,6 +33,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 80caa0bb16dca6f4ea1a9ef68b016c52, type: 3}
     loop: 0
     hitFrame: 3
+    frameSeconds: 0
   parry:
     name: skill
     frames:
@@ -44,6 +45,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 44f0d8e183786b2428425861e564d6df, type: 3}
     loop: 0
     hitFrame: 0
+    frameSeconds: 0
   aura:
   - {fileID: 21300000, guid: 3446a5a048eda0e45be2cf4e2517b9e4, type: 3}
   - {fileID: 21300000, guid: 434124f27c535fa4fab74bb5e9eba450, type: 3}

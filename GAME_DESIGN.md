@@ -393,6 +393,14 @@ Lộ trình asset theo kit đã duyệt: mỗi hero identity trước; sau đó 
 | Pháo Âm Thanh | SR | 20 | 1.0/s | 4.5 | Sóng hình nón 60°; phát thứ 4 xung kích ×1,75 + đẩy lùi |
 | Pháo Hắc Tinh | SSR | 100 | 0.1/s | 8 | Lõi bay tới chỗ đông quái, hố đen hút 1,5s rồi nổ vùng 1,6; mỗi quái chết trong hố +15% (tối đa 5) |
 
+**Pháo Đầu Rồng Đá — Long Viêm (`cannon_dragonhead`, SSR, vào game 2026-10-30, số TẠM theo bản thử của bên art):**
+không bắn từng phát. Có quái trong tầm → **phun nón liên tục 2,5s, nghỉ 0,5s**; sát thương **theo DPS** (D = 30, tầm 5,5,
+nón nửa góc 30°) nên không phụ thuộc số frame; mọi quái trúng bị **Thiêu Đốt 3s (0,2D/giây)**. Trúng quái thì đầy
+**Long Nộ** (0–100, +40/giây, ngưng trúng 2s thì tụt 20/giây): 3 mức, DPS ×1 / ×1,4 / ×1,8 và tầm ×1 / ×1,15 / ×1,3.
+Thanh đầy → **Long Tức**: lấy hơi 0,3s rồi phun luồng lớn 0,6s, mỗi quái ăn **một lần 3D** + **đất cháy 3s (0,25D/giây)**
+dọc dải phun, sau đó thanh về 0. Quái chết lúc đang bị pháo này đốt → **Hỏa Bạo**: nổ 1,2 bán kính (1D), lan Thiêu Đốt
+sang quái gần, nổ dây tối đa 3 lượt (1D → 0,5D → 0,25D). Code: `Combat/DragonBreath`, số: `Data/DragonCannonKit`.
+
 ## 5. Quái
 
 | Loại | Tên | Máu | Sát thương | Tốc độ | Vàng |
@@ -618,8 +626,10 @@ Trang bị bị đẩy khỏi MVP vì kéo theo stat cộng dồn + UI riêng + 
   ngả ấm + accent đỏ máu (mắt, vòng cổ gai). Chi tiết ở AD-6.
 - ~~Định dạng save~~ **ĐÃ CHỐT 2026-09-11: JSON file** `Application.persistentDataPath/save.json`
   (vàng, danh sách sở hữu + level/sao/mảnh, 2 bộ đếm pity). **Theo tài khoản (2026-09-26):** mỗi acc một file
-  (`save.json` = acc chính, `save-<tên>.json`), đổi acc ở Admin (F1). Acc mới được **tặng Frostweaver**; acc `test`
-  sở hữu mọi unit kể cả unit chưa vào gacha; acc `fresh` xoá làm lại mỗi lần chọn (xem lại lúc mới chơi).
+  (`save.json` = acc chính, `save-<tên>.json`), đổi acc ở Admin (F1). Acc mới được **tặng bộ khởi đầu 4 unit**
+  (Frostweaver · Beetle Knight · Rapid Cannon · War Wolf, sửa 2026-10-28 — trước đó chỉ 1 Frostweaver và sân
+  trống, xem AD-3); acc `test`/`admin` sở hữu mọi unit kể cả unit chưa vào gacha; acc `fresh` xoá làm lại mỗi
+  lần chọn (xem lại lúc mới chơi).
 - **Độ hiếm ĐÃ CHỐT 2026-09-11: gắn CỐ ĐỊNH vào từng unit.** Hero hiện tại đều N, riêng Pháp sư
   triệu hồi ở bậc cao hơn (đặt SR, sửa trong `Unit_mage_summoner.asset`); 3 pháo tạm N.
   **Định lại theo sức mạnh (người dùng giao Claude, 2026-09-26):** N = Ironblade, Hawkfletch, Frostweaver, Sói chiến,
@@ -748,9 +758,11 @@ nâng cấp, kết quả" giờ ánh xạ vào 10.1 (màn chơi), 10.2 + 10.3 (n
 
 ## 11. Nhiệm vụ (2026-10-15 — track "Hành trình" ĐÃ CODE, chờ chạy builder + Play)
 
-**Vì sao có hệ này (đo trong code, không phải cảm tính):** acc mới chỉ có **1 hero** (`SaveSystem.StarterUnitId`)
-trong khi sân có **9 ô hero**, và 10 wave đầu chỉ ≈ 2.000 vàng ≈ **4 lượt quay**. Nên "dễ chơi" ở đây là
-**lấp roster sớm + chỉ cho người chơi biết làm gì tiếp**, không phải thêm tiền tệ.
+**Vì sao có hệ này (đo trong code + Play thật, không phải cảm tính):** acc mới có **bộ khởi đầu 4 unit**
+(`SaveSystem.StarterUnits`, sửa 2026-10-28) trong khi sân có **9 ô hero**, và 10 wave đầu chỉ ≈ 2.000 vàng ≈
+**4 lượt quay**. Nên "dễ chơi" ở đây là **lấp roster sớm + chỉ cho người chơi biết làm gì tiếp**, không phải
+thêm tiền tệ. Số đo của bộ khởi đầu: 1 Frostweaver thắng wave 1–2 rồi thua wave 3; bộ 4 unit thắng wave 1–6
+mà lâu đài không mất máu — tức mốc 2 (thắng wave 3) đã mở được, và tường thật dời tới quanh wave 7–10.
 
 **Track đã làm — *Hành trình* (tân thủ):** 7 mốc × (3 nhiệm vụ + 1 ô thưởng cuối mốc). Mốc N+1 chỉ mở khi đã
 **nhận hết thưởng** mốc N (kể cả ô thưởng cuối mốc). Mốc 2/3/4 tặng **hero cố định** (Archer → Knight →

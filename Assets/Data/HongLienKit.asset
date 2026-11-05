@@ -34,6 +34,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: fce90f47f11adc14c9948d4bc1815b9f, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   detonateCast:
     name: skill
     frames:
@@ -45,6 +46,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 7351246f407891b439fb509b12950841, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   grandCast:
     name: skill
     frames:
@@ -58,6 +60,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: fc7fcdf338d7d19448c9a46e684cff7f, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   fanFlame:
   - {fileID: 21300000, guid: 76a66990b33ec544fb714d5b1a8e17e9, type: 3}
   - {fileID: 21300000, guid: 396f535775659f442817d416aa49df11, type: 3}

@@ -17,8 +17,14 @@ namespace BuildBuild.UI
     ///   - `Toast` — phan hoi ngan, tu tat: "Not enough Gold", "+1 Free Summon", doi uu tien muc tieu.
     /// Truoc day moi thu deu do vao banner nen cai sau xoa cai truoc va popup ket qua che mat.
     ///
-    /// File nay dang la HUB cua HUD tran (~400 dong). Neu phai sua tiep, viec tach dau tien nen lam la phan CAP
-    /// NGUOI CHOI (`levelText`/`xpFill`/`xpText` + `RefreshPlayer`) ra mot component rieng, khong phai tach bay gio.
+    /// HUONG DAN TAN THU (2026-10-29) nam o day o dung hai phan: `ShowNextTip` (khi nao hien the) va
+    /// `TargetOf` (enum buoc -> nut nao). Noi dung/thu tu buoc o `Meta/Tutorial`, viec ve o `UI/TipPanel`;
+    /// bang doi chieu sang nut phai o day vi day la noi duy nhat giu tham chieu toi cac nut do.
+    ///
+    /// File nay dang la HUB cua HUD tran (~580 dong, da qua nguong de tach). Neu phai sua tiep, thu tu tach:
+    /// (1) phan CAP NGUOI CHOI (`levelText`/`xpFill`/`xpText` + `RefreshPlayer`); (2) khoi huong dan
+    /// (`ShowNextTip`/`TargetOf`/`OnHeroPlaced`/`OnSquadSummoned`/`UpdateGuideRestart`) ra component rieng.
+    /// Khong nhet them viec moi vao file nay.
     ///
     /// Nut nao KHONG dung duoc trong tran thi AN HAN khi dang danh (khong chi xam) de man hinh thoang cho nguoi
     /// choi xem tran — nguoi dung chot 2026-09-29, ap ca cho nut them sau nay: them vao `HiddenWhileFighting`.
@@ -31,6 +37,9 @@ namespace BuildBuild.UI
         [SerializeField] Economy economy;
 
         [Header("Widget")]
+        [Tooltip("Ca khung thanh mau thanh tri (khung + fill + icon + so). Chi hien TRONG TRAN: ngoai tran thanh luon\n" +
+            "day mau va duoc sua sau moi wave, de nguyen chi ton cho. Khong gan thi thanh hien mai nhu cu.")]
+        [SerializeField] GameObject castleHpPanel;
         [SerializeField] Image castleHpFill;
         [SerializeField] Text castleHpText;
         [SerializeField] Text waveText;
@@ -109,6 +118,8 @@ namespace BuildBuild.UI
         /// <summary>Bang ket qua dang mo la cua tran Chinh Phat: dong bang thi ve ban do Chinh Phat, khong ve sanh.</summary>
         bool _backToConquestMap;
         bool _newBiome;   // vua thang wave thuong: dong bang ket qua thi chuyen canh sang nen moi
+        /// <summary>Bai linh cua scene nay — giu tham chieu de go su kien trong `OnDestroy` (xem `SoldierCamp.Current`).</summary>
+        SoldierCamp _camp;
 
         void Start()
         {
@@ -120,6 +131,10 @@ namespace BuildBuild.UI
                 if (castleUpgradePanel != null) castleUpgradePanel.Close();
                 if (pausePanel != null && pausePanel.IsOpen) pausePanel.Resume();
                 if (settingsPanel != null && settingsPanel.IsOpen) settingsPanel.Close();
+                // The huong dan khong duoc nam tren san dang danh (no che lane va khong con dung luc), va
+                // bam Fight la xong buoc 1 — nguoi choi da lam dung viec the noi.
+                if (tipPanel != null) tipPanel.Close();
+                Tutorial.Complete("fight");
                 Refresh();
             };
             waves.WaveCleared += (wave, gold) =>
@@ -185,12 +200,20 @@ namespace BuildBuild.UI
             castle.Health.Damaged += _ => RefreshCastle();
             economy.Changed += _ => { RefreshGold(); RefreshCastleUpgrade(); };
 
-            startButton.onClick.AddListener(waves.StartWave);
-            gachaButton.onClick.AddListener(() => SceneManager.LoadScene(SceneNames.Gacha));
+            startButton.onClick.AddListener(OnStartClicked);
+            gachaButton.onClick.AddListener(() =>
+            {
+                Tutorial.Complete("gate");
+                SceneManager.LoadScene(SceneNames.Gacha);
+            });
             unitsButton.onClick.AddListener(() => SceneManager.LoadScene(SceneNames.Units));
             if (chestButton != null) chestButton.onClick.AddListener(ClaimChest);
             if (conquestButton != null) conquestButton.onClick.AddListener(OnConquestButton);
-            if (questButton != null) questButton.onClick.AddListener(() => { if (questScreen != null) questScreen.Open(); });
+            if (questButton != null) questButton.onClick.AddListener(() =>
+            {
+                Tutorial.Complete("quests");
+                if (questScreen != null) questScreen.Open();
+            });
             if (bossRushButton != null) bossRushButton.onClick.AddListener(OnBossRush);
             if (dailyButton != null) dailyButton.onClick.AddListener(OnDaily);
             if (townButton != null) townButton.onClick.AddListener(() => { if (townScreen != null) townScreen.Open(); });
@@ -206,6 +229,11 @@ namespace BuildBuild.UI
             castle.TierChanged += Refresh;
             PlayerLevel.Changed += RefreshPlayer;
             PlayerLevel.LeveledUp += OnPlayerLevelUp;
+            // Huong dan tan thu: hai buoc chi tien duoc khi nguoi choi THUC SU dat hero / tha top linh, ma
+            // hai viec do xay ra trong he thong khac — nghe dung mot su kien cua chung, khong tu doan.
+            HeroBoard.Placed += OnHeroPlaced;
+            _camp = SoldierCamp.Current;
+            if (_camp != null) _camp.Summoned += OnSquadSummoned;
 
             if (pauseButton != null) pauseButton.onClick.AddListener(OpenPause);
             if (surrenderButton != null) surrenderButton.onClick.AddListener(() =>
@@ -222,6 +250,21 @@ namespace BuildBuild.UI
             Refresh();
             if (TownScreen.ConsumeReturn() && townScreen != null) townScreen.Open();
             else ShowNextTip();
+        }
+
+        /// <summary>
+        /// Bam Fight: chan khi doi hinh TRONG. Mot acc moi truoc 2026-10-28 vao tran voi 9 o trong, bam dung nut
+        /// duy nhat tren man roi thua wave 1 — khong co thong bao nao noi rang phai dat hero truoc.
+        /// </summary>
+        void OnStartClicked()
+        {
+            if (!waves.IsFighting && !WaveManager.InConquest && !HeroBoard.HasLineup)
+            {
+                Sfx.Play("ui-error");
+                ShowToast("Your line is empty — tap a hero slot to place one");
+                return;
+            }
+            waves.StartWave();
         }
 
         void OnBossRush()
@@ -252,13 +295,58 @@ namespace BuildBuild.UI
             Refresh();
         }
 
-        /// <summary>Hien goi y ngu canh ke tiep (moi y mot lan trong doi acc) — xem `Meta/ContextTips`.</summary>
+        /// <summary>
+        /// Hien buoc huong dan ke tiep (`Meta/Tutorial`) — chi o luot nghi: dang danh thi khong chen the
+        /// len san, va the dang mo thi khong mo chong the khac.
+        /// </summary>
         void ShowNextTip()
         {
             if (tipPanel == null || tipPanel.IsOpen) return;
-            var tip = ContextTips.Next();
-            if (tip == null) return;
-            tipPanel.Show(tip.Value);
+            if (waves.IsFighting) return;
+            var step = Tutorial.Current;
+            if (step == null) return;   // xong / da Skip / save cu: khong con gi de noi
+            tipPanel.Show(step.Value, Tutorial.Index, Tutorial.Count, TargetOf(step.Value.target));
+        }
+
+        /// <summary>
+        /// Nut ma buoc huong dan tro toi. `Meta/Tutorial` chi giu enum (khong biet UI); bang doi chieu nay
+        /// nam o day vi HUD la noi duy nhat giu tham chieu toi cac nut do.
+        /// </summary>
+        Transform TargetOf(TutorialTarget target)
+        {
+            switch (target)
+            {
+                case TutorialTarget.Fight: return startButton != null ? startButton.transform : null;
+                case TutorialTarget.Upgrade: return castleUpgradeButton != null ? castleUpgradeButton.transform : null;
+                case TutorialTarget.Chest: return chestButton != null ? chestButton.transform : null;
+                case TutorialTarget.Quests: return questButton != null ? questButton.transform : null;
+                case TutorialTarget.Gate: return gachaButton != null ? gachaButton.transform : null;
+                case TutorialTarget.Conquest: return conquestButton != null ? conquestButton.transform : null;
+                default: return null;
+            }
+        }
+
+        /// <summary>Dat hero xuong o (buoc "Fill The Slots") — xem `HeroBoard.Placed`.</summary>
+        void OnHeroPlaced() => Tutorial.Complete("slots");
+
+        /// <summary>Tha top linh ra san (buoc "Soldiers Need A Hand").</summary>
+        void OnSquadSummoned(SoldierDefinition soldier, System.Collections.Generic.IReadOnlyList<Hero> squad) =>
+            Tutorial.Complete("soldiers");
+
+        /// <summary>
+        /// Nut "Replay Guide" o man Cai dat chi dat co (`Tutorial.RestartPending`): the chi duoc hien khi
+        /// da thoat tran va da dong Cai dat, neu khong no se nam duoi lop phu va bi bo qua trong im lang.
+        /// </summary>
+        void UpdateGuideRestart()
+        {
+            if (!Tutorial.RestartPending) return;
+            if (waves.IsFighting) return;
+            if (settingsPanel != null && settingsPanel.IsOpen) return;
+            Tutorial.ConsumeRestart();
+            // The cu (neu con mo) phai dong truoc: `ShowNextTip` bo qua khi the dang mo, va mot buoc vua
+            // duoc yeu cau hien lai se bi nuot mat trong im lang.
+            if (tipPanel != null) tipPanel.Close();
+            ShowNextTip();
         }
 
         void OnPlayerLevelUp(int level)
@@ -325,6 +413,8 @@ namespace BuildBuild.UI
             // Su kien static: khong go ra thi ban ghi sang scene sau vo mot component da huy.
             PlayerLevel.Changed -= RefreshPlayer;
             PlayerLevel.LeveledUp -= OnPlayerLevelUp;
+            HeroBoard.Placed -= OnHeroPlaced;
+            if (_camp != null) _camp.Summoned -= OnSquadSummoned;
             GameSpeed.Changed -= RefreshSpeed;
             Targeting.Changed -= RefreshTargeting;
             if (pausePanel != null) pausePanel.SurrenderPressed -= OnSurrender;
@@ -354,12 +444,14 @@ namespace BuildBuild.UI
             RefreshTargeting();
             RefreshChest();
             if (conquestLabel != null) conquestLabel.text = WaveManager.InConquest ? "Leave Conquest" : "Conquest";
-            // Boss Rush khong danh trong luc dang chuan bi Chinh Phat (hai che do dung chung mot thanh).
-            if (bossRushButton != null) bossRushButton.interactable = !WaveManager.InConquest;
-            // Thu thach ngay: thang roi thi khoa nut den ngay mai (thua thi van bam lai duoc).
+            // Chuan bi Chinh Phat: hai che do phu khong danh duoc — AN han nhu nut nang thanh tri (dong trong file nay
+            // cung noi ro: nut khong dung duoc trong tran thi an, khong chi xam), thay vi mot nut xam khong noi vi sao.
+            bool extras = !waves.IsFighting && !WaveManager.InConquest;
+            if (bossRushButton != null) bossRushButton.gameObject.SetActive(extras);
             if (dailyButton != null)
             {
-                dailyButton.interactable = !WaveManager.InConquest;
+                dailyButton.gameObject.SetActive(extras);
+                // Thu thach ngay: thang roi thi nut ghi "Done" (man thu thach tu chan mo lai trong ngay).
                 if (dailyLabel != null) dailyLabel.text = DailyChallenge.Cleared ? "Done" : "Daily";
             }
             RefreshCastleUpgrade();
@@ -403,6 +495,8 @@ namespace BuildBuild.UI
             if (castleUpgradePanel == null) UpgradeCastle();
             else if (!waves.IsFighting && castle.NextTier != null && !castle.IsUpgrading)
             {
+                // Mo bang = da tim ra cho nang cap, du chua du vang: buoc huong dan day coi nhu xong.
+                Tutorial.Complete("upgrade");
                 castleUpgradePanel.Open(castle, economy.Gold);
                 Sfx.Play("ui-open");
             }
@@ -420,6 +514,9 @@ namespace BuildBuild.UI
             }
             if (castleUpgradePanel != null) castleUpgradePanel.Close();
             castle.Upgrade();
+            // Scene khong gan bang nang cap thi nut nang thang vao day (`OnCastleUpgradeButton` chi mo bang),
+            // nen duong nang thuc su phai tu bao xong buoc huong dan.
+            Tutorial.Complete("upgrade");
             Sfx.Play("upgrade");
             ShowMessage($"Fence reached level {castle.TierLevel}: {next.name}");
         }
@@ -432,12 +529,17 @@ namespace BuildBuild.UI
                 waves.LeaveConquest();
                 Refresh();
             }
-            else if (conquestMap != null) conquestMap.Open();
+            else if (conquestMap != null)
+            {
+                Tutorial.Complete("conquest");
+                conquestMap.Open();
+            }
         }
 
         // Dong ho tren ruong nhay theo phut — soat moi giay la du, khong can moi frame.
         void Update()
         {
+            UpdateGuideRestart();
             if (chestButton == null || Time.unscaledTime < _chestRefreshAt) return;
             _chestRefreshAt = Time.unscaledTime + 1f;
             RefreshChest();
@@ -450,13 +552,23 @@ namespace BuildBuild.UI
             var stage = AfkChest.Current;
             chestImage.sprite = stage == AfkChest.Stage.Full ? chestFull : stage == AfkChest.Stage.Glowing ? chestGlowing : chestClosed;
             int minutes = Mathf.FloorToInt(hours * 60f);
-            chestTimer.text = hours >= AfkChest.CapHours ? "Full" : $"{minutes / 60}g {minutes % 60:00}p";
-            chestButton.interactable = AfkChest.PendingGold(tuning) > 0;
+            // "h/m" chu khong phai "g/p": HUD nay toan chu tieng Anh, mot minh ruong ghi "5g 42p" la doc khong ra.
+            chestTimer.text = hours >= AfkChest.CapHours ? "Full" : $"{minutes / 60}h {minutes % 60:00}m";
+            // Nut LUON bam duoc. Truoc day ruong con rung thi `interactable = false`, ma `disabledColor` cua nut nay la
+            // trang nen no trong y het nut binh thuong: bam khong co tieng, khong thong bao, khong ai hieu vi sao.
+            chestButton.interactable = true;
         }
 
         void ClaimChest()
         {
+            if (AfkChest.PendingGold(tuning) <= 0)
+            {
+                Sfx.Play("ui-error");
+                ShowToast($"The chest is still filling — {chestTimer.text}");
+                return;
+            }
             var reward = AfkChest.Claim(tuning, equipment);
+            Tutorial.Complete("chest");
             Sfx.Play("coin");
             economy.Add(reward.gold);
             string dropName = reward.drop != null ? $"{EquipmentConfig.SlotName(reward.drop.slot)} {reward.drop.rarity}" : "";
@@ -473,6 +585,8 @@ namespace BuildBuild.UI
             var hp = castle.Health;
             castleHpFill.fillAmount = hp.Fraction;
             castleHpText.text = $"{Mathf.CeilToInt(hp.Current)} / {Mathf.CeilToInt(hp.Max)}";
+            // Ngoai tran chi hien avatar + Lv/XP, khong hien thanh mau thanh (nguoi dung chot 2026-10-30).
+            if (castleHpPanel != null) castleHpPanel.SetActive(waves.IsFighting);
         }
 
         void RefreshGold() => goldText.text = economy.Gold.ToString("N0");

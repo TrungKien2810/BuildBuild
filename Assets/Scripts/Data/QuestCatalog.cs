@@ -63,9 +63,9 @@ namespace BuildBuild.Data
     /// Noi dung Hanh trinh tan thu: 7 moc x (3 nhiem vu + 1 o thuong cuoi moc). Hai pattern lay tu game da khao sat:
     /// King God Castle (xong 100% chuong -> tang hero nguyen con) va FEH Heroes' Path (xong het moc truoc moi mo moc sau).
     ///
-    /// Vi sao co he nay (do trong code, khong phai cam tinh): acc moi chi co 1 hero (`SaveSystem.StarterUnitId`)
-    /// nhung san co 9 o hero, va 10 wave dau chi ~2.000 vang ~ 4 luot quay. Moc 2/3/4 tang hero CO DINH, moc 5/7
-    /// tang VE CHON tuong — theo khao sat 11 tua thi selector that luon nam o moc MUON, moc dau tang co dinh.
+    /// Vi sao co he nay (do trong code, khong phai cam tinh): acc moi co boi canh tan thu (`SaveSystem.StarterUnits`:
+    /// 2 hero + 1 phao + 1 linh) nhung san co 9 o hero, va 10 wave dau chi ~2.000 vang ~ 4 luot quay. Moc 2/3/4 tang
+    /// hero CO DINH, moc 5/7 tang VE CHON tuong — theo khao sat 11 tua thi selector that luon nam o moc MUON.
     /// </summary>
     public static class QuestCatalog
     {

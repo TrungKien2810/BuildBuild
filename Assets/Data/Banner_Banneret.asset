@@ -48,6 +48,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 54086f451b3e00544aa907e156179cb4, type: 3}
     loop: 0
     hitFrame: 0
+    frameSeconds: 0
   zoneFrames:
   - {fileID: 21300000, guid: e4c9fed340dcc354fbc51353021196ad, type: 3}
   - {fileID: 21300000, guid: df40c153e29f7c046a20144fb9c203d6, type: 3}

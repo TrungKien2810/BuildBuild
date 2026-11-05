@@ -34,9 +34,25 @@ namespace BuildBuild.Combat
         int _shots;             // Cone: dem phat de ra xung kich
         string _clip = "attack";
         GameObject _aimMark;
+        DragonBreath _dragon;
 
         public CannonDefinition Definition => _definition;
         public int Level { get; private set; }
+
+        /// <summary>Sat thuong hien tai cua mot phat (Long Viêm: mot giay phun) — doc luc ban, khong cache ngoai.</summary>
+        public float Damage => _damage;
+
+        /// <summary>Phao nay co bo luat phun cua Dau Rong Da khong (xem `DragonBreath`).</summary>
+        public bool UsesDragonBreath => _dragon != null;
+
+        /// <summary>Diem dan ra trong the gioi (dau nong), da tinh lossyScale cua than lan be phao va huong lat.</summary>
+        public Vector3 MuzzlePoint()
+        {
+            if (_definition == null) return transform.position;
+            var muzzle = (Vector3)_definition.muzzle * transform.lossyScale.x;
+            if (_renderer != null && _renderer.flipX) muzzle.x = -muzzle.x;
+            return transform.position + muzzle;
+        }
 
         void Awake()
         {
@@ -63,6 +79,15 @@ namespace BuildBuild.Combat
                 EnemyExtras.SlowIconFrames = definition.slowIconFrames;
 
             _animator.Bind(definition.animations);
+            // Dau Rong Da: bo luat phun nam o `DragonBreath`, `Cannon` khong ban tung phat nua (`Update` thoat som).
+            _dragon = null;
+            if (definition.dragonKit != null)
+            {
+                _dragon = GetComponent<DragonBreath>();
+                if (_dragon == null) _dragon = gameObject.AddComponent<DragonBreath>();
+                _dragon.Initialise(this, definition, definition.dragonKit, side);
+                return;
+            }
             _animator.HitFrame -= OnHitFrame;
             _animator.HitFrame += OnHitFrame;
             _animator.ClipFinished -= OnClipFinished;
@@ -78,6 +103,12 @@ namespace BuildBuild.Combat
 
         void Update()
         {
+            if (_dragon != null)
+            {
+                // Long Viêm: nhip phun/nghi + Long Nộ + Long Tức do `DragonBreath` quyet dinh, khong co cooldown o day.
+                _dragon.Tick();
+                return;
+            }
             if (_definition == null || _definition.fireRate <= 0f) return;
             _cooldown -= Time.deltaTime;
             if (_definition.spinUpSeconds > 0f && Time.time - _lastShot > 0.35f)

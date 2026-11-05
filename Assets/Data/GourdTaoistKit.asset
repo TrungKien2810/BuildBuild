@@ -38,6 +38,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 6e74b2891575205438e2866f869d9cfc, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   compressedCast:
     name: skill
     frames:
@@ -49,6 +50,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 6598ef7d69c0a9c4e9b97740c8fa5cfd, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   ultCast:
     name: skill
     frames:
@@ -60,6 +62,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: e0a4e1c505278094e923fb78f5acd460, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   suction:
   - {fileID: 21300000, guid: b9ef9d2f6f65b414988b7adcda839a45, type: 3}
   - {fileID: 21300000, guid: 5be8b4e4348abd541bcde52cfea29f49, type: 3}
