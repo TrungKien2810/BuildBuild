@@ -1946,6 +1946,17 @@ namespace BuildBuild.Editor
             string[] biomeDirs = { "Background/", "Background/swamp/", "Background/scorched/", "Background/snow/" };
             SetRefs(biome, "fields", biomeDirs.Select(d => LoadSprite(ArtRoot + d + "bg-field.png")).ToArray());
             SetRefs(biome, "treeLayers", biomeDirs.Select(d => LoadSprite(ArtRoot + d + "fg-trees.png")).ToArray());
+            // Them da + dai dat day hang rao doi mau theo biome (tools/art/make_fence_biomes.py); biome 0 = art goc.
+            var fenceTerrace = castleGo.transform.Find("Terrace");
+            var fenceSkirt = castleGo.transform.Find("GroundSkirt");
+            if (fenceTerrace != null && fenceSkirt != null)
+            {
+                string[] fenceDirs = { "", "swamp/", "scorched/", "snow/" };
+                SetRef(biome, "terrace", fenceTerrace.GetComponent<SpriteRenderer>());
+                SetRef(biome, "skirt", fenceSkirt.GetComponent<SpriteRenderer>());
+                SetRefs(biome, "terraces", fenceDirs.Select(d => LoadSprite(ArtRoot + "Fence/" + d + "terrace-aligned.png")).ToArray());
+                SetRefs(biome, "skirts", fenceDirs.Select(d => LoadSprite(ArtRoot + "Fence/" + d + "ground-skirt.png")).ToArray());
+            }
             SetRefs(biome, "ambience", new Object[]
             {
                 fieldAmbience, swampAmbience, scorchedAmbience, snowAmbience,

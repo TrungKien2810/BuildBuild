@@ -16,9 +16,13 @@ namespace BuildBuild.Core
     {
         [SerializeField] SpriteRenderer field;
         [SerializeField] SpriteRenderer trees;
+        [SerializeField] SpriteRenderer terrace;
+        [SerializeField] SpriteRenderer skirt;
         [Header("Moi phan tu mot biome, cung thu tu; phan tu 0 = nen co dang dung trong scene")]
         [SerializeField] Sprite[] fields;
         [SerializeField] Sprite[] treeLayers;
+        [SerializeField] Sprite[] terraces;   // them da duoi hang rao, doi mau theo nen
+        [SerializeField] Sprite[] skirts;     // dai dat day them da
         [SerializeField] GameObject[] ambience;
 
         [Header("Man den chuyen canh (Image den phu kin canvas tren cung, chan cham khi dang chay)")]
@@ -123,6 +127,8 @@ namespace BuildBuild.Core
             _persisted = biome;
             field.sprite = fields[biome];
             trees.sprite = treeLayers[biome];
+            if (terrace != null) terrace.sprite = terraces[biome];
+            if (skirt != null) skirt.sprite = skirts[biome];
             SetAmbience(biome);
             SetLight(biome);
         }
