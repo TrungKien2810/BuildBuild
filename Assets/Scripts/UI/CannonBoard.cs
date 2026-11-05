@@ -142,6 +142,18 @@ namespace BuildBuild.UI
 
         static OwnedUnit Owned(CannonDefinition cannon) => cannon != null ? SaveSystem.Data.Find(cannon.unitId) : null;
 
+        /// <summary>
+        /// Mot dong chi so cho bang chon phao. Phao thuong doc theo "toc ban", con Dau Rong Da phun lien tuc theo DPS nen
+        /// dong do doi thanh nhip phun (`DragonCannonKit`) — hai kieu ra don khac nhau khong dung chung mot cau chu.
+        /// </summary>
+        static string StatLine(CannonDefinition cannon, int level)
+        {
+            string damage = $"Damage {Progression.CannonDamage(cannon, level):0.#}";
+            if (cannon.dragonKit != null)
+                return $"{damage}/s   Breath {cannon.dragonKit.breathSeconds:0.#}s   Range {cannon.range:0.#}";
+            return $"{damage}   {cannon.fireRate:0.#}/s   Range {cannon.range:0.#}";
+        }
+
         static int LevelOf(CannonDefinition cannon)
         {
             var owned = Owned(cannon);
@@ -172,7 +184,7 @@ namespace BuildBuild.UI
                 if (i < rosterInfo.Length)
                     rosterInfo[i].text = owned == null
                         ? "Not Owned — roll gacha to obtain"
-                        : $"Lv {level}   Damage {Progression.CannonDamage(cannon, level):0.#}   {cannon.fireRate:0.#}/s   Range {cannon.range:0.#}{OnMountNote(cannon)}";
+                        : $"Lv {level}   {StatLine(cannon, level)}{OnMountNote(cannon)}";
             }
         }
 
@@ -242,6 +254,15 @@ namespace BuildBuild.UI
         void RestoreLoadout()
         {
             var loadout = SaveSystem.Data.cannons;
+            // Save chua bao gio lap phao (`cannons` rong han): lap san phao dang so huu theo thu tu `roster`.
+            // Khong co buoc nay thi 3 be tren thanh la 3 o vinh vien trong voi acc moi — bam vao chi thay
+            // "Not Owned — roll gacha to obtain" o moi dong.
+            if (loadout.Count == 0 && _activeMounts > 0)
+            {
+                FillDefaultLoadout();
+                return;
+            }
+
             for (int i = 0; i < _activeMounts; i++)
             {
                 CannonDefinition definition = null;
@@ -251,6 +272,19 @@ namespace BuildBuild.UI
                 if (definition != null && Owned(definition) == null) definition = null;
                 mounts[i].Assign(definition, LevelOf(definition));
             }
+        }
+
+        void FillDefaultLoadout()
+        {
+            int mount = 0;
+            foreach (var definition in roster)
+            {
+                if (mount >= _activeMounts) break;
+                if (definition == null || Owned(definition) == null) continue;
+                mounts[mount].Assign(definition, LevelOf(definition));
+                mount++;
+            }
+            if (mount > 0) SaveLoadout();
         }
 
         void SaveLoadout()

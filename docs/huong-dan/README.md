@@ -36,6 +36,12 @@ giải thích lại khái niệm của bài trước.
 10. [asset-cong-trinh-vao-khung-toa-do.md](asset-cong-trinh-vao-khung-toa-do.md): lâu đài/nền — crop vào
    khung, đo điểm neo, pitch mặt đất.
 
+## Chặng 3 — Giao việc sinh art cho agent khác
+
+10. [lane-sinh-asset-codex-agy.md](lane-sinh-asset-codex-agy.md): viết brief, giao cho lane
+    Codex/agy chạy headless, đọc báo cáo (ảnh thật + số đo QC), rồi đóng asset vào
+    `Assets/Art/Generated/`.
+
 ## Không nằm ở đây
 
 - Đang làm tới đâu → `docs/project-state/HANDOFF.md`.

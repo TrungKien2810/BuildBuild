@@ -98,7 +98,7 @@ namespace BuildBuild.UI
                     rowNames[i].text = equipment != null ? EquipmentConfig.SlotName(offer.slot) : offer.slot.ToString();
                     string stat = offer.slot == EquipmentSlot.Weapon ? "damage" : offer.slot == EquipmentSlot.Ring ? "attack speed" : "health";
                     float bonus = equipment != null ? equipment.Bonus(offer.slot, offer.rarity, 1) * 100 : 0;
-                    rowDetails[i].text = $"{offer.rarity} / Lv.1 / +{bonus:0.#}% {stat} - equip in Army";
+                    rowDetails[i].text = $"{offer.rarity} / Lv.1 / +{bonus:0.#}% {stat} - equip it in Roster";
                 }
                 else
                 {
@@ -106,7 +106,7 @@ namespace BuildBuild.UI
                     rowIcons[i].sprite = unit != null ? unit.icon : null;
                     rowNames[i].text = unit != null && !string.IsNullOrEmpty(unit.displayName) ? unit.displayName : offer.heroId;
                     int owned = SaveSystem.Data.Find(offer.heroId)?.shards ?? 0;
-                    rowDetails[i].text = $"{(unit != null ? unit.rarity.ToString() : "?")} / +{offer.shards} shards / Owned: {owned} - star up in Army";
+                    rowDetails[i].text = $"{(unit != null ? unit.rarity.ToString() : "?")} / +{offer.shards} shards / Owned: {owned} - star up in Roster";
                 }
                 // Icon khong co (unit ngoai pool, thieu art) thi TAT Image: Image khong sprite ve mot o TRANG duc.
                 rowIcons[i].enabled = rowIcons[i].sprite != null;
@@ -131,8 +131,8 @@ namespace BuildBuild.UI
             {
                 Sfx.Play("coin");
                 var bought = _offers[index];
-                ShowMessage(bought.IsGear ? $"{bought.rarity} {EquipmentConfig.SlotName(bought.slot)} added to inventory. Equip in Army."
-                    : $"+{bought.shards} shards for {Unit(bought.heroId)?.displayName ?? bought.heroId}. Star up in Army.");
+                ShowMessage(bought.IsGear ? $"{bought.rarity} {EquipmentConfig.SlotName(bought.slot)} added to inventory. Equip it in Roster."
+                    : $"+{bought.shards} shards for {Unit(bought.heroId)?.displayName ?? bought.heroId}. Star up in Roster.");
                 Refresh();
             }
             else

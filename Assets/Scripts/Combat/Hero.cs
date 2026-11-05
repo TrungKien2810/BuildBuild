@@ -219,6 +219,17 @@ namespace BuildBuild.Combat
             _health.Blocked += OnBlocked;
             _health.ShieldBroken += OnShieldBroken;
             _health.Died += OnDied;
+            _health.CheatDeath = CheatDeath;
+        }
+
+        // Chan cai chet o `Health` (truoc `KilledBy`/`Died`) thay vi trong `OnDied`.
+        bool CheatDeath()
+        {
+            if (_dying) return false;
+            // The Than (Wukong): mot phan than len lam ban the thay vi chet.
+            if (_wukong != null && _wukong.TrySubstitute()) return true;
+            // Dong Sinh Cong Tu (Luu Bi): anh em ket nghia nga lan dau moi wave duoc keo day.
+            return DaoVienBrother.TryRevive(this);
         }
 
         protected override void OnEnable()
@@ -1222,10 +1233,6 @@ namespace BuildBuild.Combat
         void OnDied()
         {
             if (_dying) return;
-            // The Than (Wukong): mot phan than len lam ban the thay vi chet.
-            if (_wukong != null && _wukong.TrySubstitute()) return;
-            // Dong Sinh Cong Tu (Luu Bi): anh em ket nghia nga lan dau moi wave duoc keo day.
-            if (DaoVienBrother.TryRevive(this)) return;
             _dying = true;
             Sfx.Play("hero-die");
             if (IsLaunched) Land();     // chet giua khong trung -> clip death nam tren dat

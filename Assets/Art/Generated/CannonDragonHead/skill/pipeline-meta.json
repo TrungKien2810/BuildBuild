@@ -1,0 +1,65 @@
+{
+  "target": "asset",
+  "mode": "skill",
+  "source": "tempart/CannonDragonHead/long-tuc-body",
+  "align": "feet",
+  "status": "giao 2026-10-05 (cannon pack, apply 2026-10-30)",
+  "frames": [
+    {
+      "frame": "skill-1",
+      "aligned_bbox": [
+        15,
+        28,
+        100,
+        97
+      ]
+    },
+    {
+      "frame": "skill-2",
+      "aligned_bbox": [
+        19,
+        23,
+        101,
+        97
+      ]
+    },
+    {
+      "frame": "skill-3",
+      "aligned_bbox": [
+        13,
+        27,
+        100,
+        97
+      ]
+    },
+    {
+      "frame": "skill-4",
+      "aligned_bbox": [
+        14,
+        27,
+        100,
+        97
+      ]
+    },
+    {
+      "frame": "skill-5",
+      "aligned_bbox": [
+        16,
+        27,
+        100,
+        97
+      ]
+    },
+    {
+      "frame": "skill-6",
+      "aligned_bbox": [
+        13,
+        25,
+        100,
+        97
+      ]
+    }
+  ],
+  "cell_size": 144,
+  "cell_height": 128
+}

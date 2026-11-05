@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5872530a42e740c4aa90cd38c8fa0e67, type: 3}
+  m_Name: Anim_CannonDragonHead
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.SpriteAnimationSet
+  framesPerSecond: 9
+  idle:
+    name: idle
+    frames:
+    - {fileID: 21300000, guid: bc83c0338afcb3b4abd9fd81954e961b, type: 3}
+    - {fileID: 21300000, guid: 071232d831f555345b963340cc1d73ba, type: 3}
+    - {fileID: 21300000, guid: da8f3b918b3ef6a42b8ae2aa889f205e, type: 3}
+    - {fileID: 21300000, guid: 2c64e218f0530ba43ac1623ed79fb210, type: 3}
+    loop: 1
+    hitFrame: 0
+    frameSeconds: 0
+  walk:
+    name: walk
+    frames: []
+    loop: 1
+    hitFrame: 0
+    frameSeconds: 0
+  attack:
+    name: attack
+    frames:
+    - {fileID: 21300000, guid: c0eb172cd2a3c7b4bb360f946a4a88df, type: 3}
+    - {fileID: 21300000, guid: 5ef67710c395f5049b417a30ab5f885a, type: 3}
+    - {fileID: 21300000, guid: 58db2cd35eb53ef4d911ef57222b7a02, type: 3}
+    - {fileID: 21300000, guid: 6ac29caf669541f4ba02b162d8a677b8, type: 3}
+    - {fileID: 21300000, guid: a7476d1d063c5cc4093141a39e367684, type: 3}
+    - {fileID: 21300000, guid: 5bd1eae663dabdb47b6aef503c64f87e, type: 3}
+    loop: 0
+    hitFrame: 2
+    frameSeconds: 0
+  hurt:
+    name: hurt
+    frames: []
+    loop: 0
+    hitFrame: 0
+    frameSeconds: 0
+  death:
+    name: death
+    frames: []
+    loop: 0
+    hitFrame: 0
+    frameSeconds: 0
+  skill:
+    name: skill
+    frames:
+    - {fileID: 21300000, guid: 6c02ce0be2c583841904e1baadd8ecca, type: 3}
+    - {fileID: 21300000, guid: 3639d2bf3da47fb48b8cad323a6a4155, type: 3}
+    - {fileID: 21300000, guid: 9c6057d35148c1149a72b918406290e2, type: 3}
+    - {fileID: 21300000, guid: 87e0928d0ffc1ed40a84f7b52ed2d025, type: 3}
+    - {fileID: 21300000, guid: 133b4f786e128674ba12fdadd37de90b, type: 3}
+    - {fileID: 21300000, guid: 0234595ffe10f38429f5ddfab8515ee4, type: 3}
+    loop: 0
+    hitFrame: 2
+    frameSeconds: 0

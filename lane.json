@@ -1,0 +1,7 @@
+{
+  "lane": "codex",
+  "preset": "art",
+  "allow": ["tempart/**"],
+  "runDir": ".lane/runs",
+  "timeoutSec": 1200
+}

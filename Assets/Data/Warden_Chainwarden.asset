@@ -32,6 +32,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: da5280d0c6e3de74aa1695607bc5e333, type: 3}
     loop: 0
     hitFrame: 0
+    frameSeconds: 0
   rootFrames:
   - {fileID: 21300000, guid: e7755f31100521749bff3be2e56405b8, type: 3}
   - {fileID: 21300000, guid: 86e7fb0b370470441a39e5ea15617727, type: 3}
@@ -73,6 +74,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 20ed33c1c31ec1447908110319ba016d, type: 3}
     loop: 0
     hitFrame: 0
+    frameSeconds: 0
   rageScale: 1.15
   rageTint: {r: 1, g: 0.6, b: 0.55, a: 1}
   stormCooldown: 4
@@ -97,6 +99,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 1100c195e8d8ff54aa59da88c351289c, type: 3}
     loop: 0
     hitFrame: 3
+    frameSeconds: 0
   yankFrames:
   - {fileID: 21300000, guid: 77123c08f2c7b0e44926cd950b9bf4c0, type: 3}
   - {fileID: 21300000, guid: 67a5bbed8587874489a1099ac2897919, type: 3}

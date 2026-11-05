@@ -58,7 +58,13 @@ namespace BuildBuild.Core
         {
             _scene = this;
             if (_persisted != _current) Apply(_persisted);   // 0 = nen goc trong scene, khong phai ve lai
-            else SetLight(_current);
+            else
+            {
+                // Scene dung ra BAT CA BON lop dong; khong tat bot thi vao tran se thay tuyet + tan lua + dom dom cung
+                // mot luc (2026-10-30, khi moi biome co lop dong rieng).
+                SetAmbience(_current);
+                SetLight(_current);
+            }
         }
 
         void OnDestroy()
@@ -117,9 +123,15 @@ namespace BuildBuild.Core
             _persisted = biome;
             field.sprite = fields[biome];
             trees.sprite = treeLayers[biome];
+            SetAmbience(biome);
+            SetLight(biome);
+        }
+
+        /// <summary>Chi bat lop dong cua biome dang dung; lop cac biome khac tat (de null = biome khong co lop dong).</summary>
+        void SetAmbience(int biome)
+        {
             for (int i = 0; i < ambience.Length; i++)
                 if (ambience[i] != null) ambience[i].SetActive(i == biome);
-            SetLight(biome);
         }
     }
 }

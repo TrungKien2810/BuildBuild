@@ -38,6 +38,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 72c4d96c5e66b234ca350ca559f81313, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   sweepCast:
     name: skill
     frames:
@@ -49,6 +50,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 406792356ba33e448a0652895bc71fc9, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   guardCast:
     name: skill
     frames:
@@ -60,6 +62,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 3b225988238912d40a6afa8b76da8e2e, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   grandCast:
     name: skill
     frames:
@@ -71,6 +74,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 8cc0df738a3b9c74a8d456131f1f17d5, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   puppetDeploy:
     name: skill
     frames:
@@ -82,6 +86,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: f7a9824a5f042014b88064b4f575e442, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   puppetParry:
     name: skill
     frames:
@@ -93,6 +98,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: f66ccbfba71521d4d840717656d773e3, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   grandTransform:
     name: skill
     frames:
@@ -106,6 +112,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: d22f7e6b570b4174ba4ee490b22e1732, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   cable:
   - {fileID: 21300000, guid: 1249d390d6c7de949b3962e64733cb59, type: 3}
   - {fileID: 21300000, guid: 0583518c7fc077549a176b89d3a64dc1, type: 3}

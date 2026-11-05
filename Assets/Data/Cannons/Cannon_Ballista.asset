@@ -23,6 +23,7 @@ MonoBehaviour:
   slowDuration: 0
   slowIconFrames: []
   pierceCount: 3
+  dragonKit: {fileID: 0}
   fire: 0
   arcHeight: 0
   targetMarkFrames: []

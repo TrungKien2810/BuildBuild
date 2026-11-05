@@ -45,6 +45,13 @@ namespace BuildBuild.Data
             "toi da chung nay con roi tan (No Xuyen).")]
         public int pierceCount;
 
+        [Header("Bo luat rieng (chi mot phao dung)")]
+        [Tooltip("Dau Rong Da: khac han moi phao khac — khong ban tung phat ma PHUN non lien tuc theo DPS, co Long Nộ / " +
+            "Long Tức / Thiêu Đốt / no lan. Co kit thi `Cannon` giao han viec ra don cho `DragonBreath` va bo qua " +
+            "`fireRate`, `fire`, `projectile*`, `impact*`, `pierceCount` cua asset nay (`damage` la DPS goc, `range` la " +
+            "dai non).")]
+        public DragonCannonKit dragonKit;
+
         [Header("Co che rieng (bo phao 2026-10-05, so TAM — Claude de xuat, chua can)")]
         [Tooltip("Cach ra don: Projectile = dan bay (mac dinh) · Chain = set nay tuc thi qua nhieu quai · " +
             "Cone = song hinh non truoc nong · Vortex = loi bay toi cho dong quai, mo ho den hut roi no.")]

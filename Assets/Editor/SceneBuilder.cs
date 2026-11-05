@@ -112,9 +112,11 @@ namespace BuildBuild.Editor
             BuildGachaScene(gacha);
             BuildUnitsScene();
             BuildShopScene();
+            BuildLoginSceneOnly();
 
             EditorBuildSettings.scenes = new[]
             {
+                new EditorBuildSettingsScene(ScenePath(SceneNames.Login), true),
                 new EditorBuildSettingsScene(ScenePath(SceneNames.Battle), true),
                 new EditorBuildSettingsScene(ScenePath(SceneNames.Gacha), true),
                 new EditorBuildSettingsScene(ScenePath(SceneNames.Units), true),
@@ -382,6 +384,9 @@ namespace BuildBuild.Editor
                 Unit("cannon_longgun", "Castle Musket", UnitCategory.Cannon, Rarity.SR, "icons/icon-cannon-longgun"),
                 Unit("cannon_sonic", "Sonic Cannon", UnitCategory.Cannon, Rarity.SR, "icons/icon-cannon-sonic"),
                 Unit("cannon_void", "Dark Star Cannon", UnitCategory.Cannon, Rarity.SSR, "icons/icon-cannon-void"),
+                // Phao Dau Rong Da (muc 4.16, bo art cua ban art da co trong repo tu 2026-10-05 nhung chua vao game).
+                // SSR thu hai cua kho phao, va la khau DUY NHAT khong ban tung phat — xem `DragonBreath`.
+                Unit("cannon_dragonhead", "Dragon Head Cannon", UnitCategory.Cannon, Rarity.SSR, "icons/icon-cannon-dragonhead"),
             };
 
             // Chi NOI THEM unit con thieu vao pool da co (nhu linh) — khong xoa unit chinh tay trong Inspector.
@@ -1739,7 +1744,40 @@ namespace BuildBuild.Editor
                     c.projectileSpeed = 9f; c.projectileScale = 0.7f; c.impactScale = 1f;
                     c.muzzle = new Vector2(-0.44f, 0.44f);
                 }),
+
+                // ---- Dau Rong Da (muc 4.16): phao KHONG ban tung phat — `dragonKit` khac null thi `Cannon` giao han viec
+                // ra don cho `DragonBreath` (non lua lien tuc theo DPS + Long Nộ + Long Tức + Thiêu Đốt + nổ lan).
+                // `damage` o day la DPS goc, `range` la DAI non; `fireRate`/`projectile*` khong dung. So TAM theo
+                // `tempart/CannonDragonHead/brief.md` (D = 30), CHUA can.
+                CannonDef("DragonHead", "cannon_dragonhead", "Dragon Head Cannon", "icon-cannon-dragonhead", "CannonDragonHead", c =>
+                {
+                    c.damage = 30f; c.fireRate = 1f; c.range = 5.5f;
+                    // Mep mom do tu attack-1 (art-px tu pivot: mom x 24 / be da chan y 97 cua o 144x128).
+                    c.muzzle = new Vector2(-0.48f, 0.42f);
+                    c.displayScale = 1.35f;
+                    c.dragonKit = BuildDragonKit();
+                }, skill: "skill"),
             }.Select(WithSlowIcon).ToArray();
+        }
+
+        /// <summary>
+        /// Bo so + hinh cua Long Viêm (`DragonCannonKit`). So lay tu `tempart/CannonDragonHead/brief.md` — ban thiet ke cua
+        /// ben art, ghi ro la "ban thu, chua can"; sua o day chu khong sua tung cho trong asset.
+        /// </summary>
+        static DragonCannonKit BuildDragonKit()
+        {
+            var kit = LoadOrCreate<DragonCannonKit>(DataDir + "/DragonCannonKit.asset", out _);
+            string art = ArtRoot + "CannonDragonHead/";
+            // Tien to file = ten thu muc (bo art giao theo kieu <action>/<action>-N.png).
+            kit.breathLow = Frames(art + "breath-low", "breath-low");
+            kit.breathMid = Frames(art + "breath-mid", "breath-mid");
+            kit.breathHigh = Frames(art + "breath-high", "breath-high");
+            kit.breathUlt = Frames(art + "ult-breath", "ult-breath");
+            kit.burnFrames = Frames(art + "burn-status", "burn-status");
+            kit.groundFrames = Frames(art + "scorched-ground", "scorched-ground");
+            kit.burstFrames = Frames(art + "fire-burst", "fire-burst");
+            EditorUtility.SetDirty(kit);
+            return kit;
         }
 
         /// <summary>Bong tuyet tren dau quai bi lam cham (art giao sau asset phao) — bu mot lan cho phao co slow.</summary>
@@ -1791,13 +1829,26 @@ namespace BuildBuild.Editor
                 def.animations = anim;
                 def.projectileFrames = Frames(ArtRoot + art + "/" + bullet, "projectile");
                 def.impactFrames = Frames(ArtRoot + art + "/" + impact, impactPrefix);
-            }
-            if (def.icon == null) def.icon = LoadSprite($"{UiDir}icons/{icon}.png");
+            }            if (def.icon == null) def.icon = LoadSprite($"{UiDir}icons/{icon}.png");
             EditorUtility.SetDirty(def);
             return def;
         }
 
         // ---------------------------------------------------------------- scene Battle
+
+        /// <summary>
+        /// Dung lai RIENG scene Battle — khi vua sua HUD/panel ma khong muon chay lai ca bo scene (Gacha,
+        /// Units, Shop) cung du lieu. Cung mot ham dung voi `BuildAll`.
+        /// </summary>
+        [MenuItem("BuildBuild/Scenes/Rebuild Battle Only")]
+        public static void RebuildBattleSceneOnly()
+        {
+            if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) return;
+            _font = PixelFont.Asset;   // ly do: xem BuildGachaScene
+            BuildBattleScene(null, null);   // tham so khong dung: scene tu nap lai tu Data/Prefabs sau khi mo scene moi
+            EditorSceneManager.OpenScene(ScenePath(SceneNames.Battle));
+            Debug.Log("[SceneBuilder] Da dung lai scene Battle.");
+        }
 
         static void BuildBattleScene(WaveTuning tuning, Enemy enemyPrefab)
         {
@@ -1849,12 +1900,33 @@ namespace BuildBuild.Editor
             var waveAmbience = new GameObject("WaveAmbience");
             var fieldAmbience = BuildFieldAmbience();
             fieldAmbience.transform.SetParent(waveAmbience.transform, false);
+            // Ba nen con lai (dam lay / dat chay / tuyet) truoc day KHONG co lop dong nao: ca man chi co nen tinh.
+            var swampAmbience = BuildBiomeDrift("SwampAmbience",
+                MoteDef("Firefly", "swamp/firefly", "firefly", 6f, 12, Box(-4.6f, -1.4f, 8.6f, 3.2f),
+                    DriftAmbience.Motion.Wander, 0.5f, 0.7f),
+                MoteDef("Bubble", "swamp/bubble", "bubble", 5f, 5, Box(-4.6f, -2.9f, 6.4f, 1.1f),
+                    DriftAmbience.Motion.Rise, 0.28f, 0.5f));
+            swampAmbience.transform.SetParent(waveAmbience.transform, false);
+            var scorchedAmbience = BuildBiomeDrift("ScorchedAmbience",
+                MoteDef("Ember", "scorched/ember", "ember", 7f, 14, Box(-2.4f, -2.4f, 9.4f, 5.4f),
+                    DriftAmbience.Motion.Rise, 0.45f, 0.6f),
+                MoteDef("Ash", "scorched/ash", "ash", 5f, 10, Box(-6.4f, -2.8f, 13f, 5.6f),
+                    DriftAmbience.Motion.Fall, 0.22f, 0.9f));
+            scorchedAmbience.transform.SetParent(waveAmbience.transform, false);
+            var snowAmbience = BuildBiomeDrift("SnowAmbience",
+                MoteDef("Snowflake", "snow/snowflake", "snowflake", 6f, 26, Box(-9.4f, -5.2f, 18.8f, 10.4f),
+                    DriftAmbience.Motion.Fall, 0.55f, 0.35f),
+                MoteDef("SnowDust", "snow/snow-dust", "snow-dust", 9f, 8, Box(-7.4f, -4.2f, 15f, 1.8f),
+                    DriftAmbience.Motion.Wander, 0.35f, 1.1f));
+            snowAmbience.transform.SetParent(waveAmbience.transform, false);
             BuildConquestArena(new[] { waveBackground.gameObject, waveTrees.gameObject, waveAmbience });
 
             var spawn = new GameObject("EnemySpawn").transform;
             spawn.position = PxToWorld(SpawnPx, LaneTopPx);
 
             var game = new GameObject("Game");
+            // Bam Play thang vao Battle khi chua dang nhap (bo qua scene Login) -> day ve man dang nhap.
+            game.AddComponent<LoginGate>();
             var economy = game.AddComponent<Economy>();
             var waves = game.AddComponent<WaveManager>();
             SetRef(waves, "tuning", tuning);
@@ -1874,7 +1946,10 @@ namespace BuildBuild.Editor
             string[] biomeDirs = { "Background/", "Background/swamp/", "Background/scorched/", "Background/snow/" };
             SetRefs(biome, "fields", biomeDirs.Select(d => LoadSprite(ArtRoot + d + "bg-field.png")).ToArray());
             SetRefs(biome, "treeLayers", biomeDirs.Select(d => LoadSprite(ArtRoot + d + "fg-trees.png")).ToArray());
-            SetRefs(biome, "ambience", new Object[] { fieldAmbience, null, null, null });
+            SetRefs(biome, "ambience", new Object[]
+            {
+                fieldAmbience, swampAmbience, scorchedAmbience, snowAmbience,
+            });
 
             var board = game.AddComponent<HeroBoard>();
             SetRef(board, "waves", waves);
@@ -1933,6 +2008,9 @@ namespace BuildBuild.Editor
             var hpText = Label("Value", hpFrame.transform, "", 26, Center, Vector2.zero, Native(200, 23));
             SetRef(hud, "castleHpFill", hpFill);
             SetRef(hud, "castleHpText", hpText);
+            // Thanh mau thanh chi co nghia TRONG TRAN (ngoai tran thanh luon day mau va da duoc sua sau moi wave) —
+            // BattleHud bat/tat ca khung nay theo `waves.IsFighting`, o sanh chi con avatar + Lv/XP.
+            SetRef(hud, "castleHpPanel", hpFrame.gameObject);
 
             // Cap nguoi choi (GDD muc 10.0): chan dung + `Lv` + thanh kinh nghiem CO SO, nam duoi thanh mau thanh.
             // Chan dung dang lay tam avatar Frostweaver vi chua co man chon avatar (IDEAS #3) — doi 1 dong la du.
@@ -1954,27 +2032,27 @@ namespace BuildBuild.Editor
             SetRef(hud, "goldText", GoldPill(canvas));
             // Cot nut dieu huong duoi o vang: Trieu hoi / Doi quan / Chinh Phat, cung co 280 (du cho "Roi Chinh Phat" canh icon), cach deu 16 px.
             // Ruong AFK la vat pham nhan thuong chu khong phai nut man hinh -> dat DUOI ca cot, khong chen giua.
-            var gachaButton = MakeButton("GachaButton", canvas, "Summon", TopRight, new Vector2(-24, -92), new Vector2(280, 72), out var gachaLabel);
+            var gachaButton = MakeButton("GachaButton", canvas, "Summon", TopRight, new Vector2(-24, -92), new Vector2(280, 80), out var gachaLabel);
             DecorateButton(gachaButton, gachaLabel, "icons/icon-shard");
             SetRef(hud, "gachaButton", gachaButton);
-            var unitsButton = MakeButton("UnitsButton", canvas, "Roster", TopRight, new Vector2(-24, -180), new Vector2(280, 72), out var unitsLabel);
+            var unitsButton = MakeButton("UnitsButton", canvas, "Roster", TopRight, new Vector2(-24, -188), new Vector2(280, 80), out var unitsLabel);
             DecorateButton(unitsButton, unitsLabel, "icons/icon-tab-hero");
             SetRef(hud, "unitsButton", unitsButton);
             // Chinh Phat: BattleHud doi chu thanh "Roi Chinh Phat" luc dang chuan bi.
-            var conquestButton = MakeButton("ConquestButton", canvas, "Conquest", TopRight, new Vector2(-24, -268), new Vector2(280, 72), out var conquestLabel);
+            var conquestButton = MakeButton("ConquestButton", canvas, "Conquest", TopRight, new Vector2(-24, -284), new Vector2(280, 80), out var conquestLabel);
             DecorateButton(conquestButton, conquestLabel, "icons/icon-raid");
             SetRef(hud, "conquestButton", conquestButton);
             SetRef(hud, "conquestLabel", conquestLabel);
             // Nhiem vu (GDD muc 11): nut mo man Hanh trinh + cham do bao con o bam nhan duoc. Icon lay o `lobby/menu-quest`
             // — icon nay da lam tu dot UI lobby cho hang icon GDD 10.4 nhung chua noi vao code nao.
-            var questButton = MakeButton("QuestButton", canvas, "Quests", TopRight, new Vector2(-24, -356), new Vector2(280, 72), out var questLabel);
+            var questButton = MakeButton("QuestButton", canvas, "Quests", TopRight, new Vector2(-24, -380), new Vector2(280, 80), out var questLabel);
             DecorateButton(questButton, questLabel, "lobby/menu-quest");
             var questDot = Img("Dot", questButton.transform, UiSprite("chrome/notify-dot"), TopRight, new Vector2(-4, -4), new Vector2(30, 30));
             SetRef(hud, "questButton", questButton);
             SetRef(hud, "questDot", questDot.gameObject);
             // Boss Rush: 3 hiep boss lien tiep tren cung mot thanh mau (che do phu, khong doi NextWave).
             // Anh `lobby/hud-skull-boss` da ve tu dot UI truoc va chua file nao dung.
-            var bossRushButton = MakeButton("BossRushButton", canvas, "Boss Rush", TopRight, new Vector2(-24, -444), new Vector2(280, 72), out var bossRushLabel);
+            var bossRushButton = MakeButton("BossRushButton", canvas, "Boss Rush", TopRight, new Vector2(-24, -476), new Vector2(280, 80), out var bossRushLabel);
             DecorateButton(bossRushButton, bossRushLabel, "lobby/hud-skull-boss");
             SetRef(hud, "bossRushButton", bossRushButton);
 
@@ -1982,9 +2060,9 @@ namespace BuildBuild.Editor
             // (Native 48x36 = 96x72 px man) moi dung luoi 2 px cua game; o x2 thi 1 art-px = 4 px, to va choi hon
             // moi icon quanh no (audit 2026-10-12, T4). Duoi cot nut; dong ho tich luy o duoi.
             // Ba hinh (dong / he sang / day tran) do BattleHud doi theo gio da tich. Nut KHONG nen: chi sprite ruong.
-            // y -460 (truoc la -372): nhuong cho cho nut Quests thu 4 trong cot.
+            // y -572: cot 5 nut cao 80, buoc 96 (nut cuoi day o -556) -> ruong cach 16 px.
             var chestClosed = UiSprite("raid/afk-chest-closed");
-            var chest = Img("AfkChest", canvas, chestClosed, TopRight, new Vector2(-68, -532), Native(48, 36));
+            var chest = Img("AfkChest", canvas, chestClosed, TopRight, new Vector2(-68, -572), Native(48, 36));
             chest.raycastTarget = true;
             var chestButton = chest.gameObject.AddComponent<Button>();
             var chestColors = ColorBlock.defaultColorBlock;
@@ -2212,7 +2290,14 @@ namespace BuildBuild.Editor
             SetRef(hud, "settingsPanel", BuildSettingsPanel(canvas));
         }
 
-        /// <summary>Khung goi y ngu canh o duoi san (noi dung do `Meta/ContextTips` quyet, moi y mot lan).</summary>
+        /// <summary>
+        /// The huong dan tan thu o duoi san: "2 / 8" goc tren phai, tieu de + noi dung ben trai, hai nut ben
+        /// phai ("Got it" = qua buoc nay, "Skip guide" = bo ca day). Buoc nao va noi dung gi do
+        /// `Meta/Tutorial` quyet — o day chi la khung.
+        ///
+        /// Be ngang o noi dung 540 (truoc 600) vi cot nut ben phai bat dau o x=722: chu dai cham vao nut
+        /// "Got it" thi khong co loi nao bao, chi co chu de len nut.
+        /// </summary>
         static TipPanel BuildTipPanel(RectTransform canvas)
         {
             var host = Rect("TipPanel", canvas, Bottom, new Vector2(0, 210), new Vector2(900, 190));
@@ -2221,17 +2306,23 @@ namespace BuildBuild.Editor
             var body = Img("Bg", root, UiSprite("panels/panel-hero"), Center, Vector2.zero, new Vector2(900, 190), sliced: true);
             body.raycastTarget = true;
             Img("Portrait", body.transform, UiSprite("avatars/avatar-frostweaver"), MidLeft, new Vector2(84, 0), new Vector2(120, 120));
-            var title = Label("Title", body.transform, "", 30, TopLeft, new Vector2(164, -26), new Vector2(600, 40));
+            var step = Label("Step", body.transform, "", 20, TopRight, new Vector2(-24, -14), new Vector2(160, 30));
+            step.alignment = TextAnchor.MiddleRight;
+            var title = Label("Title", body.transform, "", 30, TopLeft, new Vector2(164, -26), new Vector2(540, 40));
             title.alignment = TextAnchor.MiddleLeft;
-            var text = Label("Body", body.transform, "", 24, TopLeft, new Vector2(164, -68), new Vector2(600, 100));
+            var text = Label("Body", body.transform, "", 24, TopLeft, new Vector2(164, -68), new Vector2(520, 104));
             text.alignment = TextAnchor.UpperLeft;
             text.horizontalOverflow = HorizontalWrapMode.Wrap;   // cau dai phai xuong dong, khong tran ra ngoai khung
-            var ok = MakeButton("GotIt", body.transform, "Got it", MidRight, new Vector2(-28, 0), new Vector2(150, 66), out _);
+            var ok = MakeButton("GotIt", body.transform, "Got it", MidRight, new Vector2(-28, 16), new Vector2(180, 66), out _);
+            var skip = MakeButton("SkipGuide", body.transform, "Skip guide", MidRight, new Vector2(-28, -54), new Vector2(180, 52), out var skipLabel);
+            skipLabel.fontSize = PixelFont.Snap(20);
 
             SetRef(panel, "root", root.gameObject);
+            SetRef(panel, "stepText", step);
             SetRef(panel, "titleText", title);
             SetRef(panel, "bodyText", text);
             SetRef(panel, "dismissButton", ok);
+            SetRef(panel, "skipButton", skip);
             return panel;
         }
 
@@ -2253,9 +2344,9 @@ namespace BuildBuild.Editor
         /// </summary>
         static PausePanel BuildPausePanel(RectTransform canvas)
         {
-            var host = Rect("PausePanel", canvas, Center, Vector2.zero, new Vector2(RefWidth, RefHeight));
+            var host = FullScreen("PausePanel", canvas);
             var panel = host.gameObject.AddComponent<PausePanel>();
-            var root = Rect("Root", host, Center, Vector2.zero, new Vector2(RefWidth, RefHeight));
+            var root = FullScreen("Root", host);
             var dim = Img("Dim", root, UiSprite("chrome/dim-tile"), Center, Vector2.zero, Vector2.zero);
             Stretch(dim.rectTransform, 0, 0, 0, 0);
             dim.color = new Color(1f, 1f, 1f, 0.72f);
@@ -2284,19 +2375,19 @@ namespace BuildBuild.Editor
         /// <summary>Man Cai dat: am luong nhac + tat SFX + xoa tien trinh (bam 2 lan) + duong dan file save.</summary>
         static SettingsPanel BuildSettingsPanel(RectTransform canvas)
         {
-            var host = Rect("SettingsPanel", canvas, Center, Vector2.zero, new Vector2(RefWidth, RefHeight));
+            var host = FullScreen("SettingsPanel", canvas);
             var panel = host.gameObject.AddComponent<SettingsPanel>();
-            var root = Rect("Root", host, Center, Vector2.zero, new Vector2(RefWidth, RefHeight));
+            var root = FullScreen("Root", host);
             var dim = Img("Dim", root, UiSprite("chrome/dim-tile"), Center, Vector2.zero, Vector2.zero);
             Stretch(dim.rectTransform, 0, 0, 0, 0);
             dim.color = new Color(1f, 1f, 1f, 0.72f);
             dim.raycastTarget = true;
 
-            var body = Img("Body", root, UiSprite("panels/panel-hero"), Center, new Vector2(0, 20), new Vector2(780, 560), sliced: true);
+            var body = Img("Body", root, UiSprite("panels/panel-hero"), Center, new Vector2(0, 20), new Vector2(780, 640), sliced: true);
             body.raycastTarget = true;
             var titleBar = Img("Title", body.transform, UiSprite("panels/title-ribbon"), Top, new Vector2(0, 26), new Vector2(360, 64), sliced: true);
             Label("Value", titleBar.transform, "Settings", 34, Center, Vector2.zero, new Vector2(340, 64));
-            var closeImage = Img("Close", body.transform, UiSprite("chrome/btn-close"), TopRight, new Vector2(-14, -14), new Vector2(52, 52));
+            var closeImage = Img("Close", body.transform, UiSprite("chrome/btn-close"), TopRight, new Vector2(-16, -16), new Vector2(64, 64));
             closeImage.raycastTarget = true;
             var close = closeImage.gameObject.AddComponent<Button>();
 
@@ -2307,18 +2398,29 @@ namespace BuildBuild.Editor
                 return label;
             }
 
-            RowCaption("MusicCaption", "Music Volume", -96);
-            var minus = MakeButton("VolumeDown", body.transform, "-", TopLeft, new Vector2(400, -100), new Vector2(68, 68), out _);
-            var volumeText = Label("VolumeValue", body.transform, "40%", 28, TopLeft, new Vector2(486, -96), new Vector2(120, 48));
-            var plus = MakeButton("VolumeUp", body.transform, "+", TopLeft, new Vector2(612, -100), new Vector2(68, 68), out _);
+            RowCaption("MusicCaption", "Music Volume", -110);
+            var minus = MakeButton("VolumeDown", body.transform, "-", TopLeft, new Vector2(400, -96), new Vector2(76, 76), out _);
+            var volumeText = Label("VolumeValue", body.transform, "40%", 28, TopLeft, new Vector2(486, -110), new Vector2(120, 48));
+            var plus = MakeButton("VolumeUp", body.transform, "+", TopLeft, new Vector2(612, -96), new Vector2(76, 76), out _);
 
-            RowCaption("SoundCaption", "Sound Effects", -184);
-            var mute = MakeButton("Mute", body.transform, "Sound: ON", TopLeft, new Vector2(400, -188), new Vector2(280, 68), out var muteLabel);
+            RowCaption("SoundCaption", "Sound Effects", -196);
+            var mute = MakeButton("Mute", body.transform, "Sound: ON", TopLeft, new Vector2(400, -182), new Vector2(320, 76), out var muteLabel);
 
-            RowCaption("ProgressCaption", "Progress", -272);
-            var reset = MakeButton("Reset", body.transform, "Reset Progress", TopLeft, new Vector2(400, -276), new Vector2(280, 68), out var resetLabel);
+            RowCaption("ProgressCaption", "Progress", -282);
+            var reset = MakeButton("Reset", body.transform, "Reset Progress", TopLeft, new Vector2(400, -268), new Vector2(320, 76), out var resetLabel);
 
-            var path = Label("Path", body.transform, "", 20, TopLeft, new Vector2(48, -368), new Vector2(660, 90));
+            // Huong dan tan thu: da Skip / da xong van xem lai duoc tu day (`Meta/Tutorial.Restart`). Khong
+            // phai nut xoa gi — no chi dat lai chi so buoc trong save.
+            RowCaption("GuideCaption", "Guide", -366);
+            var guide = MakeButton("ReplayGuide", body.transform, "Replay Guide", TopLeft, new Vector2(400, -352),
+                new Vector2(320, 76), out _);
+
+            // Doi acc: dang xuat roi ve man dang nhap (`LoginScreen`); save cua acc cu van nam trong file cua no.
+            RowCaption("AccountCaption", "Account", -450);
+            var logout = MakeButton("Logout", body.transform, "Log Out", TopLeft, new Vector2(400, -436), new Vector2(320, 76), out _,
+                UiSprite("chrome/btn-blue"));
+
+            var path = Label("Path", body.transform, "", 20, TopLeft, new Vector2(48, -520), new Vector2(660, 104));
             path.alignment = TextAnchor.UpperLeft;
             path.horizontalOverflow = HorizontalWrapMode.Wrap;   // duong dan dai -> xuong dong, khong tran ra ngoai khung
 
@@ -2330,6 +2432,8 @@ namespace BuildBuild.Editor
             SetRef(panel, "muteLabel", muteLabel);
             SetRef(panel, "resetButton", reset);
             SetRef(panel, "resetLabel", resetLabel);
+            SetRef(panel, "guideButton", guide);
+            SetRef(panel, "logoutButton", logout);
             SetRef(panel, "closeButton", close);
             SetRef(panel, "pathText", path);
             return panel;
@@ -2383,7 +2487,7 @@ namespace BuildBuild.Editor
             var panel = host.gameObject.AddComponent<HeroInfoPanel>();
             var body = Img("Body", host, UiSprite("chrome/panel-stone"), Center, Vector2.zero, new Vector2(1500, 120), sliced: true);
             body.raycastTarget = true;   // cham vao bang khong roi xuong san
-            var closeImage = Img("Close", body.transform, UiSprite("chrome/btn-close"), TopRight, new Vector2(-8, -8), new Vector2(44, 44));
+            var closeImage = Img("Close", body.transform, UiSprite("chrome/btn-close"), TopRight, new Vector2(-12, -12), new Vector2(56, 56));
             closeImage.raycastTarget = true;
             var close = closeImage.gameObject.AddComponent<Button>();
 
@@ -2460,7 +2564,7 @@ namespace BuildBuild.Editor
         /// </summary>
         static ResultPopup BuildResultPopup(RectTransform canvas)
         {
-            var rootRect = Rect("ResultPopup", canvas, Center, Vector2.zero, new Vector2(RefWidth, RefHeight));
+            var rootRect = FullScreen("ResultPopup", canvas);
             var popup = rootRect.gameObject.AddComponent<ResultPopup>();
 
             var dim = Img("Dim", rootRect, UiSprite("chrome/dim-tile"), Center, Vector2.zero, Vector2.zero);
@@ -2522,7 +2626,7 @@ namespace BuildBuild.Editor
         /// <summary>Bang doc dong gop cua wave vua chot. Template an, dong that tao luc runtime tu snapshot.</summary>
         static ContributionPanel BuildContributionPanel(RectTransform canvas, WaveStats waveStats)
         {
-            var rootRect = Rect("ContributionPanel", canvas, Center, Vector2.zero, new Vector2(RefWidth, RefHeight));
+            var rootRect = FullScreen("ContributionPanel", canvas);
             var panel = rootRect.gameObject.AddComponent<ContributionPanel>();
             var dim = Img("Dim", rootRect, UiSprite("chrome/dim-tile"), Center, Vector2.zero, Vector2.zero);
             Stretch(dim.rectTransform, 0, 0, 0, 0);
@@ -2973,6 +3077,8 @@ namespace BuildBuild.Editor
         static void BuildFenceGround(Transform castle)
         {
             var terrace = LoadSprite(ArtRoot + "Fence/terrace-aligned.png");
+            float terraceWidth = 0f;
+            float terraceSeamPx = FenceFarPx;
             if (terrace != null)
             {
                 float scale = (FenceNearPx + FenceLipPx - FenceFarPx) / terrace.rect.height;
@@ -2981,7 +3087,11 @@ namespace BuildBuild.Editor
                 float width = terrace.rect.width * scale;
                 go.transform.position = PxToWorld(FenceTerraceLeftPx + width / 2f,
                     FenceFarPx + terrace.rect.height * scale / 2f);
+                terraceWidth = width;
+                terraceSeamPx = FenceFarPx + terrace.rect.height * scale;   // mep GAN cua them = day man da
             }
+
+            BuildFenceSkirt(castle, terraceWidth, terraceSeamPx);
 
             var pedestal = LoadSprite(ArtRoot + "Fence/pedestal.png");
             if (pedestal == null) return;
@@ -2998,6 +3108,24 @@ namespace BuildBuild.Editor
             }
             SetRefs(castle.GetComponent<Castle>(), "pedestals", pedestals);
             SetValue(castle.GetComponent<Castle>(), "pedestalDrop", -PadCannonDropPx / Ppu);
+        }
+
+        /// <summary>Hang y (art px, tinh tu dinh) cua duong cat trong `Fence/ground-skirt.png` — khop `tools/art/make_fence_skirt.py`.</summary>
+        const float SkirtSeamPx = 48f;
+
+        /// <summary>
+        /// Dai dat o DAY them da: pha duong cat ngang tuyet doi cua mep gan them bang co dai / so i dat / bong tiep xuc
+        /// (art `Fence/ground-skirt.png`, 1 art px = 1 px man). Khong co art thi bo qua — scene cu van dung.
+        /// Ve tren them (Castle-2) va duoi than thanh (Castle) nen dai nam de len mep da nhung khong che vet chan phao.
+        /// </summary>
+        static void BuildFenceSkirt(Transform castle, float terraceWidth, float seamPx)
+        {
+            var skirt = LoadSprite(ArtRoot + "Fence/ground-skirt.png");
+            if (skirt == null || terraceWidth <= 0f) return;
+            // Con cua Castle (nhu Terrace/Pedestal) de ban sao thanh NPC o Chinh Phat mang theo, khong phai object roi.
+            var go = NewSprite("GroundSkirt", castle, skirt, SortOrder.Castle - 1);
+            go.transform.position = PxToWorld(FenceTerraceLeftPx + terraceWidth / 2f,
+                seamPx + (skirt.rect.height / 2f - SkirtSeamPx));
         }
 
         /// <summary>Trung vi mep alpha phai cua cac hang 20-97% chieu cao (px sprite, tinh tu trai) — mat thap/vach phai.</summary>
@@ -3047,9 +3175,9 @@ namespace BuildBuild.Editor
         /// </summary>
         static CastleUpgradePanel BuildCastleUpgradePanel(RectTransform canvas)
         {
-            var host = Rect("CastleUpgradePanel", canvas, Center, Vector2.zero, new Vector2(RefWidth, RefHeight));
+            var host = FullScreen("CastleUpgradePanel", canvas);
             var panel = host.gameObject.AddComponent<CastleUpgradePanel>();
-            var root = Rect("Root", host, Center, Vector2.zero, new Vector2(RefWidth, RefHeight));
+            var root = FullScreen("Root", host);
             var dim = Img("Dim", root, UiSprite("chrome/dim-tile"), Center, Vector2.zero, Vector2.zero);
             Stretch(dim.rectTransform, 0, 0, 0, 0);
             dim.color = new Color(1f, 1f, 1f, 0.72f);
@@ -3059,7 +3187,7 @@ namespace BuildBuild.Editor
             body.raycastTarget = true;
             var titleBar = Img("Title", body.transform, UiSprite("panels/title-ribbon"), Top, new Vector2(0, 26), new Vector2(420, 64), sliced: true);
             Label("Value", titleBar.transform, "Upgrade Fence", 34, Center, Vector2.zero, new Vector2(400, 64));
-            var closeImage = Img("Close", body.transform, UiSprite("chrome/btn-close"), TopRight, new Vector2(-14, -14), new Vector2(52, 52));
+            var closeImage = Img("Close", body.transform, UiSprite("chrome/btn-close"), TopRight, new Vector2(-16, -16), new Vector2(64, 64));
             closeImage.raycastTarget = true;
             var close = closeImage.gameObject.AddComponent<Button>();
 
@@ -3124,8 +3252,10 @@ namespace BuildBuild.Editor
                 .Select(AssetDatabase.LoadAssetAtPath<CannonDefinition>)
                 .ToArray();
 
-            // 12 phao (2026-10-05) xep 1 cot thi bang cao ~1800 > man 1080 -> 2 cot.
-            const float rowStep = 124f;
+            // 13 phao (2026-10-30, them Dau Rong Da) xep 1 cot thi bang cao ~1800 > man 1080 -> 2 cot.
+            // Buoc dong 120 (nut cao 114): 7 hang -> cao 1058, van lot man 1080; de 124 thi bang cao 1086 va tieu de
+            // bi cat 9 px o mep tren (Khoa 2026-10-30).
+            const float rowStep = 120f;
             const int columns = 2;
             int rows = (roster.Length + columns - 1) / columns;
             float height = 108f + rows * rowStep + 110f;
@@ -3632,6 +3762,83 @@ namespace BuildBuild.Editor
         /// bon loai hang (Daily · Weekly · Monthly · Offers) nen phai la man rieng nhu Doi quan. Cung khuon voi
         /// `BuildUnitsScene`: camera nen toi, Back goc trai, o vang goc phai; noi dung do `Meta/Shop` quyet.
         /// </summary>
+        // ---------------------------------------------------------------- man dang nhap
+
+        /// <summary>Dung LAI mot minh scene Login (khong phai chay ca `BuildAll`) — scene nay chi dung UI chrome.</summary>
+        [MenuItem("BuildBuild/Scenes/Build Login")]
+        public static void BuildLoginSceneMenu()
+        {
+            if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) return;
+            BuildLoginSceneOnly();
+            EditorSceneManager.OpenScene(ScenePath(SceneNames.Login));
+            Debug.Log("[SceneBuilder] Da dung man dang nhap va dat lam scene dau tien trong Build Settings.");
+        }
+
+        /// <summary>
+        /// Man dang nhap / dang ky (chot 2026-10-27: tai khoan cuc bo, save theo acc — xem `Meta/Accounts`).
+        /// Scene nay dung DAU danh sach Build Settings: mo game la ra form truoc; may con phien dang nhap thi
+        /// `LoginScreen.Start` nhay thang sang Battle nen nguoi choi binh thuong khong thay no.
+        /// </summary>
+        public static void BuildLoginSceneOnly()
+        {
+            var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+            _font = PixelFont.Asset;   // ly do: xem BuildGachaScene
+            CreateCamera(new Color(0.06f, 0.05f, 0.11f));
+            CreateEventSystem();
+
+            var canvas = CreateCanvas("LoginUI");
+            var screen = canvas.gameObject.AddComponent<LoginScreen>();
+
+            var panel = Img("Panel", canvas, UiSprite("panels/panel-hero"), Center, new Vector2(0, -20), new Vector2(780, 740), sliced: true);
+            panel.raycastTarget = true;
+            var ribbon = Img("Title", panel.transform, UiSprite("panels/title-ribbon"), Top, new Vector2(0, 26), new Vector2(360, 64), sliced: true);
+            var title = Label("Value", ribbon.transform, "Sign in", 34, Center, Vector2.zero, new Vector2(340, 64));
+
+            Text Caption(Transform parent, string name, string caption, float y)
+            {
+                var label = Label(name, parent, caption, 26, TopLeft, new Vector2(48, y), new Vector2(400, 44));
+                label.alignment = TextAnchor.MiddleLeft;
+                label.color = new Color(0.78f, 0.78f, 0.9f);
+                return label;
+            }
+
+            Caption(panel.transform, "UserCaption", "Username", -92);
+            var user = MakeInput("Username", panel.transform, "3-16 letters, digits, _", TopLeft, new Vector2(48, -140), new Vector2(684, 80));
+            Caption(panel.transform, "PassCaption", "Password", -248);
+            var password = MakeInput("Password", panel.transform, "at least 4 characters", TopLeft, new Vector2(48, -296), new Vector2(684, 80), secret: true);
+
+            // O nhap lai mat khau nam trong MOT container: che do dang nhap chi viec tat ca cum, khong phai
+            // bat/tat tung object mot.
+            var confirmRow = Rect("ConfirmRow", panel.transform, TopLeft, new Vector2(0, -404), new Vector2(780, 156));
+            Caption(confirmRow, "ConfirmCaption", "Confirm password", 0);
+            var confirm = MakeInput("Confirm", confirmRow, "repeat password", TopLeft, new Vector2(48, -48), new Vector2(684, 80), secret: true);
+            confirmRow.gameObject.SetActive(false);
+
+            var submit = MakeButton("Submit", panel.transform, "Sign in", TopLeft, new Vector2(48, -596), new Vector2(336, 84), out var submitLabel);
+            var mode = MakeButton("Mode", panel.transform, "Create account", TopLeft, new Vector2(396, -596), new Vector2(336, 84), out var modeLabel,
+                UiSprite("chrome/btn-blue"));
+            var message = Label("Message", panel.transform, "", 22, TopLeft, new Vector2(48, -690), new Vector2(684, 44));
+            message.color = new Color(1f, 0.62f, 0.58f);   // chu loi, cung sac do voi nhan "Not enough Gold" cua Shop
+
+            SetRef(screen, "titleText", title);
+            SetRef(screen, "userField", user);
+            SetRef(screen, "passwordField", password);
+            SetRef(screen, "confirmField", confirm);
+            SetRef(screen, "confirmRow", confirmRow.gameObject);
+            SetRef(screen, "messageText", message);
+            SetRef(screen, "submitButton", submit);
+            SetRef(screen, "submitLabel", submitLabel);
+            SetRef(screen, "modeButton", mode);
+            SetRef(screen, "modeLabel", modeLabel);
+
+            EditorSceneManager.SaveScene(scene, ScenePath(SceneNames.Login));
+
+            // Login dung dau danh sach scene; cac scene con lai giu nguyen thu tu da co.
+            EditorBuildSettings.scenes = new[] { new EditorBuildSettingsScene(ScenePath(SceneNames.Login), true) }
+                .Concat(EditorBuildSettings.scenes.Where(s => s.path != ScenePath(SceneNames.Login)))
+                .ToArray();
+        }
+
         static void BuildShopScene()
         {
             var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
@@ -4097,6 +4304,43 @@ namespace BuildBuild.Editor
             return button;
         }
 
+        /// <summary>
+        /// O nhap chu cua UGUI `InputField` kieu cu (game khong dung TextMeshPro): nen `chrome/panel-paper`
+        /// 9-slice, chu ben trong + placeholder mo; `secret` = hien dau cham (o mat khau).
+        /// </summary>
+        static InputField MakeInput(string name, Transform parent, string placeholder, Vector2 anchor, Vector2 pos, Vector2 size,
+            bool secret = false)
+        {
+            var background = Img(name, parent, UiSprite("chrome/panel-paper"), anchor, pos, size, sliced: true);
+            background.raycastTarget = true;
+            // `panel-paper` la nen SANG (trung binh 133/255) ma chu trong o lai mau trang — lam toi bot de chu va
+            // con tro doc duoc, o nhap van nang hon nen panel (56) nen van thay duong vien.
+            background.color = new Color(0.55f, 0.55f, 0.62f, 1f);
+            var field = background.gameObject.AddComponent<InputField>();
+            // Chu va placeholder keo kin o (cach mep 24 px), pivot giua — dung bo cuc mac dinh cua UGUI cho
+            // InputField, de con tro chu ve dung cho ngoi cua no.
+            var text = Label("Text", background.transform, "", 28, Center, Vector2.zero, Vector2.zero);
+            text.alignment = TextAnchor.MiddleLeft;
+            text.supportRichText = false;
+            Stretch(text.rectTransform, 24, 24, 0, 0);
+            var hint = Label("Placeholder", background.transform, placeholder, 28, Center, Vector2.zero, Vector2.zero);
+            hint.alignment = TextAnchor.MiddleLeft;
+            hint.color = new Color(1f, 1f, 1f, 0.35f);
+            Stretch(hint.rectTransform, 24, 24, 0, 0);
+            field.targetGraphic = background;
+            field.textComponent = text;
+            field.placeholder = hint;
+            // Con tro mac dinh cua UGUI la mau XAM DAM, tren nen toi gan nhu khong thay.
+            field.customCaretColor = true;
+            field.caretColor = new Color(1f, 0.95f, 0.8f);
+            field.lineType = InputField.LineType.SingleLine;
+            // Gioi han trung voi `Accounts` (ten 16, mat khau 32) de o nhap khong nhan chu ma lop du lieu chac
+            // chan tu choi.
+            field.characterLimit = secret ? 32 : 16;
+            if (secret) field.contentType = InputField.ContentType.Password;
+            return field;
+        }
+
         static Image Img(string name, Transform parent, Sprite sprite, Vector2 anchor, Vector2 pos, Vector2 size, bool sliced = false)
         {
             var img = Rect(name, parent, anchor, pos, size).gameObject.AddComponent<Image>();
@@ -4142,6 +4386,17 @@ namespace BuildBuild.Editor
             return rect;
         }
 
+        /// <summary>
+        /// Lop phu kin MAN (popup, overlay): keo gian theo canvas thay vi co dinh 1920x1080 — man 21:9 / 4:3 thi canvas
+        /// khong con 1920x1080 (match 0,5), lop co dinh de ho dai HUD hai ben (hoac tren/duoi) van bam xuyen duoc.
+        /// </summary>
+        static RectTransform FullScreen(string name, Transform parent)
+        {
+            var rect = Rect(name, parent, Center, Vector2.zero, Vector2.zero);
+            Stretch(rect, 0, 0, 0, 0);
+            return rect;
+        }
+
         static void Stretch(RectTransform rect, float left, float right, float top, float bottom)
         {
             rect.anchorMin = Vector2.zero;
@@ -4174,8 +4429,13 @@ namespace BuildBuild.Editor
         /// </summary>
         static void BuildConquestMap(RectTransform canvas, WaveManager waves, Economy economy, BattleHud hud, HeroDefinition[] roster)
         {
-            var rootRect = Rect("ConquestMap", canvas, Center, Vector2.zero, new Vector2(RefWidth, RefHeight));
+            var rootRect = FullScreen("ConquestMap", canvas);
             var screen = rootRect.gameObject.AddComponent<ConquestMapScreen>();
+            // Nen den phu kin man: ban do co dinh 1920x1080, man rong hon thi hai ben khong con lo HUD (va bam xuyen).
+            var backdrop = Img("Backdrop", rootRect, UiSprite("chrome/dim-tile"), Center, Vector2.zero, Vector2.zero);
+            Stretch(backdrop.rectTransform, 0, 0, 0, 0);
+            backdrop.color = Color.black;
+            backdrop.raycastTarget = true;
             var mapImage = Img("Map", rootRect, UiSprite("raid/world-map"), Center, Vector2.zero, Native(960, 540));
             mapImage.raycastTarget = true;   // chan cham xuyen xuong san
             var map = mapImage.rectTransform;
@@ -4313,7 +4573,7 @@ namespace BuildBuild.Editor
         /// </summary>
         static TownScreen BuildTownScreen(RectTransform canvas)
         {
-            var rootRect = Rect("TownScreen", canvas, Center, Vector2.zero, new Vector2(RefWidth, RefHeight));
+            var rootRect = FullScreen("TownScreen", canvas);
             var screen = rootRect.gameObject.AddComponent<TownScreen>();
             var dim = Img("Dim", rootRect, UiSprite("chrome/dim-tile"), Center, Vector2.zero, Vector2.zero);
             Stretch(dim.rectTransform, 0, 0, 0, 0);
@@ -4361,7 +4621,7 @@ namespace BuildBuild.Editor
         static SkillBoardScreen BuildSkillBoardScreen(RectTransform canvas, Economy economy)
         {
             const int Rows = 3;   // = so gia tri cua `BoardNode`
-            var rootRect = Rect("SkillBoardScreen", canvas, Center, Vector2.zero, new Vector2(RefWidth, RefHeight));
+            var rootRect = FullScreen("SkillBoardScreen", canvas);
             var screen = rootRect.gameObject.AddComponent<SkillBoardScreen>();
             var dim = Img("Dim", rootRect, UiSprite("chrome/dim-tile"), Center, Vector2.zero, Vector2.zero);
             Stretch(dim.rectTransform, 0, 0, 0, 0);
@@ -4424,7 +4684,7 @@ namespace BuildBuild.Editor
 
         static QuestScreen BuildQuestScreen(RectTransform canvas, WaveManager waves, Economy economy, BattleHud hud, HeroDefinition[] roster)
         {
-            var rootRect = Rect("QuestScreen", canvas, Center, Vector2.zero, new Vector2(RefWidth, RefHeight));
+            var rootRect = FullScreen("QuestScreen", canvas);
             var screen = rootRect.gameObject.AddComponent<QuestScreen>();
 
             var dim = Img("Dim", rootRect, UiSprite("chrome/dim-tile"), Center, Vector2.zero, Vector2.zero);
@@ -4575,8 +4835,43 @@ namespace BuildBuild.Editor
             return root;
         }
 
-        // Nen Chinh Phat (Background/Conquest/, nguoi dung duyet g1 2026-10-01): canvas 2880x1620 cung ti le 1 px = 0,01 unit
-        // nhu tran wave, camera lui 1,5x thay ca tam. Thanh minh dung yen: dat nen sao cho phao dai tren nen (mep alpha trai
+        /// <summary>
+        /// Lop dong cua mot biome khong co `FieldAmbience` (dam lay / dat chay / tuyet): moi vat the mot bo frame lap,
+        /// chay theo kieu chuyen dong trong mot khung world. Ten thu muc lay theo `Background/<Biome>/<prop>/<prop>-N.png`,
+        /// cung kieu voi `Background/Field/`.
+        /// </summary>
+        static GameObject BuildBiomeDrift(string name, params DriftAmbience.Mote[] motes)
+        {
+            var root = new GameObject(name);
+            root.AddComponent<DriftAmbience>().motes = motes;
+            return root;
+        }
+
+        /// <param name="folder">Duong dan tuong doi trong `Background/`, vd `Swamp/firefly`.</param>
+        /// <param name="prefix">Tien to file frame (`firefly` -> `firefly-1.png`).</param>
+        /// <param name="area">Khung chay TRONG THE GIOI (x sang phai, y len) — xem `Box`.</param>
+        static DriftAmbience.Mote MoteDef(string name, string folder, string prefix, float fps, int count, UnityEngine.Rect area,
+            DriftAmbience.Motion motion, float speed, float stagger)
+        {
+            return new DriftAmbience.Mote
+            {
+                name = name,
+                frames = Frames(ArtRoot + "Background/" + folder, prefix),
+                fps = fps,
+                count = count,
+                area = area,
+                motion = motion,
+                speed = speed,
+                stagger = stagger,
+                order = SortOrder.Background + 2,
+            };
+        }
+
+        /// <summary>Khung trong THE GIOI: goc duoi-trai (x, y) + be ngang/cao. Nen ve 1 art px = 1 px man nen 1 unit = 100 px.</summary>
+        static UnityEngine.Rect Box(float xMin, float yMin, float width, float height) =>
+            UnityEngine.Rect.MinMaxRect(xMin, yMin, xMin + width, yMin + height);
+
+        // Nen Chinh Phat (Background/Conquest/, nguoi dung duyet g1 2026-10-01): canvas 2880x1620 cung ti le 1 px = 0,01 unit        // nhu tran wave, camera lui 1,5x thay ca tam. Thanh minh dung yen: dat nen sao cho phao dai tren nen (mep alpha trai
         // px 204, tam bbox alpha y 805 = giua duong dat ngang hang 728-882) trung phao dai dang dung. So do o
         // tempart/conquest-bg/process.py + anim/preview.html.
         const float ConquestWidth = 2880f;
@@ -4815,6 +5110,8 @@ namespace BuildBuild.Editor
         /// <summary>Frame `action-N.png` trong thu muc, xep theo N (khong lay sheet-transparent.png).</summary>
         static Sprite[] Frames(string folder, string action)
         {
+            // Thu muc chua ton tai (bo art chua giao, vd phao khong co `bullet/`) -> bo rong, khong de FindAssets bao loi.
+            if (!AssetDatabase.IsValidFolder(folder)) return System.Array.Empty<Sprite>();
             var pattern = new Regex("^" + action + @"-(\d+)\.png$");
             return AssetDatabase.FindAssets("t:Sprite", new[] { folder })
                 .Select(AssetDatabase.GUIDToAssetPath)

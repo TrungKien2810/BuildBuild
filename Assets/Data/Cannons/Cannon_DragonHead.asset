@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f28d9e270dec892bd61fa3960bb4436, type: 3}
+  m_Name: Cannon_DragonHead
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.CannonDefinition
+  displayName: Dragon Head Cannon
+  unitId: cannon_dragonhead
+  icon: {fileID: 21300000, guid: 7aa06bc6db75e644b8ad1bd79a51a2c3, type: 3}
+  damage: 30
+  fireRate: 1
+  range: 5.5
+  aoeRadius: 0
+  slowPercent: 0
+  slowDuration: 0
+  slowIconFrames: []
+  pierceCount: 0
+  dragonKit: {fileID: 11400000, guid: a1519960f6601d24fbb0aeaf4eab4654, type: 2}
+  fire: 0
+  arcHeight: 0
+  targetMarkFrames: []
+  rootDuration: 0
+  rootFrames: []
+  bigTargetMultiplier: 1
+  targetHighestHealth: 0
+  aimMarkFrames: []
+  muzzleFrames: []
+  spinUpSeconds: 0
+  spinUpMultiplier: 3
+  chainCount: 0
+  chainRange: 2.5
+  beamFrames: []
+  coneAngle: 60
+  burstEvery: 0
+  burstDamageMultiplier: 1.75
+  waveFrames: []
+  burstWaveFrames: []
+  burstImpactFrames: []
+  vortexSeconds: 1.5
+  vortexStackBonus: 0.15
+  vortexMaxStacks: 5
+  vortexOpenFrames: []
+  vortexLoop0: []
+  vortexLoop1: []
+  vortexLoop2: []
+  absorbFrames: []
+  impactFrames1: []
+  impactFrames2: []
+  damagePerLevel: 0.08
+  upgradeCostBase: 50
+  upgradeCostExponent: 1.5
+  projectileSpeed: 14
+  projectileFrames: []
+  projectileScale: 0.5
+  impactFrames: []
+  impactScale: 1
+  fireSfx: cannon-fire
+  impactSfx: 
+  animations: {fileID: 11400000, guid: f1e3ea6f17faa944aa4c8b5031c52b57, type: 2}
+  displayScale: 1.35
+  muzzle: {x: -0.48, y: 0.42}
+  tint: {r: 1, g: 1, b: 1, a: 1}

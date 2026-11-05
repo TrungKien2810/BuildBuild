@@ -26,6 +26,8 @@ namespace BuildBuild.Combat
         const float PushTime = 0.15f;
 
         Hero _hero;
+        // Hieu ung khong gan vao hero (de khong chay theo) — hero bi huy giua chieu thi coroutine dung, tu don o OnDestroy.
+        readonly System.Collections.Generic.List<GameObject> _fx = new System.Collections.Generic.List<GameObject>();
         GalemonkDefinition _definition;
         float _waveCooldown;
         float _waveAt = -1f;
@@ -163,6 +165,7 @@ namespace BuildBuild.Combat
             var def = _hero.Definition;
             float hold = def.skillDuration;
             var root = new GameObject("Tornado");
+            _fx.Add(root);
             root.transform.position = centre;
             OneShotFx.SpawnLoop(root.transform, Vector3.zero, _definition.tornadoFrames, hold + _definition.tornadoPullTime,
                 SortOrder.ForUnit(root.transform), scale: Battlefield.UnitScale);
@@ -217,12 +220,20 @@ namespace BuildBuild.Combat
         {
             if (frames == null || frames.Length == 0) return null;
             var go = new GameObject(name);
+            _fx.RemoveAll(fx => fx == null);
+            _fx.Add(go);
             go.transform.position = position;
             go.transform.localScale = Vector3.one * Battlefield.UnitScale;
             var renderer = go.AddComponent<SpriteRenderer>();
             renderer.sprite = frames[0];
             renderer.sortingOrder = SortOrder.Air;
             return renderer;
+        }
+
+        void OnDestroy()
+        {
+            foreach (var fx in _fx)
+                if (fx != null) Destroy(fx);
         }
 
         static void Animate(SpriteRenderer renderer, Sprite[] frames, float t) =>

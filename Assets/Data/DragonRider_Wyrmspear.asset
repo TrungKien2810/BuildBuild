@@ -28,6 +28,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: d407db209c1509c418b4ad07b3e78824, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   pierceFx:
   - {fileID: 21300000, guid: 98ccb7da4dc9894439f62406e9225dea, type: 3}
   - {fileID: 21300000, guid: 574902f81221f384aaeeec47d40d5ad7, type: 3}
@@ -75,6 +76,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: b5e798346536c814091582b55c125457, type: 3}
     loop: 0
     hitFrame: 0
+    frameSeconds: 0
   lanceHitFrames: 020000000400000006000000080000000a000000
   lanceFx:
   - {fileID: 21300000, guid: cd66fea4733133a4c92d50601ad9f770, type: 3}
@@ -98,6 +100,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: ae75fcd1933546749b8917eb83a8710c, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   quakeFx:
   - {fileID: 21300000, guid: 7f7bea036177af1408aeb2606a3c0f8c, type: 3}
   - {fileID: 21300000, guid: 3557445783578114ab782614e3af40d3, type: 3}
@@ -128,6 +131,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 3885602c2cc5fac4994c6fa19cf71fcf, type: 3}
     loop: 0
     hitFrame: 0
+    frameSeconds: 0
   descentHitFrame: 6
   pillarFx:
   - {fileID: 21300000, guid: a8596ca774dedf04d9f3f538935fe0a1, type: 3}
@@ -158,5 +162,6 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 25a1759fd4b2ce941be69f814a0d3711, type: 3}
     loop: 0
     hitFrame: 0
+    frameSeconds: 0
   dragonForward: 1.1
   dragonRespawn: 15

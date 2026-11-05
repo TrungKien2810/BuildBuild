@@ -1,0 +1,38 @@
+{
+  "target": "asset",
+  "mode": "bubble",
+  "source": "tempart/BiomeProps/Swamp/bubble",
+  "align": "center",
+  "status": "lane agy 2026-10-30 (brief-biome-ambience-props.md)",
+  "frames": [
+    {
+      "frame": "bubble-1",
+      "aligned_bbox": [
+        6,
+        6,
+        10,
+        10
+      ]
+    },
+    {
+      "frame": "bubble-2",
+      "aligned_bbox": [
+        4,
+        4,
+        12,
+        12
+      ]
+    },
+    {
+      "frame": "bubble-3",
+      "aligned_bbox": [
+        4,
+        4,
+        12,
+        12
+      ]
+    }
+  ],
+  "cell_size": 16,
+  "cell_height": 16
+}

@@ -46,6 +46,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: cff13b017bac88f499f703805662166b, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   howlClip:
     name: skill
     frames:
@@ -57,6 +58,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: a9350a3288e2d6d49a65e1d59bc6cf9a, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   biteClip:
     name: skill
     frames:
@@ -68,6 +70,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 2509ded6c623a354387b84150acdc773, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   punchImpact:
   - {fileID: 21300000, guid: 48b45ac4eeee6c4468758e811a76fa31, type: 3}
   - {fileID: 21300000, guid: 196c732a84841414a9b4322dcf05da71, type: 3}

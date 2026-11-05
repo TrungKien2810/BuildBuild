@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d080400a169934995ba109c689e54c, type: 3}
+  m_Name: DragonCannonKit
+  m_EditorClassIdentifier: BuildBuild::BuildBuild.Data.DragonCannonKit
+  breathSeconds: 2.5
+  restSeconds: 0.5
+  tickSeconds: 0.25
+  coneHalfAngle: 30
+  burnSeconds: 3
+  burnShare: 0.2
+  rageMax: 100
+  rageGainPerSecond: 40
+  rageDecayDelay: 2
+  rageDecayPerSecond: 20
+  rageThresholds:
+  - 33
+  - 66
+  rageDamage:
+  - 1
+  - 1.4
+  - 1.8
+  rageRange:
+  - 1
+  - 1.15
+  - 1.3
+  ultInhaleSeconds: 0.3
+  ultSeconds: 0.6
+  ultPower: 3
+  ultRangeScale: 1.35
+  ultBreathScale: 1.4
+  ultGroundPools: 3
+  ultGroundRadius: 1
+  ultGroundSeconds: 3
+  ultGroundShare: 0.25
+  burstRadius: 1.2
+  burstPower: 1
+  burstFalloff: 0.5
+  burstChainMax: 3
+  breathLow:
+  - {fileID: 21300000, guid: 07018573a0fd3b24fb06bea3a9e75b4a, type: 3}
+  - {fileID: 21300000, guid: a0a896bfdcba15b479883c4f12573d18, type: 3}
+  - {fileID: 21300000, guid: e486b0e54d785ba4d8280dee653236f2, type: 3}
+  - {fileID: 21300000, guid: 9b47e30730814444288bdb1e49e3e7fa, type: 3}
+  - {fileID: 21300000, guid: 985b17573b749d34c8271aee75aeeba4, type: 3}
+  - {fileID: 21300000, guid: 20a60bbc892b60641851bb992707e19d, type: 3}
+  breathMid:
+  - {fileID: 21300000, guid: 709d63425f6746a45b00b1ff7541d3e9, type: 3}
+  - {fileID: 21300000, guid: 1385b9be70c90e441b2aeb3609dd40c9, type: 3}
+  - {fileID: 21300000, guid: 97edd86a4d1cacb43ba20f93a85497d7, type: 3}
+  - {fileID: 21300000, guid: bdcee96c83dcefa4481ce8b58d3cf0f2, type: 3}
+  - {fileID: 21300000, guid: a270a65251503814e8416c41726a080b, type: 3}
+  - {fileID: 21300000, guid: 8273da84a1c19a044bc5481c9d96a635, type: 3}
+  breathHigh:
+  - {fileID: 21300000, guid: 0b4bd5b6e8031454a85b6fd6b876996f, type: 3}
+  - {fileID: 21300000, guid: d96c0ffba52a3744a8555471ed10f8c5, type: 3}
+  - {fileID: 21300000, guid: c3d30d88b84b32d449da7f778ce590e2, type: 3}
+  - {fileID: 21300000, guid: 403bd3df0a108304c9c3123228ff9c5e, type: 3}
+  - {fileID: 21300000, guid: b47ed3d88603ce647af6b741e41a037c, type: 3}
+  - {fileID: 21300000, guid: a51a22e469549364084c9086727f240b, type: 3}
+  breathUlt:
+  - {fileID: 21300000, guid: 167f38a563a80e3438c945b0adc81624, type: 3}
+  - {fileID: 21300000, guid: 089f71874c55b77409bf869e06c0e134, type: 3}
+  - {fileID: 21300000, guid: da5a0e12d5cb2f34794ae352c728ec7f, type: 3}
+  - {fileID: 21300000, guid: 9459f0f330a3d384a885dd1f6d0b9c5b, type: 3}
+  - {fileID: 21300000, guid: e51e5b281ff57834780b5b756fc62abe, type: 3}
+  - {fileID: 21300000, guid: 9e1608936c8eb3644807a613fc052227, type: 3}
+  burnFrames:
+  - {fileID: 21300000, guid: cf2217e90e16f0849965a571f7ce4fde, type: 3}
+  - {fileID: 21300000, guid: 30f2fad0906128e4da176c26f36b06f3, type: 3}
+  - {fileID: 21300000, guid: 83c834ef2ba248b4c9385946b0b7a6e1, type: 3}
+  - {fileID: 21300000, guid: 0f4937449d94f1f47b01259f2cea5347, type: 3}
+  groundFrames:
+  - {fileID: 21300000, guid: 314725fff44adcc439c695cdac2b9641, type: 3}
+  - {fileID: 21300000, guid: 5f3ef89bfd4ebf14f80e2c5bd5df06d8, type: 3}
+  - {fileID: 21300000, guid: f7039cdbb33dbed4fb210e1e19826b1a, type: 3}
+  - {fileID: 21300000, guid: 1673ef7c40e106843a5a00a1ac3ef1b4, type: 3}
+  burstFrames:
+  - {fileID: 21300000, guid: f0c66196011a81246820d588fc468b1e, type: 3}
+  - {fileID: 21300000, guid: b6913bad38ff00647be5b49e69bbedd5, type: 3}
+  - {fileID: 21300000, guid: d83f891ad48e2d04b9c8daab14eb462f, type: 3}
+  - {fileID: 21300000, guid: e0792dd78510e6440af2fe8af5381615, type: 3}
+  breathSfx: cannon-fire

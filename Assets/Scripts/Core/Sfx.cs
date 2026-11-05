@@ -50,7 +50,7 @@ namespace BuildBuild.Core
             }
         }
 
-        static void ApplyVolume()
+        internal static void ApplyVolume()
         {
             if (_music != null) _music.volume = MusicGain;
         }
@@ -145,6 +145,11 @@ namespace BuildBuild.Core
     {
         static readonly List<RaycastResult> Hits = new List<RaycastResult>();
         Button _hovered;
+
+        // Am luong nam trong save cua TUNG acc: dang nhap / doi acc la sang scene moi, ap lai cho nhac dang phat.
+        void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
+        void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
+        static void OnSceneLoaded(Scene scene, LoadSceneMode mode) => Sfx.ApplyVolume();
 
         void Update()
         {

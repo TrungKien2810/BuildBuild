@@ -32,6 +32,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 8f78ca1e12fe8b24c91ad6d1475146c2, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   poofFrames:
   - {fileID: 21300000, guid: b6242a3a14b43934fa8c95311ace629b, type: 3}
   - {fileID: 21300000, guid: 214705c3f87b13848a34c23f8233dee5, type: 3}
@@ -54,6 +55,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 61ebbce884558ec4f92ee72560f9a3d3, type: 3}
     loop: 0
     hitFrame: 0
+    frameSeconds: 0
   spinRingFrames:
   - {fileID: 21300000, guid: 2db74533a54c29f40916d9a72406da7e, type: 3}
   - {fileID: 21300000, guid: 79a5d471f6dd0204799ab75d92847a11, type: 3}

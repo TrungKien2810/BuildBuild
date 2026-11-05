@@ -351,12 +351,19 @@ namespace BuildBuild.UI
 
         List<(Sprite, string, string)> CannonStats(CannonDefinition cannon, int level, bool maxed, out string note)
         {
+            var kit = cannon.dragonKit;
             var rows = new List<(Sprite, string, string)>
             {
-                (iconDamage, "Damage", Value(Progression.CannonDamage(cannon, level), Progression.CannonDamage(cannon, level + 1), !maxed)),
-                (iconAttackSpeed, "Attack Speed", $"{cannon.fireRate:0.##}/s"),
-                (iconRange, "Range", $"{cannon.range:0.#}"),
+                (iconDamage, kit != null ? "Damage / s" : "Damage",
+                    Value(Progression.CannonDamage(cannon, level), Progression.CannonDamage(cannon, level + 1), !maxed)),
             };
+            // Dau Rong Da khong co "toc ban": no phun lien tuc theo nhip rieng nen dong do doi thanh nhip phun.
+            rows.Add(kit != null
+                ? (iconAttackSpeed, "Breath", $"{kit.breathSeconds:0.#}s · rest {kit.restSeconds:0.#}s")
+                : (iconAttackSpeed, "Attack Speed", $"{cannon.fireRate:0.##}/s"));
+            rows.Add((iconRange, "Range", $"{cannon.range:0.#}"));
+            if (kit != null)
+                rows.Add((iconSplash, "Burn", $"{kit.burnShare * 100f:0}% DPS · {kit.burnSeconds:0.#}s"));
             if (cannon.aoeRadius > 0f) rows.Add((iconSplash, "Splash Damage", $"radius {cannon.aoeRadius:0.#}"));
             if (cannon.slowPercent > 0f) rows.Add((iconSlow, "Slow", $"{cannon.slowPercent * 100f:0}% · {cannon.slowDuration:0.#}s"));
             note = $"Level +{cannon.damagePerLevel * 100f:0}% · Stars +{Progression.StarBonus * 100f:0}% base Damage";
@@ -460,7 +467,7 @@ namespace BuildBuild.UI
             upgradeButton.interactable = selected != null && !maxed && economy.Gold >= cost;
             upgradeLabel.text = selected == null ? "Upgrade"
                 : maxed ? "Gear Maxed"
-                : $"Upgrade\n{cost:N0} Gold";
+                : $"Upgrade\n{cost:N0} Gold{(economy.Gold >= cost ? "" : " · missing")}";
             unequipButton.interactable = selected != null;
         }
 

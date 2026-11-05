@@ -90,12 +90,38 @@ namespace BuildBuild.UI
                 foreach (var hero in Hero.Alive.ToArray()) hero.DevFillMana();
 
             if (cannons != null && GUILayout.Button("Own All 3 Cannons (Test Cannon Mounts)")) cannons.DevOwnAll();
-            GUILayout.Label($"Account: {SaveSystem.Account}");
+            GUILayout.Label($"Account: {SaveSystem.Account}   {(Accounts.IsLoggedIn ? "(signed in)" : "(not signed in)")}");
             GUILayout.BeginHorizontal();
             if (GUILayout.Button("Main")) SwitchAccount(SaveSystem.MainAccount);
             if (GUILayout.Button("Test (all heroes)")) SwitchAccount(SaveSystem.TestAccount);
-            if (GUILayout.Button("Fresh (new game)")) SwitchAccount(SaveSystem.FreshAccount);
             GUILayout.EndHorizontal();
+            GUILayout.BeginHorizontal();
+            if (GUILayout.Button("Fresh (new game)")) SwitchAccount(SaveSystem.FreshAccount);
+            // Acc seed: so huu MOI unit + 250.000 vang + 50 luot quay (xem `SaveSystem.NewAccount`). Dang nhap
+            // bang form cung duoc: `admin` / `admin1234` (chi trong Editor / Development Build).
+            if (GUILayout.Button("Admin (seed)")) SwitchAccount(SaveSystem.AdminAccount);
+            GUILayout.EndHorizontal();
+
+            // Dev: go ket mot save cu (tao truoc 2026-10-28, chi co Frostweaver) — them boi canh tan thu roi
+            // nap lai scene de `HeroBoard` xep doi hinh mac dinh tu so huu moi.
+            if (GUILayout.Button("Grant Starter Kit (add missing starter units)"))
+            {
+                int added = SaveSystem.GrantStarterKit();
+                Debug.Log($"[Admin] Starter kit: +{added} unit(s).");
+                BuildBuild.Core.GameSpeed.Resume();
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+            // Dev: nang moi ban ghi dang co len Lv20 / 3 sao de test wave cao ma khong phai bam tung con.
+            // Ban ghi duoc tao san cho moi unit trong roster khi mo bang chon (HeroBoard/CannonBoard/SoldierBoard).
+            if (GUILayout.Button("Max out owned units (Lv 20 · 3★)"))
+            {
+                foreach (var unit in SaveSystem.Data.owned)
+                {
+                    unit.level = Mathf.Max(unit.level, 20);
+                    unit.stars = Mathf.Max(unit.stars, 3);
+                }
+                SaveSystem.Save();
+            }
 
             if (GUILayout.Button("AFK Chest: +4 Hours"))
             {
@@ -157,7 +183,9 @@ namespace BuildBuild.UI
         // Nap lai scene: HeroBoard, Economy, bai linh... deu doc save trong Start.
         static void SwitchAccount(string account)
         {
-            SaveSystem.SwitchAccount(account);
+            Accounts.SetSession(account);
+            // Acc "fresh" luon bat dau lai tu dau: xoa file cua no moi lan chon.
+            if (account == SaveSystem.FreshAccount) SaveSystem.DeleteSave(account);
             BuildBuild.Core.GameSpeed.Resume();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }

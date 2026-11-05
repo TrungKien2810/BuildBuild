@@ -30,6 +30,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 393d91f9a750a9f4fa9e2b1ee9a54fbb, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   healRingFrames:
   - {fileID: 21300000, guid: 771bcde3b39e3b24b84c79b620840343, type: 3}
   - {fileID: 21300000, guid: 81aae548823c57941bb5f8483e926f2d, type: 3}
@@ -78,6 +79,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: c2933d7285eb5dc419583469338d5041, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   crescentFrames:
   - {fileID: 21300000, guid: 0c0b5229a7a2fb94599d4e661c93dbc2, type: 3}
   - {fileID: 21300000, guid: d54f85adfc5437049ba7a7aa59c86855, type: 3}
@@ -125,6 +127,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 92cec9bbc3df3594fb9bab2af22cbf63, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   pierceFrames:
   - {fileID: 21300000, guid: d83712e4b736a4c478dfa8d046a45de9, type: 3}
   - {fileID: 21300000, guid: dd912820015998143b737e3b514bd2c2, type: 3}
@@ -146,6 +149,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: dcf9edb4a04b036498191e1d08f138c6, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   roarPush: 2
   roarArmorBreak: 0.3
   roarBreakSeconds: 6

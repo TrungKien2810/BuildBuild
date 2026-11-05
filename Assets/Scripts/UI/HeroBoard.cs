@@ -62,6 +62,18 @@ namespace BuildBuild.UI
         /// <summary>Hero phe NPC cua tran Chinh Phat dang danh.</summary>
         readonly System.Collections.Generic.List<Hero> _rivals = new System.Collections.Generic.List<Hero>();
 
+        /// <summary>
+        /// Co it nhat mot o dang dat hero. `BattleHud` doc co nay de khong cho bam Fight voi san TRONG — do la
+        /// cach chac chan nhat de thua wave 1 ma khong hieu vi sao (acc moi truoc 2026-10-28 bat dau dung nhu vay).
+        /// </summary>
+        public static bool HasLineup { get; private set; }
+
+        /// <summary>
+        /// Ban ra khi nguoi choi dat MOT hero xuong o (go ra thi khong tinh). `UI/BattleHud` nghe de tien
+        /// buoc huong dan tan thu ("Fill The Slots") — lop nay khong biet gi ve huong dan.
+        /// </summary>
+        public static event System.Action Placed;
+
         // Quan du bi Chinh Phat (nguoi dung chot lai 2026-10-02): MOT dong ho chung cho hai phe, diem moi `ReinforceSeconds`.
         // Moi lan diem: thanh NPC tung `ReinforceGroup` hero du bi (`ConquestTarget.reserves`); phe ta +1 o du bi — tran
         // PAUSE, bang chon hero mo ra voi be tuong cua nguoi choi (da so huu, CHUA co trong tran tu dau, chua goi ra), chon
@@ -85,7 +97,7 @@ namespace BuildBuild.UI
         float _nextReinforce;
         /// <summary>Bang chon dang mo cho o du bi (tran dang pause), khong phai cho o 9 o.</summary>
         bool _reinforcing;
-        float _resumeScale = 1f;
+        bool _resumeOnClose;
 
         void Start()
         {
@@ -176,6 +188,7 @@ namespace BuildBuild.UI
             Spawn(_pending);        // dat xong thay hero dung o o ngay, khong doi toi wave
             SaveLineup();
             ClosePicker();
+            Placed?.Invoke();
         }
 
         // Dau wave la moc hoi sinh chinh: hero chet giua wave phai cho het wave moi tro lai.
@@ -313,8 +326,10 @@ namespace BuildBuild.UI
         {
             _reinforcing = true;
             _pending = null;
-            _resumeScale = Time.timeScale;
-            Time.timeScale = 0f;
+            // Qua `GameSpeed` (nhu SettingsPanel) chu khong ghi `Time.timeScale` rieng: bam Speed luc bang dang mo
+            // thi `GameSpeed.Apply` tung dat lai 1 va tran chay ngam sau bang chon.
+            _resumeOnClose = !GameSpeed.Paused;
+            GameSpeed.Pause();
             for (int i = 0; i < rosterButtons.Length; i++)
             {
                 bool inBattle = OnBoard(roster[i]) || _called.Contains(roster[i]);
@@ -381,6 +396,13 @@ namespace BuildBuild.UI
         void RestoreLineup()
         {
             var lineup = SaveSystem.Data.lineup;
+            // Save chua bao gio chon doi hinh (`lineup` rong han, khac voi 9 o trong): xep san hero dang so huu.
+            if (lineup.Count == 0)
+            {
+                FillDefaultLineup();
+                return;
+            }
+
             for (int i = 0; i < slots.Length && i < lineup.Count; i++)
             {
                 var definition = System.Array.Find(roster, d => d != null && d.name == lineup[i]);
@@ -388,6 +410,38 @@ namespace BuildBuild.UI
                 slots[i].Assign(definition);
                 Spawn(slots[i]);
             }
+            RefreshHasLineup();
+        }
+
+        /// <summary>
+        /// Acc moi: khong the de nguoi choi vao tran voi 9 o TRONG roi tu doan ra phai cham vao o de dat hero.
+        /// Xep san moi hero DA SO HUU theo thu tu `roster` (acc seed co `ownsAll` nen day du 9 o), ghi lai vao save
+        /// de tu day tro di lua chon cua nguoi choi moi la su that — ke ca khi ho go het hero ra.
+        /// </summary>
+        void FillDefaultLineup()
+        {
+            int index = 0;
+            foreach (var definition in roster)
+            {
+                if (index >= slots.Length) break;
+                if (definition == null || !Owned(definition)) continue;
+                slots[index].Assign(definition);
+                Spawn(slots[index]);
+                index++;
+            }
+            if (index > 0) SaveLineup();
+            RefreshHasLineup();
+        }
+
+        void RefreshHasLineup()
+        {
+            HasLineup = false;
+            foreach (var slot in slots)
+                if (slot.Definition != null)
+                {
+                    HasLineup = true;
+                    return;
+                }
         }
 
         void SaveLineup()
@@ -396,6 +450,7 @@ namespace BuildBuild.UI
             lineup.Clear();
             foreach (var slot in slots) lineup.Add(slot.Definition != null ? slot.Definition.name : "");
             SaveSystem.Save();
+            RefreshHasLineup();
         }
 
         static bool Owned(HeroDefinition definition) =>
@@ -410,7 +465,8 @@ namespace BuildBuild.UI
 
         void ClosePicker()
         {
-            if (_reinforcing) Time.timeScale = _resumeScale;   // dong bang chon o du bi = tran chay tiep
+            if (_reinforcing && _resumeOnClose) GameSpeed.Resume();   // dong bang chon o du bi = tran chay tiep
+            _resumeOnClose = false;
             _reinforcing = false;
             _pending = null;
             pickerPanel.SetActive(false);

@@ -30,6 +30,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 01ba21c386322ca46a0780a49a788b9c, type: 3}
     loop: 0
     hitFrame: 3
+    frameSeconds: 0
   rip:
     name: skill
     frames:
@@ -41,6 +42,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 3804692360d123642a949e7ed7773580, type: 3}
     loop: 0
     hitFrame: 4
+    frameSeconds: 0
   marker:
   - {fileID: 21300000, guid: cd713dc82a43f7049b90487d8419d904, type: 3}
   - {fileID: 21300000, guid: d1848a4623ee3184faef4be5ccaa9ca1, type: 3}

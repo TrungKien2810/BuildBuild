@@ -1,0 +1,47 @@
+{
+  "target": "asset",
+  "mode": "fire-burst",
+  "source": "tempart/CannonDragonHead/fire-burst",
+  "align": "center",
+  "status": "giao 2026-10-05 (cannon pack, apply 2026-10-30)",
+  "frames": [
+    {
+      "frame": "fire-burst-1",
+      "aligned_bbox": [
+        54,
+        48,
+        74,
+        79
+      ]
+    },
+    {
+      "frame": "fire-burst-2",
+      "aligned_bbox": [
+        41,
+        43,
+        87,
+        85
+      ]
+    },
+    {
+      "frame": "fire-burst-3",
+      "aligned_bbox": [
+        40,
+        42,
+        88,
+        85
+      ]
+    },
+    {
+      "frame": "fire-burst-4",
+      "aligned_bbox": [
+        47,
+        46,
+        87,
+        83
+      ]
+    }
+  ],
+  "cell_size": 128,
+  "cell_height": 128
+}

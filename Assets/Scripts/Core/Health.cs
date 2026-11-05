@@ -60,10 +60,17 @@ namespace BuildBuild.Core
         public static event Action<Health, Health, float, Faction?> DirectDamage;
         public static event Action<Health, Health, DamageKind> KilledBy;
         public Func<float, Health, float> AdjustDirectHit { get; set; }
+        /// <summary>
+        /// Goi khi mau ve 0, TRUOC `KilledBy`/`Died`: true = khong chet, khong ban su kien chet. The Than (Wukong) hoi
+        /// mau ngay; Dong Sinh (Luu Bi) giu 0 mau + bat tu roi `Revive` sau `reviveDelay` (nhu truoc). Truoc day hero huy cai chet BEN TRONG `Died` nen nguoi nghe sau (Blocker tha quai, hut mau
+        /// khi giet) van tuong no da chet.
+        /// </summary>
+        public Func<bool> CheatDeath { get; set; }
 
         public void SpendBlood(float fraction)
         {
-            if (!IsDead) Current -= Mathf.Min(Current - 1f, Mathf.Floor(Current * fraction));
+            // Current < 1 (DoT le) thi Min am -> tru so am = HOI mau; duoi 1 mau thi khong con gi de tra.
+            if (!IsDead && Current > 1f) Current -= Mathf.Min(Current - 1f, Mathf.Floor(Current * fraction));
         }
 
         /// <summary>
@@ -179,7 +186,7 @@ namespace BuildBuild.Core
             }
             float before = Current;
             Current = Mathf.Max(0f, Current - amount);
-            Damaged?.Invoke(amount);
+            Damaged?.Invoke(before - Current);   // mau THUC mat, khong phai ca don qua tay (giet rong = 100x mau)
             if (kind == DamageKind.Direct && source != this && before > Current)
                 Impacted?.Invoke(impactDirection ?? (source != null ? (Vector2)(transform.position - source.transform.position) : Vector2.zero));
             // Tu tru mau (het han, rong tan) truyen chinh minh lam nguon de thong ke loai ra — khong tinh la hut mau.
@@ -189,6 +196,7 @@ namespace BuildBuild.Core
 
             if (Current <= 0f)
             {
+                if (CheatDeath != null && CheatDeath()) return;
                 KilledBy?.Invoke(this, source, kind);
                 Died?.Invoke();
             }
