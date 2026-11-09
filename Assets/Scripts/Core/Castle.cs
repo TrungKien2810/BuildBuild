@@ -165,7 +165,7 @@ namespace BuildBuild.Core
             var next = NextTier;
             if (next == null) return "Fence Maxed";
             int best = SaveSystem.Data.nextWave - 1;
-            if (best < next.unlockWave) return $"Win Wave {next.unlockWave} Required";
+            if (best < next.unlockWave) return $"Win Wave {next.unlockWave} to Unlock";
             return null;
         }
 

@@ -34,6 +34,8 @@ namespace BuildBuild.Combat
         const float RavenBreakBigSeconds = 4f;
         const float RavenNoHeal = 4f;
         const float JudgmentDelay = 2f;
+        /// <summary>An la con cua don vi (da x UnitScale) va art ~68 px rong: o 1.0 no to hon ca than dich va che het no.</summary>
+        const float JudgmentMarkScale = 0.5f;
         const float JudgmentNoHeal = 4f;
 
         int _moonCount;
@@ -118,7 +120,7 @@ namespace BuildBuild.Combat
             _rended = marked;
             _rendedUntil = Time.time + RavenBreakBigSeconds;
             marked.Status.Apply(StatusId.NoHeal, 0f, marked.IsBoss ? RavenNoHeal * 0.5f : RavenNoHeal, _health, Side);
-            OneShotFx.Spawn(marked.BodyCenter, _definition.passiveFrames, false, SortOrder.Air, Battlefield.UnitScale);
+            OneShotFx.Spawn(marked.BodyCenter, _definition.passiveFrames, false, SortOrder.Air, Battlefield.UnitScale * _definition.impactScale);
             OnHitsLanded(1);
         }
 
@@ -169,7 +171,7 @@ namespace BuildBuild.Combat
                     && Battlefield.GroundDistance(u.transform.position, at) - u.BodyRadius <= _definition.skillRadius)
                 .OrderByDescending(u => u.Health.Current).Take(3).ToArray();
             foreach (var victim in victims)
-                victim.ApplyMark(this, JudgmentDelay, _definition.skillFrames);
+                victim.ApplyMark(this, JudgmentDelay, _definition.skillFrames, JudgmentMarkScale);
             StartCoroutine(DetonateJudgment(victims));
         }
 
@@ -185,7 +187,7 @@ namespace BuildBuild.Combat
                 victim.Health.TakeDamage(BaseDamage * multiplier * _definition.skillPower * (rend ? 1.5f : 1f), _health);
                 victim.Status.Apply(StatusId.NoHeal, 0f,
                     victim.IsBoss ? JudgmentNoHeal * 0.5f : JudgmentNoHeal, _health, Side);
-                OneShotFx.Spawn(victim.BodyCenter, _definition.skillIntroFrames, false, SortOrder.Air, Battlefield.UnitScale);
+                OneShotFx.Spawn(victim.BodyCenter, _definition.skillIntroFrames, false, SortOrder.Air, Battlefield.UnitScale * _definition.impactScale);
             }
             OnHitsLanded(victims.Length);
         }

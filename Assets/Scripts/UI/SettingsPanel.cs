@@ -122,6 +122,9 @@ namespace BuildBuild.UI
         void Logout()
         {
             Close();
+            // Chot tran dang danh TRUOC khi xoa phien: neu de WaveManager.OnDisable tu xu ly thi ket qua thua
+            // Chinh Phat bi ghi vao save "main" thay vi acc that.
+            if (WaveManager.Current != null) WaveManager.Current.Surrender();
             Accounts.Logout();
             GameSpeed.Resume();
             SceneManager.LoadScene(SceneNames.Login);

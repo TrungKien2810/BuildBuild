@@ -54,7 +54,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e58d54969107a0d439e2194602073ece, type: 3}
   - {fileID: 21300000, guid: 401115deb7f53a34e90062cdb8be7c45, type: 3}
   - {fileID: 21300000, guid: 507a8adc1665bd34eaf0fe7a1cc1a094, type: 3}
-  impactScale: 1
+  impactScale: 0.5
   knockbackOnHit: 0
   fireSfx: 
   impactSfx: 

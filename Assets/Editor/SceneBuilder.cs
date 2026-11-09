@@ -2026,16 +2026,36 @@ namespace BuildBuild.Editor
             // Cap nguoi choi (GDD muc 10.0): chan dung + `Lv` + thanh kinh nghiem CO SO, nam duoi thanh mau thanh.
             // Chan dung dang lay tam avatar Frostweaver vi chua co man chon avatar (IDEAS #3) — doi 1 dong la du.
             // XP la nguon duy nhat mo khoa `icon-xp`/`bar-fill-xp` (truoc day `bar-fill-xp` bi muon lam thanh chi so).
-            Img("PlayerAvatar", canvas, UiSprite("avatars/avatar-frostweaver"), TopLeft, new Vector2(80, -100), Native(30, 30));
-            SetRef(hud, "levelText", Label("PlayerLevel", canvas, "Lv 1", 22, TopLeft, new Vector2(150, -100), Native(56, 12)));
-            var xpFrame = Img("PlayerXp", canvas, UiSprite("chrome/bar-frame-thin"), TopLeft, new Vector2(150, -128), Native(130, 16), sliced: true);
+            // Gom 3 phan vao mot `PlayerBadge`: la nut bam (mo `PlayerProfileScreen`) va dich len cho thanh mau thanh khi thanh mau an.
+            // Toa do con = toa do cu tru (60, -92) (goc tren-trai cua badge).
+            // Mot khoi nen toi phang (khong vien: hai khung trang tri long nhau nhin roi) + khung avatar de len dau trai nhu icon cua `GoldPill`.
+            // Khong dung panel-stone: vien dinh tan cua no an het chieu cao 88 px, long hai khung vao nhau nhin roi.
+            var playerBadge = Img("PlayerBadge", canvas, null, TopLeft, new Vector2(60, -92), new Vector2(380, 92));
+            playerBadge.color = Color.clear;
+            // Plate dung stat-strip (cung ho khung go voi avatar-frame) thay dim-tile phang, va mot o nen toi sau chan dung de anh
+            // nhan vat nen trong suot khong lo canh nen game xuyen qua khung rong.
+            Img("Plate", playerBadge.transform, UiSprite("panels/stat-strip"), MidLeft, new Vector2(50, 0), new Vector2(330, 72), sliced: true);
+            Img("AvatarBacking", playerBadge.transform, UiSprite("chrome/dim-tile"), MidLeft, new Vector2(14, 0), new Vector2(64, 64)).color = new Color(0.12f, 0.09f, 0.16f, 1f);
+            playerBadge.raycastTarget = true;   // `Img` mac dinh tat raycast: khong bat thi nut khong nhan duoc cu bam nao
+            var badgeButton = playerBadge.gameObject.AddComponent<Button>();
+            badgeButton.targetGraphic = playerBadge;
+            SetRef(hud, "playerBadge", playerBadge.rectTransform);
+            SetRef(hud, "playerBadgeButton", badgeButton);
+            var avatarFrame = Img("PlayerAvatarFrame", playerBadge.transform, UiSprite("chrome/avatar-frame"), MidLeft, Vector2.zero, new Vector2(92, 92), sliced: true);
+            var avatar = Img("PlayerAvatar", avatarFrame.transform, UiSprite("avatars/avatar-frostweaver"), Center, Vector2.zero, new Vector2(62, 62));
+            avatar.preserveAspect = true;
+            // Lv va thanh XP cung le trai x=112 (ngay sau khung avatar), thanh keo het be ngang plate; bo icon-xp ngoai thanh (no tran ra de len khung).
+            var levelText = Label("PlayerLevel", playerBadge.transform, "Lv 1", 28, TopLeft, new Vector2(112, -10), new Vector2(150, 34));
+            levelText.alignment = TextAnchor.MiddleLeft;
+            SetRef(hud, "levelText", levelText);
+            var xpFrame = Img("PlayerXp", playerBadge.transform, UiSprite("chrome/bar-frame-thin"), TopLeft, new Vector2(112, -50), new Vector2(256, 30), sliced: true);
+            xpFrame.raycastTarget = false;
             var xpFill = Img("Fill", xpFrame.transform, UiSprite("chrome/bar-fill-xp"), Center, Vector2.zero, Vector2.zero);
             Stretch(xpFill.rectTransform, 6 * UiScale, 5 * UiScale, 4 * UiScale, 4 * UiScale);
             xpFill.type = Image.Type.Filled;
             xpFill.fillMethod = Image.FillMethod.Horizontal;
-            Img("Icon", xpFrame.transform, UiSprite("icons/icon-xp"), MidLeft, new Vector2(-16, 0), new Vector2(36, 36));
             SetRef(hud, "xpFill", xpFill);
-            SetRef(hud, "xpText", Label("Value", xpFrame.transform, "", 22, Center, Vector2.zero, Native(130, 16)));
+            SetRef(hud, "xpText", Label("Value", xpFrame.transform, "", 20, Center, Vector2.zero, new Vector2(256, 30)));
 
             var badge = Img("Wave", canvas, UiSprite("chrome/banner-stage"), Top, new Vector2(0, -16), Native(160, 26), sliced: true);
             SetRef(hud, "waveText", Label("Value", badge.transform, "0", 36, Center, Vector2.zero, Native(160, 26)));
@@ -2056,7 +2076,7 @@ namespace BuildBuild.Editor
             SetRef(hud, "conquestLabel", conquestLabel);
             // Nhiem vu (GDD muc 11): nut mo man Hanh trinh + cham do bao con o bam nhan duoc. Icon lay o `lobby/menu-quest`
             // — icon nay da lam tu dot UI lobby cho hang icon GDD 10.4 nhung chua noi vao code nao.
-            var questButton = MakeButton("QuestButton", canvas, "Quests", TopRight, new Vector2(-24, -380), new Vector2(280, 80), out var questLabel);
+            var questButton = MakeButton("QuestButton", canvas, "Journey", TopRight, new Vector2(-24, -380), new Vector2(280, 80), out var questLabel);
             DecorateButton(questButton, questLabel, "lobby/menu-quest");
             var questDot = Img("Dot", questButton.transform, UiSprite("chrome/notify-dot"), TopRight, new Vector2(-4, -4), new Vector2(30, 30));
             SetRef(hud, "questButton", questButton);
@@ -2212,6 +2232,7 @@ namespace BuildBuild.Editor
             var boardScreen = BuildSkillBoardScreen(canvas, economy);
             SetRef(townScreen, "board", boardScreen);
             SetRef(hud, "challengeScreen", BuildChallengeScreen(canvas, waves, AssetDatabase.LoadAssetAtPath<WaveTuning>(DataDir + "/WaveTuning.asset")));
+            BuildPlayerProfileScreen(canvas, badgeButton);
             var resultPopup = BuildResultPopup(canvas);
             var contributionPanel = BuildContributionPanel(canvas, waveStats);
             SetRef(resultPopup, "contributionPanel", contributionPanel);
@@ -2340,7 +2361,8 @@ namespace BuildBuild.Editor
         /// <summary>Thong bao ngan giua tren man (xep hang doi trong `Toast`), khong de len bang Stage.</summary>
         static Toast BuildToast(RectTransform canvas)
         {
-            var host = Rect("Toast", canvas, Top, new Vector2(0, -300), new Vector2(720, 56));
+            // Day man, tren nut Fight: o giua man thi toast de len hang hero (luc nao cung o day trong sanh).
+            var host = Rect("Toast", canvas, Bottom, new Vector2(0, 150), new Vector2(720, 56));
             var toast = host.gameObject.AddComponent<Toast>();
             var root = Rect("Root", host, Center, Vector2.zero, new Vector2(720, 56));
             Img("Bg", root, UiSprite("chrome/toast"), Center, Vector2.zero, new Vector2(720, 56), sliced: true);
@@ -3345,8 +3367,16 @@ namespace BuildBuild.Editor
             SetRef(screen, "goldText", GoldPill(canvas));
 
             var info = Img("Info", canvas, UiSprite("chrome/panel-wood"), Top, new Vector2(0, -120), new Vector2(1100, 120), sliced: true);
-            SetRef(screen, "ratesText", Label("Rates", info.transform, "", 20, Center, new Vector2(0, -14), new Vector2(1060, 44), Top));
-            SetRef(screen, "pityText", Label("Pity", info.transform, "", 26, Center, new Vector2(0, 14), new Vector2(1060, 44), Bottom));
+            var ratesLabel = Label("Rates", info.transform, "", 20, Center, new Vector2(0, -14), new Vector2(1060, 44), Top);
+            var pityLabel = Label("Pity", info.transform, "", 26, Center, new Vector2(0, 14), new Vector2(1060, 44), Bottom);
+            // Chu trang tren nen go sang (panel-wood) gan nhu khong doc duoc -> chu nau dam, bo vien den.
+            foreach (var label in new[] { ratesLabel, pityLabel })
+            {
+                label.color = new Color(0.24f, 0.14f, 0.06f);
+                Object.DestroyImmediate(label.GetComponent<Outline>());
+            }
+            SetRef(screen, "ratesText", ratesLabel);
+            SetRef(screen, "pityText", pityLabel);
 
             // 4 tab banner giua bang ti le va luoi ket qua; nhan tab do GachaScreen ghi.
             var tabs = new Button[4];
@@ -4253,8 +4283,9 @@ namespace BuildBuild.Editor
             Stretch(frame.rectTransform, 0, 0, 0, 0);
             var roleIcon = Img("Role", root.transform, null, TopLeft, new Vector2(8, -8), new Vector2(44, 44));
             roleIcon.raycastTarget = false;
-            var nameText = Label("Name", root.transform, "", 18, Center, new Vector2(0, 6), new Vector2(180, 52), Bottom);
-            var noteText = Label("Note", root.transform, "", 18, Center, new Vector2(0, -6), new Vector2(180, 28), Top);
+            var nameText = Label("Name", root.transform, "", 18, Center, new Vector2(0, 28), new Vector2(140, 52), Bottom);
+            nameText.horizontalOverflow = HorizontalWrapMode.Wrap;
+            var noteText = Label("Note", root.transform, "", 18, Center, new Vector2(12, -16), new Vector2(180, 28), Top);
             noteText.color = new Color(1f, 0.86f, 0.35f);
 
             SetRef(view, "frame", frame);
@@ -4454,6 +4485,9 @@ namespace BuildBuild.Editor
             var fog = Img("Fog", map, UiSprite("chrome/dim-tile"), Center, Vector2.zero, Vector2.zero);
             Stretch(fog.rectTransform, 0, 0, 0, 0);
             fog.color = new Color(0.75f, 0.8f, 0.9f, 0.55f);
+            var hintBack = Img("HintBack", fog.transform, null, Center, new Vector2(0, -170), new Vector2(1480, 70));
+            hintBack.color = new Color(0.05f, 0.07f, 0.12f, 0.75f);
+            hintBack.raycastTarget = false;
             Label("Hint", fog.transform, "Fog covers the border — press Scout to find Enemy Castles", 32, Center, new Vector2(0, -170), new Vector2(1400, 60));
 
             var ring = Img("ScanRing", map, null, Center, Vector2.zero, Vector2.zero);

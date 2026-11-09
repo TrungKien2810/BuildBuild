@@ -52,6 +52,13 @@ namespace BuildBuild.UI
         [SerializeField] Image xpFill;
         [Tooltip("So XP trong cap hien tai: `27 / 150`.")]
         [SerializeField] Text xpText;
+        [Tooltip("Khung chan dung + Lv + XP: dich len cho thanh mau thanh khi thanh mau bi an (ngoai tran), bam vao mo `PlayerProfileScreen`.")]
+        [SerializeField] RectTransform playerBadge;
+        [SerializeField] Button playerBadgeButton;
+        /// <summary>Do dich len (px tham chieu) khi thanh mau thanh an: ~ chieu cao thanh mau + khoang cach.</summary>
+        const float BadgeRise = 56f;
+        Vector2 _badgeHome;
+        bool _badgeHomeSet;
         /// <summary>Ghi chu len cap cua wave dang chay — gan vao bang ket qua thay vi de mot dong rieng bi popup che.</summary>
         string _levelNote;
 
@@ -166,6 +173,7 @@ namespace BuildBuild.UI
                 else
                 {
                     ShowMessage(drop != null ? $"{hint}\nEquipment Received: {dropName}" : hint);
+                    waves.LeaveConquest();
                     AdvanceBiome();
                 }
                 Refresh();
@@ -178,10 +186,10 @@ namespace BuildBuild.UI
                 string hint = waves.LastWasBossRush ? "Your Castle Fell — Boss Rush Failed"
                     : waves.LastWasDaily ? "Daily Challenge Failed — you can retry today"
                     : waves.LastWasConquest ? "Your Castle Fell — Conquest Defeat"
-                    : $"Wave {wave} Lost — grow stronger, then retry";
+                    : $"Wave {wave} Lost — upgrade your Castle, Summon or train in Town, then retry";
                 _backToConquestMap = waves.LastWasConquest;
                 if (resultPopup != null) resultPopup.Show(false, 0, hint);
-                else ShowMessage(hint);
+                else { ShowMessage(hint); waves.LeaveConquest(); }
                 Refresh();
                 if (resultPopup == null) ShowNextTip();
             };
@@ -192,6 +200,8 @@ namespace BuildBuild.UI
                     if (_backToConquestMap)
                     {
                         _backToConquestMap = false;
+                        waves.LeaveConquest();   // go nen Chinh Phat + thanh dich (giu den luc dong bang ket qua)
+                        Refresh();
                         if (conquestMap != null) conquestMap.Open();
                         return;   // ban do Chinh Phat vua mo va no cung phu kin man: goi y se hien o luot sau
                     }
@@ -258,7 +268,7 @@ namespace BuildBuild.UI
         /// </summary>
         void OnStartClicked()
         {
-            if (!waves.IsFighting && !WaveManager.InConquest && !HeroBoard.HasLineup)
+            if (!waves.IsFighting && !HeroBoard.HasLineup)
             {
                 Sfx.Play("ui-error");
                 ShowToast("Your line is empty — tap a hero slot to place one");
@@ -484,7 +494,7 @@ namespace BuildBuild.UI
                 return;
             }
             string blocker = castle.UpgradeBlocker();
-            castleUpgradeLabel.text = blocker ?? $"Upgrade {next.name} · {next.cost}";
+            castleUpgradeLabel.text = blocker ?? $"Upgrade · {next.cost}";
             // Co bang thi nut chi MO bang (luon bam duoc de xem dieu kien); bang tu xam nut Nang.
             castleUpgradeButton.interactable = castleUpgradePanel != null || blocker == null && economy.Gold >= next.cost;
             if (castleUpgradePanel != null && castleUpgradePanel.IsOpen) castleUpgradePanel.Refresh(castle, economy.Gold);
@@ -553,7 +563,7 @@ namespace BuildBuild.UI
             chestImage.sprite = stage == AfkChest.Stage.Full ? chestFull : stage == AfkChest.Stage.Glowing ? chestGlowing : chestClosed;
             int minutes = Mathf.FloorToInt(hours * 60f);
             // "h/m" chu khong phai "g/p": HUD nay toan chu tieng Anh, mot minh ruong ghi "5g 42p" la doc khong ra.
-            chestTimer.text = hours >= AfkChest.CapHours ? "Full" : $"{minutes / 60}h {minutes % 60:00}m";
+            chestTimer.text = hours >= AfkChest.CapHours ? "Claim!" : $"{minutes / 60}h {minutes % 60:00}m";
             // Nut LUON bam duoc. Truoc day ruong con rung thi `interactable = false`, ma `disabledColor` cua nut nay la
             // trang nen no trong y het nut binh thuong: bam khong co tieng, khong thong bao, khong ai hieu vi sao.
             chestButton.interactable = true;
@@ -587,6 +597,11 @@ namespace BuildBuild.UI
             castleHpText.text = $"{Mathf.CeilToInt(hp.Current)} / {Mathf.CeilToInt(hp.Max)}";
             // Ngoai tran chi hien avatar + Lv/XP, khong hien thanh mau thanh (nguoi dung chot 2026-10-30).
             if (castleHpPanel != null) castleHpPanel.SetActive(waves.IsFighting);
+            if (playerBadge == null) return;
+            // Cung cho bat/tat thanh mau de hai thu khong lech nhau: thanh mau an thi huy hieu chiem luon cho do.
+            if (!_badgeHomeSet) { _badgeHome = playerBadge.anchoredPosition; _badgeHomeSet = true; }
+            playerBadge.anchoredPosition = waves.IsFighting ? _badgeHome : _badgeHome + new Vector2(0f, BadgeRise);
+            if (playerBadgeButton != null) playerBadgeButton.interactable = !waves.IsFighting;
         }
 
         void RefreshGold() => goldText.text = economy.Gold.ToString("N0");

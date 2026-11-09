@@ -140,7 +140,7 @@ namespace BuildBuild.UI
             rowTitles[index].text = quest.title;
             rowClaims[index].GetComponentInChildren<Text>().text = quest.stage > QuestLog.Stage ? "Locked" : QuestLog.CanClaim(quest, gacha) ? "Claim" : quest.IsChapterReward ? "Finish Tasks" : "Go";
             // O thuong cuoi moc dem bang SO NHIEM VU da nhan, khong phai bang chi so — chu thich ro cho nguoi choi.
-            rowProgress[index].text = quest.IsChapterReward ? $"{progress}/{target} quests" : $"{progress}/{target}";
+            rowProgress[index].text = quest.IsChapterReward ? $"{progress}/{target} quests" : $"{Mathf.Min(progress, target)}/{target}";
             rowRewards[index].text = RewardText(quest.reward);
             rowBars[index].fillAmount = Mathf.Clamp01((float)progress / target);
             rowTitles[index].color = claimed ? new Color(0.62f, 0.66f, 0.72f) : Color.white;

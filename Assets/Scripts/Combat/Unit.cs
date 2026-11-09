@@ -152,13 +152,13 @@ namespace BuildBuild.Combat
         SpriteRenderer _markRenderer;
 
         /// <summary>An ky cua <paramref name="marker"/> trong <paramref name="seconds"/> giay; an lai thi dem lai tu dau.</summary>
-        public void ApplyMark(UnityEngine.Object marker, float seconds, Sprite[] frames)
+        public void ApplyMark(UnityEngine.Object marker, float seconds, Sprite[] frames, float scale = 1f)
         {
             if (IsDying || seconds <= 0f) return;
             _markedBy = marker;
             _markedUntil = Time.time + seconds;
             if (_markFx != null) Destroy(_markFx);
-            _markFx = OneShotFx.SpawnLoop(transform, MarkOffset, frames, seconds, SortOrder.ForUnit(this) + 1);
+            _markFx = OneShotFx.SpawnLoop(transform, MarkOffset, frames, seconds, SortOrder.ForUnit(this) + 1, scale: scale);
             _markRenderer = _markFx != null ? _markFx.GetComponent<SpriteRenderer>() : null;
         }
 

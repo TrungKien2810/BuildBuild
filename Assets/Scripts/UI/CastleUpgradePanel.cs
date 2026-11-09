@@ -62,7 +62,7 @@ namespace BuildBuild.UI
             bool unlocked = best >= next.unlockWave;
             conditionText.text = next.unlockWave <= 0 ? "No Requirements"
                 : unlocked ? $"Wave {next.unlockWave} Won"
-                : $"Win Wave {next.unlockWave} Required (current {Mathf.Max(best, 0)})";
+                : $"Win Wave {next.unlockWave} to Unlock (best {Mathf.Max(best, 0)})";
             conditionText.color = unlocked ? new Color(0.6f, 1f, 0.6f) : new Color(1f, 0.55f, 0.5f);
 
             bool afford = gold >= next.cost;

@@ -26,6 +26,7 @@ namespace BuildBuild.UI
 
         void OnGUI()
         {
+            if (!Debug.isDebugBuild) return;   // chi Editor / Development Build: ban phat hanh khong lo bang test
             var e = Event.current;
             if (e.type == EventType.KeyDown && e.keyCode == KeyCode.F1)
             {

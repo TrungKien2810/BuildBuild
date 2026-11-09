@@ -177,7 +177,8 @@ namespace BuildBuild.Core
             PlayerLevel.AddXp(PlayerLevel.ConquestXp);   // GDD 10.0: thang tran la nguon XP thu hai (khong co XP tu ruong AFK)
             IsFighting = false;
             if (castle != null) castle.Repair();
-            EndConquest();
+            // KHONG EndConquest o day: bang ket qua + bang Stats phai hien tren nen Chinh Phat. `BattleHud` goi
+            // `LeaveConquest` khi nguoi choi dong bang ket qua.
             WaveCleared?.Invoke(NextWave, gold);
         }
 
@@ -447,7 +448,7 @@ namespace BuildBuild.Core
             ClearAlive();
             if (castle != null) castle.Repair();   // day mau ngay khi het tran, khong doi den luc bam danh tiep
             if (InConquest && ConquestMatch.Current?.Target != null) ConquestMap.Finish(ConquestMatch.Current.Target, false);
-            EndConquest();
+            // Thua Chinh Phat: giu nen den khi dong bang ket qua (xem `OnRivalDestroyed`).
             Defeated?.Invoke(NextWave);
         }
 

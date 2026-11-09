@@ -18,7 +18,7 @@ namespace BuildBuild.UI
         [SerializeField] Sprite[] dailyIcons;
         [SerializeField] Button startButton, closeButton;
         bool _daily;
-        float _refreshAt;
+        float _refreshAt, _holdUntil;
         string _previewDay;
 
         void Awake()
@@ -38,6 +38,7 @@ namespace BuildBuild.UI
             // lai lan hai. Cung khuon voi `SkillBoardScreen.Open` (da dinh loi "bam lan dau khong thay gi").
             if (!root.activeSelf) root.SetActive(true);
             _previewDay = DailyChallenge.DayKey;
+            _holdUntil = 0f;
             Refresh();
             Sfx.Play("ui-open");
         }
@@ -50,9 +51,17 @@ namespace BuildBuild.UI
             Refresh();
         }
 
+        /// <summary>Hien thong bao tren dong trang thai vai giay; `Refresh` moi giay se khong ghi de len no.</summary>
+        void Hold(string text)
+        {
+            status.text = text;
+            _holdUntil = Time.unscaledTime + 3f;
+        }
+
         void Refresh()
         {
             _refreshAt = Time.unscaledTime + 1f;
+            if (Time.unscaledTime < _holdUntil) return;
             title.text = _daily ? "Daily Challenge" : "Boss Rush";
             subtitle.text = _daily ? $"{DailyChallenge.DayKey}  /  {DailyChallenge.Title}"
                 : "Three encounters. One castle. A single continuous run.";
@@ -93,9 +102,16 @@ namespace BuildBuild.UI
             {
                 _previewDay = DailyChallenge.DayKey;
                 Refresh();
+                Hold("New daily challenge - press Start again");
                 return;
             }
             if (waves.IsFighting || WaveManager.InConquest || (_daily && DailyChallenge.Cleared)) return;
+            if (!HeroBoard.HasLineup)
+            {
+                Sfx.Play("ui-error");
+                Hold("Your line is empty - close this and place a hero first");
+                return;
+            }
             Close();
             if (_daily) waves.StartDailyChallenge(); else waves.StartBossRush();
         }

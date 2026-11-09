@@ -138,7 +138,8 @@ namespace BuildBuild.UI
             else
             {
                 Sfx.Play("ui-error");
-                ShowMessage("Not enough Gold");
+                ShowMessage(Shop.Bought(_kind, index) ? "Already sold"
+                    : economy.Gold < _offers[index].price ? "Not enough Gold" : "This item is no longer available");
             }
         }
 

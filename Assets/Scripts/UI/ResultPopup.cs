@@ -61,6 +61,7 @@ namespace BuildBuild.UI
         Vector2 _hintBaseSize;
         /// <summary>Mep duoi o thuong, toa do tinh tu tam panel (o thuong neo Center).</summary>
         float _rewardBottom;
+        float _rewardTop;
         /// <summary>Mep tren cua hang nut, tinh tu mep duoi panel (nut neo Bottom).</summary>
         float _buttonTop;
 
@@ -80,6 +81,7 @@ namespace BuildBuild.UI
             _hintBaseSize = hintText.rectTransform.sizeDelta;
             var reward = (RectTransform)rewardRow.transform;
             _rewardBottom = reward.anchoredPosition.y - reward.sizeDelta.y * reward.pivot.y;
+            _rewardTop = reward.anchoredPosition.y + reward.sizeDelta.y * (1f - reward.pivot.y);
             var button = (RectTransform)closeButton.transform;
             _buttonTop = button.anchoredPosition.y + button.sizeDelta.y;
 
@@ -152,7 +154,8 @@ namespace BuildBuild.UI
             rect.sizeDelta = _hintBaseSize;
 
             float needed = Mathf.Max(_hintBaseSize.y, hintText.preferredHeight);
-            float bandTop = _rewardBottom - HintMargin;
+            // Khong co o thuong (thua) thi chu goi y lay luon cho cua o do, khong de khoang trong lon giua bang.
+            float bandTop = (rewardRow.activeSelf || dropSlot.activeSelf ? _rewardBottom : _rewardTop) - HintMargin;
             float height = Mathf.Clamp(2f * (needed + _buttonTop + HintMargin - bandTop), _panelBaseHeight, MaxPanelHeight);
             float bandBottom = -height * 0.5f + _buttonTop + HintMargin;
             float band = bandTop - bandBottom;

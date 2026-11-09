@@ -151,6 +151,8 @@ namespace BuildBuild.Meta
                     price = GearPrice(rarity),
                 };
             }
+            // Acc chua co unit nao thi `Offer` ra 0 o: KHONG cache, neu khong tab nay trong vinh vien du sau do co unit.
+            if (n == 0) return result;
             period.stock.AddRange(result);
             SaveSystem.Save();
             return result;

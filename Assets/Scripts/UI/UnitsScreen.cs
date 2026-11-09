@@ -31,7 +31,7 @@ namespace BuildBuild.UI
 
         static readonly Color TabIdle = new Color(0.6f, 0.6f, 0.6f);
         const string Up = "#7CFC7C";
-        const string Locked = "#9A9A9A";
+        const string Locked = "#6B5E50";   // nen kem: xam nhat #9A9A9A khong doc duoc
 
         [SerializeField] GachaConfig config;
         [SerializeField] Economy economy;

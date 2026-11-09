@@ -51,6 +51,7 @@ namespace BuildBuild.Editor
                 {
                     d.maxHealth = 420; d.damage = 30; d.attackRate = 0.85f; d.range = 4.5f; d.moveSpeed = 1.2f;
                     d.splashRadius = 0.1f;
+                    d.impactScale = 0.5f;   // art armor-break 57x60 px: o 1.0 (x UnitScale) to hon than dich
                     d.passiveKind = PassiveKind.ShieldBane;
                     d.passivePower = 0.3f;
                     d.projectileFrames = NF("BlackSigilHunter", "skill-pursuit-bolt-fx", "fx");

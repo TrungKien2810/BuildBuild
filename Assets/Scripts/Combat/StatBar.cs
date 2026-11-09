@@ -28,6 +28,7 @@ namespace BuildBuild.Combat
         const float BossWidth = 0.64f;
         const float Height = 0.035f;
         const int Order = SortOrder.Overlay;
+        const float TopMargin = 0.35f;   // chua cho HUD (so gia, nhan wave) khong de len thanh mau
 
         static Sprite _centre;
         static Sprite _left;
@@ -95,6 +96,23 @@ namespace BuildBuild.Combat
         {
             if (_fraction == null || _fill == null) return;
             _fill.localScale = new Vector3(_width * _fraction(), Height, 1f);
+        }
+
+        Vector3 _homeLocal;
+
+        void Start() => _homeLocal = transform.localPosition;
+
+        /// <summary>Boss cao dung sat mep tren man thi thanh mau bi cat mat: keo thanh xuong vua trong khung nhin.</summary>
+        void LateUpdate()
+        {
+            transform.localPosition = _homeLocal;
+            var cam = Camera.main;
+            if (cam == null || !cam.orthographic) return;
+            float top = cam.transform.position.y + cam.orthographicSize - TopMargin;
+            var p = transform.position;
+            if (p.y <= top) return;
+            p.y = top;
+            transform.position = p;
         }
 
         // pixelsPerUnit = 1 => sprite rong dung 1 unit, nen localScale doc thang ra don vi the gioi.

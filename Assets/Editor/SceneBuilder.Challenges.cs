@@ -42,7 +42,7 @@ namespace BuildBuild.Editor
                 var icon = Img("Boss", node.transform, null, Top, new Vector2(0, -8), new Vector2(190, 170));
                 icon.preserveAspect = true; icons[i] = icon;
                 names[i] = Label("Name", node.transform, "", 26, Top, new Vector2(0, -174), new Vector2(370, 90));
-                states[i] = Label("Progress", node.transform, "", 22, Bottom, new Vector2(0, 8), new Vector2(370, 56));
+                states[i] = Label("Progress", node.transform, "", 22, Bottom, new Vector2(0, 24), new Vector2(370, 52));
             }
             SetRef(screen, "rules", Label("Rules", panel.transform, "", 26, Top, new Vector2(0, -516), new Vector2(1340, 82)));
             var reward = Img("Reward", panel.transform, UiSprite("panels/reward-row"), Top, new Vector2(0, -614), new Vector2(1320, 100), sliced: true);

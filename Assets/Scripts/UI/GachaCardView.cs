@@ -51,7 +51,7 @@ namespace BuildBuild.UI
             };
             icon.sprite = unit.icon;
             icon.enabled = unit.icon != null;
-            nameText.text = $"{unit.displayName}\n{unit.rarity}";
+            nameText.text = unit.displayName; // do hiem da the hien qua vien the; dong "SSR" bi khung vang che
             noteText.text = result.isNew ? "New"
                 : result.canStarUp ? $"+{result.shardsGained} Shards · READY FOR STAR UP"
                 : $"+{result.shardsGained} Shards";
