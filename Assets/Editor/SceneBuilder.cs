@@ -4210,6 +4210,9 @@ namespace BuildBuild.Editor
                 iconSize.minWidth = iconSize.preferredWidth = iconSize.minHeight = iconSize.preferredHeight = SkillRowHeight;
                 texts[i] = Block("Text", row, 20, Vector2.zero, new Vector2(860, SkillRowHeight));
                 texts[i].lineSpacing = 0.6f;
+                // Nen kem sang: chu trang + vien den day (2 px) lam chu pixel 20 px nhoe thanh dam. Chu nau dam, bo vien.
+                texts[i].color = new Color(0.24f, 0.14f, 0.06f);
+                Object.DestroyImmediate(texts[i].GetComponent<Outline>());
                 texts[i].gameObject.AddComponent<LayoutElement>().flexibleWidth = 1;
             }
             SetRef(screen, "detailSkills", root.gameObject);
